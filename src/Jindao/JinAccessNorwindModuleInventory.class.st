@@ -5,6 +5,8 @@ Class {
 }
 
 { #category : #tests }
-JinAccessNorwindModuleInventory >> testModuleInventoryIsAvailable [ 
-	self assert: (project modules at: 4) name equals: #Inventory 
+JinAccessNorwindModuleInventory >> testModuleInventoryIsAvailable [
+	self
+		assert: (project modules detect: [ :m | m name = #Inventory ]) name
+		equals: #Inventory
 ]

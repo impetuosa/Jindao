@@ -11,3 +11,8 @@ Class {
 JinHandleObject >> handle: aHandle [
 	handle := aHandle
 ]
+
+{ #category : #accessing }
+JinHandleObject >> name [
+	^ handle propertyNamed: #Name
+]

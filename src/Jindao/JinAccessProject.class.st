@@ -35,7 +35,9 @@ JinAccessProject >> macros [
 
 { #category : #'as yet unclassified' }
 JinAccessProject >> modules [
-	^ JinCollection new handle: (programHandle propertyNamed: #AllModules)
+	^ JinCollection new
+		handle: (programHandle propertyNamed: #AllModules)
+		factory: (JinInstanceFactory defaultFor: JinModule)
 ]
 
 { #category : #'as yet unclassified' }
