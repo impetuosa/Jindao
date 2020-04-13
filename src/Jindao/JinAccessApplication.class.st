@@ -1,10 +1,6 @@
 "
 This is the basic access handle manager. 
 
-
-
-	
-	
 	access := COMDispatchInstance createInstanceByName: 'Access.Application'.
 	access propertyNamed: 'Visible' put: true. 
 	access dispatch: 'OpenCurrentDatabase' withArguments: { 'C:\Users\santiago\Documents\Northwind.accdb' }.

@@ -16,7 +16,9 @@ JinAccessProject >> close [
 
 { #category : #'as yet unclassified' }
 JinAccessProject >> forms [
-	^ JinCollection new handle: (programHandle propertyNamed: #AllForms)
+	^ JinCollection new
+		handle: (programHandle propertyNamed: #AllForms)
+		factory: (JinInstanceFactory defaultFor: JinForm)
 ]
 
 { #category : #'as yet unclassified' }
