@@ -2,17 +2,23 @@ Class {
 	#name : #JinForm,
 	#superclass : #JinHandleObject,
 	#instVars : [
-		'code'
+		'code',
+		'module'
 	],
 	#category : #Jindao
 }
 
 { #category : #'as yet unclassified' }
 JinForm >> code [
+	^ self module code 
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> module [
 	self ensureIsLoaded.
-	^ code
-		ifNil: [ code := JinSourceCode new
-				handle: loadedObjectHandle;
+	^ module
+		ifNil: [ module := JinFormModule new
+				moduleHandle: (loadedObjectHandle propertyNamed: #Module) project: project;
 				yourself ]
 ]
 

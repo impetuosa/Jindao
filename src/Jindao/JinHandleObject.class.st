@@ -41,6 +41,11 @@ JinHandleObject >> name [
 	^ handle propertyNamed: #Name
 ]
 
+{ #category : #accessing }
+JinHandleObject >> printOn: aStream [
+	aStream nextPutAll: self class name ; nextPut:$[ ; nextPutAll: self name ; nextPut: $]
+]
+
 { #category : #'as yet unclassified' }
 JinHandleObject >> privateLoadObjectHandle [
 	self subclassResponsibility

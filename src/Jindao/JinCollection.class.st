@@ -20,7 +20,7 @@ JinCollection >> collect: aBlock [
 	the new collection."
 
 	| newCollection |
-	newCollection := self species new.
+	newCollection := OrderedCollection new.
 	self do: [:each | newCollection add: (aBlock value: each)].
 	^ newCollection
 ]

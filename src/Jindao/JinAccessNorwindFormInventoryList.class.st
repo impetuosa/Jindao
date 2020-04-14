@@ -16,6 +16,6 @@ JinAccessNorwindFormInventoryList >> testFormInventoryListIsAvailable [
 JinAccessNorwindFormInventoryList >> testInventoryHas13Lines [
 	self
 		assert:
-			(project forms detect: [ :m | m name = 'Purchase Order Details' ]) code  amountOfLines
+			(project forms detect: [ :m | m name = 'Inventory List' ]) code  amountOfLines
 		equals: 13
 ]
