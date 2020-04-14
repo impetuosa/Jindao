@@ -2,7 +2,8 @@ Class {
 	#name : #JinInstanceFactory,
 	#superclass : #Object,
 	#instVars : [
-		'useClass'
+		'useClass',
+		'project'
 	],
 	#category : #Jindao
 }
@@ -18,7 +19,13 @@ JinInstanceFactory class >> defaultFor: aClass [
 JinInstanceFactory >> elementFor: aHandle [
 	^ useClass new
 		handle: aHandle;
+		project: project; 
 		yourself
+]
+
+{ #category : #accessing }
+JinInstanceFactory >> project: aProject [
+	project := aProject
 ]
 
 { #category : #accessing }

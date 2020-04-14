@@ -46,6 +46,16 @@ JinAccessApplication >> closeProject: aProject [
 	self handle dispatch: 'CloseCurrentDatabase' withArguments: {}
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> command [
+	^ handle propertyNamed: #DoCmd
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> command: aString withArguments: aCollection [ 
+	^ self command dispatch: aString withArguments: aCollection 
+]
+
 { #category : #initialization }
 JinAccessApplication >> handle [
 	^ handle
@@ -72,6 +82,19 @@ JinAccessApplication >> open: aFileReference [
 			dataHandle: (handle propertyNamed: #CurrentData)
 			application: self;
 		yourself
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> openModule: aJinModule [
+	self command: #OpenModule withArguments: {aJinModule name}.
+	^ self openedModuleHandles detect: [ :m | m name = aJinModule name ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> openedModuleHandles [
+	^ JinCollection new
+		handle: (handle propertyNamed: #Modules)
+		factory: (JinInstanceFactory defaultFor: JinHandleObject)
 ]
 
 { #category : #initialization }
