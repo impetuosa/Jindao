@@ -5,10 +5,26 @@ Class {
 }
 
 { #category : #tests }
+JinAccessNorwindFormInventoryList >> testFormInventoryListHas22Controls [ 
+	self
+		assert: (project forms detect: [ :m | m name = 'Inventory List' ]) controls size 
+		equals: 22.
+		
+]
+
+{ #category : #tests }
 JinAccessNorwindFormInventoryList >> testFormInventoryListHasManyControls [ 
 	self
 		assert: (project forms detect: [ :m | m name = 'Inventory List' ]) controls size 
 		equals: 22.
+		
+]
+
+{ #category : #tests }
+JinAccessNorwindFormInventoryList >> testFormInventoryListHasManyKindsOfControls [
+	self
+		assert: ((project forms detect: [ :m | m name = 'Inventory List' ]) controls groupedBy: [ : c | c class  ]) size 
+		equals:5.
 		
 ]
 

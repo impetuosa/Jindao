@@ -1,3 +1,6 @@
+"
+I am a factory that creates elements of a given class .I set up a project into the instance and set up the handle into 
+"
 Class {
 	#name : #JinInstanceFactory,
 	#superclass : #Object,

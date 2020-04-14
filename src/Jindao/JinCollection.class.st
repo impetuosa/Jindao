@@ -51,22 +51,39 @@ JinCollection >> do: aBlock [
 ]
 
 { #category : #'as yet unclassified' }
+JinCollection >> groupedBy: aBlock [
+	"Answer a dictionary whose keys are the result of evaluating aBlock for all my elements, and the value for each key is the selection of my elements that evaluated to that key. Uses species."
+	
+	| groups |
+	groups := OrderedDictionary new.
+	self do: [ :each |
+		(groups at: (aBlock value: each) ifAbsentPut: [ OrderedCollection new ]) add: each ].
+	self species ~~ OrderedCollection ifTrue: [
+		groups associationsDo: [ :association |
+			association value: (self species withAll: association value) ]].
+	^ groups
+
+]
+
+{ #category : #'as yet unclassified' }
 JinCollection >> handle: aCOMDispatchInstance factory: anInstanceFactory [
 	handle := aCOMDispatchInstance.
 	factory := anInstanceFactory
 ]
 
 { #category : #'as yet unclassified' }
-JinCollection >> select: aBlock [ 
+JinCollection >> select: aBlock [
 	"Evaluate aBlock with each of the receiver's elements as the argument. Collect into a new collection like the receiver, only those elements for which aBlock evaluates to true. Answer the new collection."
+
 	"(#(1 2 3 4 5) select: #even) >>> #(2 4)"
-	
+
 	| newCollection |
-	newCollection := self class new.
-	self do: [ :each | 
-		(aBlock value: each) 
-			ifTrue: [ newCollection add: each ]].
-	^newCollection
+	newCollection := OrderedCollection new.
+	self
+		do: [ :each | 
+			(aBlock value: each)
+				ifTrue: [ newCollection add: each ] ].
+	^ newCollection
 ]
 
 { #category : #'as yet unclassified' }
