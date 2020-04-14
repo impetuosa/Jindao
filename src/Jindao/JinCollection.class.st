@@ -60,7 +60,7 @@ JinCollection >> groupedBy: aBlock [
 		(groups at: (aBlock value: each) ifAbsentPut: [ OrderedCollection new ]) add: each ].
 	self species ~~ OrderedCollection ifTrue: [
 		groups associationsDo: [ :association |
-			association value: (self species withAll: association value) ]].
+			association value: (OrderedCollection withAll: association value) ]].
 	^ groups
 
 ]

@@ -30,7 +30,7 @@ JinControlsFactory >> classFor: aControl ifNone: aBlock [
 
 { #category : #accessing }
 JinControlsFactory >> control: aControl mapsWith: aJinControlClass [
-	^ aControl type name = aJinControlClass mappedTypeName
+	^ aControl getTypeInfo name = aJinControlClass mappedTypeName
 ]
 
 { #category : #accessing }

@@ -13,19 +13,12 @@ JinAccessNorwindFormInventoryList >> testFormInventoryListHas22Controls [
 ]
 
 { #category : #tests }
-JinAccessNorwindFormInventoryList >> testFormInventoryListHasManyControls [ 
-	self
-		assert: (project forms detect: [ :m | m name = 'Inventory List' ]) controls size 
-		equals: 22.
-		
-]
-
-{ #category : #tests }
 JinAccessNorwindFormInventoryList >> testFormInventoryListHasManyKindsOfControls [
 	self
-		assert: ((project forms detect: [ :m | m name = 'Inventory List' ]) controls groupedBy: [ : c | c class  ]) size 
-		equals:5.
-		
+		assert:
+			((project forms detect: [ :m | m name = 'Inventory List' ]) controls
+				groupedBy: [ :c | c class ]) size
+		equals: 4
 ]
 
 { #category : #tests }

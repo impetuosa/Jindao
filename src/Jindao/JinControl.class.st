@@ -2,7 +2,8 @@ Class {
 	#name : #JinControl,
 	#superclass : #Object,
 	#instVars : [
-		'handle'
+		'handle',
+		'parent'
 	],
 	#category : #'Jindao-Factories'
 }
@@ -10,4 +11,14 @@ Class {
 { #category : #'as yet unclassified' }
 JinControl class >> mappedTypeName [
 	^ self subclassResponsibility 
+]
+
+{ #category : #'as yet unclassified' }
+JinControl >> handle: aCOMDispatchInstance [ 
+	handle := aCOMDispatchInstance
+]
+
+{ #category : #'as yet unclassified' }
+JinControl >> parent: aParent [ 
+	parent := aParent 
 ]
