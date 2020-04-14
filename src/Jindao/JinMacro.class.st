@@ -1,10 +1,10 @@
 Class {
-	#name : #JinForm,
+	#name : #JinMacro,
 	#superclass : #JinHandleObject,
 	#category : #Jindao
 }
 
 { #category : #'as yet unclassified' }
-JinForm >> privateLoadObjectHandle [
-	^ (project openForm: self) handle
+JinMacro >> privateLoadObjectHandle [
+	^ (project openMacro: self) handle
 ]

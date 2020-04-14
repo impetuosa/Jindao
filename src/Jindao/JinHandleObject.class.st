@@ -3,6 +3,7 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'handle',
+		'loadedObjectHandle',
 		'project'
 	],
 	#category : #Jindao
@@ -26,12 +27,23 @@ JinHandleObject >> handle: aHandle [
 
 { #category : #'as yet unclassified' }
 JinHandleObject >> isLoaded [
-	^ handle propertyNamed: #IsLoaded
+	^ loadedObjectHandle isNotNil
+		and: [ handle propertyNamed: #IsLoaded ]
+]
+
+{ #category : #'as yet unclassified' }
+JinHandleObject >> load [
+	loadedObjectHandle := self privateLoadObjectHandle
 ]
 
 { #category : #accessing }
 JinHandleObject >> name [
 	^ handle propertyNamed: #Name
+]
+
+{ #category : #'as yet unclassified' }
+JinHandleObject >> privateLoadObjectHandle [
+	self subclassResponsibility
 ]
 
 { #category : #accessing }

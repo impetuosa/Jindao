@@ -18,7 +18,10 @@ JinAccessProject >> close [
 JinAccessProject >> forms [
 	^ JinCollection new
 		handle: (programHandle propertyNamed: #AllForms)
-		factory: (JinInstanceFactory defaultFor: JinForm)
+		factory:
+			((JinInstanceFactory defaultFor: JinForm)
+				project: self;
+				yourself)
 ]
 
 { #category : #'as yet unclassified' }
@@ -30,7 +33,12 @@ JinAccessProject >> handle: aCOMDispatchInstance dataHandle: aDataHandle applica
 
 { #category : #'as yet unclassified' }
 JinAccessProject >> macros [
-	^ JinCollection new handle: (programHandle propertyNamed: #AllMacros)
+	^ JinCollection new
+		handle: (programHandle propertyNamed: #AllMacros)
+		factory:
+			((JinInstanceFactory defaultFor: JinMacro)
+				project: self;
+				yourself)
 ]
 
 { #category : #'as yet unclassified' }
@@ -50,17 +58,30 @@ JinAccessProject >> openModule: aJinModule [
 
 { #category : #'as yet unclassified' }
 JinAccessProject >> queries [
-	^ JinCollection new handle: (dataHandle  propertyNamed: #AllQueries)
+	^ JinCollection new
+		handle: (dataHandle propertyNamed: #AllQueries)
+		factory:
+			((JinInstanceFactory defaultFor: JinQuery)
+				project: self;
+				yourself)
 ]
 
 { #category : #'as yet unclassified' }
 JinAccessProject >> reports [
-	^ JinCollection new handle: (programHandle propertyNamed: #AllReports ).
-	
-
+	^ JinCollection new
+		handle: (programHandle propertyNamed: #AllReports)
+		factory:
+			((JinInstanceFactory defaultFor: JinReport)
+				project: self;
+				yourself)
 ]
 
 { #category : #'as yet unclassified' }
 JinAccessProject >> tables [
-	^ JinCollection new handle: (dataHandle propertyNamed: #AllTables)
+	^ JinCollection new
+		handle: (dataHandle propertyNamed: #AllTables)
+		factory:
+			((JinInstanceFactory defaultFor: JinTable)
+				project: self;
+				yourself)
 ]

@@ -46,12 +46,12 @@ JinAccessApplication >> closeProject: aProject [
 	self handle dispatch: 'CloseCurrentDatabase' withArguments: {}
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessApplication >> command [
 	^ handle propertyNamed: #DoCmd
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #convenience }
 JinAccessApplication >> command: aString withArguments: aCollection [ 
 	^ self command dispatch: aString withArguments: aCollection 
 ]
@@ -90,7 +90,7 @@ JinAccessApplication >> openModule: aJinModule [
 	^ self openedModuleHandles detect: [ :m | m name = aJinModule name ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessApplication >> openedModuleHandles [
 	^ JinCollection new
 		handle: (handle propertyNamed: #Modules)
