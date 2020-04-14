@@ -19,3 +19,8 @@ JinFormModule >> moduleHandle: aHandle project: aProject [
 	loadedObjectHandle := aHandle .
 	self project: aProject
 ]
+
+{ #category : #'as yet unclassified' }
+JinFormModule >> name [
+	^ loadedObjectHandle  propertyNamed: #Name
+]
