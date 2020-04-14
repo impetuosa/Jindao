@@ -1,7 +1,7 @@
 Class {
 	#name : #JinAccessNorwindModuleInventory,
 	#superclass : #JinNorwindBasedTests,
-	#category : #Jindao
+	#category : #'Jindao-Tests'
 }
 
 { #category : #tests }

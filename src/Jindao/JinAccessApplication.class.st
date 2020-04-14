@@ -33,7 +33,7 @@ Class {
 		'handle',
 		'visible'
 	],
-	#category : #Jindao
+	#category : #'Jindao-DomainObjects'
 }
 
 { #category : #'as yet unclassified' }

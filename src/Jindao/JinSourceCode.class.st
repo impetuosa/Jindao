@@ -1,10 +1,15 @@
+"
+I represent the source code part of a module, form, macro, etc. 
+
+I am able to show my contents 
+"
 Class {
 	#name : #JinSourceCode,
 	#superclass : #Object,
 	#instVars : [
 		'handle'
 	],
-	#category : #Jindao
+	#category : #'Jindao-DomainObjects'
 }
 
 { #category : #'as yet unclassified' }

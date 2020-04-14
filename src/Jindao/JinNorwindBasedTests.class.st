@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'project'
 	],
-	#category : #Jindao
+	#category : #'Jindao-Tests'
 }
 
 { #category : #running }

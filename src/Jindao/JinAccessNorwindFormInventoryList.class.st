@@ -1,14 +1,14 @@
 Class {
 	#name : #JinAccessNorwindFormInventoryList,
 	#superclass : #JinNorwindBasedTests,
-	#category : #Jindao
+	#category : #'Jindao-Tests'
 }
 
 { #category : #tests }
 JinAccessNorwindFormInventoryList >> testFormInventoryListHasManyControls [ 
 	self
 		assert: (project forms detect: [ :m | m name = 'Inventory List' ]) controls size 
-		equals: 534.
+		equals: 22.
 		
 ]
 

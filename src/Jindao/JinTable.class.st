@@ -1,7 +1,7 @@
 Class {
 	#name : #JinTable,
 	#superclass : #JinHandleObject,
-	#category : #Jindao
+	#category : #'Jindao-DomainObjects'
 }
 
 { #category : #'as yet unclassified' }

@@ -1,3 +1,6 @@
+"
+I do represent a Form. A form contains controls and oftenly a related module with the related code. 
+"
 Class {
 	#name : #JinForm,
 	#superclass : #JinHandleObject,
@@ -5,12 +8,20 @@ Class {
 		'code',
 		'module'
 	],
-	#category : #Jindao
+	#category : #'Jindao-DomainObjects'
 }
 
 { #category : #'as yet unclassified' }
 JinForm >> code [
 	^ self module code 
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> controls [
+	self ensureIsLoaded.
+	^ JinCollection new
+		handle: ( (loadedObjectHandle propertyNamed: #Controls))
+		factory: (JinControlsFactory default)
 ]
 
 { #category : #'as yet unclassified' }

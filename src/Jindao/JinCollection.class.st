@@ -5,7 +5,7 @@ Class {
 		'handle',
 		'factory'
 	],
-	#category : #Jindao
+	#category : #'Jindao-RemoteCollections'
 }
 
 { #category : #'as yet unclassified' }

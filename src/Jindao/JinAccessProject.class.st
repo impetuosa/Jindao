@@ -1,3 +1,7 @@
+"
+I represent a access project. I am instantiated by the access application object. 
+I am a first access to collections of defined elements 
+"
 Class {
 	#name : #JinAccessProject,
 	#superclass : #Object,
@@ -6,15 +10,15 @@ Class {
 		'dataHandle',
 		'application'
 	],
-	#category : #Jindao
+	#category : #'Jindao-DomainObjects'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'initialize-release' }
 JinAccessProject >> close [
 	application closeProject: self. 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessProject >> forms [
 	^ JinCollection new
 		handle: (programHandle propertyNamed: #AllForms)
@@ -24,14 +28,14 @@ JinAccessProject >> forms [
 				yourself)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'initialize-release' }
 JinAccessProject >> handle: aCOMDispatchInstance dataHandle: aDataHandle application: anApplication [
 	application := anApplication .
 	programHandle := aCOMDispatchInstance.
 	dataHandle := aDataHandle
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessProject >> macros [
 	^ JinCollection new
 		handle: (programHandle propertyNamed: #AllMacros)
@@ -41,7 +45,7 @@ JinAccessProject >> macros [
 				yourself)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessProject >> modules [
 	^ JinCollection new
 		handle: (programHandle propertyNamed: #AllModules)
@@ -51,17 +55,17 @@ JinAccessProject >> modules [
 				yourself)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'open-load-objects' }
 JinAccessProject >> openForm: aJinForm [
 	^ application openForm: aJinForm
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'open-load-objects' }
 JinAccessProject >> openModule: aJinModule [
 	^ application openModule: aJinModule
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessProject >> queries [
 	^ JinCollection new
 		handle: (dataHandle propertyNamed: #AllQueries)
@@ -71,7 +75,7 @@ JinAccessProject >> queries [
 				yourself)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessProject >> reports [
 	^ JinCollection new
 		handle: (programHandle propertyNamed: #AllReports)
@@ -81,7 +85,7 @@ JinAccessProject >> reports [
 				yourself)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessProject >> tables [
 	^ JinCollection new
 		handle: (dataHandle propertyNamed: #AllTables)

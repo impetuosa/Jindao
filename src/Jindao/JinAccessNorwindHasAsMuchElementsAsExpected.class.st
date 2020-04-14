@@ -1,7 +1,7 @@
 Class {
 	#name : #JinAccessNorwindHasAsMuchElementsAsExpected,
 	#superclass : #JinNorwindBasedTests,
-	#category : #Jindao
+	#category : #'Jindao-Tests'
 }
 
 { #category : #running }

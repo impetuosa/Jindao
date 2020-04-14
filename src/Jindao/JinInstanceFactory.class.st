@@ -5,7 +5,7 @@ Class {
 		'useClass',
 		'project'
 	],
-	#category : #Jindao
+	#category : #'Jindao-Factories'
 }
 
 { #category : #'as yet unclassified' }

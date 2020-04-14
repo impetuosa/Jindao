@@ -1,10 +1,14 @@
+"
+I represent a regular module. 
+I have some code defined in my self .
+"
 Class {
 	#name : #JinModule,
 	#superclass : #JinHandleObject,
 	#instVars : [
 		'code'
 	],
-	#category : #Jindao
+	#category : #'Jindao-DomainObjects'
 }
 
 { #category : #'as yet unclassified' }
