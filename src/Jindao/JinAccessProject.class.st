@@ -52,6 +52,11 @@ JinAccessProject >> modules [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessProject >> openForm: aJinForm [
+	^ application openForm: aJinForm
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessProject >> openModule: aJinModule [
 	^ application openModule: aJinModule
 ]

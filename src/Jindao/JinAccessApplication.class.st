@@ -85,9 +85,22 @@ JinAccessApplication >> open: aFileReference [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessApplication >> openForm: aJinForm [ 
+	self command: #OpenForm withArguments: {aJinForm name}.
+	^ self openedFormsHandles detect: [ :m | m name = aJinForm name ]
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessApplication >> openModule: aJinModule [
 	self command: #OpenModule withArguments: {aJinModule name}.
 	^ self openedModuleHandles detect: [ :m | m name = aJinModule name ]
+]
+
+{ #category : #accessing }
+JinAccessApplication >> openedFormsHandles [
+	^ JinCollection new
+		handle: (handle propertyNamed: #Forms)
+		factory: (JinInstanceFactory defaultFor: JinHandleObject)
 ]
 
 { #category : #accessing }
