@@ -12,8 +12,8 @@ Class {
 }
 
 { #category : #accessing }
-JinControlsFactory class >> default [ 
-	^ self new 
+JinControlsFactory class >> default [
+	^ JinControlGeneratorFactory new
 ]
 
 { #category : #accessing }
