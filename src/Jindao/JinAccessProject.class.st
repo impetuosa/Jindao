@@ -8,7 +8,12 @@ Class {
 	#instVars : [
 		'programHandle',
 		'dataHandle',
-		'application'
+		'application',
+		'forms',
+		'macros',
+		'modules',
+		'queries',
+		'reports'
 	],
 	#category : #'Jindao-DomainObjects'
 }
@@ -25,12 +30,13 @@ JinAccessProject >> close [
 
 { #category : #accessing }
 JinAccessProject >> forms [
-	^ JinCollection newDefault
-		handle: (programHandle propertyNamed: #AllForms)
-		factory:
-			((JinInstanceFactory defaultFor: JinForm)
-				project: self;
-				yourself)
+	^ forms
+		ifNil: [ forms := JinCollection newDefault
+				handle: (programHandle propertyNamed: #AllForms)
+				factory:
+					((JinInstanceFactory defaultFor: JinForm)
+						project: self;
+						yourself) ]
 ]
 
 { #category : #'initialize-release' }
@@ -42,22 +48,24 @@ JinAccessProject >> handle: aCOMDispatchInstance dataHandle: aDataHandle applica
 
 { #category : #accessing }
 JinAccessProject >> macros [
-	^ JinCollection newDefault
-		handle: (programHandle propertyNamed: #AllMacros)
-		factory:
-			((JinInstanceFactory defaultFor: JinMacro)
-				project: self;
-				yourself)
+	^ macros
+		ifNil: [ macros := JinCollection newDefault
+				handle: (programHandle propertyNamed: #AllMacros)
+				factory:
+					((JinInstanceFactory defaultFor: JinMacro)
+						project: self;
+						yourself) ]
 ]
 
 { #category : #accessing }
 JinAccessProject >> modules [
-	^ JinCollection newDefault
-		handle: (programHandle propertyNamed: #AllModules)
-		factory:
-			((JinInstanceFactory defaultFor: JinModule)
-				project: self;
-				yourself)
+	^ modules
+		ifNil: [ modules := JinCollection newDefault
+				handle: (programHandle propertyNamed: #AllModules)
+				factory:
+					((JinInstanceFactory defaultFor: JinModule)
+						project: self;
+						yourself) ]
 ]
 
 { #category : #'open-load-objects' }
@@ -70,24 +78,41 @@ JinAccessProject >> openModule: aJinModule [
 	^ application openModule: aJinModule
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessProject >> openQuery: aJinQuery [
+	^ application openQuery: aJinQuery
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> openReport: aJinReport [ 
+	^ application openReport: aJinReport 
+]
+
 { #category : #accessing }
 JinAccessProject >> queries [
-	^ JinCollection newDefault
-		handle: (dataHandle propertyNamed: #AllQueries)
-		factory:
-			((JinInstanceFactory defaultFor: JinQuery)
-				project: self;
-				yourself)
+	^ queries
+		ifNil: [ queries := JinCollection newDefault
+				handle: (dataHandle propertyNamed: #AllQueries)
+				factory:
+					((JinInstanceFactory defaultFor: JinQuery)
+						project: self;
+						yourself) ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> references [
+	^ application references
 ]
 
 { #category : #accessing }
 JinAccessProject >> reports [
-	^ JinCollection newDefault
-		handle: (programHandle propertyNamed: #AllReports)
-		factory:
-			((JinInstanceFactory defaultFor: JinReport)
-				project: self;
-				yourself)
+	^ reports
+		ifNil: [ reports := JinCollection newDefault
+				handle: (programHandle propertyNamed: #AllReports)
+				factory:
+					((JinInstanceFactory defaultFor: JinReport)
+						project: self;
+						yourself) ]
 ]
 
 { #category : #accessing }

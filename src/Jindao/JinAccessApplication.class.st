@@ -31,7 +31,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'handle',
-		'visible'
+		'visible',
+		'references'
 	],
 	#category : #'Jindao-DomainObjects'
 }
@@ -101,6 +102,17 @@ JinAccessApplication >> openModule: aJinModule [
 	^ self openedModuleHandles detect: [ :m | m name = aJinModule name ]
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> openQuery: aJinQuery [
+	self command: #OpenQuery withArguments: {aJinQuery name}
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> openReport: aJinReport [ 
+	self command: #OpenReport withArguments: {aJinReport name}.
+	^ self openedReportHandles detect: [ :m | m name = aJinReport name ]
+]
+
 { #category : #accessing }
 JinAccessApplication >> openedFormsHandles [
 	^ JinCollection newDefault
@@ -113,6 +125,24 @@ JinAccessApplication >> openedModuleHandles [
 	^ JinCollection newDefault
 		handle: (handle propertyNamed: #Modules)
 		factory: (JinInstanceFactory defaultFor: JinHandleObject)
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> openedReportHandles [
+	^ JinCollection newDefault
+		handle: (handle propertyNamed: #Reports)
+		factory: (JinInstanceFactory defaultFor: JinReport)
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> references [
+	^ references
+		ifNil: [ references := JinCollection newDefaultForMethod
+				handle: (handle propertyNamed: #References)
+				factory:
+					((JinInstanceFactory defaultFor: JinReference)
+						project: self;
+						yourself) ]
 ]
 
 { #category : #initialization }

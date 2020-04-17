@@ -1,8 +1,7 @@
 Class {
 	#name : #JinControl,
-	#superclass : #Object,
+	#superclass : #JinProtoHandleObject,
 	#instVars : [
-		'handle',
 		'parent'
 	],
 	#category : #'Jindao-DomainObjects'
@@ -19,6 +18,11 @@ JinControl >> acceptVisitor: aVisitor [
 ]
 
 { #category : #'as yet unclassified' }
+JinControl >> controlName [
+	^ handle propertyNamed: #ControlName
+]
+
+{ #category : #'as yet unclassified' }
 JinControl >> handle: aCOMDispatchInstance [ 
 	handle := aCOMDispatchInstance
 ]
@@ -26,4 +30,13 @@ JinControl >> handle: aCOMDispatchInstance [
 { #category : #'as yet unclassified' }
 JinControl >> parent: aParent [ 
 	parent := aParent 
+]
+
+{ #category : #'as yet unclassified' }
+JinControl >> printOn: aStream [
+	aStream
+		nextPutAll: self class name;
+		nextPut: $[;
+		nextPutAll: self controlName;
+		nextPut: $]
 ]

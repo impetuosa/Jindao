@@ -10,7 +10,12 @@ Class {
 
 { #category : #'instance creation' }
 JinCollection class >> newDefault [ 
-	^ JinCachedCollection new
+	^ JinCachedEntityCollection new
+]
+
+{ #category : #'instance creation' }
+JinCollection class >> newDefaultForMethod [ 
+	^ JinMethodBasedCollection new
 ]
 
 { #category : #'as yet unclassified' }
@@ -58,6 +63,11 @@ JinCollection >> do: aBlock [
 { #category : #'as yet unclassified' }
 JinCollection >> factory: anInstanceFactory [
 	factory := anInstanceFactory
+]
+
+{ #category : #'as yet unclassified' }
+JinCollection >> first [
+	^ self at: 1 
 ]
 
 { #category : #'as yet unclassified' }

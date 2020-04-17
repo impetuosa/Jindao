@@ -18,5 +18,5 @@ JinCachedCollection >> at: anIndex [
 { #category : #'as yet unclassified' }
 JinCachedCollection >> collection [
 	^ collection
-		ifNil: [ collection := OrderedCollection new: self size ]
+		ifNil: [ collection := OrderedCollection new: self size withAll: self ]
 ]

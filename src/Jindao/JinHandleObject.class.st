@@ -5,11 +5,10 @@ The loaded face is the one that has most of the description .
 "
 Class {
 	#name : #JinHandleObject,
-	#superclass : #Object,
+	#superclass : #JinProtoHandleObject,
 	#instVars : [
-		'handle',
-		'loadedObjectHandle',
-		'project'
+		'project',
+		'loadedObjectHandle'
 	],
 	#category : #'Jindao-DomainObjects'
 }
@@ -18,16 +17,6 @@ Class {
 JinHandleObject >> ensureIsLoaded [
 	self isLoaded
 		ifFalse: [ self load ]
-]
-
-{ #category : #'as yet unclassified' }
-JinHandleObject >> handle [
-	^ handle
-]
-
-{ #category : #accessing }
-JinHandleObject >> handle: aHandle [
-	handle := aHandle
 ]
 
 { #category : #'as yet unclassified' }
@@ -44,11 +33,6 @@ JinHandleObject >> load [
 { #category : #accessing }
 JinHandleObject >> name [
 	^ handle propertyNamed: #Name
-]
-
-{ #category : #accessing }
-JinHandleObject >> printOn: aStream [
-	aStream nextPutAll: self class name ; nextPut:$[ ; nextPutAll: self name ; nextPut: $]
 ]
 
 { #category : #'as yet unclassified' }

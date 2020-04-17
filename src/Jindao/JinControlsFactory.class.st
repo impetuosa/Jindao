@@ -13,7 +13,7 @@ Class {
 
 { #category : #accessing }
 JinControlsFactory class >> default [
-	^ JinControlsOnlyGenericsFactory new
+	^ JinControlsMappedTypesFactory new
 ]
 
 { #category : #accessing }

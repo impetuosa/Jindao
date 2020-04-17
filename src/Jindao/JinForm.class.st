@@ -31,6 +31,12 @@ JinForm >> controls [
 ]
 
 { #category : #'as yet unclassified' }
+JinForm >> hasModule [
+	self ensureIsLoaded .
+	^ loadedObjectHandle propertyNamed: #HasModule
+]
+
+{ #category : #'as yet unclassified' }
 JinForm >> module [
 	self ensureIsLoaded.
 	^ module
