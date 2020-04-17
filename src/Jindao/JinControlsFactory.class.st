@@ -13,7 +13,7 @@ Class {
 
 { #category : #accessing }
 JinControlsFactory class >> default [
-	^ JinControlGeneratorFactory new
+	^ JinControlsOnlyGenericsFactory new
 ]
 
 { #category : #accessing }
@@ -23,9 +23,7 @@ JinControlsFactory >> classFor: aControl [
 
 { #category : #accessing }
 JinControlsFactory >> classFor: aControl ifNone: aBlock [
-	^ JinControl subclasses
-		detect: [ :a | self control: aControl mapsWith: a ]
-		ifNone: [ aBlock value ]
+	self subclassResponsibility 
 ]
 
 { #category : #accessing }

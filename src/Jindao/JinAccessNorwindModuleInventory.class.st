@@ -24,7 +24,7 @@ JinAccessNorwindModuleInventory >> testInventoryHas310Lines [
 { #category : #tests }
 JinAccessNorwindModuleInventory >> testInventoryTextCode [
 	self
-		assert: (project modules detect: [ :m | m name = #Inventory ]) code isNotEmpty
+		assert: (project modules detect: [ :m | m name = #Inventory ]) code isNotEmpty.
 ]
 
 { #category : #tests }

@@ -41,6 +41,11 @@ JinAccessApplication class >> default [
 	^ self new
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> acceptVisitor: aVisitor [
+	aVisitor visitApplication: self 
+]
+
 { #category : #initialization }
 JinAccessApplication >> closeProject: aProject [
 	self handle dispatch: 'CloseCurrentDatabase' withArguments: {}
@@ -98,14 +103,14 @@ JinAccessApplication >> openModule: aJinModule [
 
 { #category : #accessing }
 JinAccessApplication >> openedFormsHandles [
-	^ JinCollection new
+	^ JinCollection newDefault
 		handle: (handle propertyNamed: #Forms)
 		factory: (JinInstanceFactory defaultFor: JinHandleObject)
 ]
 
 { #category : #accessing }
 JinAccessApplication >> openedModuleHandles [
-	^ JinCollection new
+	^ JinCollection newDefault
 		handle: (handle propertyNamed: #Modules)
 		factory: (JinInstanceFactory defaultFor: JinHandleObject)
 ]

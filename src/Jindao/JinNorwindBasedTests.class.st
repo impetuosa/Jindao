@@ -13,6 +13,11 @@ JinNorwindBasedTests >> norwind [
 ]
 
 { #category : #running }
+JinNorwindBasedTests >> runCaseManaged [
+	self runCase
+]
+
+{ #category : #running }
 JinNorwindBasedTests >> setUp [
 	project := JinAccessApplication default open: self norwind
 ]

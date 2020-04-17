@@ -1,8 +1,21 @@
 Class {
 	#name : #JinControlGeneratorFactory,
-	#superclass : #JinControlsFactory,
+	#superclass : #JinControlsMappedTypesFactory,
+	#instVars : [
+		'builder'
+	],
 	#category : #'Jindao-Factories'
 }
+
+{ #category : #accessing }
+JinControlGeneratorFactory >> builder [
+	^ builder ifNil: [ JinControlClassBuilder ]
+]
+
+{ #category : #accessing }
+JinControlGeneratorFactory >> builder: aBuilder [ 
+	builder := aBuilder 
+]
 
 { #category : #accessing }
 JinControlGeneratorFactory >> classFor: aControl [
@@ -14,11 +27,16 @@ JinControlGeneratorFactory >> classFor: aControl [
 { #category : #accessing }
 JinControlGeneratorFactory >> generateClassControlFor: aControl [
 	| builder |
-	builder := JinControlClassBuilder new.
+	builder := self newBuilder.
 	builder
 		superclass: JinControl;
 		name: aControl getTypeInfo name.
 	aControl getTypeInfo properties do: [ :p | builder addProperty: p ].
-	aControl getTypeInfo methods do: [ :p | builder addMethod: p ].
+	aControl getTypeInfo methods reject: [: p | p isProperty ] thenDo: [ :p | builder addMethod: p ].
 	^ builder build
+]
+
+{ #category : #accessing }
+JinControlGeneratorFactory >> newBuilder [
+	^ self builder new 
 ]

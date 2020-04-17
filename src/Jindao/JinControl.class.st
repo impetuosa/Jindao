@@ -5,12 +5,17 @@ Class {
 		'handle',
 		'parent'
 	],
-	#category : #'Jindao-Factories'
+	#category : #'Jindao-DomainObjects'
 }
 
 { #category : #'as yet unclassified' }
 JinControl class >> mappedTypeName [
-	^ self subclassResponsibility 
+	^ false 
+]
+
+{ #category : #'as yet unclassified' }
+JinControl >> acceptVisitor: aVisitor [
+	aVisitor visitControl: self
 ]
 
 { #category : #'as yet unclassified' }

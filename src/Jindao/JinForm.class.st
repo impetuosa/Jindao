@@ -12,6 +12,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinForm >> acceptVisitor: aVisitor [
+	aVisitor visitForm: self.
+	
+]
+
+{ #category : #'as yet unclassified' }
 JinForm >> code [
 	^ self module code 
 ]
@@ -19,7 +25,7 @@ JinForm >> code [
 { #category : #'as yet unclassified' }
 JinForm >> controls [
 	self ensureIsLoaded.
-	^ JinCollection new
+	^ JinCollection newDefault
 		handle: ( (loadedObjectHandle propertyNamed: #Controls))
 		factory: (JinControlsFactory default)
 ]

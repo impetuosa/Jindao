@@ -12,6 +12,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinModule >> acceptVisitor: aVisitor [
+	aVisitor visitModule: self 
+]
+
+{ #category : #'as yet unclassified' }
 JinModule >> code [
 	self ensureIsLoaded.
 	^ code

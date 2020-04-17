@@ -13,6 +13,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinSourceCode >> acceptVisitor: aVisitor [
+	aVisitor visitSourceCode: self 
+]
+
+{ #category : #'as yet unclassified' }
 JinSourceCode >> amountOfElements [
 	^ self elements size 
 ]

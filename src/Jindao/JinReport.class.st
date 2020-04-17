@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinReport >> acceptVisitor: aVisitor [
+	aVisitor visitReport: self 
+]
+
+{ #category : #'as yet unclassified' }
 JinReport >> privateLoadObjectHandle [
 	^ (project openReport: self) handle
 ]

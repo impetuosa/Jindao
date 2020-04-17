@@ -8,6 +8,11 @@ Class {
 	#category : #'Jindao-RemoteCollections'
 }
 
+{ #category : #'instance creation' }
+JinCollection class >> newDefault [ 
+	^ JinCachedCollection new
+]
+
 { #category : #'as yet unclassified' }
 JinCollection >> at: anIndex [
 	^ factory elementFor: (handle propertyNamed: 'Item' withArguments: {(anIndex - 1)})
@@ -48,6 +53,19 @@ JinCollection >> detect: aBlock ifNone: exceptionBlock [
 { #category : #'as yet unclassified' }
 JinCollection >> do: aBlock [
 	1 to: self size do: [ :index | aBlock value: (self at: index) ]
+]
+
+{ #category : #'as yet unclassified' }
+JinCollection >> factory: anInstanceFactory [
+	factory := anInstanceFactory
+]
+
+{ #category : #'as yet unclassified' }
+JinCollection >> flatCollect: aBlock [
+	| col |
+	col := OrderedCollection new: self size.
+	self do: [ :each | col addAll: (aBlock value: each) ].
+	^ col
 ]
 
 { #category : #'as yet unclassified' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #JinControlGeneric,
 	#superclass : #JinControl,
-	#category : #'Jindao-Factories'
+	#category : #'Jindao-DomainObjects'
 }
 
 { #category : #'as yet unclassified' }

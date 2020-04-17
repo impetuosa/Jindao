@@ -9,7 +9,7 @@ JinAccessNorwindFormInventoryList >> testFormInventoryListHas22Controls [
 	self
 		assert: (project forms detect: [ :m | m name = 'Inventory List' ]) controls size 
 		equals: 22.
-		
+ 
 ]
 
 { #category : #tests }

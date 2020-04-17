@@ -10,6 +10,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinFormModule >> acceptVisitor: aVisitor [
+	aVisitor visitFormModule: self 
+]
+
+{ #category : #'as yet unclassified' }
 JinFormModule >> ensureIsLoaded [
 	self isLoaded ifFalse: [ self error: ' A form module is mean to be loaded by the form owner ' ].
 ]

@@ -14,13 +14,18 @@ Class {
 }
 
 { #category : #'initialize-release' }
+JinAccessProject >> acceptVisitor: aVisitor [
+	aVisitor visitProject: self 
+]
+
+{ #category : #'initialize-release' }
 JinAccessProject >> close [
 	application closeProject: self. 
 ]
 
 { #category : #accessing }
 JinAccessProject >> forms [
-	^ JinCollection new
+	^ JinCollection newDefault
 		handle: (programHandle propertyNamed: #AllForms)
 		factory:
 			((JinInstanceFactory defaultFor: JinForm)
@@ -37,7 +42,7 @@ JinAccessProject >> handle: aCOMDispatchInstance dataHandle: aDataHandle applica
 
 { #category : #accessing }
 JinAccessProject >> macros [
-	^ JinCollection new
+	^ JinCollection newDefault
 		handle: (programHandle propertyNamed: #AllMacros)
 		factory:
 			((JinInstanceFactory defaultFor: JinMacro)
@@ -47,7 +52,7 @@ JinAccessProject >> macros [
 
 { #category : #accessing }
 JinAccessProject >> modules [
-	^ JinCollection new
+	^ JinCollection newDefault
 		handle: (programHandle propertyNamed: #AllModules)
 		factory:
 			((JinInstanceFactory defaultFor: JinModule)
@@ -67,7 +72,7 @@ JinAccessProject >> openModule: aJinModule [
 
 { #category : #accessing }
 JinAccessProject >> queries [
-	^ JinCollection new
+	^ JinCollection newDefault
 		handle: (dataHandle propertyNamed: #AllQueries)
 		factory:
 			((JinInstanceFactory defaultFor: JinQuery)
@@ -77,7 +82,7 @@ JinAccessProject >> queries [
 
 { #category : #accessing }
 JinAccessProject >> reports [
-	^ JinCollection new
+	^ JinCollection newDefault
 		handle: (programHandle propertyNamed: #AllReports)
 		factory:
 			((JinInstanceFactory defaultFor: JinReport)
@@ -87,7 +92,7 @@ JinAccessProject >> reports [
 
 { #category : #accessing }
 JinAccessProject >> tables [
-	^ JinCollection new
+	^ JinCollection newDefault
 		handle: (dataHandle propertyNamed: #AllTables)
 		factory:
 			((JinInstanceFactory defaultFor: JinTable)
