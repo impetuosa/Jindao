@@ -41,6 +41,14 @@ JinCollection >> detect: aBlock [
 ]
 
 { #category : #'as yet unclassified' }
+JinCollection >> detect: aBlock ifFound: foundBlock [
+	self
+		detect: aBlock
+		ifFound: foundBlock
+		ifNone: [ "Do nothing on purpose" ]
+]
+
+{ #category : #'as yet unclassified' }
 JinCollection >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
 	self
 		do: [ :each | 

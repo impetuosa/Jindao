@@ -1,11 +1,23 @@
 Class {
 	#name : #JinNorwindBasedTests,
-	#superclass : #TestCase,
+	#superclass : #ParametrizedTestCase,
 	#instVars : [
 		'project'
 	],
 	#category : #'Jindao-Tests'
 }
+
+{ #category : #'building suites' }
+JinNorwindBasedTests class >> norwind [
+	^ 'C:\Users\santiago\Documents\Northwind.accdb' asFileReference
+]
+
+{ #category : #'building suites' }
+JinNorwindBasedTests class >> testParameters [
+	^ ParametrizedTestMatrix new
+		forSelector: #project
+		addOptions: {(JinAccessApplication default open: self norwind)}
+]
 
 { #category : #running }
 JinNorwindBasedTests >> norwind [
@@ -13,13 +25,13 @@ JinNorwindBasedTests >> norwind [
 ]
 
 { #category : #running }
-JinNorwindBasedTests >> runCaseManaged [
-	self runCase
+JinNorwindBasedTests >> project: aProject [ 
+	project := aProject 
 ]
 
 { #category : #running }
-JinNorwindBasedTests >> setUp [
-	project := JinAccessApplication default open: self norwind
+JinNorwindBasedTests >> runCaseManaged [
+	self runCase
 ]
 
 { #category : #running }

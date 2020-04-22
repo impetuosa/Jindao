@@ -12,7 +12,8 @@ JinCasinoModelStatelessFactory >> importControl: aControl inTheContextOf: aWidge
 { #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> importForm: aForm inTheContextOf: aProject [
 	^ JinPage new
-		realClassName: aForm name;
+		realClassName: aForm class name;
+		name: aForm name;
 		project: aProject;
 		yourself
 ]
