@@ -23,6 +23,11 @@ JinAccessProject >> acceptVisitor: aVisitor [
 	^ aVisitor visitProject: self 
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessProject >> application [
+	^ application
+]
+
 { #category : #'initialize-release' }
 JinAccessProject >> close [
 	application closeProject: self. 
