@@ -26,8 +26,11 @@ JinForm >> code [
 JinForm >> controls [
 	self ensureIsLoaded.
 	^ JinCollection newDefault
-		handle: ( (loadedObjectHandle propertyNamed: #Controls))
-		factory: (JinControlsFactory default)
+		handle: (loadedObjectHandle propertyNamed: #Controls)
+		factory:
+			(JinControlsFactory default
+				parent: self;
+				yourself)
 ]
 
 { #category : #'as yet unclassified' }

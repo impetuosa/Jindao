@@ -29,3 +29,8 @@ JinCasinoModelStatelessFactory >> importProject: aProject [
 		name: aProject name;
 		yourself
 ]
+
+{ #category : #'as yet unclassified' }
+JinCasinoModelStatelessFactory >> visitCheckbox: aJinControlCheckbox [ 
+	self shouldBeImplemented.
+]

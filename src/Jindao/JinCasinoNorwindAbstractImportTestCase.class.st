@@ -12,13 +12,20 @@ Class {
 	#category : #'Jindao-CasinoImporting'
 }
 
+{ #category : #'as yet unclassified' }
+JinCasinoNorwindAbstractImportTestCase >> findAnyControlOfClass: aClass [
+	aClass
+		ifNil: [ ^ self error: ' Trying to find nil as control class' ].
+	project forms
+		do:
+			[ :f | f controls detect: [ :c | c class = aClass ] ifFound: [ :c | ^ c ] ].
+	self
+		error: 'Unable to find in the current project a control of class ' , aClass
+]
+
 { #category : #running }
 JinCasinoNorwindAbstractImportTestCase >> importAnyControlOfClass: aClass [
-	aClass ifNil: [ ^ self error:' Trying to find nil as control class' ].
-	project forms do: [ : f | 
-		f controls detect: [ : c| c class = aClass ]	ifFound:[ : c | ^ c ].
-	 ].
-	self error:'Unable to find in the current project a control of class ' , aClass .
+	self importControl: (self findAnyControlOfClass: aClass)
 ]
 
 { #category : #running }
@@ -33,7 +40,7 @@ JinCasinoNorwindAbstractImportTestCase >> importAnyFormNamed: aName [
 
 { #category : #running }
 JinCasinoNorwindAbstractImportTestCase >> importControl: aControl [ 
-	self importForm: aControl parent.
+	self importForm: aControl form .
 	control := aControl.
 	^ importedControl := factory
 		importControl: control

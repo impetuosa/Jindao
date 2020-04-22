@@ -23,8 +23,18 @@ JinControl >> controlName [
 ]
 
 { #category : #'as yet unclassified' }
+JinControl >> form [
+	^ parent 
+]
+
+{ #category : #'as yet unclassified' }
 JinControl >> handle: aCOMDispatchInstance [ 
 	handle := aCOMDispatchInstance
+]
+
+{ #category : #'as yet unclassified' }
+JinControl >> jinParent [
+	^ parent 
 ]
 
 { #category : #'as yet unclassified' }
