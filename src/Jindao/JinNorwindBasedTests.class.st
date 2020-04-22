@@ -12,13 +12,6 @@ JinNorwindBasedTests class >> norwind [
 	^ 'C:\Users\santiago\Documents\Northwind.accdb' asFileReference
 ]
 
-{ #category : #'building suites' }
-JinNorwindBasedTests class >> testParameters [
-	^ ParametrizedTestMatrix new
-		forSelector: #project
-		addOptions: {(JinAccessApplication default open: self norwind)}
-]
-
 { #category : #running }
 JinNorwindBasedTests >> norwind [
 	^ 'C:\Users\santiago\Documents\Northwind.accdb' asFileReference
@@ -35,7 +28,7 @@ JinNorwindBasedTests >> runCaseManaged [
 ]
 
 { #category : #running }
-JinNorwindBasedTests >> tearDown [
-	project close. 
-	super tearDown
+JinNorwindBasedTests >> setUp [ 
+	super setUp.
+	project := JinNorwindProjectResource current project 
 ]
