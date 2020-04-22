@@ -15,8 +15,8 @@ JinBreathFirstVisitor >> visitCheckbox: aJinControlCheckbox [
 ]
 
 { #category : #'as yet unclassified' }
-JinBreathFirstVisitor >> visitCollection: aCollection [  
-	aCollection do: [ : element | element acceptVisitor: self  ]
+JinBreathFirstVisitor >> visitCollection: aCollection [
+	aCollection do: [ :element | element acceptVisitor: self ]
 ]
 
 { #category : #'as yet unclassified' }

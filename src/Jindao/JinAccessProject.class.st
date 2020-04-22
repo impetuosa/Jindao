@@ -20,7 +20,7 @@ Class {
 
 { #category : #'initialize-release' }
 JinAccessProject >> acceptVisitor: aVisitor [
-	aVisitor visitProject: self 
+	^ aVisitor visitProject: self 
 ]
 
 { #category : #'initialize-release' }
@@ -37,6 +37,11 @@ JinAccessProject >> forms [
 					((JinInstanceFactory defaultFor: JinForm)
 						project: self;
 						yourself) ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> fullName [
+	^ programHandle propertyNamed:#FullName
 ]
 
 { #category : #'initialize-release' }
@@ -66,6 +71,11 @@ JinAccessProject >> modules [
 					((JinInstanceFactory defaultFor: JinModule)
 						project: self;
 						yourself) ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> name [
+	^ programHandle propertyNamed: #Name 
 ]
 
 { #category : #'open-load-objects' }
