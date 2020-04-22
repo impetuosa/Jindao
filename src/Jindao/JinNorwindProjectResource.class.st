@@ -15,18 +15,19 @@ JinNorwindProjectResource >> norwind [
 { #category : #running }
 JinNorwindProjectResource >> project [
 	^ project
+		ifNil: [ project := JinAccessApplication default open: self norwind ]
 ]
 
 { #category : #running }
 JinNorwindProjectResource >> setUp [
 	super setUp.  
-	project := (JinAccessApplication default open: self norwind)
+	self project. 
 ]
 
 { #category : #running }
 JinNorwindProjectResource >> tearDown [
 	project close.
-	
+	project := nil. 
 	super tearDown.
 	
 ]

@@ -13,16 +13,6 @@ JinNorwindBasedTests class >> norwind [
 ]
 
 { #category : #running }
-JinNorwindBasedTests >> norwind [
-	^ 'C:\Users\santiago\Documents\Northwind.accdb' asFileReference
-]
-
-{ #category : #running }
-JinNorwindBasedTests >> project: aProject [ 
-	project := aProject 
-]
-
-{ #category : #running }
 JinNorwindBasedTests >> runCaseManaged [
 	self runCase
 ]

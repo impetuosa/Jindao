@@ -14,11 +14,11 @@ JinAccessNorwindFormInventoryList >> testFormInventoryListHas22Controls [
 
 { #category : #tests }
 JinAccessNorwindFormInventoryList >> testFormInventoryListHasManyKindsOfControls [
-	[self
+	self
 		assert:
 			((project forms detect: [ :m | m name = 'Inventory List' ]) controls
 				groupedBy: [ :c | c class ]) size
-		equals: 4] on: Error do: [ :e | self halt. ]
+		equals: 4
 ]
 
 { #category : #tests }
