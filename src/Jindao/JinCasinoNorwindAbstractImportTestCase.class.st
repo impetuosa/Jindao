@@ -58,7 +58,7 @@ JinCasinoNorwindAbstractImportTestCase >> importForm: aForm [
 
 { #category : #running }
 JinCasinoNorwindAbstractImportTestCase >> importProject [
-	^ importedProject := factory importProject: project
+	^ importedProject := factory importProject: project model: CSNUICWModel new
 ]
 
 { #category : #running }

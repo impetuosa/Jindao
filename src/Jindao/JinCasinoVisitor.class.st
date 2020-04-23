@@ -5,7 +5,8 @@ Class {
 		'stack',
 		'importedProject',
 		'mapper',
-		'factory'
+		'factory',
+		'importingIntoThisModel'
 	],
 	#category : #'Jindao-CasinoImporting'
 }
@@ -23,12 +24,14 @@ JinCasinoVisitor >> importForm: aForm [
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> importFormControl: aControl [
-	^ self factory importControl: aControl inTheContextOf: stack top
+	^ [ self factory importControl: aControl inTheContextOf: stack top ]
+		on: Error
+		do: [ :err | ^ nil ]
 ]
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> importProject: aProject [
-	^ self factory importProject: aProject. 
+	^ self factory importProject: aProject model: importingIntoThisModel . 
 	
 ]
 
@@ -48,6 +51,11 @@ JinCasinoVisitor >> pushInStack: anObject during: aBlock [
 	stack push: anObject.
 	aBlock value.
 	^ stack pop
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoVisitor >> useModel: aModel [
+	importingIntoThisModel := aModel
 ]
 
 { #category : #'as yet unclassified' }

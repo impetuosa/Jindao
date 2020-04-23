@@ -45,9 +45,10 @@ JinCasinoModelStatelessFactory >> importModelFrom: aControl [
 ]
 
 { #category : #'as yet unclassified' }
-JinCasinoModelStatelessFactory >> importProject: aProject [
+JinCasinoModelStatelessFactory >> importProject: aProject model: aModel [
 	^ JinCasinoProject new
 		name: aProject name;
+		model: aModel ;
 		yourself
 ]
 
@@ -90,7 +91,7 @@ JinCasinoModelStatelessFactory >> visitCombobox: aJinControlCombobox [
 	| input |
 	input := CSNUISelect new. 
 	input name: aJinControlCombobox name .
-	input value: aJinControlCombobox value.
+	input value: aJinControlCombobox defaultValue .
 	
 	self setupAttributesFrom: aJinControlCombobox into:input.
 	
@@ -191,7 +192,7 @@ JinCasinoModelStatelessFactory >> visitTextbox: aJinControlTextbox [
 	| input |
 	input := CSNUIInputText new. 
 	input name: aJinControlTextbox name .
-	input value: aJinControlTextbox value.
+	input value: aJinControlTextbox defaultValue.
 	
 	self setupAttributesFrom: aJinControlTextbox into:input.
 	

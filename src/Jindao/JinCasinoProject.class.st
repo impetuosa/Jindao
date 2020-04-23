@@ -17,19 +17,24 @@ JinCasinoProject >> add: aCSNBusinessPage [
 
 { #category : #adding }
 JinCasinoProject >> addPage: aJinPage [ 
-	pages add: aJinPage
+	pages add: aJinPage.
+	model add: aJinPage 
 ]
 
 { #category : #accessing }
 JinCasinoProject >> initialize [
 	super initialize.
 	pages := Set new.
-	model := CSNUICWModel new
 ]
 
 { #category : #'as yet unclassified' }
 JinCasinoProject >> model [
 	^ model
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoProject >> model: aModel [ 
+	^ model := aModel 
 ]
 
 { #category : #'as yet unclassified' }
