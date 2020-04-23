@@ -18,7 +18,7 @@ JinNorwindBasedTests >> runCaseManaged [
 ]
 
 { #category : #running }
-JinNorwindBasedTests >> setUp [ 
+JinNorwindBasedTests >> setUp [
 	super setUp.
-	project := JinNorwindProjectResource current project 
+	project := JinNorwindProjectResource current project
 ]

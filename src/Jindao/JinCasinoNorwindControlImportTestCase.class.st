@@ -14,26 +14,27 @@ JinCasinoNorwindControlImportTestCase class >> testParameters [
 		forSelector: #testingBundle
 		addOptions:
 			{
-			{JinControlAttachment . #NotYetImplemented }.
+			{JinControlAttachment . CSNUIInputFile }.
 			{JinControlCheckbox . CSNUIInputCheckbox }.
 			{JinControlCombobox . CSNUISelect }.
 			{JinControlCommandButton . CSNUIButton }.
 			{JinControlImage . CSNUIImage }.
 			{JinControlLabel . CSNUIParagraph}.
-			{JinControlLine . #NotYetImplemented}.
 			{JinControlListBox . CSNUIOrderedList }.
-			{JinControlPage . #NotYetImplemented }.
-			{JinControlRectangle . #NotYetImplemented  }.
-			{JinControlSubForm . #NotYetImplemented }.
-			{JinControlTabControl . CSNUITab }.
+			{JinControlPage . CSNUITab }.
+			{JinControlRectangle . CSNUIPanel }.
+			{JinControlSubForm . CSNUIFieldset  }.
+			{JinControlTabControl . CSNUITabManager }.
 			{JinControlTextbox . CSNUIInputText }
 			}
 ]
 
 { #category : #tests }
 JinCasinoNorwindControlImportTestCase >> testControlMapsToExpectedCSNObject [
-	self importAnyControlOfClass:  controlClass. 
-	self assert: importedControl class equals: expectedImportedControlClass 
+	self importAnyControlOfClass: controlClass.
+	self
+		assert: importedControl class
+		equals: expectedImportedControlClass
 ]
 
 { #category : #tests }

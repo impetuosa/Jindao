@@ -26,7 +26,8 @@ JinNorwindProjectResource >> setUp [
 
 { #category : #running }
 JinNorwindProjectResource >> tearDown [
-	project close.
+	[project close.] on:Error do: [  ].
+	
 	project := nil. 
 	super tearDown.
 	

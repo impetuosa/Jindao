@@ -40,7 +40,7 @@ JinCasinoNorwindAbstractImportTestCase >> importAnyFormNamed: aName [
 
 { #category : #running }
 JinCasinoNorwindAbstractImportTestCase >> importControl: aControl [ 
-	self importForm: aControl form .
+	self importForm: aControl containingWidget .
 	control := aControl.
 	^ importedControl := factory
 		importControl: control

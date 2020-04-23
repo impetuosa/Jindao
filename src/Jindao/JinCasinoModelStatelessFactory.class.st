@@ -63,6 +63,17 @@ JinCasinoModelStatelessFactory >> setupAttributesFrom: aJinControl into: aCSNUIL
 ]
 
 { #category : #'as yet unclassified' }
+JinCasinoModelStatelessFactory >> visitAttachment: aJinControlAttachment [ 
+| input |
+	input := CSNUIInputFile new. 
+	input name: aJinControlAttachment name .
+	input addAttribute: (self height: aJinControlAttachment). 
+	input addAttribute: (self width: aJinControlAttachment). 
+	
+	^ input 
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> visitCheckbox: aJinControlCheckbox [ 
 	| input |
 	input := CSNUIInputCheckbox new. 
@@ -120,11 +131,58 @@ JinCasinoModelStatelessFactory >> visitLabel: aJinControlLabel [
 ]
 
 { #category : #'as yet unclassified' }
+JinCasinoModelStatelessFactory >> visitLine: aJinControlLine [ 
+	self error: 'There is no widget for Line yet. '
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> visitListBox: aJinControlListBox [
 	| input |
 	input := CSNUIOrderedList new.
 	input name: aJinControlListBox name.
 	self setupAttributesFrom: aJinControlListBox into: input.
+	^ input
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoModelStatelessFactory >> visitPage: aJinControlPage [ 
+| input |
+	input := CSNUITab new.
+	input name: aJinControlPage name.
+	input addAttribute: (self height: aJinControlPage).
+	input addAttribute: (self width: aJinControlPage).
+	^ input
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoModelStatelessFactory >> visitRectangle: aJinControlRectangle [ 
+| input |
+	input := CSNUIPanel new. 
+	input name: aJinControlRectangle name .
+
+	input addAttribute: (self height: aJinControlRectangle). 
+	input addAttribute: (self width: aJinControlRectangle). 
+	
+	^ input 
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoModelStatelessFactory >> visitSubForm: aJinControlSubForm [
+	| input |
+	input := CSNUIFieldset new.
+	input name: aJinControlSubForm name.
+	input addAttribute: (self height: aJinControlSubForm).
+	input addAttribute: (self width: aJinControlSubForm).
+	^ input
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoModelStatelessFactory >> visitTabControl: aJinControlTabControl [
+	| input |
+	input := CSNUITabManager new.
+	input name: aJinControlTabControl name.
+	input addAttribute: (self height: aJinControlTabControl).
+	input addAttribute: (self width: aJinControlTabControl).
 	^ input
 ]
 

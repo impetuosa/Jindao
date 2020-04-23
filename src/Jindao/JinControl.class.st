@@ -18,13 +18,13 @@ JinControl >> acceptVisitor: aVisitor [
 ]
 
 { #category : #'as yet unclassified' }
-JinControl >> controlName [
-	^ handle propertyNamed: #ControlName
+JinControl >> containingWidget [
+	^ parent 
 ]
 
 { #category : #'as yet unclassified' }
-JinControl >> form [
-	^ parent 
+JinControl >> controlName [
+	^ handle propertyNamed: #ControlName
 ]
 
 { #category : #'as yet unclassified' }
