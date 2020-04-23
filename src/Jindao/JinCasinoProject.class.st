@@ -3,10 +3,17 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'name',
-		'pages'
+		'pages',
+		'model'
 	],
 	#category : #'Jindao-CasinoImporting'
 }
+
+{ #category : #'as yet unclassified' }
+JinCasinoProject >> add: aCSNBusinessPage [
+	self addPage: aCSNBusinessPage.
+	^ aCSNBusinessPage
+]
 
 { #category : #adding }
 JinCasinoProject >> addPage: aJinPage [ 
@@ -16,7 +23,13 @@ JinCasinoProject >> addPage: aJinPage [
 { #category : #accessing }
 JinCasinoProject >> initialize [
 	super initialize.
-	pages := Set new
+	pages := Set new.
+	model := CSNUICWModel new
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoProject >> model [
+	^ model
 ]
 
 { #category : #'as yet unclassified' }

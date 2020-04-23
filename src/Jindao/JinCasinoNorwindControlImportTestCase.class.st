@@ -19,7 +19,7 @@ JinCasinoNorwindControlImportTestCase class >> testParameters [
 			{JinControlCombobox . CSNUISelect }.
 			{JinControlCommandButton . CSNUIButton }.
 			{JinControlImage . CSNUIImage }.
-			{JinControlLabel . CSNUILabel}.
+			{JinControlLabel . CSNUIParagraph}.
 			{JinControlLine . #NotYetImplemented}.
 			{JinControlListBox . CSNUIOrderedList }.
 			{JinControlPage . #NotYetImplemented }.
@@ -39,7 +39,9 @@ JinCasinoNorwindControlImportTestCase >> testControlMapsToExpectedCSNObject [
 { #category : #tests }
 JinCasinoNorwindControlImportTestCase >> testImportedControlParentPointsToImportedForm [
 	self importAnyControlOfClass: controlClass.
-	self assert: importedControl parent equals: importedForm
+	self
+		assert: importedControl widgetContainer
+		equals: importedForm businessPage first
 ]
 
 { #category : #tests }

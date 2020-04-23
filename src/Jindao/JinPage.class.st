@@ -15,5 +15,6 @@ JinPage >> project [
 { #category : #accessing }
 JinPage >> project: aJinCasinoProject [ 
 	project := aJinCasinoProject.
+	mooseModel := aJinCasinoProject model .
 	aJinCasinoProject addPage: self. 
 ]

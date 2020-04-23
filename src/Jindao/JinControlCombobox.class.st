@@ -2484,9 +2484,8 @@ JinControlCombobox >> validationText: aParam1 [
 
 { #category : #'property - generated' }
 JinControlCombobox >> value [
-<getter>
-	^ (handle propertyNamed: #'Value' ).
-
+	<getter>
+	^ handle propertyNamed: #Value
 ]
 
 { #category : #'property - generated' }

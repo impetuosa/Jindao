@@ -44,7 +44,7 @@ JinCasinoNorwindAbstractImportTestCase >> importControl: aControl [
 	control := aControl.
 	^ importedControl := factory
 		importControl: control
-		inTheContextOf: importedProject
+		inTheContextOf: importedForm
 ]
 
 { #category : #running }
