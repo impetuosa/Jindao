@@ -1,3 +1,6 @@
+"
+self reset 
+"
 Class {
 	#name : #JinNorwindProjectResource,
 	#superclass : #TestResource,
@@ -9,7 +12,7 @@ Class {
 
 { #category : #running }
 JinNorwindProjectResource >> norwind [
-	^ 'C:\Users\santiago\Documents\Northwind.accdb' asFileReference
+	^ 'D:\Users\Santiago.BRAGAGNOLO\Documents\norwind\Northwind.accdb' asFileReference
 ]
 
 { #category : #running }
