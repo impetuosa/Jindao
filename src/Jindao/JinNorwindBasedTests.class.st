@@ -9,7 +9,8 @@ Class {
 
 { #category : #'building suites' }
 JinNorwindBasedTests class >> norwind [
-	^ 'C:\Users\santiago\Documents\Northwind.accdb' asFileReference
+	^ 'D:\Users\Santiago.BRAGAGNOLO\Documents\norwind\Northwind.accdb'
+		asFileReference
 ]
 
 { #category : #running }

@@ -779,9 +779,8 @@ JinControlSubForm >> move: aLeft top: aTop width: aWidth height: aHeight [
 
 { #category : #'property - generated' }
 JinControlSubForm >> name [
-<getter>
-	^ (handle propertyNamed: #'Name' ).
-
+	<getter>
+	^ handle propertyNamed: #Name
 ]
 
 { #category : #'property - generated' }

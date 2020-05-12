@@ -32,7 +32,7 @@ JinCasinoModelStatelessFactory >> importForm: aForm inTheContextOf: aProject [
 		realClassName: aForm class name;
 		addBusinessPage:
 			(CSNBusinessPage new
-				name: aForm name;
+				name: aForm nameWithoutSpaces;
 				yourself);
 		name: aForm name;
 		project: aProject;
@@ -58,8 +58,8 @@ JinCasinoModelStatelessFactory >> setupAttributesFrom: aJinControl into: aCSNUIL
 	" The attributes required can be built by visiting the properties, since properties are pretty much the same. We may can aim to generate as the controls  "
 	aJinControl enabled
 		ifFalse: [ aCSNUILeafElement addAttribute: self disabled ].
-	aCSNUILeafElement addAttribute: (self height: aJinControl). 
-	aCSNUILeafElement addAttribute: (self width: aJinControl). 
+	"aCSNUILeafElement addAttribute: (self height: aJinControl). "
+	"aCSNUILeafElement addAttribute: (self width: aJinControl). "
 	
 ]
 
@@ -67,9 +67,9 @@ JinCasinoModelStatelessFactory >> setupAttributesFrom: aJinControl into: aCSNUIL
 JinCasinoModelStatelessFactory >> visitAttachment: aJinControlAttachment [ 
 | input |
 	input := CSNUIInputFile new. 
-	input name: aJinControlAttachment name .
-	input addAttribute: (self height: aJinControlAttachment). 
-	input addAttribute: (self width: aJinControlAttachment). 
+	input name: aJinControlAttachment nameWithoutSpaces .
+	"input addAttribute: (self height: aJinControlAttachment). "
+"	input addAttribute: (self width: aJinControlAttachment). "
 	
 	^ input 
 ]
@@ -78,7 +78,7 @@ JinCasinoModelStatelessFactory >> visitAttachment: aJinControlAttachment [
 JinCasinoModelStatelessFactory >> visitCheckbox: aJinControlCheckbox [ 
 	| input |
 	input := CSNUIInputCheckbox new. 
-	input name: aJinControlCheckbox name .
+	input name: aJinControlCheckbox nameWithoutSpaces.
 	input value: aJinControlCheckbox value.
 	
 	self setupAttributesFrom: aJinControlCheckbox into:input.
@@ -90,7 +90,7 @@ JinCasinoModelStatelessFactory >> visitCheckbox: aJinControlCheckbox [
 JinCasinoModelStatelessFactory >> visitCombobox: aJinControlCombobox [ 
 	| input |
 	input := CSNUISelect new. 
-	input name: aJinControlCombobox name .
+	input name: aJinControlCombobox nameWithoutSpaces.
 	input value: aJinControlCombobox defaultValue .
 	
 	self setupAttributesFrom: aJinControlCombobox into:input.
@@ -102,7 +102,7 @@ JinCasinoModelStatelessFactory >> visitCombobox: aJinControlCombobox [
 JinCasinoModelStatelessFactory >> visitCommandButton: aJinControlCommandButton [ 
 	| input |
 	input := CSNUIButton new. 
-	input name: aJinControlCommandButton name .
+	input name: aJinControlCommandButton nameWithoutSpaces .
 	
 	self setupAttributesFrom: aJinControlCommandButton into:input.
 	
@@ -112,10 +112,10 @@ JinCasinoModelStatelessFactory >> visitCommandButton: aJinControlCommandButton [
 { #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> visitImage: aJinControlImage [
 	| input |
-	input := CSNUIImage new.
-	input name: aJinControlImage name.
-	input addAttribute: (self height: aJinControlImage). 
-	input addAttribute: (self width: aJinControlImage). 
+	input := CSNUILabel new.
+	input name: aJinControlImage nameWithoutSpaces.
+	"input addAttribute: (self height: aJinControlImage). "
+	"input addAttribute: (self width: aJinControlImage). "
 	^ input
 ]
 
@@ -123,11 +123,11 @@ JinCasinoModelStatelessFactory >> visitImage: aJinControlImage [
 JinCasinoModelStatelessFactory >> visitLabel: aJinControlLabel [ 
 | input |
 	input := CSNUIParagraph new. 
-	input name: aJinControlLabel name .
+	input name: aJinControlLabel nameWithoutSpaces .
 	input text: aJinControlLabel caption.
-	input addAttribute: (self height: aJinControlLabel). 
-	input addAttribute: (self width: aJinControlLabel). 
-	
+"	input addAttribute: (self height: aJinControlLabel)." 
+"	input addAttribute: (self width: aJinControlLabel). 
+	"
 	^ input 
 ]
 
@@ -140,7 +140,7 @@ JinCasinoModelStatelessFactory >> visitLine: aJinControlLine [
 JinCasinoModelStatelessFactory >> visitListBox: aJinControlListBox [
 	| input |
 	input := CSNUIOrderedList new.
-	input name: aJinControlListBox name.
+	input name: aJinControlListBox nameWithoutSpaces.
 	self setupAttributesFrom: aJinControlListBox into: input.
 	^ input
 ]
@@ -149,9 +149,9 @@ JinCasinoModelStatelessFactory >> visitListBox: aJinControlListBox [
 JinCasinoModelStatelessFactory >> visitPage: aJinControlPage [ 
 | input |
 	input := CSNUITab new.
-	input name: aJinControlPage name.
-	input addAttribute: (self height: aJinControlPage).
-	input addAttribute: (self width: aJinControlPage).
+	input name: aJinControlPage nameWithoutSpaces.
+	"input addAttribute: (self height: aJinControlPage).""
+	input addAttribute: (self width: aJinControlPage)."
 	^ input
 ]
 
@@ -159,10 +159,10 @@ JinCasinoModelStatelessFactory >> visitPage: aJinControlPage [
 JinCasinoModelStatelessFactory >> visitRectangle: aJinControlRectangle [ 
 | input |
 	input := CSNUIPanel new. 
-	input name: aJinControlRectangle name .
+	input name: aJinControlRectangle nameWithoutSpaces .
 
-	input addAttribute: (self height: aJinControlRectangle). 
-	input addAttribute: (self width: aJinControlRectangle). 
+"	input addAttribute: (self height: aJinControlRectangle). "
+	"input addAttribute: (self width: aJinControlRectangle). "
 	
 	^ input 
 ]
@@ -171,9 +171,9 @@ JinCasinoModelStatelessFactory >> visitRectangle: aJinControlRectangle [
 JinCasinoModelStatelessFactory >> visitSubForm: aJinControlSubForm [
 	| input |
 	input := CSNUIFieldset new.
-	input name: aJinControlSubForm name.
-	input addAttribute: (self height: aJinControlSubForm).
-	input addAttribute: (self width: aJinControlSubForm).
+	input name: aJinControlSubForm nameWithoutSpaces.
+	"input addAttribute: (self height: aJinControlSubForm)."
+	"input addAttribute: (self width: aJinControlSubForm)."
 	^ input
 ]
 
@@ -181,9 +181,9 @@ JinCasinoModelStatelessFactory >> visitSubForm: aJinControlSubForm [
 JinCasinoModelStatelessFactory >> visitTabControl: aJinControlTabControl [
 	| input |
 	input := CSNUITabManager new.
-	input name: aJinControlTabControl name.
-	input addAttribute: (self height: aJinControlTabControl).
-	input addAttribute: (self width: aJinControlTabControl).
+	input name: aJinControlTabControl nameWithoutSpaces.
+	"input addAttribute: (self height: aJinControlTabControl)."
+"	input addAttribute: (self width: aJinControlTabControl)."
 	^ input
 ]
 
@@ -191,7 +191,7 @@ JinCasinoModelStatelessFactory >> visitTabControl: aJinControlTabControl [
 JinCasinoModelStatelessFactory >> visitTextbox: aJinControlTextbox [ 
 	| input |
 	input := CSNUIInputText new. 
-	input name: aJinControlTextbox name .
+	input name: aJinControlTextbox nameWithoutSpaces .
 	input value: aJinControlTextbox defaultValue.
 	
 	self setupAttributesFrom: aJinControlTextbox into:input.
