@@ -150,37 +150,37 @@ With the tab control, you can construct a single form or dialog box that contain
 
 "
 Class {
-	#name : #JinControlTabControl,
+	#name : #JinTabControl,
 	#superclass : #JinControlAbstractTabControl,
 	#category : #'Jindao-DomainObjects-GeneratedControls'
 }
 
 { #category : #generated }
-JinControlTabControl class >> mappedTypeName [
+JinTabControl class >> mappedTypeName [
 	^#'_TabControl'
 ]
 
 { #category : #generated }
-JinControlTabControl >> acceptVisitor: aVisitor [
+JinTabControl >> acceptVisitor: aVisitor [
 	^ aVisitor visitTabControl: self
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> application [
+JinTabControl >> application [
 <getter>
 	^ (handle propertyNamed: #'Application' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> backColor [
+JinTabControl >> backColor [
 <getter>
 	^ (handle propertyNamed: #'BackColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> backColor: aParam1 [
+JinTabControl >> backColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackColor' withArguments: {aParam1} ).
@@ -188,14 +188,14 @@ JinControlTabControl >> backColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> backShade [
+JinTabControl >> backShade [
 <getter>
 	^ (handle propertyNamed: #'BackShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> backShade: aParam1 [
+JinTabControl >> backShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackShade' withArguments: {aParam1} ).
@@ -203,14 +203,14 @@ JinControlTabControl >> backShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> backStyle [
+JinTabControl >> backStyle [
 <getter>
 	^ (handle propertyNamed: #'BackStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> backStyle: aParam1 [
+JinTabControl >> backStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackStyle' withArguments: {aParam1} ).
@@ -218,14 +218,14 @@ JinControlTabControl >> backStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> backThemeColorIndex [
+JinTabControl >> backThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BackThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> backThemeColorIndex: aParam1 [
+JinTabControl >> backThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackThemeColorIndex' withArguments: {aParam1} ).
@@ -233,14 +233,14 @@ JinControlTabControl >> backThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> backTint [
+JinTabControl >> backTint [
 <getter>
 	^ (handle propertyNamed: #'BackTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> backTint: aParam1 [
+JinTabControl >> backTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackTint' withArguments: {aParam1} ).
@@ -248,14 +248,14 @@ JinControlTabControl >> backTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> borderColor [
+JinTabControl >> borderColor [
 <getter>
 	^ (handle propertyNamed: #'BorderColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> borderColor: aParam1 [
+JinTabControl >> borderColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderColor' withArguments: {aParam1} ).
@@ -263,14 +263,14 @@ JinControlTabControl >> borderColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> borderShade [
+JinTabControl >> borderShade [
 <getter>
 	^ (handle propertyNamed: #'BorderShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> borderShade: aParam1 [
+JinTabControl >> borderShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderShade' withArguments: {aParam1} ).
@@ -278,14 +278,14 @@ JinControlTabControl >> borderShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> borderStyle [
+JinTabControl >> borderStyle [
 <getter>
 	^ (handle propertyNamed: #'BorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> borderStyle: aParam1 [
+JinTabControl >> borderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderStyle' withArguments: {aParam1} ).
@@ -293,14 +293,14 @@ JinControlTabControl >> borderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> borderThemeColorIndex [
+JinTabControl >> borderThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BorderThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> borderThemeColorIndex: aParam1 [
+JinTabControl >> borderThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderThemeColorIndex' withArguments: {aParam1} ).
@@ -308,14 +308,14 @@ JinControlTabControl >> borderThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> borderTint [
+JinTabControl >> borderTint [
 <getter>
 	^ (handle propertyNamed: #'BorderTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> borderTint: aParam1 [
+JinTabControl >> borderTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderTint' withArguments: {aParam1} ).
@@ -323,14 +323,14 @@ JinControlTabControl >> borderTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> bottomPadding [
+JinTabControl >> bottomPadding [
 <getter>
 	^ (handle propertyNamed: #'BottomPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> bottomPadding: aParam1 [
+JinTabControl >> bottomPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BottomPadding' withArguments: {aParam1} ).
@@ -338,14 +338,14 @@ JinControlTabControl >> bottomPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> controlType [
+JinTabControl >> controlType [
 <getter>
 	^ (handle propertyNamed: #'ControlType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> controlType: aParam1 [
+JinTabControl >> controlType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlType' withArguments: {aParam1} ).
@@ -353,14 +353,14 @@ JinControlTabControl >> controlType: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> displayWhen [
+JinTabControl >> displayWhen [
 <getter>
 	^ (handle propertyNamed: #'DisplayWhen' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> displayWhen: aParam1 [
+JinTabControl >> displayWhen: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DisplayWhen' withArguments: {aParam1} ).
@@ -368,14 +368,14 @@ JinControlTabControl >> displayWhen: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> enabled [
+JinTabControl >> enabled [
 <getter>
 	^ (handle propertyNamed: #'Enabled' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> enabled: aParam1 [
+JinTabControl >> enabled: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Enabled' withArguments: {aParam1} ).
@@ -383,14 +383,14 @@ JinControlTabControl >> enabled: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> eventProcPrefix [
+JinTabControl >> eventProcPrefix [
 <getter>
 	^ (handle propertyNamed: #'EventProcPrefix' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> eventProcPrefix: aParam1 [
+JinTabControl >> eventProcPrefix: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'EventProcPrefix' withArguments: {aParam1} ).
@@ -398,14 +398,14 @@ JinControlTabControl >> eventProcPrefix: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> fontBold [
+JinTabControl >> fontBold [
 <getter>
 	^ (handle propertyNamed: #'FontBold' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> fontBold: aParam1 [
+JinTabControl >> fontBold: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontBold' withArguments: {aParam1} ).
@@ -413,14 +413,14 @@ JinControlTabControl >> fontBold: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> fontItalic [
+JinTabControl >> fontItalic [
 <getter>
 	^ (handle propertyNamed: #'FontItalic' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> fontItalic: aParam1 [
+JinTabControl >> fontItalic: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontItalic' withArguments: {aParam1} ).
@@ -428,14 +428,14 @@ JinControlTabControl >> fontItalic: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> fontName [
+JinTabControl >> fontName [
 <getter>
 	^ (handle propertyNamed: #'FontName' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> fontName: aParam1 [
+JinTabControl >> fontName: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontName' withArguments: {aParam1} ).
@@ -443,14 +443,14 @@ JinControlTabControl >> fontName: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> fontSize [
+JinTabControl >> fontSize [
 <getter>
 	^ (handle propertyNamed: #'FontSize' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> fontSize: aParam1 [
+JinTabControl >> fontSize: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontSize' withArguments: {aParam1} ).
@@ -458,14 +458,14 @@ JinControlTabControl >> fontSize: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> fontUnderline [
+JinTabControl >> fontUnderline [
 <getter>
 	^ (handle propertyNamed: #'FontUnderline' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> fontUnderline: aParam1 [
+JinTabControl >> fontUnderline: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontUnderline' withArguments: {aParam1} ).
@@ -473,14 +473,14 @@ JinControlTabControl >> fontUnderline: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> fontWeight [
+JinTabControl >> fontWeight [
 <getter>
 	^ (handle propertyNamed: #'FontWeight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> fontWeight: aParam1 [
+JinTabControl >> fontWeight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontWeight' withArguments: {aParam1} ).
@@ -488,14 +488,14 @@ JinControlTabControl >> fontWeight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> foreColor [
+JinTabControl >> foreColor [
 <getter>
 	^ (handle propertyNamed: #'ForeColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> foreColor: aParam1 [
+JinTabControl >> foreColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeColor' withArguments: {aParam1} ).
@@ -503,14 +503,14 @@ JinControlTabControl >> foreColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> foreShade [
+JinTabControl >> foreShade [
 <getter>
 	^ (handle propertyNamed: #'ForeShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> foreShade: aParam1 [
+JinTabControl >> foreShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeShade' withArguments: {aParam1} ).
@@ -518,14 +518,14 @@ JinControlTabControl >> foreShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> foreThemeColorIndex [
+JinTabControl >> foreThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'ForeThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> foreThemeColorIndex: aParam1 [
+JinTabControl >> foreThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeThemeColorIndex' withArguments: {aParam1} ).
@@ -533,14 +533,14 @@ JinControlTabControl >> foreThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> foreTint [
+JinTabControl >> foreTint [
 <getter>
 	^ (handle propertyNamed: #'ForeTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> foreTint: aParam1 [
+JinTabControl >> foreTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeTint' withArguments: {aParam1} ).
@@ -548,14 +548,14 @@ JinControlTabControl >> foreTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gradient [
+JinTabControl >> gradient [
 <getter>
 	^ (handle propertyNamed: #'Gradient' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gradient: aParam1 [
+JinTabControl >> gradient: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Gradient' withArguments: {aParam1} ).
@@ -563,14 +563,14 @@ JinControlTabControl >> gradient: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineColor [
+JinTabControl >> gridlineColor [
 <getter>
 	^ (handle propertyNamed: #'GridlineColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineColor: aParam1 [
+JinTabControl >> gridlineColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineColor' withArguments: {aParam1} ).
@@ -578,14 +578,14 @@ JinControlTabControl >> gridlineColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineShade [
+JinTabControl >> gridlineShade [
 <getter>
 	^ (handle propertyNamed: #'GridlineShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineShade: aParam1 [
+JinTabControl >> gridlineShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineShade' withArguments: {aParam1} ).
@@ -593,14 +593,14 @@ JinControlTabControl >> gridlineShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineStyleBottom [
+JinTabControl >> gridlineStyleBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineStyleBottom: aParam1 [
+JinTabControl >> gridlineStyleBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleBottom' withArguments: {aParam1} ).
@@ -608,14 +608,14 @@ JinControlTabControl >> gridlineStyleBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineStyleLeft [
+JinTabControl >> gridlineStyleLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineStyleLeft: aParam1 [
+JinTabControl >> gridlineStyleLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleLeft' withArguments: {aParam1} ).
@@ -623,14 +623,14 @@ JinControlTabControl >> gridlineStyleLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineStyleRight [
+JinTabControl >> gridlineStyleRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineStyleRight: aParam1 [
+JinTabControl >> gridlineStyleRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleRight' withArguments: {aParam1} ).
@@ -638,14 +638,14 @@ JinControlTabControl >> gridlineStyleRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineStyleTop [
+JinTabControl >> gridlineStyleTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineStyleTop: aParam1 [
+JinTabControl >> gridlineStyleTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleTop' withArguments: {aParam1} ).
@@ -653,14 +653,14 @@ JinControlTabControl >> gridlineStyleTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineThemeColorIndex [
+JinTabControl >> gridlineThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineThemeColorIndex: aParam1 [
+JinTabControl >> gridlineThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' withArguments: {aParam1} ).
@@ -668,14 +668,14 @@ JinControlTabControl >> gridlineThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineTint [
+JinTabControl >> gridlineTint [
 <getter>
 	^ (handle propertyNamed: #'GridlineTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineTint: aParam1 [
+JinTabControl >> gridlineTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineTint' withArguments: {aParam1} ).
@@ -683,14 +683,14 @@ JinControlTabControl >> gridlineTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineWidthBottom [
+JinTabControl >> gridlineWidthBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineWidthBottom: aParam1 [
+JinTabControl >> gridlineWidthBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthBottom' withArguments: {aParam1} ).
@@ -698,14 +698,14 @@ JinControlTabControl >> gridlineWidthBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineWidthLeft [
+JinTabControl >> gridlineWidthLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineWidthLeft: aParam1 [
+JinTabControl >> gridlineWidthLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthLeft' withArguments: {aParam1} ).
@@ -713,14 +713,14 @@ JinControlTabControl >> gridlineWidthLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineWidthRight [
+JinTabControl >> gridlineWidthRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineWidthRight: aParam1 [
+JinTabControl >> gridlineWidthRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthRight' withArguments: {aParam1} ).
@@ -728,14 +728,14 @@ JinControlTabControl >> gridlineWidthRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineWidthTop [
+JinTabControl >> gridlineWidthTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> gridlineWidthTop: aParam1 [
+JinTabControl >> gridlineWidthTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthTop' withArguments: {aParam1} ).
@@ -743,14 +743,14 @@ JinControlTabControl >> gridlineWidthTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> height [
+JinTabControl >> height [
 <getter>
 	^ (handle propertyNamed: #'Height' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> height: aParam1 [
+JinTabControl >> height: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Height' withArguments: {aParam1} ).
@@ -758,14 +758,14 @@ JinControlTabControl >> height: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> helpContextId [
+JinTabControl >> helpContextId [
 <getter>
 	^ (handle propertyNamed: #'HelpContextId' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> helpContextId: aParam1 [
+JinTabControl >> helpContextId: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HelpContextId' withArguments: {aParam1} ).
@@ -773,14 +773,14 @@ JinControlTabControl >> helpContextId: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> horizontalAnchor [
+JinTabControl >> horizontalAnchor [
 <getter>
 	^ (handle propertyNamed: #'HorizontalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> horizontalAnchor: aParam1 [
+JinTabControl >> horizontalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HorizontalAnchor' withArguments: {aParam1} ).
@@ -788,14 +788,14 @@ JinControlTabControl >> horizontalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverColor [
+JinTabControl >> hoverColor [
 <getter>
 	^ (handle propertyNamed: #'HoverColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverColor: aParam1 [
+JinTabControl >> hoverColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverColor' withArguments: {aParam1} ).
@@ -803,14 +803,14 @@ JinControlTabControl >> hoverColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverForeColor [
+JinTabControl >> hoverForeColor [
 <getter>
 	^ (handle propertyNamed: #'HoverForeColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverForeColor: aParam1 [
+JinTabControl >> hoverForeColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverForeColor' withArguments: {aParam1} ).
@@ -818,14 +818,14 @@ JinControlTabControl >> hoverForeColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverForeShade [
+JinTabControl >> hoverForeShade [
 <getter>
 	^ (handle propertyNamed: #'HoverForeShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverForeShade: aParam1 [
+JinTabControl >> hoverForeShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverForeShade' withArguments: {aParam1} ).
@@ -833,14 +833,14 @@ JinControlTabControl >> hoverForeShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverForeThemeColorIndex [
+JinTabControl >> hoverForeThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'HoverForeThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverForeThemeColorIndex: aParam1 [
+JinTabControl >> hoverForeThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverForeThemeColorIndex' withArguments: {aParam1} ).
@@ -848,14 +848,14 @@ JinControlTabControl >> hoverForeThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverForeTint [
+JinTabControl >> hoverForeTint [
 <getter>
 	^ (handle propertyNamed: #'HoverForeTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverForeTint: aParam1 [
+JinTabControl >> hoverForeTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverForeTint' withArguments: {aParam1} ).
@@ -863,14 +863,14 @@ JinControlTabControl >> hoverForeTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverShade [
+JinTabControl >> hoverShade [
 <getter>
 	^ (handle propertyNamed: #'HoverShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverShade: aParam1 [
+JinTabControl >> hoverShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverShade' withArguments: {aParam1} ).
@@ -878,14 +878,14 @@ JinControlTabControl >> hoverShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverThemeColorIndex [
+JinTabControl >> hoverThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'HoverThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverThemeColorIndex: aParam1 [
+JinTabControl >> hoverThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverThemeColorIndex' withArguments: {aParam1} ).
@@ -893,14 +893,14 @@ JinControlTabControl >> hoverThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverTint [
+JinTabControl >> hoverTint [
 <getter>
 	^ (handle propertyNamed: #'HoverTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> hoverTint: aParam1 [
+JinTabControl >> hoverTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverTint' withArguments: {aParam1} ).
@@ -908,14 +908,14 @@ JinControlTabControl >> hoverTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> inSelection [
+JinTabControl >> inSelection [
 <getter>
 	^ (handle propertyNamed: #'InSelection' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> inSelection: aParam1 [
+JinTabControl >> inSelection: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'InSelection' withArguments: {aParam1} ).
@@ -923,14 +923,14 @@ JinControlTabControl >> inSelection: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> isVisible [
+JinTabControl >> isVisible [
 <getter>
 	^ (handle propertyNamed: #'IsVisible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> isVisible: aParam1 [
+JinTabControl >> isVisible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IsVisible' withArguments: {aParam1} ).
@@ -938,28 +938,28 @@ JinControlTabControl >> isVisible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> layout [
+JinTabControl >> layout [
 <getter>
 	^ (handle propertyNamed: #'Layout' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> layoutID [
+JinTabControl >> layoutID [
 <getter>
 	^ (handle propertyNamed: #'LayoutID' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> left [
+JinTabControl >> left [
 <getter>
 	^ (handle propertyNamed: #'Left' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> left: aParam1 [
+JinTabControl >> left: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Left' withArguments: {aParam1} ).
@@ -967,14 +967,14 @@ JinControlTabControl >> left: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> leftPadding [
+JinTabControl >> leftPadding [
 <getter>
 	^ (handle propertyNamed: #'LeftPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> leftPadding: aParam1 [
+JinTabControl >> leftPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LeftPadding' withArguments: {aParam1} ).
@@ -982,7 +982,7 @@ JinControlTabControl >> leftPadding: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlTabControl >> move: aLeft top: aTop width: aWidth height: aHeight [
+JinTabControl >> move: aLeft top: aTop width: aWidth height: aHeight [
 <method>
 "This method can be called with optional parameters. Top,Width,Height"
 	^ (handle dispatch: #'Move' withArguments: {aLeft . aTop . aWidth . aHeight} ).
@@ -990,14 +990,14 @@ JinControlTabControl >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> multiRow [
+JinTabControl >> multiRow [
 <getter>
 	^ (handle propertyNamed: #'MultiRow' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> multiRow: aParam1 [
+JinTabControl >> multiRow: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'MultiRow' withArguments: {aParam1} ).
@@ -1005,14 +1005,14 @@ JinControlTabControl >> multiRow: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> name [
+JinTabControl >> name [
 <getter>
 	^ (handle propertyNamed: #'Name' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> name: aParam1 [
+JinTabControl >> name: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Name' withArguments: {aParam1} ).
@@ -1020,21 +1020,21 @@ JinControlTabControl >> name: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> oldValue [
+JinTabControl >> oldValue [
 <getter>
 	^ (handle propertyNamed: #'OldValue' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onChange [
+JinTabControl >> onChange [
 <getter>
 	^ (handle propertyNamed: #'OnChange' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onChange: aParam1 [
+JinTabControl >> onChange: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnChange' withArguments: {aParam1} ).
@@ -1042,14 +1042,14 @@ JinControlTabControl >> onChange: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onClick [
+JinTabControl >> onClick [
 <getter>
 	^ (handle propertyNamed: #'OnClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onClick: aParam1 [
+JinTabControl >> onClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnClick' withArguments: {aParam1} ).
@@ -1057,14 +1057,14 @@ JinControlTabControl >> onClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onDblClick [
+JinTabControl >> onDblClick [
 <getter>
 	^ (handle propertyNamed: #'OnDblClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onDblClick: aParam1 [
+JinTabControl >> onDblClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnDblClick' withArguments: {aParam1} ).
@@ -1072,14 +1072,14 @@ JinControlTabControl >> onDblClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onKeyDown [
+JinTabControl >> onKeyDown [
 <getter>
 	^ (handle propertyNamed: #'OnKeyDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onKeyDown: aParam1 [
+JinTabControl >> onKeyDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyDown' withArguments: {aParam1} ).
@@ -1087,14 +1087,14 @@ JinControlTabControl >> onKeyDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onKeyPress [
+JinTabControl >> onKeyPress [
 <getter>
 	^ (handle propertyNamed: #'OnKeyPress' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onKeyPress: aParam1 [
+JinTabControl >> onKeyPress: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyPress' withArguments: {aParam1} ).
@@ -1102,14 +1102,14 @@ JinControlTabControl >> onKeyPress: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onKeyUp [
+JinTabControl >> onKeyUp [
 <getter>
 	^ (handle propertyNamed: #'OnKeyUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onKeyUp: aParam1 [
+JinTabControl >> onKeyUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyUp' withArguments: {aParam1} ).
@@ -1117,14 +1117,14 @@ JinControlTabControl >> onKeyUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onMouseDown [
+JinTabControl >> onMouseDown [
 <getter>
 	^ (handle propertyNamed: #'OnMouseDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onMouseDown: aParam1 [
+JinTabControl >> onMouseDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseDown' withArguments: {aParam1} ).
@@ -1132,14 +1132,14 @@ JinControlTabControl >> onMouseDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onMouseMove [
+JinTabControl >> onMouseMove [
 <getter>
 	^ (handle propertyNamed: #'OnMouseMove' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onMouseMove: aParam1 [
+JinTabControl >> onMouseMove: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseMove' withArguments: {aParam1} ).
@@ -1147,14 +1147,14 @@ JinControlTabControl >> onMouseMove: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onMouseUp [
+JinTabControl >> onMouseUp [
 <getter>
 	^ (handle propertyNamed: #'OnMouseUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> onMouseUp: aParam1 [
+JinTabControl >> onMouseUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseUp' withArguments: {aParam1} ).
@@ -1162,28 +1162,28 @@ JinControlTabControl >> onMouseUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pages [
+JinTabControl >> pages [
 <getter>
 	^ (handle propertyNamed: #'Pages' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> parent [
+JinTabControl >> parent [
 <getter>
 	^ (handle propertyNamed: #'Parent' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedColor [
+JinTabControl >> pressedColor [
 <getter>
 	^ (handle propertyNamed: #'PressedColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedColor: aParam1 [
+JinTabControl >> pressedColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedColor' withArguments: {aParam1} ).
@@ -1191,14 +1191,14 @@ JinControlTabControl >> pressedColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedForeColor [
+JinTabControl >> pressedForeColor [
 <getter>
 	^ (handle propertyNamed: #'PressedForeColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedForeColor: aParam1 [
+JinTabControl >> pressedForeColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedForeColor' withArguments: {aParam1} ).
@@ -1206,14 +1206,14 @@ JinControlTabControl >> pressedForeColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedForeShade [
+JinTabControl >> pressedForeShade [
 <getter>
 	^ (handle propertyNamed: #'PressedForeShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedForeShade: aParam1 [
+JinTabControl >> pressedForeShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedForeShade' withArguments: {aParam1} ).
@@ -1221,14 +1221,14 @@ JinControlTabControl >> pressedForeShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedForeThemeColorIndex [
+JinTabControl >> pressedForeThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'PressedForeThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedForeThemeColorIndex: aParam1 [
+JinTabControl >> pressedForeThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedForeThemeColorIndex' withArguments: {aParam1} ).
@@ -1236,14 +1236,14 @@ JinControlTabControl >> pressedForeThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedForeTint [
+JinTabControl >> pressedForeTint [
 <getter>
 	^ (handle propertyNamed: #'PressedForeTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedForeTint: aParam1 [
+JinTabControl >> pressedForeTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedForeTint' withArguments: {aParam1} ).
@@ -1251,14 +1251,14 @@ JinControlTabControl >> pressedForeTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedShade [
+JinTabControl >> pressedShade [
 <getter>
 	^ (handle propertyNamed: #'PressedShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedShade: aParam1 [
+JinTabControl >> pressedShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedShade' withArguments: {aParam1} ).
@@ -1266,14 +1266,14 @@ JinControlTabControl >> pressedShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedThemeColorIndex [
+JinTabControl >> pressedThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'PressedThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedThemeColorIndex: aParam1 [
+JinTabControl >> pressedThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedThemeColorIndex' withArguments: {aParam1} ).
@@ -1281,14 +1281,14 @@ JinControlTabControl >> pressedThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedTint [
+JinTabControl >> pressedTint [
 <getter>
 	^ (handle propertyNamed: #'PressedTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> pressedTint: aParam1 [
+JinTabControl >> pressedTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedTint' withArguments: {aParam1} ).
@@ -1296,14 +1296,14 @@ JinControlTabControl >> pressedTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> rightPadding [
+JinTabControl >> rightPadding [
 <getter>
 	^ (handle propertyNamed: #'RightPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> rightPadding: aParam1 [
+JinTabControl >> rightPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'RightPadding' withArguments: {aParam1} ).
@@ -1311,14 +1311,14 @@ JinControlTabControl >> rightPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> section [
+JinTabControl >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> section: aParam1 [
+JinTabControl >> section: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Section' withArguments: {aParam1} ).
@@ -1326,14 +1326,14 @@ JinControlTabControl >> section: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> shape [
+JinTabControl >> shape [
 <getter>
 	^ (handle propertyNamed: #'Shape' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> shape: aParam1 [
+JinTabControl >> shape: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Shape' withArguments: {aParam1} ).
@@ -1341,14 +1341,14 @@ JinControlTabControl >> shape: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> shortcutMenuBar [
+JinTabControl >> shortcutMenuBar [
 <getter>
 	^ (handle propertyNamed: #'ShortcutMenuBar' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> shortcutMenuBar: aParam1 [
+JinTabControl >> shortcutMenuBar: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ShortcutMenuBar' withArguments: {aParam1} ).
@@ -1356,21 +1356,21 @@ JinControlTabControl >> shortcutMenuBar: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlTabControl >> sizeToFit [
+JinTabControl >> sizeToFit [
 <method>
 	^ (handle dispatch: #'SizeToFit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> statusBarText [
+JinTabControl >> statusBarText [
 <getter>
 	^ (handle propertyNamed: #'StatusBarText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> statusBarText: aParam1 [
+JinTabControl >> statusBarText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'StatusBarText' withArguments: {aParam1} ).
@@ -1378,14 +1378,14 @@ JinControlTabControl >> statusBarText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> style [
+JinTabControl >> style [
 <getter>
 	^ (handle propertyNamed: #'Style' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> style: aParam1 [
+JinTabControl >> style: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Style' withArguments: {aParam1} ).
@@ -1393,14 +1393,14 @@ JinControlTabControl >> style: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> tabFixedHeight [
+JinTabControl >> tabFixedHeight [
 <getter>
 	^ (handle propertyNamed: #'TabFixedHeight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> tabFixedHeight: aParam1 [
+JinTabControl >> tabFixedHeight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabFixedHeight' withArguments: {aParam1} ).
@@ -1408,14 +1408,14 @@ JinControlTabControl >> tabFixedHeight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> tabFixedWidth [
+JinTabControl >> tabFixedWidth [
 <getter>
 	^ (handle propertyNamed: #'TabFixedWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> tabFixedWidth: aParam1 [
+JinTabControl >> tabFixedWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabFixedWidth' withArguments: {aParam1} ).
@@ -1423,14 +1423,14 @@ JinControlTabControl >> tabFixedWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> tabIndex [
+JinTabControl >> tabIndex [
 <getter>
 	^ (handle propertyNamed: #'TabIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> tabIndex: aParam1 [
+JinTabControl >> tabIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabIndex' withArguments: {aParam1} ).
@@ -1438,14 +1438,14 @@ JinControlTabControl >> tabIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> tabStop [
+JinTabControl >> tabStop [
 <getter>
 	^ (handle propertyNamed: #'TabStop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> tabStop: aParam1 [
+JinTabControl >> tabStop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabStop' withArguments: {aParam1} ).
@@ -1453,14 +1453,14 @@ JinControlTabControl >> tabStop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> tag [
+JinTabControl >> tag [
 <getter>
 	^ (handle propertyNamed: #'Tag' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> tag: aParam1 [
+JinTabControl >> tag: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Tag' withArguments: {aParam1} ).
@@ -1468,14 +1468,14 @@ JinControlTabControl >> tag: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> themeFontIndex [
+JinTabControl >> themeFontIndex [
 <getter>
 	^ (handle propertyNamed: #'ThemeFontIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> themeFontIndex: aParam1 [
+JinTabControl >> themeFontIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ThemeFontIndex' withArguments: {aParam1} ).
@@ -1483,14 +1483,14 @@ JinControlTabControl >> themeFontIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> top [
+JinTabControl >> top [
 <getter>
 	^ (handle propertyNamed: #'Top' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> top: aParam1 [
+JinTabControl >> top: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Top' withArguments: {aParam1} ).
@@ -1498,14 +1498,14 @@ JinControlTabControl >> top: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> topPadding [
+JinTabControl >> topPadding [
 <getter>
 	^ (handle propertyNamed: #'TopPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> topPadding: aParam1 [
+JinTabControl >> topPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TopPadding' withArguments: {aParam1} ).
@@ -1513,14 +1513,14 @@ JinControlTabControl >> topPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> useTheme [
+JinTabControl >> useTheme [
 <getter>
 	^ (handle propertyNamed: #'UseTheme' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> useTheme: aParam1 [
+JinTabControl >> useTheme: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'UseTheme' withArguments: {aParam1} ).
@@ -1528,14 +1528,14 @@ JinControlTabControl >> useTheme: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> value [
+JinTabControl >> value [
 <getter>
 	^ (handle propertyNamed: #'Value' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> value: aParam1 [
+JinTabControl >> value: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Value' withArguments: {aParam1} ).
@@ -1543,14 +1543,14 @@ JinControlTabControl >> value: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> verticalAnchor [
+JinTabControl >> verticalAnchor [
 <getter>
 	^ (handle propertyNamed: #'VerticalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> verticalAnchor: aParam1 [
+JinTabControl >> verticalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'VerticalAnchor' withArguments: {aParam1} ).
@@ -1558,14 +1558,14 @@ JinControlTabControl >> verticalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> visible [
+JinTabControl >> visible [
 <getter>
 	^ (handle propertyNamed: #'Visible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> visible: aParam1 [
+JinTabControl >> visible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Visible' withArguments: {aParam1} ).
@@ -1573,14 +1573,14 @@ JinControlTabControl >> visible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> width [
+JinTabControl >> width [
 <getter>
 	^ (handle propertyNamed: #'Width' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> width: aParam1 [
+JinTabControl >> width: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Width' withArguments: {aParam1} ).

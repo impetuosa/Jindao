@@ -7,7 +7,8 @@ Class {
 	#instVars : [
 		'superclass',
 		'name',
-		'mapping'
+		'mapping',
+		'packageName'
 	],
 	#category : #'Jindao-Factories-Builders'
 }
@@ -22,16 +23,16 @@ JinControlClassBuilder >> addMethod: aMethod [
 
 { #category : #'as yet unclassified' }
 JinControlClassBuilder >> addProperty: aCOMProperty [
-	(self shouldAddPropertyGetter: aCOMProperty)
-		ifTrue: [ aCOMProperty getter
-				ifNotNil: [ (self buildingClassFor: aCOMProperty)
-						compile: (self getterCodeFor: aCOMProperty)
-						classified: 'property - generated' ] ].
-	(self shouldAddPropertySetter: aCOMProperty)
-		ifTrue: [ aCOMProperty setter
-				ifNotNil: [ (self buildingClassFor: aCOMProperty)
-						compile: (self setterCodeFor: aCOMProperty)
-						classified: 'property - generated' ] ]
+	(aCOMProperty getter isNotNil
+		and: [ self shouldAddPropertyGetter: aCOMProperty ])
+		ifTrue: [ (self buildingClassFor: aCOMProperty)
+				compile: (self getterCodeFor: aCOMProperty)
+				classified: 'property - generated' ].
+	(aCOMProperty setter isNotNil
+		and: [ self shouldAddPropertySetter: aCOMProperty ])
+		ifTrue: [ (self buildingClassFor: aCOMProperty)
+				compile: (self setterCodeFor: aCOMProperty)
+				classified: 'property - generated' ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -73,7 +74,7 @@ JinControlClassBuilder >> buildingClass [
 				subclass: self buildingClassName asSymbol
 				instanceVariableNames: ''
 				classVariableNames: ''
-				package: 'Jindao-DomainObjects-GeneratedControls'.
+				package: self packageName.
 			freshOne comment: self comment ]
 ]
 
@@ -154,8 +155,18 @@ JinControlClassBuilder >> methodNameFor: aString [
 { #category : #'class name' }
 JinControlClassBuilder >> name: aString [ 
 	mapping := aString. 
-	name := (superclass name , aString) copyReplaceAll: '_' with: ''
+	name := ('Jin', aString) copyReplaceAll: '_' with: ''
 	
+]
+
+{ #category : #'as yet unclassified' }
+JinControlClassBuilder >> packageName [
+	^ packageName
+]
+
+{ #category : #'as yet unclassified' }
+JinControlClassBuilder >> packageName: aString [
+	 packageName := aString
 ]
 
 { #category : #'as yet unclassified' }

@@ -242,30 +242,30 @@ Office Access 2007 blocks the following types of attached files. At this time, y
 
 "
 Class {
-	#name : #JinControlAttachment,
+	#name : #JinAttachment,
 	#superclass : #JinControlAbstractAttachment,
 	#category : #'Jindao-DomainObjects-GeneratedControls'
 }
 
 { #category : #generated }
-JinControlAttachment class >> mappedTypeName [
+JinAttachment class >> mappedTypeName [
 	^#'_Attachment'
 ]
 
 { #category : #generated }
-JinControlAttachment >> acceptVisitor: aVisitor [
+JinAttachment >> acceptVisitor: aVisitor [
 	^ aVisitor visitAttachment: self
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> addColon [
+JinAttachment >> addColon [
 <getter>
 	^ (handle propertyNamed: #'AddColon' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> addColon: aParam1 [
+JinAttachment >> addColon: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AddColon' withArguments: {aParam1} ).
@@ -273,28 +273,28 @@ JinControlAttachment >> addColon: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> application [
+JinAttachment >> application [
 <getter>
 	^ (handle propertyNamed: #'Application' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> attachmentCount [
+JinAttachment >> attachmentCount [
 <getter>
 	^ (handle propertyNamed: #'AttachmentCount' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> autoLabel [
+JinAttachment >> autoLabel [
 <getter>
 	^ (handle propertyNamed: #'AutoLabel' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> autoLabel: aParam1 [
+JinAttachment >> autoLabel: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AutoLabel' withArguments: {aParam1} ).
@@ -302,21 +302,21 @@ JinControlAttachment >> autoLabel: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlAttachment >> back [
+JinAttachment >> back [
 <method>
 	^ (handle dispatch: #'Back' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> backColor [
+JinAttachment >> backColor [
 <getter>
 	^ (handle propertyNamed: #'BackColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> backColor: aParam1 [
+JinAttachment >> backColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackColor' withArguments: {aParam1} ).
@@ -324,14 +324,14 @@ JinControlAttachment >> backColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> backShade [
+JinAttachment >> backShade [
 <getter>
 	^ (handle propertyNamed: #'BackShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> backShade: aParam1 [
+JinAttachment >> backShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackShade' withArguments: {aParam1} ).
@@ -339,14 +339,14 @@ JinControlAttachment >> backShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> backStyle [
+JinAttachment >> backStyle [
 <getter>
 	^ (handle propertyNamed: #'BackStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> backStyle: aParam1 [
+JinAttachment >> backStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackStyle' withArguments: {aParam1} ).
@@ -354,14 +354,14 @@ JinControlAttachment >> backStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> backThemeColorIndex [
+JinAttachment >> backThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BackThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> backThemeColorIndex: aParam1 [
+JinAttachment >> backThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackThemeColorIndex' withArguments: {aParam1} ).
@@ -369,14 +369,14 @@ JinControlAttachment >> backThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> backTint [
+JinAttachment >> backTint [
 <getter>
 	^ (handle propertyNamed: #'BackTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> backTint: aParam1 [
+JinAttachment >> backTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackTint' withArguments: {aParam1} ).
@@ -384,14 +384,14 @@ JinControlAttachment >> backTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> borderColor [
+JinAttachment >> borderColor [
 <getter>
 	^ (handle propertyNamed: #'BorderColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> borderColor: aParam1 [
+JinAttachment >> borderColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderColor' withArguments: {aParam1} ).
@@ -399,14 +399,14 @@ JinControlAttachment >> borderColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> borderShade [
+JinAttachment >> borderShade [
 <getter>
 	^ (handle propertyNamed: #'BorderShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> borderShade: aParam1 [
+JinAttachment >> borderShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderShade' withArguments: {aParam1} ).
@@ -414,14 +414,14 @@ JinControlAttachment >> borderShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> borderStyle [
+JinAttachment >> borderStyle [
 <getter>
 	^ (handle propertyNamed: #'BorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> borderStyle: aParam1 [
+JinAttachment >> borderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderStyle' withArguments: {aParam1} ).
@@ -429,14 +429,14 @@ JinControlAttachment >> borderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> borderThemeColorIndex [
+JinAttachment >> borderThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BorderThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> borderThemeColorIndex: aParam1 [
+JinAttachment >> borderThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderThemeColorIndex' withArguments: {aParam1} ).
@@ -444,14 +444,14 @@ JinControlAttachment >> borderThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> borderTint [
+JinAttachment >> borderTint [
 <getter>
 	^ (handle propertyNamed: #'BorderTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> borderTint: aParam1 [
+JinAttachment >> borderTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderTint' withArguments: {aParam1} ).
@@ -459,14 +459,14 @@ JinControlAttachment >> borderTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> borderWidth [
+JinAttachment >> borderWidth [
 <getter>
 	^ (handle propertyNamed: #'BorderWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> borderWidth: aParam1 [
+JinAttachment >> borderWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderWidth' withArguments: {aParam1} ).
@@ -474,14 +474,14 @@ JinControlAttachment >> borderWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> bottomPadding [
+JinAttachment >> bottomPadding [
 <getter>
 	^ (handle propertyNamed: #'BottomPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> bottomPadding: aParam1 [
+JinAttachment >> bottomPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BottomPadding' withArguments: {aParam1} ).
@@ -489,14 +489,14 @@ JinControlAttachment >> bottomPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> columnHidden [
+JinAttachment >> columnHidden [
 <getter>
 	^ (handle propertyNamed: #'ColumnHidden' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> columnHidden: aParam1 [
+JinAttachment >> columnHidden: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnHidden' withArguments: {aParam1} ).
@@ -504,14 +504,14 @@ JinControlAttachment >> columnHidden: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> columnOrder [
+JinAttachment >> columnOrder [
 <getter>
 	^ (handle propertyNamed: #'ColumnOrder' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> columnOrder: aParam1 [
+JinAttachment >> columnOrder: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnOrder' withArguments: {aParam1} ).
@@ -519,14 +519,14 @@ JinControlAttachment >> columnOrder: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> columnWidth [
+JinAttachment >> columnWidth [
 <getter>
 	^ (handle propertyNamed: #'ColumnWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> columnWidth: aParam1 [
+JinAttachment >> columnWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnWidth' withArguments: {aParam1} ).
@@ -534,14 +534,14 @@ JinControlAttachment >> columnWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> controlSource [
+JinAttachment >> controlSource [
 <getter>
 	^ (handle propertyNamed: #'ControlSource' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> controlSource: aParam1 [
+JinAttachment >> controlSource: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlSource' withArguments: {aParam1} ).
@@ -549,14 +549,14 @@ JinControlAttachment >> controlSource: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> controlTipText [
+JinAttachment >> controlTipText [
 <getter>
 	^ (handle propertyNamed: #'ControlTipText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> controlTipText: aParam1 [
+JinAttachment >> controlTipText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlTipText' withArguments: {aParam1} ).
@@ -564,14 +564,14 @@ JinControlAttachment >> controlTipText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> controlType [
+JinAttachment >> controlType [
 <getter>
 	^ (handle propertyNamed: #'ControlType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> controlType: aParam1 [
+JinAttachment >> controlType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlType' withArguments: {aParam1} ).
@@ -579,21 +579,21 @@ JinControlAttachment >> controlType: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> controls [
+JinAttachment >> controls [
 <getter>
 	^ (handle propertyNamed: #'Controls' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> currentAttachment [
+JinAttachment >> currentAttachment [
 <getter>
 	^ (handle propertyNamed: #'CurrentAttachment' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> currentAttachment: aParam1 [
+JinAttachment >> currentAttachment: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'CurrentAttachment' withArguments: {aParam1} ).
@@ -601,14 +601,14 @@ JinControlAttachment >> currentAttachment: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> defaultPicture [
+JinAttachment >> defaultPicture [
 <getter>
 	^ (handle propertyNamed: #'DefaultPicture' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> defaultPicture: aParam1 [
+JinAttachment >> defaultPicture: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DefaultPicture' withArguments: {aParam1} ).
@@ -616,14 +616,14 @@ JinControlAttachment >> defaultPicture: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> defaultPictureType [
+JinAttachment >> defaultPictureType [
 <getter>
 	^ (handle propertyNamed: #'DefaultPictureType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> defaultPictureType: aParam1 [
+JinAttachment >> defaultPictureType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DefaultPictureType' withArguments: {aParam1} ).
@@ -631,14 +631,14 @@ JinControlAttachment >> defaultPictureType: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> displayAs [
+JinAttachment >> displayAs [
 <getter>
 	^ (handle propertyNamed: #'DisplayAs' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> displayAs: aParam1 [
+JinAttachment >> displayAs: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DisplayAs' withArguments: {aParam1} ).
@@ -646,14 +646,14 @@ JinControlAttachment >> displayAs: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> displayWhen [
+JinAttachment >> displayWhen [
 <getter>
 	^ (handle propertyNamed: #'DisplayWhen' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> displayWhen: aParam1 [
+JinAttachment >> displayWhen: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DisplayWhen' withArguments: {aParam1} ).
@@ -661,14 +661,14 @@ JinControlAttachment >> displayWhen: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> enabled [
+JinAttachment >> enabled [
 <getter>
 	^ (handle propertyNamed: #'Enabled' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> enabled: aParam1 [
+JinAttachment >> enabled: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Enabled' withArguments: {aParam1} ).
@@ -676,14 +676,14 @@ JinControlAttachment >> enabled: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> eventProcPrefix [
+JinAttachment >> eventProcPrefix [
 <getter>
 	^ (handle propertyNamed: #'EventProcPrefix' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> eventProcPrefix: aParam1 [
+JinAttachment >> eventProcPrefix: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'EventProcPrefix' withArguments: {aParam1} ).
@@ -691,7 +691,7 @@ JinControlAttachment >> eventProcPrefix: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> fileName: aVar [
+JinAttachment >> fileName: aVar [
 <getter>
 "This method can be called with optional parameters. var"
 	^ (handle propertyNamed: #'FileName' withArguments: {aVar} ).
@@ -699,7 +699,7 @@ JinControlAttachment >> fileName: aVar [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> fileType: aVar [
+JinAttachment >> fileType: aVar [
 <getter>
 "This method can be called with optional parameters. var"
 	^ (handle propertyNamed: #'FileType' withArguments: {aVar} ).
@@ -707,7 +707,7 @@ JinControlAttachment >> fileType: aVar [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> fileURL: aVar [
+JinAttachment >> fileURL: aVar [
 <getter>
 "This method can be called with optional parameters. var"
 	^ (handle propertyNamed: #'FileURL' withArguments: {aVar} ).
@@ -715,21 +715,21 @@ JinControlAttachment >> fileURL: aVar [
 ]
 
 { #category : #'method - generated' }
-JinControlAttachment >> forward [
+JinAttachment >> forward [
 <method>
 	^ (handle dispatch: #'Forward' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineColor [
+JinAttachment >> gridlineColor [
 <getter>
 	^ (handle propertyNamed: #'GridlineColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineColor: aParam1 [
+JinAttachment >> gridlineColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineColor' withArguments: {aParam1} ).
@@ -737,14 +737,14 @@ JinControlAttachment >> gridlineColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineShade [
+JinAttachment >> gridlineShade [
 <getter>
 	^ (handle propertyNamed: #'GridlineShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineShade: aParam1 [
+JinAttachment >> gridlineShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineShade' withArguments: {aParam1} ).
@@ -752,14 +752,14 @@ JinControlAttachment >> gridlineShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineStyleBottom [
+JinAttachment >> gridlineStyleBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineStyleBottom: aParam1 [
+JinAttachment >> gridlineStyleBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleBottom' withArguments: {aParam1} ).
@@ -767,14 +767,14 @@ JinControlAttachment >> gridlineStyleBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineStyleLeft [
+JinAttachment >> gridlineStyleLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineStyleLeft: aParam1 [
+JinAttachment >> gridlineStyleLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleLeft' withArguments: {aParam1} ).
@@ -782,14 +782,14 @@ JinControlAttachment >> gridlineStyleLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineStyleRight [
+JinAttachment >> gridlineStyleRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineStyleRight: aParam1 [
+JinAttachment >> gridlineStyleRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleRight' withArguments: {aParam1} ).
@@ -797,14 +797,14 @@ JinControlAttachment >> gridlineStyleRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineStyleTop [
+JinAttachment >> gridlineStyleTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineStyleTop: aParam1 [
+JinAttachment >> gridlineStyleTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleTop' withArguments: {aParam1} ).
@@ -812,14 +812,14 @@ JinControlAttachment >> gridlineStyleTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineThemeColorIndex [
+JinAttachment >> gridlineThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineThemeColorIndex: aParam1 [
+JinAttachment >> gridlineThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' withArguments: {aParam1} ).
@@ -827,14 +827,14 @@ JinControlAttachment >> gridlineThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineTint [
+JinAttachment >> gridlineTint [
 <getter>
 	^ (handle propertyNamed: #'GridlineTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineTint: aParam1 [
+JinAttachment >> gridlineTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineTint' withArguments: {aParam1} ).
@@ -842,14 +842,14 @@ JinControlAttachment >> gridlineTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineWidthBottom [
+JinAttachment >> gridlineWidthBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineWidthBottom: aParam1 [
+JinAttachment >> gridlineWidthBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthBottom' withArguments: {aParam1} ).
@@ -857,14 +857,14 @@ JinControlAttachment >> gridlineWidthBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineWidthLeft [
+JinAttachment >> gridlineWidthLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineWidthLeft: aParam1 [
+JinAttachment >> gridlineWidthLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthLeft' withArguments: {aParam1} ).
@@ -872,14 +872,14 @@ JinControlAttachment >> gridlineWidthLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineWidthRight [
+JinAttachment >> gridlineWidthRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineWidthRight: aParam1 [
+JinAttachment >> gridlineWidthRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthRight' withArguments: {aParam1} ).
@@ -887,14 +887,14 @@ JinControlAttachment >> gridlineWidthRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineWidthTop [
+JinAttachment >> gridlineWidthTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> gridlineWidthTop: aParam1 [
+JinAttachment >> gridlineWidthTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthTop' withArguments: {aParam1} ).
@@ -902,14 +902,14 @@ JinControlAttachment >> gridlineWidthTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> height [
+JinAttachment >> height [
 <getter>
 	^ (handle propertyNamed: #'Height' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> height: aParam1 [
+JinAttachment >> height: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Height' withArguments: {aParam1} ).
@@ -917,14 +917,14 @@ JinControlAttachment >> height: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> helpContextId [
+JinAttachment >> helpContextId [
 <getter>
 	^ (handle propertyNamed: #'HelpContextId' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> helpContextId: aParam1 [
+JinAttachment >> helpContextId: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HelpContextId' withArguments: {aParam1} ).
@@ -932,14 +932,14 @@ JinControlAttachment >> helpContextId: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> horizontalAnchor [
+JinAttachment >> horizontalAnchor [
 <getter>
 	^ (handle propertyNamed: #'HorizontalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> horizontalAnchor: aParam1 [
+JinAttachment >> horizontalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HorizontalAnchor' withArguments: {aParam1} ).
@@ -947,14 +947,14 @@ JinControlAttachment >> horizontalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> inSelection [
+JinAttachment >> inSelection [
 <getter>
 	^ (handle propertyNamed: #'InSelection' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> inSelection: aParam1 [
+JinAttachment >> inSelection: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'InSelection' withArguments: {aParam1} ).
@@ -962,14 +962,14 @@ JinControlAttachment >> inSelection: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> isVisible [
+JinAttachment >> isVisible [
 <getter>
 	^ (handle propertyNamed: #'IsVisible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> isVisible: aParam1 [
+JinAttachment >> isVisible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IsVisible' withArguments: {aParam1} ).
@@ -977,14 +977,14 @@ JinControlAttachment >> isVisible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> labelAlign [
+JinAttachment >> labelAlign [
 <getter>
 	^ (handle propertyNamed: #'LabelAlign' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> labelAlign: aParam1 [
+JinAttachment >> labelAlign: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelAlign' withArguments: {aParam1} ).
@@ -992,14 +992,14 @@ JinControlAttachment >> labelAlign: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> labelX [
+JinAttachment >> labelX [
 <getter>
 	^ (handle propertyNamed: #'LabelX' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> labelX: aParam1 [
+JinAttachment >> labelX: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelX' withArguments: {aParam1} ).
@@ -1007,14 +1007,14 @@ JinControlAttachment >> labelX: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> labelY [
+JinAttachment >> labelY [
 <getter>
 	^ (handle propertyNamed: #'LabelY' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> labelY: aParam1 [
+JinAttachment >> labelY: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelY' withArguments: {aParam1} ).
@@ -1022,28 +1022,28 @@ JinControlAttachment >> labelY: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> layout [
+JinAttachment >> layout [
 <getter>
 	^ (handle propertyNamed: #'Layout' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> layoutID [
+JinAttachment >> layoutID [
 <getter>
 	^ (handle propertyNamed: #'LayoutID' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> left [
+JinAttachment >> left [
 <getter>
 	^ (handle propertyNamed: #'Left' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> left: aParam1 [
+JinAttachment >> left: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Left' withArguments: {aParam1} ).
@@ -1051,14 +1051,14 @@ JinControlAttachment >> left: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> leftPadding [
+JinAttachment >> leftPadding [
 <getter>
 	^ (handle propertyNamed: #'LeftPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> leftPadding: aParam1 [
+JinAttachment >> leftPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LeftPadding' withArguments: {aParam1} ).
@@ -1066,14 +1066,14 @@ JinControlAttachment >> leftPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> locked [
+JinAttachment >> locked [
 <getter>
 	^ (handle propertyNamed: #'Locked' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> locked: aParam1 [
+JinAttachment >> locked: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Locked' withArguments: {aParam1} ).
@@ -1081,7 +1081,7 @@ JinControlAttachment >> locked: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlAttachment >> move: aLeft top: aTop width: aWidth height: aHeight [
+JinAttachment >> move: aLeft top: aTop width: aWidth height: aHeight [
 <method>
 "This method can be called with optional parameters. Top,Width,Height"
 	^ (handle dispatch: #'Move' withArguments: {aLeft . aTop . aWidth . aHeight} ).
@@ -1089,14 +1089,14 @@ JinControlAttachment >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> name [
+JinAttachment >> name [
 <getter>
 	^ (handle propertyNamed: #'Name' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> name: aParam1 [
+JinAttachment >> name: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Name' withArguments: {aParam1} ).
@@ -1104,14 +1104,14 @@ JinControlAttachment >> name: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> oldBorderStyle [
+JinAttachment >> oldBorderStyle [
 <getter>
 	^ (handle propertyNamed: #'OldBorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> oldBorderStyle: aParam1 [
+JinAttachment >> oldBorderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OldBorderStyle' withArguments: {aParam1} ).
@@ -1119,21 +1119,21 @@ JinControlAttachment >> oldBorderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> oldValue [
+JinAttachment >> oldValue [
 <getter>
 	^ (handle propertyNamed: #'OldValue' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onAttachmentCurrent [
+JinAttachment >> onAttachmentCurrent [
 <getter>
 	^ (handle propertyNamed: #'OnAttachmentCurrent' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onAttachmentCurrent: aParam1 [
+JinAttachment >> onAttachmentCurrent: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnAttachmentCurrent' withArguments: {aParam1} ).
@@ -1141,14 +1141,14 @@ JinControlAttachment >> onAttachmentCurrent: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onChange [
+JinAttachment >> onChange [
 <getter>
 	^ (handle propertyNamed: #'OnChange' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onChange: aParam1 [
+JinAttachment >> onChange: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnChange' withArguments: {aParam1} ).
@@ -1156,14 +1156,14 @@ JinControlAttachment >> onChange: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onClick [
+JinAttachment >> onClick [
 <getter>
 	^ (handle propertyNamed: #'OnClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onClick: aParam1 [
+JinAttachment >> onClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnClick' withArguments: {aParam1} ).
@@ -1171,14 +1171,14 @@ JinControlAttachment >> onClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onDblClick [
+JinAttachment >> onDblClick [
 <getter>
 	^ (handle propertyNamed: #'OnDblClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onDblClick: aParam1 [
+JinAttachment >> onDblClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnDblClick' withArguments: {aParam1} ).
@@ -1186,14 +1186,14 @@ JinControlAttachment >> onDblClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onDirty [
+JinAttachment >> onDirty [
 <getter>
 	^ (handle propertyNamed: #'OnDirty' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onDirty: aParam1 [
+JinAttachment >> onDirty: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnDirty' withArguments: {aParam1} ).
@@ -1201,14 +1201,14 @@ JinControlAttachment >> onDirty: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onEnter [
+JinAttachment >> onEnter [
 <getter>
 	^ (handle propertyNamed: #'OnEnter' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onEnter: aParam1 [
+JinAttachment >> onEnter: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnEnter' withArguments: {aParam1} ).
@@ -1216,14 +1216,14 @@ JinControlAttachment >> onEnter: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onExit [
+JinAttachment >> onExit [
 <getter>
 	^ (handle propertyNamed: #'OnExit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onExit: aParam1 [
+JinAttachment >> onExit: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnExit' withArguments: {aParam1} ).
@@ -1231,14 +1231,14 @@ JinControlAttachment >> onExit: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onGotFocus [
+JinAttachment >> onGotFocus [
 <getter>
 	^ (handle propertyNamed: #'OnGotFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onGotFocus: aParam1 [
+JinAttachment >> onGotFocus: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnGotFocus' withArguments: {aParam1} ).
@@ -1246,14 +1246,14 @@ JinControlAttachment >> onGotFocus: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onKeyDown [
+JinAttachment >> onKeyDown [
 <getter>
 	^ (handle propertyNamed: #'OnKeyDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onKeyDown: aParam1 [
+JinAttachment >> onKeyDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyDown' withArguments: {aParam1} ).
@@ -1261,14 +1261,14 @@ JinControlAttachment >> onKeyDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onKeyPress [
+JinAttachment >> onKeyPress [
 <getter>
 	^ (handle propertyNamed: #'OnKeyPress' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onKeyPress: aParam1 [
+JinAttachment >> onKeyPress: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyPress' withArguments: {aParam1} ).
@@ -1276,14 +1276,14 @@ JinControlAttachment >> onKeyPress: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onKeyUp [
+JinAttachment >> onKeyUp [
 <getter>
 	^ (handle propertyNamed: #'OnKeyUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onKeyUp: aParam1 [
+JinAttachment >> onKeyUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyUp' withArguments: {aParam1} ).
@@ -1291,14 +1291,14 @@ JinControlAttachment >> onKeyUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onLostFocus [
+JinAttachment >> onLostFocus [
 <getter>
 	^ (handle propertyNamed: #'OnLostFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onLostFocus: aParam1 [
+JinAttachment >> onLostFocus: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnLostFocus' withArguments: {aParam1} ).
@@ -1306,14 +1306,14 @@ JinControlAttachment >> onLostFocus: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onMouseDown [
+JinAttachment >> onMouseDown [
 <getter>
 	^ (handle propertyNamed: #'OnMouseDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onMouseDown: aParam1 [
+JinAttachment >> onMouseDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseDown' withArguments: {aParam1} ).
@@ -1321,14 +1321,14 @@ JinControlAttachment >> onMouseDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onMouseMove [
+JinAttachment >> onMouseMove [
 <getter>
 	^ (handle propertyNamed: #'OnMouseMove' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onMouseMove: aParam1 [
+JinAttachment >> onMouseMove: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseMove' withArguments: {aParam1} ).
@@ -1336,14 +1336,14 @@ JinControlAttachment >> onMouseMove: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onMouseUp [
+JinAttachment >> onMouseUp [
 <getter>
 	^ (handle propertyNamed: #'OnMouseUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> onMouseUp: aParam1 [
+JinAttachment >> onMouseUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseUp' withArguments: {aParam1} ).
@@ -1351,21 +1351,21 @@ JinControlAttachment >> onMouseUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> parent [
+JinAttachment >> parent [
 <getter>
 	^ (handle propertyNamed: #'Parent' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> pictureAlignment [
+JinAttachment >> pictureAlignment [
 <getter>
 	^ (handle propertyNamed: #'PictureAlignment' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> pictureAlignment: aParam1 [
+JinAttachment >> pictureAlignment: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PictureAlignment' withArguments: {aParam1} ).
@@ -1373,14 +1373,14 @@ JinControlAttachment >> pictureAlignment: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> pictureSizeMode [
+JinAttachment >> pictureSizeMode [
 <getter>
 	^ (handle propertyNamed: #'PictureSizeMode' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> pictureSizeMode: aParam1 [
+JinAttachment >> pictureSizeMode: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PictureSizeMode' withArguments: {aParam1} ).
@@ -1388,14 +1388,14 @@ JinControlAttachment >> pictureSizeMode: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> pictureTiling [
+JinAttachment >> pictureTiling [
 <getter>
 	^ (handle propertyNamed: #'PictureTiling' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> pictureTiling: aParam1 [
+JinAttachment >> pictureTiling: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PictureTiling' withArguments: {aParam1} ).
@@ -1403,21 +1403,21 @@ JinControlAttachment >> pictureTiling: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlAttachment >> requery [
+JinAttachment >> requery [
 <method>
 	^ (handle dispatch: #'Requery' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> rightPadding [
+JinAttachment >> rightPadding [
 <getter>
 	^ (handle propertyNamed: #'RightPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> rightPadding: aParam1 [
+JinAttachment >> rightPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'RightPadding' withArguments: {aParam1} ).
@@ -1425,14 +1425,14 @@ JinControlAttachment >> rightPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> section [
+JinAttachment >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> section: aParam1 [
+JinAttachment >> section: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Section' withArguments: {aParam1} ).
@@ -1440,21 +1440,21 @@ JinControlAttachment >> section: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlAttachment >> setFocus [
+JinAttachment >> setFocus [
 <method>
 	^ (handle dispatch: #'SetFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> shortcutMenuBar [
+JinAttachment >> shortcutMenuBar [
 <getter>
 	^ (handle propertyNamed: #'ShortcutMenuBar' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> shortcutMenuBar: aParam1 [
+JinAttachment >> shortcutMenuBar: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ShortcutMenuBar' withArguments: {aParam1} ).
@@ -1462,21 +1462,21 @@ JinControlAttachment >> shortcutMenuBar: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlAttachment >> sizeToFit [
+JinAttachment >> sizeToFit [
 <method>
 	^ (handle dispatch: #'SizeToFit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> specialEffect [
+JinAttachment >> specialEffect [
 <getter>
 	^ (handle propertyNamed: #'SpecialEffect' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> specialEffect: aParam1 [
+JinAttachment >> specialEffect: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SpecialEffect' withArguments: {aParam1} ).
@@ -1484,14 +1484,14 @@ JinControlAttachment >> specialEffect: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> statusBarText [
+JinAttachment >> statusBarText [
 <getter>
 	^ (handle propertyNamed: #'StatusBarText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> statusBarText: aParam1 [
+JinAttachment >> statusBarText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'StatusBarText' withArguments: {aParam1} ).
@@ -1499,14 +1499,14 @@ JinControlAttachment >> statusBarText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> tabIndex [
+JinAttachment >> tabIndex [
 <getter>
 	^ (handle propertyNamed: #'TabIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> tabIndex: aParam1 [
+JinAttachment >> tabIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabIndex' withArguments: {aParam1} ).
@@ -1514,14 +1514,14 @@ JinControlAttachment >> tabIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> tabStop [
+JinAttachment >> tabStop [
 <getter>
 	^ (handle propertyNamed: #'TabStop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> tabStop: aParam1 [
+JinAttachment >> tabStop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabStop' withArguments: {aParam1} ).
@@ -1529,14 +1529,14 @@ JinControlAttachment >> tabStop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> tag [
+JinAttachment >> tag [
 <getter>
 	^ (handle propertyNamed: #'Tag' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> tag: aParam1 [
+JinAttachment >> tag: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Tag' withArguments: {aParam1} ).
@@ -1544,14 +1544,14 @@ JinControlAttachment >> tag: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> top [
+JinAttachment >> top [
 <getter>
 	^ (handle propertyNamed: #'Top' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> top: aParam1 [
+JinAttachment >> top: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Top' withArguments: {aParam1} ).
@@ -1559,14 +1559,14 @@ JinControlAttachment >> top: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> topPadding [
+JinAttachment >> topPadding [
 <getter>
 	^ (handle propertyNamed: #'TopPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> topPadding: aParam1 [
+JinAttachment >> topPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TopPadding' withArguments: {aParam1} ).
@@ -1574,14 +1574,14 @@ JinControlAttachment >> topPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> verticalAnchor [
+JinAttachment >> verticalAnchor [
 <getter>
 	^ (handle propertyNamed: #'VerticalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> verticalAnchor: aParam1 [
+JinAttachment >> verticalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'VerticalAnchor' withArguments: {aParam1} ).
@@ -1589,14 +1589,14 @@ JinControlAttachment >> verticalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> visible [
+JinAttachment >> visible [
 <getter>
 	^ (handle propertyNamed: #'Visible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> visible: aParam1 [
+JinAttachment >> visible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Visible' withArguments: {aParam1} ).
@@ -1604,14 +1604,14 @@ JinControlAttachment >> visible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> width [
+JinAttachment >> width [
 <getter>
 	^ (handle propertyNamed: #'Width' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlAttachment >> width: aParam1 [
+JinAttachment >> width: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Width' withArguments: {aParam1} ).

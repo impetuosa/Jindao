@@ -151,30 +151,30 @@ You can also use check boxes in an option group to display values to choose from
 
 "
 Class {
-	#name : #JinControlCheckbox,
+	#name : #JinCheckbox,
 	#superclass : #JinControlAbstractCheckbox,
 	#category : #'Jindao-DomainObjects-GeneratedControls'
 }
 
 { #category : #generated }
-JinControlCheckbox class >> mappedTypeName [
+JinCheckbox class >> mappedTypeName [
 	^#'_Checkbox'
 ]
 
 { #category : #generated }
-JinControlCheckbox >> acceptVisitor: aVisitor [
+JinCheckbox >> acceptVisitor: aVisitor [
 	^ aVisitor visitCheckbox: self
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> addColon [
+JinCheckbox >> addColon [
 <getter>
 	^ (handle propertyNamed: #'AddColon' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> addColon: aParam1 [
+JinCheckbox >> addColon: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AddColon' withArguments: {aParam1} ).
@@ -182,21 +182,21 @@ JinControlCheckbox >> addColon: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> application [
+JinCheckbox >> application [
 <getter>
 	^ (handle propertyNamed: #'Application' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> autoLabel [
+JinCheckbox >> autoLabel [
 <getter>
 	^ (handle propertyNamed: #'AutoLabel' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> autoLabel: aParam1 [
+JinCheckbox >> autoLabel: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AutoLabel' withArguments: {aParam1} ).
@@ -204,14 +204,14 @@ JinControlCheckbox >> autoLabel: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> borderColor [
+JinCheckbox >> borderColor [
 <getter>
 	^ (handle propertyNamed: #'BorderColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> borderColor: aParam1 [
+JinCheckbox >> borderColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderColor' withArguments: {aParam1} ).
@@ -219,14 +219,14 @@ JinControlCheckbox >> borderColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> borderShade [
+JinCheckbox >> borderShade [
 <getter>
 	^ (handle propertyNamed: #'BorderShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> borderShade: aParam1 [
+JinCheckbox >> borderShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderShade' withArguments: {aParam1} ).
@@ -234,14 +234,14 @@ JinControlCheckbox >> borderShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> borderStyle [
+JinCheckbox >> borderStyle [
 <getter>
 	^ (handle propertyNamed: #'BorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> borderStyle: aParam1 [
+JinCheckbox >> borderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderStyle' withArguments: {aParam1} ).
@@ -249,14 +249,14 @@ JinControlCheckbox >> borderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> borderThemeColorIndex [
+JinCheckbox >> borderThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BorderThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> borderThemeColorIndex: aParam1 [
+JinCheckbox >> borderThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderThemeColorIndex' withArguments: {aParam1} ).
@@ -264,14 +264,14 @@ JinControlCheckbox >> borderThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> borderTint [
+JinCheckbox >> borderTint [
 <getter>
 	^ (handle propertyNamed: #'BorderTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> borderTint: aParam1 [
+JinCheckbox >> borderTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderTint' withArguments: {aParam1} ).
@@ -279,14 +279,14 @@ JinControlCheckbox >> borderTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> borderWidth [
+JinCheckbox >> borderWidth [
 <getter>
 	^ (handle propertyNamed: #'BorderWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> borderWidth: aParam1 [
+JinCheckbox >> borderWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderWidth' withArguments: {aParam1} ).
@@ -294,14 +294,14 @@ JinControlCheckbox >> borderWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> bottomPadding [
+JinCheckbox >> bottomPadding [
 <getter>
 	^ (handle propertyNamed: #'BottomPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> bottomPadding: aParam1 [
+JinCheckbox >> bottomPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BottomPadding' withArguments: {aParam1} ).
@@ -309,14 +309,14 @@ JinControlCheckbox >> bottomPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> columnHidden [
+JinCheckbox >> columnHidden [
 <getter>
 	^ (handle propertyNamed: #'ColumnHidden' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> columnHidden: aParam1 [
+JinCheckbox >> columnHidden: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnHidden' withArguments: {aParam1} ).
@@ -324,14 +324,14 @@ JinControlCheckbox >> columnHidden: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> columnOrder [
+JinCheckbox >> columnOrder [
 <getter>
 	^ (handle propertyNamed: #'ColumnOrder' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> columnOrder: aParam1 [
+JinCheckbox >> columnOrder: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnOrder' withArguments: {aParam1} ).
@@ -339,14 +339,14 @@ JinControlCheckbox >> columnOrder: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> columnWidth [
+JinCheckbox >> columnWidth [
 <getter>
 	^ (handle propertyNamed: #'ColumnWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> columnWidth: aParam1 [
+JinCheckbox >> columnWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnWidth' withArguments: {aParam1} ).
@@ -354,14 +354,14 @@ JinControlCheckbox >> columnWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> controlSource [
+JinCheckbox >> controlSource [
 <getter>
 	^ (handle propertyNamed: #'ControlSource' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> controlSource: aParam1 [
+JinCheckbox >> controlSource: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlSource' withArguments: {aParam1} ).
@@ -369,14 +369,14 @@ JinControlCheckbox >> controlSource: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> controlTipText [
+JinCheckbox >> controlTipText [
 <getter>
 	^ (handle propertyNamed: #'ControlTipText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> controlTipText: aParam1 [
+JinCheckbox >> controlTipText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlTipText' withArguments: {aParam1} ).
@@ -384,14 +384,14 @@ JinControlCheckbox >> controlTipText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> controlType [
+JinCheckbox >> controlType [
 <getter>
 	^ (handle propertyNamed: #'ControlType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> controlType: aParam1 [
+JinCheckbox >> controlType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlType' withArguments: {aParam1} ).
@@ -399,21 +399,21 @@ JinControlCheckbox >> controlType: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> controls [
+JinCheckbox >> controls [
 <getter>
 	^ (handle propertyNamed: #'Controls' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> defaultValue [
+JinCheckbox >> defaultValue [
 <getter>
 	^ (handle propertyNamed: #'DefaultValue' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> defaultValue: aParam1 [
+JinCheckbox >> defaultValue: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DefaultValue' withArguments: {aParam1} ).
@@ -421,14 +421,14 @@ JinControlCheckbox >> defaultValue: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> displayWhen [
+JinCheckbox >> displayWhen [
 <getter>
 	^ (handle propertyNamed: #'DisplayWhen' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> displayWhen: aParam1 [
+JinCheckbox >> displayWhen: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DisplayWhen' withArguments: {aParam1} ).
@@ -436,14 +436,14 @@ JinControlCheckbox >> displayWhen: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> enabled [
+JinCheckbox >> enabled [
 <getter>
 	^ (handle propertyNamed: #'Enabled' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> enabled: aParam1 [
+JinCheckbox >> enabled: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Enabled' withArguments: {aParam1} ).
@@ -451,14 +451,14 @@ JinControlCheckbox >> enabled: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> eventProcPrefix [
+JinCheckbox >> eventProcPrefix [
 <getter>
 	^ (handle propertyNamed: #'EventProcPrefix' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> eventProcPrefix: aParam1 [
+JinCheckbox >> eventProcPrefix: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'EventProcPrefix' withArguments: {aParam1} ).
@@ -466,14 +466,14 @@ JinControlCheckbox >> eventProcPrefix: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineColor [
+JinCheckbox >> gridlineColor [
 <getter>
 	^ (handle propertyNamed: #'GridlineColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineColor: aParam1 [
+JinCheckbox >> gridlineColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineColor' withArguments: {aParam1} ).
@@ -481,14 +481,14 @@ JinControlCheckbox >> gridlineColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineShade [
+JinCheckbox >> gridlineShade [
 <getter>
 	^ (handle propertyNamed: #'GridlineShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineShade: aParam1 [
+JinCheckbox >> gridlineShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineShade' withArguments: {aParam1} ).
@@ -496,14 +496,14 @@ JinControlCheckbox >> gridlineShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineStyleBottom [
+JinCheckbox >> gridlineStyleBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineStyleBottom: aParam1 [
+JinCheckbox >> gridlineStyleBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleBottom' withArguments: {aParam1} ).
@@ -511,14 +511,14 @@ JinControlCheckbox >> gridlineStyleBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineStyleLeft [
+JinCheckbox >> gridlineStyleLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineStyleLeft: aParam1 [
+JinCheckbox >> gridlineStyleLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleLeft' withArguments: {aParam1} ).
@@ -526,14 +526,14 @@ JinControlCheckbox >> gridlineStyleLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineStyleRight [
+JinCheckbox >> gridlineStyleRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineStyleRight: aParam1 [
+JinCheckbox >> gridlineStyleRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleRight' withArguments: {aParam1} ).
@@ -541,14 +541,14 @@ JinControlCheckbox >> gridlineStyleRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineStyleTop [
+JinCheckbox >> gridlineStyleTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineStyleTop: aParam1 [
+JinCheckbox >> gridlineStyleTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleTop' withArguments: {aParam1} ).
@@ -556,14 +556,14 @@ JinControlCheckbox >> gridlineStyleTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineThemeColorIndex [
+JinCheckbox >> gridlineThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineThemeColorIndex: aParam1 [
+JinCheckbox >> gridlineThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' withArguments: {aParam1} ).
@@ -571,14 +571,14 @@ JinControlCheckbox >> gridlineThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineTint [
+JinCheckbox >> gridlineTint [
 <getter>
 	^ (handle propertyNamed: #'GridlineTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineTint: aParam1 [
+JinCheckbox >> gridlineTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineTint' withArguments: {aParam1} ).
@@ -586,14 +586,14 @@ JinControlCheckbox >> gridlineTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineWidthBottom [
+JinCheckbox >> gridlineWidthBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineWidthBottom: aParam1 [
+JinCheckbox >> gridlineWidthBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthBottom' withArguments: {aParam1} ).
@@ -601,14 +601,14 @@ JinControlCheckbox >> gridlineWidthBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineWidthLeft [
+JinCheckbox >> gridlineWidthLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineWidthLeft: aParam1 [
+JinCheckbox >> gridlineWidthLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthLeft' withArguments: {aParam1} ).
@@ -616,14 +616,14 @@ JinControlCheckbox >> gridlineWidthLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineWidthRight [
+JinCheckbox >> gridlineWidthRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineWidthRight: aParam1 [
+JinCheckbox >> gridlineWidthRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthRight' withArguments: {aParam1} ).
@@ -631,14 +631,14 @@ JinControlCheckbox >> gridlineWidthRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineWidthTop [
+JinCheckbox >> gridlineWidthTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> gridlineWidthTop: aParam1 [
+JinCheckbox >> gridlineWidthTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthTop' withArguments: {aParam1} ).
@@ -646,14 +646,14 @@ JinControlCheckbox >> gridlineWidthTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> height [
+JinCheckbox >> height [
 <getter>
 	^ (handle propertyNamed: #'Height' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> height: aParam1 [
+JinCheckbox >> height: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Height' withArguments: {aParam1} ).
@@ -661,14 +661,14 @@ JinControlCheckbox >> height: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> helpContextId [
+JinCheckbox >> helpContextId [
 <getter>
 	^ (handle propertyNamed: #'HelpContextId' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> helpContextId: aParam1 [
+JinCheckbox >> helpContextId: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HelpContextId' withArguments: {aParam1} ).
@@ -676,14 +676,14 @@ JinControlCheckbox >> helpContextId: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> hideDuplicates [
+JinCheckbox >> hideDuplicates [
 <getter>
 	^ (handle propertyNamed: #'HideDuplicates' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> hideDuplicates: aParam1 [
+JinCheckbox >> hideDuplicates: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HideDuplicates' withArguments: {aParam1} ).
@@ -691,14 +691,14 @@ JinControlCheckbox >> hideDuplicates: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> horizontalAnchor [
+JinCheckbox >> horizontalAnchor [
 <getter>
 	^ (handle propertyNamed: #'HorizontalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> horizontalAnchor: aParam1 [
+JinCheckbox >> horizontalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HorizontalAnchor' withArguments: {aParam1} ).
@@ -706,14 +706,14 @@ JinControlCheckbox >> horizontalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> inSelection [
+JinCheckbox >> inSelection [
 <getter>
 	^ (handle propertyNamed: #'InSelection' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> inSelection: aParam1 [
+JinCheckbox >> inSelection: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'InSelection' withArguments: {aParam1} ).
@@ -721,14 +721,14 @@ JinControlCheckbox >> inSelection: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> isVisible [
+JinCheckbox >> isVisible [
 <getter>
 	^ (handle propertyNamed: #'IsVisible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> isVisible: aParam1 [
+JinCheckbox >> isVisible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IsVisible' withArguments: {aParam1} ).
@@ -736,14 +736,14 @@ JinControlCheckbox >> isVisible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> labelAlign [
+JinCheckbox >> labelAlign [
 <getter>
 	^ (handle propertyNamed: #'LabelAlign' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> labelAlign: aParam1 [
+JinCheckbox >> labelAlign: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelAlign' withArguments: {aParam1} ).
@@ -751,14 +751,14 @@ JinControlCheckbox >> labelAlign: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> labelX [
+JinCheckbox >> labelX [
 <getter>
 	^ (handle propertyNamed: #'LabelX' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> labelX: aParam1 [
+JinCheckbox >> labelX: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelX' withArguments: {aParam1} ).
@@ -766,14 +766,14 @@ JinControlCheckbox >> labelX: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> labelY [
+JinCheckbox >> labelY [
 <getter>
 	^ (handle propertyNamed: #'LabelY' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> labelY: aParam1 [
+JinCheckbox >> labelY: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelY' withArguments: {aParam1} ).
@@ -781,28 +781,28 @@ JinControlCheckbox >> labelY: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> layout [
+JinCheckbox >> layout [
 <getter>
 	^ (handle propertyNamed: #'Layout' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> layoutID [
+JinCheckbox >> layoutID [
 <getter>
 	^ (handle propertyNamed: #'LayoutID' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> left [
+JinCheckbox >> left [
 <getter>
 	^ (handle propertyNamed: #'Left' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> left: aParam1 [
+JinCheckbox >> left: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Left' withArguments: {aParam1} ).
@@ -810,14 +810,14 @@ JinControlCheckbox >> left: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> leftPadding [
+JinCheckbox >> leftPadding [
 <getter>
 	^ (handle propertyNamed: #'LeftPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> leftPadding: aParam1 [
+JinCheckbox >> leftPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LeftPadding' withArguments: {aParam1} ).
@@ -825,14 +825,14 @@ JinControlCheckbox >> leftPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> locked [
+JinCheckbox >> locked [
 <getter>
 	^ (handle propertyNamed: #'Locked' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> locked: aParam1 [
+JinCheckbox >> locked: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Locked' withArguments: {aParam1} ).
@@ -840,7 +840,7 @@ JinControlCheckbox >> locked: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlCheckbox >> move: aLeft top: aTop width: aWidth height: aHeight [
+JinCheckbox >> move: aLeft top: aTop width: aWidth height: aHeight [
 <method>
 "This method can be called with optional parameters. Top,Width,Height"
 	^ (handle dispatch: #'Move' withArguments: {aLeft . aTop . aWidth . aHeight} ).
@@ -848,14 +848,14 @@ JinControlCheckbox >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> name [
+JinCheckbox >> name [
 <getter>
 	^ (handle propertyNamed: #'Name' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> name: aParam1 [
+JinCheckbox >> name: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Name' withArguments: {aParam1} ).
@@ -863,14 +863,14 @@ JinControlCheckbox >> name: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> oldBorderStyle [
+JinCheckbox >> oldBorderStyle [
 <getter>
 	^ (handle propertyNamed: #'OldBorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> oldBorderStyle: aParam1 [
+JinCheckbox >> oldBorderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OldBorderStyle' withArguments: {aParam1} ).
@@ -878,21 +878,21 @@ JinControlCheckbox >> oldBorderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> oldValue [
+JinCheckbox >> oldValue [
 <getter>
 	^ (handle propertyNamed: #'OldValue' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onClick [
+JinCheckbox >> onClick [
 <getter>
 	^ (handle propertyNamed: #'OnClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onClick: aParam1 [
+JinCheckbox >> onClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnClick' withArguments: {aParam1} ).
@@ -900,14 +900,14 @@ JinControlCheckbox >> onClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onDblClick [
+JinCheckbox >> onDblClick [
 <getter>
 	^ (handle propertyNamed: #'OnDblClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onDblClick: aParam1 [
+JinCheckbox >> onDblClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnDblClick' withArguments: {aParam1} ).
@@ -915,14 +915,14 @@ JinControlCheckbox >> onDblClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onEnter [
+JinCheckbox >> onEnter [
 <getter>
 	^ (handle propertyNamed: #'OnEnter' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onEnter: aParam1 [
+JinCheckbox >> onEnter: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnEnter' withArguments: {aParam1} ).
@@ -930,14 +930,14 @@ JinControlCheckbox >> onEnter: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onExit [
+JinCheckbox >> onExit [
 <getter>
 	^ (handle propertyNamed: #'OnExit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onExit: aParam1 [
+JinCheckbox >> onExit: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnExit' withArguments: {aParam1} ).
@@ -945,14 +945,14 @@ JinControlCheckbox >> onExit: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onGotFocus [
+JinCheckbox >> onGotFocus [
 <getter>
 	^ (handle propertyNamed: #'OnGotFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onGotFocus: aParam1 [
+JinCheckbox >> onGotFocus: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnGotFocus' withArguments: {aParam1} ).
@@ -960,14 +960,14 @@ JinControlCheckbox >> onGotFocus: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onKeyDown [
+JinCheckbox >> onKeyDown [
 <getter>
 	^ (handle propertyNamed: #'OnKeyDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onKeyDown: aParam1 [
+JinCheckbox >> onKeyDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyDown' withArguments: {aParam1} ).
@@ -975,14 +975,14 @@ JinControlCheckbox >> onKeyDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onKeyPress [
+JinCheckbox >> onKeyPress [
 <getter>
 	^ (handle propertyNamed: #'OnKeyPress' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onKeyPress: aParam1 [
+JinCheckbox >> onKeyPress: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyPress' withArguments: {aParam1} ).
@@ -990,14 +990,14 @@ JinControlCheckbox >> onKeyPress: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onKeyUp [
+JinCheckbox >> onKeyUp [
 <getter>
 	^ (handle propertyNamed: #'OnKeyUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onKeyUp: aParam1 [
+JinCheckbox >> onKeyUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyUp' withArguments: {aParam1} ).
@@ -1005,14 +1005,14 @@ JinControlCheckbox >> onKeyUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onLostFocus [
+JinCheckbox >> onLostFocus [
 <getter>
 	^ (handle propertyNamed: #'OnLostFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onLostFocus: aParam1 [
+JinCheckbox >> onLostFocus: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnLostFocus' withArguments: {aParam1} ).
@@ -1020,14 +1020,14 @@ JinControlCheckbox >> onLostFocus: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onMouseDown [
+JinCheckbox >> onMouseDown [
 <getter>
 	^ (handle propertyNamed: #'OnMouseDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onMouseDown: aParam1 [
+JinCheckbox >> onMouseDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseDown' withArguments: {aParam1} ).
@@ -1035,14 +1035,14 @@ JinControlCheckbox >> onMouseDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onMouseMove [
+JinCheckbox >> onMouseMove [
 <getter>
 	^ (handle propertyNamed: #'OnMouseMove' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onMouseMove: aParam1 [
+JinCheckbox >> onMouseMove: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseMove' withArguments: {aParam1} ).
@@ -1050,14 +1050,14 @@ JinControlCheckbox >> onMouseMove: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onMouseUp [
+JinCheckbox >> onMouseUp [
 <getter>
 	^ (handle propertyNamed: #'OnMouseUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> onMouseUp: aParam1 [
+JinCheckbox >> onMouseUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseUp' withArguments: {aParam1} ).
@@ -1065,14 +1065,14 @@ JinControlCheckbox >> onMouseUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> optionValue [
+JinCheckbox >> optionValue [
 <getter>
 	^ (handle propertyNamed: #'OptionValue' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> optionValue: aParam1 [
+JinCheckbox >> optionValue: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OptionValue' withArguments: {aParam1} ).
@@ -1080,21 +1080,21 @@ JinControlCheckbox >> optionValue: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> parent [
+JinCheckbox >> parent [
 <getter>
 	^ (handle propertyNamed: #'Parent' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> readingOrder [
+JinCheckbox >> readingOrder [
 <getter>
 	^ (handle propertyNamed: #'ReadingOrder' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> readingOrder: aParam1 [
+JinCheckbox >> readingOrder: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ReadingOrder' withArguments: {aParam1} ).
@@ -1102,21 +1102,21 @@ JinControlCheckbox >> readingOrder: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlCheckbox >> requery [
+JinCheckbox >> requery [
 <method>
 	^ (handle dispatch: #'Requery' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> rightPadding [
+JinCheckbox >> rightPadding [
 <getter>
 	^ (handle propertyNamed: #'RightPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> rightPadding: aParam1 [
+JinCheckbox >> rightPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'RightPadding' withArguments: {aParam1} ).
@@ -1124,14 +1124,14 @@ JinControlCheckbox >> rightPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> section [
+JinCheckbox >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> section: aParam1 [
+JinCheckbox >> section: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Section' withArguments: {aParam1} ).
@@ -1139,21 +1139,21 @@ JinControlCheckbox >> section: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlCheckbox >> setFocus [
+JinCheckbox >> setFocus [
 <method>
 	^ (handle dispatch: #'SetFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> shortcutMenuBar [
+JinCheckbox >> shortcutMenuBar [
 <getter>
 	^ (handle propertyNamed: #'ShortcutMenuBar' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> shortcutMenuBar: aParam1 [
+JinCheckbox >> shortcutMenuBar: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ShortcutMenuBar' withArguments: {aParam1} ).
@@ -1161,21 +1161,21 @@ JinControlCheckbox >> shortcutMenuBar: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlCheckbox >> sizeToFit [
+JinCheckbox >> sizeToFit [
 <method>
 	^ (handle dispatch: #'SizeToFit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> specialEffect [
+JinCheckbox >> specialEffect [
 <getter>
 	^ (handle propertyNamed: #'SpecialEffect' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> specialEffect: aParam1 [
+JinCheckbox >> specialEffect: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SpecialEffect' withArguments: {aParam1} ).
@@ -1183,14 +1183,14 @@ JinControlCheckbox >> specialEffect: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> statusBarText [
+JinCheckbox >> statusBarText [
 <getter>
 	^ (handle propertyNamed: #'StatusBarText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> statusBarText: aParam1 [
+JinCheckbox >> statusBarText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'StatusBarText' withArguments: {aParam1} ).
@@ -1198,14 +1198,14 @@ JinControlCheckbox >> statusBarText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> tabIndex [
+JinCheckbox >> tabIndex [
 <getter>
 	^ (handle propertyNamed: #'TabIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> tabIndex: aParam1 [
+JinCheckbox >> tabIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabIndex' withArguments: {aParam1} ).
@@ -1213,14 +1213,14 @@ JinControlCheckbox >> tabIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> tabStop [
+JinCheckbox >> tabStop [
 <getter>
 	^ (handle propertyNamed: #'TabStop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> tabStop: aParam1 [
+JinCheckbox >> tabStop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabStop' withArguments: {aParam1} ).
@@ -1228,14 +1228,14 @@ JinControlCheckbox >> tabStop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> tag [
+JinCheckbox >> tag [
 <getter>
 	^ (handle propertyNamed: #'Tag' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> tag: aParam1 [
+JinCheckbox >> tag: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Tag' withArguments: {aParam1} ).
@@ -1243,14 +1243,14 @@ JinControlCheckbox >> tag: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> top [
+JinCheckbox >> top [
 <getter>
 	^ (handle propertyNamed: #'Top' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> top: aParam1 [
+JinCheckbox >> top: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Top' withArguments: {aParam1} ).
@@ -1258,14 +1258,14 @@ JinControlCheckbox >> top: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> topPadding [
+JinCheckbox >> topPadding [
 <getter>
 	^ (handle propertyNamed: #'TopPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> topPadding: aParam1 [
+JinCheckbox >> topPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TopPadding' withArguments: {aParam1} ).
@@ -1273,14 +1273,14 @@ JinControlCheckbox >> topPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> tripleState [
+JinCheckbox >> tripleState [
 <getter>
 	^ (handle propertyNamed: #'TripleState' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> tripleState: aParam1 [
+JinCheckbox >> tripleState: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TripleState' withArguments: {aParam1} ).
@@ -1288,21 +1288,21 @@ JinControlCheckbox >> tripleState: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlCheckbox >> undo [
+JinCheckbox >> undo [
 <method>
 	^ (handle dispatch: #'Undo' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> validationRule [
+JinCheckbox >> validationRule [
 <getter>
 	^ (handle propertyNamed: #'ValidationRule' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> validationRule: aParam1 [
+JinCheckbox >> validationRule: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ValidationRule' withArguments: {aParam1} ).
@@ -1310,14 +1310,14 @@ JinControlCheckbox >> validationRule: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> validationText [
+JinCheckbox >> validationText [
 <getter>
 	^ (handle propertyNamed: #'ValidationText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> validationText: aParam1 [
+JinCheckbox >> validationText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ValidationText' withArguments: {aParam1} ).
@@ -1325,14 +1325,14 @@ JinControlCheckbox >> validationText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> value [
+JinCheckbox >> value [
 <getter>
 	^ (handle propertyNamed: #'Value' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> value: aParam1 [
+JinCheckbox >> value: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Value' withArguments: {aParam1} ).
@@ -1340,14 +1340,14 @@ JinControlCheckbox >> value: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> verticalAnchor [
+JinCheckbox >> verticalAnchor [
 <getter>
 	^ (handle propertyNamed: #'VerticalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> verticalAnchor: aParam1 [
+JinCheckbox >> verticalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'VerticalAnchor' withArguments: {aParam1} ).
@@ -1355,14 +1355,14 @@ JinControlCheckbox >> verticalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> visible [
+JinCheckbox >> visible [
 <getter>
 	^ (handle propertyNamed: #'Visible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> visible: aParam1 [
+JinCheckbox >> visible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Visible' withArguments: {aParam1} ).
@@ -1370,14 +1370,14 @@ JinControlCheckbox >> visible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> width [
+JinCheckbox >> width [
 <getter>
 	^ (handle propertyNamed: #'Width' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> width: aParam1 [
+JinCheckbox >> width: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Width' withArguments: {aParam1} ).

@@ -225,30 +225,30 @@ End Sub
 
 "
 Class {
-	#name : #JinControlListBox,
+	#name : #JinListBox,
 	#superclass : #JinControlAbstractListBox,
 	#category : #'Jindao-DomainObjects-GeneratedControls'
 }
 
 { #category : #generated }
-JinControlListBox class >> mappedTypeName [
+JinListBox class >> mappedTypeName [
 	^#'_ListBox'
 ]
 
 { #category : #generated }
-JinControlListBox >> acceptVisitor: aVisitor [
+JinListBox >> acceptVisitor: aVisitor [
 	^ aVisitor visitListBox: self
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> addColon [
+JinListBox >> addColon [
 <getter>
 	^ (handle propertyNamed: #'AddColon' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> addColon: aParam1 [
+JinListBox >> addColon: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AddColon' withArguments: {aParam1} ).
@@ -256,7 +256,7 @@ JinControlListBox >> addColon: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlListBox >> addItem: aItem index: aIndex [
+JinListBox >> addItem: aItem index: aIndex [
 <method>
 "This method can be called with optional parameters. Index"
 	^ (handle dispatch: #'AddItem' withArguments: {aItem . aIndex} ).
@@ -264,14 +264,14 @@ JinControlListBox >> addItem: aItem index: aIndex [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> allowValueListEdits [
+JinListBox >> allowValueListEdits [
 <getter>
 	^ (handle propertyNamed: #'AllowValueListEdits' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> allowValueListEdits: aParam1 [
+JinListBox >> allowValueListEdits: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AllowValueListEdits' withArguments: {aParam1} ).
@@ -279,21 +279,21 @@ JinControlListBox >> allowValueListEdits: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> application [
+JinListBox >> application [
 <getter>
 	^ (handle propertyNamed: #'Application' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> autoLabel [
+JinListBox >> autoLabel [
 <getter>
 	^ (handle propertyNamed: #'AutoLabel' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> autoLabel: aParam1 [
+JinListBox >> autoLabel: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AutoLabel' withArguments: {aParam1} ).
@@ -301,14 +301,14 @@ JinControlListBox >> autoLabel: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> backColor [
+JinListBox >> backColor [
 <getter>
 	^ (handle propertyNamed: #'BackColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> backColor: aParam1 [
+JinListBox >> backColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackColor' withArguments: {aParam1} ).
@@ -316,14 +316,14 @@ JinControlListBox >> backColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> backShade [
+JinListBox >> backShade [
 <getter>
 	^ (handle propertyNamed: #'BackShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> backShade: aParam1 [
+JinListBox >> backShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackShade' withArguments: {aParam1} ).
@@ -331,14 +331,14 @@ JinControlListBox >> backShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> backThemeColorIndex [
+JinListBox >> backThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BackThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> backThemeColorIndex: aParam1 [
+JinListBox >> backThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackThemeColorIndex' withArguments: {aParam1} ).
@@ -346,14 +346,14 @@ JinControlListBox >> backThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> backTint [
+JinListBox >> backTint [
 <getter>
 	^ (handle propertyNamed: #'BackTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> backTint: aParam1 [
+JinListBox >> backTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackTint' withArguments: {aParam1} ).
@@ -361,14 +361,14 @@ JinControlListBox >> backTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> borderColor [
+JinListBox >> borderColor [
 <getter>
 	^ (handle propertyNamed: #'BorderColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> borderColor: aParam1 [
+JinListBox >> borderColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderColor' withArguments: {aParam1} ).
@@ -376,14 +376,14 @@ JinControlListBox >> borderColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> borderShade [
+JinListBox >> borderShade [
 <getter>
 	^ (handle propertyNamed: #'BorderShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> borderShade: aParam1 [
+JinListBox >> borderShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderShade' withArguments: {aParam1} ).
@@ -391,14 +391,14 @@ JinControlListBox >> borderShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> borderStyle [
+JinListBox >> borderStyle [
 <getter>
 	^ (handle propertyNamed: #'BorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> borderStyle: aParam1 [
+JinListBox >> borderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderStyle' withArguments: {aParam1} ).
@@ -406,14 +406,14 @@ JinControlListBox >> borderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> borderThemeColorIndex [
+JinListBox >> borderThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BorderThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> borderThemeColorIndex: aParam1 [
+JinListBox >> borderThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderThemeColorIndex' withArguments: {aParam1} ).
@@ -421,14 +421,14 @@ JinControlListBox >> borderThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> borderTint [
+JinListBox >> borderTint [
 <getter>
 	^ (handle propertyNamed: #'BorderTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> borderTint: aParam1 [
+JinListBox >> borderTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderTint' withArguments: {aParam1} ).
@@ -436,14 +436,14 @@ JinControlListBox >> borderTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> borderWidth [
+JinListBox >> borderWidth [
 <getter>
 	^ (handle propertyNamed: #'BorderWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> borderWidth: aParam1 [
+JinListBox >> borderWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderWidth' withArguments: {aParam1} ).
@@ -451,14 +451,14 @@ JinControlListBox >> borderWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> bottomPadding [
+JinListBox >> bottomPadding [
 <getter>
 	^ (handle propertyNamed: #'BottomPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> bottomPadding: aParam1 [
+JinListBox >> bottomPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BottomPadding' withArguments: {aParam1} ).
@@ -466,14 +466,14 @@ JinControlListBox >> bottomPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> boundColumn [
+JinListBox >> boundColumn [
 <getter>
 	^ (handle propertyNamed: #'BoundColumn' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> boundColumn: aParam1 [
+JinListBox >> boundColumn: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BoundColumn' withArguments: {aParam1} ).
@@ -481,7 +481,7 @@ JinControlListBox >> boundColumn: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> column: aIndex row: aRow [
+JinListBox >> column: aIndex row: aRow [
 <getter>
 "This method can be called with optional parameters. Row"
 	^ (handle propertyNamed: #'Column' withArguments: {aIndex . aRow} ).
@@ -489,14 +489,14 @@ JinControlListBox >> column: aIndex row: aRow [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> columnCount [
+JinListBox >> columnCount [
 <getter>
 	^ (handle propertyNamed: #'ColumnCount' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> columnCount: aParam1 [
+JinListBox >> columnCount: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnCount' withArguments: {aParam1} ).
@@ -504,14 +504,14 @@ JinControlListBox >> columnCount: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> columnHeads [
+JinListBox >> columnHeads [
 <getter>
 	^ (handle propertyNamed: #'ColumnHeads' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> columnHeads: aParam1 [
+JinListBox >> columnHeads: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnHeads' withArguments: {aParam1} ).
@@ -519,14 +519,14 @@ JinControlListBox >> columnHeads: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> columnHidden [
+JinListBox >> columnHidden [
 <getter>
 	^ (handle propertyNamed: #'ColumnHidden' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> columnHidden: aParam1 [
+JinListBox >> columnHidden: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnHidden' withArguments: {aParam1} ).
@@ -534,14 +534,14 @@ JinControlListBox >> columnHidden: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> columnOrder [
+JinListBox >> columnOrder [
 <getter>
 	^ (handle propertyNamed: #'ColumnOrder' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> columnOrder: aParam1 [
+JinListBox >> columnOrder: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnOrder' withArguments: {aParam1} ).
@@ -549,14 +549,14 @@ JinControlListBox >> columnOrder: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> columnWidth [
+JinListBox >> columnWidth [
 <getter>
 	^ (handle propertyNamed: #'ColumnWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> columnWidth: aParam1 [
+JinListBox >> columnWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnWidth' withArguments: {aParam1} ).
@@ -564,14 +564,14 @@ JinControlListBox >> columnWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> columnWidths [
+JinListBox >> columnWidths [
 <getter>
 	^ (handle propertyNamed: #'ColumnWidths' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> columnWidths: aParam1 [
+JinListBox >> columnWidths: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnWidths' withArguments: {aParam1} ).
@@ -579,14 +579,14 @@ JinControlListBox >> columnWidths: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> controlSource [
+JinListBox >> controlSource [
 <getter>
 	^ (handle propertyNamed: #'ControlSource' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> controlSource: aParam1 [
+JinListBox >> controlSource: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlSource' withArguments: {aParam1} ).
@@ -594,14 +594,14 @@ JinControlListBox >> controlSource: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> controlTipText [
+JinListBox >> controlTipText [
 <getter>
 	^ (handle propertyNamed: #'ControlTipText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> controlTipText: aParam1 [
+JinListBox >> controlTipText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlTipText' withArguments: {aParam1} ).
@@ -609,14 +609,14 @@ JinControlListBox >> controlTipText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> controlType [
+JinListBox >> controlType [
 <getter>
 	^ (handle propertyNamed: #'ControlType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> controlType: aParam1 [
+JinListBox >> controlType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlType' withArguments: {aParam1} ).
@@ -624,21 +624,21 @@ JinControlListBox >> controlType: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> controls [
+JinListBox >> controls [
 <getter>
 	^ (handle propertyNamed: #'Controls' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> defaultValue [
+JinListBox >> defaultValue [
 <getter>
 	^ (handle propertyNamed: #'DefaultValue' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> defaultValue: aParam1 [
+JinListBox >> defaultValue: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DefaultValue' withArguments: {aParam1} ).
@@ -646,14 +646,14 @@ JinControlListBox >> defaultValue: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> displayWhen [
+JinListBox >> displayWhen [
 <getter>
 	^ (handle propertyNamed: #'DisplayWhen' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> displayWhen: aParam1 [
+JinListBox >> displayWhen: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DisplayWhen' withArguments: {aParam1} ).
@@ -661,14 +661,14 @@ JinControlListBox >> displayWhen: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> enabled [
+JinListBox >> enabled [
 <getter>
 	^ (handle propertyNamed: #'Enabled' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> enabled: aParam1 [
+JinListBox >> enabled: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Enabled' withArguments: {aParam1} ).
@@ -676,14 +676,14 @@ JinControlListBox >> enabled: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> eventProcPrefix [
+JinListBox >> eventProcPrefix [
 <getter>
 	^ (handle propertyNamed: #'EventProcPrefix' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> eventProcPrefix: aParam1 [
+JinListBox >> eventProcPrefix: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'EventProcPrefix' withArguments: {aParam1} ).
@@ -691,14 +691,14 @@ JinControlListBox >> eventProcPrefix: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> fontBold [
+JinListBox >> fontBold [
 <getter>
 	^ (handle propertyNamed: #'FontBold' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> fontBold: aParam1 [
+JinListBox >> fontBold: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontBold' withArguments: {aParam1} ).
@@ -706,14 +706,14 @@ JinControlListBox >> fontBold: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> fontItalic [
+JinListBox >> fontItalic [
 <getter>
 	^ (handle propertyNamed: #'FontItalic' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> fontItalic: aParam1 [
+JinListBox >> fontItalic: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontItalic' withArguments: {aParam1} ).
@@ -721,14 +721,14 @@ JinControlListBox >> fontItalic: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> fontName [
+JinListBox >> fontName [
 <getter>
 	^ (handle propertyNamed: #'FontName' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> fontName: aParam1 [
+JinListBox >> fontName: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontName' withArguments: {aParam1} ).
@@ -736,14 +736,14 @@ JinControlListBox >> fontName: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> fontSize [
+JinListBox >> fontSize [
 <getter>
 	^ (handle propertyNamed: #'FontSize' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> fontSize: aParam1 [
+JinListBox >> fontSize: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontSize' withArguments: {aParam1} ).
@@ -751,14 +751,14 @@ JinControlListBox >> fontSize: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> fontUnderline [
+JinListBox >> fontUnderline [
 <getter>
 	^ (handle propertyNamed: #'FontUnderline' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> fontUnderline: aParam1 [
+JinListBox >> fontUnderline: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontUnderline' withArguments: {aParam1} ).
@@ -766,14 +766,14 @@ JinControlListBox >> fontUnderline: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> fontWeight [
+JinListBox >> fontWeight [
 <getter>
 	^ (handle propertyNamed: #'FontWeight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> fontWeight: aParam1 [
+JinListBox >> fontWeight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontWeight' withArguments: {aParam1} ).
@@ -781,14 +781,14 @@ JinControlListBox >> fontWeight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> foreColor [
+JinListBox >> foreColor [
 <getter>
 	^ (handle propertyNamed: #'ForeColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> foreColor: aParam1 [
+JinListBox >> foreColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeColor' withArguments: {aParam1} ).
@@ -796,14 +796,14 @@ JinControlListBox >> foreColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> foreShade [
+JinListBox >> foreShade [
 <getter>
 	^ (handle propertyNamed: #'ForeShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> foreShade: aParam1 [
+JinListBox >> foreShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeShade' withArguments: {aParam1} ).
@@ -811,14 +811,14 @@ JinControlListBox >> foreShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> foreThemeColorIndex [
+JinListBox >> foreThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'ForeThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> foreThemeColorIndex: aParam1 [
+JinListBox >> foreThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeThemeColorIndex' withArguments: {aParam1} ).
@@ -826,14 +826,14 @@ JinControlListBox >> foreThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> foreTint [
+JinListBox >> foreTint [
 <getter>
 	^ (handle propertyNamed: #'ForeTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> foreTint: aParam1 [
+JinListBox >> foreTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeTint' withArguments: {aParam1} ).
@@ -841,14 +841,14 @@ JinControlListBox >> foreTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineColor [
+JinListBox >> gridlineColor [
 <getter>
 	^ (handle propertyNamed: #'GridlineColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineColor: aParam1 [
+JinListBox >> gridlineColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineColor' withArguments: {aParam1} ).
@@ -856,14 +856,14 @@ JinControlListBox >> gridlineColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineShade [
+JinListBox >> gridlineShade [
 <getter>
 	^ (handle propertyNamed: #'GridlineShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineShade: aParam1 [
+JinListBox >> gridlineShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineShade' withArguments: {aParam1} ).
@@ -871,14 +871,14 @@ JinControlListBox >> gridlineShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineStyleBottom [
+JinListBox >> gridlineStyleBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineStyleBottom: aParam1 [
+JinListBox >> gridlineStyleBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleBottom' withArguments: {aParam1} ).
@@ -886,14 +886,14 @@ JinControlListBox >> gridlineStyleBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineStyleLeft [
+JinListBox >> gridlineStyleLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineStyleLeft: aParam1 [
+JinListBox >> gridlineStyleLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleLeft' withArguments: {aParam1} ).
@@ -901,14 +901,14 @@ JinControlListBox >> gridlineStyleLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineStyleRight [
+JinListBox >> gridlineStyleRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineStyleRight: aParam1 [
+JinListBox >> gridlineStyleRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleRight' withArguments: {aParam1} ).
@@ -916,14 +916,14 @@ JinControlListBox >> gridlineStyleRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineStyleTop [
+JinListBox >> gridlineStyleTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineStyleTop: aParam1 [
+JinListBox >> gridlineStyleTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleTop' withArguments: {aParam1} ).
@@ -931,14 +931,14 @@ JinControlListBox >> gridlineStyleTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineThemeColorIndex [
+JinListBox >> gridlineThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineThemeColorIndex: aParam1 [
+JinListBox >> gridlineThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' withArguments: {aParam1} ).
@@ -946,14 +946,14 @@ JinControlListBox >> gridlineThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineTint [
+JinListBox >> gridlineTint [
 <getter>
 	^ (handle propertyNamed: #'GridlineTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineTint: aParam1 [
+JinListBox >> gridlineTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineTint' withArguments: {aParam1} ).
@@ -961,14 +961,14 @@ JinControlListBox >> gridlineTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineWidthBottom [
+JinListBox >> gridlineWidthBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineWidthBottom: aParam1 [
+JinListBox >> gridlineWidthBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthBottom' withArguments: {aParam1} ).
@@ -976,14 +976,14 @@ JinControlListBox >> gridlineWidthBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineWidthLeft [
+JinListBox >> gridlineWidthLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineWidthLeft: aParam1 [
+JinListBox >> gridlineWidthLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthLeft' withArguments: {aParam1} ).
@@ -991,14 +991,14 @@ JinControlListBox >> gridlineWidthLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineWidthRight [
+JinListBox >> gridlineWidthRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineWidthRight: aParam1 [
+JinListBox >> gridlineWidthRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthRight' withArguments: {aParam1} ).
@@ -1006,14 +1006,14 @@ JinControlListBox >> gridlineWidthRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineWidthTop [
+JinListBox >> gridlineWidthTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> gridlineWidthTop: aParam1 [
+JinListBox >> gridlineWidthTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthTop' withArguments: {aParam1} ).
@@ -1021,14 +1021,14 @@ JinControlListBox >> gridlineWidthTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> height [
+JinListBox >> height [
 <getter>
 	^ (handle propertyNamed: #'Height' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> height: aParam1 [
+JinListBox >> height: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Height' withArguments: {aParam1} ).
@@ -1036,14 +1036,14 @@ JinControlListBox >> height: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> helpContextId [
+JinListBox >> helpContextId [
 <getter>
 	^ (handle propertyNamed: #'HelpContextId' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> helpContextId: aParam1 [
+JinListBox >> helpContextId: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HelpContextId' withArguments: {aParam1} ).
@@ -1051,14 +1051,14 @@ JinControlListBox >> helpContextId: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> hideDuplicates [
+JinListBox >> hideDuplicates [
 <getter>
 	^ (handle propertyNamed: #'HideDuplicates' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> hideDuplicates: aParam1 [
+JinListBox >> hideDuplicates: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HideDuplicates' withArguments: {aParam1} ).
@@ -1066,14 +1066,14 @@ JinControlListBox >> hideDuplicates: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> horizontalAnchor [
+JinListBox >> horizontalAnchor [
 <getter>
 	^ (handle propertyNamed: #'HorizontalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> horizontalAnchor: aParam1 [
+JinListBox >> horizontalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HorizontalAnchor' withArguments: {aParam1} ).
@@ -1081,21 +1081,21 @@ JinControlListBox >> horizontalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> hyperlink [
+JinListBox >> hyperlink [
 <getter>
 	^ (handle propertyNamed: #'Hyperlink' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> iMEHold [
+JinListBox >> iMEHold [
 <getter>
 	^ (handle propertyNamed: #'IMEHold' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> iMEHold: aParam1 [
+JinListBox >> iMEHold: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IMEHold' withArguments: {aParam1} ).
@@ -1103,14 +1103,14 @@ JinControlListBox >> iMEHold: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> iMEMode [
+JinListBox >> iMEMode [
 <getter>
 	^ (handle propertyNamed: #'IMEMode' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> iMEMode: aParam1 [
+JinListBox >> iMEMode: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IMEMode' withArguments: {aParam1} ).
@@ -1118,14 +1118,14 @@ JinControlListBox >> iMEMode: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> iMESentenceMode [
+JinListBox >> iMESentenceMode [
 <getter>
 	^ (handle propertyNamed: #'IMESentenceMode' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> iMESentenceMode: aParam1 [
+JinListBox >> iMESentenceMode: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IMESentenceMode' withArguments: {aParam1} ).
@@ -1133,14 +1133,14 @@ JinControlListBox >> iMESentenceMode: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> inSelection [
+JinListBox >> inSelection [
 <getter>
 	^ (handle propertyNamed: #'InSelection' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> inSelection: aParam1 [
+JinListBox >> inSelection: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'InSelection' withArguments: {aParam1} ).
@@ -1148,14 +1148,14 @@ JinControlListBox >> inSelection: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> inheritValueList [
+JinListBox >> inheritValueList [
 <getter>
 	^ (handle propertyNamed: #'InheritValueList' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> inheritValueList: aParam1 [
+JinListBox >> inheritValueList: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'InheritValueList' withArguments: {aParam1} ).
@@ -1163,14 +1163,14 @@ JinControlListBox >> inheritValueList: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> isVisible [
+JinListBox >> isVisible [
 <getter>
 	^ (handle propertyNamed: #'IsVisible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> isVisible: aParam1 [
+JinListBox >> isVisible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IsVisible' withArguments: {aParam1} ).
@@ -1178,7 +1178,7 @@ JinControlListBox >> isVisible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> itemData: aIndex [
+JinListBox >> itemData: aIndex [
 <getter>
 
 	^ (handle propertyNamed: #'ItemData' withArguments: {aIndex} ).
@@ -1186,21 +1186,21 @@ JinControlListBox >> itemData: aIndex [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> itemsSelected [
+JinListBox >> itemsSelected [
 <getter>
 	^ (handle propertyNamed: #'ItemsSelected' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> labelAlign [
+JinListBox >> labelAlign [
 <getter>
 	^ (handle propertyNamed: #'LabelAlign' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> labelAlign: aParam1 [
+JinListBox >> labelAlign: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelAlign' withArguments: {aParam1} ).
@@ -1208,14 +1208,14 @@ JinControlListBox >> labelAlign: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> labelX [
+JinListBox >> labelX [
 <getter>
 	^ (handle propertyNamed: #'LabelX' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> labelX: aParam1 [
+JinListBox >> labelX: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelX' withArguments: {aParam1} ).
@@ -1223,14 +1223,14 @@ JinControlListBox >> labelX: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> labelY [
+JinListBox >> labelY [
 <getter>
 	^ (handle propertyNamed: #'LabelY' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> labelY: aParam1 [
+JinListBox >> labelY: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelY' withArguments: {aParam1} ).
@@ -1238,28 +1238,28 @@ JinControlListBox >> labelY: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> layout [
+JinListBox >> layout [
 <getter>
 	^ (handle propertyNamed: #'Layout' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> layoutID [
+JinListBox >> layoutID [
 <getter>
 	^ (handle propertyNamed: #'LayoutID' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> left [
+JinListBox >> left [
 <getter>
 	^ (handle propertyNamed: #'Left' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> left: aParam1 [
+JinListBox >> left: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Left' withArguments: {aParam1} ).
@@ -1267,14 +1267,14 @@ JinControlListBox >> left: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> leftPadding [
+JinListBox >> leftPadding [
 <getter>
 	^ (handle propertyNamed: #'LeftPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> leftPadding: aParam1 [
+JinListBox >> leftPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LeftPadding' withArguments: {aParam1} ).
@@ -1282,14 +1282,14 @@ JinControlListBox >> leftPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> listCount [
+JinListBox >> listCount [
 <getter>
 	^ (handle propertyNamed: #'ListCount' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> listCount: aParam1 [
+JinListBox >> listCount: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ListCount' withArguments: {aParam1} ).
@@ -1297,14 +1297,14 @@ JinControlListBox >> listCount: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> listIndex [
+JinListBox >> listIndex [
 <getter>
 	^ (handle propertyNamed: #'ListIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> listIndex: aParam1 [
+JinListBox >> listIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ListIndex' withArguments: {aParam1} ).
@@ -1312,14 +1312,14 @@ JinControlListBox >> listIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> listItemsEditForm [
+JinListBox >> listItemsEditForm [
 <getter>
 	^ (handle propertyNamed: #'ListItemsEditForm' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> listItemsEditForm: aParam1 [
+JinListBox >> listItemsEditForm: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ListItemsEditForm' withArguments: {aParam1} ).
@@ -1327,14 +1327,14 @@ JinControlListBox >> listItemsEditForm: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> locked [
+JinListBox >> locked [
 <getter>
 	^ (handle propertyNamed: #'Locked' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> locked: aParam1 [
+JinListBox >> locked: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Locked' withArguments: {aParam1} ).
@@ -1342,7 +1342,7 @@ JinControlListBox >> locked: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlListBox >> move: aLeft top: aTop width: aWidth height: aHeight [
+JinListBox >> move: aLeft top: aTop width: aWidth height: aHeight [
 <method>
 "This method can be called with optional parameters. Top,Width,Height"
 	^ (handle dispatch: #'Move' withArguments: {aLeft . aTop . aWidth . aHeight} ).
@@ -1350,14 +1350,14 @@ JinControlListBox >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> multiSelect [
+JinListBox >> multiSelect [
 <getter>
 	^ (handle propertyNamed: #'MultiSelect' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> multiSelect: aParam1 [
+JinListBox >> multiSelect: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'MultiSelect' withArguments: {aParam1} ).
@@ -1365,14 +1365,14 @@ JinControlListBox >> multiSelect: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> name [
+JinListBox >> name [
 <getter>
 	^ (handle propertyNamed: #'Name' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> name: aParam1 [
+JinListBox >> name: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Name' withArguments: {aParam1} ).
@@ -1380,14 +1380,14 @@ JinControlListBox >> name: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> numeralShapes [
+JinListBox >> numeralShapes [
 <getter>
 	^ (handle propertyNamed: #'NumeralShapes' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> numeralShapes: aParam1 [
+JinListBox >> numeralShapes: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'NumeralShapes' withArguments: {aParam1} ).
@@ -1395,14 +1395,14 @@ JinControlListBox >> numeralShapes: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> oldBorderStyle [
+JinListBox >> oldBorderStyle [
 <getter>
 	^ (handle propertyNamed: #'OldBorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> oldBorderStyle: aParam1 [
+JinListBox >> oldBorderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OldBorderStyle' withArguments: {aParam1} ).
@@ -1410,21 +1410,21 @@ JinControlListBox >> oldBorderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> oldValue [
+JinListBox >> oldValue [
 <getter>
 	^ (handle propertyNamed: #'OldValue' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onClick [
+JinListBox >> onClick [
 <getter>
 	^ (handle propertyNamed: #'OnClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onClick: aParam1 [
+JinListBox >> onClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnClick' withArguments: {aParam1} ).
@@ -1432,14 +1432,14 @@ JinControlListBox >> onClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onDblClick [
+JinListBox >> onDblClick [
 <getter>
 	^ (handle propertyNamed: #'OnDblClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onDblClick: aParam1 [
+JinListBox >> onDblClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnDblClick' withArguments: {aParam1} ).
@@ -1447,14 +1447,14 @@ JinControlListBox >> onDblClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onEnter [
+JinListBox >> onEnter [
 <getter>
 	^ (handle propertyNamed: #'OnEnter' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onEnter: aParam1 [
+JinListBox >> onEnter: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnEnter' withArguments: {aParam1} ).
@@ -1462,14 +1462,14 @@ JinControlListBox >> onEnter: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onExit [
+JinListBox >> onExit [
 <getter>
 	^ (handle propertyNamed: #'OnExit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onExit: aParam1 [
+JinListBox >> onExit: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnExit' withArguments: {aParam1} ).
@@ -1477,14 +1477,14 @@ JinControlListBox >> onExit: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onGotFocus [
+JinListBox >> onGotFocus [
 <getter>
 	^ (handle propertyNamed: #'OnGotFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onGotFocus: aParam1 [
+JinListBox >> onGotFocus: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnGotFocus' withArguments: {aParam1} ).
@@ -1492,14 +1492,14 @@ JinControlListBox >> onGotFocus: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onKeyDown [
+JinListBox >> onKeyDown [
 <getter>
 	^ (handle propertyNamed: #'OnKeyDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onKeyDown: aParam1 [
+JinListBox >> onKeyDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyDown' withArguments: {aParam1} ).
@@ -1507,14 +1507,14 @@ JinControlListBox >> onKeyDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onKeyPress [
+JinListBox >> onKeyPress [
 <getter>
 	^ (handle propertyNamed: #'OnKeyPress' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onKeyPress: aParam1 [
+JinListBox >> onKeyPress: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyPress' withArguments: {aParam1} ).
@@ -1522,14 +1522,14 @@ JinControlListBox >> onKeyPress: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onKeyUp [
+JinListBox >> onKeyUp [
 <getter>
 	^ (handle propertyNamed: #'OnKeyUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onKeyUp: aParam1 [
+JinListBox >> onKeyUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyUp' withArguments: {aParam1} ).
@@ -1537,14 +1537,14 @@ JinControlListBox >> onKeyUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onLostFocus [
+JinListBox >> onLostFocus [
 <getter>
 	^ (handle propertyNamed: #'OnLostFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onLostFocus: aParam1 [
+JinListBox >> onLostFocus: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnLostFocus' withArguments: {aParam1} ).
@@ -1552,14 +1552,14 @@ JinControlListBox >> onLostFocus: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onMouseDown [
+JinListBox >> onMouseDown [
 <getter>
 	^ (handle propertyNamed: #'OnMouseDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onMouseDown: aParam1 [
+JinListBox >> onMouseDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseDown' withArguments: {aParam1} ).
@@ -1567,14 +1567,14 @@ JinControlListBox >> onMouseDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onMouseMove [
+JinListBox >> onMouseMove [
 <getter>
 	^ (handle propertyNamed: #'OnMouseMove' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onMouseMove: aParam1 [
+JinListBox >> onMouseMove: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseMove' withArguments: {aParam1} ).
@@ -1582,14 +1582,14 @@ JinControlListBox >> onMouseMove: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onMouseUp [
+JinListBox >> onMouseUp [
 <getter>
 	^ (handle propertyNamed: #'OnMouseUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> onMouseUp: aParam1 [
+JinListBox >> onMouseUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseUp' withArguments: {aParam1} ).
@@ -1597,21 +1597,21 @@ JinControlListBox >> onMouseUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> parent [
+JinListBox >> parent [
 <getter>
 	^ (handle propertyNamed: #'Parent' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> readingOrder [
+JinListBox >> readingOrder [
 <getter>
 	^ (handle propertyNamed: #'ReadingOrder' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> readingOrder: aParam1 [
+JinListBox >> readingOrder: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ReadingOrder' withArguments: {aParam1} ).
@@ -1619,14 +1619,14 @@ JinControlListBox >> readingOrder: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> recordset [
+JinListBox >> recordset [
 <getter>
 	^ (handle propertyNamed: #'Recordset' ).
 
 ]
 
 { #category : #'method - generated' }
-JinControlListBox >> recordset: aParam1 [
+JinListBox >> recordset: aParam1 [
 <method>
 
 	^ (handle dispatch: #'Recordset' withArguments: {aParam1} ).
@@ -1634,7 +1634,7 @@ JinControlListBox >> recordset: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlListBox >> removeItem: aIndex [
+JinListBox >> removeItem: aIndex [
 <method>
 
 	^ (handle dispatch: #'RemoveItem' withArguments: {aIndex} ).
@@ -1642,21 +1642,21 @@ JinControlListBox >> removeItem: aIndex [
 ]
 
 { #category : #'method - generated' }
-JinControlListBox >> requery [
+JinListBox >> requery [
 <method>
 	^ (handle dispatch: #'Requery' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> rightPadding [
+JinListBox >> rightPadding [
 <getter>
 	^ (handle propertyNamed: #'RightPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> rightPadding: aParam1 [
+JinListBox >> rightPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'RightPadding' withArguments: {aParam1} ).
@@ -1664,14 +1664,14 @@ JinControlListBox >> rightPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> rowSource [
+JinListBox >> rowSource [
 <getter>
 	^ (handle propertyNamed: #'RowSource' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> rowSource: aParam1 [
+JinListBox >> rowSource: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'RowSource' withArguments: {aParam1} ).
@@ -1679,14 +1679,14 @@ JinControlListBox >> rowSource: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> rowSourceType [
+JinListBox >> rowSourceType [
 <getter>
 	^ (handle propertyNamed: #'RowSourceType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> rowSourceType: aParam1 [
+JinListBox >> rowSourceType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'RowSourceType' withArguments: {aParam1} ).
@@ -1694,14 +1694,14 @@ JinControlListBox >> rowSourceType: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> scrollBarAlign [
+JinListBox >> scrollBarAlign [
 <getter>
 	^ (handle propertyNamed: #'ScrollBarAlign' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> scrollBarAlign: aParam1 [
+JinListBox >> scrollBarAlign: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ScrollBarAlign' withArguments: {aParam1} ).
@@ -1709,14 +1709,14 @@ JinControlListBox >> scrollBarAlign: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> section [
+JinListBox >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> section: aParam1 [
+JinListBox >> section: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Section' withArguments: {aParam1} ).
@@ -1724,7 +1724,7 @@ JinControlListBox >> section: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> selected: aLRow [
+JinListBox >> selected: aLRow [
 <getter>
 
 	^ (handle propertyNamed: #'Selected' withArguments: {aLRow} ).
@@ -1732,7 +1732,7 @@ JinControlListBox >> selected: aLRow [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> selected: aLRow aParam1: aParam1 [
+JinListBox >> selected: aLRow aParam1: aParam1 [
 <setter>
 	
 	^ (handle propertyNamed: #'Selected' withArguments: {aLRow . aParam1} ).
@@ -1740,21 +1740,21 @@ JinControlListBox >> selected: aLRow aParam1: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlListBox >> setFocus [
+JinListBox >> setFocus [
 <method>
 	^ (handle dispatch: #'SetFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> shortcutMenuBar [
+JinListBox >> shortcutMenuBar [
 <getter>
 	^ (handle propertyNamed: #'ShortcutMenuBar' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> shortcutMenuBar: aParam1 [
+JinListBox >> shortcutMenuBar: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ShortcutMenuBar' withArguments: {aParam1} ).
@@ -1762,14 +1762,14 @@ JinControlListBox >> shortcutMenuBar: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> showOnlyRowSourceValues [
+JinListBox >> showOnlyRowSourceValues [
 <getter>
 	^ (handle propertyNamed: #'ShowOnlyRowSourceValues' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> showOnlyRowSourceValues: aParam1 [
+JinListBox >> showOnlyRowSourceValues: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ShowOnlyRowSourceValues' withArguments: {aParam1} ).
@@ -1777,28 +1777,28 @@ JinControlListBox >> showOnlyRowSourceValues: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlListBox >> sizeToFit [
+JinListBox >> sizeToFit [
 <method>
 	^ (handle dispatch: #'SizeToFit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> smartTags [
+JinListBox >> smartTags [
 <getter>
 	^ (handle propertyNamed: #'SmartTags' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> specialEffect [
+JinListBox >> specialEffect [
 <getter>
 	^ (handle propertyNamed: #'SpecialEffect' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> specialEffect: aParam1 [
+JinListBox >> specialEffect: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SpecialEffect' withArguments: {aParam1} ).
@@ -1806,14 +1806,14 @@ JinControlListBox >> specialEffect: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> statusBarText [
+JinListBox >> statusBarText [
 <getter>
 	^ (handle propertyNamed: #'StatusBarText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> statusBarText: aParam1 [
+JinListBox >> statusBarText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'StatusBarText' withArguments: {aParam1} ).
@@ -1821,14 +1821,14 @@ JinControlListBox >> statusBarText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> tabIndex [
+JinListBox >> tabIndex [
 <getter>
 	^ (handle propertyNamed: #'TabIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> tabIndex: aParam1 [
+JinListBox >> tabIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabIndex' withArguments: {aParam1} ).
@@ -1836,14 +1836,14 @@ JinControlListBox >> tabIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> tabStop [
+JinListBox >> tabStop [
 <getter>
 	^ (handle propertyNamed: #'TabStop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> tabStop: aParam1 [
+JinListBox >> tabStop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabStop' withArguments: {aParam1} ).
@@ -1851,14 +1851,14 @@ JinControlListBox >> tabStop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> tag [
+JinListBox >> tag [
 <getter>
 	^ (handle propertyNamed: #'Tag' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> tag: aParam1 [
+JinListBox >> tag: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Tag' withArguments: {aParam1} ).
@@ -1866,14 +1866,14 @@ JinControlListBox >> tag: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> themeFontIndex [
+JinListBox >> themeFontIndex [
 <getter>
 	^ (handle propertyNamed: #'ThemeFontIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> themeFontIndex: aParam1 [
+JinListBox >> themeFontIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ThemeFontIndex' withArguments: {aParam1} ).
@@ -1881,14 +1881,14 @@ JinControlListBox >> themeFontIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> top [
+JinListBox >> top [
 <getter>
 	^ (handle propertyNamed: #'Top' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> top: aParam1 [
+JinListBox >> top: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Top' withArguments: {aParam1} ).
@@ -1896,14 +1896,14 @@ JinControlListBox >> top: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> topPadding [
+JinListBox >> topPadding [
 <getter>
 	^ (handle propertyNamed: #'TopPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> topPadding: aParam1 [
+JinListBox >> topPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TopPadding' withArguments: {aParam1} ).
@@ -1911,21 +1911,21 @@ JinControlListBox >> topPadding: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlListBox >> undo [
+JinListBox >> undo [
 <method>
 	^ (handle dispatch: #'Undo' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> validationRule [
+JinListBox >> validationRule [
 <getter>
 	^ (handle propertyNamed: #'ValidationRule' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> validationRule: aParam1 [
+JinListBox >> validationRule: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ValidationRule' withArguments: {aParam1} ).
@@ -1933,14 +1933,14 @@ JinControlListBox >> validationRule: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> validationText [
+JinListBox >> validationText [
 <getter>
 	^ (handle propertyNamed: #'ValidationText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> validationText: aParam1 [
+JinListBox >> validationText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ValidationText' withArguments: {aParam1} ).
@@ -1948,14 +1948,14 @@ JinControlListBox >> validationText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> value [
+JinListBox >> value [
 <getter>
 	^ (handle propertyNamed: #'Value' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> value: aParam1 [
+JinListBox >> value: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Value' withArguments: {aParam1} ).
@@ -1963,14 +1963,14 @@ JinControlListBox >> value: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> verticalAnchor [
+JinListBox >> verticalAnchor [
 <getter>
 	^ (handle propertyNamed: #'VerticalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> verticalAnchor: aParam1 [
+JinListBox >> verticalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'VerticalAnchor' withArguments: {aParam1} ).
@@ -1978,14 +1978,14 @@ JinControlListBox >> verticalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> visible [
+JinListBox >> visible [
 <getter>
 	^ (handle propertyNamed: #'Visible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> visible: aParam1 [
+JinListBox >> visible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Visible' withArguments: {aParam1} ).
@@ -1993,14 +1993,14 @@ JinControlListBox >> visible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> width [
+JinListBox >> width [
 <getter>
 	^ (handle propertyNamed: #'Width' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> width: aParam1 [
+JinListBox >> width: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Width' withArguments: {aParam1} ).

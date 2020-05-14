@@ -119,30 +119,30 @@ Instead of creating the main form, and then adding the subform control to it, yo
 [!include[Support and feedback](~/includes/feedback-boilerplate.md)]
 "
 Class {
-	#name : #JinControlSubForm,
+	#name : #JinSubForm,
 	#superclass : #JinControlAbstractSubForm,
 	#category : #'Jindao-DomainObjects-GeneratedControls'
 }
 
 { #category : #generated }
-JinControlSubForm class >> mappedTypeName [
+JinSubForm class >> mappedTypeName [
 	^#'_SubForm'
 ]
 
 { #category : #generated }
-JinControlSubForm >> acceptVisitor: aVisitor [
+JinSubForm >> acceptVisitor: aVisitor [
 	^ aVisitor visitSubForm: self
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> addColon [
+JinSubForm >> addColon [
 <getter>
 	^ (handle propertyNamed: #'AddColon' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> addColon: aParam1 [
+JinSubForm >> addColon: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AddColon' withArguments: {aParam1} ).
@@ -150,21 +150,21 @@ JinControlSubForm >> addColon: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> application [
+JinSubForm >> application [
 <getter>
 	^ (handle propertyNamed: #'Application' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> autoLabel [
+JinSubForm >> autoLabel [
 <getter>
 	^ (handle propertyNamed: #'AutoLabel' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> autoLabel: aParam1 [
+JinSubForm >> autoLabel: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AutoLabel' withArguments: {aParam1} ).
@@ -172,14 +172,14 @@ JinControlSubForm >> autoLabel: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> borderColor [
+JinSubForm >> borderColor [
 <getter>
 	^ (handle propertyNamed: #'BorderColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> borderColor: aParam1 [
+JinSubForm >> borderColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderColor' withArguments: {aParam1} ).
@@ -187,14 +187,14 @@ JinControlSubForm >> borderColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> borderShade [
+JinSubForm >> borderShade [
 <getter>
 	^ (handle propertyNamed: #'BorderShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> borderShade: aParam1 [
+JinSubForm >> borderShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderShade' withArguments: {aParam1} ).
@@ -202,14 +202,14 @@ JinControlSubForm >> borderShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> borderStyle [
+JinSubForm >> borderStyle [
 <getter>
 	^ (handle propertyNamed: #'BorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> borderStyle: aParam1 [
+JinSubForm >> borderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderStyle' withArguments: {aParam1} ).
@@ -217,14 +217,14 @@ JinControlSubForm >> borderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> borderThemeColorIndex [
+JinSubForm >> borderThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BorderThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> borderThemeColorIndex: aParam1 [
+JinSubForm >> borderThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderThemeColorIndex' withArguments: {aParam1} ).
@@ -232,14 +232,14 @@ JinControlSubForm >> borderThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> borderTint [
+JinSubForm >> borderTint [
 <getter>
 	^ (handle propertyNamed: #'BorderTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> borderTint: aParam1 [
+JinSubForm >> borderTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderTint' withArguments: {aParam1} ).
@@ -247,14 +247,14 @@ JinControlSubForm >> borderTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> borderWidth [
+JinSubForm >> borderWidth [
 <getter>
 	^ (handle propertyNamed: #'BorderWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> borderWidth: aParam1 [
+JinSubForm >> borderWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderWidth' withArguments: {aParam1} ).
@@ -262,14 +262,14 @@ JinControlSubForm >> borderWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> bottomPadding [
+JinSubForm >> bottomPadding [
 <getter>
 	^ (handle propertyNamed: #'BottomPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> bottomPadding: aParam1 [
+JinSubForm >> bottomPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BottomPadding' withArguments: {aParam1} ).
@@ -277,14 +277,14 @@ JinControlSubForm >> bottomPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> canGrow [
+JinSubForm >> canGrow [
 <getter>
 	^ (handle propertyNamed: #'CanGrow' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> canGrow: aParam1 [
+JinSubForm >> canGrow: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'CanGrow' withArguments: {aParam1} ).
@@ -292,14 +292,14 @@ JinControlSubForm >> canGrow: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> canShrink [
+JinSubForm >> canShrink [
 <getter>
 	^ (handle propertyNamed: #'CanShrink' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> canShrink: aParam1 [
+JinSubForm >> canShrink: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'CanShrink' withArguments: {aParam1} ).
@@ -307,14 +307,14 @@ JinControlSubForm >> canShrink: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> controlType [
+JinSubForm >> controlType [
 <getter>
 	^ (handle propertyNamed: #'ControlType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> controlType: aParam1 [
+JinSubForm >> controlType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlType' withArguments: {aParam1} ).
@@ -322,21 +322,21 @@ JinControlSubForm >> controlType: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> controls [
+JinSubForm >> controls [
 <getter>
 	^ (handle propertyNamed: #'Controls' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> displayWhen [
+JinSubForm >> displayWhen [
 <getter>
 	^ (handle propertyNamed: #'DisplayWhen' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> displayWhen: aParam1 [
+JinSubForm >> displayWhen: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DisplayWhen' withArguments: {aParam1} ).
@@ -344,14 +344,14 @@ JinControlSubForm >> displayWhen: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> enabled [
+JinSubForm >> enabled [
 <getter>
 	^ (handle propertyNamed: #'Enabled' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> enabled: aParam1 [
+JinSubForm >> enabled: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Enabled' withArguments: {aParam1} ).
@@ -359,14 +359,14 @@ JinControlSubForm >> enabled: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> eventProcPrefix [
+JinSubForm >> eventProcPrefix [
 <getter>
 	^ (handle propertyNamed: #'EventProcPrefix' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> eventProcPrefix: aParam1 [
+JinSubForm >> eventProcPrefix: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'EventProcPrefix' withArguments: {aParam1} ).
@@ -374,14 +374,14 @@ JinControlSubForm >> eventProcPrefix: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> filterOnEmptyMaster [
+JinSubForm >> filterOnEmptyMaster [
 <getter>
 	^ (handle propertyNamed: #'FilterOnEmptyMaster' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> filterOnEmptyMaster: aParam1 [
+JinSubForm >> filterOnEmptyMaster: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FilterOnEmptyMaster' withArguments: {aParam1} ).
@@ -389,21 +389,21 @@ JinControlSubForm >> filterOnEmptyMaster: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> form [
+JinSubForm >> form [
 <getter>
 	^ (handle propertyNamed: #'Form' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineColor [
+JinSubForm >> gridlineColor [
 <getter>
 	^ (handle propertyNamed: #'GridlineColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineColor: aParam1 [
+JinSubForm >> gridlineColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineColor' withArguments: {aParam1} ).
@@ -411,14 +411,14 @@ JinControlSubForm >> gridlineColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineShade [
+JinSubForm >> gridlineShade [
 <getter>
 	^ (handle propertyNamed: #'GridlineShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineShade: aParam1 [
+JinSubForm >> gridlineShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineShade' withArguments: {aParam1} ).
@@ -426,14 +426,14 @@ JinControlSubForm >> gridlineShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineStyleBottom [
+JinSubForm >> gridlineStyleBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineStyleBottom: aParam1 [
+JinSubForm >> gridlineStyleBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleBottom' withArguments: {aParam1} ).
@@ -441,14 +441,14 @@ JinControlSubForm >> gridlineStyleBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineStyleLeft [
+JinSubForm >> gridlineStyleLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineStyleLeft: aParam1 [
+JinSubForm >> gridlineStyleLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleLeft' withArguments: {aParam1} ).
@@ -456,14 +456,14 @@ JinControlSubForm >> gridlineStyleLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineStyleRight [
+JinSubForm >> gridlineStyleRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineStyleRight: aParam1 [
+JinSubForm >> gridlineStyleRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleRight' withArguments: {aParam1} ).
@@ -471,14 +471,14 @@ JinControlSubForm >> gridlineStyleRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineStyleTop [
+JinSubForm >> gridlineStyleTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineStyleTop: aParam1 [
+JinSubForm >> gridlineStyleTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleTop' withArguments: {aParam1} ).
@@ -486,14 +486,14 @@ JinControlSubForm >> gridlineStyleTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineThemeColorIndex [
+JinSubForm >> gridlineThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineThemeColorIndex: aParam1 [
+JinSubForm >> gridlineThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' withArguments: {aParam1} ).
@@ -501,14 +501,14 @@ JinControlSubForm >> gridlineThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineTint [
+JinSubForm >> gridlineTint [
 <getter>
 	^ (handle propertyNamed: #'GridlineTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineTint: aParam1 [
+JinSubForm >> gridlineTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineTint' withArguments: {aParam1} ).
@@ -516,14 +516,14 @@ JinControlSubForm >> gridlineTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineWidthBottom [
+JinSubForm >> gridlineWidthBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineWidthBottom: aParam1 [
+JinSubForm >> gridlineWidthBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthBottom' withArguments: {aParam1} ).
@@ -531,14 +531,14 @@ JinControlSubForm >> gridlineWidthBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineWidthLeft [
+JinSubForm >> gridlineWidthLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineWidthLeft: aParam1 [
+JinSubForm >> gridlineWidthLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthLeft' withArguments: {aParam1} ).
@@ -546,14 +546,14 @@ JinControlSubForm >> gridlineWidthLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineWidthRight [
+JinSubForm >> gridlineWidthRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineWidthRight: aParam1 [
+JinSubForm >> gridlineWidthRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthRight' withArguments: {aParam1} ).
@@ -561,14 +561,14 @@ JinControlSubForm >> gridlineWidthRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineWidthTop [
+JinSubForm >> gridlineWidthTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> gridlineWidthTop: aParam1 [
+JinSubForm >> gridlineWidthTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthTop' withArguments: {aParam1} ).
@@ -576,14 +576,14 @@ JinControlSubForm >> gridlineWidthTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> height [
+JinSubForm >> height [
 <getter>
 	^ (handle propertyNamed: #'Height' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> height: aParam1 [
+JinSubForm >> height: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Height' withArguments: {aParam1} ).
@@ -591,14 +591,14 @@ JinControlSubForm >> height: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> horizontalAnchor [
+JinSubForm >> horizontalAnchor [
 <getter>
 	^ (handle propertyNamed: #'HorizontalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> horizontalAnchor: aParam1 [
+JinSubForm >> horizontalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HorizontalAnchor' withArguments: {aParam1} ).
@@ -606,14 +606,14 @@ JinControlSubForm >> horizontalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> inSelection [
+JinSubForm >> inSelection [
 <getter>
 	^ (handle propertyNamed: #'InSelection' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> inSelection: aParam1 [
+JinSubForm >> inSelection: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'InSelection' withArguments: {aParam1} ).
@@ -621,14 +621,14 @@ JinControlSubForm >> inSelection: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> isVisible [
+JinSubForm >> isVisible [
 <getter>
 	^ (handle propertyNamed: #'IsVisible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> isVisible: aParam1 [
+JinSubForm >> isVisible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IsVisible' withArguments: {aParam1} ).
@@ -636,14 +636,14 @@ JinControlSubForm >> isVisible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> labelAlign [
+JinSubForm >> labelAlign [
 <getter>
 	^ (handle propertyNamed: #'LabelAlign' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> labelAlign: aParam1 [
+JinSubForm >> labelAlign: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelAlign' withArguments: {aParam1} ).
@@ -651,14 +651,14 @@ JinControlSubForm >> labelAlign: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> labelX [
+JinSubForm >> labelX [
 <getter>
 	^ (handle propertyNamed: #'LabelX' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> labelX: aParam1 [
+JinSubForm >> labelX: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelX' withArguments: {aParam1} ).
@@ -666,14 +666,14 @@ JinControlSubForm >> labelX: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> labelY [
+JinSubForm >> labelY [
 <getter>
 	^ (handle propertyNamed: #'LabelY' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> labelY: aParam1 [
+JinSubForm >> labelY: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelY' withArguments: {aParam1} ).
@@ -681,28 +681,28 @@ JinControlSubForm >> labelY: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> layout [
+JinSubForm >> layout [
 <getter>
 	^ (handle propertyNamed: #'Layout' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> layoutID [
+JinSubForm >> layoutID [
 <getter>
 	^ (handle propertyNamed: #'LayoutID' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> left [
+JinSubForm >> left [
 <getter>
 	^ (handle propertyNamed: #'Left' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> left: aParam1 [
+JinSubForm >> left: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Left' withArguments: {aParam1} ).
@@ -710,14 +710,14 @@ JinControlSubForm >> left: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> leftPadding [
+JinSubForm >> leftPadding [
 <getter>
 	^ (handle propertyNamed: #'LeftPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> leftPadding: aParam1 [
+JinSubForm >> leftPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LeftPadding' withArguments: {aParam1} ).
@@ -725,14 +725,14 @@ JinControlSubForm >> leftPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> linkChildFields [
+JinSubForm >> linkChildFields [
 <getter>
 	^ (handle propertyNamed: #'LinkChildFields' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> linkChildFields: aParam1 [
+JinSubForm >> linkChildFields: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LinkChildFields' withArguments: {aParam1} ).
@@ -740,14 +740,14 @@ JinControlSubForm >> linkChildFields: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> linkMasterFields [
+JinSubForm >> linkMasterFields [
 <getter>
 	^ (handle propertyNamed: #'LinkMasterFields' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> linkMasterFields: aParam1 [
+JinSubForm >> linkMasterFields: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LinkMasterFields' withArguments: {aParam1} ).
@@ -755,14 +755,14 @@ JinControlSubForm >> linkMasterFields: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> locked [
+JinSubForm >> locked [
 <getter>
 	^ (handle propertyNamed: #'Locked' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> locked: aParam1 [
+JinSubForm >> locked: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Locked' withArguments: {aParam1} ).
@@ -770,7 +770,7 @@ JinControlSubForm >> locked: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlSubForm >> move: aLeft top: aTop width: aWidth height: aHeight [
+JinSubForm >> move: aLeft top: aTop width: aWidth height: aHeight [
 <method>
 "This method can be called with optional parameters. Top,Width,Height"
 	^ (handle dispatch: #'Move' withArguments: {aLeft . aTop . aWidth . aHeight} ).
@@ -778,13 +778,13 @@ JinControlSubForm >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> name [
+JinSubForm >> name [
 	<getter>
 	^ handle propertyNamed: #Name
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> name: aParam1 [
+JinSubForm >> name: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Name' withArguments: {aParam1} ).
@@ -792,14 +792,14 @@ JinControlSubForm >> name: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> oldBorderStyle [
+JinSubForm >> oldBorderStyle [
 <getter>
 	^ (handle propertyNamed: #'OldBorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> oldBorderStyle: aParam1 [
+JinSubForm >> oldBorderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OldBorderStyle' withArguments: {aParam1} ).
@@ -807,14 +807,14 @@ JinControlSubForm >> oldBorderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> onEnter [
+JinSubForm >> onEnter [
 <getter>
 	^ (handle propertyNamed: #'OnEnter' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> onEnter: aParam1 [
+JinSubForm >> onEnter: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnEnter' withArguments: {aParam1} ).
@@ -822,14 +822,14 @@ JinControlSubForm >> onEnter: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> onExit [
+JinSubForm >> onExit [
 <getter>
 	^ (handle propertyNamed: #'OnExit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> onExit: aParam1 [
+JinSubForm >> onExit: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnExit' withArguments: {aParam1} ).
@@ -837,35 +837,35 @@ JinControlSubForm >> onExit: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> parent [
+JinSubForm >> parent [
 <getter>
 	^ (handle propertyNamed: #'Parent' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> report [
+JinSubForm >> report [
 <getter>
 	^ (handle propertyNamed: #'Report' ).
 
 ]
 
 { #category : #'method - generated' }
-JinControlSubForm >> requery [
+JinSubForm >> requery [
 <method>
 	^ (handle dispatch: #'Requery' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> rightPadding [
+JinSubForm >> rightPadding [
 <getter>
 	^ (handle propertyNamed: #'RightPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> rightPadding: aParam1 [
+JinSubForm >> rightPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'RightPadding' withArguments: {aParam1} ).
@@ -873,14 +873,14 @@ JinControlSubForm >> rightPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> section [
+JinSubForm >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> section: aParam1 [
+JinSubForm >> section: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Section' withArguments: {aParam1} ).
@@ -888,28 +888,28 @@ JinControlSubForm >> section: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlSubForm >> setFocus [
+JinSubForm >> setFocus [
 <method>
 	^ (handle dispatch: #'SetFocus' ).
 
 ]
 
 { #category : #'method - generated' }
-JinControlSubForm >> sizeToFit [
+JinSubForm >> sizeToFit [
 <method>
 	^ (handle dispatch: #'SizeToFit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> sourceObject [
+JinSubForm >> sourceObject [
 <getter>
 	^ (handle propertyNamed: #'SourceObject' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> sourceObject: aParam1 [
+JinSubForm >> sourceObject: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SourceObject' withArguments: {aParam1} ).
@@ -917,14 +917,14 @@ JinControlSubForm >> sourceObject: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> specialEffect [
+JinSubForm >> specialEffect [
 <getter>
 	^ (handle propertyNamed: #'SpecialEffect' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> specialEffect: aParam1 [
+JinSubForm >> specialEffect: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SpecialEffect' withArguments: {aParam1} ).
@@ -932,14 +932,14 @@ JinControlSubForm >> specialEffect: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> statusBarText [
+JinSubForm >> statusBarText [
 <getter>
 	^ (handle propertyNamed: #'StatusBarText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> statusBarText: aParam1 [
+JinSubForm >> statusBarText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'StatusBarText' withArguments: {aParam1} ).
@@ -947,14 +947,14 @@ JinControlSubForm >> statusBarText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> tabIndex [
+JinSubForm >> tabIndex [
 <getter>
 	^ (handle propertyNamed: #'TabIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> tabIndex: aParam1 [
+JinSubForm >> tabIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabIndex' withArguments: {aParam1} ).
@@ -962,14 +962,14 @@ JinControlSubForm >> tabIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> tabStop [
+JinSubForm >> tabStop [
 <getter>
 	^ (handle propertyNamed: #'TabStop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> tabStop: aParam1 [
+JinSubForm >> tabStop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabStop' withArguments: {aParam1} ).
@@ -977,14 +977,14 @@ JinControlSubForm >> tabStop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> tag [
+JinSubForm >> tag [
 <getter>
 	^ (handle propertyNamed: #'Tag' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> tag: aParam1 [
+JinSubForm >> tag: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Tag' withArguments: {aParam1} ).
@@ -992,14 +992,14 @@ JinControlSubForm >> tag: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> top [
+JinSubForm >> top [
 <getter>
 	^ (handle propertyNamed: #'Top' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> top: aParam1 [
+JinSubForm >> top: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Top' withArguments: {aParam1} ).
@@ -1007,14 +1007,14 @@ JinControlSubForm >> top: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> topPadding [
+JinSubForm >> topPadding [
 <getter>
 	^ (handle propertyNamed: #'TopPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> topPadding: aParam1 [
+JinSubForm >> topPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TopPadding' withArguments: {aParam1} ).
@@ -1022,14 +1022,14 @@ JinControlSubForm >> topPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> verticalAnchor [
+JinSubForm >> verticalAnchor [
 <getter>
 	^ (handle propertyNamed: #'VerticalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> verticalAnchor: aParam1 [
+JinSubForm >> verticalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'VerticalAnchor' withArguments: {aParam1} ).
@@ -1037,14 +1037,14 @@ JinControlSubForm >> verticalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> visible [
+JinSubForm >> visible [
 <getter>
 	^ (handle propertyNamed: #'Visible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> visible: aParam1 [
+JinSubForm >> visible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Visible' withArguments: {aParam1} ).
@@ -1052,14 +1052,14 @@ JinControlSubForm >> visible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> width [
+JinSubForm >> width [
 <getter>
 	^ (handle propertyNamed: #'Width' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> width: aParam1 [
+JinSubForm >> width: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Width' withArguments: {aParam1} ).

@@ -14,18 +14,18 @@ JinCasinoNorwindControlImportTestCase class >> testParameters [
 		forSelector: #testingBundle
 		addOptions:
 			{
-			{JinControlAttachment . CSNUIInputFile }.
-			{JinControlCheckbox . CSNUIInputCheckbox }.
-			{JinControlCombobox . CSNUISelect }.
-			{JinControlCommandButton . CSNUIButton }.
-			{JinControlImage . CSNUIImage }.
-			{JinControlLabel . CSNUIParagraph}.
-			{JinControlListBox . CSNUIOrderedList }.
-			{JinControlPage . CSNUITab }.
-			{JinControlRectangle . CSNUIPanel }.
-			{JinControlSubForm . CSNUIFieldset  }.
-			{JinControlTabControl . CSNUITabManager }.
-			{JinControlTextbox . CSNUIInputText }
+			{JinAttachment . CSNUIInputFile }.
+			{JinCheckbox . CSNUIInputCheckbox }.
+			{JinCombobox . CSNUISelect }.
+			{JinCommandButton . CSNUIButton }.
+			{JinImage . CSNUIImage }.
+			{JinLabel . CSNUIParagraph}.
+			{JinListBox . CSNUIOrderedList }.
+			{JinPage . CSNUITab }.
+			{JinRectangle . CSNUIPanel }.
+			{JinSubForm . CSNUIFieldset  }.
+			{JinTabControl . CSNUITabManager }.
+			{JinTextbox . CSNUIInputText }
 			}
 ]
 

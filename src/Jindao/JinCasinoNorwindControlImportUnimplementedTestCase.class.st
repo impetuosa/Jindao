@@ -11,7 +11,7 @@ Class {
 JinCasinoNorwindControlImportUnimplementedTestCase class >> testParameters [
 	^ super testParameters
 		forSelector: #controlClass
-		addOptions: {JinControlLine}
+		addOptions: {JinLine}
 ]
 
 { #category : #accessing }

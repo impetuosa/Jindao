@@ -33,7 +33,7 @@ JinCasinoNorwindEntryElementsImportTestCase >> testImportedGeneratedBusinessPage
 { #category : #tests }
 JinCasinoNorwindEntryElementsImportTestCase >> testJinFormImportsIntoJinPage [
 	self importAnyForm.
-	self assert: importedForm class equals: JinPage 
+	self assert: importedForm class equals: JinCasinoPage 
 	
 ]
 

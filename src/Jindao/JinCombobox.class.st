@@ -1,215 +1,336 @@
 "
 ---
-title: TextBox object (Access)
-keywords: vbaac10.chm11201
+title: ComboBox object (Access)
+keywords: vbaac10.chm11545
 f1_keywords:
-- vbaac10.chm11201
+- vbaac10.chm11545
 ms.prod: access
 api_name:
-- Access.TextBox
-ms.assetid: d74fbe9a-0d40-7d28-956f-a2bfd0cfee45
-ms.date: 03/21/2019
+- Access.ComboBox
+ms.assetid: 1cf508d5-023e-eb38-3991-71e82b2a4e7e
+ms.date: 02/27/2019
 localization_priority: Normal
 ---
 
 
-# TextBox object (Access)
+# ComboBox object (Access)
 
-This object represents a text box control on a form or report. Text boxes are used to display data from a record source, display the results of a calculation, or accept input from a user.
+This object corresponds to a combo box control. The combo box control combines the features of a text box and a list box. Use a combo box when you want the option of either typing a value or selecting a value from a predefined list.
+
 
 ## Remarks
 
 |Control|Tool|
 |:-----|:-----|
-|![Text box control](../images/t-txtbox_ZA06054010.gif)|![Text box tool](../images/textbox_ZA06044637.gif)|
+|![Combo box control](../images/t-combox_ZA06053980.gif)|![Combo box tool](../images/a_combobox_ZA06047114.gif)|
 
-Text boxes can be either bound or unbound. You use a bound text box to display data from a particular field. You use an unbound text box to display the results of a calculation, or to accept input from a user (as in the following code example).
+In Form view, Microsoft Access doesn't display the list until you click the combo box's arrow.
 
+If you have Control Wizards on before you select the combo box tool, you can create a combo box with a wizard. To turn Control Wizards on or off, click the **Control Wizards** tool in the toolbox.
+
+The setting of the **LimitToList** property determines whether you can enter values that aren't in the list.
+
+The list can be single- or multiple-column, and the columns can appear with or without headings.
+    
 
 ## Example
 
-The following code example uses a form with a text box to receive user input. The code displays a message when the user inputs data and then presses Enter.
+The following example shows how to use multiple **ComboBox** controls to supply criteria for a query.
 
 ```vb
+Private Sub cmdSearch_Click()
+    Dim db As Database
+    Dim qd As QueryDef
+    Dim vWhere As Variant
+    
+    Set db = CurrentDb()
+    
+    On Error Resume Next
+    db.QueryDefs.Delete ""Query1""
+    On Error GoTo 0
+    
+    vWhere = Null
+    vWhere = vWhere & "" AND [PymtTypeID]="" & Me.cboPaymentTypes
+    vWhere = vWhere & "" AND [RefundTypeID]="" & Me.cboRefundType
+    vWhere = vWhere & "" AND [RefundCDMID]="" & Me.cboRefundCDM
+    vWhere = vWhere & "" AND [RefundOptionID]="" & Me.cboRefundOption
+    vWhere = vWhere & "" AND [RefundCodeID]="" & Me.cboRefundCode
+    
+    If Nz(vWhere, """") = """" Then
+        MsgBox ""There are no search criteria selected."" & vbCrLf & vbCrLf & _
+        ""Search Cancelled."", vbInformation, ""Search Canceled.""
+        
+    Else
+        Set qd = db.CreateQueryDef(""Query1"", ""SELECT * FROM tblRefundData WHERE "" & _
+        Mid(vWhere, 6))
+        
+        db.Close
+        Set db = Nothing
+        
+        DoCmd.OpenQuery ""Query1"", acViewNormal, acReadOnly
+    End If
+End Sub
+```
 
-Private Sub txtValue1_BeforeUpdate(Cancel As Integer)
+<br/>
 
-MsgBox ""The Text box is being updated.""
+The following example shows how to set the **RowSource** property of a combo box when a form is loaded. When the form is displayed, the items stored in the **Departments** field of the **tblDepartment** combo box are displayed in the **cboDept** combo box.
+
+```vb
+Private Sub Form_Load()
+    Me.Caption = ""Today is "" & Format$(Date, ""dddd mmm-d-yyyy"")
+    Me.RecordSource = ""tblDepartments""
+    DoCmd.Maximize  
+    txtDept.ControlSource = ""Department""
+    cmdClose.Caption = ""&Close""
+    cboDept.RowSourceType = ""Table/Query""
+    cboDept.RowSource = ""SELECT Department FROM tblDepartments""
+End Sub
+```
+
+<br/>
+
+The following example shows how to create a combo box that is bound to one column while displaying another. Setting the **ColumnCount** property to 2 specifies that the **cboDept** combo box will display the first two columns of the data source specified by the **RowSource** property. Setting the **BoundColumn** property to 1 specifies that the value stored in the first column will be returned when you inspect the value of the combo box.
+
+The **ColumnWidths** property specifies the width of the two columns. By setting the width of the first column to **0in.**, the first column is not displayed in the combo box.
+
+```vb
+Private Sub cboDept_Enter()
+    With cboDept
+        .RowSource = ""SELECT * FROM tblDepartments ORDER BY Department""
+        .ColumnCount = 2
+        .BoundColumn = 1
+        .ColumnWidths = ""0in.;1in.""
+    End With
+End Sub
+```
+
+<br/>
+
+The following example shows how to add an item to a bound combo box.
+
+```vb
+Private Sub cboMainCategory_NotInList(NewData As String, Response As Integer)
+
+    On Error GoTo Error_Handler
+    Dim intAnswer As Integer
+    intAnswer = MsgBox("""""""" & NewData & """""" is not an approved category. "" & vbcrlf _
+        & ""Do you want to add it now?"", vbYesNo + vbQuestion, ""Invalid Category"")
+
+    Select Case intAnswer
+        Case vbYes
+            DoCmd.SetWarnings False
+            DoCmd.RunSQL ""INSERT INTO tlkpCategoryNotInList (Category) "" & _ 
+                         ""Select """""" & NewData & """""";""
+            DoCmd.SetWarnings True
+            Response = acDataErrAdded
+        Case vbNo
+            MsgBox ""Please select an item from the list."", _
+                vbExclamation + vbOKOnly, ""Invalid Entry""
+            Response = acDataErrContinue
+
+    End Select
+
+    Exit_Procedure:
+        DoCmd.SetWarnings True
+        Exit Sub
+
+    Error_Handler:
+        MsgBox Err.Number & "", "" & Err.Description
+        Resume Exit_Procedure
+        Resume
 
 End Sub
-
 ```
 
 ## Events
 
-- [AfterUpdate](Access.TextBox.AfterUpdate-event.md)
-- [BeforeUpdate](Access.TextBox.BeforeUpdate-event.md)
-- [Change](Access.TextBox.Change.md)
-- [Click](Access.TextBox.Click.md)
-- [DblClick](Access.TextBox.DblClick.md)
-- [Dirty](Access.TextBox.Dirty.md)
-- [Enter](Access.TextBox.Enter.md)
-- [Exit](Access.TextBox.Exit.md)
-- [GotFocus](Access.TextBox.GotFocus.md)
-- [KeyDown](Access.TextBox.KeyDown.md)
-- [KeyPress](Access.TextBox.KeyPress.md)
-- [KeyUp](Access.TextBox.KeyUp.md)
-- [LostFocus](Access.TextBox.LostFocus.md)
-- [MouseDown](Access.TextBox.MouseDown.md)
-- [MouseMove](Access.TextBox.MouseMove.md)
-- [MouseUp](Access.TextBox.MouseUp.md)
-- [Undo](Access.TextBox.Undo(even).md)
+- [AfterUpdate](Access.ComboBox.AfterUpdate-event.md)
+- [BeforeUpdate](Access.ComboBox.BeforeUpdate-event.md)
+- [Change](Access.ComboBox.Change.md)
+- [Click](Access.ComboBox.Click.md)
+- [DblClick](Access.ComboBox.DblClick.md)
+- [Dirty](Access.ComboBox.Dirty.md)
+- [Enter](Access.ComboBox.Enter.md)
+- [Exit](Access.ComboBox.Exit.md)
+- [GotFocus](Access.ComboBox.GotFocus.md)
+- [KeyDown](Access.ComboBox.KeyDown.md)
+- [KeyPress](Access.ComboBox.KeyPress.md)
+- [KeyUp](Access.ComboBox.KeyUp.md)
+- [LostFocus](Access.ComboBox.LostFocus.md)
+- [MouseDown](Access.ComboBox.MouseDown.md)
+- [MouseMove](Access.ComboBox.MouseMove.md)
+- [MouseUp](Access.ComboBox.MouseUp.md)
+- [NotInList](Access.ComboBox.NotInList.md)
+- [Undo](Access.ComboBox.Undo(even).md)
 
 ## Methods
 
-- [Move](Access.TextBox.Move.md)
-- [Requery](Access.TextBox.Requery.md)
-- [SetFocus](Access.TextBox.SetFocus.md)
-- [SizeToFit](Access.TextBox.SizeToFit.md)
-- [Undo](Access.TextBox.Undo(method).md)
+- [AddItem](Access.ComboBox.AddItem.md)
+- [Dropdown](Access.ComboBox.Dropdown.md)
+- [Move](Access.ComboBox.Move.md)
+- [RemoveItem](Access.ComboBox.RemoveItem.md)
+- [Requery](Access.ComboBox.Requery.md)
+- [SetFocus](Access.ComboBox.SetFocus.md)
+- [SizeToFit](Access.ComboBox.SizeToFit.md)
+- [Undo](Access.ComboBox.Undo(method).md)
 
 ## Properties
 
-- [AddColon](Access.TextBox.AddColon.md)
-- [AfterUpdate](Access.TextBox.AfterUpdate-property.md)
-- [AllowAutoCorrect](Access.TextBox.AllowAutoCorrect.md)
-- [Application](Access.TextBox.Application.md)
-- [AsianLineBreak](Access.TextBox.AsianLineBreak.md)
-- [AutoLabel](Access.TextBox.AutoLabel.md)
-- [AutoTab](Access.TextBox.AutoTab.md)
-- [BackColor](Access.TextBox.BackColor.md)
-- [BackShade](Access.TextBox.BackShade.md)
-- [BackStyle](Access.TextBox.BackStyle.md)
-- [BackThemeColorIndex](Access.TextBox.BackThemeColorIndex.md)
-- [BackTint](Access.TextBox.BackTint.md)
-- [BeforeUpdate](Access.TextBox.BeforeUpdate-property.md)
-- [BorderColor](Access.TextBox.BorderColor.md)
-- [BorderShade](Access.TextBox.BorderShade.md)
-- [BorderStyle](Access.TextBox.BorderStyle.md)
-- [BorderThemeColorIndex](Access.TextBox.BorderThemeColorIndex.md)
-- [BorderTint](Access.TextBox.BorderTint.md)
-- [BorderWidth](Access.TextBox.BorderWidth.md)
-- [BottomMargin](Access.TextBox.BottomMargin.md)
-- [BottomPadding](Access.TextBox.BottomPadding.md)
-- [CanGrow](Access.TextBox.CanGrow.md)
-- [CanShrink](Access.TextBox.CanShrink.md)
-- [ColumnHidden](Access.TextBox.ColumnHidden.md)
-- [ColumnOrder](Access.TextBox.ColumnOrder.md)
-- [ColumnWidth](Access.TextBox.ColumnWidth.md)
-- [Controls](Access.TextBox.Controls.md)
-- [ControlSource](Access.TextBox.ControlSource.md)
-- [ControlTipText](Access.TextBox.ControlTipText.md)
-- [ControlType](Access.TextBox.ControlType.md)
-- [DecimalPlaces](Access.TextBox.DecimalPlaces.md)
-- [DefaultValue](Access.TextBox.DefaultValue.md)
-- [DisplayAsHyperlink](Access.TextBox.DisplayAsHyperlink.md)
-- [DisplayWhen](Access.TextBox.DisplayWhen.md)
-- [Enabled](Access.TextBox.Enabled.md)
-- [EnterKeyBehavior](Access.TextBox.EnterKeyBehavior.md)
-- [EventProcPrefix](Access.TextBox.EventProcPrefix.md)
-- [FilterLookup](Access.TextBox.FilterLookup.md)
-- [FontBold](Access.TextBox.FontBold.md)
-- [FontItalic](Access.TextBox.FontItalic.md)
-- [FontName](Access.TextBox.FontName.md)
-- [FontSize](Access.TextBox.FontSize.md)
-- [FontUnderline](Access.TextBox.FontUnderline.md)
-- [FontWeight](Access.TextBox.FontWeight.md)
-- [ForeColor](Access.TextBox.ForeColor.md)
-- [ForeShade](Access.TextBox.ForeShade.md)
-- [ForeThemeColorIndex](Access.TextBox.ForeThemeColorIndex.md)
-- [ForeTint](Access.TextBox.ForeTint.md)
-- [Format](Access.TextBox.Format.md)
-- [FormatConditions](Access.TextBox.FormatConditions.md)
-- [FuriganaControl](Access.TextBox.FuriganaControl.md)
-- [GridlineColor](Access.TextBox.GridlineColor.md)
-- [GridlineShade](Access.TextBox.GridlineShade.md)
-- [GridlineStyleBottom](Access.TextBox.GridlineStyleBottom.md)
-- [GridlineStyleLeft](Access.TextBox.GridlineStyleLeft.md)
-- [GridlineStyleRight](Access.TextBox.GridlineStyleRight.md)
-- [GridlineStyleTop](Access.TextBox.GridlineStyleTop.md)
-- [GridlineThemeColorIndex](Access.TextBox.GridlineThemeColorIndex.md)
-- [GridlineTint](Access.TextBox.GridlineTint.md)
-- [GridlineWidthBottom](Access.TextBox.GridlineWidthBottom.md)
-- [GridlineWidthLeft](Access.TextBox.GridlineWidthLeft.md)
-- [GridlineWidthRight](Access.TextBox.GridlineWidthRight.md)
-- [GridlineWidthTop](Access.TextBox.GridlineWidthTop.md)
-- [Height](Access.TextBox.Height.md)
-- [HelpContextId](Access.TextBox.HelpContextId.md)
-- [HideDuplicates](Access.TextBox.HideDuplicates.md)
-- [HorizontalAnchor](Access.TextBox.HorizontalAnchor.md)
-- [Hyperlink](Access.TextBox.Hyperlink.md)
-- [IMEHold](Access.TextBox.IMEHold.md)
-- [IMEMode](Access.TextBox.IMEMode.md)
-- [IMESentenceMode](Access.TextBox.IMESentenceMode.md)
-- [InputMask](Access.TextBox.InputMask.md)
-- [InSelection](Access.TextBox.InSelection.md)
-- [IsHyperlink](Access.TextBox.IsHyperlink.md)
-- [IsVisible](Access.TextBox.IsVisible.md)
-- [KeyboardLanguage](Access.TextBox.KeyboardLanguage.md)
-- [LabelAlign](Access.TextBox.LabelAlign.md)
-- [LabelX](Access.TextBox.LabelX.md)
-- [LabelY](Access.TextBox.LabelY.md)
-- [Layout](Access.TextBox.Layout.md)
-- [LayoutID](Access.TextBox.LayoutID.md)
-- [Left](Access.TextBox.Left.md)
-- [LeftMargin](Access.TextBox.LeftMargin.md)
-- [LeftPadding](Access.TextBox.LeftPadding.md)
-- [LineSpacing](Access.TextBox.LineSpacing.md)
-- [Locked](Access.TextBox.Locked.md)
-- [Name](Access.TextBox.Name.md)
-- [NumeralShapes](Access.TextBox.NumeralShapes.md)
-- [OldBorderStyle](Access.TextBox.OldBorderStyle.md)
-- [OldValue](Access.TextBox.OldValue.md)
-- [OnChange](Access.TextBox.OnChange.md)
-- [OnClick](Access.TextBox.OnClick.md)
-- [OnDblClick](Access.TextBox.OnDblClick.md)
-- [OnDirty](Access.TextBox.OnDirty.md)
-- [OnEnter](Access.TextBox.OnEnter.md)
-- [OnExit](Access.TextBox.OnExit.md)
-- [OnGotFocus](Access.TextBox.OnGotFocus.md)
-- [OnKeyDown](Access.TextBox.OnKeyDown.md)
-- [OnKeyPress](Access.TextBox.OnKeyPress.md)
-- [OnKeyUp](Access.TextBox.OnKeyUp.md)
-- [OnLostFocus](Access.TextBox.OnLostFocus.md)
-- [OnMouseDown](Access.TextBox.OnMouseDown.md)
-- [OnMouseMove](Access.TextBox.OnMouseMove.md)
-- [OnMouseUp](Access.TextBox.OnMouseUp.md)
-- [OnUndo](Access.TextBox.OnUndo.md)
-- [Parent](Access.TextBox.Parent.md)
-- [PostalAddress](Access.TextBox.PostalAddress.md)
-- [Properties](Access.TextBox.Properties.md)
-- [ReadingOrder](Access.TextBox.ReadingOrder.md)
-- [RightMargin](Access.TextBox.RightMargin.md)
-- [RightPadding](Access.TextBox.RightPadding.md)
-- [RunningSum](Access.TextBox.RunningSum.md)
-- [ScrollBarAlign](Access.TextBox.ScrollBarAlign.md)
-- [ScrollBars](Access.TextBox.ScrollBars.md)
-- [Section](Access.TextBox.Section.md)
-- [SelLength](Access.TextBox.SelLength.md)
-- [SelStart](Access.TextBox.SelStart.md)
-- [SelText](Access.TextBox.SelText.md)
-- [ShortcutMenuBar](Access.TextBox.ShortcutMenuBar.md)
-- [ShowDatePicker](Access.TextBox.ShowDatePicker.md)
-- [SmartTags](Access.TextBox.SmartTags.md)
-- [SpecialEffect](Access.TextBox.SpecialEffect.md)
-- [StatusBarText](Access.TextBox.StatusBarText.md)
-- [TabIndex](Access.TextBox.TabIndex.md)
-- [TabStop](Access.TextBox.TabStop.md)
-- [Tag](Access.TextBox.Tag.md)
-- [Text](Access.TextBox.Text.md)
-- [TextAlign](Access.TextBox.TextAlign.md)
-- [TextFormat](Access.TextBox.TextFormat.md)
-- [ThemeFontIndex](Access.TextBox.ThemeFontIndex.md)
-- [Top](Access.TextBox.Top.md)
-- [TopMargin](Access.TextBox.TopMargin.md)
-- [TopPadding](Access.TextBox.TopPadding.md)
-- [ValidationRule](Access.TextBox.ValidationRule.md)
-- [ValidationText](Access.TextBox.ValidationText.md)
-- [Value](Access.TextBox.Value.md)
-- [Vertical](Access.TextBox.Vertical.md)
-- [VerticalAnchor](Access.TextBox.VerticalAnchor.md)
-- [Visible](Access.TextBox.Visible.md)
-- [Width](Access.TextBox.Width.md)
+- [AddColon](Access.ComboBox.AddColon.md)
+- [AfterUpdate](Access.ComboBox.AfterUpdate-property.md)
+- [AllowAutoCorrect](Access.ComboBox.AllowAutoCorrect.md)
+- [AllowValueListEdits](Access.ComboBox.AllowValueListEdits.md)
+- [Application](Access.ComboBox.Application.md)
+- [AutoExpand](Access.ComboBox.AutoExpand.md)
+- [AutoLabel](Access.ComboBox.AutoLabel.md)
+- [BackColor](Access.ComboBox.BackColor.md)
+- [BackShade](Access.ComboBox.BackShade.md)
+- [BackStyle](Access.ComboBox.BackStyle.md)
+- [BackThemeColorIndex](Access.ComboBox.BackThemeColorIndex.md)
+- [BackTint](Access.ComboBox.BackTint.md)
+- [BeforeUpdate](Access.ComboBox.BeforeUpdate-property.md)
+- [BorderColor](Access.ComboBox.BorderColor.md)
+- [BorderShade](Access.ComboBox.BorderShade.md)
+- [BorderStyle](Access.ComboBox.BorderStyle.md)
+- [BorderThemeColorIndex](Access.ComboBox.BorderThemeColorIndex.md)
+- [BorderTint](Access.ComboBox.BorderTint.md)
+- [BorderWidth](Access.ComboBox.BorderWidth.md)
+- [BottomMargin](Access.ComboBox.BottomMargin.md)
+- [BottomPadding](Access.ComboBox.BottomPadding.md)
+- [BoundColumn](Access.ComboBox.BoundColumn.md)
+- [CanGrow](Access.ComboBox.CanGrow.md)
+- [CanShrink](Access.ComboBox.CanShrink.md)
+- [Column](Access.ComboBox.Column.md)
+- [ColumnCount](Access.ComboBox.ColumnCount.md)
+- [ColumnHeads](Access.ComboBox.ColumnHeads.md)
+- [ColumnHidden](Access.ComboBox.ColumnHidden.md)
+- [ColumnOrder](Access.ComboBox.ColumnOrder.md)
+- [ColumnWidth](Access.ComboBox.ColumnWidth.md)
+- [ColumnWidths](Access.ComboBox.ColumnWidths.md)
+- [Controls](Access.ComboBox.Controls.md)
+- [ControlSource](Access.ComboBox.ControlSource.md)
+- [ControlTipText](Access.ComboBox.ControlTipText.md)
+- [ControlType](Access.ComboBox.ControlType.md)
+- [DecimalPlaces](Access.ComboBox.DecimalPlaces.md)
+- [DefaultValue](Access.ComboBox.DefaultValue.md)
+- [DisplayAsHyperlink](Access.ComboBox.DisplayAsHyperlink.md)
+- [DisplayWhen](Access.ComboBox.DisplayWhen.md)
+- [Enabled](Access.ComboBox.Enabled.md)
+- [EventProcPrefix](Access.ComboBox.EventProcPrefix.md)
+- [FontBold](Access.ComboBox.FontBold.md)
+- [FontItalic](Access.ComboBox.FontItalic.md)
+- [FontName](Access.ComboBox.FontName.md)
+- [FontSize](Access.ComboBox.FontSize.md)
+- [FontUnderline](Access.ComboBox.FontUnderline.md)
+- [FontWeight](Access.ComboBox.FontWeight.md)
+- [ForeColor](Access.ComboBox.ForeColor.md)
+- [ForeShade](Access.ComboBox.ForeShade.md)
+- [ForeThemeColorIndex](Access.ComboBox.ForeThemeColorIndex.md)
+- [ForeTint](Access.ComboBox.ForeTint.md)
+- [Format](Access.ComboBox.Format.md)
+- [FormatConditions](Access.ComboBox.FormatConditions.md)
+- [GridlineColor](Access.ComboBox.GridlineColor.md)
+- [GridlineShade](Access.ComboBox.GridlineShade.md)
+- [GridlineStyleBottom](Access.ComboBox.GridlineStyleBottom.md)
+- [GridlineStyleLeft](Access.ComboBox.GridlineStyleLeft.md)
+- [GridlineStyleRight](Access.ComboBox.GridlineStyleRight.md)
+- [GridlineStyleTop](Access.ComboBox.GridlineStyleTop.md)
+- [GridlineThemeColorIndex](Access.ComboBox.GridlineThemeColorIndex.md)
+- [GridlineTint](Access.ComboBox.GridlineTint.md)
+- [GridlineWidthBottom](Access.ComboBox.GridlineWidthBottom.md)
+- [GridlineWidthLeft](Access.ComboBox.GridlineWidthLeft.md)
+- [GridlineWidthRight](Access.ComboBox.GridlineWidthRight.md)
+- [GridlineWidthTop](Access.ComboBox.GridlineWidthTop.md)
+- [Height](Access.ComboBox.Height.md)
+- [HelpContextId](Access.ComboBox.HelpContextId.md)
+- [HideDuplicates](Access.ComboBox.HideDuplicates.md)
+- [HorizontalAnchor](Access.ComboBox.HorizontalAnchor.md)
+- [Hyperlink](Access.ComboBox.Hyperlink.md)
+- [IMEHold](Access.ComboBox.IMEHold.md)
+- [IMEMode](Access.ComboBox.IMEMode.md)
+- [IMESentenceMode](Access.ComboBox.IMESentenceMode.md)
+- [InheritValueList](Access.ComboBox.InheritValueList.md)
+- [InputMask](Access.ComboBox.InputMask.md)
+- [InSelection](Access.ComboBox.InSelection.md)
+- [IsHyperlink](Access.ComboBox.IsHyperlink.md)
+- [IsVisible](Access.ComboBox.IsVisible.md)
+- [ItemData](Access.ComboBox.ItemData.md)
+- [ItemsSelected](Access.ComboBox.ItemsSelected.md)
+- [KeyboardLanguage](Access.ComboBox.KeyboardLanguage.md)
+- [LabelAlign](Access.ComboBox.LabelAlign.md)
+- [LabelX](Access.ComboBox.LabelX.md)
+- [LabelY](Access.ComboBox.LabelY.md)
+- [Layout](Access.ComboBox.Layout.md)
+- [LayoutID](Access.ComboBox.LayoutID.md)
+- [Left](Access.ComboBox.Left.md)
+- [LeftMargin](Access.ComboBox.LeftMargin.md)
+- [LeftPadding](Access.ComboBox.LeftPadding.md)
+- [LimitToList](Access.ComboBox.LimitToList.md)
+- [ListCount](Access.ComboBox.ListCount.md)
+- [ListIndex](Access.ComboBox.ListIndex.md)
+- [ListItemsEditForm](Access.ComboBox.ListItemsEditForm.md)
+- [ListRows](Access.ComboBox.ListRows.md)
+- [ListWidth](Access.ComboBox.ListWidth.md)
+- [Locked](Access.ComboBox.Locked.md)
+- [Name](Access.ComboBox.Name.md)
+- [NumeralShapes](Access.ComboBox.NumeralShapes.md)
+- [OldBorderStyle](Access.ComboBox.OldBorderStyle.md)
+- [OldValue](Access.ComboBox.OldValue.md)
+- [OnChange](Access.ComboBox.OnChange.md)
+- [OnClick](Access.ComboBox.OnClick.md)
+- [OnDblClick](Access.ComboBox.OnDblClick.md)
+- [OnDirty](Access.ComboBox.OnDirty.md)
+- [OnEnter](Access.ComboBox.OnEnter.md)
+- [OnExit](Access.ComboBox.OnExit.md)
+- [OnGotFocus](Access.ComboBox.OnGotFocus.md)
+- [OnKeyDown](Access.ComboBox.OnKeyDown.md)
+- [OnKeyPress](Access.ComboBox.OnKeyPress.md)
+- [OnKeyUp](Access.ComboBox.OnKeyUp.md)
+- [OnLostFocus](Access.ComboBox.OnLostFocus.md)
+- [OnMouseDown](Access.ComboBox.OnMouseDown.md)
+- [OnMouseMove](Access.ComboBox.OnMouseMove.md)
+- [OnMouseUp](Access.ComboBox.OnMouseUp.md)
+- [OnNotInList](Access.ComboBox.OnNotInList.md)
+- [OnUndo](Access.ComboBox.OnUndo.md)
+- [Parent](Access.ComboBox.Parent.md)
+- [Properties](Access.ComboBox.Properties.md)
+- [ReadingOrder](Access.ComboBox.ReadingOrder.md)
+- [Recordset](Access.ComboBox.Recordset.md)
+- [RightMargin](Access.ComboBox.RightMargin.md)
+- [RightPadding](Access.ComboBox.RightPadding.md)
+- [RowSource](Access.ComboBox.RowSource.md)
+- [RowSourceType](Access.ComboBox.RowSourceType.md)
+- [ScrollBarAlign](Access.ComboBox.ScrollBarAlign.md)
+- [Section](Access.ComboBox.Section.md)
+- [Selected](Access.ComboBox.Selected.md)
+- [SelLength](Access.ComboBox.SelLength.md)
+- [SelStart](Access.ComboBox.SelStart.md)
+- [SelText](Access.ComboBox.SelText.md)
+- [SeparatorCharacters](Access.ComboBox.SeparatorCharacters.md)
+- [ShortcutMenuBar](Access.ComboBox.ShortcutMenuBar.md)
+- [ShowOnlyRowSourceValues](Access.ComboBox.ShowOnlyRowSourceValues.md)
+- [SmartTags](Access.ComboBox.SmartTags.md)
+- [SpecialEffect](Access.ComboBox.SpecialEffect.md)
+- [StatusBarText](Access.ComboBox.StatusBarText.md)
+- [TabIndex](Access.ComboBox.TabIndex.md)
+- [TabStop](Access.ComboBox.TabStop.md)
+- [Tag](Access.ComboBox.Tag.md)
+- [Text](Access.ComboBox.Text.md)
+- [TextAlign](Access.ComboBox.TextAlign.md)
+- [ThemeFontIndex](Access.ComboBox.ThemeFontIndex.md)
+- [Top](Access.ComboBox.Top.md)
+- [TopMargin](Access.ComboBox.TopMargin.md)
+- [TopPadding](Access.ComboBox.TopPadding.md)
+- [ValidationRule](Access.ComboBox.ValidationRule.md)
+- [ValidationText](Access.ComboBox.ValidationText.md)
+- [Value](Access.ComboBox.Value.md)
+- [VerticalAnchor](Access.ComboBox.VerticalAnchor.md)
+- [Visible](Access.ComboBox.Visible.md)
+- [Width](Access.ComboBox.Width.md)
+
+
+
 
 ## See also
 
@@ -220,45 +341,53 @@ End Sub
 
 "
 Class {
-	#name : #JinControlTextbox,
-	#superclass : #JinControlAbstractTextbox,
+	#name : #JinCombobox,
+	#superclass : #JinControlAbstractCombobox,
 	#category : #'Jindao-DomainObjects-GeneratedControls'
 }
 
 { #category : #generated }
-JinControlTextbox class >> mappedTypeName [
-	^#'_Textbox'
+JinCombobox class >> mappedTypeName [
+	^#'_Combobox'
 ]
 
 { #category : #generated }
-JinControlTextbox >> acceptVisitor: aVisitor [
-	^ aVisitor visitTextbox: self
+JinCombobox >> acceptVisitor: aVisitor [
+	^ aVisitor visitCombobox: self
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> addColon [
+JinCombobox >> addColon [
 <getter>
 	^ (handle propertyNamed: #'AddColon' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> addColon: aParam1 [
+JinCombobox >> addColon: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AddColon' withArguments: {aParam1} ).
 
 ]
 
+{ #category : #'method - generated' }
+JinCombobox >> addItem: aItem index: aIndex [
+<method>
+"This method can be called with optional parameters. Index"
+	^ (handle dispatch: #'AddItem' withArguments: {aItem . aIndex} ).
+
+]
+
 { #category : #'property - generated' }
-JinControlTextbox >> allowAutoCorrect [
+JinCombobox >> allowAutoCorrect [
 <getter>
 	^ (handle propertyNamed: #'AllowAutoCorrect' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> allowAutoCorrect: aParam1 [
+JinCombobox >> allowAutoCorrect: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AllowAutoCorrect' withArguments: {aParam1} ).
@@ -266,36 +395,51 @@ JinControlTextbox >> allowAutoCorrect: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> application [
+JinCombobox >> allowValueListEdits [
+<getter>
+	^ (handle propertyNamed: #'AllowValueListEdits' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> allowValueListEdits: aParam1 [
+<setter>
+		
+	^ (handle propertyNamed: #'AllowValueListEdits' withArguments: {aParam1} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> application [
 <getter>
 	^ (handle propertyNamed: #'Application' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> asianLineBreak [
+JinCombobox >> autoExpand [
 <getter>
-	^ (handle propertyNamed: #'AsianLineBreak' ).
+	^ (handle propertyNamed: #'AutoExpand' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> asianLineBreak: aParam1 [
+JinCombobox >> autoExpand: aParam1 [
 <setter>
 		
-	^ (handle propertyNamed: #'AsianLineBreak' withArguments: {aParam1} ).
+	^ (handle propertyNamed: #'AutoExpand' withArguments: {aParam1} ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> autoLabel [
+JinCombobox >> autoLabel [
 <getter>
 	^ (handle propertyNamed: #'AutoLabel' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> autoLabel: aParam1 [
+JinCombobox >> autoLabel: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AutoLabel' withArguments: {aParam1} ).
@@ -303,29 +447,14 @@ JinControlTextbox >> autoLabel: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> autoTab [
-<getter>
-	^ (handle propertyNamed: #'AutoTab' ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> autoTab: aParam1 [
-<setter>
-		
-	^ (handle propertyNamed: #'AutoTab' withArguments: {aParam1} ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> backColor [
+JinCombobox >> backColor [
 <getter>
 	^ (handle propertyNamed: #'BackColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> backColor: aParam1 [
+JinCombobox >> backColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackColor' withArguments: {aParam1} ).
@@ -333,14 +462,14 @@ JinControlTextbox >> backColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> backShade [
+JinCombobox >> backShade [
 <getter>
 	^ (handle propertyNamed: #'BackShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> backShade: aParam1 [
+JinCombobox >> backShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackShade' withArguments: {aParam1} ).
@@ -348,14 +477,14 @@ JinControlTextbox >> backShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> backStyle [
+JinCombobox >> backStyle [
 <getter>
 	^ (handle propertyNamed: #'BackStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> backStyle: aParam1 [
+JinCombobox >> backStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackStyle' withArguments: {aParam1} ).
@@ -363,14 +492,14 @@ JinControlTextbox >> backStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> backThemeColorIndex [
+JinCombobox >> backThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BackThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> backThemeColorIndex: aParam1 [
+JinCombobox >> backThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackThemeColorIndex' withArguments: {aParam1} ).
@@ -378,14 +507,14 @@ JinControlTextbox >> backThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> backTint [
+JinCombobox >> backTint [
 <getter>
 	^ (handle propertyNamed: #'BackTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> backTint: aParam1 [
+JinCombobox >> backTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackTint' withArguments: {aParam1} ).
@@ -393,14 +522,14 @@ JinControlTextbox >> backTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> borderColor [
+JinCombobox >> borderColor [
 <getter>
 	^ (handle propertyNamed: #'BorderColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> borderColor: aParam1 [
+JinCombobox >> borderColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderColor' withArguments: {aParam1} ).
@@ -408,14 +537,14 @@ JinControlTextbox >> borderColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> borderShade [
+JinCombobox >> borderShade [
 <getter>
 	^ (handle propertyNamed: #'BorderShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> borderShade: aParam1 [
+JinCombobox >> borderShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderShade' withArguments: {aParam1} ).
@@ -423,14 +552,14 @@ JinControlTextbox >> borderShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> borderStyle [
+JinCombobox >> borderStyle [
 <getter>
 	^ (handle propertyNamed: #'BorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> borderStyle: aParam1 [
+JinCombobox >> borderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderStyle' withArguments: {aParam1} ).
@@ -438,14 +567,14 @@ JinControlTextbox >> borderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> borderThemeColorIndex [
+JinCombobox >> borderThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BorderThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> borderThemeColorIndex: aParam1 [
+JinCombobox >> borderThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderThemeColorIndex' withArguments: {aParam1} ).
@@ -453,14 +582,14 @@ JinControlTextbox >> borderThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> borderTint [
+JinCombobox >> borderTint [
 <getter>
 	^ (handle propertyNamed: #'BorderTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> borderTint: aParam1 [
+JinCombobox >> borderTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderTint' withArguments: {aParam1} ).
@@ -468,14 +597,14 @@ JinControlTextbox >> borderTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> borderWidth [
+JinCombobox >> borderWidth [
 <getter>
 	^ (handle propertyNamed: #'BorderWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> borderWidth: aParam1 [
+JinCombobox >> borderWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderWidth' withArguments: {aParam1} ).
@@ -483,14 +612,14 @@ JinControlTextbox >> borderWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> bottomMargin [
+JinCombobox >> bottomMargin [
 <getter>
 	^ (handle propertyNamed: #'BottomMargin' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> bottomMargin: aParam1 [
+JinCombobox >> bottomMargin: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BottomMargin' withArguments: {aParam1} ).
@@ -498,14 +627,14 @@ JinControlTextbox >> bottomMargin: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> bottomPadding [
+JinCombobox >> bottomPadding [
 <getter>
 	^ (handle propertyNamed: #'BottomPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> bottomPadding: aParam1 [
+JinCombobox >> bottomPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BottomPadding' withArguments: {aParam1} ).
@@ -513,14 +642,29 @@ JinControlTextbox >> bottomPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> canGrow [
+JinCombobox >> boundColumn [
+<getter>
+	^ (handle propertyNamed: #'BoundColumn' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> boundColumn: aParam1 [
+<setter>
+		
+	^ (handle propertyNamed: #'BoundColumn' withArguments: {aParam1} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> canGrow [
 <getter>
 	^ (handle propertyNamed: #'CanGrow' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> canGrow: aParam1 [
+JinCombobox >> canGrow: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'CanGrow' withArguments: {aParam1} ).
@@ -528,14 +672,14 @@ JinControlTextbox >> canGrow: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> canShrink [
+JinCombobox >> canShrink [
 <getter>
 	^ (handle propertyNamed: #'CanShrink' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> canShrink: aParam1 [
+JinCombobox >> canShrink: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'CanShrink' withArguments: {aParam1} ).
@@ -543,14 +687,52 @@ JinControlTextbox >> canShrink: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> columnHidden [
+JinCombobox >> column: aIndex row: aRow [
+<getter>
+"This method can be called with optional parameters. Row"
+	^ (handle propertyNamed: #'Column' withArguments: {aIndex . aRow} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> columnCount [
+<getter>
+	^ (handle propertyNamed: #'ColumnCount' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> columnCount: aParam1 [
+<setter>
+		
+	^ (handle propertyNamed: #'ColumnCount' withArguments: {aParam1} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> columnHeads [
+<getter>
+	^ (handle propertyNamed: #'ColumnHeads' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> columnHeads: aParam1 [
+<setter>
+		
+	^ (handle propertyNamed: #'ColumnHeads' withArguments: {aParam1} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> columnHidden [
 <getter>
 	^ (handle propertyNamed: #'ColumnHidden' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> columnHidden: aParam1 [
+JinCombobox >> columnHidden: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnHidden' withArguments: {aParam1} ).
@@ -558,14 +740,14 @@ JinControlTextbox >> columnHidden: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> columnOrder [
+JinCombobox >> columnOrder [
 <getter>
 	^ (handle propertyNamed: #'ColumnOrder' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> columnOrder: aParam1 [
+JinCombobox >> columnOrder: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnOrder' withArguments: {aParam1} ).
@@ -573,14 +755,14 @@ JinControlTextbox >> columnOrder: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> columnWidth [
+JinCombobox >> columnWidth [
 <getter>
 	^ (handle propertyNamed: #'ColumnWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> columnWidth: aParam1 [
+JinCombobox >> columnWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ColumnWidth' withArguments: {aParam1} ).
@@ -588,14 +770,29 @@ JinControlTextbox >> columnWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> controlSource [
+JinCombobox >> columnWidths [
+<getter>
+	^ (handle propertyNamed: #'ColumnWidths' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> columnWidths: aParam1 [
+<setter>
+		
+	^ (handle propertyNamed: #'ColumnWidths' withArguments: {aParam1} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> controlSource [
 <getter>
 	^ (handle propertyNamed: #'ControlSource' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> controlSource: aParam1 [
+JinCombobox >> controlSource: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlSource' withArguments: {aParam1} ).
@@ -603,14 +800,14 @@ JinControlTextbox >> controlSource: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> controlTipText [
+JinCombobox >> controlTipText [
 <getter>
 	^ (handle propertyNamed: #'ControlTipText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> controlTipText: aParam1 [
+JinCombobox >> controlTipText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlTipText' withArguments: {aParam1} ).
@@ -618,14 +815,14 @@ JinControlTextbox >> controlTipText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> controlType [
+JinCombobox >> controlType [
 <getter>
 	^ (handle propertyNamed: #'ControlType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> controlType: aParam1 [
+JinCombobox >> controlType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlType' withArguments: {aParam1} ).
@@ -633,21 +830,21 @@ JinControlTextbox >> controlType: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> controls [
+JinCombobox >> controls [
 <getter>
 	^ (handle propertyNamed: #'Controls' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> decimalPlaces [
+JinCombobox >> decimalPlaces [
 <getter>
 	^ (handle propertyNamed: #'DecimalPlaces' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> decimalPlaces: aParam1 [
+JinCombobox >> decimalPlaces: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DecimalPlaces' withArguments: {aParam1} ).
@@ -655,14 +852,14 @@ JinControlTextbox >> decimalPlaces: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> defaultValue [
+JinCombobox >> defaultValue [
 <getter>
 	^ (handle propertyNamed: #'DefaultValue' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> defaultValue: aParam1 [
+JinCombobox >> defaultValue: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DefaultValue' withArguments: {aParam1} ).
@@ -670,14 +867,14 @@ JinControlTextbox >> defaultValue: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> displayAsHyperlink [
+JinCombobox >> displayAsHyperlink [
 <getter>
 	^ (handle propertyNamed: #'DisplayAsHyperlink' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> displayAsHyperlink: aParam1 [
+JinCombobox >> displayAsHyperlink: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DisplayAsHyperlink' withArguments: {aParam1} ).
@@ -685,29 +882,36 @@ JinControlTextbox >> displayAsHyperlink: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> displayWhen [
+JinCombobox >> displayWhen [
 <getter>
 	^ (handle propertyNamed: #'DisplayWhen' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> displayWhen: aParam1 [
+JinCombobox >> displayWhen: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DisplayWhen' withArguments: {aParam1} ).
 
 ]
 
+{ #category : #'method - generated' }
+JinCombobox >> dropdown [
+<method>
+	^ (handle dispatch: #'Dropdown' ).
+
+]
+
 { #category : #'property - generated' }
-JinControlTextbox >> enabled [
+JinCombobox >> enabled [
 <getter>
 	^ (handle propertyNamed: #'Enabled' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> enabled: aParam1 [
+JinCombobox >> enabled: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Enabled' withArguments: {aParam1} ).
@@ -715,29 +919,14 @@ JinControlTextbox >> enabled: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> enterKeyBehavior [
-<getter>
-	^ (handle propertyNamed: #'EnterKeyBehavior' ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> enterKeyBehavior: aParam1 [
-<setter>
-		
-	^ (handle propertyNamed: #'EnterKeyBehavior' withArguments: {aParam1} ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> eventProcPrefix [
+JinCombobox >> eventProcPrefix [
 <getter>
 	^ (handle propertyNamed: #'EventProcPrefix' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> eventProcPrefix: aParam1 [
+JinCombobox >> eventProcPrefix: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'EventProcPrefix' withArguments: {aParam1} ).
@@ -745,29 +934,14 @@ JinControlTextbox >> eventProcPrefix: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> filterLookup [
-<getter>
-	^ (handle propertyNamed: #'FilterLookup' ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> filterLookup: aParam1 [
-<setter>
-		
-	^ (handle propertyNamed: #'FilterLookup' withArguments: {aParam1} ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> fontBold [
+JinCombobox >> fontBold [
 <getter>
 	^ (handle propertyNamed: #'FontBold' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> fontBold: aParam1 [
+JinCombobox >> fontBold: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontBold' withArguments: {aParam1} ).
@@ -775,14 +949,14 @@ JinControlTextbox >> fontBold: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> fontItalic [
+JinCombobox >> fontItalic [
 <getter>
 	^ (handle propertyNamed: #'FontItalic' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> fontItalic: aParam1 [
+JinCombobox >> fontItalic: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontItalic' withArguments: {aParam1} ).
@@ -790,14 +964,14 @@ JinControlTextbox >> fontItalic: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> fontName [
+JinCombobox >> fontName [
 <getter>
 	^ (handle propertyNamed: #'FontName' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> fontName: aParam1 [
+JinCombobox >> fontName: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontName' withArguments: {aParam1} ).
@@ -805,14 +979,14 @@ JinControlTextbox >> fontName: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> fontSize [
+JinCombobox >> fontSize [
 <getter>
 	^ (handle propertyNamed: #'FontSize' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> fontSize: aParam1 [
+JinCombobox >> fontSize: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontSize' withArguments: {aParam1} ).
@@ -820,14 +994,14 @@ JinControlTextbox >> fontSize: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> fontUnderline [
+JinCombobox >> fontUnderline [
 <getter>
 	^ (handle propertyNamed: #'FontUnderline' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> fontUnderline: aParam1 [
+JinCombobox >> fontUnderline: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontUnderline' withArguments: {aParam1} ).
@@ -835,14 +1009,14 @@ JinControlTextbox >> fontUnderline: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> fontWeight [
+JinCombobox >> fontWeight [
 <getter>
 	^ (handle propertyNamed: #'FontWeight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> fontWeight: aParam1 [
+JinCombobox >> fontWeight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontWeight' withArguments: {aParam1} ).
@@ -850,14 +1024,14 @@ JinControlTextbox >> fontWeight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> foreColor [
+JinCombobox >> foreColor [
 <getter>
 	^ (handle propertyNamed: #'ForeColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> foreColor: aParam1 [
+JinCombobox >> foreColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeColor' withArguments: {aParam1} ).
@@ -865,14 +1039,14 @@ JinControlTextbox >> foreColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> foreShade [
+JinCombobox >> foreShade [
 <getter>
 	^ (handle propertyNamed: #'ForeShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> foreShade: aParam1 [
+JinCombobox >> foreShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeShade' withArguments: {aParam1} ).
@@ -880,14 +1054,14 @@ JinControlTextbox >> foreShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> foreThemeColorIndex [
+JinCombobox >> foreThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'ForeThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> foreThemeColorIndex: aParam1 [
+JinCombobox >> foreThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeThemeColorIndex' withArguments: {aParam1} ).
@@ -895,14 +1069,14 @@ JinControlTextbox >> foreThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> foreTint [
+JinCombobox >> foreTint [
 <getter>
 	^ (handle propertyNamed: #'ForeTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> foreTint: aParam1 [
+JinCombobox >> foreTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeTint' withArguments: {aParam1} ).
@@ -910,14 +1084,14 @@ JinControlTextbox >> foreTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> format [
+JinCombobox >> format [
 <getter>
 	^ (handle propertyNamed: #'Format' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> format: aParam1 [
+JinCombobox >> format: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Format' withArguments: {aParam1} ).
@@ -925,36 +1099,21 @@ JinControlTextbox >> format: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> formatConditions [
+JinCombobox >> formatConditions [
 <getter>
 	^ (handle propertyNamed: #'FormatConditions' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> furiganaControl [
-<getter>
-	^ (handle propertyNamed: #'FuriganaControl' ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> furiganaControl: aParam1 [
-<setter>
-		
-	^ (handle propertyNamed: #'FuriganaControl' withArguments: {aParam1} ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> gridlineColor [
+JinCombobox >> gridlineColor [
 <getter>
 	^ (handle propertyNamed: #'GridlineColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineColor: aParam1 [
+JinCombobox >> gridlineColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineColor' withArguments: {aParam1} ).
@@ -962,14 +1121,14 @@ JinControlTextbox >> gridlineColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineShade [
+JinCombobox >> gridlineShade [
 <getter>
 	^ (handle propertyNamed: #'GridlineShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineShade: aParam1 [
+JinCombobox >> gridlineShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineShade' withArguments: {aParam1} ).
@@ -977,14 +1136,14 @@ JinControlTextbox >> gridlineShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineStyleBottom [
+JinCombobox >> gridlineStyleBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineStyleBottom: aParam1 [
+JinCombobox >> gridlineStyleBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleBottom' withArguments: {aParam1} ).
@@ -992,14 +1151,14 @@ JinControlTextbox >> gridlineStyleBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineStyleLeft [
+JinCombobox >> gridlineStyleLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineStyleLeft: aParam1 [
+JinCombobox >> gridlineStyleLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleLeft' withArguments: {aParam1} ).
@@ -1007,14 +1166,14 @@ JinControlTextbox >> gridlineStyleLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineStyleRight [
+JinCombobox >> gridlineStyleRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineStyleRight: aParam1 [
+JinCombobox >> gridlineStyleRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleRight' withArguments: {aParam1} ).
@@ -1022,14 +1181,14 @@ JinControlTextbox >> gridlineStyleRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineStyleTop [
+JinCombobox >> gridlineStyleTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineStyleTop: aParam1 [
+JinCombobox >> gridlineStyleTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleTop' withArguments: {aParam1} ).
@@ -1037,14 +1196,14 @@ JinControlTextbox >> gridlineStyleTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineThemeColorIndex [
+JinCombobox >> gridlineThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineThemeColorIndex: aParam1 [
+JinCombobox >> gridlineThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' withArguments: {aParam1} ).
@@ -1052,14 +1211,14 @@ JinControlTextbox >> gridlineThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineTint [
+JinCombobox >> gridlineTint [
 <getter>
 	^ (handle propertyNamed: #'GridlineTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineTint: aParam1 [
+JinCombobox >> gridlineTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineTint' withArguments: {aParam1} ).
@@ -1067,14 +1226,14 @@ JinControlTextbox >> gridlineTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineWidthBottom [
+JinCombobox >> gridlineWidthBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineWidthBottom: aParam1 [
+JinCombobox >> gridlineWidthBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthBottom' withArguments: {aParam1} ).
@@ -1082,14 +1241,14 @@ JinControlTextbox >> gridlineWidthBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineWidthLeft [
+JinCombobox >> gridlineWidthLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineWidthLeft: aParam1 [
+JinCombobox >> gridlineWidthLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthLeft' withArguments: {aParam1} ).
@@ -1097,14 +1256,14 @@ JinControlTextbox >> gridlineWidthLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineWidthRight [
+JinCombobox >> gridlineWidthRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineWidthRight: aParam1 [
+JinCombobox >> gridlineWidthRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthRight' withArguments: {aParam1} ).
@@ -1112,14 +1271,14 @@ JinControlTextbox >> gridlineWidthRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineWidthTop [
+JinCombobox >> gridlineWidthTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> gridlineWidthTop: aParam1 [
+JinCombobox >> gridlineWidthTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthTop' withArguments: {aParam1} ).
@@ -1127,14 +1286,14 @@ JinControlTextbox >> gridlineWidthTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> height [
+JinCombobox >> height [
 <getter>
 	^ (handle propertyNamed: #'Height' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> height: aParam1 [
+JinCombobox >> height: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Height' withArguments: {aParam1} ).
@@ -1142,14 +1301,14 @@ JinControlTextbox >> height: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> helpContextId [
+JinCombobox >> helpContextId [
 <getter>
 	^ (handle propertyNamed: #'HelpContextId' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> helpContextId: aParam1 [
+JinCombobox >> helpContextId: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HelpContextId' withArguments: {aParam1} ).
@@ -1157,14 +1316,14 @@ JinControlTextbox >> helpContextId: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> hideDuplicates [
+JinCombobox >> hideDuplicates [
 <getter>
 	^ (handle propertyNamed: #'HideDuplicates' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> hideDuplicates: aParam1 [
+JinCombobox >> hideDuplicates: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HideDuplicates' withArguments: {aParam1} ).
@@ -1172,14 +1331,14 @@ JinControlTextbox >> hideDuplicates: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> horizontalAnchor [
+JinCombobox >> horizontalAnchor [
 <getter>
 	^ (handle propertyNamed: #'HorizontalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> horizontalAnchor: aParam1 [
+JinCombobox >> horizontalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HorizontalAnchor' withArguments: {aParam1} ).
@@ -1187,21 +1346,21 @@ JinControlTextbox >> horizontalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> hyperlink [
+JinCombobox >> hyperlink [
 <getter>
 	^ (handle propertyNamed: #'Hyperlink' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> iMEHold [
+JinCombobox >> iMEHold [
 <getter>
 	^ (handle propertyNamed: #'IMEHold' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> iMEHold: aParam1 [
+JinCombobox >> iMEHold: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IMEHold' withArguments: {aParam1} ).
@@ -1209,14 +1368,14 @@ JinControlTextbox >> iMEHold: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> iMEMode [
+JinCombobox >> iMEMode [
 <getter>
 	^ (handle propertyNamed: #'IMEMode' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> iMEMode: aParam1 [
+JinCombobox >> iMEMode: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IMEMode' withArguments: {aParam1} ).
@@ -1224,14 +1383,14 @@ JinControlTextbox >> iMEMode: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> iMESentenceMode [
+JinCombobox >> iMESentenceMode [
 <getter>
 	^ (handle propertyNamed: #'IMESentenceMode' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> iMESentenceMode: aParam1 [
+JinCombobox >> iMESentenceMode: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IMESentenceMode' withArguments: {aParam1} ).
@@ -1239,14 +1398,14 @@ JinControlTextbox >> iMESentenceMode: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> inSelection [
+JinCombobox >> inSelection [
 <getter>
 	^ (handle propertyNamed: #'InSelection' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> inSelection: aParam1 [
+JinCombobox >> inSelection: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'InSelection' withArguments: {aParam1} ).
@@ -1254,14 +1413,29 @@ JinControlTextbox >> inSelection: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> inputMask [
+JinCombobox >> inheritValueList [
+<getter>
+	^ (handle propertyNamed: #'InheritValueList' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> inheritValueList: aParam1 [
+<setter>
+		
+	^ (handle propertyNamed: #'InheritValueList' withArguments: {aParam1} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> inputMask [
 <getter>
 	^ (handle propertyNamed: #'InputMask' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> inputMask: aParam1 [
+JinCombobox >> inputMask: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'InputMask' withArguments: {aParam1} ).
@@ -1269,14 +1443,14 @@ JinControlTextbox >> inputMask: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> isHyperlink [
+JinCombobox >> isHyperlink [
 <getter>
 	^ (handle propertyNamed: #'IsHyperlink' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> isHyperlink: aParam1 [
+JinCombobox >> isHyperlink: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IsHyperlink' withArguments: {aParam1} ).
@@ -1284,14 +1458,14 @@ JinControlTextbox >> isHyperlink: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> isVisible [
+JinCombobox >> isVisible [
 <getter>
 	^ (handle propertyNamed: #'IsVisible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> isVisible: aParam1 [
+JinCombobox >> isVisible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IsVisible' withArguments: {aParam1} ).
@@ -1299,14 +1473,29 @@ JinControlTextbox >> isVisible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> keyboardLanguage [
+JinCombobox >> itemData: aIndex [
+<getter>
+
+	^ (handle propertyNamed: #'ItemData' withArguments: {aIndex} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> itemsSelected [
+<getter>
+	^ (handle propertyNamed: #'ItemsSelected' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> keyboardLanguage [
 <getter>
 	^ (handle propertyNamed: #'KeyboardLanguage' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> keyboardLanguage: aParam1 [
+JinCombobox >> keyboardLanguage: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'KeyboardLanguage' withArguments: {aParam1} ).
@@ -1314,14 +1503,14 @@ JinControlTextbox >> keyboardLanguage: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> labelAlign [
+JinCombobox >> labelAlign [
 <getter>
 	^ (handle propertyNamed: #'LabelAlign' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> labelAlign: aParam1 [
+JinCombobox >> labelAlign: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelAlign' withArguments: {aParam1} ).
@@ -1329,14 +1518,14 @@ JinControlTextbox >> labelAlign: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> labelX [
+JinCombobox >> labelX [
 <getter>
 	^ (handle propertyNamed: #'LabelX' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> labelX: aParam1 [
+JinCombobox >> labelX: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelX' withArguments: {aParam1} ).
@@ -1344,14 +1533,14 @@ JinControlTextbox >> labelX: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> labelY [
+JinCombobox >> labelY [
 <getter>
 	^ (handle propertyNamed: #'LabelY' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> labelY: aParam1 [
+JinCombobox >> labelY: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelY' withArguments: {aParam1} ).
@@ -1359,28 +1548,28 @@ JinControlTextbox >> labelY: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> layout [
+JinCombobox >> layout [
 <getter>
 	^ (handle propertyNamed: #'Layout' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> layoutID [
+JinCombobox >> layoutID [
 <getter>
 	^ (handle propertyNamed: #'LayoutID' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> left [
+JinCombobox >> left [
 <getter>
 	^ (handle propertyNamed: #'Left' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> left: aParam1 [
+JinCombobox >> left: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Left' withArguments: {aParam1} ).
@@ -1388,14 +1577,14 @@ JinControlTextbox >> left: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> leftMargin [
+JinCombobox >> leftMargin [
 <getter>
 	^ (handle propertyNamed: #'LeftMargin' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> leftMargin: aParam1 [
+JinCombobox >> leftMargin: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LeftMargin' withArguments: {aParam1} ).
@@ -1403,14 +1592,14 @@ JinControlTextbox >> leftMargin: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> leftPadding [
+JinCombobox >> leftPadding [
 <getter>
 	^ (handle propertyNamed: #'LeftPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> leftPadding: aParam1 [
+JinCombobox >> leftPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LeftPadding' withArguments: {aParam1} ).
@@ -1418,29 +1607,104 @@ JinControlTextbox >> leftPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> lineSpacing [
+JinCombobox >> limitToList [
 <getter>
-	^ (handle propertyNamed: #'LineSpacing' ).
+	^ (handle propertyNamed: #'LimitToList' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> lineSpacing: aParam1 [
+JinCombobox >> limitToList: aParam1 [
 <setter>
 		
-	^ (handle propertyNamed: #'LineSpacing' withArguments: {aParam1} ).
+	^ (handle propertyNamed: #'LimitToList' withArguments: {aParam1} ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> locked [
+JinCombobox >> listCount [
+<getter>
+	^ (handle propertyNamed: #'ListCount' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> listCount: aParam1 [
+<setter>
+		
+	^ (handle propertyNamed: #'ListCount' withArguments: {aParam1} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> listIndex [
+<getter>
+	^ (handle propertyNamed: #'ListIndex' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> listIndex: aParam1 [
+<setter>
+		
+	^ (handle propertyNamed: #'ListIndex' withArguments: {aParam1} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> listItemsEditForm [
+<getter>
+	^ (handle propertyNamed: #'ListItemsEditForm' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> listItemsEditForm: aParam1 [
+<setter>
+		
+	^ (handle propertyNamed: #'ListItemsEditForm' withArguments: {aParam1} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> listRows [
+<getter>
+	^ (handle propertyNamed: #'ListRows' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> listRows: aParam1 [
+<setter>
+		
+	^ (handle propertyNamed: #'ListRows' withArguments: {aParam1} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> listWidth [
+<getter>
+	^ (handle propertyNamed: #'ListWidth' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> listWidth: aParam1 [
+<setter>
+		
+	^ (handle propertyNamed: #'ListWidth' withArguments: {aParam1} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> locked [
 <getter>
 	^ (handle propertyNamed: #'Locked' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> locked: aParam1 [
+JinCombobox >> locked: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Locked' withArguments: {aParam1} ).
@@ -1448,7 +1712,7 @@ JinControlTextbox >> locked: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlTextbox >> move: aLeft top: aTop width: aWidth height: aHeight [
+JinCombobox >> move: aLeft top: aTop width: aWidth height: aHeight [
 <method>
 "This method can be called with optional parameters. Top,Width,Height"
 	^ (handle dispatch: #'Move' withArguments: {aLeft . aTop . aWidth . aHeight} ).
@@ -1456,14 +1720,14 @@ JinControlTextbox >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> name [
+JinCombobox >> name [
 <getter>
 	^ (handle propertyNamed: #'Name' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> name: aParam1 [
+JinCombobox >> name: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Name' withArguments: {aParam1} ).
@@ -1471,14 +1735,14 @@ JinControlTextbox >> name: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> numeralShapes [
+JinCombobox >> numeralShapes [
 <getter>
 	^ (handle propertyNamed: #'NumeralShapes' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> numeralShapes: aParam1 [
+JinCombobox >> numeralShapes: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'NumeralShapes' withArguments: {aParam1} ).
@@ -1486,14 +1750,14 @@ JinControlTextbox >> numeralShapes: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> oldBorderStyle [
+JinCombobox >> oldBorderStyle [
 <getter>
 	^ (handle propertyNamed: #'OldBorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> oldBorderStyle: aParam1 [
+JinCombobox >> oldBorderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OldBorderStyle' withArguments: {aParam1} ).
@@ -1501,21 +1765,21 @@ JinControlTextbox >> oldBorderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> oldValue [
+JinCombobox >> oldValue [
 <getter>
 	^ (handle propertyNamed: #'OldValue' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onChange [
+JinCombobox >> onChange [
 <getter>
 	^ (handle propertyNamed: #'OnChange' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onChange: aParam1 [
+JinCombobox >> onChange: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnChange' withArguments: {aParam1} ).
@@ -1523,14 +1787,14 @@ JinControlTextbox >> onChange: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onClick [
+JinCombobox >> onClick [
 <getter>
 	^ (handle propertyNamed: #'OnClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onClick: aParam1 [
+JinCombobox >> onClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnClick' withArguments: {aParam1} ).
@@ -1538,14 +1802,14 @@ JinControlTextbox >> onClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onDblClick [
+JinCombobox >> onDblClick [
 <getter>
 	^ (handle propertyNamed: #'OnDblClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onDblClick: aParam1 [
+JinCombobox >> onDblClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnDblClick' withArguments: {aParam1} ).
@@ -1553,14 +1817,14 @@ JinControlTextbox >> onDblClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onDirty [
+JinCombobox >> onDirty [
 <getter>
 	^ (handle propertyNamed: #'OnDirty' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onDirty: aParam1 [
+JinCombobox >> onDirty: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnDirty' withArguments: {aParam1} ).
@@ -1568,14 +1832,14 @@ JinControlTextbox >> onDirty: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onEnter [
+JinCombobox >> onEnter [
 <getter>
 	^ (handle propertyNamed: #'OnEnter' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onEnter: aParam1 [
+JinCombobox >> onEnter: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnEnter' withArguments: {aParam1} ).
@@ -1583,14 +1847,14 @@ JinControlTextbox >> onEnter: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onExit [
+JinCombobox >> onExit [
 <getter>
 	^ (handle propertyNamed: #'OnExit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onExit: aParam1 [
+JinCombobox >> onExit: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnExit' withArguments: {aParam1} ).
@@ -1598,14 +1862,14 @@ JinControlTextbox >> onExit: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onGotFocus [
+JinCombobox >> onGotFocus [
 <getter>
 	^ (handle propertyNamed: #'OnGotFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onGotFocus: aParam1 [
+JinCombobox >> onGotFocus: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnGotFocus' withArguments: {aParam1} ).
@@ -1613,14 +1877,14 @@ JinControlTextbox >> onGotFocus: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onKeyDown [
+JinCombobox >> onKeyDown [
 <getter>
 	^ (handle propertyNamed: #'OnKeyDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onKeyDown: aParam1 [
+JinCombobox >> onKeyDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyDown' withArguments: {aParam1} ).
@@ -1628,14 +1892,14 @@ JinControlTextbox >> onKeyDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onKeyPress [
+JinCombobox >> onKeyPress [
 <getter>
 	^ (handle propertyNamed: #'OnKeyPress' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onKeyPress: aParam1 [
+JinCombobox >> onKeyPress: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyPress' withArguments: {aParam1} ).
@@ -1643,14 +1907,14 @@ JinControlTextbox >> onKeyPress: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onKeyUp [
+JinCombobox >> onKeyUp [
 <getter>
 	^ (handle propertyNamed: #'OnKeyUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onKeyUp: aParam1 [
+JinCombobox >> onKeyUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyUp' withArguments: {aParam1} ).
@@ -1658,14 +1922,14 @@ JinControlTextbox >> onKeyUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onLostFocus [
+JinCombobox >> onLostFocus [
 <getter>
 	^ (handle propertyNamed: #'OnLostFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onLostFocus: aParam1 [
+JinCombobox >> onLostFocus: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnLostFocus' withArguments: {aParam1} ).
@@ -1673,14 +1937,14 @@ JinControlTextbox >> onLostFocus: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onMouseDown [
+JinCombobox >> onMouseDown [
 <getter>
 	^ (handle propertyNamed: #'OnMouseDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onMouseDown: aParam1 [
+JinCombobox >> onMouseDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseDown' withArguments: {aParam1} ).
@@ -1688,14 +1952,14 @@ JinControlTextbox >> onMouseDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onMouseMove [
+JinCombobox >> onMouseMove [
 <getter>
 	^ (handle propertyNamed: #'OnMouseMove' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onMouseMove: aParam1 [
+JinCombobox >> onMouseMove: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseMove' withArguments: {aParam1} ).
@@ -1703,14 +1967,14 @@ JinControlTextbox >> onMouseMove: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onMouseUp [
+JinCombobox >> onMouseUp [
 <getter>
 	^ (handle propertyNamed: #'OnMouseUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onMouseUp: aParam1 [
+JinCombobox >> onMouseUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseUp' withArguments: {aParam1} ).
@@ -1718,14 +1982,29 @@ JinControlTextbox >> onMouseUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onUndo [
+JinCombobox >> onNotInList [
+<getter>
+	^ (handle propertyNamed: #'OnNotInList' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> onNotInList: aParam1 [
+<setter>
+		
+	^ (handle propertyNamed: #'OnNotInList' withArguments: {aParam1} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> onUndo [
 <getter>
 	^ (handle propertyNamed: #'OnUndo' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> onUndo: aParam1 [
+JinCombobox >> onUndo: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnUndo' withArguments: {aParam1} ).
@@ -1733,58 +2012,66 @@ JinControlTextbox >> onUndo: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> parent [
+JinCombobox >> parent [
 <getter>
 	^ (handle propertyNamed: #'Parent' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> postalAddress [
-<getter>
-	^ (handle propertyNamed: #'PostalAddress' ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> postalAddress: aParam1 [
-<setter>
-		
-	^ (handle propertyNamed: #'PostalAddress' withArguments: {aParam1} ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> readingOrder [
+JinCombobox >> readingOrder [
 <getter>
 	^ (handle propertyNamed: #'ReadingOrder' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> readingOrder: aParam1 [
+JinCombobox >> readingOrder: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ReadingOrder' withArguments: {aParam1} ).
 
 ]
 
+{ #category : #'property - generated' }
+JinCombobox >> recordset [
+<getter>
+	^ (handle propertyNamed: #'Recordset' ).
+
+]
+
 { #category : #'method - generated' }
-JinControlTextbox >> requery [
+JinCombobox >> recordset: aParam1 [
+<method>
+
+	^ (handle dispatch: #'Recordset' withArguments: {aParam1} ).
+
+]
+
+{ #category : #'method - generated' }
+JinCombobox >> removeItem: aIndex [
+<method>
+
+	^ (handle dispatch: #'RemoveItem' withArguments: {aIndex} ).
+
+]
+
+{ #category : #'method - generated' }
+JinCombobox >> requery [
 <method>
 	^ (handle dispatch: #'Requery' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> rightMargin [
+JinCombobox >> rightMargin [
 <getter>
 	^ (handle propertyNamed: #'RightMargin' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> rightMargin: aParam1 [
+JinCombobox >> rightMargin: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'RightMargin' withArguments: {aParam1} ).
@@ -1792,14 +2079,14 @@ JinControlTextbox >> rightMargin: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> rightPadding [
+JinCombobox >> rightPadding [
 <getter>
 	^ (handle propertyNamed: #'RightPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> rightPadding: aParam1 [
+JinCombobox >> rightPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'RightPadding' withArguments: {aParam1} ).
@@ -1807,29 +2094,44 @@ JinControlTextbox >> rightPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> runningSum [
+JinCombobox >> rowSource [
 <getter>
-	^ (handle propertyNamed: #'RunningSum' ).
+	^ (handle propertyNamed: #'RowSource' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> runningSum: aParam1 [
+JinCombobox >> rowSource: aParam1 [
 <setter>
 		
-	^ (handle propertyNamed: #'RunningSum' withArguments: {aParam1} ).
+	^ (handle propertyNamed: #'RowSource' withArguments: {aParam1} ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> scrollBarAlign [
+JinCombobox >> rowSourceType [
+<getter>
+	^ (handle propertyNamed: #'RowSourceType' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> rowSourceType: aParam1 [
+<setter>
+		
+	^ (handle propertyNamed: #'RowSourceType' withArguments: {aParam1} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> scrollBarAlign [
 <getter>
 	^ (handle propertyNamed: #'ScrollBarAlign' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> scrollBarAlign: aParam1 [
+JinCombobox >> scrollBarAlign: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ScrollBarAlign' withArguments: {aParam1} ).
@@ -1837,29 +2139,14 @@ JinControlTextbox >> scrollBarAlign: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> scrollBars [
-<getter>
-	^ (handle propertyNamed: #'ScrollBars' ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> scrollBars: aParam1 [
-<setter>
-		
-	^ (handle propertyNamed: #'ScrollBars' withArguments: {aParam1} ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> section [
+JinCombobox >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> section: aParam1 [
+JinCombobox >> section: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Section' withArguments: {aParam1} ).
@@ -1867,14 +2154,14 @@ JinControlTextbox >> section: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> selLength [
+JinCombobox >> selLength [
 <getter>
 	^ (handle propertyNamed: #'SelLength' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> selLength: aParam1 [
+JinCombobox >> selLength: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SelLength' withArguments: {aParam1} ).
@@ -1882,14 +2169,14 @@ JinControlTextbox >> selLength: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> selStart [
+JinCombobox >> selStart [
 <getter>
 	^ (handle propertyNamed: #'SelStart' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> selStart: aParam1 [
+JinCombobox >> selStart: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SelStart' withArguments: {aParam1} ).
@@ -1897,36 +2184,67 @@ JinControlTextbox >> selStart: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> selText [
+JinCombobox >> selText [
 <getter>
 	^ (handle propertyNamed: #'SelText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> selText: aParam1 [
+JinCombobox >> selText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SelText' withArguments: {aParam1} ).
 
 ]
 
+{ #category : #'property - generated' }
+JinCombobox >> selected: aLRow [
+<getter>
+
+	^ (handle propertyNamed: #'Selected' withArguments: {aLRow} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> selected: aLRow aParam1: aParam1 [
+<setter>
+	
+	^ (handle propertyNamed: #'Selected' withArguments: {aLRow . aParam1} ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> separatorCharacters [
+<getter>
+	^ (handle propertyNamed: #'SeparatorCharacters' ).
+
+]
+
+{ #category : #'property - generated' }
+JinCombobox >> separatorCharacters: aParam1 [
+<setter>
+		
+	^ (handle propertyNamed: #'SeparatorCharacters' withArguments: {aParam1} ).
+
+]
+
 { #category : #'method - generated' }
-JinControlTextbox >> setFocus [
+JinCombobox >> setFocus [
 <method>
 	^ (handle dispatch: #'SetFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> shortcutMenuBar [
+JinCombobox >> shortcutMenuBar [
 <getter>
 	^ (handle propertyNamed: #'ShortcutMenuBar' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> shortcutMenuBar: aParam1 [
+JinCombobox >> shortcutMenuBar: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ShortcutMenuBar' withArguments: {aParam1} ).
@@ -1934,43 +2252,43 @@ JinControlTextbox >> shortcutMenuBar: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> showDatePicker [
+JinCombobox >> showOnlyRowSourceValues [
 <getter>
-	^ (handle propertyNamed: #'ShowDatePicker' ).
+	^ (handle propertyNamed: #'ShowOnlyRowSourceValues' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> showDatePicker: aParam1 [
+JinCombobox >> showOnlyRowSourceValues: aParam1 [
 <setter>
 		
-	^ (handle propertyNamed: #'ShowDatePicker' withArguments: {aParam1} ).
+	^ (handle propertyNamed: #'ShowOnlyRowSourceValues' withArguments: {aParam1} ).
 
 ]
 
 { #category : #'method - generated' }
-JinControlTextbox >> sizeToFit [
+JinCombobox >> sizeToFit [
 <method>
 	^ (handle dispatch: #'SizeToFit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> smartTags [
+JinCombobox >> smartTags [
 <getter>
 	^ (handle propertyNamed: #'SmartTags' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> specialEffect [
+JinCombobox >> specialEffect [
 <getter>
 	^ (handle propertyNamed: #'SpecialEffect' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> specialEffect: aParam1 [
+JinCombobox >> specialEffect: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SpecialEffect' withArguments: {aParam1} ).
@@ -1978,14 +2296,14 @@ JinControlTextbox >> specialEffect: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> statusBarText [
+JinCombobox >> statusBarText [
 <getter>
 	^ (handle propertyNamed: #'StatusBarText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> statusBarText: aParam1 [
+JinCombobox >> statusBarText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'StatusBarText' withArguments: {aParam1} ).
@@ -1993,14 +2311,14 @@ JinControlTextbox >> statusBarText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> tabIndex [
+JinCombobox >> tabIndex [
 <getter>
 	^ (handle propertyNamed: #'TabIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> tabIndex: aParam1 [
+JinCombobox >> tabIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabIndex' withArguments: {aParam1} ).
@@ -2008,14 +2326,14 @@ JinControlTextbox >> tabIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> tabStop [
+JinCombobox >> tabStop [
 <getter>
 	^ (handle propertyNamed: #'TabStop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> tabStop: aParam1 [
+JinCombobox >> tabStop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabStop' withArguments: {aParam1} ).
@@ -2023,14 +2341,14 @@ JinControlTextbox >> tabStop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> tag [
+JinCombobox >> tag [
 <getter>
 	^ (handle propertyNamed: #'Tag' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> tag: aParam1 [
+JinCombobox >> tag: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Tag' withArguments: {aParam1} ).
@@ -2038,14 +2356,14 @@ JinControlTextbox >> tag: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> text [
+JinCombobox >> text [
 <getter>
 	^ (handle propertyNamed: #'Text' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> text: aParam1 [
+JinCombobox >> text: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Text' withArguments: {aParam1} ).
@@ -2053,14 +2371,14 @@ JinControlTextbox >> text: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> textAlign [
+JinCombobox >> textAlign [
 <getter>
 	^ (handle propertyNamed: #'TextAlign' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> textAlign: aParam1 [
+JinCombobox >> textAlign: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TextAlign' withArguments: {aParam1} ).
@@ -2068,29 +2386,14 @@ JinControlTextbox >> textAlign: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> textFormat [
-<getter>
-	^ (handle propertyNamed: #'TextFormat' ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> textFormat: aParam1 [
-<setter>
-		
-	^ (handle propertyNamed: #'TextFormat' withArguments: {aParam1} ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> themeFontIndex [
+JinCombobox >> themeFontIndex [
 <getter>
 	^ (handle propertyNamed: #'ThemeFontIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> themeFontIndex: aParam1 [
+JinCombobox >> themeFontIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ThemeFontIndex' withArguments: {aParam1} ).
@@ -2098,14 +2401,14 @@ JinControlTextbox >> themeFontIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> top [
+JinCombobox >> top [
 <getter>
 	^ (handle propertyNamed: #'Top' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> top: aParam1 [
+JinCombobox >> top: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Top' withArguments: {aParam1} ).
@@ -2113,14 +2416,14 @@ JinControlTextbox >> top: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> topMargin [
+JinCombobox >> topMargin [
 <getter>
 	^ (handle propertyNamed: #'TopMargin' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> topMargin: aParam1 [
+JinCombobox >> topMargin: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TopMargin' withArguments: {aParam1} ).
@@ -2128,14 +2431,14 @@ JinControlTextbox >> topMargin: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> topPadding [
+JinCombobox >> topPadding [
 <getter>
 	^ (handle propertyNamed: #'TopPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> topPadding: aParam1 [
+JinCombobox >> topPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TopPadding' withArguments: {aParam1} ).
@@ -2143,14 +2446,14 @@ JinControlTextbox >> topPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> validationRule [
+JinCombobox >> validationRule [
 <getter>
 	^ (handle propertyNamed: #'ValidationRule' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> validationRule: aParam1 [
+JinCombobox >> validationRule: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ValidationRule' withArguments: {aParam1} ).
@@ -2158,14 +2461,14 @@ JinControlTextbox >> validationRule: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> validationText [
+JinCombobox >> validationText [
 <getter>
 	^ (handle propertyNamed: #'ValidationText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> validationText: aParam1 [
+JinCombobox >> validationText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ValidationText' withArguments: {aParam1} ).
@@ -2173,14 +2476,13 @@ JinControlTextbox >> validationText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> value [
-<getter>
-	^ (handle propertyNamed: #'Value' ).
-
+JinCombobox >> value [
+	<getter>
+	^ handle propertyNamed: #Value
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> value: aParam1 [
+JinCombobox >> value: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Value' withArguments: {aParam1} ).
@@ -2188,29 +2490,14 @@ JinControlTextbox >> value: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> vertical [
-<getter>
-	^ (handle propertyNamed: #'Vertical' ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> vertical: aParam1 [
-<setter>
-		
-	^ (handle propertyNamed: #'Vertical' withArguments: {aParam1} ).
-
-]
-
-{ #category : #'property - generated' }
-JinControlTextbox >> verticalAnchor [
+JinCombobox >> verticalAnchor [
 <getter>
 	^ (handle propertyNamed: #'VerticalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> verticalAnchor: aParam1 [
+JinCombobox >> verticalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'VerticalAnchor' withArguments: {aParam1} ).
@@ -2218,14 +2505,14 @@ JinControlTextbox >> verticalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> visible [
+JinCombobox >> visible [
 <getter>
 	^ (handle propertyNamed: #'Visible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> visible: aParam1 [
+JinCombobox >> visible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Visible' withArguments: {aParam1} ).
@@ -2233,14 +2520,14 @@ JinControlTextbox >> visible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> width [
+JinCombobox >> width [
 <getter>
 	^ (handle propertyNamed: #'Width' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> width: aParam1 [
+JinCombobox >> width: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Width' withArguments: {aParam1} ).

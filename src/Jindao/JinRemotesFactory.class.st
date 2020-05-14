@@ -18,16 +18,18 @@ JinRemotesFactory class >> defaultFactory [
 
 { #category : #'instance creation' }
 JinRemotesFactory class >> newDefaultAccessPropertyFactory [
-	^ self defaultFactory new
-		defaultHierarchyClass: JinAccessProperty;
-		yourself
+	| f |
+	f := self defaultFactory.
+	self assert: f ~= self.
+	^ f newDefaultAccessPropertyFactory
 ]
 
 { #category : #'instance creation' }
 JinRemotesFactory class >> newDefaultControlsFactory [
-	^ self defaultFactory new
-		defaultHierarchyClass: JinControlGeneric;
-		yourself
+	| f |
+	f := self defaultFactory.
+	self assert: f ~= self.
+	^ f newDefaultControlsFactory
 ]
 
 { #category : #accessing }

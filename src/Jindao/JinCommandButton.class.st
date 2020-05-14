@@ -194,30 +194,30 @@ You can display text on a command button by setting its **Caption** property, or
 
 "
 Class {
-	#name : #JinControlCommandButton,
+	#name : #JinCommandButton,
 	#superclass : #JinControlAbstractCommandButton,
 	#category : #'Jindao-DomainObjects-GeneratedControls'
 }
 
 { #category : #generated }
-JinControlCommandButton class >> mappedTypeName [
+JinCommandButton class >> mappedTypeName [
 	^#'_CommandButton'
 ]
 
 { #category : #generated }
-JinControlCommandButton >> acceptVisitor: aVisitor [
+JinCommandButton >> acceptVisitor: aVisitor [
 	^ aVisitor visitCommandButton: self
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> addColon [
+JinCommandButton >> addColon [
 <getter>
 	^ (handle propertyNamed: #'AddColon' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> addColon: aParam1 [
+JinCommandButton >> addColon: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AddColon' withArguments: {aParam1} ).
@@ -225,14 +225,14 @@ JinControlCommandButton >> addColon: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> alignment [
+JinCommandButton >> alignment [
 <getter>
 	^ (handle propertyNamed: #'Alignment' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> alignment: aParam1 [
+JinCommandButton >> alignment: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Alignment' withArguments: {aParam1} ).
@@ -240,21 +240,21 @@ JinControlCommandButton >> alignment: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> application [
+JinCommandButton >> application [
 <getter>
 	^ (handle propertyNamed: #'Application' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> autoLabel [
+JinCommandButton >> autoLabel [
 <getter>
 	^ (handle propertyNamed: #'AutoLabel' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> autoLabel: aParam1 [
+JinCommandButton >> autoLabel: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AutoLabel' withArguments: {aParam1} ).
@@ -262,14 +262,14 @@ JinControlCommandButton >> autoLabel: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> autoRepeat [
+JinCommandButton >> autoRepeat [
 <getter>
 	^ (handle propertyNamed: #'AutoRepeat' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> autoRepeat: aParam1 [
+JinCommandButton >> autoRepeat: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'AutoRepeat' withArguments: {aParam1} ).
@@ -277,14 +277,14 @@ JinControlCommandButton >> autoRepeat: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> backColor [
+JinCommandButton >> backColor [
 <getter>
 	^ (handle propertyNamed: #'BackColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> backColor: aParam1 [
+JinCommandButton >> backColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackColor' withArguments: {aParam1} ).
@@ -292,14 +292,14 @@ JinControlCommandButton >> backColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> backShade [
+JinCommandButton >> backShade [
 <getter>
 	^ (handle propertyNamed: #'BackShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> backShade: aParam1 [
+JinCommandButton >> backShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackShade' withArguments: {aParam1} ).
@@ -307,14 +307,14 @@ JinControlCommandButton >> backShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> backStyle [
+JinCommandButton >> backStyle [
 <getter>
 	^ (handle propertyNamed: #'BackStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> backStyle: aParam1 [
+JinCommandButton >> backStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackStyle' withArguments: {aParam1} ).
@@ -322,14 +322,14 @@ JinControlCommandButton >> backStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> backThemeColorIndex [
+JinCommandButton >> backThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BackThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> backThemeColorIndex: aParam1 [
+JinCommandButton >> backThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackThemeColorIndex' withArguments: {aParam1} ).
@@ -337,14 +337,14 @@ JinControlCommandButton >> backThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> backTint [
+JinCommandButton >> backTint [
 <getter>
 	^ (handle propertyNamed: #'BackTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> backTint: aParam1 [
+JinCommandButton >> backTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackTint' withArguments: {aParam1} ).
@@ -352,14 +352,14 @@ JinControlCommandButton >> backTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> bevel [
+JinCommandButton >> bevel [
 <getter>
 	^ (handle propertyNamed: #'Bevel' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> bevel: aParam1 [
+JinCommandButton >> bevel: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Bevel' withArguments: {aParam1} ).
@@ -367,14 +367,14 @@ JinControlCommandButton >> bevel: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> borderColor [
+JinCommandButton >> borderColor [
 <getter>
 	^ (handle propertyNamed: #'BorderColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> borderColor: aParam1 [
+JinCommandButton >> borderColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderColor' withArguments: {aParam1} ).
@@ -382,14 +382,14 @@ JinControlCommandButton >> borderColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> borderShade [
+JinCommandButton >> borderShade [
 <getter>
 	^ (handle propertyNamed: #'BorderShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> borderShade: aParam1 [
+JinCommandButton >> borderShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderShade' withArguments: {aParam1} ).
@@ -397,14 +397,14 @@ JinControlCommandButton >> borderShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> borderStyle [
+JinCommandButton >> borderStyle [
 <getter>
 	^ (handle propertyNamed: #'BorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> borderStyle: aParam1 [
+JinCommandButton >> borderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderStyle' withArguments: {aParam1} ).
@@ -412,14 +412,14 @@ JinControlCommandButton >> borderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> borderThemeColorIndex [
+JinCommandButton >> borderThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BorderThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> borderThemeColorIndex: aParam1 [
+JinCommandButton >> borderThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderThemeColorIndex' withArguments: {aParam1} ).
@@ -427,14 +427,14 @@ JinControlCommandButton >> borderThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> borderTint [
+JinCommandButton >> borderTint [
 <getter>
 	^ (handle propertyNamed: #'BorderTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> borderTint: aParam1 [
+JinCommandButton >> borderTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderTint' withArguments: {aParam1} ).
@@ -442,14 +442,14 @@ JinControlCommandButton >> borderTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> borderWidth [
+JinCommandButton >> borderWidth [
 <getter>
 	^ (handle propertyNamed: #'BorderWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> borderWidth: aParam1 [
+JinCommandButton >> borderWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderWidth' withArguments: {aParam1} ).
@@ -457,14 +457,14 @@ JinControlCommandButton >> borderWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> bottomPadding [
+JinCommandButton >> bottomPadding [
 <getter>
 	^ (handle propertyNamed: #'BottomPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> bottomPadding: aParam1 [
+JinCommandButton >> bottomPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BottomPadding' withArguments: {aParam1} ).
@@ -472,14 +472,14 @@ JinControlCommandButton >> bottomPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> cancel [
+JinCommandButton >> cancel [
 <getter>
 	^ (handle propertyNamed: #'Cancel' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> cancel: aParam1 [
+JinCommandButton >> cancel: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Cancel' withArguments: {aParam1} ).
@@ -487,14 +487,14 @@ JinControlCommandButton >> cancel: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> caption [
+JinCommandButton >> caption [
 <getter>
 	^ (handle propertyNamed: #'Caption' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> caption: aParam1 [
+JinCommandButton >> caption: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Caption' withArguments: {aParam1} ).
@@ -502,14 +502,14 @@ JinControlCommandButton >> caption: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> controlTipText [
+JinCommandButton >> controlTipText [
 <getter>
 	^ (handle propertyNamed: #'ControlTipText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> controlTipText: aParam1 [
+JinCommandButton >> controlTipText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlTipText' withArguments: {aParam1} ).
@@ -517,14 +517,14 @@ JinControlCommandButton >> controlTipText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> controlType [
+JinCommandButton >> controlType [
 <getter>
 	^ (handle propertyNamed: #'ControlType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> controlType: aParam1 [
+JinCommandButton >> controlType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlType' withArguments: {aParam1} ).
@@ -532,21 +532,21 @@ JinControlCommandButton >> controlType: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> controls [
+JinCommandButton >> controls [
 <getter>
 	^ (handle propertyNamed: #'Controls' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> cursorOnHover [
+JinCommandButton >> cursorOnHover [
 <getter>
 	^ (handle propertyNamed: #'CursorOnHover' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> cursorOnHover: aParam1 [
+JinCommandButton >> cursorOnHover: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'CursorOnHover' withArguments: {aParam1} ).
@@ -554,14 +554,14 @@ JinControlCommandButton >> cursorOnHover: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> default [
+JinCommandButton >> default [
 <getter>
 	^ (handle propertyNamed: #'Default' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> default: aParam1 [
+JinCommandButton >> default: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Default' withArguments: {aParam1} ).
@@ -569,14 +569,14 @@ JinControlCommandButton >> default: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> displayWhen [
+JinCommandButton >> displayWhen [
 <getter>
 	^ (handle propertyNamed: #'DisplayWhen' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> displayWhen: aParam1 [
+JinCommandButton >> displayWhen: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DisplayWhen' withArguments: {aParam1} ).
@@ -584,14 +584,14 @@ JinControlCommandButton >> displayWhen: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> enabled [
+JinCommandButton >> enabled [
 <getter>
 	^ (handle propertyNamed: #'Enabled' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> enabled: aParam1 [
+JinCommandButton >> enabled: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Enabled' withArguments: {aParam1} ).
@@ -599,14 +599,14 @@ JinControlCommandButton >> enabled: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> eventProcPrefix [
+JinCommandButton >> eventProcPrefix [
 <getter>
 	^ (handle propertyNamed: #'EventProcPrefix' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> eventProcPrefix: aParam1 [
+JinCommandButton >> eventProcPrefix: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'EventProcPrefix' withArguments: {aParam1} ).
@@ -614,14 +614,14 @@ JinControlCommandButton >> eventProcPrefix: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> fontBold [
+JinCommandButton >> fontBold [
 <getter>
 	^ (handle propertyNamed: #'FontBold' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> fontBold: aParam1 [
+JinCommandButton >> fontBold: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontBold' withArguments: {aParam1} ).
@@ -629,14 +629,14 @@ JinControlCommandButton >> fontBold: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> fontItalic [
+JinCommandButton >> fontItalic [
 <getter>
 	^ (handle propertyNamed: #'FontItalic' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> fontItalic: aParam1 [
+JinCommandButton >> fontItalic: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontItalic' withArguments: {aParam1} ).
@@ -644,14 +644,14 @@ JinControlCommandButton >> fontItalic: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> fontName [
+JinCommandButton >> fontName [
 <getter>
 	^ (handle propertyNamed: #'FontName' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> fontName: aParam1 [
+JinCommandButton >> fontName: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontName' withArguments: {aParam1} ).
@@ -659,14 +659,14 @@ JinControlCommandButton >> fontName: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> fontSize [
+JinCommandButton >> fontSize [
 <getter>
 	^ (handle propertyNamed: #'FontSize' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> fontSize: aParam1 [
+JinCommandButton >> fontSize: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontSize' withArguments: {aParam1} ).
@@ -674,14 +674,14 @@ JinControlCommandButton >> fontSize: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> fontUnderline [
+JinCommandButton >> fontUnderline [
 <getter>
 	^ (handle propertyNamed: #'FontUnderline' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> fontUnderline: aParam1 [
+JinCommandButton >> fontUnderline: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontUnderline' withArguments: {aParam1} ).
@@ -689,14 +689,14 @@ JinControlCommandButton >> fontUnderline: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> fontWeight [
+JinCommandButton >> fontWeight [
 <getter>
 	^ (handle propertyNamed: #'FontWeight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> fontWeight: aParam1 [
+JinCommandButton >> fontWeight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontWeight' withArguments: {aParam1} ).
@@ -704,14 +704,14 @@ JinControlCommandButton >> fontWeight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> foreColor [
+JinCommandButton >> foreColor [
 <getter>
 	^ (handle propertyNamed: #'ForeColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> foreColor: aParam1 [
+JinCommandButton >> foreColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeColor' withArguments: {aParam1} ).
@@ -719,14 +719,14 @@ JinControlCommandButton >> foreColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> foreShade [
+JinCommandButton >> foreShade [
 <getter>
 	^ (handle propertyNamed: #'ForeShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> foreShade: aParam1 [
+JinCommandButton >> foreShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeShade' withArguments: {aParam1} ).
@@ -734,14 +734,14 @@ JinControlCommandButton >> foreShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> foreThemeColorIndex [
+JinCommandButton >> foreThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'ForeThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> foreThemeColorIndex: aParam1 [
+JinCommandButton >> foreThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeThemeColorIndex' withArguments: {aParam1} ).
@@ -749,14 +749,14 @@ JinControlCommandButton >> foreThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> foreTint [
+JinCommandButton >> foreTint [
 <getter>
 	^ (handle propertyNamed: #'ForeTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> foreTint: aParam1 [
+JinCommandButton >> foreTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeTint' withArguments: {aParam1} ).
@@ -764,14 +764,14 @@ JinControlCommandButton >> foreTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> glow [
+JinCommandButton >> glow [
 <getter>
 	^ (handle propertyNamed: #'Glow' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> glow: aParam1 [
+JinCommandButton >> glow: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Glow' withArguments: {aParam1} ).
@@ -779,14 +779,14 @@ JinControlCommandButton >> glow: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gradient [
+JinCommandButton >> gradient [
 <getter>
 	^ (handle propertyNamed: #'Gradient' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gradient: aParam1 [
+JinCommandButton >> gradient: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Gradient' withArguments: {aParam1} ).
@@ -794,14 +794,14 @@ JinControlCommandButton >> gradient: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineColor [
+JinCommandButton >> gridlineColor [
 <getter>
 	^ (handle propertyNamed: #'GridlineColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineColor: aParam1 [
+JinCommandButton >> gridlineColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineColor' withArguments: {aParam1} ).
@@ -809,14 +809,14 @@ JinControlCommandButton >> gridlineColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineShade [
+JinCommandButton >> gridlineShade [
 <getter>
 	^ (handle propertyNamed: #'GridlineShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineShade: aParam1 [
+JinCommandButton >> gridlineShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineShade' withArguments: {aParam1} ).
@@ -824,14 +824,14 @@ JinControlCommandButton >> gridlineShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineStyleBottom [
+JinCommandButton >> gridlineStyleBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineStyleBottom: aParam1 [
+JinCommandButton >> gridlineStyleBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleBottom' withArguments: {aParam1} ).
@@ -839,14 +839,14 @@ JinControlCommandButton >> gridlineStyleBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineStyleLeft [
+JinCommandButton >> gridlineStyleLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineStyleLeft: aParam1 [
+JinCommandButton >> gridlineStyleLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleLeft' withArguments: {aParam1} ).
@@ -854,14 +854,14 @@ JinControlCommandButton >> gridlineStyleLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineStyleRight [
+JinCommandButton >> gridlineStyleRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineStyleRight: aParam1 [
+JinCommandButton >> gridlineStyleRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleRight' withArguments: {aParam1} ).
@@ -869,14 +869,14 @@ JinControlCommandButton >> gridlineStyleRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineStyleTop [
+JinCommandButton >> gridlineStyleTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineStyleTop: aParam1 [
+JinCommandButton >> gridlineStyleTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleTop' withArguments: {aParam1} ).
@@ -884,14 +884,14 @@ JinControlCommandButton >> gridlineStyleTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineThemeColorIndex [
+JinCommandButton >> gridlineThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineThemeColorIndex: aParam1 [
+JinCommandButton >> gridlineThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' withArguments: {aParam1} ).
@@ -899,14 +899,14 @@ JinControlCommandButton >> gridlineThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineTint [
+JinCommandButton >> gridlineTint [
 <getter>
 	^ (handle propertyNamed: #'GridlineTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineTint: aParam1 [
+JinCommandButton >> gridlineTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineTint' withArguments: {aParam1} ).
@@ -914,14 +914,14 @@ JinControlCommandButton >> gridlineTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineWidthBottom [
+JinCommandButton >> gridlineWidthBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineWidthBottom: aParam1 [
+JinCommandButton >> gridlineWidthBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthBottom' withArguments: {aParam1} ).
@@ -929,14 +929,14 @@ JinControlCommandButton >> gridlineWidthBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineWidthLeft [
+JinCommandButton >> gridlineWidthLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineWidthLeft: aParam1 [
+JinCommandButton >> gridlineWidthLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthLeft' withArguments: {aParam1} ).
@@ -944,14 +944,14 @@ JinControlCommandButton >> gridlineWidthLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineWidthRight [
+JinCommandButton >> gridlineWidthRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineWidthRight: aParam1 [
+JinCommandButton >> gridlineWidthRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthRight' withArguments: {aParam1} ).
@@ -959,14 +959,14 @@ JinControlCommandButton >> gridlineWidthRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineWidthTop [
+JinCommandButton >> gridlineWidthTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> gridlineWidthTop: aParam1 [
+JinCommandButton >> gridlineWidthTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthTop' withArguments: {aParam1} ).
@@ -974,14 +974,14 @@ JinControlCommandButton >> gridlineWidthTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> height [
+JinCommandButton >> height [
 <getter>
 	^ (handle propertyNamed: #'Height' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> height: aParam1 [
+JinCommandButton >> height: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Height' withArguments: {aParam1} ).
@@ -989,14 +989,14 @@ JinControlCommandButton >> height: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> helpContextId [
+JinCommandButton >> helpContextId [
 <getter>
 	^ (handle propertyNamed: #'HelpContextId' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> helpContextId: aParam1 [
+JinCommandButton >> helpContextId: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HelpContextId' withArguments: {aParam1} ).
@@ -1004,14 +1004,14 @@ JinControlCommandButton >> helpContextId: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> horizontalAnchor [
+JinCommandButton >> horizontalAnchor [
 <getter>
 	^ (handle propertyNamed: #'HorizontalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> horizontalAnchor: aParam1 [
+JinCommandButton >> horizontalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HorizontalAnchor' withArguments: {aParam1} ).
@@ -1019,14 +1019,14 @@ JinControlCommandButton >> horizontalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverColor [
+JinCommandButton >> hoverColor [
 <getter>
 	^ (handle propertyNamed: #'HoverColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverColor: aParam1 [
+JinCommandButton >> hoverColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverColor' withArguments: {aParam1} ).
@@ -1034,14 +1034,14 @@ JinControlCommandButton >> hoverColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverForeColor [
+JinCommandButton >> hoverForeColor [
 <getter>
 	^ (handle propertyNamed: #'HoverForeColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverForeColor: aParam1 [
+JinCommandButton >> hoverForeColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverForeColor' withArguments: {aParam1} ).
@@ -1049,14 +1049,14 @@ JinControlCommandButton >> hoverForeColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverForeShade [
+JinCommandButton >> hoverForeShade [
 <getter>
 	^ (handle propertyNamed: #'HoverForeShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverForeShade: aParam1 [
+JinCommandButton >> hoverForeShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverForeShade' withArguments: {aParam1} ).
@@ -1064,14 +1064,14 @@ JinControlCommandButton >> hoverForeShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverForeThemeColorIndex [
+JinCommandButton >> hoverForeThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'HoverForeThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverForeThemeColorIndex: aParam1 [
+JinCommandButton >> hoverForeThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverForeThemeColorIndex' withArguments: {aParam1} ).
@@ -1079,14 +1079,14 @@ JinControlCommandButton >> hoverForeThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverForeTint [
+JinCommandButton >> hoverForeTint [
 <getter>
 	^ (handle propertyNamed: #'HoverForeTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverForeTint: aParam1 [
+JinCommandButton >> hoverForeTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverForeTint' withArguments: {aParam1} ).
@@ -1094,14 +1094,14 @@ JinControlCommandButton >> hoverForeTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverShade [
+JinCommandButton >> hoverShade [
 <getter>
 	^ (handle propertyNamed: #'HoverShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverShade: aParam1 [
+JinCommandButton >> hoverShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverShade' withArguments: {aParam1} ).
@@ -1109,14 +1109,14 @@ JinControlCommandButton >> hoverShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverThemeColorIndex [
+JinCommandButton >> hoverThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'HoverThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverThemeColorIndex: aParam1 [
+JinCommandButton >> hoverThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverThemeColorIndex' withArguments: {aParam1} ).
@@ -1124,14 +1124,14 @@ JinControlCommandButton >> hoverThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverTint [
+JinCommandButton >> hoverTint [
 <getter>
 	^ (handle propertyNamed: #'HoverTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hoverTint: aParam1 [
+JinCommandButton >> hoverTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HoverTint' withArguments: {aParam1} ).
@@ -1139,21 +1139,21 @@ JinControlCommandButton >> hoverTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hyperlink [
+JinCommandButton >> hyperlink [
 <getter>
 	^ (handle propertyNamed: #'Hyperlink' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hyperlinkAddress [
+JinCommandButton >> hyperlinkAddress [
 <getter>
 	^ (handle propertyNamed: #'HyperlinkAddress' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hyperlinkAddress: aParam1 [
+JinCommandButton >> hyperlinkAddress: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HyperlinkAddress' withArguments: {aParam1} ).
@@ -1161,14 +1161,14 @@ JinControlCommandButton >> hyperlinkAddress: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hyperlinkSubAddress [
+JinCommandButton >> hyperlinkSubAddress [
 <getter>
 	^ (handle propertyNamed: #'HyperlinkSubAddress' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> hyperlinkSubAddress: aParam1 [
+JinCommandButton >> hyperlinkSubAddress: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HyperlinkSubAddress' withArguments: {aParam1} ).
@@ -1176,14 +1176,14 @@ JinControlCommandButton >> hyperlinkSubAddress: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> inSelection [
+JinCommandButton >> inSelection [
 <getter>
 	^ (handle propertyNamed: #'InSelection' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> inSelection: aParam1 [
+JinCommandButton >> inSelection: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'InSelection' withArguments: {aParam1} ).
@@ -1191,14 +1191,14 @@ JinControlCommandButton >> inSelection: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> isVisible [
+JinCommandButton >> isVisible [
 <getter>
 	^ (handle propertyNamed: #'IsVisible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> isVisible: aParam1 [
+JinCommandButton >> isVisible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IsVisible' withArguments: {aParam1} ).
@@ -1206,14 +1206,14 @@ JinControlCommandButton >> isVisible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> labelAlign [
+JinCommandButton >> labelAlign [
 <getter>
 	^ (handle propertyNamed: #'LabelAlign' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> labelAlign: aParam1 [
+JinCommandButton >> labelAlign: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelAlign' withArguments: {aParam1} ).
@@ -1221,14 +1221,14 @@ JinControlCommandButton >> labelAlign: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> labelX [
+JinCommandButton >> labelX [
 <getter>
 	^ (handle propertyNamed: #'LabelX' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> labelX: aParam1 [
+JinCommandButton >> labelX: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelX' withArguments: {aParam1} ).
@@ -1236,14 +1236,14 @@ JinControlCommandButton >> labelX: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> labelY [
+JinCommandButton >> labelY [
 <getter>
 	^ (handle propertyNamed: #'LabelY' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> labelY: aParam1 [
+JinCommandButton >> labelY: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LabelY' withArguments: {aParam1} ).
@@ -1251,28 +1251,28 @@ JinControlCommandButton >> labelY: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> layout [
+JinCommandButton >> layout [
 <getter>
 	^ (handle propertyNamed: #'Layout' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> layoutID [
+JinCommandButton >> layoutID [
 <getter>
 	^ (handle propertyNamed: #'LayoutID' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> left [
+JinCommandButton >> left [
 <getter>
 	^ (handle propertyNamed: #'Left' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> left: aParam1 [
+JinCommandButton >> left: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Left' withArguments: {aParam1} ).
@@ -1280,14 +1280,14 @@ JinControlCommandButton >> left: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> leftPadding [
+JinCommandButton >> leftPadding [
 <getter>
 	^ (handle propertyNamed: #'LeftPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> leftPadding: aParam1 [
+JinCommandButton >> leftPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LeftPadding' withArguments: {aParam1} ).
@@ -1295,7 +1295,7 @@ JinControlCommandButton >> leftPadding: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlCommandButton >> move: aLeft top: aTop width: aWidth height: aHeight [
+JinCommandButton >> move: aLeft top: aTop width: aWidth height: aHeight [
 <method>
 "This method can be called with optional parameters. Top,Width,Height"
 	^ (handle dispatch: #'Move' withArguments: {aLeft . aTop . aWidth . aHeight} ).
@@ -1303,14 +1303,14 @@ JinControlCommandButton >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> name [
+JinCommandButton >> name [
 <getter>
 	^ (handle propertyNamed: #'Name' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> name: aParam1 [
+JinCommandButton >> name: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Name' withArguments: {aParam1} ).
@@ -1318,14 +1318,14 @@ JinControlCommandButton >> name: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> objectPalette [
+JinCommandButton >> objectPalette [
 <getter>
 	^ (handle propertyNamed: #'ObjectPalette' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> objectPalette: aParam1 [
+JinCommandButton >> objectPalette: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ObjectPalette' withArguments: {aParam1} ).
@@ -1333,21 +1333,21 @@ JinControlCommandButton >> objectPalette: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> oldValue [
+JinCommandButton >> oldValue [
 <getter>
 	^ (handle propertyNamed: #'OldValue' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onClick [
+JinCommandButton >> onClick [
 <getter>
 	^ (handle propertyNamed: #'OnClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onClick: aParam1 [
+JinCommandButton >> onClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnClick' withArguments: {aParam1} ).
@@ -1355,14 +1355,14 @@ JinControlCommandButton >> onClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onDblClick [
+JinCommandButton >> onDblClick [
 <getter>
 	^ (handle propertyNamed: #'OnDblClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onDblClick: aParam1 [
+JinCommandButton >> onDblClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnDblClick' withArguments: {aParam1} ).
@@ -1370,14 +1370,14 @@ JinControlCommandButton >> onDblClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onEnter [
+JinCommandButton >> onEnter [
 <getter>
 	^ (handle propertyNamed: #'OnEnter' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onEnter: aParam1 [
+JinCommandButton >> onEnter: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnEnter' withArguments: {aParam1} ).
@@ -1385,14 +1385,14 @@ JinControlCommandButton >> onEnter: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onExit [
+JinCommandButton >> onExit [
 <getter>
 	^ (handle propertyNamed: #'OnExit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onExit: aParam1 [
+JinCommandButton >> onExit: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnExit' withArguments: {aParam1} ).
@@ -1400,14 +1400,14 @@ JinControlCommandButton >> onExit: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onGotFocus [
+JinCommandButton >> onGotFocus [
 <getter>
 	^ (handle propertyNamed: #'OnGotFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onGotFocus: aParam1 [
+JinCommandButton >> onGotFocus: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnGotFocus' withArguments: {aParam1} ).
@@ -1415,14 +1415,14 @@ JinControlCommandButton >> onGotFocus: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onKeyDown [
+JinCommandButton >> onKeyDown [
 <getter>
 	^ (handle propertyNamed: #'OnKeyDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onKeyDown: aParam1 [
+JinCommandButton >> onKeyDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyDown' withArguments: {aParam1} ).
@@ -1430,14 +1430,14 @@ JinControlCommandButton >> onKeyDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onKeyPress [
+JinCommandButton >> onKeyPress [
 <getter>
 	^ (handle propertyNamed: #'OnKeyPress' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onKeyPress: aParam1 [
+JinCommandButton >> onKeyPress: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyPress' withArguments: {aParam1} ).
@@ -1445,14 +1445,14 @@ JinControlCommandButton >> onKeyPress: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onKeyUp [
+JinCommandButton >> onKeyUp [
 <getter>
 	^ (handle propertyNamed: #'OnKeyUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onKeyUp: aParam1 [
+JinCommandButton >> onKeyUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnKeyUp' withArguments: {aParam1} ).
@@ -1460,14 +1460,14 @@ JinControlCommandButton >> onKeyUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onLostFocus [
+JinCommandButton >> onLostFocus [
 <getter>
 	^ (handle propertyNamed: #'OnLostFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onLostFocus: aParam1 [
+JinCommandButton >> onLostFocus: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnLostFocus' withArguments: {aParam1} ).
@@ -1475,14 +1475,14 @@ JinControlCommandButton >> onLostFocus: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onMouseDown [
+JinCommandButton >> onMouseDown [
 <getter>
 	^ (handle propertyNamed: #'OnMouseDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onMouseDown: aParam1 [
+JinCommandButton >> onMouseDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseDown' withArguments: {aParam1} ).
@@ -1490,14 +1490,14 @@ JinControlCommandButton >> onMouseDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onMouseMove [
+JinCommandButton >> onMouseMove [
 <getter>
 	^ (handle propertyNamed: #'OnMouseMove' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onMouseMove: aParam1 [
+JinCommandButton >> onMouseMove: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseMove' withArguments: {aParam1} ).
@@ -1505,14 +1505,14 @@ JinControlCommandButton >> onMouseMove: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onMouseUp [
+JinCommandButton >> onMouseUp [
 <getter>
 	^ (handle propertyNamed: #'OnMouseUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onMouseUp: aParam1 [
+JinCommandButton >> onMouseUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseUp' withArguments: {aParam1} ).
@@ -1520,14 +1520,14 @@ JinControlCommandButton >> onMouseUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onPush [
+JinCommandButton >> onPush [
 <getter>
 	^ (handle propertyNamed: #'OnPush' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> onPush: aParam1 [
+JinCommandButton >> onPush: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnPush' withArguments: {aParam1} ).
@@ -1535,21 +1535,21 @@ JinControlCommandButton >> onPush: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> parent [
+JinCommandButton >> parent [
 <getter>
 	^ (handle propertyNamed: #'Parent' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> picture [
+JinCommandButton >> picture [
 <getter>
 	^ (handle propertyNamed: #'Picture' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> picture: aParam1 [
+JinCommandButton >> picture: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Picture' withArguments: {aParam1} ).
@@ -1557,14 +1557,14 @@ JinControlCommandButton >> picture: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pictureCaptionArrangement [
+JinCommandButton >> pictureCaptionArrangement [
 <getter>
 	^ (handle propertyNamed: #'PictureCaptionArrangement' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pictureCaptionArrangement: aParam1 [
+JinCommandButton >> pictureCaptionArrangement: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PictureCaptionArrangement' withArguments: {aParam1} ).
@@ -1572,14 +1572,14 @@ JinControlCommandButton >> pictureCaptionArrangement: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pictureData [
+JinCommandButton >> pictureData [
 <getter>
 	^ (handle propertyNamed: #'PictureData' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pictureData: aParam1 [
+JinCommandButton >> pictureData: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PictureData' withArguments: {aParam1} ).
@@ -1587,14 +1587,14 @@ JinControlCommandButton >> pictureData: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pictureType [
+JinCommandButton >> pictureType [
 <getter>
 	^ (handle propertyNamed: #'PictureType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pictureType: aParam1 [
+JinCommandButton >> pictureType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PictureType' withArguments: {aParam1} ).
@@ -1602,14 +1602,14 @@ JinControlCommandButton >> pictureType: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedColor [
+JinCommandButton >> pressedColor [
 <getter>
 	^ (handle propertyNamed: #'PressedColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedColor: aParam1 [
+JinCommandButton >> pressedColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedColor' withArguments: {aParam1} ).
@@ -1617,14 +1617,14 @@ JinControlCommandButton >> pressedColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedForeColor [
+JinCommandButton >> pressedForeColor [
 <getter>
 	^ (handle propertyNamed: #'PressedForeColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedForeColor: aParam1 [
+JinCommandButton >> pressedForeColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedForeColor' withArguments: {aParam1} ).
@@ -1632,14 +1632,14 @@ JinControlCommandButton >> pressedForeColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedForeShade [
+JinCommandButton >> pressedForeShade [
 <getter>
 	^ (handle propertyNamed: #'PressedForeShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedForeShade: aParam1 [
+JinCommandButton >> pressedForeShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedForeShade' withArguments: {aParam1} ).
@@ -1647,14 +1647,14 @@ JinControlCommandButton >> pressedForeShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedForeThemeColorIndex [
+JinCommandButton >> pressedForeThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'PressedForeThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedForeThemeColorIndex: aParam1 [
+JinCommandButton >> pressedForeThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedForeThemeColorIndex' withArguments: {aParam1} ).
@@ -1662,14 +1662,14 @@ JinControlCommandButton >> pressedForeThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedForeTint [
+JinCommandButton >> pressedForeTint [
 <getter>
 	^ (handle propertyNamed: #'PressedForeTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedForeTint: aParam1 [
+JinCommandButton >> pressedForeTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedForeTint' withArguments: {aParam1} ).
@@ -1677,14 +1677,14 @@ JinControlCommandButton >> pressedForeTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedShade [
+JinCommandButton >> pressedShade [
 <getter>
 	^ (handle propertyNamed: #'PressedShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedShade: aParam1 [
+JinCommandButton >> pressedShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedShade' withArguments: {aParam1} ).
@@ -1692,14 +1692,14 @@ JinControlCommandButton >> pressedShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedThemeColorIndex [
+JinCommandButton >> pressedThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'PressedThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedThemeColorIndex: aParam1 [
+JinCommandButton >> pressedThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedThemeColorIndex' withArguments: {aParam1} ).
@@ -1707,14 +1707,14 @@ JinControlCommandButton >> pressedThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedTint [
+JinCommandButton >> pressedTint [
 <getter>
 	^ (handle propertyNamed: #'PressedTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> pressedTint: aParam1 [
+JinCommandButton >> pressedTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PressedTint' withArguments: {aParam1} ).
@@ -1722,14 +1722,14 @@ JinControlCommandButton >> pressedTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> quickStyle [
+JinCommandButton >> quickStyle [
 <getter>
 	^ (handle propertyNamed: #'QuickStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> quickStyle: aParam1 [
+JinCommandButton >> quickStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'QuickStyle' withArguments: {aParam1} ).
@@ -1737,14 +1737,14 @@ JinControlCommandButton >> quickStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> readingOrder [
+JinCommandButton >> readingOrder [
 <getter>
 	^ (handle propertyNamed: #'ReadingOrder' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> readingOrder: aParam1 [
+JinCommandButton >> readingOrder: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ReadingOrder' withArguments: {aParam1} ).
@@ -1752,21 +1752,21 @@ JinControlCommandButton >> readingOrder: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlCommandButton >> requery [
+JinCommandButton >> requery [
 <method>
 	^ (handle dispatch: #'Requery' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> rightPadding [
+JinCommandButton >> rightPadding [
 <getter>
 	^ (handle propertyNamed: #'RightPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> rightPadding: aParam1 [
+JinCommandButton >> rightPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'RightPadding' withArguments: {aParam1} ).
@@ -1774,14 +1774,14 @@ JinControlCommandButton >> rightPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> section [
+JinCommandButton >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> section: aParam1 [
+JinCommandButton >> section: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Section' withArguments: {aParam1} ).
@@ -1789,21 +1789,21 @@ JinControlCommandButton >> section: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlCommandButton >> setFocus [
+JinCommandButton >> setFocus [
 <method>
 	^ (handle dispatch: #'SetFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> shadow [
+JinCommandButton >> shadow [
 <getter>
 	^ (handle propertyNamed: #'Shadow' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> shadow: aParam1 [
+JinCommandButton >> shadow: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Shadow' withArguments: {aParam1} ).
@@ -1811,14 +1811,14 @@ JinControlCommandButton >> shadow: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> shape [
+JinCommandButton >> shape [
 <getter>
 	^ (handle propertyNamed: #'Shape' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> shape: aParam1 [
+JinCommandButton >> shape: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Shape' withArguments: {aParam1} ).
@@ -1826,14 +1826,14 @@ JinControlCommandButton >> shape: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> shortcutMenuBar [
+JinCommandButton >> shortcutMenuBar [
 <getter>
 	^ (handle propertyNamed: #'ShortcutMenuBar' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> shortcutMenuBar: aParam1 [
+JinCommandButton >> shortcutMenuBar: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ShortcutMenuBar' withArguments: {aParam1} ).
@@ -1841,21 +1841,21 @@ JinControlCommandButton >> shortcutMenuBar: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlCommandButton >> sizeToFit [
+JinCommandButton >> sizeToFit [
 <method>
 	^ (handle dispatch: #'SizeToFit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> softEdges [
+JinCommandButton >> softEdges [
 <getter>
 	^ (handle propertyNamed: #'SoftEdges' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> softEdges: aParam1 [
+JinCommandButton >> softEdges: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SoftEdges' withArguments: {aParam1} ).
@@ -1863,14 +1863,14 @@ JinControlCommandButton >> softEdges: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> statusBarText [
+JinCommandButton >> statusBarText [
 <getter>
 	^ (handle propertyNamed: #'StatusBarText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> statusBarText: aParam1 [
+JinCommandButton >> statusBarText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'StatusBarText' withArguments: {aParam1} ).
@@ -1878,14 +1878,14 @@ JinControlCommandButton >> statusBarText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> tabIndex [
+JinCommandButton >> tabIndex [
 <getter>
 	^ (handle propertyNamed: #'TabIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> tabIndex: aParam1 [
+JinCommandButton >> tabIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabIndex' withArguments: {aParam1} ).
@@ -1893,14 +1893,14 @@ JinControlCommandButton >> tabIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> tabStop [
+JinCommandButton >> tabStop [
 <getter>
 	^ (handle propertyNamed: #'TabStop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> tabStop: aParam1 [
+JinCommandButton >> tabStop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TabStop' withArguments: {aParam1} ).
@@ -1908,14 +1908,14 @@ JinControlCommandButton >> tabStop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> tag [
+JinCommandButton >> tag [
 <getter>
 	^ (handle propertyNamed: #'Tag' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> tag: aParam1 [
+JinCommandButton >> tag: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Tag' withArguments: {aParam1} ).
@@ -1923,14 +1923,14 @@ JinControlCommandButton >> tag: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> themeFontIndex [
+JinCommandButton >> themeFontIndex [
 <getter>
 	^ (handle propertyNamed: #'ThemeFontIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> themeFontIndex: aParam1 [
+JinCommandButton >> themeFontIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ThemeFontIndex' withArguments: {aParam1} ).
@@ -1938,14 +1938,14 @@ JinControlCommandButton >> themeFontIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> top [
+JinCommandButton >> top [
 <getter>
 	^ (handle propertyNamed: #'Top' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> top: aParam1 [
+JinCommandButton >> top: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Top' withArguments: {aParam1} ).
@@ -1953,14 +1953,14 @@ JinControlCommandButton >> top: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> topPadding [
+JinCommandButton >> topPadding [
 <getter>
 	^ (handle propertyNamed: #'TopPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> topPadding: aParam1 [
+JinCommandButton >> topPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TopPadding' withArguments: {aParam1} ).
@@ -1968,14 +1968,14 @@ JinControlCommandButton >> topPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> transparent [
+JinCommandButton >> transparent [
 <getter>
 	^ (handle propertyNamed: #'Transparent' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> transparent: aParam1 [
+JinCommandButton >> transparent: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Transparent' withArguments: {aParam1} ).
@@ -1983,14 +1983,14 @@ JinControlCommandButton >> transparent: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> useTheme [
+JinCommandButton >> useTheme [
 <getter>
 	^ (handle propertyNamed: #'UseTheme' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> useTheme: aParam1 [
+JinCommandButton >> useTheme: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'UseTheme' withArguments: {aParam1} ).
@@ -1998,14 +1998,14 @@ JinControlCommandButton >> useTheme: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> verticalAnchor [
+JinCommandButton >> verticalAnchor [
 <getter>
 	^ (handle propertyNamed: #'VerticalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> verticalAnchor: aParam1 [
+JinCommandButton >> verticalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'VerticalAnchor' withArguments: {aParam1} ).
@@ -2013,14 +2013,14 @@ JinControlCommandButton >> verticalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> visible [
+JinCommandButton >> visible [
 <getter>
 	^ (handle propertyNamed: #'Visible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> visible: aParam1 [
+JinCommandButton >> visible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Visible' withArguments: {aParam1} ).
@@ -2028,14 +2028,14 @@ JinControlCommandButton >> visible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> width [
+JinCommandButton >> width [
 <getter>
 	^ (handle propertyNamed: #'Width' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> width: aParam1 [
+JinCommandButton >> width: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Width' withArguments: {aParam1} ).

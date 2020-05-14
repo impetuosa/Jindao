@@ -2,7 +2,8 @@ Class {
 	#name : #JinRemoteObjectGeneratorFactory,
 	#superclass : #JinRemoteObjectMappedTypesFactory,
 	#instVars : [
-		'buildingClass'
+		'buildingClass',
+		'packageName'
 	],
 	#category : #'Jindao-Factories'
 }
@@ -39,7 +40,11 @@ JinRemoteObjectGeneratorFactory class >> newDefaultAccessPropertyFactory: aJinCl
 		" If class not found, a new class will be created under this superclass "
 			buildingClass: aJinClassBuilder;
 		" If class not found, a new class will be created using this class buider. "
-			yourself
+			nameResolver: [ :d | d propertyNamed: #Name ];
+		" When a class has to be created, it is going to use this block as configuration. The property classes get their name from property individual name "
+			packageName: 'Jindao-DomainObjects-GeneratedProperties';
+			" Package where the generated classes are going to be "
+		yourself
 ]
 
 { #category : #'instance creation' }
@@ -52,9 +57,13 @@ JinRemoteObjectGeneratorFactory class >> newDefaultControlsFactory: aJinClassBui
 	^ self new
 		defaultHierarchyClass: JinControlGenerated;
 		" If class not found, a new class will be created under this superclass "
-			buildingClass: aJinClassBuilder;
+		buildingClass: aJinClassBuilder;
 		" If class not found, a new class will be created using this class buider. "
-			yourself
+		nameResolver: [ :d | d getTypeInfo name ];
+			" When a class has to be created, it is going to use this block as configuration. The control classes get their name from the access type"
+		packageName: 'Jindao-DomainObjects-GeneratedControls';
+			" Package where the generated classes are going to be "
+		yourself
 ]
 
 { #category : #accessing }
@@ -77,11 +86,10 @@ JinRemoteObjectGeneratorFactory >> classFor: aControl [
 { #category : #accessing }
 JinRemoteObjectGeneratorFactory >> generateClassControlFor: aRemoteObject [
 	| builder |
-	builder := self newBuilderForName:aRemoteObject getTypeInfo name .
-	
-	(self selectPropertiesFor: aRemoteObject )
+	builder := self newBuilderForName: (self resolveNameForClassGeneration: aRemoteObject).
+	(self selectPropertiesFor: aRemoteObject)
 		do: [ :p | builder addProperty: p ].
-	(self selectMethodsFor: aRemoteObject) 
+	(self selectMethodsFor: aRemoteObject)
 		reject: [ :p | p isProperty ]
 		thenDo: [ :p | builder addMethod: p ].
 	^ builder build
@@ -89,14 +97,22 @@ JinRemoteObjectGeneratorFactory >> generateClassControlFor: aRemoteObject [
 
 { #category : #accessing }
 JinRemoteObjectGeneratorFactory >> newBuilder [
-	^ self buildingClass new 
+	^ self buildingClass new
+		packageName: packageName;
+		superclass: self defaultHierarchyClass;
+		yourself
 ]
 
 { #category : #accessing }
 JinRemoteObjectGeneratorFactory >> newBuilderForName: aName [
 	^ self newBuilder
-		superclass: self defaultHierarchyClass;
-		name: aName
+		name: aName;
+		yourself
+]
+
+{ #category : #accessing }
+JinRemoteObjectGeneratorFactory >> packageName: aName [
+	packageName := aName
 ]
 
 { #category : #accessing }

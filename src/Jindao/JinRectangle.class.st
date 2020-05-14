@@ -87,37 +87,37 @@ You can move a rectangle and the controls in it as a single unit by dragging the
 [!include[Support and feedback](~/includes/feedback-boilerplate.md)]
 "
 Class {
-	#name : #JinControlRectangle,
+	#name : #JinRectangle,
 	#superclass : #JinControlAbstractRectangle,
 	#category : #'Jindao-DomainObjects-GeneratedControls'
 }
 
 { #category : #generated }
-JinControlRectangle class >> mappedTypeName [
+JinRectangle class >> mappedTypeName [
 	^#'_Rectangle'
 ]
 
 { #category : #generated }
-JinControlRectangle >> acceptVisitor: aVisitor [
+JinRectangle >> acceptVisitor: aVisitor [
 	^ aVisitor visitRectangle: self
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> application [
+JinRectangle >> application [
 <getter>
 	^ (handle propertyNamed: #'Application' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> backColor [
+JinRectangle >> backColor [
 <getter>
 	^ (handle propertyNamed: #'BackColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> backColor: aParam1 [
+JinRectangle >> backColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackColor' withArguments: {aParam1} ).
@@ -125,14 +125,14 @@ JinControlRectangle >> backColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> backShade [
+JinRectangle >> backShade [
 <getter>
 	^ (handle propertyNamed: #'BackShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> backShade: aParam1 [
+JinRectangle >> backShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackShade' withArguments: {aParam1} ).
@@ -140,14 +140,14 @@ JinControlRectangle >> backShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> backStyle [
+JinRectangle >> backStyle [
 <getter>
 	^ (handle propertyNamed: #'BackStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> backStyle: aParam1 [
+JinRectangle >> backStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackStyle' withArguments: {aParam1} ).
@@ -155,14 +155,14 @@ JinControlRectangle >> backStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> backThemeColorIndex [
+JinRectangle >> backThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BackThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> backThemeColorIndex: aParam1 [
+JinRectangle >> backThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackThemeColorIndex' withArguments: {aParam1} ).
@@ -170,14 +170,14 @@ JinControlRectangle >> backThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> backTint [
+JinRectangle >> backTint [
 <getter>
 	^ (handle propertyNamed: #'BackTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> backTint: aParam1 [
+JinRectangle >> backTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackTint' withArguments: {aParam1} ).
@@ -185,14 +185,14 @@ JinControlRectangle >> backTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> borderColor [
+JinRectangle >> borderColor [
 <getter>
 	^ (handle propertyNamed: #'BorderColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> borderColor: aParam1 [
+JinRectangle >> borderColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderColor' withArguments: {aParam1} ).
@@ -200,14 +200,14 @@ JinControlRectangle >> borderColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> borderShade [
+JinRectangle >> borderShade [
 <getter>
 	^ (handle propertyNamed: #'BorderShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> borderShade: aParam1 [
+JinRectangle >> borderShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderShade' withArguments: {aParam1} ).
@@ -215,14 +215,14 @@ JinControlRectangle >> borderShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> borderStyle [
+JinRectangle >> borderStyle [
 <getter>
 	^ (handle propertyNamed: #'BorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> borderStyle: aParam1 [
+JinRectangle >> borderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderStyle' withArguments: {aParam1} ).
@@ -230,14 +230,14 @@ JinControlRectangle >> borderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> borderThemeColorIndex [
+JinRectangle >> borderThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BorderThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> borderThemeColorIndex: aParam1 [
+JinRectangle >> borderThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderThemeColorIndex' withArguments: {aParam1} ).
@@ -245,14 +245,14 @@ JinControlRectangle >> borderThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> borderTint [
+JinRectangle >> borderTint [
 <getter>
 	^ (handle propertyNamed: #'BorderTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> borderTint: aParam1 [
+JinRectangle >> borderTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderTint' withArguments: {aParam1} ).
@@ -260,14 +260,14 @@ JinControlRectangle >> borderTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> borderWidth [
+JinRectangle >> borderWidth [
 <getter>
 	^ (handle propertyNamed: #'BorderWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> borderWidth: aParam1 [
+JinRectangle >> borderWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderWidth' withArguments: {aParam1} ).
@@ -275,14 +275,14 @@ JinControlRectangle >> borderWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> controlType [
+JinRectangle >> controlType [
 <getter>
 	^ (handle propertyNamed: #'ControlType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> controlType: aParam1 [
+JinRectangle >> controlType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlType' withArguments: {aParam1} ).
@@ -290,14 +290,14 @@ JinControlRectangle >> controlType: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> displayWhen [
+JinRectangle >> displayWhen [
 <getter>
 	^ (handle propertyNamed: #'DisplayWhen' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> displayWhen: aParam1 [
+JinRectangle >> displayWhen: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DisplayWhen' withArguments: {aParam1} ).
@@ -305,14 +305,14 @@ JinControlRectangle >> displayWhen: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> eventProcPrefix [
+JinRectangle >> eventProcPrefix [
 <getter>
 	^ (handle propertyNamed: #'EventProcPrefix' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> eventProcPrefix: aParam1 [
+JinRectangle >> eventProcPrefix: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'EventProcPrefix' withArguments: {aParam1} ).
@@ -320,14 +320,14 @@ JinControlRectangle >> eventProcPrefix: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> height [
+JinRectangle >> height [
 <getter>
 	^ (handle propertyNamed: #'Height' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> height: aParam1 [
+JinRectangle >> height: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Height' withArguments: {aParam1} ).
@@ -335,14 +335,14 @@ JinControlRectangle >> height: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> horizontalAnchor [
+JinRectangle >> horizontalAnchor [
 <getter>
 	^ (handle propertyNamed: #'HorizontalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> horizontalAnchor: aParam1 [
+JinRectangle >> horizontalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HorizontalAnchor' withArguments: {aParam1} ).
@@ -350,14 +350,14 @@ JinControlRectangle >> horizontalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> inSelection [
+JinRectangle >> inSelection [
 <getter>
 	^ (handle propertyNamed: #'InSelection' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> inSelection: aParam1 [
+JinRectangle >> inSelection: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'InSelection' withArguments: {aParam1} ).
@@ -365,14 +365,14 @@ JinControlRectangle >> inSelection: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> isVisible [
+JinRectangle >> isVisible [
 <getter>
 	^ (handle propertyNamed: #'IsVisible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> isVisible: aParam1 [
+JinRectangle >> isVisible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IsVisible' withArguments: {aParam1} ).
@@ -380,14 +380,14 @@ JinControlRectangle >> isVisible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> left [
+JinRectangle >> left [
 <getter>
 	^ (handle propertyNamed: #'Left' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> left: aParam1 [
+JinRectangle >> left: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Left' withArguments: {aParam1} ).
@@ -395,7 +395,7 @@ JinControlRectangle >> left: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlRectangle >> move: aLeft top: aTop width: aWidth height: aHeight [
+JinRectangle >> move: aLeft top: aTop width: aWidth height: aHeight [
 <method>
 "This method can be called with optional parameters. Top,Width,Height"
 	^ (handle dispatch: #'Move' withArguments: {aLeft . aTop . aWidth . aHeight} ).
@@ -403,14 +403,14 @@ JinControlRectangle >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> name [
+JinRectangle >> name [
 <getter>
 	^ (handle propertyNamed: #'Name' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> name: aParam1 [
+JinRectangle >> name: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Name' withArguments: {aParam1} ).
@@ -418,14 +418,14 @@ JinControlRectangle >> name: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> oldBorderStyle [
+JinRectangle >> oldBorderStyle [
 <getter>
 	^ (handle propertyNamed: #'OldBorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> oldBorderStyle: aParam1 [
+JinRectangle >> oldBorderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OldBorderStyle' withArguments: {aParam1} ).
@@ -433,14 +433,14 @@ JinControlRectangle >> oldBorderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> onClick [
+JinRectangle >> onClick [
 <getter>
 	^ (handle propertyNamed: #'OnClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> onClick: aParam1 [
+JinRectangle >> onClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnClick' withArguments: {aParam1} ).
@@ -448,14 +448,14 @@ JinControlRectangle >> onClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> onDblClick [
+JinRectangle >> onDblClick [
 <getter>
 	^ (handle propertyNamed: #'OnDblClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> onDblClick: aParam1 [
+JinRectangle >> onDblClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnDblClick' withArguments: {aParam1} ).
@@ -463,14 +463,14 @@ JinControlRectangle >> onDblClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> onMouseDown [
+JinRectangle >> onMouseDown [
 <getter>
 	^ (handle propertyNamed: #'OnMouseDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> onMouseDown: aParam1 [
+JinRectangle >> onMouseDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseDown' withArguments: {aParam1} ).
@@ -478,14 +478,14 @@ JinControlRectangle >> onMouseDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> onMouseMove [
+JinRectangle >> onMouseMove [
 <getter>
 	^ (handle propertyNamed: #'OnMouseMove' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> onMouseMove: aParam1 [
+JinRectangle >> onMouseMove: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseMove' withArguments: {aParam1} ).
@@ -493,14 +493,14 @@ JinControlRectangle >> onMouseMove: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> onMouseUp [
+JinRectangle >> onMouseUp [
 <getter>
 	^ (handle propertyNamed: #'OnMouseUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> onMouseUp: aParam1 [
+JinRectangle >> onMouseUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseUp' withArguments: {aParam1} ).
@@ -508,21 +508,21 @@ JinControlRectangle >> onMouseUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> parent [
+JinRectangle >> parent [
 <getter>
 	^ (handle propertyNamed: #'Parent' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> section [
+JinRectangle >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> section: aParam1 [
+JinRectangle >> section: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Section' withArguments: {aParam1} ).
@@ -530,21 +530,21 @@ JinControlRectangle >> section: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlRectangle >> sizeToFit [
+JinRectangle >> sizeToFit [
 <method>
 	^ (handle dispatch: #'SizeToFit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> specialEffect [
+JinRectangle >> specialEffect [
 <getter>
 	^ (handle propertyNamed: #'SpecialEffect' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> specialEffect: aParam1 [
+JinRectangle >> specialEffect: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SpecialEffect' withArguments: {aParam1} ).
@@ -552,14 +552,14 @@ JinControlRectangle >> specialEffect: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> tag [
+JinRectangle >> tag [
 <getter>
 	^ (handle propertyNamed: #'Tag' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> tag: aParam1 [
+JinRectangle >> tag: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Tag' withArguments: {aParam1} ).
@@ -567,14 +567,14 @@ JinControlRectangle >> tag: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> top [
+JinRectangle >> top [
 <getter>
 	^ (handle propertyNamed: #'Top' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> top: aParam1 [
+JinRectangle >> top: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Top' withArguments: {aParam1} ).
@@ -582,14 +582,14 @@ JinControlRectangle >> top: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> verticalAnchor [
+JinRectangle >> verticalAnchor [
 <getter>
 	^ (handle propertyNamed: #'VerticalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> verticalAnchor: aParam1 [
+JinRectangle >> verticalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'VerticalAnchor' withArguments: {aParam1} ).
@@ -597,14 +597,14 @@ JinControlRectangle >> verticalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> visible [
+JinRectangle >> visible [
 <getter>
 	^ (handle propertyNamed: #'Visible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> visible: aParam1 [
+JinRectangle >> visible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Visible' withArguments: {aParam1} ).
@@ -612,14 +612,14 @@ JinControlRectangle >> visible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> width [
+JinRectangle >> width [
 <getter>
 	^ (handle propertyNamed: #'Width' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> width: aParam1 [
+JinRectangle >> width: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Width' withArguments: {aParam1} ).

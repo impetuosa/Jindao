@@ -66,37 +66,37 @@ You can use the **BorderWidth** property to change the line width. You can use t
 [!include[Support and feedback](~/includes/feedback-boilerplate.md)]
 "
 Class {
-	#name : #JinControlLine,
+	#name : #JinLine,
 	#superclass : #JinControlAbstractLine,
 	#category : #'Jindao-DomainObjects-GeneratedControls'
 }
 
 { #category : #generated }
-JinControlLine class >> mappedTypeName [
+JinLine class >> mappedTypeName [
 	^#'_Line'
 ]
 
 { #category : #generated }
-JinControlLine >> acceptVisitor: aVisitor [
+JinLine >> acceptVisitor: aVisitor [
 	^ aVisitor visitLine: self
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> application [
+JinLine >> application [
 <getter>
 	^ (handle propertyNamed: #'Application' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> borderColor [
+JinLine >> borderColor [
 <getter>
 	^ (handle propertyNamed: #'BorderColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> borderColor: aParam1 [
+JinLine >> borderColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderColor' withArguments: {aParam1} ).
@@ -104,14 +104,14 @@ JinControlLine >> borderColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> borderShade [
+JinLine >> borderShade [
 <getter>
 	^ (handle propertyNamed: #'BorderShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> borderShade: aParam1 [
+JinLine >> borderShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderShade' withArguments: {aParam1} ).
@@ -119,14 +119,14 @@ JinControlLine >> borderShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> borderStyle [
+JinLine >> borderStyle [
 <getter>
 	^ (handle propertyNamed: #'BorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> borderStyle: aParam1 [
+JinLine >> borderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderStyle' withArguments: {aParam1} ).
@@ -134,14 +134,14 @@ JinControlLine >> borderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> borderThemeColorIndex [
+JinLine >> borderThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BorderThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> borderThemeColorIndex: aParam1 [
+JinLine >> borderThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderThemeColorIndex' withArguments: {aParam1} ).
@@ -149,14 +149,14 @@ JinControlLine >> borderThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> borderTint [
+JinLine >> borderTint [
 <getter>
 	^ (handle propertyNamed: #'BorderTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> borderTint: aParam1 [
+JinLine >> borderTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderTint' withArguments: {aParam1} ).
@@ -164,14 +164,14 @@ JinControlLine >> borderTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> borderWidth [
+JinLine >> borderWidth [
 <getter>
 	^ (handle propertyNamed: #'BorderWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> borderWidth: aParam1 [
+JinLine >> borderWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderWidth' withArguments: {aParam1} ).
@@ -179,14 +179,14 @@ JinControlLine >> borderWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> controlType [
+JinLine >> controlType [
 <getter>
 	^ (handle propertyNamed: #'ControlType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> controlType: aParam1 [
+JinLine >> controlType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlType' withArguments: {aParam1} ).
@@ -194,14 +194,14 @@ JinControlLine >> controlType: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> displayWhen [
+JinLine >> displayWhen [
 <getter>
 	^ (handle propertyNamed: #'DisplayWhen' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> displayWhen: aParam1 [
+JinLine >> displayWhen: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DisplayWhen' withArguments: {aParam1} ).
@@ -209,14 +209,14 @@ JinControlLine >> displayWhen: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> eventProcPrefix [
+JinLine >> eventProcPrefix [
 <getter>
 	^ (handle propertyNamed: #'EventProcPrefix' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> eventProcPrefix: aParam1 [
+JinLine >> eventProcPrefix: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'EventProcPrefix' withArguments: {aParam1} ).
@@ -224,14 +224,14 @@ JinControlLine >> eventProcPrefix: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> height [
+JinLine >> height [
 <getter>
 	^ (handle propertyNamed: #'Height' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> height: aParam1 [
+JinLine >> height: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Height' withArguments: {aParam1} ).
@@ -239,14 +239,14 @@ JinControlLine >> height: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> horizontalAnchor [
+JinLine >> horizontalAnchor [
 <getter>
 	^ (handle propertyNamed: #'HorizontalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> horizontalAnchor: aParam1 [
+JinLine >> horizontalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HorizontalAnchor' withArguments: {aParam1} ).
@@ -254,14 +254,14 @@ JinControlLine >> horizontalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> inSelection [
+JinLine >> inSelection [
 <getter>
 	^ (handle propertyNamed: #'InSelection' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> inSelection: aParam1 [
+JinLine >> inSelection: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'InSelection' withArguments: {aParam1} ).
@@ -269,14 +269,14 @@ JinControlLine >> inSelection: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> isVisible [
+JinLine >> isVisible [
 <getter>
 	^ (handle propertyNamed: #'IsVisible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> isVisible: aParam1 [
+JinLine >> isVisible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IsVisible' withArguments: {aParam1} ).
@@ -284,14 +284,14 @@ JinControlLine >> isVisible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> left [
+JinLine >> left [
 <getter>
 	^ (handle propertyNamed: #'Left' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> left: aParam1 [
+JinLine >> left: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Left' withArguments: {aParam1} ).
@@ -299,14 +299,14 @@ JinControlLine >> left: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> lineSlant [
+JinLine >> lineSlant [
 <getter>
 	^ (handle propertyNamed: #'LineSlant' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> lineSlant: aParam1 [
+JinLine >> lineSlant: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LineSlant' withArguments: {aParam1} ).
@@ -314,7 +314,7 @@ JinControlLine >> lineSlant: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlLine >> move: aLeft top: aTop width: aWidth height: aHeight [
+JinLine >> move: aLeft top: aTop width: aWidth height: aHeight [
 <method>
 "This method can be called with optional parameters. Top,Width,Height"
 	^ (handle dispatch: #'Move' withArguments: {aLeft . aTop . aWidth . aHeight} ).
@@ -322,14 +322,14 @@ JinControlLine >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> name [
+JinLine >> name [
 <getter>
 	^ (handle propertyNamed: #'Name' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> name: aParam1 [
+JinLine >> name: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Name' withArguments: {aParam1} ).
@@ -337,14 +337,14 @@ JinControlLine >> name: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> oldBorderStyle [
+JinLine >> oldBorderStyle [
 <getter>
 	^ (handle propertyNamed: #'OldBorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> oldBorderStyle: aParam1 [
+JinLine >> oldBorderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OldBorderStyle' withArguments: {aParam1} ).
@@ -352,21 +352,21 @@ JinControlLine >> oldBorderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> parent [
+JinLine >> parent [
 <getter>
 	^ (handle propertyNamed: #'Parent' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> section [
+JinLine >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> section: aParam1 [
+JinLine >> section: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Section' withArguments: {aParam1} ).
@@ -374,21 +374,21 @@ JinControlLine >> section: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlLine >> sizeToFit [
+JinLine >> sizeToFit [
 <method>
 	^ (handle dispatch: #'SizeToFit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> specialEffect [
+JinLine >> specialEffect [
 <getter>
 	^ (handle propertyNamed: #'SpecialEffect' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> specialEffect: aParam1 [
+JinLine >> specialEffect: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SpecialEffect' withArguments: {aParam1} ).
@@ -396,14 +396,14 @@ JinControlLine >> specialEffect: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> tag [
+JinLine >> tag [
 <getter>
 	^ (handle propertyNamed: #'Tag' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> tag: aParam1 [
+JinLine >> tag: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Tag' withArguments: {aParam1} ).
@@ -411,14 +411,14 @@ JinControlLine >> tag: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> top [
+JinLine >> top [
 <getter>
 	^ (handle propertyNamed: #'Top' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> top: aParam1 [
+JinLine >> top: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Top' withArguments: {aParam1} ).
@@ -426,14 +426,14 @@ JinControlLine >> top: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> verticalAnchor [
+JinLine >> verticalAnchor [
 <getter>
 	^ (handle propertyNamed: #'VerticalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> verticalAnchor: aParam1 [
+JinLine >> verticalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'VerticalAnchor' withArguments: {aParam1} ).
@@ -441,14 +441,14 @@ JinControlLine >> verticalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> visible [
+JinLine >> visible [
 <getter>
 	^ (handle propertyNamed: #'Visible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> visible: aParam1 [
+JinLine >> visible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Visible' withArguments: {aParam1} ).
@@ -456,14 +456,14 @@ JinControlLine >> visible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> width [
+JinLine >> width [
 <getter>
 	^ (handle propertyNamed: #'Width' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> width: aParam1 [
+JinLine >> width: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Width' withArguments: {aParam1} ).

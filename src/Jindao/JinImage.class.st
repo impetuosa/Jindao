@@ -128,37 +128,37 @@ You can use the image control or an [Unbound object frame](overview/Access.md) f
 
 "
 Class {
-	#name : #JinControlImage,
+	#name : #JinImage,
 	#superclass : #JinControlAbstractImage,
 	#category : #'Jindao-DomainObjects-GeneratedControls'
 }
 
 { #category : #generated }
-JinControlImage class >> mappedTypeName [
+JinImage class >> mappedTypeName [
 	^#'_Image'
 ]
 
 { #category : #generated }
-JinControlImage >> acceptVisitor: aVisitor [
+JinImage >> acceptVisitor: aVisitor [
 	^ aVisitor visitImage: self
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> application [
+JinImage >> application [
 <getter>
 	^ (handle propertyNamed: #'Application' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> backColor [
+JinImage >> backColor [
 <getter>
 	^ (handle propertyNamed: #'BackColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> backColor: aParam1 [
+JinImage >> backColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackColor' withArguments: {aParam1} ).
@@ -166,14 +166,14 @@ JinControlImage >> backColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> backShade [
+JinImage >> backShade [
 <getter>
 	^ (handle propertyNamed: #'BackShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> backShade: aParam1 [
+JinImage >> backShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackShade' withArguments: {aParam1} ).
@@ -181,14 +181,14 @@ JinControlImage >> backShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> backStyle [
+JinImage >> backStyle [
 <getter>
 	^ (handle propertyNamed: #'BackStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> backStyle: aParam1 [
+JinImage >> backStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackStyle' withArguments: {aParam1} ).
@@ -196,14 +196,14 @@ JinControlImage >> backStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> backThemeColorIndex [
+JinImage >> backThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BackThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> backThemeColorIndex: aParam1 [
+JinImage >> backThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackThemeColorIndex' withArguments: {aParam1} ).
@@ -211,14 +211,14 @@ JinControlImage >> backThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> backTint [
+JinImage >> backTint [
 <getter>
 	^ (handle propertyNamed: #'BackTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> backTint: aParam1 [
+JinImage >> backTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackTint' withArguments: {aParam1} ).
@@ -226,14 +226,14 @@ JinControlImage >> backTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> borderColor [
+JinImage >> borderColor [
 <getter>
 	^ (handle propertyNamed: #'BorderColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> borderColor: aParam1 [
+JinImage >> borderColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderColor' withArguments: {aParam1} ).
@@ -241,14 +241,14 @@ JinControlImage >> borderColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> borderShade [
+JinImage >> borderShade [
 <getter>
 	^ (handle propertyNamed: #'BorderShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> borderShade: aParam1 [
+JinImage >> borderShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderShade' withArguments: {aParam1} ).
@@ -256,14 +256,14 @@ JinControlImage >> borderShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> borderStyle [
+JinImage >> borderStyle [
 <getter>
 	^ (handle propertyNamed: #'BorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> borderStyle: aParam1 [
+JinImage >> borderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderStyle' withArguments: {aParam1} ).
@@ -271,14 +271,14 @@ JinControlImage >> borderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> borderThemeColorIndex [
+JinImage >> borderThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BorderThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> borderThemeColorIndex: aParam1 [
+JinImage >> borderThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderThemeColorIndex' withArguments: {aParam1} ).
@@ -286,14 +286,14 @@ JinControlImage >> borderThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> borderTint [
+JinImage >> borderTint [
 <getter>
 	^ (handle propertyNamed: #'BorderTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> borderTint: aParam1 [
+JinImage >> borderTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderTint' withArguments: {aParam1} ).
@@ -301,14 +301,14 @@ JinControlImage >> borderTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> borderWidth [
+JinImage >> borderWidth [
 <getter>
 	^ (handle propertyNamed: #'BorderWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> borderWidth: aParam1 [
+JinImage >> borderWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderWidth' withArguments: {aParam1} ).
@@ -316,14 +316,14 @@ JinControlImage >> borderWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> bottomPadding [
+JinImage >> bottomPadding [
 <getter>
 	^ (handle propertyNamed: #'BottomPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> bottomPadding: aParam1 [
+JinImage >> bottomPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BottomPadding' withArguments: {aParam1} ).
@@ -331,14 +331,14 @@ JinControlImage >> bottomPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> controlTipText [
+JinImage >> controlTipText [
 <getter>
 	^ (handle propertyNamed: #'ControlTipText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> controlTipText: aParam1 [
+JinImage >> controlTipText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlTipText' withArguments: {aParam1} ).
@@ -346,14 +346,14 @@ JinControlImage >> controlTipText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> controlType [
+JinImage >> controlType [
 <getter>
 	^ (handle propertyNamed: #'ControlType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> controlType: aParam1 [
+JinImage >> controlType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlType' withArguments: {aParam1} ).
@@ -361,21 +361,21 @@ JinControlImage >> controlType: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> controls [
+JinImage >> controls [
 <getter>
 	^ (handle propertyNamed: #'Controls' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> displayWhen [
+JinImage >> displayWhen [
 <getter>
 	^ (handle propertyNamed: #'DisplayWhen' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> displayWhen: aParam1 [
+JinImage >> displayWhen: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DisplayWhen' withArguments: {aParam1} ).
@@ -383,14 +383,14 @@ JinControlImage >> displayWhen: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> eventProcPrefix [
+JinImage >> eventProcPrefix [
 <getter>
 	^ (handle propertyNamed: #'EventProcPrefix' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> eventProcPrefix: aParam1 [
+JinImage >> eventProcPrefix: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'EventProcPrefix' withArguments: {aParam1} ).
@@ -398,14 +398,14 @@ JinControlImage >> eventProcPrefix: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineColor [
+JinImage >> gridlineColor [
 <getter>
 	^ (handle propertyNamed: #'GridlineColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineColor: aParam1 [
+JinImage >> gridlineColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineColor' withArguments: {aParam1} ).
@@ -413,14 +413,14 @@ JinControlImage >> gridlineColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineShade [
+JinImage >> gridlineShade [
 <getter>
 	^ (handle propertyNamed: #'GridlineShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineShade: aParam1 [
+JinImage >> gridlineShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineShade' withArguments: {aParam1} ).
@@ -428,14 +428,14 @@ JinControlImage >> gridlineShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineStyleBottom [
+JinImage >> gridlineStyleBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineStyleBottom: aParam1 [
+JinImage >> gridlineStyleBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleBottom' withArguments: {aParam1} ).
@@ -443,14 +443,14 @@ JinControlImage >> gridlineStyleBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineStyleLeft [
+JinImage >> gridlineStyleLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineStyleLeft: aParam1 [
+JinImage >> gridlineStyleLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleLeft' withArguments: {aParam1} ).
@@ -458,14 +458,14 @@ JinControlImage >> gridlineStyleLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineStyleRight [
+JinImage >> gridlineStyleRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineStyleRight: aParam1 [
+JinImage >> gridlineStyleRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleRight' withArguments: {aParam1} ).
@@ -473,14 +473,14 @@ JinControlImage >> gridlineStyleRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineStyleTop [
+JinImage >> gridlineStyleTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineStyleTop: aParam1 [
+JinImage >> gridlineStyleTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleTop' withArguments: {aParam1} ).
@@ -488,14 +488,14 @@ JinControlImage >> gridlineStyleTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineThemeColorIndex [
+JinImage >> gridlineThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineThemeColorIndex: aParam1 [
+JinImage >> gridlineThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' withArguments: {aParam1} ).
@@ -503,14 +503,14 @@ JinControlImage >> gridlineThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineTint [
+JinImage >> gridlineTint [
 <getter>
 	^ (handle propertyNamed: #'GridlineTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineTint: aParam1 [
+JinImage >> gridlineTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineTint' withArguments: {aParam1} ).
@@ -518,14 +518,14 @@ JinControlImage >> gridlineTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineWidthBottom [
+JinImage >> gridlineWidthBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineWidthBottom: aParam1 [
+JinImage >> gridlineWidthBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthBottom' withArguments: {aParam1} ).
@@ -533,14 +533,14 @@ JinControlImage >> gridlineWidthBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineWidthLeft [
+JinImage >> gridlineWidthLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineWidthLeft: aParam1 [
+JinImage >> gridlineWidthLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthLeft' withArguments: {aParam1} ).
@@ -548,14 +548,14 @@ JinControlImage >> gridlineWidthLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineWidthRight [
+JinImage >> gridlineWidthRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineWidthRight: aParam1 [
+JinImage >> gridlineWidthRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthRight' withArguments: {aParam1} ).
@@ -563,14 +563,14 @@ JinControlImage >> gridlineWidthRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineWidthTop [
+JinImage >> gridlineWidthTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> gridlineWidthTop: aParam1 [
+JinImage >> gridlineWidthTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthTop' withArguments: {aParam1} ).
@@ -578,14 +578,14 @@ JinControlImage >> gridlineWidthTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> height [
+JinImage >> height [
 <getter>
 	^ (handle propertyNamed: #'Height' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> height: aParam1 [
+JinImage >> height: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Height' withArguments: {aParam1} ).
@@ -593,14 +593,14 @@ JinControlImage >> height: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> helpContextId [
+JinImage >> helpContextId [
 <getter>
 	^ (handle propertyNamed: #'HelpContextId' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> helpContextId: aParam1 [
+JinImage >> helpContextId: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HelpContextId' withArguments: {aParam1} ).
@@ -608,14 +608,14 @@ JinControlImage >> helpContextId: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> horizontalAnchor [
+JinImage >> horizontalAnchor [
 <getter>
 	^ (handle propertyNamed: #'HorizontalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> horizontalAnchor: aParam1 [
+JinImage >> horizontalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HorizontalAnchor' withArguments: {aParam1} ).
@@ -623,21 +623,21 @@ JinControlImage >> horizontalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> hyperlink [
+JinImage >> hyperlink [
 <getter>
 	^ (handle propertyNamed: #'Hyperlink' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> hyperlinkAddress [
+JinImage >> hyperlinkAddress [
 <getter>
 	^ (handle propertyNamed: #'HyperlinkAddress' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> hyperlinkAddress: aParam1 [
+JinImage >> hyperlinkAddress: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HyperlinkAddress' withArguments: {aParam1} ).
@@ -645,14 +645,14 @@ JinControlImage >> hyperlinkAddress: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> hyperlinkSubAddress [
+JinImage >> hyperlinkSubAddress [
 <getter>
 	^ (handle propertyNamed: #'HyperlinkSubAddress' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> hyperlinkSubAddress: aParam1 [
+JinImage >> hyperlinkSubAddress: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HyperlinkSubAddress' withArguments: {aParam1} ).
@@ -660,14 +660,14 @@ JinControlImage >> hyperlinkSubAddress: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> imageHeight [
+JinImage >> imageHeight [
 <getter>
 	^ (handle propertyNamed: #'ImageHeight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> imageHeight: aParam1 [
+JinImage >> imageHeight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ImageHeight' withArguments: {aParam1} ).
@@ -675,14 +675,14 @@ JinControlImage >> imageHeight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> imageWidth [
+JinImage >> imageWidth [
 <getter>
 	^ (handle propertyNamed: #'ImageWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> imageWidth: aParam1 [
+JinImage >> imageWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ImageWidth' withArguments: {aParam1} ).
@@ -690,14 +690,14 @@ JinControlImage >> imageWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> inSelection [
+JinImage >> inSelection [
 <getter>
 	^ (handle propertyNamed: #'InSelection' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> inSelection: aParam1 [
+JinImage >> inSelection: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'InSelection' withArguments: {aParam1} ).
@@ -705,14 +705,14 @@ JinControlImage >> inSelection: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> isVisible [
+JinImage >> isVisible [
 <getter>
 	^ (handle propertyNamed: #'IsVisible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> isVisible: aParam1 [
+JinImage >> isVisible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IsVisible' withArguments: {aParam1} ).
@@ -720,28 +720,28 @@ JinControlImage >> isVisible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> layout [
+JinImage >> layout [
 <getter>
 	^ (handle propertyNamed: #'Layout' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> layoutID [
+JinImage >> layoutID [
 <getter>
 	^ (handle propertyNamed: #'LayoutID' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> left [
+JinImage >> left [
 <getter>
 	^ (handle propertyNamed: #'Left' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> left: aParam1 [
+JinImage >> left: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Left' withArguments: {aParam1} ).
@@ -749,14 +749,14 @@ JinControlImage >> left: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> leftPadding [
+JinImage >> leftPadding [
 <getter>
 	^ (handle propertyNamed: #'LeftPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> leftPadding: aParam1 [
+JinImage >> leftPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LeftPadding' withArguments: {aParam1} ).
@@ -764,7 +764,7 @@ JinControlImage >> leftPadding: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlImage >> move: aLeft top: aTop width: aWidth height: aHeight [
+JinImage >> move: aLeft top: aTop width: aWidth height: aHeight [
 <method>
 "This method can be called with optional parameters. Top,Width,Height"
 	^ (handle dispatch: #'Move' withArguments: {aLeft . aTop . aWidth . aHeight} ).
@@ -772,14 +772,14 @@ JinControlImage >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> name [
+JinImage >> name [
 <getter>
 	^ (handle propertyNamed: #'Name' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> name: aParam1 [
+JinImage >> name: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Name' withArguments: {aParam1} ).
@@ -787,14 +787,14 @@ JinControlImage >> name: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> objectPalette [
+JinImage >> objectPalette [
 <getter>
 	^ (handle propertyNamed: #'ObjectPalette' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> objectPalette: aParam1 [
+JinImage >> objectPalette: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ObjectPalette' withArguments: {aParam1} ).
@@ -802,14 +802,14 @@ JinControlImage >> objectPalette: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> oldBorderStyle [
+JinImage >> oldBorderStyle [
 <getter>
 	^ (handle propertyNamed: #'OldBorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> oldBorderStyle: aParam1 [
+JinImage >> oldBorderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OldBorderStyle' withArguments: {aParam1} ).
@@ -817,21 +817,21 @@ JinControlImage >> oldBorderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> oldValue [
+JinImage >> oldValue [
 <getter>
 	^ (handle propertyNamed: #'OldValue' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> onClick [
+JinImage >> onClick [
 <getter>
 	^ (handle propertyNamed: #'OnClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> onClick: aParam1 [
+JinImage >> onClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnClick' withArguments: {aParam1} ).
@@ -839,14 +839,14 @@ JinControlImage >> onClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> onDblClick [
+JinImage >> onDblClick [
 <getter>
 	^ (handle propertyNamed: #'OnDblClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> onDblClick: aParam1 [
+JinImage >> onDblClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnDblClick' withArguments: {aParam1} ).
@@ -854,14 +854,14 @@ JinControlImage >> onDblClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> onMouseDown [
+JinImage >> onMouseDown [
 <getter>
 	^ (handle propertyNamed: #'OnMouseDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> onMouseDown: aParam1 [
+JinImage >> onMouseDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseDown' withArguments: {aParam1} ).
@@ -869,14 +869,14 @@ JinControlImage >> onMouseDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> onMouseMove [
+JinImage >> onMouseMove [
 <getter>
 	^ (handle propertyNamed: #'OnMouseMove' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> onMouseMove: aParam1 [
+JinImage >> onMouseMove: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseMove' withArguments: {aParam1} ).
@@ -884,14 +884,14 @@ JinControlImage >> onMouseMove: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> onMouseUp [
+JinImage >> onMouseUp [
 <getter>
 	^ (handle propertyNamed: #'OnMouseUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> onMouseUp: aParam1 [
+JinImage >> onMouseUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseUp' withArguments: {aParam1} ).
@@ -899,21 +899,21 @@ JinControlImage >> onMouseUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> parent [
+JinImage >> parent [
 <getter>
 	^ (handle propertyNamed: #'Parent' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> picture [
+JinImage >> picture [
 <getter>
 	^ (handle propertyNamed: #'Picture' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> picture: aParam1 [
+JinImage >> picture: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Picture' withArguments: {aParam1} ).
@@ -921,14 +921,14 @@ JinControlImage >> picture: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> pictureAlignment [
+JinImage >> pictureAlignment [
 <getter>
 	^ (handle propertyNamed: #'PictureAlignment' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> pictureAlignment: aParam1 [
+JinImage >> pictureAlignment: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PictureAlignment' withArguments: {aParam1} ).
@@ -936,14 +936,14 @@ JinControlImage >> pictureAlignment: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> pictureData [
+JinImage >> pictureData [
 <getter>
 	^ (handle propertyNamed: #'PictureData' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> pictureData: aParam1 [
+JinImage >> pictureData: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PictureData' withArguments: {aParam1} ).
@@ -951,14 +951,14 @@ JinControlImage >> pictureData: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> pictureTiling [
+JinImage >> pictureTiling [
 <getter>
 	^ (handle propertyNamed: #'PictureTiling' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> pictureTiling: aParam1 [
+JinImage >> pictureTiling: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PictureTiling' withArguments: {aParam1} ).
@@ -966,14 +966,14 @@ JinControlImage >> pictureTiling: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> pictureType [
+JinImage >> pictureType [
 <getter>
 	^ (handle propertyNamed: #'PictureType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> pictureType: aParam1 [
+JinImage >> pictureType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PictureType' withArguments: {aParam1} ).
@@ -981,21 +981,21 @@ JinControlImage >> pictureType: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlImage >> requery [
+JinImage >> requery [
 <method>
 	^ (handle dispatch: #'Requery' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> rightPadding [
+JinImage >> rightPadding [
 <getter>
 	^ (handle propertyNamed: #'RightPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> rightPadding: aParam1 [
+JinImage >> rightPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'RightPadding' withArguments: {aParam1} ).
@@ -1003,14 +1003,14 @@ JinControlImage >> rightPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> section [
+JinImage >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> section: aParam1 [
+JinImage >> section: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Section' withArguments: {aParam1} ).
@@ -1018,21 +1018,21 @@ JinControlImage >> section: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlImage >> setFocus [
+JinImage >> setFocus [
 <method>
 	^ (handle dispatch: #'SetFocus' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> shortcutMenuBar [
+JinImage >> shortcutMenuBar [
 <getter>
 	^ (handle propertyNamed: #'ShortcutMenuBar' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> shortcutMenuBar: aParam1 [
+JinImage >> shortcutMenuBar: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ShortcutMenuBar' withArguments: {aParam1} ).
@@ -1040,14 +1040,14 @@ JinControlImage >> shortcutMenuBar: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> sizeMode [
+JinImage >> sizeMode [
 <getter>
 	^ (handle propertyNamed: #'SizeMode' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> sizeMode: aParam1 [
+JinImage >> sizeMode: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SizeMode' withArguments: {aParam1} ).
@@ -1055,21 +1055,21 @@ JinControlImage >> sizeMode: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlImage >> sizeToFit [
+JinImage >> sizeToFit [
 <method>
 	^ (handle dispatch: #'SizeToFit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> specialEffect [
+JinImage >> specialEffect [
 <getter>
 	^ (handle propertyNamed: #'SpecialEffect' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> specialEffect: aParam1 [
+JinImage >> specialEffect: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SpecialEffect' withArguments: {aParam1} ).
@@ -1077,14 +1077,14 @@ JinControlImage >> specialEffect: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> tag [
+JinImage >> tag [
 <getter>
 	^ (handle propertyNamed: #'Tag' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> tag: aParam1 [
+JinImage >> tag: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Tag' withArguments: {aParam1} ).
@@ -1092,14 +1092,14 @@ JinControlImage >> tag: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> top [
+JinImage >> top [
 <getter>
 	^ (handle propertyNamed: #'Top' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> top: aParam1 [
+JinImage >> top: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Top' withArguments: {aParam1} ).
@@ -1107,14 +1107,14 @@ JinControlImage >> top: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> topPadding [
+JinImage >> topPadding [
 <getter>
 	^ (handle propertyNamed: #'TopPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> topPadding: aParam1 [
+JinImage >> topPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TopPadding' withArguments: {aParam1} ).
@@ -1122,14 +1122,14 @@ JinControlImage >> topPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> verticalAnchor [
+JinImage >> verticalAnchor [
 <getter>
 	^ (handle propertyNamed: #'VerticalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> verticalAnchor: aParam1 [
+JinImage >> verticalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'VerticalAnchor' withArguments: {aParam1} ).
@@ -1137,14 +1137,14 @@ JinControlImage >> verticalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> visible [
+JinImage >> visible [
 <getter>
 	^ (handle propertyNamed: #'Visible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> visible: aParam1 [
+JinImage >> visible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Visible' withArguments: {aParam1} ).
@@ -1152,14 +1152,14 @@ JinControlImage >> visible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> width [
+JinImage >> width [
 <getter>
 	^ (handle propertyNamed: #'Width' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlImage >> width: aParam1 [
+JinImage >> width: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Width' withArguments: {aParam1} ).

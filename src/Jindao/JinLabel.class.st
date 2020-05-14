@@ -143,37 +143,37 @@ When you create a label by using the **Label** tool, the label stands on its own
 
 "
 Class {
-	#name : #JinControlLabel,
+	#name : #JinLabel,
 	#superclass : #JinControlAbstractLabel,
 	#category : #'Jindao-DomainObjects-GeneratedControls'
 }
 
 { #category : #generated }
-JinControlLabel class >> mappedTypeName [
+JinLabel class >> mappedTypeName [
 	^#'_Label'
 ]
 
 { #category : #generated }
-JinControlLabel >> acceptVisitor: aVisitor [
+JinLabel >> acceptVisitor: aVisitor [
 	^ aVisitor visitLabel: self
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> application [
+JinLabel >> application [
 <getter>
 	^ (handle propertyNamed: #'Application' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> backColor [
+JinLabel >> backColor [
 <getter>
 	^ (handle propertyNamed: #'BackColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> backColor: aParam1 [
+JinLabel >> backColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackColor' withArguments: {aParam1} ).
@@ -181,14 +181,14 @@ JinControlLabel >> backColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> backShade [
+JinLabel >> backShade [
 <getter>
 	^ (handle propertyNamed: #'BackShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> backShade: aParam1 [
+JinLabel >> backShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackShade' withArguments: {aParam1} ).
@@ -196,14 +196,14 @@ JinControlLabel >> backShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> backStyle [
+JinLabel >> backStyle [
 <getter>
 	^ (handle propertyNamed: #'BackStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> backStyle: aParam1 [
+JinLabel >> backStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackStyle' withArguments: {aParam1} ).
@@ -211,14 +211,14 @@ JinControlLabel >> backStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> backThemeColorIndex [
+JinLabel >> backThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BackThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> backThemeColorIndex: aParam1 [
+JinLabel >> backThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackThemeColorIndex' withArguments: {aParam1} ).
@@ -226,14 +226,14 @@ JinControlLabel >> backThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> backTint [
+JinLabel >> backTint [
 <getter>
 	^ (handle propertyNamed: #'BackTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> backTint: aParam1 [
+JinLabel >> backTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BackTint' withArguments: {aParam1} ).
@@ -241,14 +241,14 @@ JinControlLabel >> backTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> borderColor [
+JinLabel >> borderColor [
 <getter>
 	^ (handle propertyNamed: #'BorderColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> borderColor: aParam1 [
+JinLabel >> borderColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderColor' withArguments: {aParam1} ).
@@ -256,14 +256,14 @@ JinControlLabel >> borderColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> borderShade [
+JinLabel >> borderShade [
 <getter>
 	^ (handle propertyNamed: #'BorderShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> borderShade: aParam1 [
+JinLabel >> borderShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderShade' withArguments: {aParam1} ).
@@ -271,14 +271,14 @@ JinControlLabel >> borderShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> borderStyle [
+JinLabel >> borderStyle [
 <getter>
 	^ (handle propertyNamed: #'BorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> borderStyle: aParam1 [
+JinLabel >> borderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderStyle' withArguments: {aParam1} ).
@@ -286,14 +286,14 @@ JinControlLabel >> borderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> borderThemeColorIndex [
+JinLabel >> borderThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'BorderThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> borderThemeColorIndex: aParam1 [
+JinLabel >> borderThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderThemeColorIndex' withArguments: {aParam1} ).
@@ -301,14 +301,14 @@ JinControlLabel >> borderThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> borderTint [
+JinLabel >> borderTint [
 <getter>
 	^ (handle propertyNamed: #'BorderTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> borderTint: aParam1 [
+JinLabel >> borderTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderTint' withArguments: {aParam1} ).
@@ -316,14 +316,14 @@ JinControlLabel >> borderTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> borderWidth [
+JinLabel >> borderWidth [
 <getter>
 	^ (handle propertyNamed: #'BorderWidth' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> borderWidth: aParam1 [
+JinLabel >> borderWidth: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BorderWidth' withArguments: {aParam1} ).
@@ -331,14 +331,14 @@ JinControlLabel >> borderWidth: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> bottomMargin [
+JinLabel >> bottomMargin [
 <getter>
 	^ (handle propertyNamed: #'BottomMargin' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> bottomMargin: aParam1 [
+JinLabel >> bottomMargin: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BottomMargin' withArguments: {aParam1} ).
@@ -346,14 +346,14 @@ JinControlLabel >> bottomMargin: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> bottomPadding [
+JinLabel >> bottomPadding [
 <getter>
 	^ (handle propertyNamed: #'BottomPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> bottomPadding: aParam1 [
+JinLabel >> bottomPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'BottomPadding' withArguments: {aParam1} ).
@@ -361,14 +361,14 @@ JinControlLabel >> bottomPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> caption [
+JinLabel >> caption [
 <getter>
 	^ (handle propertyNamed: #'Caption' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> caption: aParam1 [
+JinLabel >> caption: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Caption' withArguments: {aParam1} ).
@@ -376,14 +376,14 @@ JinControlLabel >> caption: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> controlTipText [
+JinLabel >> controlTipText [
 <getter>
 	^ (handle propertyNamed: #'ControlTipText' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> controlTipText: aParam1 [
+JinLabel >> controlTipText: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlTipText' withArguments: {aParam1} ).
@@ -391,14 +391,14 @@ JinControlLabel >> controlTipText: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> controlType [
+JinLabel >> controlType [
 <getter>
 	^ (handle propertyNamed: #'ControlType' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> controlType: aParam1 [
+JinLabel >> controlType: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ControlType' withArguments: {aParam1} ).
@@ -406,14 +406,14 @@ JinControlLabel >> controlType: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> displayWhen [
+JinLabel >> displayWhen [
 <getter>
 	^ (handle propertyNamed: #'DisplayWhen' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> displayWhen: aParam1 [
+JinLabel >> displayWhen: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'DisplayWhen' withArguments: {aParam1} ).
@@ -421,14 +421,14 @@ JinControlLabel >> displayWhen: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> eventProcPrefix [
+JinLabel >> eventProcPrefix [
 <getter>
 	^ (handle propertyNamed: #'EventProcPrefix' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> eventProcPrefix: aParam1 [
+JinLabel >> eventProcPrefix: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'EventProcPrefix' withArguments: {aParam1} ).
@@ -436,14 +436,14 @@ JinControlLabel >> eventProcPrefix: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> fontBold [
+JinLabel >> fontBold [
 <getter>
 	^ (handle propertyNamed: #'FontBold' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> fontBold: aParam1 [
+JinLabel >> fontBold: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontBold' withArguments: {aParam1} ).
@@ -451,14 +451,14 @@ JinControlLabel >> fontBold: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> fontItalic [
+JinLabel >> fontItalic [
 <getter>
 	^ (handle propertyNamed: #'FontItalic' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> fontItalic: aParam1 [
+JinLabel >> fontItalic: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontItalic' withArguments: {aParam1} ).
@@ -466,14 +466,14 @@ JinControlLabel >> fontItalic: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> fontName [
+JinLabel >> fontName [
 <getter>
 	^ (handle propertyNamed: #'FontName' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> fontName: aParam1 [
+JinLabel >> fontName: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontName' withArguments: {aParam1} ).
@@ -481,14 +481,14 @@ JinControlLabel >> fontName: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> fontSize [
+JinLabel >> fontSize [
 <getter>
 	^ (handle propertyNamed: #'FontSize' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> fontSize: aParam1 [
+JinLabel >> fontSize: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontSize' withArguments: {aParam1} ).
@@ -496,14 +496,14 @@ JinControlLabel >> fontSize: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> fontUnderline [
+JinLabel >> fontUnderline [
 <getter>
 	^ (handle propertyNamed: #'FontUnderline' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> fontUnderline: aParam1 [
+JinLabel >> fontUnderline: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontUnderline' withArguments: {aParam1} ).
@@ -511,14 +511,14 @@ JinControlLabel >> fontUnderline: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> fontWeight [
+JinLabel >> fontWeight [
 <getter>
 	^ (handle propertyNamed: #'FontWeight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> fontWeight: aParam1 [
+JinLabel >> fontWeight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'FontWeight' withArguments: {aParam1} ).
@@ -526,14 +526,14 @@ JinControlLabel >> fontWeight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> foreColor [
+JinLabel >> foreColor [
 <getter>
 	^ (handle propertyNamed: #'ForeColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> foreColor: aParam1 [
+JinLabel >> foreColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeColor' withArguments: {aParam1} ).
@@ -541,14 +541,14 @@ JinControlLabel >> foreColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> foreShade [
+JinLabel >> foreShade [
 <getter>
 	^ (handle propertyNamed: #'ForeShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> foreShade: aParam1 [
+JinLabel >> foreShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeShade' withArguments: {aParam1} ).
@@ -556,14 +556,14 @@ JinControlLabel >> foreShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> foreThemeColorIndex [
+JinLabel >> foreThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'ForeThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> foreThemeColorIndex: aParam1 [
+JinLabel >> foreThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeThemeColorIndex' withArguments: {aParam1} ).
@@ -571,14 +571,14 @@ JinControlLabel >> foreThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> foreTint [
+JinLabel >> foreTint [
 <getter>
 	^ (handle propertyNamed: #'ForeTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> foreTint: aParam1 [
+JinLabel >> foreTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ForeTint' withArguments: {aParam1} ).
@@ -586,14 +586,14 @@ JinControlLabel >> foreTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineColor [
+JinLabel >> gridlineColor [
 <getter>
 	^ (handle propertyNamed: #'GridlineColor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineColor: aParam1 [
+JinLabel >> gridlineColor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineColor' withArguments: {aParam1} ).
@@ -601,14 +601,14 @@ JinControlLabel >> gridlineColor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineShade [
+JinLabel >> gridlineShade [
 <getter>
 	^ (handle propertyNamed: #'GridlineShade' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineShade: aParam1 [
+JinLabel >> gridlineShade: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineShade' withArguments: {aParam1} ).
@@ -616,14 +616,14 @@ JinControlLabel >> gridlineShade: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineStyleBottom [
+JinLabel >> gridlineStyleBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineStyleBottom: aParam1 [
+JinLabel >> gridlineStyleBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleBottom' withArguments: {aParam1} ).
@@ -631,14 +631,14 @@ JinControlLabel >> gridlineStyleBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineStyleLeft [
+JinLabel >> gridlineStyleLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineStyleLeft: aParam1 [
+JinLabel >> gridlineStyleLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleLeft' withArguments: {aParam1} ).
@@ -646,14 +646,14 @@ JinControlLabel >> gridlineStyleLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineStyleRight [
+JinLabel >> gridlineStyleRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineStyleRight: aParam1 [
+JinLabel >> gridlineStyleRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleRight' withArguments: {aParam1} ).
@@ -661,14 +661,14 @@ JinControlLabel >> gridlineStyleRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineStyleTop [
+JinLabel >> gridlineStyleTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineStyleTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineStyleTop: aParam1 [
+JinLabel >> gridlineStyleTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineStyleTop' withArguments: {aParam1} ).
@@ -676,14 +676,14 @@ JinControlLabel >> gridlineStyleTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineThemeColorIndex [
+JinLabel >> gridlineThemeColorIndex [
 <getter>
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineThemeColorIndex: aParam1 [
+JinLabel >> gridlineThemeColorIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineThemeColorIndex' withArguments: {aParam1} ).
@@ -691,14 +691,14 @@ JinControlLabel >> gridlineThemeColorIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineTint [
+JinLabel >> gridlineTint [
 <getter>
 	^ (handle propertyNamed: #'GridlineTint' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineTint: aParam1 [
+JinLabel >> gridlineTint: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineTint' withArguments: {aParam1} ).
@@ -706,14 +706,14 @@ JinControlLabel >> gridlineTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineWidthBottom [
+JinLabel >> gridlineWidthBottom [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthBottom' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineWidthBottom: aParam1 [
+JinLabel >> gridlineWidthBottom: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthBottom' withArguments: {aParam1} ).
@@ -721,14 +721,14 @@ JinControlLabel >> gridlineWidthBottom: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineWidthLeft [
+JinLabel >> gridlineWidthLeft [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthLeft' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineWidthLeft: aParam1 [
+JinLabel >> gridlineWidthLeft: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthLeft' withArguments: {aParam1} ).
@@ -736,14 +736,14 @@ JinControlLabel >> gridlineWidthLeft: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineWidthRight [
+JinLabel >> gridlineWidthRight [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthRight' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineWidthRight: aParam1 [
+JinLabel >> gridlineWidthRight: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthRight' withArguments: {aParam1} ).
@@ -751,14 +751,14 @@ JinControlLabel >> gridlineWidthRight: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineWidthTop [
+JinLabel >> gridlineWidthTop [
 <getter>
 	^ (handle propertyNamed: #'GridlineWidthTop' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> gridlineWidthTop: aParam1 [
+JinLabel >> gridlineWidthTop: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'GridlineWidthTop' withArguments: {aParam1} ).
@@ -766,14 +766,14 @@ JinControlLabel >> gridlineWidthTop: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> height [
+JinLabel >> height [
 <getter>
 	^ (handle propertyNamed: #'Height' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> height: aParam1 [
+JinLabel >> height: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Height' withArguments: {aParam1} ).
@@ -781,14 +781,14 @@ JinControlLabel >> height: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> helpContextId [
+JinLabel >> helpContextId [
 <getter>
 	^ (handle propertyNamed: #'HelpContextId' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> helpContextId: aParam1 [
+JinLabel >> helpContextId: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HelpContextId' withArguments: {aParam1} ).
@@ -796,14 +796,14 @@ JinControlLabel >> helpContextId: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> horizontalAnchor [
+JinLabel >> horizontalAnchor [
 <getter>
 	^ (handle propertyNamed: #'HorizontalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> horizontalAnchor: aParam1 [
+JinLabel >> horizontalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HorizontalAnchor' withArguments: {aParam1} ).
@@ -811,21 +811,21 @@ JinControlLabel >> horizontalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> hyperlink [
+JinLabel >> hyperlink [
 <getter>
 	^ (handle propertyNamed: #'Hyperlink' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> hyperlinkAddress [
+JinLabel >> hyperlinkAddress [
 <getter>
 	^ (handle propertyNamed: #'HyperlinkAddress' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> hyperlinkAddress: aParam1 [
+JinLabel >> hyperlinkAddress: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HyperlinkAddress' withArguments: {aParam1} ).
@@ -833,14 +833,14 @@ JinControlLabel >> hyperlinkAddress: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> hyperlinkSubAddress [
+JinLabel >> hyperlinkSubAddress [
 <getter>
 	^ (handle propertyNamed: #'HyperlinkSubAddress' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> hyperlinkSubAddress: aParam1 [
+JinLabel >> hyperlinkSubAddress: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'HyperlinkSubAddress' withArguments: {aParam1} ).
@@ -848,14 +848,14 @@ JinControlLabel >> hyperlinkSubAddress: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> inSelection [
+JinLabel >> inSelection [
 <getter>
 	^ (handle propertyNamed: #'InSelection' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> inSelection: aParam1 [
+JinLabel >> inSelection: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'InSelection' withArguments: {aParam1} ).
@@ -863,14 +863,14 @@ JinControlLabel >> inSelection: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> isVisible [
+JinLabel >> isVisible [
 <getter>
 	^ (handle propertyNamed: #'IsVisible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> isVisible: aParam1 [
+JinLabel >> isVisible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'IsVisible' withArguments: {aParam1} ).
@@ -878,28 +878,28 @@ JinControlLabel >> isVisible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> layout [
+JinLabel >> layout [
 <getter>
 	^ (handle propertyNamed: #'Layout' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> layoutID [
+JinLabel >> layoutID [
 <getter>
 	^ (handle propertyNamed: #'LayoutID' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> left [
+JinLabel >> left [
 <getter>
 	^ (handle propertyNamed: #'Left' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> left: aParam1 [
+JinLabel >> left: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Left' withArguments: {aParam1} ).
@@ -907,14 +907,14 @@ JinControlLabel >> left: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> leftMargin [
+JinLabel >> leftMargin [
 <getter>
 	^ (handle propertyNamed: #'LeftMargin' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> leftMargin: aParam1 [
+JinLabel >> leftMargin: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LeftMargin' withArguments: {aParam1} ).
@@ -922,14 +922,14 @@ JinControlLabel >> leftMargin: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> leftPadding [
+JinLabel >> leftPadding [
 <getter>
 	^ (handle propertyNamed: #'LeftPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> leftPadding: aParam1 [
+JinLabel >> leftPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LeftPadding' withArguments: {aParam1} ).
@@ -937,14 +937,14 @@ JinControlLabel >> leftPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> lineSpacing [
+JinLabel >> lineSpacing [
 <getter>
 	^ (handle propertyNamed: #'LineSpacing' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> lineSpacing: aParam1 [
+JinLabel >> lineSpacing: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'LineSpacing' withArguments: {aParam1} ).
@@ -952,7 +952,7 @@ JinControlLabel >> lineSpacing: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlLabel >> move: aLeft top: aTop width: aWidth height: aHeight [
+JinLabel >> move: aLeft top: aTop width: aWidth height: aHeight [
 <method>
 "This method can be called with optional parameters. Top,Width,Height"
 	^ (handle dispatch: #'Move' withArguments: {aLeft . aTop . aWidth . aHeight} ).
@@ -960,14 +960,14 @@ JinControlLabel >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> name [
+JinLabel >> name [
 <getter>
 	^ (handle propertyNamed: #'Name' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> name: aParam1 [
+JinLabel >> name: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Name' withArguments: {aParam1} ).
@@ -975,14 +975,14 @@ JinControlLabel >> name: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> numeralShapes [
+JinLabel >> numeralShapes [
 <getter>
 	^ (handle propertyNamed: #'NumeralShapes' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> numeralShapes: aParam1 [
+JinLabel >> numeralShapes: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'NumeralShapes' withArguments: {aParam1} ).
@@ -990,14 +990,14 @@ JinControlLabel >> numeralShapes: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> oldBorderStyle [
+JinLabel >> oldBorderStyle [
 <getter>
 	^ (handle propertyNamed: #'OldBorderStyle' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> oldBorderStyle: aParam1 [
+JinLabel >> oldBorderStyle: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OldBorderStyle' withArguments: {aParam1} ).
@@ -1005,14 +1005,14 @@ JinControlLabel >> oldBorderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> onClick [
+JinLabel >> onClick [
 <getter>
 	^ (handle propertyNamed: #'OnClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> onClick: aParam1 [
+JinLabel >> onClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnClick' withArguments: {aParam1} ).
@@ -1020,14 +1020,14 @@ JinControlLabel >> onClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> onDblClick [
+JinLabel >> onDblClick [
 <getter>
 	^ (handle propertyNamed: #'OnDblClick' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> onDblClick: aParam1 [
+JinLabel >> onDblClick: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnDblClick' withArguments: {aParam1} ).
@@ -1035,14 +1035,14 @@ JinControlLabel >> onDblClick: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> onMouseDown [
+JinLabel >> onMouseDown [
 <getter>
 	^ (handle propertyNamed: #'OnMouseDown' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> onMouseDown: aParam1 [
+JinLabel >> onMouseDown: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseDown' withArguments: {aParam1} ).
@@ -1050,14 +1050,14 @@ JinControlLabel >> onMouseDown: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> onMouseMove [
+JinLabel >> onMouseMove [
 <getter>
 	^ (handle propertyNamed: #'OnMouseMove' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> onMouseMove: aParam1 [
+JinLabel >> onMouseMove: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseMove' withArguments: {aParam1} ).
@@ -1065,14 +1065,14 @@ JinControlLabel >> onMouseMove: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> onMouseUp [
+JinLabel >> onMouseUp [
 <getter>
 	^ (handle propertyNamed: #'OnMouseUp' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> onMouseUp: aParam1 [
+JinLabel >> onMouseUp: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'OnMouseUp' withArguments: {aParam1} ).
@@ -1080,21 +1080,21 @@ JinControlLabel >> onMouseUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> parent [
+JinLabel >> parent [
 <getter>
 	^ (handle propertyNamed: #'Parent' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> readingOrder [
+JinLabel >> readingOrder [
 <getter>
 	^ (handle propertyNamed: #'ReadingOrder' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> readingOrder: aParam1 [
+JinLabel >> readingOrder: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ReadingOrder' withArguments: {aParam1} ).
@@ -1102,14 +1102,14 @@ JinControlLabel >> readingOrder: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> rightMargin [
+JinLabel >> rightMargin [
 <getter>
 	^ (handle propertyNamed: #'RightMargin' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> rightMargin: aParam1 [
+JinLabel >> rightMargin: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'RightMargin' withArguments: {aParam1} ).
@@ -1117,14 +1117,14 @@ JinControlLabel >> rightMargin: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> rightPadding [
+JinLabel >> rightPadding [
 <getter>
 	^ (handle propertyNamed: #'RightPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> rightPadding: aParam1 [
+JinLabel >> rightPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'RightPadding' withArguments: {aParam1} ).
@@ -1132,14 +1132,14 @@ JinControlLabel >> rightPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> section [
+JinLabel >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> section: aParam1 [
+JinLabel >> section: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Section' withArguments: {aParam1} ).
@@ -1147,14 +1147,14 @@ JinControlLabel >> section: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> shortcutMenuBar [
+JinLabel >> shortcutMenuBar [
 <getter>
 	^ (handle propertyNamed: #'ShortcutMenuBar' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> shortcutMenuBar: aParam1 [
+JinLabel >> shortcutMenuBar: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ShortcutMenuBar' withArguments: {aParam1} ).
@@ -1162,28 +1162,28 @@ JinControlLabel >> shortcutMenuBar: aParam1 [
 ]
 
 { #category : #'method - generated' }
-JinControlLabel >> sizeToFit [
+JinLabel >> sizeToFit [
 <method>
 	^ (handle dispatch: #'SizeToFit' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> smartTags [
+JinLabel >> smartTags [
 <getter>
 	^ (handle propertyNamed: #'SmartTags' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> specialEffect [
+JinLabel >> specialEffect [
 <getter>
 	^ (handle propertyNamed: #'SpecialEffect' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> specialEffect: aParam1 [
+JinLabel >> specialEffect: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'SpecialEffect' withArguments: {aParam1} ).
@@ -1191,14 +1191,14 @@ JinControlLabel >> specialEffect: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> tag [
+JinLabel >> tag [
 <getter>
 	^ (handle propertyNamed: #'Tag' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> tag: aParam1 [
+JinLabel >> tag: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Tag' withArguments: {aParam1} ).
@@ -1206,14 +1206,14 @@ JinControlLabel >> tag: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> textAlign [
+JinLabel >> textAlign [
 <getter>
 	^ (handle propertyNamed: #'TextAlign' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> textAlign: aParam1 [
+JinLabel >> textAlign: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TextAlign' withArguments: {aParam1} ).
@@ -1221,14 +1221,14 @@ JinControlLabel >> textAlign: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> themeFontIndex [
+JinLabel >> themeFontIndex [
 <getter>
 	^ (handle propertyNamed: #'ThemeFontIndex' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> themeFontIndex: aParam1 [
+JinLabel >> themeFontIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'ThemeFontIndex' withArguments: {aParam1} ).
@@ -1236,14 +1236,14 @@ JinControlLabel >> themeFontIndex: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> top [
+JinLabel >> top [
 <getter>
 	^ (handle propertyNamed: #'Top' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> top: aParam1 [
+JinLabel >> top: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Top' withArguments: {aParam1} ).
@@ -1251,14 +1251,14 @@ JinControlLabel >> top: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> topMargin [
+JinLabel >> topMargin [
 <getter>
 	^ (handle propertyNamed: #'TopMargin' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> topMargin: aParam1 [
+JinLabel >> topMargin: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TopMargin' withArguments: {aParam1} ).
@@ -1266,14 +1266,14 @@ JinControlLabel >> topMargin: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> topPadding [
+JinLabel >> topPadding [
 <getter>
 	^ (handle propertyNamed: #'TopPadding' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> topPadding: aParam1 [
+JinLabel >> topPadding: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'TopPadding' withArguments: {aParam1} ).
@@ -1281,14 +1281,14 @@ JinControlLabel >> topPadding: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> vertical [
+JinLabel >> vertical [
 <getter>
 	^ (handle propertyNamed: #'Vertical' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> vertical: aParam1 [
+JinLabel >> vertical: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Vertical' withArguments: {aParam1} ).
@@ -1296,14 +1296,14 @@ JinControlLabel >> vertical: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> verticalAnchor [
+JinLabel >> verticalAnchor [
 <getter>
 	^ (handle propertyNamed: #'VerticalAnchor' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> verticalAnchor: aParam1 [
+JinLabel >> verticalAnchor: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'VerticalAnchor' withArguments: {aParam1} ).
@@ -1311,14 +1311,14 @@ JinControlLabel >> verticalAnchor: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> visible [
+JinLabel >> visible [
 <getter>
 	^ (handle propertyNamed: #'Visible' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> visible: aParam1 [
+JinLabel >> visible: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Visible' withArguments: {aParam1} ).
@@ -1326,14 +1326,14 @@ JinControlLabel >> visible: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> width [
+JinLabel >> width [
 <getter>
 	^ (handle propertyNamed: #'Width' ).
 
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> width: aParam1 [
+JinLabel >> width: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Width' withArguments: {aParam1} ).
