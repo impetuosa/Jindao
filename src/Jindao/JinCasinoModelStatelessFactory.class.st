@@ -122,6 +122,7 @@ JinCasinoModelStatelessFactory >> visitImage: aJinControlImage [
 { #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> visitLabel: aJinControlLabel [ 
 | input |
+	self halt. 
 	input := CSNUIParagraph new. 
 	input name: aJinControlLabel nameWithoutSpaces .
 	input text: aJinControlLabel caption.

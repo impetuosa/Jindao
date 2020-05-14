@@ -1087,13 +1087,6 @@ JinControlLabel >> parent [
 ]
 
 { #category : #'property - generated' }
-JinControlLabel >> properties [
-<getter>
-	^ (handle propertyNamed: #'Properties' ).
-
-]
-
-{ #category : #'property - generated' }
 JinControlLabel >> readingOrder [
 <getter>
 	^ (handle propertyNamed: #'ReadingOrder' ).

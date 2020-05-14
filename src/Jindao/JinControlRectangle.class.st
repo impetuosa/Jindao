@@ -515,13 +515,6 @@ JinControlRectangle >> parent [
 ]
 
 { #category : #'property - generated' }
-JinControlRectangle >> properties [
-<getter>
-	^ (handle propertyNamed: #'Properties' ).
-
-]
-
-{ #category : #'property - generated' }
 JinControlRectangle >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).

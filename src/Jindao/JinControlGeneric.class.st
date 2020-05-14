@@ -1,7 +1,10 @@
+"
+I am here to work as a minimal-functionality handle .
+"
 Class {
 	#name : #JinControlGeneric,
 	#superclass : #JinControl,
-	#category : #'Jindao-DomainObjects'
+	#category : #'Jindao-DomainObjects-FormControls'
 }
 
 { #category : #'as yet unclassified' }

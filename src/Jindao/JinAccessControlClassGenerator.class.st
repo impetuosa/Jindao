@@ -17,16 +17,17 @@ JinAccessControlClassGenerator >> forceDoubleGenerationOfAllClasses [
 	(project forms
 		flatCollect: [ :c | 
 			c controls
-				factory:
-					(JinControlGeneratorFactory new
-						builder: JinControlDoubleClassBuilder;
-						yourself);
+				factory: JinRemoteObjectGeneratorFactory newControlDoubleClassBasedFactory;
 				yourself ]) collect: [ :c | c yourself ]
 ]
 
 { #category : #tests }
 JinAccessControlClassGenerator >> forceGenerationOfAllClasses [
-	(project forms flatCollect: [ : c | c controls factory: JinControlGeneratorFactory new ; yourself ]) collect: [  : c | c yourself ].
+	(project forms
+		flatCollect: [ :c | 
+			c controls
+				factory: JinRemoteObjectGeneratorFactory newControlSimpleClassBasedFactory ])
+		collect: [ :c | c yourself ]
 ]
 
 { #category : #tests }
@@ -41,4 +42,33 @@ JinAccessControlClassGenerator >> testAllTheExpectedControlsAreCreated [
 	JinControl allSubclasses
 		remove: JinControlGeneric;
 		yourself
+]
+
+{ #category : #tests }
+JinAccessControlClassGenerator >> testGeneratedClassesMethodsOrPropertiesShouldNotOverrideAnyNotOverrideMethod [
+	| configuredBuilder |
+	configuredBuilder := JinRemoteObjectGeneratorFactory
+		newControlSimpleClassBasedFactory newBuilderForName: 'Test'.
+	self
+		deny: (configuredBuilder shouldGenerateMethodNamed: 'properties' asSymbol)
+]
+
+{ #category : #tests }
+JinAccessControlClassGenerator >> testGeneratedClassesMethodsOrPropertiesShouldNotOverrideAnyNotOverrideMethod2 [
+	| configuredBuilder |
+	configuredBuilder := JinRemoteObjectGeneratorFactory
+		newControlSimpleClassBasedFactory newBuilderForName: 'Test'.
+	self
+		deny: (configuredBuilder shouldGenerateMethodNamed: 'controlName' asSymbol)
+]
+
+{ #category : #tests }
+JinAccessControlClassGenerator >> testGeneratedClassesMethodsOrPropertiesShouldOverrideAnyNoNotOverrideMethod [
+	| configuredBuilder |
+	configuredBuilder := JinRemoteObjectGeneratorFactory
+		newControlSimpleClassBasedFactory newBuilderForName: 'Test'.
+	self
+		assert:
+			(configuredBuilder
+				shouldGenerateMethodNamed: 'acceptVisitor:' asSymbol)
 ]

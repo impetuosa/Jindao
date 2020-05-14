@@ -844,13 +844,6 @@ JinControlSubForm >> parent [
 ]
 
 { #category : #'property - generated' }
-JinControlSubForm >> properties [
-<getter>
-	^ (handle propertyNamed: #'Properties' ).
-
-]
-
-{ #category : #'property - generated' }
 JinControlSubForm >> report [
 <getter>
 	^ (handle propertyNamed: #'Report' ).

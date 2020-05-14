@@ -1087,13 +1087,6 @@ JinControlCheckbox >> parent [
 ]
 
 { #category : #'property - generated' }
-JinControlCheckbox >> properties [
-<getter>
-	^ (handle propertyNamed: #'Properties' ).
-
-]
-
-{ #category : #'property - generated' }
 JinControlCheckbox >> readingOrder [
 <getter>
 	^ (handle propertyNamed: #'ReadingOrder' ).

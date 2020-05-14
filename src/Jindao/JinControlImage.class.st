@@ -980,13 +980,6 @@ JinControlImage >> pictureType: aParam1 [
 
 ]
 
-{ #category : #'property - generated' }
-JinControlImage >> properties [
-<getter>
-	^ (handle propertyNamed: #'Properties' ).
-
-]
-
 { #category : #'method - generated' }
 JinControlImage >> requery [
 <method>

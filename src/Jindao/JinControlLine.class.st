@@ -359,13 +359,6 @@ JinControlLine >> parent [
 ]
 
 { #category : #'property - generated' }
-JinControlLine >> properties [
-<getter>
-	^ (handle propertyNamed: #'Properties' ).
-
-]
-
-{ #category : #'property - generated' }
 JinControlLine >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).

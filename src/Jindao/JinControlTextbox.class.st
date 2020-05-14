@@ -1755,13 +1755,6 @@ JinControlTextbox >> postalAddress: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTextbox >> properties [
-<getter>
-	^ (handle propertyNamed: #'Properties' ).
-
-]
-
-{ #category : #'property - generated' }
 JinControlTextbox >> readingOrder [
 <getter>
 	^ (handle propertyNamed: #'ReadingOrder' ).

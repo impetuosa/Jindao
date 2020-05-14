@@ -1,7 +1,7 @@
 Class {
 	#name : #JinMacro,
 	#superclass : #JinHandleObject,
-	#category : #'Jindao-DomainObjects'
+	#category : #'Jindao-DomainObjects-PrincipalObjects'
 }
 
 { #category : #'as yet unclassified' }

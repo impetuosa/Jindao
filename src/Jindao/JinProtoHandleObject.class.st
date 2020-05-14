@@ -8,6 +8,16 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinProtoHandleObject class >> mappedTypeName [
+	^ false 
+]
+
+{ #category : #'as yet unclassified' }
+JinProtoHandleObject class >> mapsWith: aRemoteObject [
+	aRemoteObject getTypeInfo name = self mappedTypeName
+]
+
+{ #category : #'as yet unclassified' }
 JinProtoHandleObject >> handle [
 	^ handle
 ]

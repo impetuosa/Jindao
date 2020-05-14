@@ -10,7 +10,7 @@ Class {
 		'project',
 		'loadedObjectHandle'
 	],
-	#category : #'Jindao-DomainObjects'
+	#category : #'Jindao-DomainObjects-PrincipalObjects'
 }
 
 { #category : #'as yet unclassified' }

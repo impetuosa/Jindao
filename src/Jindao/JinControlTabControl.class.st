@@ -1296,13 +1296,6 @@ JinControlTabControl >> pressedTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlTabControl >> properties [
-<getter>
-	^ (handle propertyNamed: #'Properties' ).
-
-]
-
-{ #category : #'property - generated' }
 JinControlTabControl >> rightPadding [
 <getter>
 	^ (handle propertyNamed: #'RightPadding' ).

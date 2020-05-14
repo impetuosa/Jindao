@@ -1,6 +1,9 @@
+"
+I am here to abstract the methods that are part of many elements, but are not particularly interesting for my only subclass.
+"
 Class {
 	#name : #JinControlAbstractSubForm,
-	#superclass : #JinControl,
+	#superclass : #JinControlGenerated,
 	#category : #'Jindao-DomainObjects-GeneratedControls-Abstract'
 }
 

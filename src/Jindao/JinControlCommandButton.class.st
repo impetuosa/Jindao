@@ -1722,13 +1722,6 @@ JinControlCommandButton >> pressedTint: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinControlCommandButton >> properties [
-<getter>
-	^ (handle propertyNamed: #'Properties' ).
-
-]
-
-{ #category : #'property - generated' }
 JinControlCommandButton >> quickStyle [
 <getter>
 	^ (handle propertyNamed: #'QuickStyle' ).

@@ -16,27 +16,20 @@ JinControlDoubleClassBuilder >> buildingAbstractClassName [
 ]
 
 { #category : #'as yet unclassified' }
-JinControlDoubleClassBuilder >> buildingClass [
-	^ self class environment
-		at: self buildingClassName
-		ifAbsent: [ 
-			| class | 
-			class := self superclass
-				subclass: self buildingClassName asSymbol
-				instanceVariableNames: ''
-				classVariableNames: ''
-				package: 'Jindao-DomainObjects-GeneratedControls'.
-				class comment: (JinDocumentationLoader default access controlNamed: self mappingName) fileReference readStream upToEnd .
-				 ]
-]
-
-{ #category : #'as yet unclassified' }
 JinControlDoubleClassBuilder >> buildingClassFor: anElement [ 
 	^ ((JinDocumentationLoader default access controlNamed: self mappingName) documents: anElement name ) ifTrue: [ 
 		(super buildingClassFor: anElement )
 	 ] ifFalse: [  
 		self superclass 
 	 ]
+]
+
+{ #category : #'as yet unclassified' }
+JinControlDoubleClassBuilder >> comment [
+	^ super comment
+		,
+			(JinDocumentationLoader default access controlNamed: self mappingName)
+				fileReference readStream upToEnd
 ]
 
 { #category : #'as yet unclassified' }
@@ -56,9 +49,13 @@ JinControlDoubleClassBuilder >> name: aString [
 JinControlDoubleClassBuilder >> superclass [
 	^ self class environment
 		at: self buildingAbstractClassName
-		ifAbsent: [  superclass
+		ifAbsent: [ | freshOne |
+			freshOne := superclass
 				subclass: self buildingAbstractClassName asSymbol
 				instanceVariableNames: ''
 				classVariableNames: ''
-				package: 'Jindao-DomainObjects-GeneratedControls-Abstract' ]
+				package: 'Jindao-DomainObjects-GeneratedControls-Abstract'.
+			freshOne
+				comment:
+					' I am here to abstract the methods that are part of many elements, but are not particularly interesting for my only subclass.' ]
 ]

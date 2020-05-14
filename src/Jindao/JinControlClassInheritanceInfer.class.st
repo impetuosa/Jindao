@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'names'
 	],
-	#category : #'Jindao-Factories'
+	#category : #'Jindao-BorderExperiments'
 }
 
 { #category : #accessing }

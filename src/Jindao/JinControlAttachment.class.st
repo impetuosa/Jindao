@@ -1402,13 +1402,6 @@ JinControlAttachment >> pictureTiling: aParam1 [
 
 ]
 
-{ #category : #'property - generated' }
-JinControlAttachment >> properties [
-<getter>
-	^ (handle propertyNamed: #'Properties' ).
-
-]
-
 { #category : #'method - generated' }
 JinControlAttachment >> requery [
 <method>

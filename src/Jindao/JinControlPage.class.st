@@ -443,13 +443,6 @@ JinControlPage >> pictureType: aParam1 [
 
 ]
 
-{ #category : #'property - generated' }
-JinControlPage >> properties [
-<getter>
-	^ (handle propertyNamed: #'Properties' ).
-
-]
-
 { #category : #'method - generated' }
 JinControlPage >> requery [
 <method>

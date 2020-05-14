@@ -8,7 +8,7 @@ Class {
 		'code',
 		'module'
 	],
-	#category : #'Jindao-DomainObjects'
+	#category : #'Jindao-DomainObjects-PrincipalObjects'
 }
 
 { #category : #'as yet unclassified' }
@@ -27,10 +27,14 @@ JinForm >> controls [
 	self ensureIsLoaded.
 	^ JinCollection newDefault
 		handle: (loadedObjectHandle propertyNamed: #Controls)
-		factory:
-			(JinControlsFactory default
-				parent: self;
-				yourself)
+		factory: self controlsFactory
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> controlsFactory [
+	^ JinRemotesFactory newDefaultControlsFactory
+		parent: self;
+		yourself
 ]
 
 { #category : #'as yet unclassified' }

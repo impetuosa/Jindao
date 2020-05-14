@@ -2019,13 +2019,6 @@ JinControlCombobox >> parent [
 ]
 
 { #category : #'property - generated' }
-JinControlCombobox >> properties [
-<getter>
-	^ (handle propertyNamed: #'Properties' ).
-
-]
-
-{ #category : #'property - generated' }
 JinControlCombobox >> readingOrder [
 <getter>
 	^ (handle propertyNamed: #'ReadingOrder' ).

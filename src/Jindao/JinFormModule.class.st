@@ -6,7 +6,7 @@ I am only accessible through a form
 Class {
 	#name : #JinFormModule,
 	#superclass : #JinModule,
-	#category : #'Jindao-DomainObjects'
+	#category : #'Jindao-DomainObjects-PrincipalObjects'
 }
 
 { #category : #'as yet unclassified' }

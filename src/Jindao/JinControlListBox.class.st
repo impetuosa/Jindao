@@ -1604,13 +1604,6 @@ JinControlListBox >> parent [
 ]
 
 { #category : #'property - generated' }
-JinControlListBox >> properties [
-<getter>
-	^ (handle propertyNamed: #'Properties' ).
-
-]
-
-{ #category : #'property - generated' }
 JinControlListBox >> readingOrder [
 <getter>
 	^ (handle propertyNamed: #'ReadingOrder' ).
