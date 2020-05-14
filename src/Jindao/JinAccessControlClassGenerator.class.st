@@ -14,7 +14,7 @@ JinAccessControlClassGenerator >> ensureGeneratedClassesAreGone [
 
 { #category : #tests }
 JinAccessControlClassGenerator >> forceDoubleGenerationOfAllClasses [
-	(project forms
+	^ (project forms
 		flatCollect: [ :c | 
 			c controls
 				factory: JinRemoteObjectGeneratorFactory newControlDoubleClassBasedFactory;
@@ -22,8 +22,19 @@ JinAccessControlClassGenerator >> forceDoubleGenerationOfAllClasses [
 ]
 
 { #category : #tests }
+JinAccessControlClassGenerator >> forceGenerationOfAllAccessPropertiesClasses [
+	| allControls |
+	allControls := self forceGenerationOfAllClasses.
+	(allControls
+		flatCollect: [ :c | 
+			c properties
+				factory: JinRemoteObjectGeneratorFactory newAccessPropertySimpleClassBasedFactory;
+				yourself ]) collect: [ :p | p yourself ]
+]
+
+{ #category : #tests }
 JinAccessControlClassGenerator >> forceGenerationOfAllClasses [
-	(project forms
+	^ (project forms
 		flatCollect: [ :c | 
 			c controls
 				factory: JinRemoteObjectGeneratorFactory newControlSimpleClassBasedFactory ])
@@ -34,6 +45,14 @@ JinAccessControlClassGenerator >> forceGenerationOfAllClasses [
 JinAccessControlClassGenerator >> tearDown [
 	super tearDown.
 	"self ensureGeneratedClassesAreGone"
+]
+
+{ #category : #tests }
+JinAccessControlClassGenerator >> testAllTheExpectedAccessPropertyTypesAreCreated [
+	self forceGenerationOfAllAccessPropertiesClasses.
+	JinControl allSubclasses
+		remove: JinControlGeneric;
+		yourself
 ]
 
 { #category : #tests }
