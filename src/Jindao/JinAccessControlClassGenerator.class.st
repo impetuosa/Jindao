@@ -58,9 +58,13 @@ JinAccessControlClassGenerator >> testAllTheExpectedAccessPropertyTypesAreCreate
 { #category : #tests }
 JinAccessControlClassGenerator >> testAllTheExpectedControlsAreCreated [
 	self forceDoubleGenerationOfAllClasses.
-	JinControl allSubclasses
-		remove: JinControlGeneric;
-		yourself
+	self
+		assert:
+			(JinControl allSubclasses
+				remove: JinControlGeneric;
+				remove: JinControlGenerated;
+				yourself) size
+		equals: 26
 ]
 
 { #category : #tests }

@@ -10,6 +10,12 @@ Class {
 	#category : #'Jindao-Tests'
 }
 
+{ #category : #initialization }
+JinNorwindProjectResource class >> reset [
+	<script> 
+	super reset. 
+]
+
 { #category : #running }
 JinNorwindProjectResource >> norwind [
 	^ 'D:\Users\Santiago.BRAGAGNOLO\Documents\norwind\Northwind.accdb' asFileReference

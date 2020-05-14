@@ -35,13 +35,14 @@ JinRemoteObjectMappedTypesFactory >> classFor: aRemoteObject ifNone: aBlock [
 
 { #category : #accessing }
 JinRemoteObjectMappedTypesFactory >> control: aControl mapsWith: aJinControlClass [
+ self halt. 
 	^ (self resolveNameForClassGeneration: aControl)
 		= aJinControlClass mappedTypeName
 ]
 
 { #category : #accessing }
 JinRemoteObjectMappedTypesFactory >> mappedControlsCollection [
-	^ self defaultHierarchyClass allSubclasses
+	^ self defaultHierarchyClass superclass allSubclasses
 ]
 
 { #category : #accessing }
