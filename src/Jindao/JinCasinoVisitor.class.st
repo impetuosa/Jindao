@@ -18,11 +18,9 @@ JinCasinoVisitor >> factory [
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> importAccessProperty: aProperty [
-	^ [ self factory
+	^ self factory
 		importAccessProperty: aProperty
-		inTheContextOf: stack top ]
-		on: Error
-		do: [ :err | ^ nil ]
+		inTheContextOf: stack top
 ]
 
 { #category : #'as yet unclassified' }
