@@ -7,7 +7,8 @@ Class {
 	#name : #JinControl,
 	#superclass : #JinProtoHandleObject,
 	#instVars : [
-		'parent'
+		'parent',
+		'properties'
 	],
 	#category : #'Jindao-DomainObjects-FormControls'
 }
@@ -54,8 +55,17 @@ JinControl >> printOn: aStream [
 
 { #category : #'as yet unclassified' }
 JinControl >> properties [
-	<doNotOverride> 
-	^ JinCollection newDefault
-		handle: (handle propertyNamed: #Properties)
-		factory: (JinInstanceFactory defaultFor: JinHandleObject)
+	<doNotOverride>
+	^ properties
+		ifNil: [ properties := JinCollection newDefault
+				handle: (handle propertyNamed: #Properties)
+					factory: self propertiesFactory;
+				yourself ]
+]
+
+{ #category : #'as yet unclassified' }
+JinControl >> propertiesFactory [
+	^ JinRemotesFactory newDefaultAccessPropertyFactory
+		parent: self;
+		yourself
 ]

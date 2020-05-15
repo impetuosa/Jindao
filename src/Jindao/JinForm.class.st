@@ -6,7 +6,8 @@ Class {
 	#superclass : #JinHandleObject,
 	#instVars : [
 		'code',
-		'module'
+		'module',
+		'controls'
 	],
 	#category : #'Jindao-DomainObjects-PrincipalObjects'
 }
@@ -25,9 +26,10 @@ JinForm >> code [
 { #category : #'as yet unclassified' }
 JinForm >> controls [
 	self ensureIsLoaded.
-	^ JinCollection newDefault
-		handle: (loadedObjectHandle propertyNamed: #Controls)
-		factory: self controlsFactory
+	^ controls
+		ifNil: [ controls := JinCollection newDefault
+				handle: (loadedObjectHandle propertyNamed: #Controls)
+				factory: self controlsFactory ]
 ]
 
 { #category : #'as yet unclassified' }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'handle'
 	],
-	#category : #'Jindao-DomainObjects'
+	#category : #'Jindao-DomainObjects-Properties'
 }
 
 { #category : #'as yet unclassified' }
@@ -13,8 +13,8 @@ JinProtoHandleObject class >> mappedTypeName [
 ]
 
 { #category : #'as yet unclassified' }
-JinProtoHandleObject class >> mapsWith: aRemoteObject [
-	^ aRemoteObject getTypeInfo name = self mappedTypeName
+JinProtoHandleObject class >> mapsWith: aTypeName [
+	^ aTypeName = self mappedTypeName
 ]
 
 { #category : #'as yet unclassified' }

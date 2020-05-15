@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'handle'
 	],
-	#category : #'Jindao-DomainObjects'
+	#category : #'Jindao-DomainObjects-Properties'
 }
 
 { #category : #'as yet unclassified' }

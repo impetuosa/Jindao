@@ -28,16 +28,10 @@ JinRemoteObjectMappedTypesFactory class >> newDefaultControlsFactory [
 
 { #category : #accessing }
 JinRemoteObjectMappedTypesFactory >> classFor: aRemoteObject ifNone: aBlock [
-	^ self mappedControlsCollection
-		detect: [ :a | self remoteObject: aRemoteObject mapsWith: a ]
-		ifNone: [ aBlock value ]
-]
 
-{ #category : #accessing }
-JinRemoteObjectMappedTypesFactory >> control: aControl mapsWith: aJinControlClass [
- self halt. 
-	^ (self resolveNameForClassGeneration: aControl)
-		= aJinControlClass mappedTypeName
+	^ self mappedControlsCollection
+		detect: [ :a | self remoteObject: (self resolveNameForClassGeneration: aRemoteObject) mapsWith: a ]
+		ifNone: [ aBlock value ]
 ]
 
 { #category : #accessing }

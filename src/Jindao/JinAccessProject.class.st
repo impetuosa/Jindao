@@ -15,7 +15,7 @@ Class {
 		'queries',
 		'reports'
 	],
-	#category : #'Jindao-DomainObjects'
+	#category : #'Jindao-DomainObjects-PrincipalObjects'
 }
 
 { #category : #'initialize-release' }

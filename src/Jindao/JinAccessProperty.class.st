@@ -7,28 +7,33 @@ Class {
 	#category : #'Jindao-DomainObjects-Properties'
 }
 
-{ #category : #'method - generated' }
+{ #category : #visiting }
+JinAccessProperty >> acceptVisitor: aVisitor [
+	aVisitor visitAccessProperty: self
+]
+
+{ #category : #'remote methods' }
 JinAccessProperty >> addRef [
 <method>
 	^ (handle dispatch: #'AddRef' ).
 
 ]
 
-{ #category : #'property - generated' }
+{ #category : #'remote properties' }
 JinAccessProperty >> application [
 <getter>
 	^ (handle propertyNamed: #'Application' ).
 
 ]
 
-{ #category : #'property - generated' }
+{ #category : #'remote properties' }
 JinAccessProperty >> category [
 <getter>
 	^ (handle propertyNamed: #'Category' ).
 
 ]
 
-{ #category : #'method - generated' }
+{ #category : #'remote methods' }
 JinAccessProperty >> getIDsOfNames: aRiid rgszNames: aRgszNames cNames: aCNames lcid: aLcid rgdispid: aRgdispid [
 <method>
 
@@ -36,7 +41,7 @@ JinAccessProperty >> getIDsOfNames: aRiid rgszNames: aRgszNames cNames: aCNames 
 
 ]
 
-{ #category : #'method - generated' }
+{ #category : #'remote methods' }
 JinAccessProperty >> getTypeInfo: aItinfo lcid: aLcid pptinfo: aPptinfo [
 <method>
 
@@ -44,7 +49,7 @@ JinAccessProperty >> getTypeInfo: aItinfo lcid: aLcid pptinfo: aPptinfo [
 
 ]
 
-{ #category : #'method - generated' }
+{ #category : #'remote methods' }
 JinAccessProperty >> getTypeInfoCount: aPctinfo [
 <method>
 
@@ -52,14 +57,14 @@ JinAccessProperty >> getTypeInfoCount: aPctinfo [
 
 ]
 
-{ #category : #'property - generated' }
+{ #category : #'remote properties' }
 JinAccessProperty >> inherited [
 <getter>
 	^ (handle propertyNamed: #'Inherited' ).
 
 ]
 
-{ #category : #'method - generated' }
+{ #category : #'remote methods' }
 JinAccessProperty >> invoke: aDispidMember riid: aRiid lcid: aLcid wFlags: aWFlags pdispparams: aPdispparams pvarResult: aPvarResult pexcepinfo: aPexcepinfo puArgErr: aPuArgErr [
 <method>
 
@@ -67,7 +72,7 @@ JinAccessProperty >> invoke: aDispidMember riid: aRiid lcid: aLcid wFlags: aWFla
 
 ]
 
-{ #category : #'method - generated' }
+{ #category : #'remote methods' }
 JinAccessProperty >> isMemberSafe: aDispid [
 <method>
 
@@ -75,14 +80,14 @@ JinAccessProperty >> isMemberSafe: aDispid [
 
 ]
 
-{ #category : #'property - generated' }
+{ #category : #'remote properties' }
 JinAccessProperty >> name [
 <getter>
 	^ (handle propertyNamed: #'Name' ).
 
 ]
 
-{ #category : #'property - generated' }
+{ #category : #'remote properties' }
 JinAccessProperty >> name: aParam1 [
 <setter>
 		
@@ -90,7 +95,7 @@ JinAccessProperty >> name: aParam1 [
 
 ]
 
-{ #category : #'property - generated' }
+{ #category : #'remote properties' }
 JinAccessProperty >> parent [
 <getter>
 	^ (handle propertyNamed: #'Parent' ).
@@ -102,14 +107,14 @@ JinAccessProperty >> parent: aParent [
 	parent := aParent
 ]
 
-{ #category : #'property - generated' }
+{ #category : #'remote properties' }
 JinAccessProperty >> properties [
 <getter>
 	^ (handle propertyNamed: #'Properties' ).
 
 ]
 
-{ #category : #'method - generated' }
+{ #category : #'remote methods' }
 JinAccessProperty >> queryInterface: aRiid ppvObj: aPpvObj [
 <method>
 
@@ -117,21 +122,21 @@ JinAccessProperty >> queryInterface: aRiid ppvObj: aPpvObj [
 
 ]
 
-{ #category : #'method - generated' }
+{ #category : #'remote methods' }
 JinAccessProperty >> release [
 <method>
 	^ (handle dispatch: #'Release' ).
 
 ]
 
-{ #category : #'property - generated' }
+{ #category : #'remote properties' }
 JinAccessProperty >> type [
 <getter>
 	^ (handle propertyNamed: #'Type' ).
 
 ]
 
-{ #category : #'property - generated' }
+{ #category : #'remote properties' }
 JinAccessProperty >> type: aParam1 [
 <setter>
 		
@@ -139,14 +144,14 @@ JinAccessProperty >> type: aParam1 [
 
 ]
 
-{ #category : #'property - generated' }
+{ #category : #'remote properties' }
 JinAccessProperty >> value [
 <getter>
 	^ (handle propertyNamed: #'Value' ).
 
 ]
 
-{ #category : #'property - generated' }
+{ #category : #'remote properties' }
 JinAccessProperty >> value: aParam1 [
 <setter>
 		
