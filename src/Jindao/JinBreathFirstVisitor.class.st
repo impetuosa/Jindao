@@ -461,8 +461,9 @@ JinBreathFirstVisitor >> visitForm: aJinForm [
 ]
 
 { #category : #'visit-first-objects' }
-JinBreathFirstVisitor >> visitFormControl: aJinControlTextbox [ 
-	self visitHandleObject: aJinControlTextbox 
+JinBreathFirstVisitor >> visitFormControl: aJinControlObject [
+	self visitHandleObject: aJinControlObject.
+	self visitCollection: aJinControlObject properties.
 ]
 
 { #category : #'visit-first-objects' }

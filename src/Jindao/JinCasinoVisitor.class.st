@@ -17,6 +17,13 @@ JinCasinoVisitor >> factory [
 ]
 
 { #category : #'as yet unclassified' }
+JinCasinoVisitor >> importAccessProperty: aProperty [
+	^ [ self factory importAccessProperty: aProperty inTheContextOf: stack top ]
+		on: Error
+		do: [ :err | ^ nil ]
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoVisitor >> importForm: aForm [
 	^ self factory importForm: aForm inTheContextOf: stack top.
 	
@@ -56,6 +63,13 @@ JinCasinoVisitor >> pushInStack: anObject during: aBlock [
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> useModel: aModel [
 	importingIntoThisModel := aModel
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoVisitor >> visitAccessProperty: aJinAccessProperty [
+	^ self
+		pushInStack: (self importAccessProperty: aJinAccessProperty)
+		during: [ super visitAccessProperty: aJinAccessProperty ]
 ]
 
 { #category : #'as yet unclassified' }

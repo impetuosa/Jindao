@@ -147,25 +147,19 @@ JinCasinoModelStatelessFactory >> visitListBox: aJinControlListBox [
 ]
 
 { #category : #'as yet unclassified' }
-JinCasinoModelStatelessFactory >> visitPage: aJinControlPage [ 
-| input |
+JinCasinoModelStatelessFactory >> visitPage: aJinControlPage [
+	| input |
 	input := CSNUITab new.
 	input name: aJinControlPage nameWithoutSpaces.
-	"input addAttribute: (self height: aJinControlPage).""
-	input addAttribute: (self width: aJinControlPage)."
 	^ input
 ]
 
 { #category : #'as yet unclassified' }
-JinCasinoModelStatelessFactory >> visitRectangle: aJinControlRectangle [ 
-| input |
-	input := CSNUIPanel new. 
-	input name: aJinControlRectangle nameWithoutSpaces .
-
-"	input addAttribute: (self height: aJinControlRectangle). "
-	"input addAttribute: (self width: aJinControlRectangle). "
-	
-	^ input 
+JinCasinoModelStatelessFactory >> visitRectangle: aJinControlRectangle [
+	| input |
+	input := CSNUIPanel new.
+	input name: aJinControlRectangle nameWithoutSpaces.
+	^ input
 ]
 
 { #category : #'as yet unclassified' }
@@ -173,8 +167,6 @@ JinCasinoModelStatelessFactory >> visitSubForm: aJinControlSubForm [
 	| input |
 	input := CSNUIFieldset new.
 	input name: aJinControlSubForm nameWithoutSpaces.
-	"input addAttribute: (self height: aJinControlSubForm)."
-	"input addAttribute: (self width: aJinControlSubForm)."
 	^ input
 ]
 
@@ -183,21 +175,17 @@ JinCasinoModelStatelessFactory >> visitTabControl: aJinControlTabControl [
 	| input |
 	input := CSNUITabManager new.
 	input name: aJinControlTabControl nameWithoutSpaces.
-	"input addAttribute: (self height: aJinControlTabControl)."
-"	input addAttribute: (self width: aJinControlTabControl)."
 	^ input
 ]
 
 { #category : #'as yet unclassified' }
-JinCasinoModelStatelessFactory >> visitTextbox: aJinControlTextbox [ 
+JinCasinoModelStatelessFactory >> visitTextbox: aJinControlTextbox [
 	| input |
-	input := CSNUIInputText new. 
-	input name: aJinControlTextbox nameWithoutSpaces .
+	input := CSNUIInputText new.
+	input name: aJinControlTextbox nameWithoutSpaces.
 	input value: aJinControlTextbox defaultValue.
-	
-	self setupAttributesFrom: aJinControlTextbox into:input.
-	
-	^ input 
+	self setupAttributesFrom: aJinControlTextbox into: input.
+	^ input
 ]
 
 { #category : #'as yet unclassified' }
