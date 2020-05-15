@@ -14,7 +14,7 @@ Class {
 JinDocumentationLoader class >> default [
 	^ default
 		ifNil: [ default := self new
-				loadControlDetailsFrom: 'd:/Users/Santiago.BRAGAGNOLO/Documents/PhD/git-repositories/VBA-Docs/api' asFileReference ]
+				loadControlDetailsFrom: 'd:/Users/Santiago.BRAGAGNOLO/Documents/git-repositories/VBA-Docs/api' asFileReference ]
 ]
 
 { #category : #accessing }
