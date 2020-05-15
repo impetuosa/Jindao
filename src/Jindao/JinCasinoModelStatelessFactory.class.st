@@ -19,6 +19,14 @@ JinCasinoModelStatelessFactory >> height: aJinControlCheckbox [
 ]
 
 { #category : #'as yet unclassified' }
+JinCasinoModelStatelessFactory >> importAccessProperty: aProperty inTheContextOf: anImportedControl [
+	| attribute |
+	attribute := aProperty acceptVisitor: self.
+	anImportedControl addAttribute: attribute.
+	^ attribute
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> importControl: aControl inTheContextOf: aWidget [
 	| control |
 	control := self importModelFrom: aControl.
@@ -53,25 +61,11 @@ JinCasinoModelStatelessFactory >> importProject: aProject model: aModel [
 ]
 
 { #category : #'as yet unclassified' }
-JinCasinoModelStatelessFactory >> setupAttributesFrom: aJinControl into: aCSNUILeafElement [
-	self flag: #CheckComment. 
-	" The attributes required can be built by visiting the properties, since properties are pretty much the same. We may can aim to generate as the controls  "
-	aJinControl enabled
-		ifFalse: [ aCSNUILeafElement addAttribute: self disabled ].
-	"aCSNUILeafElement addAttribute: (self height: aJinControl). "
-	"aCSNUILeafElement addAttribute: (self width: aJinControl). "
-	
-]
-
-{ #category : #'as yet unclassified' }
-JinCasinoModelStatelessFactory >> visitAttachment: aJinControlAttachment [ 
-| input |
-	input := CSNUIInputFile new. 
-	input name: aJinControlAttachment nameWithoutSpaces .
-	"input addAttribute: (self height: aJinControlAttachment). "
-"	input addAttribute: (self width: aJinControlAttachment). "
-	
-	^ input 
+JinCasinoModelStatelessFactory >> visitAttachment: aJinControlAttachment [
+	| input |
+	input := CSNUIInputFile new.
+	input name: aJinControlAttachment nameWithoutSpaces.
+	^ input
 ]
 
 { #category : #'as yet unclassified' }
@@ -80,33 +74,24 @@ JinCasinoModelStatelessFactory >> visitCheckbox: aJinControlCheckbox [
 	input := CSNUIInputCheckbox new. 
 	input name: aJinControlCheckbox nameWithoutSpaces.
 	input value: aJinControlCheckbox value.
-	
-	self setupAttributesFrom: aJinControlCheckbox into:input.
-	
 	^ input 
 ]
 
 { #category : #'as yet unclassified' }
-JinCasinoModelStatelessFactory >> visitCombobox: aJinControlCombobox [ 
+JinCasinoModelStatelessFactory >> visitCombobox: aJinControlCombobox [
 	| input |
-	input := CSNUISelect new. 
+	input := CSNUISelect new.
 	input name: aJinControlCombobox nameWithoutSpaces.
-	input value: aJinControlCombobox defaultValue .
-	
-	self setupAttributesFrom: aJinControlCombobox into:input.
-	
-	^ input 
+	input value: aJinControlCombobox defaultValue.
+	^ input
 ]
 
 { #category : #'as yet unclassified' }
-JinCasinoModelStatelessFactory >> visitCommandButton: aJinControlCommandButton [ 
+JinCasinoModelStatelessFactory >> visitCommandButton: aJinControlCommandButton [
 	| input |
-	input := CSNUIButton new. 
-	input name: aJinControlCommandButton nameWithoutSpaces .
-	
-	self setupAttributesFrom: aJinControlCommandButton into:input.
-	
-	^ input 
+	input := CSNUIButton new.
+	input name: aJinControlCommandButton nameWithoutSpaces.
+	^ input
 ]
 
 { #category : #'as yet unclassified' }
@@ -114,22 +99,16 @@ JinCasinoModelStatelessFactory >> visitImage: aJinControlImage [
 	| input |
 	input := CSNUILabel new.
 	input name: aJinControlImage nameWithoutSpaces.
-	"input addAttribute: (self height: aJinControlImage). "
-	"input addAttribute: (self width: aJinControlImage). "
 	^ input
 ]
 
 { #category : #'as yet unclassified' }
-JinCasinoModelStatelessFactory >> visitLabel: aJinControlLabel [ 
-| input |
-	self halt. 
-	input := CSNUIParagraph new. 
-	input name: aJinControlLabel nameWithoutSpaces .
+JinCasinoModelStatelessFactory >> visitLabel: aJinControlLabel [
+	| input |
+	input := CSNUIParagraph new.
+	input name: aJinControlLabel nameWithoutSpaces.
 	input text: aJinControlLabel caption.
-"	input addAttribute: (self height: aJinControlLabel)." 
-"	input addAttribute: (self width: aJinControlLabel). 
-	"
-	^ input 
+	^ input
 ]
 
 { #category : #'as yet unclassified' }
@@ -142,7 +121,6 @@ JinCasinoModelStatelessFactory >> visitListBox: aJinControlListBox [
 	| input |
 	input := CSNUIOrderedList new.
 	input name: aJinControlListBox nameWithoutSpaces.
-	self setupAttributesFrom: aJinControlListBox into: input.
 	^ input
 ]
 
@@ -184,7 +162,6 @@ JinCasinoModelStatelessFactory >> visitTextbox: aJinControlTextbox [
 	input := CSNUIInputText new.
 	input name: aJinControlTextbox nameWithoutSpaces.
 	input value: aJinControlTextbox defaultValue.
-	self setupAttributesFrom: aJinControlTextbox into: input.
 	^ input
 ]
 
