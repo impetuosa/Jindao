@@ -4,7 +4,7 @@ I have some code defined in my self .
 "
 Class {
 	#name : #JinModule,
-	#superclass : #JinHandleObject,
+	#superclass : #JinLoadableObject,
 	#instVars : [
 		'code'
 	],

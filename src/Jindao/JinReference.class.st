@@ -1,6 +1,6 @@
 Class {
 	#name : #JinReference,
-	#superclass : #JinHandleObject,
+	#superclass : #JinLoadableObject,
 	#category : #'Jindao-DomainObjects-PrincipalObjects'
 }
 

@@ -1,5 +1,5 @@
 Class {
-	#name : #JinProtoHandleObject,
+	#name : #JinProtoObject,
 	#superclass : #Object,
 	#instVars : [
 		'handle'
@@ -8,33 +8,39 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinProtoHandleObject class >> mappedTypeName [
+JinProtoObject class >> mappedTypeName [
 	^ false 
 ]
 
 { #category : #'as yet unclassified' }
-JinProtoHandleObject class >> mapsWith: aTypeName [
+JinProtoObject class >> mapsWith: aTypeName [
 	^ aTypeName = self mappedTypeName
 ]
 
 { #category : #'as yet unclassified' }
-JinProtoHandleObject >> handle [
+JinProtoObject >> beCached [
+	handle := handle asCachedHandle.
+]
+
+{ #category : #'as yet unclassified' }
+JinProtoObject >> handle [
 	^ handle
 ]
 
 { #category : #accessing }
-JinProtoHandleObject >> handle: aHandle [
-	handle := aHandle
+JinProtoObject >> handle: aHandle [
+	handle := aHandle.
+	self beCached
 ]
 
 { #category : #'as yet unclassified' }
-JinProtoHandleObject >> nameWithoutSpaces [
+JinProtoObject >> nameWithoutSpaces [
 	^ ((self name copyReplaceAll: ' ' with: '')
 		copyReplaceAll: '/'
 		with: '') copyReplaceAll: '-' with: '_'
 ]
 
 { #category : #accessing }
-JinProtoHandleObject >> printOn: aStream [
+JinProtoObject >> printOn: aStream [
 	aStream nextPutAll: self class name ; nextPut:$[ ; nextPutAll: self name ; nextPut: $]
 ]

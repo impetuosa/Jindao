@@ -5,7 +5,7 @@ In this hiearchy we have the generated control, used as super class of generated
 "
 Class {
 	#name : #JinControl,
-	#superclass : #JinProtoHandleObject,
+	#superclass : #JinProtoObject,
 	#instVars : [
 		'parent',
 		'properties'
@@ -27,11 +27,6 @@ JinControl >> containingWidget [
 JinControl >> controlName [
 	<doNotOverride>
 	^ handle propertyNamed: #ControlName
-]
-
-{ #category : #'as yet unclassified' }
-JinControl >> handle: aCOMDispatchInstance [ 
-	handle := aCOMDispatchInstance
 ]
 
 { #category : #'as yet unclassified' }

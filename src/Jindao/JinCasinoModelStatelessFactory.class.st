@@ -20,12 +20,12 @@ JinCasinoModelStatelessFactory >> height: aJinControlCheckbox [
 
 { #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> importAccessProperty: aProperty inTheContextOf: anImportedControl [
-	| attribute |
+	"| attribute |
 	attribute := aProperty acceptVisitor: self.
 	(attribute isNil or: [ attribute = self ])
 		ifTrue: [ ^ nil ].
 	anImportedControl addAttribute: attribute.
-	^ attribute
+	^ attribute"
 ]
 
 { #category : #'as yet unclassified' }
@@ -44,7 +44,7 @@ JinCasinoModelStatelessFactory >> importForm: aForm inTheContextOf: aProject [
 			(CSNBusinessPage new
 				name: aForm nameWithoutSpaces;
 				yourself);
-		name: aForm name;
+		name: aForm nameWithoutSpaces;
 		project: aProject;
 		yourself
 ]
@@ -139,8 +139,7 @@ JinCasinoModelStatelessFactory >> visitFormat: aJinFormat [
 
 { #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> visitHeight: aJinHeight [
-	Warning
-		signal:
+		self warn: 
 			' I dont know yet how to manage height . it seems to be a bit more complex than expected '
 ]
 
@@ -164,6 +163,11 @@ JinCasinoModelStatelessFactory >> visitLabel: aJinControlLabel [
 { #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitLabelName: aJinLabelName [
 	Warning signal: 'JinLabelName fails on getting value. this visit may have to do something '
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoModelStatelessFactory >> visitLeft: aJinLeft [ 
+	self shouldBeImplemented.
 ]
 
 { #category : #'visit - control' }
@@ -241,7 +245,7 @@ JinCasinoModelStatelessFactory >> visitTextbox: aJinControlTextbox [
 
 { #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> visitTop: aJinTop [ 
-	Warning signal: 'Top should be interesting for layout annotating '
+	self warn: 'Top should be interesting for layout annotating '
 ]
 
 { #category : #'as yet unclassified' }
@@ -256,9 +260,13 @@ JinCasinoModelStatelessFactory >> visitVisible: aJinVisible [
 
 { #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> visitWidth: aJinWidth [
-	Warning
-		signal:
+		self warn: 
 			' I dont know yet how to manage width. it seems to be a bit more complex than expected '
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoModelStatelessFactory >> warn: text [
+	Warning signal: text
 ]
 
 { #category : #accessing }

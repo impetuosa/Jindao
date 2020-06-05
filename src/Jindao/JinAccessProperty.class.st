@@ -1,6 +1,6 @@
 Class {
 	#name : #JinAccessProperty,
-	#superclass : #JinProtoHandleObject,
+	#superclass : #JinProtoObject,
 	#instVars : [
 		'parent'
 	],

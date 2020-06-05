@@ -1,6 +1,6 @@
 Class {
 	#name : #JinReport,
-	#superclass : #JinHandleObject,
+	#superclass : #JinLoadableObject,
 	#category : #'Jindao-DomainObjects-PrincipalObjects'
 }
 

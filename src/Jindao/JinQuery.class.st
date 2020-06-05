@@ -1,6 +1,6 @@
 Class {
 	#name : #JinQuery,
-	#superclass : #JinHandleObject,
+	#superclass : #JinLoadableObject,
 	#category : #'Jindao-DomainObjects-PrincipalObjects'
 }
 

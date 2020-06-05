@@ -3,7 +3,7 @@ I do represent a Form. A form contains controls and oftenly a related module wit
 "
 Class {
 	#name : #JinForm,
-	#superclass : #JinHandleObject,
+	#superclass : #JinLoadableObject,
 	#instVars : [
 		'code',
 		'module',

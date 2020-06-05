@@ -5,10 +5,7 @@ I am able to show my contents
 "
 Class {
 	#name : #JinSourceCode,
-	#superclass : #Object,
-	#instVars : [
-		'handle'
-	],
+	#superclass : #JinProtoObject,
 	#category : #'Jindao-DomainObjects-Properties'
 }
 
@@ -51,11 +48,6 @@ JinSourceCode >> elements [
 				or: [ element size < 5 ])
 				ifTrue: [ acc ]
 				ifFalse: [ acc add: element. acc   ] ]
-]
-
-{ #category : #'as yet unclassified' }
-JinSourceCode >> handle: aCOMDispatchInstance [ 
-	handle := aCOMDispatchInstance
 ]
 
 { #category : #'as yet unclassified' }

@@ -4,8 +4,8 @@ I have two faces. The closed (or meta face), and the loaded face.
 The loaded face is the one that has most of the description .
 "
 Class {
-	#name : #JinHandleObject,
-	#superclass : #JinProtoHandleObject,
+	#name : #JinLoadableObject,
+	#superclass : #JinProtoObject,
 	#instVars : [
 		'project',
 		'loadedObjectHandle'
@@ -14,33 +14,33 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinHandleObject >> ensureIsLoaded [
+JinLoadableObject >> ensureIsLoaded [
 	self isLoaded
 		ifFalse: [ self load ]
 ]
 
 { #category : #'as yet unclassified' }
-JinHandleObject >> isLoaded [
+JinLoadableObject >> isLoaded [
 	^ loadedObjectHandle isNotNil
 		and: [ handle propertyNamed: #IsLoaded ]
 ]
 
 { #category : #'as yet unclassified' }
-JinHandleObject >> load [
+JinLoadableObject >> load [
 	loadedObjectHandle := self privateLoadObjectHandle
 ]
 
 { #category : #accessing }
-JinHandleObject >> name [
+JinLoadableObject >> name [
 	^ handle propertyNamed: #Name
 ]
 
 { #category : #'as yet unclassified' }
-JinHandleObject >> privateLoadObjectHandle [
+JinLoadableObject >> privateLoadObjectHandle [
 	self subclassResponsibility
 ]
 
 { #category : #accessing }
-JinHandleObject >> project: aProject [
+JinLoadableObject >> project: aProject [
 	project := aProject
 ]

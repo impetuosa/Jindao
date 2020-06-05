@@ -117,14 +117,14 @@ JinAccessApplication >> openReport: aJinReport [
 JinAccessApplication >> openedFormsHandles [
 	^ JinCollection newDefault
 		handle: (handle propertyNamed: #Forms)
-		factory: (JinInstanceFactory defaultFor: JinHandleObject)
+		factory: (JinInstanceFactory defaultFor: JinLoadableObject)
 ]
 
 { #category : #accessing }
 JinAccessApplication >> openedModuleHandles [
 	^ JinCollection newDefault
 		handle: (handle propertyNamed: #Modules)
-		factory: (JinInstanceFactory defaultFor: JinHandleObject)
+		factory: (JinInstanceFactory defaultFor: JinLoadableObject)
 ]
 
 { #category : #'as yet unclassified' }

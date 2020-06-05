@@ -1,6 +1,6 @@
 Class {
 	#name : #JinMacro,
-	#superclass : #JinHandleObject,
+	#superclass : #JinLoadableObject,
 	#category : #'Jindao-DomainObjects-PrincipalObjects'
 }
 
