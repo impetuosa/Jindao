@@ -13,9 +13,10 @@ Class {
 		'macros',
 		'modules',
 		'queries',
-		'reports'
+		'reports',
+		'tables'
 	],
-	#category : #'Jindao-DomainObjects-PrincipalObjects'
+	#category : #'Jindao-Core'
 }
 
 { #category : #'initialize-release' }
@@ -23,7 +24,7 @@ JinAccessProject >> acceptVisitor: aVisitor [
 	^ aVisitor visitProject: self 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessProject >> application [
 	^ application
 ]
@@ -33,18 +34,18 @@ JinAccessProject >> close [
 	application closeProject: self. 
 ]
 
-{ #category : #accessing }
+{ #category : #'form-api' }
 JinAccessProject >> forms [
 	^ forms
 		ifNil: [ forms := JinCollection newDefault
 				handle: (programHandle propertyNamed: #AllForms)
 				factory:
-					((JinInstanceFactory defaultFor: JinForm)
+					((JinFirstClassCitizenModelFactory defaultFor: JinForm)
 						project: self;
 						yourself) ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessProject >> fullName [
 	^ programHandle propertyNamed:#FullName
 ]
@@ -56,86 +57,97 @@ JinAccessProject >> handle: aCOMDispatchInstance dataHandle: aDataHandle applica
 	dataHandle := aDataHandle
 ]
 
-{ #category : #accessing }
+{ #category : #'macro-api' }
 JinAccessProject >> macros [
 	^ macros
 		ifNil: [ macros := JinCollection newDefault
 				handle: (programHandle propertyNamed: #AllMacros)
 				factory:
-					((JinInstanceFactory defaultFor: JinMacro)
+					((JinFirstClassCitizenModelFactory defaultFor: JinMacro)
 						project: self;
 						yourself) ]
 ]
 
-{ #category : #accessing }
+{ #category : #'module-api' }
 JinAccessProject >> modules [
 	^ modules
 		ifNil: [ modules := JinCollection newDefault
 				handle: (programHandle propertyNamed: #AllModules)
 				factory:
-					((JinInstanceFactory defaultFor: JinModule)
+					((JinFirstClassCitizenModelFactory defaultFor: JinModule)
 						project: self;
 						yourself) ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessProject >> name [
 	^ programHandle propertyNamed: #Name 
 ]
 
-{ #category : #'open-load-objects' }
+{ #category : #'form-api' }
+JinAccessProject >> newForm [
+	^ application newForm 
+]
+
+{ #category : #'form-api' }
 JinAccessProject >> openForm: aJinForm [
 	^ application openForm: aJinForm
 ]
 
-{ #category : #'open-load-objects' }
+{ #category : #'module-api' }
 JinAccessProject >> openModule: aJinModule [
 	^ application openModule: aJinModule
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'query-api' }
 JinAccessProject >> openQuery: aJinQuery [
 	^ application openQuery: aJinQuery
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'report-api' }
 JinAccessProject >> openReport: aJinReport [ 
 	^ application openReport: aJinReport 
 ]
 
-{ #category : #accessing }
+{ #category : #'table-api' }
+JinAccessProject >> openTable: aJinTable [ 
+	^ application openTable: aJinTable 
+]
+
+{ #category : #'query-api' }
 JinAccessProject >> queries [
 	^ queries
 		ifNil: [ queries := JinCollection newDefault
 				handle: (dataHandle propertyNamed: #AllQueries)
 				factory:
-					((JinInstanceFactory defaultFor: JinQuery)
+					((JinFirstClassCitizenModelFactory defaultFor: JinQuery)
 						project: self;
 						yourself) ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessProject >> references [
 	^ application references
 ]
 
-{ #category : #accessing }
+{ #category : #'report-api' }
 JinAccessProject >> reports [
 	^ reports
 		ifNil: [ reports := JinCollection newDefault
 				handle: (programHandle propertyNamed: #AllReports)
 				factory:
-					((JinInstanceFactory defaultFor: JinReport)
+					((JinFirstClassCitizenModelFactory defaultFor: JinReport)
 						project: self;
 						yourself) ]
 ]
 
-{ #category : #accessing }
+{ #category : #'table-api' }
 JinAccessProject >> tables [
-	^ JinCollection newDefault
-		handle: (dataHandle propertyNamed: #AllTables)
-		factory:
-			((JinInstanceFactory defaultFor: JinTable)
-				project: self;
-				yourself)
+	^ tables
+		ifNil: [ tables := JinCollection newDefault
+				handle: (dataHandle propertyNamed: #AllTables)
+				factory:
+					((JinFirstClassCitizenModelFactory defaultFor: JinTable)
+						project: self;
+						yourself) ]
 ]

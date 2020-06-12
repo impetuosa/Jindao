@@ -222,7 +222,7 @@ End Sub
 Class {
 	#name : #JinTextbox,
 	#superclass : #JinControlAbstractTextbox,
-	#category : #'Jindao-DomainObjects-GeneratedControls'
+	#category : #'Jindao-FormControls-Generated'
 }
 
 { #category : #generated }

@@ -1,7 +1,7 @@
 Class {
 	#name : #JinReport,
-	#superclass : #JinLoadableObject,
-	#category : #'Jindao-DomainObjects-PrincipalObjects'
+	#superclass : #JinModelObject,
+	#category : #'Jindao-Core'
 }
 
 { #category : #'as yet unclassified' }
@@ -9,7 +9,7 @@ JinReport >> acceptVisitor: aVisitor [
 	aVisitor visitReport: self 
 ]
 
-{ #category : #'as yet unclassified' }
-JinReport >> privateLoadObjectHandle [
-	^ (project openReport: self) handle
+{ #category : #accessing }
+JinReport >> privateLoadBodyObject [
+	^ (project openReport: self)
 ]

@@ -227,7 +227,7 @@ End Sub
 Class {
 	#name : #JinListBox,
 	#superclass : #JinControlAbstractListBox,
-	#category : #'Jindao-DomainObjects-GeneratedControls'
+	#category : #'Jindao-FormControls-Generated'
 }
 
 { #category : #generated }

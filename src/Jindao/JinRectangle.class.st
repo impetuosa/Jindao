@@ -89,7 +89,7 @@ You can move a rectangle and the controls in it as a single unit by dragging the
 Class {
 	#name : #JinRectangle,
 	#superclass : #JinControlAbstractRectangle,
-	#category : #'Jindao-DomainObjects-GeneratedControls'
+	#category : #'Jindao-FormControls-Generated'
 }
 
 { #category : #generated }

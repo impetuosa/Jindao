@@ -101,7 +101,7 @@ Each **Page** object can also contain one or more controls. Controls on a **Page
 Class {
 	#name : #JinPage,
 	#superclass : #JinControlAbstractPage,
-	#category : #'Jindao-DomainObjects-GeneratedControls'
+	#category : #'Jindao-FormControls-Generated'
 }
 
 { #category : #generated }

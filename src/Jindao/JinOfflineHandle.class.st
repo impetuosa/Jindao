@@ -5,7 +5,7 @@ If it is in the cachem, fine, if not error. I am not a cache builder! Use stateT
 Class {
 	#name : #JinOfflineHandle,
 	#superclass : #JinCachingHandle,
-	#category : #'Jindao-DomainObjects-Properties'
+	#category : #'Jindao-Handles'
 }
 
 { #category : #properties }

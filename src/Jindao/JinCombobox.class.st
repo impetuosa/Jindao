@@ -343,7 +343,7 @@ End Sub
 Class {
 	#name : #JinCombobox,
 	#superclass : #JinControlAbstractCombobox,
-	#category : #'Jindao-DomainObjects-GeneratedControls'
+	#category : #'Jindao-FormControls-Generated'
 }
 
 { #category : #generated }

@@ -41,7 +41,7 @@ JinCasinoNorwindEntryElementsImportTestCase >> testJinFormImportsIntoJinPage [
 JinCasinoNorwindEntryElementsImportTestCase >> testJinFormImportsTheNameAndNoneWidgets [
 	self importAnyForm.
 	self assert: importedForm name equals: form name.
-	self assert: importedForm realClassName equals: #JinForm.
+	self assert: importedForm realClassName equals: #JinFormBody.
 	self assert: importedForm widgets isEmpty
 ]
 

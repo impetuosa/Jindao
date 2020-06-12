@@ -1,7 +1,7 @@
 Class {
 	#name : #JinMacro,
-	#superclass : #JinLoadableObject,
-	#category : #'Jindao-DomainObjects-PrincipalObjects'
+	#superclass : #JinModelObject,
+	#category : #'Jindao-Core'
 }
 
 { #category : #'as yet unclassified' }
@@ -9,7 +9,7 @@ JinMacro >> acceptVisitor: aVisitor [
 	aVisitor visitMacro: self 
 ]
 
-{ #category : #'as yet unclassified' }
-JinMacro >> privateLoadObjectHandle [
-	^ (project openMacro: self) handle
+{ #category : #accessing }
+JinMacro >> privateLoadBodyObject [
+	^ (project openMacro: self) 
 ]

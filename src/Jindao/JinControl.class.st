@@ -5,12 +5,12 @@ In this hiearchy we have the generated control, used as super class of generated
 "
 Class {
 	#name : #JinControl,
-	#superclass : #JinProtoObject,
+	#superclass : #JinAccessObject,
 	#instVars : [
 		'parent',
 		'properties'
 	],
-	#category : #'Jindao-DomainObjects-FormControls'
+	#category : #'Jindao-FormControls'
 }
 
 { #category : #'as yet unclassified' }

@@ -5,7 +5,7 @@ Pay attention, since non method/property is going to be called twice with the sa
 Class {
 	#name : #JinCachedHandle,
 	#superclass : #JinStateTrackingHandle,
-	#category : #'Jindao-DomainObjects-Properties'
+	#category : #'Jindao-Handles'
 }
 
 { #category : #properties }

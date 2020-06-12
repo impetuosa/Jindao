@@ -4,7 +4,7 @@ I am here to abstract the methods that are part of many elements, but are not pa
 Class {
 	#name : #JinControlAbstractImage,
 	#superclass : #JinControlGenerated,
-	#category : #'Jindao-DomainObjects-GeneratedControls-Abstract'
+	#category : #'Jindao-FormControls-Generated-Abstract'
 }
 
 { #category : #'method - generated' }

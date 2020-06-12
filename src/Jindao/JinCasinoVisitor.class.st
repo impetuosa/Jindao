@@ -1,6 +1,6 @@
 Class {
 	#name : #JinCasinoVisitor,
-	#superclass : #JinBreathFirstVisitor,
+	#superclass : #JinVisitor,
 	#instVars : [
 		'stack',
 		'importedProject',

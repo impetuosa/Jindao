@@ -1,7 +1,7 @@
 Class {
 	#name : #JinReference,
-	#superclass : #JinLoadableObject,
-	#category : #'Jindao-DomainObjects-PrincipalObjects'
+	#superclass : #JinAccessObject,
+	#category : #'Jindao-Core'
 }
 
 { #category : #'as yet unclassified' }

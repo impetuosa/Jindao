@@ -2,7 +2,7 @@
 I am a factory that creates elements of a given class .I set up a project into the instance and set up the handle into 
 "
 Class {
-	#name : #JinInstanceFactory,
+	#name : #JinFirstClassCitizenModelFactory,
 	#superclass : #Object,
 	#instVars : [
 		'useClass',
@@ -12,26 +12,29 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinInstanceFactory class >> defaultFor: aClass [
+JinFirstClassCitizenModelFactory class >> defaultFor: aClass [
 	^ self new
 		useClass: aClass;
 		yourself
 ]
 
 { #category : #accessing }
-JinInstanceFactory >> elementFor: aHandle [
+JinFirstClassCitizenModelFactory >> elementFor: aHandle [
 	^ useClass new
-		handle: aHandle;
-		project: project; 
+		description:
+			(JinDescriptionObject new
+				handle: aHandle;
+				yourself);
+		project: project;
 		yourself
 ]
 
 { #category : #accessing }
-JinInstanceFactory >> project: aProject [
+JinFirstClassCitizenModelFactory >> project: aProject [
 	project := aProject
 ]
 
 { #category : #accessing }
-JinInstanceFactory >> useClass: aClass [
+JinFirstClassCitizenModelFactory >> useClass: aClass [
 	useClass := aClass. 
 ]

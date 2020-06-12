@@ -153,7 +153,7 @@ You can also use check boxes in an option group to display values to choose from
 Class {
 	#name : #JinCheckbox,
 	#superclass : #JinControlAbstractCheckbox,
-	#category : #'Jindao-DomainObjects-GeneratedControls'
+	#category : #'Jindao-FormControls-Generated'
 }
 
 { #category : #generated }

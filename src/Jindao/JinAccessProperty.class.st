@@ -1,10 +1,10 @@
 Class {
 	#name : #JinAccessProperty,
-	#superclass : #JinProtoObject,
+	#superclass : #JinAccessObject,
 	#instVars : [
 		'parent'
 	],
-	#category : #'Jindao-DomainObjects-Properties'
+	#category : #'Jindao-Core'
 }
 
 { #category : #visiting }

@@ -28,13 +28,12 @@ oneModule propertyNamed: 'Lines' withArguments: { 1 . 100 }.
 "
 Class {
 	#name : #JinAccessApplication,
-	#superclass : #Object,
+	#superclass : #JinAccessObject,
 	#instVars : [
-		'handle',
 		'visible',
 		'references'
 	],
-	#category : #'Jindao-DomainObjects-PrincipalObjects'
+	#category : #'Jindao-Core'
 }
 
 { #category : #'as yet unclassified' }
@@ -42,7 +41,7 @@ JinAccessApplication class >> default [
 	^ self new
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinAccessApplication >> acceptVisitor: aVisitor [
 	aVisitor visitApplication: self 
 ]
@@ -52,7 +51,7 @@ JinAccessApplication >> closeProject: aProject [
 	self handle dispatch: 'CloseCurrentDatabase' withArguments: {}
 ]
 
-{ #category : #accessing }
+{ #category : #convenience }
 JinAccessApplication >> command [
 	^ handle propertyNamed: #DoCmd
 ]
@@ -60,6 +59,11 @@ JinAccessApplication >> command [
 { #category : #convenience }
 JinAccessApplication >> command: aString withArguments: aCollection [ 
 	^ self command dispatch: aString withArguments: aCollection 
+]
+
+{ #category : #'table-api' }
+JinAccessApplication >> database [
+	^ (self workspace propertyNamed: #Databases) propertyNamed:#Item withArguments:{0}
 ]
 
 { #category : #initialization }
@@ -79,6 +83,11 @@ JinAccessApplication >> initialize [
 ]
 
 { #category : #initialization }
+JinAccessApplication >> name [
+	^ 'Application'
+]
+
+{ #category : #initialization }
 JinAccessApplication >> open: aFileReference [
 	self handle
 		dispatch: 'OpenCurrentDatabase'
@@ -90,58 +99,105 @@ JinAccessApplication >> open: aFileReference [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'form-api' }
 JinAccessApplication >> openForm: aJinForm [ 
-	self command: #OpenForm withArguments: {aJinForm name}.
+	self command: #OpenForm withArguments: {aJinForm name . 1}.
 	^ self openedFormsHandles detect: [ :m | m name = aJinForm name ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'module-api' }
 JinAccessApplication >> openModule: aJinModule [
 	self command: #OpenModule withArguments: {aJinModule name}.
 	^ self openedModuleHandles detect: [ :m | m name = aJinModule name ]
 ]
 
-{ #category : #'as yet unclassified' }
-JinAccessApplication >> openQuery: aJinQuery [
-	self command: #OpenQuery withArguments: {aJinQuery name}
+{ #category : #'query-api' }
+JinAccessApplication >> openQuery: aQuery [
+	self
+		command: #OpenQuery
+		withArguments:
+			{aQuery name.
+			1}.
+	^ self openedQueryHandles detect: [ :m | m name = aQuery name ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'report-api' }
 JinAccessApplication >> openReport: aJinReport [ 
-	self command: #OpenReport withArguments: {aJinReport name}.
+	self command: #OpenReport withArguments: {aJinReport name . 1}.
 	^ self openedReportHandles detect: [ :m | m name = aJinReport name ]
 ]
 
-{ #category : #accessing }
+{ #category : #'table-api' }
+JinAccessApplication >> openTable: aJinTable [
+	| wsp |
+	wsp := self workspace.
+	self
+		command: #OpenTable
+		withArguments:
+			{aJinTable name.
+			1}.
+	^ self openedTableHandles detect: [ :m | m name = aJinTable name ]
+]
+
+{ #category : #'form-api' }
 JinAccessApplication >> openedFormsHandles [
 	^ JinCollection newDefault
 		handle: (handle propertyNamed: #Forms)
-		factory: (JinInstanceFactory defaultFor: JinLoadableObject)
+		factory:
+			(JinRemoteObjectOnlyGenericsFactory new
+				defaultHierarchyClass: JinFormBody ;
+				yourself)
 ]
 
-{ #category : #accessing }
+{ #category : #'module-api' }
 JinAccessApplication >> openedModuleHandles [
-	^ JinCollection newDefault
+^ JinCollection newDefault
 		handle: (handle propertyNamed: #Modules)
-		factory: (JinInstanceFactory defaultFor: JinLoadableObject)
+		factory:
+			(JinRemoteObjectOnlyGenericsFactory new
+				defaultHierarchyClass: JinModuleBody  ;
+				yourself)
+	
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'query-api' }
+JinAccessApplication >> openedQueryHandles [
+	^ JinCollection newDefault
+		handle: (handle propertyNamed: #Queries)
+		factory:
+			(JinRemoteObjectOnlyGenericsFactory new
+				defaultHierarchyClass: JinQueryBody;
+				yourself)
+]
+
+{ #category : #'report-api' }
 JinAccessApplication >> openedReportHandles [
 	^ JinCollection newDefault
 		handle: (handle propertyNamed: #Reports)
-		factory: (JinInstanceFactory defaultFor: JinReport)
+		factory:
+			(JinRemoteObjectOnlyGenericsFactory new
+				defaultHierarchyClass: JinReportBody ;
+				yourself)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'table-api' }
+JinAccessApplication >> openedTableHandles [
+	^ JinCollection newDefault
+		handle: (self database propertyNamed: #TableDefs)
+		factory:
+			(JinRemoteObjectOnlyGenericsFactory new
+				defaultHierarchyClass: JinTableBody;
+				yourself)
+]
+
+{ #category : #accessing }
 JinAccessApplication >> references [
 	^ references
 		ifNil: [ references := JinCollection newDefaultForMethod
 				handle: (handle propertyNamed: #References)
 				factory:
-					((JinInstanceFactory defaultFor: JinReference)
-						project: self;
+					(JinRemoteObjectOnlyGenericsFactory new
+						defaultHierarchyClass: JinReference;
 						yourself) ]
 ]
 
@@ -153,4 +209,9 @@ JinAccessApplication >> visible [
 { #category : #initialization }
 JinAccessApplication >> visible: aBoolean [
 	visible := aBoolean 
+]
+
+{ #category : #'table-api' }
+JinAccessApplication >> workspace [
+	^ ((handle propertyNamed: #DBEngine) propertyNamed:#Workspaces ) propertyNamed:#Item withArguments:{0}.
 ]

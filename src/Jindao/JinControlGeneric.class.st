@@ -4,7 +4,7 @@ I am here to work as a minimal-functionality handle .
 Class {
 	#name : #JinControlGeneric,
 	#superclass : #JinControl,
-	#category : #'Jindao-DomainObjects-FormControls'
+	#category : #'Jindao-FormControls'
 }
 
 { #category : #'as yet unclassified' }

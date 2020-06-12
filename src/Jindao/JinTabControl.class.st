@@ -152,7 +152,7 @@ With the tab control, you can construct a single form or dialog box that contain
 Class {
 	#name : #JinTabControl,
 	#superclass : #JinControlAbstractTabControl,
-	#category : #'Jindao-DomainObjects-GeneratedControls'
+	#category : #'Jindao-FormControls-Generated'
 }
 
 { #category : #generated }

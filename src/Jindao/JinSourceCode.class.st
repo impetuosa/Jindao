@@ -5,8 +5,8 @@ I am able to show my contents
 "
 Class {
 	#name : #JinSourceCode,
-	#superclass : #JinProtoObject,
-	#category : #'Jindao-DomainObjects-Properties'
+	#superclass : #JinAccessObject,
+	#category : #'Jindao-Core'
 }
 
 { #category : #'as yet unclassified' }
@@ -53,4 +53,9 @@ JinSourceCode >> elements [
 { #category : #'as yet unclassified' }
 JinSourceCode >> isNotEmpty [
 	^ self amountOfLines > 0
+]
+
+{ #category : #'as yet unclassified' }
+JinSourceCode >> name [
+	^ 'src'
 ]

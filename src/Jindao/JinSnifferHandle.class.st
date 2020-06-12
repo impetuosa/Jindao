@@ -5,7 +5,7 @@ To know what seems to be important and what does not
 Class {
 	#name : #JinSnifferHandle,
 	#superclass : #JinCachingHandle,
-	#category : #'Jindao-DomainObjects-Properties'
+	#category : #'Jindao-Handles'
 }
 
 { #category : #properties }

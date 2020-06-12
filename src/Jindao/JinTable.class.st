@@ -1,7 +1,7 @@
 Class {
 	#name : #JinTable,
-	#superclass : #JinLoadableObject,
-	#category : #'Jindao-DomainObjects-PrincipalObjects'
+	#superclass : #JinModelObject,
+	#category : #'Jindao-Core'
 }
 
 { #category : #'as yet unclassified' }
@@ -9,7 +9,7 @@ JinTable >> acceptVisitor: aVisitor [
 	aVisitor visitTable: self 
 ]
 
-{ #category : #'as yet unclassified' }
-JinTable >> privateLoadObjectHandle [
-	^ (project openTable: self) handle
+{ #category : #accessing }
+JinTable >> privateLoadBodyObject [
+	^ (project openTable: self)
 ]

@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'cache'
 	],
-	#category : #'Jindao-DomainObjects-Properties'
+	#category : #'Jindao-Handles'
 }
 
 { #category : #properties }

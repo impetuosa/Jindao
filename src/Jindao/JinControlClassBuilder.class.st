@@ -268,7 +268,7 @@ JinControlClassBuilder >> shouldGenerateMethodNamed: aMethodHeader [
 	^ (Pragma
 		allNamed: #doNotOverride
 		from: self superclass
-		to: JinProtoObject) asOrderedCollection
+		to: JinAccessObject) asOrderedCollection
 		noneSatisfy: [ :p | p methodSelector = selector ]
 ]
 

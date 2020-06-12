@@ -130,7 +130,7 @@ You can use the image control or an [Unbound object frame](overview/Access.md) f
 Class {
 	#name : #JinImage,
 	#superclass : #JinControlAbstractImage,
-	#category : #'Jindao-DomainObjects-GeneratedControls'
+	#category : #'Jindao-FormControls-Generated'
 }
 
 { #category : #generated }

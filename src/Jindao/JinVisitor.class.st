@@ -1,1204 +1,1204 @@
 Class {
-	#name : #JinBreathFirstVisitor,
+	#name : #JinVisitor,
 	#superclass : #Object,
-	#category : #'Jindao-DomainObjects-Visitor'
+	#category : #'Jindao-Core'
 }
 
 { #category : #'visit-first-objects' }
-JinBreathFirstVisitor >> visitAccessProperty: anAccessProperty [
+JinVisitor >> visitAccessProperty: anAccessProperty [
 	^ self visitHandleObject: anAccessProperty
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitAfterUpdate:aAfterUpdate [
+JinVisitor >> visitAfterUpdate:aAfterUpdate [
 	^ self visitAccessProperty: aAfterUpdate. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitAfterUpdateEmMacro:aAfterUpdateEmMacro [
+JinVisitor >> visitAfterUpdateEmMacro:aAfterUpdateEmMacro [
 	^ self visitAccessProperty: aAfterUpdateEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitAggregateType:aAggregateType [
+JinVisitor >> visitAggregateType:aAggregateType [
 	^ self visitAccessProperty: aAggregateType. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitAlignment:aAlignment [
+JinVisitor >> visitAlignment:aAlignment [
 	^ self visitAccessProperty: aAlignment. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitAllowAutoCorrect:aAllowAutoCorrect [
+JinVisitor >> visitAllowAutoCorrect:aAllowAutoCorrect [
 	^ self visitAccessProperty: aAllowAutoCorrect. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitAllowValueListEdits:aAllowValueListEdits [
+JinVisitor >> visitAllowValueListEdits:aAllowValueListEdits [
 	^ self visitAccessProperty: aAllowValueListEdits. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitAsianLineBreak:aAsianLineBreak [
+JinVisitor >> visitAsianLineBreak:aAsianLineBreak [
 	^ self visitAccessProperty: aAsianLineBreak. 
 
 ]
 
 { #category : #'visit-controls' }
-JinBreathFirstVisitor >> visitAttachment: aJinControlAttachment [ 
+JinVisitor >> visitAttachment: aJinControlAttachment [ 
 self visitFormControl: aJinControlAttachment
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitAutoExpand:aAutoExpand [
+JinVisitor >> visitAutoExpand:aAutoExpand [
 	^ self visitAccessProperty: aAutoExpand. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitAutoRepeat:aAutoRepeat [
+JinVisitor >> visitAutoRepeat:aAutoRepeat [
 	^ self visitAccessProperty: aAutoRepeat. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitAutoTab:aAutoTab [
+JinVisitor >> visitAutoTab:aAutoTab [
 	^ self visitAccessProperty: aAutoTab. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBackColor:aBackColor [
+JinVisitor >> visitBackColor:aBackColor [
 	^ self visitAccessProperty: aBackColor. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBackShade:aBackShade [
+JinVisitor >> visitBackShade:aBackShade [
 	^ self visitAccessProperty: aBackShade. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBackStyle:aBackStyle [
+JinVisitor >> visitBackStyle:aBackStyle [
 	^ self visitAccessProperty: aBackStyle. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBackThemeColorIndex:aBackThemeColorIndex [
+JinVisitor >> visitBackThemeColorIndex:aBackThemeColorIndex [
 	^ self visitAccessProperty: aBackThemeColorIndex. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBackTint:aBackTint [
+JinVisitor >> visitBackTint:aBackTint [
 	^ self visitAccessProperty: aBackTint. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBeforeUpdate:aBeforeUpdate [
+JinVisitor >> visitBeforeUpdate:aBeforeUpdate [
 	^ self visitAccessProperty: aBeforeUpdate. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBeforeUpdateEmMacro:aBeforeUpdateEmMacro [
+JinVisitor >> visitBeforeUpdateEmMacro:aBeforeUpdateEmMacro [
 	^ self visitAccessProperty: aBeforeUpdateEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBevel:aBevel [
+JinVisitor >> visitBevel:aBevel [
 	^ self visitAccessProperty: aBevel. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBorderColor:aBorderColor [
+JinVisitor >> visitBorderColor:aBorderColor [
 	^ self visitAccessProperty: aBorderColor. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBorderLineStyle:aBorderLineStyle [
+JinVisitor >> visitBorderLineStyle:aBorderLineStyle [
 	^ self visitAccessProperty: aBorderLineStyle. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBorderShade:aBorderShade [
+JinVisitor >> visitBorderShade:aBorderShade [
 	^ self visitAccessProperty: aBorderShade. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBorderStyle:aBorderStyle [
+JinVisitor >> visitBorderStyle:aBorderStyle [
 	^ self visitAccessProperty: aBorderStyle. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBorderThemeColorIndex:aBorderThemeColorIndex [
+JinVisitor >> visitBorderThemeColorIndex:aBorderThemeColorIndex [
 	^ self visitAccessProperty: aBorderThemeColorIndex. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBorderTint:aBorderTint [
+JinVisitor >> visitBorderTint:aBorderTint [
 	^ self visitAccessProperty: aBorderTint. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBorderWidth:aBorderWidth [
+JinVisitor >> visitBorderWidth:aBorderWidth [
 	^ self visitAccessProperty: aBorderWidth. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBottomMargin:aBottomMargin [
+JinVisitor >> visitBottomMargin:aBottomMargin [
 	^ self visitAccessProperty: aBottomMargin. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBottomPadding:aBottomPadding [
+JinVisitor >> visitBottomPadding:aBottomPadding [
 	^ self visitAccessProperty: aBottomPadding. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitBoundColumn:aBoundColumn [
+JinVisitor >> visitBoundColumn:aBoundColumn [
 	^ self visitAccessProperty: aBoundColumn. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitCanGrow:aCanGrow [
+JinVisitor >> visitCanGrow:aCanGrow [
 	^ self visitAccessProperty: aCanGrow. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitCanShrink:aCanShrink [
+JinVisitor >> visitCanShrink:aCanShrink [
 	^ self visitAccessProperty: aCanShrink. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitCancel:aCancel [
+JinVisitor >> visitCancel:aCancel [
 	^ self visitAccessProperty: aCancel. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitCaption:aCaption [
+JinVisitor >> visitCaption:aCaption [
 	^ self visitAccessProperty: aCaption. 
 
 ]
 
 { #category : #'visit-controls' }
-JinBreathFirstVisitor >> visitCheckbox: aJinControlCheckbox [
+JinVisitor >> visitCheckbox: aJinControlCheckbox [
 	self visitFormControl: aJinControlCheckbox
 ]
 
 { #category : #'visit-first-objects' }
-JinBreathFirstVisitor >> visitCollection: aCollection [
+JinVisitor >> visitCollection: aCollection [
 	aCollection do: [ :element | element acceptVisitor: self ]
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitColumnCount:aColumnCount [
+JinVisitor >> visitColumnCount:aColumnCount [
 	^ self visitAccessProperty: aColumnCount. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitColumnEnd:aColumnEnd [
+JinVisitor >> visitColumnEnd:aColumnEnd [
 	^ self visitAccessProperty: aColumnEnd. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitColumnHeads:aColumnHeads [
+JinVisitor >> visitColumnHeads:aColumnHeads [
 	^ self visitAccessProperty: aColumnHeads. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitColumnHidden:aColumnHidden [
+JinVisitor >> visitColumnHidden:aColumnHidden [
 	^ self visitAccessProperty: aColumnHidden. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitColumnOrder:aColumnOrder [
+JinVisitor >> visitColumnOrder:aColumnOrder [
 	^ self visitAccessProperty: aColumnOrder. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitColumnStart:aColumnStart [
+JinVisitor >> visitColumnStart:aColumnStart [
 	^ self visitAccessProperty: aColumnStart. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitColumnWidth:aColumnWidth [
+JinVisitor >> visitColumnWidth:aColumnWidth [
 	^ self visitAccessProperty: aColumnWidth. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitColumnWidths:aColumnWidths [
+JinVisitor >> visitColumnWidths:aColumnWidths [
 	^ self visitAccessProperty: aColumnWidths. 
 
 ]
 
 { #category : #'visit-controls' }
-JinBreathFirstVisitor >> visitCombobox: aJinControlCombobox [
+JinVisitor >> visitCombobox: aJinControlCombobox [
 	self visitFormControl: aJinControlCombobox
 ]
 
 { #category : #'visit-controls' }
-JinBreathFirstVisitor >> visitCommandButton: aJinControlCommandButton [ 
+JinVisitor >> visitCommandButton: aJinControlCommandButton [ 
 	self visitFormControl: aJinControlCommandButton
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitConditionalFormat14:aConditionalFormat14 [
+JinVisitor >> visitConditionalFormat14:aConditionalFormat14 [
 	^ self visitAccessProperty: aConditionalFormat14. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitConditionalFormat:aConditionalFormat [
+JinVisitor >> visitConditionalFormat:aConditionalFormat [
 	^ self visitAccessProperty: aConditionalFormat. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitControlSource:aControlSource [
+JinVisitor >> visitControlSource:aControlSource [
 	^ self visitAccessProperty: aControlSource. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitControlTipText:aControlTipText [
+JinVisitor >> visitControlTipText:aControlTipText [
 	^ self visitAccessProperty: aControlTipText. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitControlType:aControlType [
+JinVisitor >> visitControlType:aControlType [
 	^ self visitAccessProperty: aControlType. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitCursorOnHover:aCursorOnHover [
+JinVisitor >> visitCursorOnHover:aCursorOnHover [
 	^ self visitAccessProperty: aCursorOnHover. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitDatasheetCaption:aDatasheetCaption [
+JinVisitor >> visitDatasheetCaption:aDatasheetCaption [
 	^ self visitAccessProperty: aDatasheetCaption. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitDecimalPlaces:aDecimalPlaces [
+JinVisitor >> visitDecimalPlaces:aDecimalPlaces [
 	^ self visitAccessProperty: aDecimalPlaces. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitDefault:aDefault [
+JinVisitor >> visitDefault:aDefault [
 	^ self visitAccessProperty: aDefault. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitDefaultPicture:aDefaultPicture [
+JinVisitor >> visitDefaultPicture:aDefaultPicture [
 	^ self visitAccessProperty: aDefaultPicture. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitDefaultPictureType:aDefaultPictureType [
+JinVisitor >> visitDefaultPictureType:aDefaultPictureType [
 	^ self visitAccessProperty: aDefaultPictureType. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitDefaultValue:aDefaultValue [
+JinVisitor >> visitDefaultValue:aDefaultValue [
 	^ self visitAccessProperty: aDefaultValue. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitDisplayAs:aDisplayAs [
+JinVisitor >> visitDisplayAs:aDisplayAs [
 	^ self visitAccessProperty: aDisplayAs. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitDisplayAsHyperlink:aDisplayAsHyperlink [
+JinVisitor >> visitDisplayAsHyperlink:aDisplayAsHyperlink [
 	^ self visitAccessProperty: aDisplayAsHyperlink. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitDisplayWhen:aDisplayWhen [
+JinVisitor >> visitDisplayWhen:aDisplayWhen [
 	^ self visitAccessProperty: aDisplayWhen. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitEnabled:aEnabled [
+JinVisitor >> visitEnabled:aEnabled [
 	^ self visitAccessProperty: aEnabled. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitEnterKeyBehavior:aEnterKeyBehavior [
+JinVisitor >> visitEnterKeyBehavior:aEnterKeyBehavior [
 	^ self visitAccessProperty: aEnterKeyBehavior. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitEventProcPrefix:aEventProcPrefix [
+JinVisitor >> visitEventProcPrefix:aEventProcPrefix [
 	^ self visitAccessProperty: aEventProcPrefix. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitFilterLookup:aFilterLookup [
+JinVisitor >> visitFilterLookup:aFilterLookup [
 	^ self visitAccessProperty: aFilterLookup. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitFilterOnEmptyMaster:aFilterOnEmptyMaster [
+JinVisitor >> visitFilterOnEmptyMaster:aFilterOnEmptyMaster [
 	^ self visitAccessProperty: aFilterOnEmptyMaster. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitFontBold:aFontBold [
+JinVisitor >> visitFontBold:aFontBold [
 	^ self visitAccessProperty: aFontBold. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitFontItalic:aFontItalic [
+JinVisitor >> visitFontItalic:aFontItalic [
 	^ self visitAccessProperty: aFontItalic. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitFontName:aFontName [
+JinVisitor >> visitFontName:aFontName [
 	^ self visitAccessProperty: aFontName. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitFontSize:aFontSize [
+JinVisitor >> visitFontSize:aFontSize [
 	^ self visitAccessProperty: aFontSize. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitFontUnderline:aFontUnderline [
+JinVisitor >> visitFontUnderline:aFontUnderline [
 	^ self visitAccessProperty: aFontUnderline. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitFontWeight:aFontWeight [
+JinVisitor >> visitFontWeight:aFontWeight [
 	^ self visitAccessProperty: aFontWeight. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitForeColor:aForeColor [
+JinVisitor >> visitForeColor:aForeColor [
 	^ self visitAccessProperty: aForeColor. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitForeShade:aForeShade [
+JinVisitor >> visitForeShade:aForeShade [
 	^ self visitAccessProperty: aForeShade. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitForeThemeColorIndex:aForeThemeColorIndex [
+JinVisitor >> visitForeThemeColorIndex:aForeThemeColorIndex [
 	^ self visitAccessProperty: aForeThemeColorIndex. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitForeTint:aForeTint [
+JinVisitor >> visitForeTint:aForeTint [
 	^ self visitAccessProperty: aForeTint. 
 
 ]
 
 { #category : #'visit-first-objects' }
-JinBreathFirstVisitor >> visitForm: aJinForm [
+JinVisitor >> visitForm: aJinForm [
 	aJinForm hasModule ifTrue: [  aJinForm module acceptVisitor: self  ].
 	self visitCollection: aJinForm controls 
 ]
 
 { #category : #'visit-first-objects' }
-JinBreathFirstVisitor >> visitFormControl: aJinControlObject [
+JinVisitor >> visitFormControl: aJinControlObject [
 	self visitHandleObject: aJinControlObject.
 	self visitCollection: aJinControlObject properties.
 ]
 
 { #category : #'visit-first-objects' }
-JinBreathFirstVisitor >> visitFormModule: aJinFormModule [ 
+JinVisitor >> visitFormModule: aJinFormModule [ 
 	self visitModule: aJinFormModule 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitFormat:aFormat [
+JinVisitor >> visitFormat:aFormat [
 	^ self visitAccessProperty: aFormat. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitFuriganaControl:aFuriganaControl [
+JinVisitor >> visitFuriganaControl:aFuriganaControl [
 	^ self visitAccessProperty: aFuriganaControl. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitGlow:aGlow [
+JinVisitor >> visitGlow:aGlow [
 	^ self visitAccessProperty: aGlow. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitGradient:aGradient [
+JinVisitor >> visitGradient:aGradient [
 	^ self visitAccessProperty: aGradient. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitGridlineColor:aGridlineColor [
+JinVisitor >> visitGridlineColor:aGridlineColor [
 	^ self visitAccessProperty: aGridlineColor. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitGridlineShade:aGridlineShade [
+JinVisitor >> visitGridlineShade:aGridlineShade [
 	^ self visitAccessProperty: aGridlineShade. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitGridlineStyleBottom:aGridlineStyleBottom [
+JinVisitor >> visitGridlineStyleBottom:aGridlineStyleBottom [
 	^ self visitAccessProperty: aGridlineStyleBottom. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitGridlineStyleLeft:aGridlineStyleLeft [
+JinVisitor >> visitGridlineStyleLeft:aGridlineStyleLeft [
 	^ self visitAccessProperty: aGridlineStyleLeft. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitGridlineStyleRight:aGridlineStyleRight [
+JinVisitor >> visitGridlineStyleRight:aGridlineStyleRight [
 	^ self visitAccessProperty: aGridlineStyleRight. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitGridlineStyleTop:aGridlineStyleTop [
+JinVisitor >> visitGridlineStyleTop:aGridlineStyleTop [
 	^ self visitAccessProperty: aGridlineStyleTop. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitGridlineThemeColorIndex:aGridlineThemeColorIndex [
+JinVisitor >> visitGridlineThemeColorIndex:aGridlineThemeColorIndex [
 	^ self visitAccessProperty: aGridlineThemeColorIndex. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitGridlineTint:aGridlineTint [
+JinVisitor >> visitGridlineTint:aGridlineTint [
 	^ self visitAccessProperty: aGridlineTint. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitGridlineWidthBottom:aGridlineWidthBottom [
+JinVisitor >> visitGridlineWidthBottom:aGridlineWidthBottom [
 	^ self visitAccessProperty: aGridlineWidthBottom. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitGridlineWidthLeft:aGridlineWidthLeft [
+JinVisitor >> visitGridlineWidthLeft:aGridlineWidthLeft [
 	^ self visitAccessProperty: aGridlineWidthLeft. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitGridlineWidthRight:aGridlineWidthRight [
+JinVisitor >> visitGridlineWidthRight:aGridlineWidthRight [
 	^ self visitAccessProperty: aGridlineWidthRight. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitGridlineWidthTop:aGridlineWidthTop [
+JinVisitor >> visitGridlineWidthTop:aGridlineWidthTop [
 	^ self visitAccessProperty: aGridlineWidthTop. 
 
 ]
 
 { #category : #'visit-first-objects' }
-JinBreathFirstVisitor >> visitHandleObject: aJinReference [ 
+JinVisitor >> visitHandleObject: aJinReference [ 
 	" Leaf object arriving "
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHeight:aHeight [
+JinVisitor >> visitHeight:aHeight [
 	^ self visitAccessProperty: aHeight. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHelpContextId:aHelpContextId [
+JinVisitor >> visitHelpContextId:aHelpContextId [
 	^ self visitAccessProperty: aHelpContextId. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHorizontalAnchor:aHorizontalAnchor [
+JinVisitor >> visitHorizontalAnchor:aHorizontalAnchor [
 	^ self visitAccessProperty: aHorizontalAnchor. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHoverColor:aHoverColor [
+JinVisitor >> visitHoverColor:aHoverColor [
 	^ self visitAccessProperty: aHoverColor. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHoverForeColor:aHoverForeColor [
+JinVisitor >> visitHoverForeColor:aHoverForeColor [
 	^ self visitAccessProperty: aHoverForeColor. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHoverForeShade:aHoverForeShade [
+JinVisitor >> visitHoverForeShade:aHoverForeShade [
 	^ self visitAccessProperty: aHoverForeShade. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHoverForeThemeColorIndex:aHoverForeThemeColorIndex [
+JinVisitor >> visitHoverForeThemeColorIndex:aHoverForeThemeColorIndex [
 	^ self visitAccessProperty: aHoverForeThemeColorIndex. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHoverForeTint:aHoverForeTint [
+JinVisitor >> visitHoverForeTint:aHoverForeTint [
 	^ self visitAccessProperty: aHoverForeTint. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHoverShade:aHoverShade [
+JinVisitor >> visitHoverShade:aHoverShade [
 	^ self visitAccessProperty: aHoverShade. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHoverThemeColorIndex:aHoverThemeColorIndex [
+JinVisitor >> visitHoverThemeColorIndex:aHoverThemeColorIndex [
 	^ self visitAccessProperty: aHoverThemeColorIndex. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHoverTint:aHoverTint [
+JinVisitor >> visitHoverTint:aHoverTint [
 	^ self visitAccessProperty: aHoverTint. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHyperlinkAddress:aHyperlinkAddress [
+JinVisitor >> visitHyperlinkAddress:aHyperlinkAddress [
 	^ self visitAccessProperty: aHyperlinkAddress. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHyperlinkBinderDescription:aHyperlinkBinderDescription [
+JinVisitor >> visitHyperlinkBinderDescription:aHyperlinkBinderDescription [
 	^ self visitAccessProperty: aHyperlinkBinderDescription. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHyperlinkSubAddress:aHyperlinkSubAddress [
+JinVisitor >> visitHyperlinkSubAddress:aHyperlinkSubAddress [
 	^ self visitAccessProperty: aHyperlinkSubAddress. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitHyperlinkTarget:aHyperlinkTarget [
+JinVisitor >> visitHyperlinkTarget:aHyperlinkTarget [
 	^ self visitAccessProperty: aHyperlinkTarget. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitIMEHold:aIMEHold [
+JinVisitor >> visitIMEHold:aIMEHold [
 	^ self visitAccessProperty: aIMEHold. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitIMEMode:aIMEMode [
+JinVisitor >> visitIMEMode:aIMEMode [
 	^ self visitAccessProperty: aIMEMode. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitIMESentenceMode:aIMESentenceMode [
+JinVisitor >> visitIMESentenceMode:aIMESentenceMode [
 	^ self visitAccessProperty: aIMESentenceMode. 
 
 ]
 
 { #category : #'visit-controls' }
-JinBreathFirstVisitor >> visitImage: aJinControlImage [ 
+JinVisitor >> visitImage: aJinControlImage [ 
 	self visitFormControl: aJinControlImage 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitImageData:aImageData [
+JinVisitor >> visitImageData:aImageData [
 	^ self visitAccessProperty: aImageData. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitImageHeight:aImageHeight [
+JinVisitor >> visitImageHeight:aImageHeight [
 	^ self visitAccessProperty: aImageHeight. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitImageWidth:aImageWidth [
+JinVisitor >> visitImageWidth:aImageWidth [
 	^ self visitAccessProperty: aImageWidth. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitInSelection:aInSelection [
+JinVisitor >> visitInSelection:aInSelection [
 	^ self visitAccessProperty: aInSelection. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitInheritValueList:aInheritValueList [
+JinVisitor >> visitInheritValueList:aInheritValueList [
 	^ self visitAccessProperty: aInheritValueList. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitInputMask:aInputMask [
+JinVisitor >> visitInputMask:aInputMask [
 	^ self visitAccessProperty: aInputMask. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitIsHyperlink:aIsHyperlink [
+JinVisitor >> visitIsHyperlink:aIsHyperlink [
 	^ self visitAccessProperty: aIsHyperlink. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitKeyboardLanguage:aKeyboardLanguage [
+JinVisitor >> visitKeyboardLanguage:aKeyboardLanguage [
 	^ self visitAccessProperty: aKeyboardLanguage. 
 
 ]
 
 { #category : #'visit-controls' }
-JinBreathFirstVisitor >> visitLabel: aJinControlLabel [ 
+JinVisitor >> visitLabel: aJinControlLabel [ 
 		self visitFormControl: aJinControlLabel
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitLabelName:aLabelName [
+JinVisitor >> visitLabelName:aLabelName [
 	^ self visitAccessProperty: aLabelName. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitLayout:aLayout [
+JinVisitor >> visitLayout:aLayout [
 	^ self visitAccessProperty: aLayout. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitLayoutID:aLayoutID [
+JinVisitor >> visitLayoutID:aLayoutID [
 	^ self visitAccessProperty: aLayoutID. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitLeft:aLeft [
+JinVisitor >> visitLeft:aLeft [
 	^ self visitAccessProperty: aLeft. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitLeftMargin:aLeftMargin [
+JinVisitor >> visitLeftMargin:aLeftMargin [
 	^ self visitAccessProperty: aLeftMargin. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitLeftPadding:aLeftPadding [
+JinVisitor >> visitLeftPadding:aLeftPadding [
 	^ self visitAccessProperty: aLeftPadding. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitLimitToList:aLimitToList [
+JinVisitor >> visitLimitToList:aLimitToList [
 	^ self visitAccessProperty: aLimitToList. 
 
 ]
 
 { #category : #'visit-controls' }
-JinBreathFirstVisitor >> visitLine: aJinControlLine [ 
+JinVisitor >> visitLine: aJinControlLine [ 
 	self visitFormControl: aJinControlLine
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitLineSlant:aLineSlant [
+JinVisitor >> visitLineSlant:aLineSlant [
 	^ self visitAccessProperty: aLineSlant. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitLineSpacing:aLineSpacing [
+JinVisitor >> visitLineSpacing:aLineSpacing [
 	^ self visitAccessProperty: aLineSpacing. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitLinkChildFields:aLinkChildFields [
+JinVisitor >> visitLinkChildFields:aLinkChildFields [
 	^ self visitAccessProperty: aLinkChildFields. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitLinkMasterFields:aLinkMasterFields [
+JinVisitor >> visitLinkMasterFields:aLinkMasterFields [
 	^ self visitAccessProperty: aLinkMasterFields. 
 
 ]
 
 { #category : #'visit-controls' }
-JinBreathFirstVisitor >> visitListBox: aJinControlListBox [ 
+JinVisitor >> visitListBox: aJinControlListBox [ 
 	self visitFormControl: aJinControlListBox 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitListCount:aListCount [
+JinVisitor >> visitListCount:aListCount [
 	^ self visitAccessProperty: aListCount. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitListIndex:aListIndex [
+JinVisitor >> visitListIndex:aListIndex [
 	^ self visitAccessProperty: aListIndex. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitListItemsEditForm:aListItemsEditForm [
+JinVisitor >> visitListItemsEditForm:aListItemsEditForm [
 	^ self visitAccessProperty: aListItemsEditForm. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitListRows:aListRows [
+JinVisitor >> visitListRows:aListRows [
 	^ self visitAccessProperty: aListRows. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitListWidth:aListWidth [
+JinVisitor >> visitListWidth:aListWidth [
 	^ self visitAccessProperty: aListWidth. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitLocked:aLocked [
+JinVisitor >> visitLocked:aLocked [
 	^ self visitAccessProperty: aLocked. 
 
 ]
 
 { #category : #'visit-first-objects' }
-JinBreathFirstVisitor >> visitModule: aJinModule [ 
+JinVisitor >> visitModule: aJinModule [ 
 	aJinModule code acceptVisitor: self.
 	
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitMultiRow:aMultiRow [
+JinVisitor >> visitMultiRow:aMultiRow [
 	^ self visitAccessProperty: aMultiRow. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitMultiSelect:aMultiSelect [
+JinVisitor >> visitMultiSelect:aMultiSelect [
 	^ self visitAccessProperty: aMultiSelect. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitName:aName [
+JinVisitor >> visitName:aName [
 	^ self visitAccessProperty: aName. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitNumeralShapes:aNumeralShapes [
+JinVisitor >> visitNumeralShapes:aNumeralShapes [
 	^ self visitAccessProperty: aNumeralShapes. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitObjectPalette:aObjectPalette [
+JinVisitor >> visitObjectPalette:aObjectPalette [
 	^ self visitAccessProperty: aObjectPalette. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOldBorderStyle:aOldBorderStyle [
+JinVisitor >> visitOldBorderStyle:aOldBorderStyle [
 	^ self visitAccessProperty: aOldBorderStyle. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnAttachmentCurrent:aOnAttachmentCurrent [
+JinVisitor >> visitOnAttachmentCurrent:aOnAttachmentCurrent [
 	^ self visitAccessProperty: aOnAttachmentCurrent. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnAttachmentCurrentEmMacro:aOnAttachmentCurrentEmMacro [
+JinVisitor >> visitOnAttachmentCurrentEmMacro:aOnAttachmentCurrentEmMacro [
 	^ self visitAccessProperty: aOnAttachmentCurrentEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnChange:aOnChange [
+JinVisitor >> visitOnChange:aOnChange [
 	^ self visitAccessProperty: aOnChange. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnChangeEmMacro:aOnChangeEmMacro [
+JinVisitor >> visitOnChangeEmMacro:aOnChangeEmMacro [
 	^ self visitAccessProperty: aOnChangeEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnClick:aOnClick [
+JinVisitor >> visitOnClick:aOnClick [
 	^ self visitAccessProperty: aOnClick. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnClickEmMacro:aOnClickEmMacro [
+JinVisitor >> visitOnClickEmMacro:aOnClickEmMacro [
 	^ self visitAccessProperty: aOnClickEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnDblClick:aOnDblClick [
+JinVisitor >> visitOnDblClick:aOnDblClick [
 	^ self visitAccessProperty: aOnDblClick. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnDblClickEmMacro:aOnDblClickEmMacro [
+JinVisitor >> visitOnDblClickEmMacro:aOnDblClickEmMacro [
 	^ self visitAccessProperty: aOnDblClickEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnDirty:aOnDirty [
+JinVisitor >> visitOnDirty:aOnDirty [
 	^ self visitAccessProperty: aOnDirty. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnDirtyEmMacro:aOnDirtyEmMacro [
+JinVisitor >> visitOnDirtyEmMacro:aOnDirtyEmMacro [
 	^ self visitAccessProperty: aOnDirtyEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnEnter:aOnEnter [
+JinVisitor >> visitOnEnter:aOnEnter [
 	^ self visitAccessProperty: aOnEnter. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnEnterEmMacro:aOnEnterEmMacro [
+JinVisitor >> visitOnEnterEmMacro:aOnEnterEmMacro [
 	^ self visitAccessProperty: aOnEnterEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnExit:aOnExit [
+JinVisitor >> visitOnExit:aOnExit [
 	^ self visitAccessProperty: aOnExit. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnExitEmMacro:aOnExitEmMacro [
+JinVisitor >> visitOnExitEmMacro:aOnExitEmMacro [
 	^ self visitAccessProperty: aOnExitEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnGotFocus:aOnGotFocus [
+JinVisitor >> visitOnGotFocus:aOnGotFocus [
 	^ self visitAccessProperty: aOnGotFocus. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnGotFocusEmMacro:aOnGotFocusEmMacro [
+JinVisitor >> visitOnGotFocusEmMacro:aOnGotFocusEmMacro [
 	^ self visitAccessProperty: aOnGotFocusEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnKeyDown:aOnKeyDown [
+JinVisitor >> visitOnKeyDown:aOnKeyDown [
 	^ self visitAccessProperty: aOnKeyDown. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnKeyDownEmMacro:aOnKeyDownEmMacro [
+JinVisitor >> visitOnKeyDownEmMacro:aOnKeyDownEmMacro [
 	^ self visitAccessProperty: aOnKeyDownEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnKeyPress:aOnKeyPress [
+JinVisitor >> visitOnKeyPress:aOnKeyPress [
 	^ self visitAccessProperty: aOnKeyPress. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnKeyPressEmMacro:aOnKeyPressEmMacro [
+JinVisitor >> visitOnKeyPressEmMacro:aOnKeyPressEmMacro [
 	^ self visitAccessProperty: aOnKeyPressEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnKeyUp:aOnKeyUp [
+JinVisitor >> visitOnKeyUp:aOnKeyUp [
 	^ self visitAccessProperty: aOnKeyUp. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnKeyUpEmMacro:aOnKeyUpEmMacro [
+JinVisitor >> visitOnKeyUpEmMacro:aOnKeyUpEmMacro [
 	^ self visitAccessProperty: aOnKeyUpEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnLostFocus:aOnLostFocus [
+JinVisitor >> visitOnLostFocus:aOnLostFocus [
 	^ self visitAccessProperty: aOnLostFocus. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnLostFocusEmMacro:aOnLostFocusEmMacro [
+JinVisitor >> visitOnLostFocusEmMacro:aOnLostFocusEmMacro [
 	^ self visitAccessProperty: aOnLostFocusEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnMouseDown:aOnMouseDown [
+JinVisitor >> visitOnMouseDown:aOnMouseDown [
 	^ self visitAccessProperty: aOnMouseDown. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnMouseDownEmMacro:aOnMouseDownEmMacro [
+JinVisitor >> visitOnMouseDownEmMacro:aOnMouseDownEmMacro [
 	^ self visitAccessProperty: aOnMouseDownEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnMouseMove:aOnMouseMove [
+JinVisitor >> visitOnMouseMove:aOnMouseMove [
 	^ self visitAccessProperty: aOnMouseMove. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnMouseMoveEmMacro:aOnMouseMoveEmMacro [
+JinVisitor >> visitOnMouseMoveEmMacro:aOnMouseMoveEmMacro [
 	^ self visitAccessProperty: aOnMouseMoveEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnMouseUp:aOnMouseUp [
+JinVisitor >> visitOnMouseUp:aOnMouseUp [
 	^ self visitAccessProperty: aOnMouseUp. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnMouseUpEmMacro:aOnMouseUpEmMacro [
+JinVisitor >> visitOnMouseUpEmMacro:aOnMouseUpEmMacro [
 	^ self visitAccessProperty: aOnMouseUpEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnNotInList:aOnNotInList [
+JinVisitor >> visitOnNotInList:aOnNotInList [
 	^ self visitAccessProperty: aOnNotInList. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnNotInListEmMacro:aOnNotInListEmMacro [
+JinVisitor >> visitOnNotInListEmMacro:aOnNotInListEmMacro [
 	^ self visitAccessProperty: aOnNotInListEmMacro. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnUndo:aOnUndo [
+JinVisitor >> visitOnUndo:aOnUndo [
 	^ self visitAccessProperty: aOnUndo. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitOnUndoEmMacro:aOnUndoEmMacro [
+JinVisitor >> visitOnUndoEmMacro:aOnUndoEmMacro [
 	^ self visitAccessProperty: aOnUndoEmMacro. 
 
 ]
 
 { #category : #'visit-controls' }
-JinBreathFirstVisitor >> visitPage: aJinControlPage [
+JinVisitor >> visitPage: aJinControlPage [
 	self visitFormControl: aJinControlPage
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPageIndex:aPageIndex [
+JinVisitor >> visitPageIndex:aPageIndex [
 	^ self visitAccessProperty: aPageIndex. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPicture:aPicture [
+JinVisitor >> visitPicture:aPicture [
 	^ self visitAccessProperty: aPicture. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPictureAlignment:aPictureAlignment [
+JinVisitor >> visitPictureAlignment:aPictureAlignment [
 	^ self visitAccessProperty: aPictureAlignment. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPictureCaptionArrangement:aPictureCaptionArrangement [
+JinVisitor >> visitPictureCaptionArrangement:aPictureCaptionArrangement [
 	^ self visitAccessProperty: aPictureCaptionArrangement. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPictureData:aPictureData [
+JinVisitor >> visitPictureData:aPictureData [
 	^ self visitAccessProperty: aPictureData. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPictureSizeMode:aPictureSizeMode [
+JinVisitor >> visitPictureSizeMode:aPictureSizeMode [
 	^ self visitAccessProperty: aPictureSizeMode. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPictureTiling:aPictureTiling [
+JinVisitor >> visitPictureTiling:aPictureTiling [
 	^ self visitAccessProperty: aPictureTiling. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPictureType:aPictureType [
+JinVisitor >> visitPictureType:aPictureType [
 	^ self visitAccessProperty: aPictureType. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPressedColor:aPressedColor [
+JinVisitor >> visitPressedColor:aPressedColor [
 	^ self visitAccessProperty: aPressedColor. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPressedForeColor:aPressedForeColor [
+JinVisitor >> visitPressedForeColor:aPressedForeColor [
 	^ self visitAccessProperty: aPressedForeColor. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPressedForeShade:aPressedForeShade [
+JinVisitor >> visitPressedForeShade:aPressedForeShade [
 	^ self visitAccessProperty: aPressedForeShade. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPressedForeThemeColorIndex:aPressedForeThemeColorIndex [
+JinVisitor >> visitPressedForeThemeColorIndex:aPressedForeThemeColorIndex [
 	^ self visitAccessProperty: aPressedForeThemeColorIndex. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPressedForeTint:aPressedForeTint [
+JinVisitor >> visitPressedForeTint:aPressedForeTint [
 	^ self visitAccessProperty: aPressedForeTint. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPressedShade:aPressedShade [
+JinVisitor >> visitPressedShade:aPressedShade [
 	^ self visitAccessProperty: aPressedShade. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPressedThemeColorIndex:aPressedThemeColorIndex [
+JinVisitor >> visitPressedThemeColorIndex:aPressedThemeColorIndex [
 	^ self visitAccessProperty: aPressedThemeColorIndex. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitPressedTint:aPressedTint [
+JinVisitor >> visitPressedTint:aPressedTint [
 	^ self visitAccessProperty: aPressedTint. 
 
 ]
 
 { #category : #'visit-first-objects' }
-JinBreathFirstVisitor >> visitProject: aJinAccessProject [
+JinVisitor >> visitProject: aJinAccessProject [
 	self visitCollection: aJinAccessProject references.
 	self visitCollection: aJinAccessProject modules.
 	self visitCollection: aJinAccessProject forms.
@@ -1208,354 +1208,354 @@ JinBreathFirstVisitor >> visitProject: aJinAccessProject [
 ]
 
 { #category : #'visit-first-objects' }
-JinBreathFirstVisitor >> visitQuery: aJinQuery [ 
+JinVisitor >> visitQuery: aJinQuery [ 
 	" Not yer something to do "
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitQuickStyle:aQuickStyle [
+JinVisitor >> visitQuickStyle:aQuickStyle [
 	^ self visitAccessProperty: aQuickStyle. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitQuickStyleMask:aQuickStyleMask [
+JinVisitor >> visitQuickStyleMask:aQuickStyleMask [
 	^ self visitAccessProperty: aQuickStyleMask. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitReadingOrder:aReadingOrder [
+JinVisitor >> visitReadingOrder:aReadingOrder [
 	^ self visitAccessProperty: aReadingOrder. 
 
 ]
 
 { #category : #'visit-controls' }
-JinBreathFirstVisitor >> visitRectangle: aJinControlRectangle [
+JinVisitor >> visitRectangle: aJinControlRectangle [
 	self visitFormControl: aJinControlRectangle
 ]
 
 { #category : #'visit-first-objects' }
-JinBreathFirstVisitor >> visitReference: aJinReference [ 
+JinVisitor >> visitReference: aJinReference [ 
 
 
 	self visitHandleObject: aJinReference 
 ]
 
 { #category : #'visit-first-objects' }
-JinBreathFirstVisitor >> visitReport: aJinReport [ 
+JinVisitor >> visitReport: aJinReport [ 
 	" Visiting "
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitRightMargin:aRightMargin [
+JinVisitor >> visitRightMargin:aRightMargin [
 	^ self visitAccessProperty: aRightMargin. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitRightPadding:aRightPadding [
+JinVisitor >> visitRightPadding:aRightPadding [
 	^ self visitAccessProperty: aRightPadding. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitRowEnd:aRowEnd [
+JinVisitor >> visitRowEnd:aRowEnd [
 	^ self visitAccessProperty: aRowEnd. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitRowSource:aRowSource [
+JinVisitor >> visitRowSource:aRowSource [
 	^ self visitAccessProperty: aRowSource. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitRowSourceType:aRowSourceType [
+JinVisitor >> visitRowSourceType:aRowSourceType [
 	^ self visitAccessProperty: aRowSourceType. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitRowStart:aRowStart [
+JinVisitor >> visitRowStart:aRowStart [
 	^ self visitAccessProperty: aRowStart. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitScrollBarAlign:aScrollBarAlign [
+JinVisitor >> visitScrollBarAlign:aScrollBarAlign [
 	^ self visitAccessProperty: aScrollBarAlign. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitScrollBars:aScrollBars [
+JinVisitor >> visitScrollBars:aScrollBars [
 	^ self visitAccessProperty: aScrollBars. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitSection:aSection [
+JinVisitor >> visitSection:aSection [
 	^ self visitAccessProperty: aSection. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitSelLength:aSelLength [
+JinVisitor >> visitSelLength:aSelLength [
 	^ self visitAccessProperty: aSelLength. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitSelStart:aSelStart [
+JinVisitor >> visitSelStart:aSelStart [
 	^ self visitAccessProperty: aSelStart. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitSelText:aSelText [
+JinVisitor >> visitSelText:aSelText [
 	^ self visitAccessProperty: aSelText. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitSeparatorCharacters:aSeparatorCharacters [
+JinVisitor >> visitSeparatorCharacters:aSeparatorCharacters [
 	^ self visitAccessProperty: aSeparatorCharacters. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitShadow:aShadow [
+JinVisitor >> visitShadow:aShadow [
 	^ self visitAccessProperty: aShadow. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitShape:aShape [
+JinVisitor >> visitShape:aShape [
 	^ self visitAccessProperty: aShape. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitShortcutMenuBar:aShortcutMenuBar [
+JinVisitor >> visitShortcutMenuBar:aShortcutMenuBar [
 	^ self visitAccessProperty: aShortcutMenuBar. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitShowDatePicker:aShowDatePicker [
+JinVisitor >> visitShowDatePicker:aShowDatePicker [
 	^ self visitAccessProperty: aShowDatePicker. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitShowOnlyRowSourceValues:aShowOnlyRowSourceValues [
+JinVisitor >> visitShowOnlyRowSourceValues:aShowOnlyRowSourceValues [
 	^ self visitAccessProperty: aShowOnlyRowSourceValues. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitShowPageHeaderAndPageFooter:aShowPageHeaderAndPageFooter [
+JinVisitor >> visitShowPageHeaderAndPageFooter:aShowPageHeaderAndPageFooter [
 	^ self visitAccessProperty: aShowPageHeaderAndPageFooter. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitSizeMode:aSizeMode [
+JinVisitor >> visitSizeMode:aSizeMode [
 	^ self visitAccessProperty: aSizeMode. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitSmartTags:aSmartTags [
+JinVisitor >> visitSmartTags:aSmartTags [
 	^ self visitAccessProperty: aSmartTags. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitSoftEdges:aSoftEdges [
+JinVisitor >> visitSoftEdges:aSoftEdges [
 	^ self visitAccessProperty: aSoftEdges. 
 
 ]
 
 { #category : #'visit-first-objects' }
-JinBreathFirstVisitor >> visitSourceCode: aJinSourceCode [ 
+JinVisitor >> visitSourceCode: aJinSourceCode [ 
 	self visitHandleObject: aJinSourceCode 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitSourceObject:aSourceObject [
+JinVisitor >> visitSourceObject:aSourceObject [
 	^ self visitAccessProperty: aSourceObject. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitSpecialEffect:aSpecialEffect [
+JinVisitor >> visitSpecialEffect:aSpecialEffect [
 	^ self visitAccessProperty: aSpecialEffect. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitStatusBarText:aStatusBarText [
+JinVisitor >> visitStatusBarText:aStatusBarText [
 	^ self visitAccessProperty: aStatusBarText. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitStyle:aStyle [
+JinVisitor >> visitStyle:aStyle [
 	^ self visitAccessProperty: aStyle. 
 
 ]
 
 { #category : #'visit-controls' }
-JinBreathFirstVisitor >> visitSubForm: aJinControlSubForm [ 
+JinVisitor >> visitSubForm: aJinControlSubForm [ 
 		self visitFormControl: aJinControlSubForm
 ]
 
 { #category : #'visit-controls' }
-JinBreathFirstVisitor >> visitTabControl: aJinControlTabControl [
+JinVisitor >> visitTabControl: aJinControlTabControl [
 	self visitFormControl: aJinControlTabControl
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitTabFixedHeight:aTabFixedHeight [
+JinVisitor >> visitTabFixedHeight:aTabFixedHeight [
 	^ self visitAccessProperty: aTabFixedHeight. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitTabFixedWidth:aTabFixedWidth [
+JinVisitor >> visitTabFixedWidth:aTabFixedWidth [
 	^ self visitAccessProperty: aTabFixedWidth. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitTabIndex:aTabIndex [
+JinVisitor >> visitTabIndex:aTabIndex [
 	^ self visitAccessProperty: aTabIndex. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitTabStop:aTabStop [
+JinVisitor >> visitTabStop:aTabStop [
 	^ self visitAccessProperty: aTabStop. 
 
 ]
 
 { #category : #'visit-first-objects' }
-JinBreathFirstVisitor >> visitTable: aJinTable [ 
+JinVisitor >> visitTable: aJinTable [ 
 	
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitTag:aTag [
+JinVisitor >> visitTag:aTag [
 	^ self visitAccessProperty: aTag. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitText:aText [
+JinVisitor >> visitText:aText [
 	^ self visitAccessProperty: aText. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitTextAlign:aTextAlign [
+JinVisitor >> visitTextAlign:aTextAlign [
 	^ self visitAccessProperty: aTextAlign. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitTextFontCharSet:aTextFontCharSet [
+JinVisitor >> visitTextFontCharSet:aTextFontCharSet [
 	^ self visitAccessProperty: aTextFontCharSet. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitTextFormat:aTextFormat [
+JinVisitor >> visitTextFormat:aTextFormat [
 	^ self visitAccessProperty: aTextFormat. 
 
 ]
 
 { #category : #'visit-controls' }
-JinBreathFirstVisitor >> visitTextbox: aJinControlTextbox [ 
+JinVisitor >> visitTextbox: aJinControlTextbox [ 
 	self visitFormControl: aJinControlTextbox 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitThemeFontIndex:aThemeFontIndex [
+JinVisitor >> visitThemeFontIndex:aThemeFontIndex [
 	^ self visitAccessProperty: aThemeFontIndex. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitTop:aTop [
+JinVisitor >> visitTop:aTop [
 	^ self visitAccessProperty: aTop. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitTopMargin:aTopMargin [
+JinVisitor >> visitTopMargin:aTopMargin [
 	^ self visitAccessProperty: aTopMargin. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitTopPadding:aTopPadding [
+JinVisitor >> visitTopPadding:aTopPadding [
 	^ self visitAccessProperty: aTopPadding. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitTransparent:aTransparent [
+JinVisitor >> visitTransparent:aTransparent [
 	^ self visitAccessProperty: aTransparent. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitTripleState:aTripleState [
+JinVisitor >> visitTripleState:aTripleState [
 	^ self visitAccessProperty: aTripleState. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitUseTheme:aUseTheme [
+JinVisitor >> visitUseTheme:aUseTheme [
 	^ self visitAccessProperty: aUseTheme. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitValidationRule:aValidationRule [
+JinVisitor >> visitValidationRule:aValidationRule [
 	^ self visitAccessProperty: aValidationRule. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitValidationText:aValidationText [
+JinVisitor >> visitValidationText:aValidationText [
 	^ self visitAccessProperty: aValidationText. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitVertical:aVertical [
+JinVisitor >> visitVertical:aVertical [
 	^ self visitAccessProperty: aVertical. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitVerticalAnchor:aVerticalAnchor [
+JinVisitor >> visitVerticalAnchor:aVerticalAnchor [
 	^ self visitAccessProperty: aVerticalAnchor. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitVisible:aVisible [
+JinVisitor >> visitVisible:aVisible [
 	^ self visitAccessProperty: aVisible. 
 
 ]
 
 { #category : #'visit-control-properties' }
-JinBreathFirstVisitor >> visitWidth:aWidth [
+JinVisitor >> visitWidth:aWidth [
 	^ self visitAccessProperty: aWidth. 
 
 ]

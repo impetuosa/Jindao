@@ -121,7 +121,7 @@ Instead of creating the main form, and then adding the subform control to it, yo
 Class {
 	#name : #JinSubForm,
 	#superclass : #JinControlAbstractSubForm,
-	#category : #'Jindao-DomainObjects-GeneratedControls'
+	#category : #'Jindao-FormControls-Generated'
 }
 
 { #category : #generated }

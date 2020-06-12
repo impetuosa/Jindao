@@ -1,15 +1,7 @@
-"
-I do represent a Form. A form contains controls and oftenly a related module with the related code. 
-"
 Class {
 	#name : #JinForm,
-	#superclass : #JinLoadableObject,
-	#instVars : [
-		'code',
-		'module',
-		'controls'
-	],
-	#category : #'Jindao-DomainObjects-PrincipalObjects'
+	#superclass : #JinModelObject,
+	#category : #'Jindao-Core'
 }
 
 { #category : #'as yet unclassified' }
@@ -20,41 +12,15 @@ JinForm >> acceptVisitor: aVisitor [
 
 { #category : #'as yet unclassified' }
 JinForm >> code [
-	^ self module code 
+	^ self body code
 ]
 
 { #category : #'as yet unclassified' }
 JinForm >> controls [
-	self ensureIsLoaded.
-	^ controls
-		ifNil: [ controls := JinCollection newDefault
-				handle: (loadedObjectHandle propertyNamed: #Controls)
-				factory: self controlsFactory ]
+	^ self body controls 
 ]
 
-{ #category : #'as yet unclassified' }
-JinForm >> controlsFactory [
-	^ JinRemotesFactory newDefaultControlsFactory
-		parent: self;
-		yourself
-]
-
-{ #category : #'as yet unclassified' }
-JinForm >> hasModule [
-	self ensureIsLoaded .
-	^ loadedObjectHandle propertyNamed: #HasModule
-]
-
-{ #category : #'as yet unclassified' }
-JinForm >> module [
-	self ensureIsLoaded.
-	^ module
-		ifNil: [ module := JinFormModule new
-				moduleHandle: (loadedObjectHandle propertyNamed: #Module) project: project;
-				yourself ]
-]
-
-{ #category : #'as yet unclassified' }
-JinForm >> privateLoadObjectHandle [
-	^ (project openForm: self) handle
+{ #category : #accessing }
+JinForm >> privateLoadBodyObject [
+	^ (project openForm: self)
 ]

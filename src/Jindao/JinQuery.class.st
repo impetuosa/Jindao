@@ -1,7 +1,7 @@
 Class {
 	#name : #JinQuery,
-	#superclass : #JinLoadableObject,
-	#category : #'Jindao-DomainObjects-PrincipalObjects'
+	#superclass : #JinModelObject,
+	#category : #'Jindao-Core'
 }
 
 { #category : #'as yet unclassified' }
@@ -9,7 +9,7 @@ JinQuery >> acceptVisitor: aVisitor [
 	aVisitor visitQuery: self 
 ]
 
-{ #category : #'as yet unclassified' }
-JinQuery >> privateLoadObjectHandle [
-	^ (project openQuery: self) handle
+{ #category : #accessing }
+JinQuery >> privateLoadBodyObject [
+	^ (project openQuery: self)
 ]

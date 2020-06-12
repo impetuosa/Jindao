@@ -196,7 +196,7 @@ You can display text on a command button by setting its **Caption** property, or
 Class {
 	#name : #JinCommandButton,
 	#superclass : #JinControlAbstractCommandButton,
-	#category : #'Jindao-DomainObjects-GeneratedControls'
+	#category : #'Jindao-FormControls-Generated'
 }
 
 { #category : #generated }

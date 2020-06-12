@@ -1,46 +1,46 @@
 Class {
-	#name : #JinProtoObject,
+	#name : #JinAccessObject,
 	#superclass : #Object,
 	#instVars : [
 		'handle'
 	],
-	#category : #'Jindao-DomainObjects-Properties'
+	#category : #'Jindao-Core'
 }
 
 { #category : #'as yet unclassified' }
-JinProtoObject class >> mappedTypeName [
+JinAccessObject class >> mappedTypeName [
 	^ false 
 ]
 
 { #category : #'as yet unclassified' }
-JinProtoObject class >> mapsWith: aTypeName [
+JinAccessObject class >> mapsWith: aTypeName [
 	^ aTypeName = self mappedTypeName
 ]
 
 { #category : #'as yet unclassified' }
-JinProtoObject >> beCached [
+JinAccessObject >> beCached [
 	handle := handle asCachedHandle.
 ]
 
 { #category : #'as yet unclassified' }
-JinProtoObject >> handle [
+JinAccessObject >> handle [
 	^ handle
 ]
 
 { #category : #accessing }
-JinProtoObject >> handle: aHandle [
+JinAccessObject >> handle: aHandle [
 	handle := aHandle.
 	self beCached
 ]
 
 { #category : #'as yet unclassified' }
-JinProtoObject >> nameWithoutSpaces [
+JinAccessObject >> nameWithoutSpaces [
 	^ ((self name copyReplaceAll: ' ' with: '')
 		copyReplaceAll: '/'
 		with: '') copyReplaceAll: '-' with: '_'
 ]
 
 { #category : #accessing }
-JinProtoObject >> printOn: aStream [
+JinAccessObject >> printOn: aStream [
 	aStream nextPutAll: self class name ; nextPut:$[ ; nextPutAll: self name ; nextPut: $]
 ]

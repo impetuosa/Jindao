@@ -68,7 +68,7 @@ You can use the **BorderWidth** property to change the line width. You can use t
 Class {
 	#name : #JinLine,
 	#superclass : #JinControlAbstractLine,
-	#category : #'Jindao-DomainObjects-GeneratedControls'
+	#category : #'Jindao-FormControls-Generated'
 }
 
 { #category : #generated }

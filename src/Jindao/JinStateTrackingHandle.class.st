@@ -4,7 +4,7 @@ I do track down each return value of each operation per method / property and ar
 Class {
 	#name : #JinStateTrackingHandle,
 	#superclass : #JinCachingHandle,
-	#category : #'Jindao-DomainObjects-Properties'
+	#category : #'Jindao-Handles'
 }
 
 { #category : #properties }

@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'handle'
 	],
-	#category : #'Jindao-DomainObjects-Properties'
+	#category : #'Jindao-Core'
 }
 
 { #category : #properties }

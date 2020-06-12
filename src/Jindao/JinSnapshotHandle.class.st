@@ -4,7 +4,7 @@ I am supposed to get a snapshot of the content as soon as possible, The idea is 
 Class {
 	#name : #JinSnapshotHandle,
 	#superclass : #JinCachedHandle,
-	#category : #'Jindao-DomainObjects-Properties'
+	#category : #'Jindao-Handles'
 }
 
 { #category : #properties }

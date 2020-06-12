@@ -1,0 +1,15 @@
+"
+I am a module attached to a form. 
+I do not belong to the main collection of modules accessible in project/ application.
+I am only accessible through a form 
+"
+Class {
+	#name : #JinSubModuleBody,
+	#superclass : #JinModuleBody,
+	#category : #'Jindao-Core'
+}
+
+{ #category : #'as yet unclassified' }
+JinSubModuleBody >> acceptVisitor: aVisitor [
+	aVisitor visitFormModule: self 
+]
