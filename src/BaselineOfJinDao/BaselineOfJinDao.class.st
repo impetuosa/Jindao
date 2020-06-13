@@ -1,15 +1,15 @@
 Class {
-	#name : #BaselineOfJinDao,
+	#name : #BaselineOfJindao,
 	#superclass : #BaselineOf,
-	#category : #BaselineOfJinDao
+	#category : #BaselineOfJindao
 }
 
 { #category : #baselines }
-BaselineOfJinDao >> baseline: spec [
+BaselineOfJindao >> baseline: spec [
 	<baseline>
 	spec
 		baseline: 'PharoWin32'
 		with: [ spec repository: 'github://tesonep/pharo-com' ].
-	spec package: 'JinDao' with: [ spec requires: 'PharoWin32' ].
-	spec group: 'default' with: #(JinDao)
+	spec package: 'Jindao' with: [ spec requires: 'PharoWin32' ].
+	spec group: 'default' with: #(Jindao)
 ]

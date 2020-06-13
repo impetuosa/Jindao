@@ -1,1 +1,1 @@
-Package { #name : #BaselineOfJinDao }
+Package { #name : #BaselineOfJindao }
