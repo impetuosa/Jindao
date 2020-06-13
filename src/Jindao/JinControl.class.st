@@ -15,7 +15,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 JinControl >> acceptVisitor: aVisitor [
-	aVisitor visitControl: self
+	aVisitor visitFormControl: self
 ]
 
 { #category : #'as yet unclassified' }

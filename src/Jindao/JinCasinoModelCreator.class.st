@@ -2,7 +2,8 @@ Class {
 	#name : #JinCasinoModelCreator,
 	#superclass : #CSNMooseModelCreator,
 	#instVars : [
-		'importedProject'
+		'importedProject',
+		'errors'
 	],
 	#category : #'Jindao-CasinoImporting'
 }
@@ -31,5 +32,6 @@ JinCasinoModelCreator >> basicRun [
 	importer := JinCasinoAccessModelImporter new
 		import: blApplication
 		into: model.
-	importedProject := importer importedProject 
+	importedProject := importer importedProject .
+	errors := importer errors. 
 ]

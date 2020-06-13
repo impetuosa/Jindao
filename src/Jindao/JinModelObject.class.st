@@ -37,6 +37,13 @@ JinModelObject >> name [
 	^ description name 
 ]
 
+{ #category : #'as yet unclassified' }
+JinModelObject >> nameWithoutSpaces [
+	^ ((self name copyReplaceAll: ' ' with: '')
+		copyReplaceAll: '/'
+		with: '') copyReplaceAll: '-' with: '_'
+]
+
 { #category : #accessing }
 JinModelObject >> printOn: aStream [
 	aStream nextPutAll: self class name ; nextPut:$[ ; nextPutAll: self name ; nextPut: $]

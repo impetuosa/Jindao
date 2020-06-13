@@ -20,6 +20,16 @@ JinForm >> controls [
 	^ self body controls 
 ]
 
+{ #category : #'as yet unclassified' }
+JinForm >> hasModule [
+	^ self body hasModule
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> module [
+	^ self body module
+]
+
 { #category : #accessing }
 JinForm >> privateLoadBodyObject [
 	^ (project openForm: self)

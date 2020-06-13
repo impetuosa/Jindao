@@ -40,6 +40,11 @@ JinAccessObject >> nameWithoutSpaces [
 		with: '') copyReplaceAll: '-' with: '_'
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessObject >> parent: anUndefinedObject [ 
+
+]
+
 { #category : #accessing }
 JinAccessObject >> printOn: aStream [
 	aStream nextPutAll: self class name ; nextPut:$[ ; nextPutAll: self name ; nextPut: $]

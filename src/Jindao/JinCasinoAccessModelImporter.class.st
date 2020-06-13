@@ -4,10 +4,16 @@ Class {
 	#instVars : [
 		'project',
 		'importedModel',
-		'importedProject'
+		'importedProject',
+		'errors'
 	],
 	#category : #'Jindao-CasinoImporting'
 }
+
+{ #category : #'as yet unclassified' }
+JinCasinoAccessModelImporter >> errors [
+	^ errors
+]
 
 { #category : #'as yet unclassified' }
 JinCasinoAccessModelImporter >> import [
@@ -15,6 +21,7 @@ JinCasinoAccessModelImporter >> import [
 	importer := JinCasinoVisitor new.
 	importer useModel: importedModel.
 	project acceptVisitor: importer.
+	errors := importer errors .
 	importedProject := importer importedProject .
 ]
 

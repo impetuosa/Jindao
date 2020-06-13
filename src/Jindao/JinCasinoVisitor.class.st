@@ -6,10 +6,16 @@ Class {
 		'importedProject',
 		'mapper',
 		'factory',
-		'importingIntoThisModel'
+		'importingIntoThisModel',
+		'errors'
 	],
 	#category : #'Jindao-CasinoImporting'
 }
+
+{ #category : #'as yet unclassified' }
+JinCasinoVisitor >> errors [
+	^ errors
+]
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> factory [
@@ -50,14 +56,15 @@ JinCasinoVisitor >> importedProject [
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> initialize [
 	super initialize.
-	stack := Stack new
+	stack := Stack new.
+	errors := Dictionary  new.
 ]
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> pushInStack: anObject during: aBlock [
 	stack push: anObject.
-	aBlock value.
-	^ stack pop
+	aBlock
+		ensure: [ ^ stack pop ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -76,7 +83,7 @@ JinCasinoVisitor >> visitAccessProperty: aJinAccessProperty [
 JinCasinoVisitor >> visitForm: aJinForm [
 	^ self
 		pushInStack: (self importForm: aJinForm)
-		during: [ super visitForm: aJinForm ]
+		during: [ super visitForm: aJinForm ] 
 ]
 
 { #category : #'as yet unclassified' }
@@ -90,5 +97,9 @@ JinCasinoVisitor >> visitFormControl: aJinFormControl [
 JinCasinoVisitor >> visitProject: aJinAccessProject [
 	^ importedProject := self
 		pushInStack: (self importProject: aJinAccessProject)
-		during: [ super visitProject: aJinAccessProject ]
+		during: [ self visitCollection: aJinAccessProject references.
+			self visitCollection: (aJinAccessProject forms select: #isLoaded).
+			self visitCollection: aJinAccessProject queries.
+			self visitCollection: aJinAccessProject reports.
+			self visitCollection: aJinAccessProject tables ]
 ]
