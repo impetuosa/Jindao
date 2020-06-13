@@ -1,7 +1,7 @@
 Class {
 	#name : #JinCasinoModelStatelessFactory,
 	#superclass : #Object,
-	#category : #'Jindao-CasinoImporting'
+	#category : #JindaoCasinoImporting
 }
 
 { #category : #accessing }

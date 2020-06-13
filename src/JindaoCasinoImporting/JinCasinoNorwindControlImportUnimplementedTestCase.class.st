@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'controlClass'
 	],
-	#category : #'Jindao-CasinoImporting'
+	#category : #JindaoCasinoImporting
 }
 
 { #category : #'building suites' }

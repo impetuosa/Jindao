@@ -9,7 +9,7 @@ Class {
 		'control',
 		'importedControl'
 	],
-	#category : #'Jindao-CasinoImporting'
+	#category : #JindaoCasinoImporting
 }
 
 { #category : #'as yet unclassified' }

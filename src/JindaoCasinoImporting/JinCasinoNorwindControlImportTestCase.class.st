@@ -5,7 +5,7 @@ Class {
 		'controlClass',
 		'expectedImportedControlClass'
 	],
-	#category : #'Jindao-CasinoImporting'
+	#category : #JindaoCasinoImporting
 }
 
 { #category : #'building suites' }

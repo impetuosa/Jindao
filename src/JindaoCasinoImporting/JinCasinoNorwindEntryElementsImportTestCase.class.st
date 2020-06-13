@@ -1,7 +1,7 @@
 Class {
 	#name : #JinCasinoNorwindEntryElementsImportTestCase,
 	#superclass : #JinCasinoNorwindAbstractImportTestCase,
-	#category : #'Jindao-CasinoImporting'
+	#category : #JindaoCasinoImporting
 }
 
 { #category : #tests }

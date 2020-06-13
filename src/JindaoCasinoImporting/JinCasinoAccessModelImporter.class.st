@@ -7,7 +7,7 @@ Class {
 		'importedProject',
 		'errors'
 	],
-	#category : #'Jindao-CasinoImporting'
+	#category : #JindaoCasinoImporting
 }
 
 { #category : #'as yet unclassified' }
