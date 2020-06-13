@@ -13,3 +13,4 @@ BaselineOfJindao >> baseline: spec [
 	spec package: 'Jindao' with: [ spec requires: 'PharoWin32' ].
 	spec group: 'default' with: #(Jindao)
 ]
+
