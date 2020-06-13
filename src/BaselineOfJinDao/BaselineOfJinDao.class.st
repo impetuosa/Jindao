@@ -6,6 +6,7 @@ Class {
 
 { #category : #baselines }
 BaselineOfJinDao >> baseline: spec [
+	<baseline>
 	spec
 		baseline: 'PharoWin32'
 		with: [ spec repository: 'github://tesonep/pharo-com' ].
