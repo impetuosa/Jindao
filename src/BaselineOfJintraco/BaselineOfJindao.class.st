@@ -1,7 +1,7 @@
 Class {
 	#name : #BaselineOfJindao,
 	#superclass : #BaselineOf,
-	#category : #BaselineOfJindao
+	#category : #BaselineOfJintraco
 }
 
 { #category : #baselines }
