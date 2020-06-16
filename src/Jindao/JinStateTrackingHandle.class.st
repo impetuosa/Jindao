@@ -54,12 +54,11 @@ JinStateTrackingHandle >> dispatch: aFunctionName withArguments: arguments [
 JinStateTrackingHandle >> propertyNamed: aPropName withArguments: arguments [
 	| properties value |
 	properties := self privateGettersCache.
-	[ 
-		value := super propertyNamed: aPropName withArguments: arguments.
-		properties at: {aPropName . arguments } put: value.
-		^ value 
-	] on: Error 	do: [ :err | 
-			properties at: {aPropName . arguments } put: err.
-			err signal
-	]
+	value := super propertyNamed: aPropName withArguments: arguments.
+	properties
+		at:
+			{aPropName.
+			arguments}
+		put: value.
+	^ value
 ]

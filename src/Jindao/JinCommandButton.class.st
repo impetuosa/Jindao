@@ -1303,13 +1303,6 @@ JinCommandButton >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinCommandButton >> name [
-<getter>
-	^ (handle propertyNamed: #'Name' ).
-
-]
-
-{ #category : #'property - generated' }
 JinCommandButton >> name: aParam1 [
 <setter>
 		

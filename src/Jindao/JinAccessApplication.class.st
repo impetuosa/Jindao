@@ -46,6 +46,54 @@ JinAccessApplication >> acceptVisitor: aVisitor [
 	aVisitor visitApplication: self 
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> addReference: aName builtIn: isBuiltIn path: aFileReference guid: aGuid [
+[	(handle propertyNamed: #References)
+		dispatch: #AddFromFile
+		withArguments: {aFileReference fullName}] on: Error do: [ :e | 
+		
+			
+		 ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> addReference: aName builtIn: isBuiltIn path: aFileReference guid: aGuid major: aMajor minor: aMinor [
+	| addedRef |
+	self references
+		detect:
+			[ :r | r guid = aGuid and: [ r major = aMajor and: [ r minor = aMinor ] ] ]
+		ifFound: [ :r | ^ r ]
+		ifNone: [ [ (handle propertyNamed: #References)
+				dispatch: #AddFromFile
+				withArguments: {aFileReference fullName} ]
+				on: Error
+				do: [ :e | 
+					(handle propertyNamed: #References)
+						dispatch: #AddFromGuid
+						withArguments:
+							{aGuid.
+							aMajor.
+							aMinor} ].
+			^ self references detect: [ :r | r name = aName ] ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> close: aJinModelObject [
+	"	
+		Third parameter is about saving or not: 
+		
+		acSaveNo  == 2 
+		acSavePrompt == 0
+		acSaveYes == 1
+		"
+	self
+		command: #Close
+		withArguments:
+			{aJinModelObject typeNumber.
+			aJinModelObject name.
+			2}
+]
+
 { #category : #initialization }
 JinAccessApplication >> closeProject: aProject [
 	self handle dispatch: 'CloseCurrentDatabase' withArguments: {}
@@ -61,9 +109,111 @@ JinAccessApplication >> command: aString withArguments: aCollection [
 	^ self command dispatch: aString withArguments: aCollection 
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> createControl: aName inReport: aJinReport type: aTypeNumber section: aSection [
+	| control |
+	control := handle
+		dispatch: #CreateReportControl
+		withArguments:
+			{aJinReport name.
+			aTypeNumber .aSection }.
+	control propertyNamed: #Name put: aName
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> createModule: aKind named: aName properties: aCollection into: aProject [
+	| f |
+	f := self
+		ensureFileModuleKind: aKind
+		name: aName
+		properties: aCollection.
+		
+		
+'Application.VBE.ActiveVBProject.VBComponents.Import mcstrImportExportModule
+   
+    Application.DoCmd.Save acModule, mcstrModuleName
+   
+    Application.RefreshDatabaseWindow '
+	handle
+		dispatch: #LoadFromText
+		withArguments:
+			{JinModule typeNumber.
+			aName.
+			f fullName}.
+	f delete
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> createNewProject: aFileReference [
+	| newProject | 
+	newProject := self handle
+		dispatch: 'NewCurrentDatabase'
+		withArguments: {aFileReference fullName}.
+	^ JinAccessProject new
+		handle: (handle propertyNamed: 'CurrentProject')
+			dataHandle: (handle propertyNamed: #CurrentData)
+			application: self;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> createReportNamed: aString [
+	| report defaultName |
+	report := handle dispatch: #CreateReport.
+	defaultName := (report propertyNamed: #Name).
+	self refreshDatabaseWindow.
+
+	self
+		command: #Close
+		withArguments:
+			{JinReport typeNumber.
+			defaultName . 
+			1 }.
+	
+	self
+		command: #Rename
+		withArguments:
+			{aString.
+			JinReport typeNumber.
+			defaultName}.
+	
+	
+]
+
 { #category : #'table-api' }
 JinAccessApplication >> database [
 	^ (self workspace propertyNamed: #Databases) propertyNamed:#Item withArguments:{0}
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> ensureFileModuleKind: aKind name: aName properties: aCollection [
+	| f content |
+	f := (aName , '.bas') asFileReference.
+	f ensureDelete.
+	aCollection size > 2
+		ifTrue: [ self halt ].
+	aKind = #ClassModule
+		ifTrue: [ 
+f := (aName , '.cls') asFileReference.
+content :=  'VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  ''True
+END
+Attribute VB_Name = "{1}"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+' format: {aName} ]
+		ifFalse: [ 
+f := (aName , '.bas') asFileReference.
+content := 'Attribute VB_Name = "{1}"
+' format: {aName} ].
+	f ensureCreateFile.
+	f writeStream
+		nextPutAll: content;
+		close.
+	^ f
 ]
 
 { #category : #initialization }
@@ -118,6 +268,7 @@ JinAccessApplication >> openQuery: aQuery [
 		withArguments:
 			{aQuery name.
 			1}.
+	
 	^ self openedQueryHandles detect: [ :m | m name = aQuery name ]
 ]
 
@@ -163,7 +314,7 @@ JinAccessApplication >> openedModuleHandles [
 { #category : #'query-api' }
 JinAccessApplication >> openedQueryHandles [
 	^ JinCollection newDefault
-		handle: (handle propertyNamed: #Queries)
+		handle: (self database propertyNamed: #QueryDefs)
 		factory:
 			(JinRemoteObjectOnlyGenericsFactory new
 				defaultHierarchyClass: JinQueryBody;
@@ -199,6 +350,53 @@ JinAccessApplication >> references [
 					(JinRemoteObjectOnlyGenericsFactory new
 						defaultHierarchyClass: JinReference;
 						yourself) ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> refreshDatabaseWindow [
+	handle dispatch: #RefreshDatabaseWindow
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> save: aJinModelObject [
+
+
+	self
+		command: #Save
+		withArguments:
+			{aJinModelObject typeNumber.
+			aJinModelObject name}
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> saveModuleNamed: aString [
+	self
+		command: #Save
+		withArguments:
+			{JinModule typeNumber.
+			aString}
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> vbeComponentFor: aJinModule in: aJinAccessProject [
+	^ (self vbeProjectFor: aJinAccessProject) components
+		detect: [ :c | c name = aJinModule vbeComponentName ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> vbeProjectFor: aJinAccessProject [
+	^ self vbeProjects
+		detect: [ :p | p sanitizedName = aJinAccessProject sanitizedName ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> vbeProjects [
+	^ JinCollection newDefaultForMethod
+		handle: ((handle propertyNamed: #VBE) propertyNamed: #VBProjects)
+		factory:
+			(JinRemoteObjectOnlyGenericsFactory new
+				defaultHierarchyClass: JinVBEProject;
+				yourself)
 ]
 
 { #category : #initialization }

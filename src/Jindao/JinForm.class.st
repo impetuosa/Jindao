@@ -1,13 +1,23 @@
 Class {
 	#name : #JinForm,
-	#superclass : #JinModelObject,
+	#superclass : #JinVBObject,
 	#category : #'Jindao-Core'
 }
+
+{ #category : #accessing }
+JinForm class >> typeNumber [
+	^ 2
+]
 
 { #category : #'as yet unclassified' }
 JinForm >> acceptVisitor: aVisitor [
 	aVisitor visitForm: self.
 	
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> addControl: aJinLabel [ 
+	self shouldBeImplemented.
 ]
 
 { #category : #'as yet unclassified' }
@@ -33,4 +43,9 @@ JinForm >> module [
 { #category : #accessing }
 JinForm >> privateLoadBodyObject [
 	^ (project openForm: self)
+]
+
+{ #category : #accessing }
+JinForm >> vbeComponentName [
+	^ 'Form_' , self name
 ]

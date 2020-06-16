@@ -1089,13 +1089,6 @@ JinAttachment >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinAttachment >> name [
-<getter>
-	^ (handle propertyNamed: #'Name' ).
-
-]
-
-{ #category : #'property - generated' }
 JinAttachment >> name: aParam1 [
 <setter>
 		

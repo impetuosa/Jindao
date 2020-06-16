@@ -19,4 +19,16 @@ JinCachedCollection >> at: anIndex [
 JinCachedCollection >> collection [
 	^ collection
 		ifNil: [ collection := OrderedCollection new: self size withAll: self ]
+		ifNotNil: [ collection size < self size
+				ifFalse: [ collection ]
+				ifTrue: [ collection := collection
+						, (OrderedCollection new: self size - collection size withAll: self) ] ]
+]
+
+{ #category : #'as yet unclassified' }
+JinCachedCollection >> handle: aHandle [
+	self size = (aHandle propertyNamed: #Count)
+		ifFalse: [ 
+			collection := nil .
+			handle := aHandle ]
 ]

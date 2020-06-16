@@ -403,13 +403,6 @@ JinRectangle >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinRectangle >> name [
-<getter>
-	^ (handle propertyNamed: #'Name' ).
-
-]
-
-{ #category : #'property - generated' }
 JinRectangle >> name: aParam1 [
 <setter>
 		

@@ -55,6 +55,11 @@ JinHandle >> handle: aHandle [
  handle := aHandle 
 ]
 
+{ #category : #'as yet unclassified' }
+JinHandle >> properties [
+	^ handle properties
+]
+
 { #category : #properties }
 JinHandle >> propertyNamed: aPropName [
 	^ self propertyNamed: aPropName withArguments: #()

@@ -102,6 +102,13 @@ JinCollection >> groupedBy: aBlock [
 ]
 
 { #category : #'as yet unclassified' }
+JinCollection >> handle: aHandle [
+	self size = (aHandle propertyNamed: #Count)
+		ifFalse: [ 
+			handle := aHandle ]
+]
+
+{ #category : #'as yet unclassified' }
 JinCollection >> handle: aCOMDispatchInstance factory: anInstanceFactory [
 	handle := aCOMDispatchInstance.
 	factory := anInstanceFactory
@@ -125,6 +132,15 @@ JinCollection >> select: aBlock [
 			(aBlock value: each)
 				ifTrue: [ newCollection add: each ] ].
 	^ newCollection
+]
+
+{ #category : #'as yet unclassified' }
+JinCollection >> select: selectBock thenDo: aBlock [
+	
+	| each |
+	1 to: self size do: [ :index |
+		(selectBock value: (each := self at: index))
+			ifTrue: [ aBlock value: each ]].
 ]
 
 { #category : #'as yet unclassified' }

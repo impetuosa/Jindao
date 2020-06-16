@@ -1005,13 +1005,6 @@ JinTabControl >> multiRow: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinTabControl >> name [
-<getter>
-	^ (handle propertyNamed: #'Name' ).
-
-]
-
-{ #category : #'property - generated' }
 JinTabControl >> name: aParam1 [
 <setter>
 		

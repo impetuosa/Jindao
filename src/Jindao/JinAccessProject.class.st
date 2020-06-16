@@ -24,6 +24,26 @@ JinAccessProject >> acceptVisitor: aVisitor [
 	^ aVisitor visitProject: self 
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessProject >> addReference: aName builtIn: isBuiltIn path: aFileReference guid: aGuid [
+	^ application
+		addReference: aName
+		builtIn: isBuiltIn
+		path: aFileReference
+		guid: aGuid
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> addReference: aName builtIn: isBuiltIn path: aFileReference guid: aGuid major: aMajor minor: aMinor [
+	^ application
+		addReference: aName
+		builtIn: isBuiltIn
+		path: aFileReference
+		guid: aGuid
+		major: aMajor
+		minor: aMinor
+]
+
 { #category : #accessing }
 JinAccessProject >> application [
 	^ application
@@ -32,6 +52,97 @@ JinAccessProject >> application [
 { #category : #'initialize-release' }
 JinAccessProject >> close [
 	application closeProject: self. 
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> close: aJinForm [
+	application close: aJinForm
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> createControl: aName inReport: aJinReport type: aTypeNumber section: aSection [
+	application
+		createControl: aName
+		inReport: aJinReport
+		type: aTypeNumber
+		section: aSection.
+	^ aJinReport controls detect: [ :c | c name = aName ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> createModule: aKind named: aName properties: aCollection [
+	^ self modules
+		detect: [ :m | m name = aName ]
+		ifFound: [ :m | m ]
+		ifNone: [ | f module |
+			f := self
+				ensureFileModuleKind: aKind
+				name: aName
+				properties: aCollection.
+			self vbeProject import: f.
+			f delete.
+			module := self modules detect: [ :m | m name = aName ].
+			module save.
+			application refreshDatabaseWindow.
+			^ module ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> createModuleNamed: aName fromFile: aFileReference [
+	^ self modules
+		detect: [ :m | m name = aName ]
+		ifFound: [ :m | m ]
+		ifNone: [ self vbeProject import: aFileReference.
+			application saveModuleNamed: aName.
+			application refreshDatabaseWindow.
+			^ self modules detect: [ :m | m name = aName ] ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> createReportNamed: aString [
+	application createReportNamed: aString.
+	^ (self reports detect: [ :r | r name = aString ])
+		body;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> database [
+	^ JinDatabaseEngine new
+		handle: application database;
+		project: self; 
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> ensureFileModuleKind: aKind name: aName properties: aCollection [
+	| f content |
+	f := (aName , '.bas') asFileReference.
+	f ensureDelete.
+	aCollection size > 2
+		ifTrue: [ self halt ].
+	aKind = #ClassModule
+		ifTrue: [ 
+f := (aName , '.cls') asFileReference.
+content :=  'VERSION 1.0 CLASS
+BEGIN
+  MultiUse = -1  ''True
+END
+Attribute VB_Name = "{1}"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = False
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+' format: {aName} ]
+		ifFalse: [ 
+f := (aName , '.bas') asFileReference.
+content := 'Attribute VB_Name = "{1}"
+' format: {aName} ].
+	f ensureCreateFile.
+	f writeStream
+		nextPutAll: content;
+		close.
+	^ f
 ]
 
 { #category : #'form-api' }
@@ -77,6 +188,8 @@ JinAccessProject >> modules [
 					((JinFirstClassCitizenModelFactory defaultFor: JinModule)
 						project: self;
 						yourself) ]
+		ifNotNil: [ modules handle: (programHandle propertyNamed: #AllModules).
+			modules ]
 ]
 
 { #category : #accessing }
@@ -132,22 +245,40 @@ JinAccessProject >> references [
 
 { #category : #'report-api' }
 JinAccessProject >> reports [
-	^ reports
-		ifNil: [ reports := JinCollection newDefault
-				handle: (programHandle propertyNamed: #AllReports)
-				factory:
-					((JinFirstClassCitizenModelFactory defaultFor: JinReport)
-						project: self;
-						yourself) ]
+	^ JinCollection newDefault
+		handle: (programHandle propertyNamed: #AllReports)
+		factory:
+			((JinFirstClassCitizenModelFactory defaultFor: JinReport)
+				project: self;
+				yourself)
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> sanitizedName [
+	^ (self name readStream upTo: $.) asLowercase
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> save: aJinModule [ 
+	application save: aJinModule 
 ]
 
 { #category : #'table-api' }
 JinAccessProject >> tables [
-	^ tables
-		ifNil: [ tables := JinCollection newDefault
-				handle: (dataHandle propertyNamed: #AllTables)
-				factory:
-					((JinFirstClassCitizenModelFactory defaultFor: JinTable)
-						project: self;
-						yourself) ]
+	^ JinCollection newDefault
+		handle: (dataHandle propertyNamed: #AllTables)
+		factory:
+			((JinFirstClassCitizenModelFactory defaultFor: JinTable)
+				project: self;
+				yourself)
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> vbeComponentFor: aJinModule [
+	^ application vbeComponentFor: aJinModule in: self
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> vbeProject [
+	^ application vbeProjectFor: self 
 ]

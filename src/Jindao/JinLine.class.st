@@ -322,13 +322,6 @@ JinLine >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinLine >> name [
-<getter>
-	^ (handle propertyNamed: #'Name' ).
-
-]
-
-{ #category : #'property - generated' }
 JinLine >> name: aParam1 [
 <setter>
 		

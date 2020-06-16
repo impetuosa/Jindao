@@ -30,6 +30,11 @@ JinControl >> controlName [
 ]
 
 { #category : #'as yet unclassified' }
+JinControl >> controlTypeNumber [
+	^ handle propertyNamed: #ControlType
+]
+
+{ #category : #'as yet unclassified' }
 JinControl >> jinParent [
 	^ parent 
 ]
@@ -63,4 +68,9 @@ JinControl >> propertiesFactory [
 	^ JinRemotesFactory newDefaultAccessPropertyFactory
 		parent: self;
 		yourself
+]
+
+{ #category : #'as yet unclassified' }
+JinControl >> sectionNumber [
+	^ handle propertyNamed:#Section 
 ]

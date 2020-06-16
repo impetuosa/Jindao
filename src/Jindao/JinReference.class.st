@@ -10,11 +10,46 @@ JinReference >> acceptVisitor: aVisitor [
 ]
 
 { #category : #'as yet unclassified' }
+JinReference >> guid [
+	^ handle propertyNamed: #Guid
+]
+
+{ #category : #'as yet unclassified' }
 JinReference >> isBroken [
 	^ handle propertyNamed: #IsBroken
 ]
 
 { #category : #'as yet unclassified' }
-JinReference >> name [
-	^ handle propertyNamed:#Name 
+JinReference >> isBuiltIn [
+	^ handle propertyNamed: #BuiltIn
+]
+
+{ #category : #'as yet unclassified' }
+JinReference >> major [
+	^ handle propertyNamed: #Major
+]
+
+{ #category : #'as yet unclassified' }
+JinReference >> minor [
+	^ handle propertyNamed: #Minor
+]
+
+{ #category : #'as yet unclassified' }
+JinReference >> path [
+	^ (handle propertyNamed: #FullPath) asFileReference
+]
+
+{ #category : #'as yet unclassified' }
+JinReference >> printOn: aStream [
+	aStream
+		nextPutAll: 'Ref[';
+		nextPutAll: self name;
+		nextPutAll: '|';
+		nextPutAll: self major asString;
+		nextPut: $.;
+		nextPutAll: self minor asString;
+		nextPutAll:
+			(self isBroken
+				ifTrue: [ 'BROKEN]' ]
+				ifFalse: [ ']' ])
 ]

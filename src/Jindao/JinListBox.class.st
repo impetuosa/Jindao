@@ -1365,13 +1365,6 @@ JinListBox >> multiSelect: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinListBox >> name [
-<getter>
-	^ (handle propertyNamed: #'Name' ).
-
-]
-
-{ #category : #'property - generated' }
 JinListBox >> name: aParam1 [
 <setter>
 		

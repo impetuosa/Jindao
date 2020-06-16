@@ -4,6 +4,11 @@ Class {
 	#category : #'Jindao-Core'
 }
 
+{ #category : #accessing }
+JinQuery class >> typeNumber [
+	^ 1
+]
+
 { #category : #'as yet unclassified' }
 JinQuery >> acceptVisitor: aVisitor [
 	aVisitor visitQuery: self 
@@ -12,4 +17,9 @@ JinQuery >> acceptVisitor: aVisitor [
 { #category : #accessing }
 JinQuery >> privateLoadBodyObject [
 	^ (project openQuery: self)
+]
+
+{ #category : #'as yet unclassified' }
+JinQuery >> sql [
+	^ self body sql 
 ]

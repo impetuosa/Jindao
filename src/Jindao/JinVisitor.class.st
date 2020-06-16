@@ -52,8 +52,8 @@ JinVisitor >> visitAsianLineBreak:aAsianLineBreak [
 ]
 
 { #category : #'visit-controls' }
-JinVisitor >> visitAttachment: aJinControlAttachment [ 
-self visitFormControl: aJinControlAttachment
+JinVisitor >> visitAttachment: aJinControlAttachment [
+	self visitFormControl: aJinControlAttachment
 ]
 
 { #category : #'visit-control-properties' }
@@ -1201,10 +1201,10 @@ JinVisitor >> visitPressedTint:aPressedTint [
 JinVisitor >> visitProject: aJinAccessProject [
 	self visitCollection: aJinAccessProject references.
 	self visitCollection: aJinAccessProject modules.
-	self visitCollection: aJinAccessProject forms.
 	self visitCollection: aJinAccessProject queries.
 	self visitCollection: aJinAccessProject reports.
-	self visitCollection: aJinAccessProject tables
+	self visitCollection: aJinAccessProject tables.
+	self visitCollection: aJinAccessProject forms.
 ]
 
 { #category : #'visit-first-objects' }

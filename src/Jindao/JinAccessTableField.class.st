@@ -48,13 +48,14 @@ JinAccessTableField >> acceptVisitor: aVisitor [
 ]
 
 { #category : #'as yet unclassified' }
-JinAccessTableField >> name [
-	^ handle propertyNamed: #Name
-]
-
-{ #category : #'as yet unclassified' }
 JinAccessTableField >> printOn: aStream [
-	aStream nextPutAll: ('{1} : {2}({3})' format: { self name . self type. self size })
+	aStream
+		nextPutAll:
+			('{1} : {2}({3})'
+				format:
+					{self name.
+					self typeName.
+					self size})
 ]
 
 { #category : #'as yet unclassified' }
@@ -79,5 +80,10 @@ JinAccessTableField >> size [
 
 { #category : #'as yet unclassified' }
 JinAccessTableField >> type [
-	^  self class fieldTypeMapping: (handle propertyNamed: #Type )
+	^ handle propertyNamed: #Type
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessTableField >> typeName [
+	^ self class fieldTypeMapping: self type
 ]

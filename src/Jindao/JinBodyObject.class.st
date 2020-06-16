@@ -10,10 +10,5 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinBodyObject >> name [
-	^ handle propertyNamed:#Name 
-]
-
-{ #category : #'as yet unclassified' }
 JinBodyObject >> parent: anUndefinedObject [ 
 ]

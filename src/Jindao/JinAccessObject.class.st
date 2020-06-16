@@ -33,6 +33,11 @@ JinAccessObject >> handle: aHandle [
 	self beCached
 ]
 
+{ #category : #accessing }
+JinAccessObject >> name [
+	^ handle propertyNamed: #Name
+]
+
 { #category : #'as yet unclassified' }
 JinAccessObject >> nameWithoutSpaces [
 	^ ((self name copyReplaceAll: ' ' with: '')

@@ -10,15 +10,32 @@ Class {
 }
 
 { #category : #accessing }
+JinModelObject class >> typeNumber [
+	self subclassResponsibility
+]
+
+{ #category : #accessing }
 JinModelObject >> body [
 	^ body
 		ifNil: [ self load.
 			body ]
 ]
 
+{ #category : #'as yet unclassified' }
+JinModelObject >> close [
+	project close: self.
+	body := nil
+]
+
 { #category : #accessing }
 JinModelObject >> description: aDescription [
 	description := aDescription
+]
+
+{ #category : #'as yet unclassified' }
+JinModelObject >> ensureUnload [
+	project close: self.
+	body := nil.
 ]
 
 { #category : #accessing }
@@ -57,4 +74,14 @@ JinModelObject >> privateLoadBodyObject [
 { #category : #accessing }
 JinModelObject >> project: aJinAccessProject [ 
 	project := aJinAccessProject
+]
+
+{ #category : #accessing }
+JinModelObject >> save [
+	project save: self
+]
+
+{ #category : #'as yet unclassified' }
+JinModelObject >> typeNumber [
+	^ self class typeNumber
 ]

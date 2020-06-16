@@ -287,13 +287,6 @@ JinPage >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinPage >> name [
-<getter>
-	^ (handle propertyNamed: #'Name' ).
-
-]
-
-{ #category : #'property - generated' }
 JinPage >> name: aParam1 [
 <setter>
 		

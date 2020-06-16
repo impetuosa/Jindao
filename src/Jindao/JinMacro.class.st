@@ -4,6 +4,11 @@ Class {
 	#category : #'Jindao-Core'
 }
 
+{ #category : #accessing }
+JinMacro class >> typeNumber [
+	^ 4
+]
+
 { #category : #'as yet unclassified' }
 JinMacro >> acceptVisitor: aVisitor [
 	aVisitor visitMacro: self 

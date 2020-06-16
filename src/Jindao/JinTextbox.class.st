@@ -1456,13 +1456,6 @@ JinTextbox >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinTextbox >> name [
-<getter>
-	^ (handle propertyNamed: #'Name' ).
-
-]
-
-{ #category : #'property - generated' }
 JinTextbox >> name: aParam1 [
 <setter>
 		

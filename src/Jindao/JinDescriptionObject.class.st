@@ -11,8 +11,3 @@ Class {
 JinDescriptionObject >> isLoaded [
 	^ handle propertyNamed: #IsLoaded
 ]
-
-{ #category : #accessing }
-JinDescriptionObject >> name [
-	^ handle propertyNamed: #Name
-]

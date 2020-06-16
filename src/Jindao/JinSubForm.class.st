@@ -778,12 +778,6 @@ JinSubForm >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinSubForm >> name [
-	<getter>
-	^ handle propertyNamed: #Name
-]
-
-{ #category : #'property - generated' }
 JinSubForm >> name: aParam1 [
 <setter>
 		

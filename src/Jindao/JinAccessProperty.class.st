@@ -72,18 +72,16 @@ JinAccessProperty >> invoke: aDispidMember riid: aRiid lcid: aLcid wFlags: aWFla
 
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessProperty >> isEasyToTransfer [
+	^ true
+]
+
 { #category : #'remote methods' }
 JinAccessProperty >> isMemberSafe: aDispid [
 <method>
 
 	^ (handle dispatch: #'IsMemberSafe' withArguments: {aDispid} ).
-
-]
-
-{ #category : #'remote properties' }
-JinAccessProperty >> name [
-<getter>
-	^ (handle propertyNamed: #'Name' ).
 
 ]
 
@@ -155,6 +153,6 @@ JinAccessProperty >> value [
 JinAccessProperty >> value: aParam1 [
 <setter>
 		
-	^ (handle propertyNamed: #'Value' withArguments: {aParam1} ).
+	^ (handle propertyNamed: #'Value' put: aParam1 ).
 
 ]

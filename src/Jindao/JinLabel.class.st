@@ -960,13 +960,6 @@ JinLabel >> move: aLeft top: aTop width: aWidth height: aHeight [
 ]
 
 { #category : #'property - generated' }
-JinLabel >> name [
-<getter>
-	^ (handle propertyNamed: #'Name' ).
-
-]
-
-{ #category : #'property - generated' }
 JinLabel >> name: aParam1 [
 <setter>
 		

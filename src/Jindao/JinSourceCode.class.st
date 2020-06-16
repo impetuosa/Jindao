@@ -25,6 +25,11 @@ JinSourceCode >> amountOfLines [
 ]
 
 { #category : #'as yet unclassified' }
+JinSourceCode >> content [
+	^ self contents
+]
+
+{ #category : #'as yet unclassified' }
 JinSourceCode >> contents [
 	^ self contentsFrom: 1 to: self amountOfLines 
 ]
@@ -48,6 +53,11 @@ JinSourceCode >> elements [
 				or: [ element size < 5 ])
 				ifTrue: [ acc ]
 				ifFalse: [ acc add: element. acc   ] ]
+]
+
+{ #category : #'as yet unclassified' }
+JinSourceCode >> insertLines: aString [ 
+	handle dispatch: #InsertLines withArguments: { self amountOfLines . aString }
 ]
 
 { #category : #'as yet unclassified' }
