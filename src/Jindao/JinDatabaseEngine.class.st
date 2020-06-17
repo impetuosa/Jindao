@@ -61,7 +61,7 @@ JinDatabaseEngine >> createTableNamed: aName fields: fields attributes: anAttrib
 		dispatch: #CreateTableDef
 		withArguments:
 			{aName.
-			(self transformToBestFitAttirbute: anAttributeNumber).
+			anAttributeNumber.
 			anOtherName.
 			aConnectionString}.
 	fieldsProperty := def propertyNamed: #Fields.
@@ -76,8 +76,7 @@ JinDatabaseEngine >> createTableNamed: aName fields: fields attributes: anAttrib
 			fieldsProperty dispatch: #Append withArguments: {newField} ].
 	(handle propertyNamed: #TableDefs)
 		dispatch: #Append
-		withArguments: {def}.
-
+		withArguments: {def}
 ]
 
 { #category : #'as yet unclassified' }

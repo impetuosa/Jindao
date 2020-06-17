@@ -20,3 +20,8 @@ JinControlGeneric >> printOn: aStream [
 		nextPutAll: handle getTypeInfo name;
 		nextPut: $]
 ]
+
+{ #category : #'as yet unclassified' }
+JinControlGeneric >> section [
+	^ handle propertyNamed:#Section
+]

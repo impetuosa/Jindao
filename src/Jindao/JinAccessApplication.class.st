@@ -47,6 +47,29 @@ JinAccessApplication >> acceptVisitor: aVisitor [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessApplication >> activeEntity [
+	^ [ self activeForm ]
+		on: Win32Error
+		do: [ :e | 
+			e passIfNotError0x80020009.
+			self activeReport ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> activeForm [
+	| screen |
+	screen := handle propertyNamed: #Screen.
+	^ screen propertyNamed: #ActiveForm
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> activeReport [
+	| screen |
+	screen := handle propertyNamed: #Screen.
+	^ screen propertyNamed: #ActiveReport
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessApplication >> addReference: aName builtIn: isBuiltIn path: aFileReference guid: aGuid [
 [	(handle propertyNamed: #References)
 		dispatch: #AddFromFile
@@ -110,6 +133,18 @@ JinAccessApplication >> command: aString withArguments: aCollection [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessApplication >> createControl: aName inForm: aJinForm type: aTypeNumber section: aSection [
+	| control |
+	control := handle
+		dispatch: #CreateControl
+		withArguments:
+			{aJinForm name.
+			aTypeNumber.
+			aSection}.
+	control propertyNamed: #Name put: aName
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessApplication >> createControl: aName inReport: aJinReport type: aTypeNumber section: aSection [
 	| control |
 	control := handle
@@ -118,6 +153,41 @@ JinAccessApplication >> createControl: aName inReport: aJinReport type: aTypeNum
 			{aJinReport name.
 			aTypeNumber .aSection }.
 	control propertyNamed: #Name put: aName
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> createFormNamed: aString [
+	| form defaultName |
+	form := handle dispatch: #CreateForm.
+	defaultName := form propertyNamed: #Name.
+	self refreshDatabaseWindow.
+	self
+		command: #Close
+		withArguments:
+			{JinForm typeNumber.
+			defaultName.
+			1}.
+	self
+		command: #Rename
+		withArguments:
+			{aString.
+			JinForm typeNumber.
+			defaultName}
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> createGroupLevel: aJinReport expression: anExpression header: aBoolean footer: anOtherBoolean [
+	^ handle
+		dispatch: #CreateGroupLevel
+		withArguments:
+			{aJinReport name.
+			anExpression.
+			(aBoolean
+				ifTrue: [ 1 ]
+				ifFalse: [ 0 ]).
+			(anOtherBoolean
+				ifTrue: [ 1 ]
+				ifFalse: [ 0 ])}
 ]
 
 { #category : #'as yet unclassified' }

@@ -50,6 +50,11 @@ JinHandle >> dispatch: aFunctionName withArguments: arguments [
 	^ handle dispatch: aFunctionName withArguments: arguments
 ]
 
+{ #category : #'as yet unclassified' }
+JinHandle >> getTypeInfo [
+	^ handle getTypeInfo
+]
+
 { #category : #properties }
 JinHandle >> handle: aHandle [
  handle := aHandle 

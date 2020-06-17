@@ -25,6 +25,24 @@ JinAccessProject >> acceptVisitor: aVisitor [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessProject >> activeEntity [
+	| entity |
+	entity := application activeEntity.
+	(entity getTypeInfo name beginsWith: '_Report')
+		ifTrue: [ ^ self reports
+				detect: [ :r | r name = (entity propertyNamed: #Name) ] ].
+	(entity getTypeInfo name beginsWith: '_Form')
+		ifTrue:
+			[ ^ self forms detect: [ :r | r name = (entity propertyNamed: #Name) ] ].
+	self error: 'UnexpectedKind of entity '
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> activeEntityName [
+	^ application activeEntity propertyNamed:#Name 
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessProject >> addReference: aName builtIn: isBuiltIn path: aFileReference guid: aGuid [
 	^ application
 		addReference: aName
@@ -60,6 +78,16 @@ JinAccessProject >> close: aJinForm [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessProject >> createControl: aName inForm: aJinForm type: aTypeNumber section: aSection [
+	application
+		createControl: aName
+		inForm: aJinForm
+		type: aTypeNumber
+		section: aSection.
+	^ aJinForm controls detect: [ :c | c name = aName ]
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessProject >> createControl: aName inReport: aJinReport type: aTypeNumber section: aSection [
 	application
 		createControl: aName
@@ -67,6 +95,27 @@ JinAccessProject >> createControl: aName inReport: aJinReport type: aTypeNumber 
 		type: aTypeNumber
 		section: aSection.
 	^ aJinReport controls detect: [ :c | c name = aName ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> createFormNamed: aString [
+	application createFormNamed: aString.
+	^ (self forms detect: [ :r | r name = aString ])
+		body;
+		yourself
+
+	
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> createGroupLevel: aJinReport expression: anExpression header: aBoolean footer: anOtherBoolean [
+	| long |
+	long := application
+		createGroupLevel: aJinReport
+		expression: anExpression
+		header: aBoolean
+		footer: anOtherBoolean.
+	^ aJinReport groupLevelNumber: long
 ]
 
 { #category : #'as yet unclassified' }
@@ -145,15 +194,32 @@ content := 'Attribute VB_Name = "{1}"
 	^ f
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessProject >> ensureItHasNonPageHeaderFooter: aJinFormOrModule [
+	" acCmdPageHdrFtr 	182 "
+
+	self assert: self activeEntityName = aJinFormOrModule name.
+	aJinFormOrModule hasPageHeaderFooter
+		ifTrue: [ application command: #RunCommand withArguments: {182} ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> ensurePageHeaderFooter: aJinFormOrModule [
+	" acCmdPageHdrFtr 	182 "
+
+	self assert: self activeEntityName = aJinFormOrModule name.
+	aJinFormOrModule hasPageHeaderFooter
+		ifFalse: [ application command: #RunCommand withArguments: {182} ]
+]
+
 { #category : #'form-api' }
 JinAccessProject >> forms [
-	^ forms
-		ifNil: [ forms := JinCollection newDefault
-				handle: (programHandle propertyNamed: #AllForms)
-				factory:
-					((JinFirstClassCitizenModelFactory defaultFor: JinForm)
-						project: self;
-						yourself) ]
+	^ JinCollection newDefault
+		handle: (programHandle propertyNamed: #AllForms)
+		factory:
+			((JinFirstClassCitizenModelFactory defaultFor: JinForm)
+				project: self;
+				yourself)
 ]
 
 { #category : #accessing }
@@ -166,6 +232,22 @@ JinAccessProject >> handle: aCOMDispatchInstance dataHandle: aDataHandle applica
 	application := anApplication .
 	programHandle := aCOMDispatchInstance.
 	dataHandle := aDataHandle
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> installHeaderFooterOn: aJinReport [
+	" acCmdReportHdrFtr 	37 	 "
+	
+	self assert: self activeEntityName = aJinReport name .
+	application command: #RunCommand withArguments: {37}
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> installReportHeaderFooterOn: aJinReport [
+	"acCmdFormHdrFtr 	36 	 "
+
+	self assert: self activeEntityName = aJinReport name.
+	application command: #RunCommand withArguments: {36}
 ]
 
 { #category : #'macro-api' }

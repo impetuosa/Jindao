@@ -19,6 +19,20 @@ JinVBObject >> properties [
 ]
 
 { #category : #'as yet unclassified' }
+JinVBObject >> propertiesValues [
+	^ self properties
+		collect: [ :p | 
+			| value |
+			value := [ p value ]
+				on: Error
+				do: [ :e | 
+					((e isKindOf: KeyNotFound) or: [ e isError0x80020009 ])
+						ifTrue: [ nil ]
+						ifFalse: [ e signal ] ].
+			p name -> value ]
+]
+
+{ #category : #'as yet unclassified' }
 JinVBObject >> vbeComponent [
 	^ vbeComponent
 		ifNil: [ vbeComponent := project vbeComponentFor: self ]

@@ -34,17 +34,18 @@ FuReplicant >> infuseProperties: aJinObjectSource into: aJinObjectTarget [
 			value := [ p value ]
 				on: Error
 				do: [ :e | 
-					((e messageText includesSubstring: '16r80020009') or: [ e isKindOf:KeyNotFound ])
+					((e isKindOf: KeyNotFound) or: [ e isError0x80020009 ])
 						ifTrue: [ nil ]
-						ifFalse: [ e  signal ] ].
+						ifFalse: [ e signal ] ].
 			table at: p name put: value ].
 	aJinObjectTarget properties
-		collect: [ :p | [(table at: p name) ifNotNil: [ :v | p value: v ]] 
+		collect: [ :p | 
+			[ (table at: p name) ifNotNil: [ :v | p value: v ] ]
 				on: Error
 				do: [ :e | 
-					((e messageText includesSubstring: '16r80020009') or: [ e isKindOf:KeyNotFound ])
+					((e isKindOf: KeyNotFound) or: [ e isError0x80020009 ])
 						ifTrue: [ nil ]
-						ifFalse: [ e  signal ] ]. ]
+						ifFalse: [ e signal ] ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -65,12 +66,48 @@ FuReplicant >> replicate [
 
 { #category : #'as yet unclassified' }
 FuReplicant >> replicateForm: aForm [
-	| remoteForm |
-	remoteForm := target createForm: aForm name.
-	aForm properties
-		select: [ :p | self isEasyToTransfer: p ]
-		thenDo:
-			[ :p | remoteForm propertyNamed: p name put: (p propertyNamed: #Value) ]
+
+	| form tuples |
+	form := target createFormNamed: aForm name.
+	aForm hasHeaderFooter
+		ifTrue: [ form installHeaderFooter ].
+	aForm hasPageHeaderFooter
+		ifTrue: [ form installPageHeaderFooter ]
+		ifFalse: [ form ensureItHasNonPageHeaderFooter ].
+	tuples := Dictionary new.
+	aForm controls
+		do: [ :c | 
+			c isEmptyCell ifFalse: [
+"				https://docs.microsoft.com/en-us/office/vba/api/Access.EmptyCell
+				An EmptyCell object is created when a control layout contains an empty cell. You cannot explicitly create or delete an EmptyCell object.
+				"
+			tuples
+				at: c
+				put:
+					(form
+						createControl: c name
+						type: c controlTypeNumber
+						section: c section) ]].
+	form module code insertLines: aForm module code content.
+	tuples
+		keysAndValuesDo: [ :cs :ct | self infuseProperties: cs into: ct ].
+	self infuseProperties: aForm into: form.
+	form save.
+	form close.
+	^ form
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> replicateGroupLevel: aGroup into: aReport [
+	| groupLevel |
+	groupLevel := aReport
+		addGroupLevel: aGroup controlSource
+		header: aGroup groupHeader
+		footer: aGroup groupFooter.
+	groupLevel groupOn: aGroup groupOn.
+	groupLevel groupInterval: aGroup groupInterval.
+	groupLevel keepTogether: aGroup keepTogether.
+	groupLevel sortOrder: aGroup sortOrder
 ]
 
 { #category : #'as yet unclassified' }
@@ -92,19 +129,34 @@ FuReplicant >> replicateQuery: aJinQuery [
 { #category : #'as yet unclassified' }
 FuReplicant >> replicateReport: aJinReport [
 	| report tuples |
-
 	report := target createReportNamed: aJinReport name.
+	aJinReport groupLevels
+		do: [ :g | self replicateGroupLevel: g into: report ].
+	aJinReport hasHeaderFooter
+		ifTrue: [ report installHeaderFooter ].
+	aJinReport hasPageHeaderFooter
+		ifTrue: [ report installPageHeaderFooter ]
+		ifFalse: [ report ensureItHasNonPageHeaderFooter ].
 	tuples := Dictionary new.
 	aJinReport controls
-		do:
-			[ :c | tuples at: c put: (report createControl: c name type: c controlTypeNumber section: c section ) ].
+		do: [ :c | 
+			c isEmptyCell ifFalse: [
+"				https://docs.microsoft.com/en-us/office/vba/api/Access.EmptyCell
+				An EmptyCell object is created when a control layout contains an empty cell. You cannot explicitly create or delete an EmptyCell object.
+				"
+			tuples
+				at: c
+				put:
+					(report
+						createControl: c name
+						type: c controlTypeNumber
+						section: c section) ]].
 	report module code insertLines: aJinReport module code content.
 	tuples
 		keysAndValuesDo: [ :cs :ct | self infuseProperties: cs into: ct ].
 	self infuseProperties: aJinReport into: report.
 	report save.
 	report close.
-
 	^ report
 ]
 

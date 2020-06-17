@@ -35,6 +35,11 @@ JinControl >> controlTypeNumber [
 ]
 
 { #category : #'as yet unclassified' }
+JinControl >> isEmptyCell [
+	^ false 
+]
+
+{ #category : #'as yet unclassified' }
 JinControl >> jinParent [
 	^ parent 
 ]

@@ -19,10 +19,9 @@ JinFormBody >> code [
 
 { #category : #'as yet unclassified' }
 JinFormBody >> controls [
-	^ controls
-		ifNil: [ controls := JinCollection newDefault
-				handle: (handle propertyNamed: #Controls)
-				factory: self controlsFactory ]
+	^ JinCollection newDefault
+		handle: (handle propertyNamed: #Controls)
+		factory: self controlsFactory
 ]
 
 { #category : #'as yet unclassified' }
@@ -33,8 +32,36 @@ JinFormBody >> controlsFactory [
 ]
 
 { #category : #'as yet unclassified' }
+JinFormBody >> hasHeaderFooter [
+	"
+1 	acHeader 	Form header section
+2 	acFooter 	Form footer section"
+	^ self hasSection: 1.
+	
+]
+
+{ #category : #'as yet unclassified' }
 JinFormBody >> hasModule [
 	^ handle propertyNamed: #HasModule
+]
+
+{ #category : #'as yet unclassified' }
+JinFormBody >> hasPageHeaderFooter [
+	"3 	acPageHeader 	Form page header section
+4 	acPageFooter 	Form page footer section"
+
+	^ self hasSection: 3
+]
+
+{ #category : #'as yet unclassified' }
+JinFormBody >> hasSection: anInteger [
+	^ [ (handle propertyNamed: #Section withArguments: {anInteger})
+		propertyNamed: #Name.
+	true ]
+		on: Win32Error
+		do: [ :e | 
+			e passIfNotError0x80020009.
+			false ]
 ]
 
 { #category : #'as yet unclassified' }

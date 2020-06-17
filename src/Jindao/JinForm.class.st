@@ -31,8 +31,42 @@ JinForm >> controls [
 ]
 
 { #category : #'as yet unclassified' }
+JinForm >> createControl: aName type: aTypeNumber section: aSection [
+	^ project
+		createControl: aName
+		inForm: self 
+		type: aTypeNumber
+		section: aSection
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> ensureItHasNonPageHeaderFooter [
+	^ project ensureItHasNonPageHeaderFooter: self 
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> hasHeaderFooter [
+	^ self body hasHeaderFooter
+]
+
+{ #category : #'as yet unclassified' }
 JinForm >> hasModule [
 	^ self body hasModule
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> hasPageHeaderFooter [
+	^ self body hasPageHeaderFooter
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> installHeaderFooter [
+	^ project installHeaderFooterOn: self
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> installPageHeaderFooter [
+	^ project ensurePageHeaderFooter: self 
 ]
 
 { #category : #'as yet unclassified' }
