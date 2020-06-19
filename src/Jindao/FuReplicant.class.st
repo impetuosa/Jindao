@@ -1,3 +1,15 @@
+"
+project :=  JinAccessApplication default open: 'D:\Users\Santiago.BRAGAGNOLO\Documents\PhD\Resources\11.50.00.02\Produit\caccueil.accdb' asFileReference .
+newProject := JinAccessApplication default createNewProject: 'replica.adp' asFileReference.
+FuReplicant replicateTables: project into: newProject.
+
+JinBodyObject   allInstances .
+project :=  JinAccessApplication default open: 'D:\Users\Santiago.BRAGAGNOLO\Documents\norwind\Northwind.accdb' asFileReference.
+
+'Southwind.accdb' asFileReference ensureDelete.
+newProject := JinAccessApplication default createNewProject: 'Southwind.accdb' asFileReference.
+FuReplicant replicate: project into: newProject.
+"
 Class {
 	#name : #FuReplicant,
 	#superclass : #JinStackVisitor,
