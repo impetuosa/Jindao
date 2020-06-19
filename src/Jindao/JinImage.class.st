@@ -892,13 +892,6 @@ JinImage >> onMouseUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinImage >> parent [
-<getter>
-	^ (handle propertyNamed: #'Parent' ).
-
-]
-
-{ #category : #'property - generated' }
 JinImage >> picture [
 <getter>
 	^ (handle propertyNamed: #'Picture' ).

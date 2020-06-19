@@ -27,7 +27,7 @@ JinFormBody >> controls [
 { #category : #'as yet unclassified' }
 JinFormBody >> controlsFactory [
 	^ JinRemotesFactory newDefaultControlsFactory
-		parent: self;
+		scopedBy: self;
 		yourself
 ]
 
@@ -70,4 +70,13 @@ JinFormBody >> module [
 		ifNil: [ module := JinSubModuleBody new
 				handle: (handle propertyNamed: #Module);
 				yourself ]
+]
+
+{ #category : #'as yet unclassified' }
+JinFormBody >> resolveObjectFor: aHandle [
+	| name |
+	name := aHandle propertyNamed: #Name.
+	^ self name = name
+		ifTrue: [ self ]
+		ifFalse: [ self controls detect: [ :c | c name = name ] ]
 ]

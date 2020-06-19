@@ -1344,13 +1344,6 @@ JinAttachment >> onMouseUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinAttachment >> parent [
-<getter>
-	^ (handle propertyNamed: #'Parent' ).
-
-]
-
-{ #category : #'property - generated' }
 JinAttachment >> pictureAlignment [
 <getter>
 	^ (handle propertyNamed: #'PictureAlignment' ).

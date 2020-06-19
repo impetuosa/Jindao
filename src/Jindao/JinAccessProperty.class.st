@@ -1,9 +1,6 @@
 Class {
 	#name : #JinAccessProperty,
 	#superclass : #JinAccessObject,
-	#instVars : [
-		'parent'
-	],
 	#category : #'Jindao-Core'
 }
 
@@ -90,25 +87,6 @@ JinAccessProperty >> name: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'Name' withArguments: {aParam1} ).
-
-]
-
-{ #category : #'remote properties' }
-JinAccessProperty >> parent [
-<getter>
-	^ (handle propertyNamed: #'Parent' ).
-
-]
-
-{ #category : #accessing }
-JinAccessProperty >> parent: aParent [
-	parent := aParent
-]
-
-{ #category : #'remote properties' }
-JinAccessProperty >> properties [
-<getter>
-	^ (handle propertyNamed: #'Properties' ).
 
 ]
 

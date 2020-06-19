@@ -174,6 +174,15 @@ JinPage >> controls [
 ]
 
 { #category : #'property - generated' }
+JinPage >> createIn: aForm [
+	^ aForm
+		createControl: self name
+		type: self controlType
+		section: self sectionNumber
+		parent: self parentName
+]
+
+{ #category : #'property - generated' }
 JinPage >> enabled [
 <getter>
 	^ (handle propertyNamed: #'Enabled' ).
@@ -381,13 +390,6 @@ JinPage >> pageIndex: aParam1 [
 <setter>
 		
 	^ (handle propertyNamed: #'PageIndex' withArguments: {aParam1} ).
-
-]
-
-{ #category : #'property - generated' }
-JinPage >> parent [
-<getter>
-	^ (handle propertyNamed: #'Parent' ).
 
 ]
 

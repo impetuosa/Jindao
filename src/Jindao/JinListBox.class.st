@@ -1590,13 +1590,6 @@ JinListBox >> onMouseUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinListBox >> parent [
-<getter>
-	^ (handle propertyNamed: #'Parent' ).
-
-]
-
-{ #category : #'property - generated' }
 JinListBox >> readingOrder [
 <getter>
 	^ (handle propertyNamed: #'ReadingOrder' ).

@@ -40,6 +40,21 @@ JinForm >> createControl: aName type: aTypeNumber section: aSection [
 ]
 
 { #category : #'as yet unclassified' }
+JinForm >> createControl: aName type: aTypeNumber section: aSection parent: aParentName [
+	^ project
+		createControl: aName
+		inForm: self
+		type: aTypeNumber
+		section: aSection
+		parent: aParentName
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> description [
+	^ description
+]
+
+{ #category : #'as yet unclassified' }
 JinForm >> ensureItHasNonPageHeaderFooter [
 	^ project ensureItHasNonPageHeaderFooter: self 
 ]

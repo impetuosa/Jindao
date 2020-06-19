@@ -66,7 +66,6 @@ FuReplicant >> replicate [
 
 { #category : #'as yet unclassified' }
 FuReplicant >> replicateForm: aForm [
-
 	| form tuples |
 	form := target createFormNamed: aForm name.
 	aForm hasHeaderFooter
@@ -77,17 +76,11 @@ FuReplicant >> replicateForm: aForm [
 	tuples := Dictionary new.
 	aForm controls
 		do: [ :c | 
-			c isEmptyCell ifFalse: [
-"				https://docs.microsoft.com/en-us/office/vba/api/Access.EmptyCell
+			c isEmptyCell
+				ifFalse:
+					[ "				https://docs.microsoft.com/en-us/office/vba/api/Access.EmptyCell
 				An EmptyCell object is created when a control layout contains an empty cell. You cannot explicitly create or delete an EmptyCell object.
-				"
-			tuples
-				at: c
-				put:
-					(form
-						createControl: c name
-						type: c controlTypeNumber
-						section: c section) ]].
+				" tuples at: c put: (c createIn: form) ] ].
 	form module code insertLines: aForm module code content.
 	tuples
 		keysAndValuesDo: [ :cs :ct | self infuseProperties: cs into: ct ].

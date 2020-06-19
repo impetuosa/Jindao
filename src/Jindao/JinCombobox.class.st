@@ -2005,13 +2005,6 @@ JinCombobox >> onUndo: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinCombobox >> parent [
-<getter>
-	^ (handle propertyNamed: #'Parent' ).
-
-]
-
-{ #category : #'property - generated' }
 JinCombobox >> readingOrder [
 <getter>
 	^ (handle propertyNamed: #'ReadingOrder' ).

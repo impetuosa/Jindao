@@ -88,6 +88,17 @@ JinAccessProject >> createControl: aName inForm: aJinForm type: aTypeNumber sect
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessProject >> createControl: aName inForm: aJinForm type: aTypeNumber section: aSection parent: aParentName [
+	application
+		createControl: aName
+		inForm: aJinForm
+		type: aTypeNumber
+		section: aSection
+		parent: aParentName.
+	^ aJinForm controls detect: [ :c | c name = aName ]
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessProject >> createControl: aName inReport: aJinReport type: aTypeNumber section: aSection [
 	application
 		createControl: aName

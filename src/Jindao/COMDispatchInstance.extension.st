@@ -1,5 +1,10 @@
 Extension { #name : #COMDispatchInstance }
 
+{ #category : #'*JinDao' }
+COMDispatchInstance >> asCOMHandle [
+	^ self 
+]
+
 { #category : #'*Jindao' }
 COMDispatchInstance >> asCachedHandle [
 	^ JinCachedHandle new

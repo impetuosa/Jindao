@@ -831,13 +831,6 @@ JinSubForm >> onExit: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinSubForm >> parent [
-<getter>
-	^ (handle propertyNamed: #'Parent' ).
-
-]
-
-{ #category : #'property - generated' }
 JinSubForm >> report [
 <getter>
 	^ (handle propertyNamed: #'Report' ).

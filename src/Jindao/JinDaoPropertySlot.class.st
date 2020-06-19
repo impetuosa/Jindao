@@ -12,7 +12,7 @@ Class {
 JinDaoPropertySlot >> read: anObject [
 	^ propertyType new
 		handle: (anObject handle propertyNamed: propertyName);
-		parent: anObject;
+		scopedBy: anObject;
 		yourself
 ]
 

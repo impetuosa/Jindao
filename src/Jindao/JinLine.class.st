@@ -345,13 +345,6 @@ JinLine >> oldBorderStyle: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinLine >> parent [
-<getter>
-	^ (handle propertyNamed: #'Parent' ).
-
-]
-
-{ #category : #'property - generated' }
 JinLine >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).

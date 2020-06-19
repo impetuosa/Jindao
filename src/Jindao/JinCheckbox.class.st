@@ -1073,13 +1073,6 @@ JinCheckbox >> optionValue: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinCheckbox >> parent [
-<getter>
-	^ (handle propertyNamed: #'Parent' ).
-
-]
-
-{ #category : #'property - generated' }
 JinCheckbox >> readingOrder [
 <getter>
 	^ (handle propertyNamed: #'ReadingOrder' ).

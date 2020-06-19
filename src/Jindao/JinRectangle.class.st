@@ -501,13 +501,6 @@ JinRectangle >> onMouseUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinRectangle >> parent [
-<getter>
-	^ (handle propertyNamed: #'Parent' ).
-
-]
-
-{ #category : #'property - generated' }
 JinRectangle >> section [
 <getter>
 	^ (handle propertyNamed: #'Section' ).

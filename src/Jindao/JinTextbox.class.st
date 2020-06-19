@@ -1726,13 +1726,6 @@ JinTextbox >> onUndo: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinTextbox >> parent [
-<getter>
-	^ (handle propertyNamed: #'Parent' ).
-
-]
-
-{ #category : #'property - generated' }
 JinTextbox >> postalAddress [
 <getter>
 	^ (handle propertyNamed: #'PostalAddress' ).

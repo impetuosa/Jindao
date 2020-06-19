@@ -145,6 +145,19 @@ JinAccessApplication >> createControl: aName inForm: aJinForm type: aTypeNumber 
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessApplication >> createControl: aName inForm: aJinForm type: aTypeNumber section: aSection parent: aParentName [
+	| control |
+	control := handle
+		dispatch: #CreateControl
+		withArguments:
+			{aJinForm name.
+			aTypeNumber.
+			aSection.
+			aParentName}.
+	control propertyNamed: #Name put: aName
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessApplication >> createControl: aName inReport: aJinReport type: aTypeNumber section: aSection [
 	| control |
 	control := handle

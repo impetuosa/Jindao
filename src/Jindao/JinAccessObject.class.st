@@ -24,7 +24,7 @@ JinAccessObject >> beCached [
 
 { #category : #'as yet unclassified' }
 JinAccessObject >> handle [
-	^ handle
+	^ handle asCOMHandle
 ]
 
 { #category : #accessing }
@@ -43,11 +43,6 @@ JinAccessObject >> nameWithoutSpaces [
 	^ ((self name copyReplaceAll: ' ' with: '')
 		copyReplaceAll: '/'
 		with: '') copyReplaceAll: '-' with: '_'
-]
-
-{ #category : #'as yet unclassified' }
-JinAccessObject >> parent: anUndefinedObject [ 
-
 ]
 
 { #category : #accessing }

@@ -1162,13 +1162,6 @@ JinTabControl >> pages [
 ]
 
 { #category : #'property - generated' }
-JinTabControl >> parent [
-<getter>
-	^ (handle propertyNamed: #'Parent' ).
-
-]
-
-{ #category : #'property - generated' }
 JinTabControl >> pressedColor [
 <getter>
 	^ (handle propertyNamed: #'PressedColor' ).

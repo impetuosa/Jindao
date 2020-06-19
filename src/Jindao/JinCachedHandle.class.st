@@ -8,6 +8,11 @@ Class {
 	#category : #'Jindao-Handles'
 }
 
+{ #category : #'as yet unclassified' }
+JinCachedHandle >> asCOMHandle [
+	^ handle asCOMHandle 
+]
+
 { #category : #properties }
 JinCachedHandle >> asStateTrackingHandle [
 	^ JinStateTrackingHandle new

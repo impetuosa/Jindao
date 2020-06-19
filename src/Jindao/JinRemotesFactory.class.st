@@ -5,8 +5,8 @@ Class {
 	#name : #JinRemotesFactory,
 	#superclass : #Object,
 	#instVars : [
-		'parent',
-		'defaultHierarchyClass'
+		'defaultHierarchyClass',
+		'scope'
 	],
 	#category : #'Jindao-Factories'
 }
@@ -54,10 +54,10 @@ JinRemotesFactory >> defaultHierarchyClass: aClass [
 
 { #category : #accessing }
 JinRemotesFactory >> elementFor: aControl [
-	^ (self instanceFor: aControl)
-		handle: aControl;
-		parent: parent;
-		yourself
+	| instance |
+	instance := (self instanceFor: aControl) handle: aControl.
+	scope ifNotNil: [ instance scopedBy: scope ].
+	^ instance
 ]
 
 { #category : #accessing }
@@ -65,7 +65,7 @@ JinRemotesFactory >> instanceFor: aControl [
 	^ (self classFor: aControl) new
 ]
 
-{ #category : #accessing }
-JinRemotesFactory >> parent: aParent [
-	parent := aParent 
+{ #category : #'as yet unclassified' }
+JinRemotesFactory >> scopedBy: aJinFormBody [
+	scope := aJinFormBody
 ]

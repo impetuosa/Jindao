@@ -7,8 +7,8 @@ Class {
 	#name : #JinControl,
 	#superclass : #JinAccessObject,
 	#instVars : [
-		'parent',
-		'properties'
+		'properties',
+		'scope'
 	],
 	#category : #'Jindao-FormControls'
 }
@@ -20,7 +20,7 @@ JinControl >> acceptVisitor: aVisitor [
 
 { #category : #'as yet unclassified' }
 JinControl >> containingWidget [
-	^ parent 
+	^ self parent 
 ]
 
 { #category : #'as yet unclassified' }
@@ -35,18 +35,39 @@ JinControl >> controlTypeNumber [
 ]
 
 { #category : #'as yet unclassified' }
+JinControl >> createIn: aJinForm [
+	| parentName |
+	parentName := self parentName.
+	^ parentName = aJinForm name
+		ifTrue: [ aJinForm
+				createControl: self name
+				type: self controlType
+				section: self sectionNumber ]
+		ifFalse: [ aJinForm
+				createControl: self name
+				type: self controlType
+				section: self sectionNumber
+				parent: parentName ]
+]
+
+{ #category : #'as yet unclassified' }
 JinControl >> isEmptyCell [
 	^ false 
 ]
 
 { #category : #'as yet unclassified' }
-JinControl >> jinParent [
-	^ parent 
+JinControl >> parent [
+	^ handle propertyNamed: #Parent
 ]
 
 { #category : #'as yet unclassified' }
-JinControl >> parent: aParent [ 
-	parent := aParent 
+JinControl >> parentName [
+	^ self parent propertyNamed: #Name
+]
+
+{ #category : #'as yet unclassified' }
+JinControl >> parentObject [
+	^ scope resolveObjectFor: self parent
 ]
 
 { #category : #'as yet unclassified' }
@@ -71,8 +92,11 @@ JinControl >> properties [
 { #category : #'as yet unclassified' }
 JinControl >> propertiesFactory [
 	^ JinRemotesFactory newDefaultAccessPropertyFactory
-		parent: self;
-		yourself
+]
+
+{ #category : #'as yet unclassified' }
+JinControl >> scopedBy: aFormOrReport [
+	scope := aFormOrReport
 ]
 
 { #category : #'as yet unclassified' }

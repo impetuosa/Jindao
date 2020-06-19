@@ -1528,13 +1528,6 @@ JinCommandButton >> onPush: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinCommandButton >> parent [
-<getter>
-	^ (handle propertyNamed: #'Parent' ).
-
-]
-
-{ #category : #'property - generated' }
 JinCommandButton >> picture [
 <getter>
 	^ (handle propertyNamed: #'Picture' ).

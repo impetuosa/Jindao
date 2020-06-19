@@ -1200,11 +1200,11 @@ JinVisitor >> visitPressedTint:aPressedTint [
 { #category : #'visit-first-objects' }
 JinVisitor >> visitProject: aJinAccessProject [
 	self visitCollection: aJinAccessProject references.
+	self visitCollection: aJinAccessProject forms.
 	self visitCollection: aJinAccessProject modules.
 	self visitCollection: aJinAccessProject queries.
 	self visitCollection: aJinAccessProject reports.
-	self visitCollection: aJinAccessProject tables.
-	self visitCollection: aJinAccessProject forms.
+	self visitCollection: aJinAccessProject tables
 ]
 
 { #category : #'visit-first-objects' }

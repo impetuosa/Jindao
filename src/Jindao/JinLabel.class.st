@@ -1073,13 +1073,6 @@ JinLabel >> onMouseUp: aParam1 [
 ]
 
 { #category : #'property - generated' }
-JinLabel >> parent [
-<getter>
-	^ (handle propertyNamed: #'Parent' ).
-
-]
-
-{ #category : #'property - generated' }
 JinLabel >> readingOrder [
 <getter>
 	^ (handle propertyNamed: #'ReadingOrder' ).
