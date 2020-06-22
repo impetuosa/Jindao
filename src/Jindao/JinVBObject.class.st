@@ -15,7 +15,9 @@ JinVBObject >> close [
 
 { #category : #'as yet unclassified' }
 JinVBObject >> properties [
-	^ self vbeComponent properties
+	^ self hasModule
+		ifTrue: [ self vbeComponent properties ]
+		ifFalse: [ {} ]
 ]
 
 { #category : #'as yet unclassified' }

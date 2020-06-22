@@ -39,6 +39,11 @@ JinTable >> fields [
 ]
 
 { #category : #'as yet unclassified' }
+JinTable >> indexes [
+	^ self body indexes 
+]
+
+{ #category : #'as yet unclassified' }
 JinTable >> isAttachedAndSavesPassword [
 	" dbAttachSavePWD	131072	Saves user ID and password for linked remote table."
 
@@ -101,6 +106,11 @@ JinTable >> isSystemTable [
 { #category : #accessing }
 JinTable >> privateLoadBodyObject [
 	^ (project openTable: self)
+]
+
+{ #category : #'as yet unclassified' }
+JinTable >> relations [
+	^ self body relations
 ]
 
 { #category : #'as yet unclassified' }

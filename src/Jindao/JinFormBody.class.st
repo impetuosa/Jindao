@@ -65,6 +65,19 @@ JinFormBody >> hasSection: anInteger [
 ]
 
 { #category : #'as yet unclassified' }
+JinFormBody >> height [
+	^ (handle propertyNamed: #Section withArguments: {0})
+		propertyNamed: #Height
+]
+
+{ #category : #'as yet unclassified' }
+JinFormBody >> height: anInteger [
+	^ (handle propertyNamed: #Section withArguments: {0})
+		propertyNamed: #Height
+		put: anInteger
+]
+
+{ #category : #'as yet unclassified' }
 JinFormBody >> module [
 	^ module
 		ifNil: [ module := JinSubModuleBody new
@@ -79,4 +92,14 @@ JinFormBody >> resolveObjectFor: aHandle [
 	^ self name = name
 		ifTrue: [ self ]
 		ifFalse: [ self controls detect: [ :c | c name = name ] ]
+]
+
+{ #category : #'as yet unclassified' }
+JinFormBody >> width [
+	^ handle propertyNamed:#Width
+]
+
+{ #category : #'as yet unclassified' }
+JinFormBody >> width: anInteger [ 
+	handle propertyNamed:#Width put: anInteger 
 ]

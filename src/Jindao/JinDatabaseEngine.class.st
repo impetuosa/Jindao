@@ -85,6 +85,16 @@ JinDatabaseEngine >> project: aJinAccessProject [
 ]
 
 { #category : #'as yet unclassified' }
+JinDatabaseEngine >> relations [
+	^ JinCollection newDefault
+		handle: (handle propertyNamed: #Relations)
+		factory:
+			(JinRemoteObjectOnlyGenericsFactory new
+				defaultHierarchyClass: JinAccessObject ;
+				yourself)
+]
+
+{ #category : #'as yet unclassified' }
 JinDatabaseEngine >> transformToBestFitAttirbute: anAttribute [  
 "
 dbAttachedODBC	536870912	Linked ODBC database table.

@@ -8,7 +8,3 @@ Class {
 	#superclass : #JinAccessObject,
 	#category : #'Jindao-Core'
 }
-
-{ #category : #'as yet unclassified' }
-JinBodyObject >> parent: anUndefinedObject [ 
-]

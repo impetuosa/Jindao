@@ -102,6 +102,11 @@ JinAccessApplication >> addReference: aName builtIn: isBuiltIn path: aFileRefere
 
 { #category : #'as yet unclassified' }
 JinAccessApplication >> close: aJinModelObject [
+	self close: aJinModelObject save: false
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> close: aJinModelObject save: aBool [
 	"	
 		Third parameter is about saving or not: 
 		
@@ -109,12 +114,15 @@ JinAccessApplication >> close: aJinModelObject [
 		acSavePrompt == 0
 		acSaveYes == 1
 		"
+
 	self
 		command: #Close
 		withArguments:
 			{aJinModelObject typeNumber.
 			aJinModelObject name.
-			2}
+			(aBool
+				ifTrue: [ 1 ]
+				ifFalse: [ 2 ])}
 ]
 
 { #category : #initialization }

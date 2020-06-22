@@ -27,6 +27,12 @@ JinModelObject >> close [
 	body := nil
 ]
 
+{ #category : #'as yet unclassified' }
+JinModelObject >> closeAndSave [
+	project close: self save: true.
+	body := nil
+]
+
 { #category : #accessing }
 JinModelObject >> description: aDescription [
 	description := aDescription

@@ -75,6 +75,16 @@ JinForm >> hasPageHeaderFooter [
 ]
 
 { #category : #'as yet unclassified' }
+JinForm >> height [
+	^ self body height 
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> height: anInteger [
+	self body height: anInteger
+]
+
+{ #category : #'as yet unclassified' }
 JinForm >> installHeaderFooter [
 	^ project installHeaderFooterOn: self
 ]
@@ -97,4 +107,14 @@ JinForm >> privateLoadBodyObject [
 { #category : #accessing }
 JinForm >> vbeComponentName [
 	^ 'Form_' , self name
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> width [
+	^ self body width
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> width: anInteger [
+	self body width: anInteger
 ]

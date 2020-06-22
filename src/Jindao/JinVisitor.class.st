@@ -1200,11 +1200,14 @@ JinVisitor >> visitPressedTint:aPressedTint [
 { #category : #'visit-first-objects' }
 JinVisitor >> visitProject: aJinAccessProject [
 	self visitCollection: aJinAccessProject references.
-	self visitCollection: aJinAccessProject forms.
-	self visitCollection: aJinAccessProject modules.
+	self visitCollection: aJinAccessProject tables.
+	self visitCollection: aJinAccessProject relations.
 	self visitCollection: aJinAccessProject queries.
+	self visitCollection: aJinAccessProject modules.
 	self visitCollection: aJinAccessProject reports.
-	self visitCollection: aJinAccessProject tables
+	self visitCollection: aJinAccessProject forms.
+"	self visitCollection: aJinAccessProject macros."
+	
 ]
 
 { #category : #'visit-first-objects' }
@@ -1443,8 +1446,9 @@ JinVisitor >> visitTabStop:aTabStop [
 ]
 
 { #category : #'visit-first-objects' }
-JinVisitor >> visitTable: aJinTable [ 
-	
+JinVisitor >> visitTable: aJinTable [
+	self visitCollection: aJinTable indexes.
+
 ]
 
 { #category : #'visit-control-properties' }

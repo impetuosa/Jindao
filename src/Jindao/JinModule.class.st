@@ -20,6 +20,11 @@ JinModule >> code [
 ]
 
 { #category : #'as yet unclassified' }
+JinModule >> deleteLine: aNumber [
+	^ self code deleteLine: aNumber
+]
+
+{ #category : #'as yet unclassified' }
 JinModule >> export [
 	^ self vbeComponent export
 ]

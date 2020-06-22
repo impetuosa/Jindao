@@ -80,6 +80,8 @@ FuReplicant >> replicate [
 FuReplicant >> replicateForm: aForm [
 	| form tuples |
 	form := target createFormNamed: aForm name.
+	aForm hasModule
+		ifTrue: [ self replicateModuleForm: aForm module into: form ].
 	aForm hasHeaderFooter
 		ifTrue: [ form installHeaderFooter ].
 	aForm hasPageHeaderFooter
@@ -97,6 +99,7 @@ FuReplicant >> replicateForm: aForm [
 	tuples
 		keysAndValuesDo: [ :cs :ct | self infuseProperties: cs into: ct ].
 	self infuseProperties: aForm into: form.
+	self halt. 
 	form save.
 	form close.
 	^ form
@@ -126,6 +129,15 @@ FuReplicant >> replicateModule: aJinModule [
 ]
 
 { #category : #'as yet unclassified' }
+FuReplicant >> replicateModuleForm: aModuleForm into: form [
+	| content |
+	content := aModuleForm code content.
+	content lines size > 1
+		ifTrue: [ form module code deleteLine: 1.
+			form module code insertLines: content ]
+]
+
+{ #category : #'as yet unclassified' }
 FuReplicant >> replicateQuery: aJinQuery [ 
 	target database createQueryDefNamed: aJinQuery name sql: aJinQuery sql. 
 	target application refreshDatabaseWindow
@@ -135,6 +147,8 @@ FuReplicant >> replicateQuery: aJinQuery [
 FuReplicant >> replicateReport: aJinReport [
 	| report tuples |
 	report := target createReportNamed: aJinReport name.
+	aJinReport hasModule
+		ifTrue: [ self replicateModuleForm: aJinReport module into: report ].
 	aJinReport groupLevels
 		do: [ :g | self replicateGroupLevel: g into: report ].
 	aJinReport hasHeaderFooter
@@ -145,21 +159,22 @@ FuReplicant >> replicateReport: aJinReport [
 	tuples := Dictionary new.
 	aJinReport controls
 		do: [ :c | 
-			c isEmptyCell ifFalse: [
-"				https://docs.microsoft.com/en-us/office/vba/api/Access.EmptyCell
+			c isEmptyCell
+				ifFalse:
+					[ "				https://docs.microsoft.com/en-us/office/vba/api/Access.EmptyCell
 				An EmptyCell object is created when a control layout contains an empty cell. You cannot explicitly create or delete an EmptyCell object.
 				"
-			tuples
-				at: c
-				put:
-					(report
-						createControl: c name
-						type: c controlTypeNumber
-						section: c section) ]].
-	report module code insertLines: aJinReport module code content.
+					tuples
+						at: c
+						put:
+							(report
+								createControl: c name
+								type: c controlTypeNumber
+								section: c section) ] ].
 	tuples
 		keysAndValuesDo: [ :cs :ct | self infuseProperties: cs into: ct ].
 	self infuseProperties: aJinReport into: report.
+	self halt.
 	report save.
 	report close.
 	^ report
@@ -167,14 +182,15 @@ FuReplicant >> replicateReport: aJinReport [
 
 { #category : #'as yet unclassified' }
 FuReplicant >> replicateTable: aJinTable [
-	| table |
-	table := aJinTable isLocal
-		ifTrue: [ target database
+	aJinTable isLocal
+		ifTrue: [ | table |
+			table := target database
 				createTableNamed: aJinTable name
 				fields: aJinTable fields
 				attributes: aJinTable attributes
 				sourceTableName: aJinTable sourceTableName
-				connect: aJinTable connect ]
+				connect: aJinTable connect.
+			table contents: aJinTable contents ]
 		ifFalse: [ target database
 				createRemoteTableNamed: aJinTable name
 				fields: aJinTable fields
@@ -201,23 +217,8 @@ FuReplicant >> target: aJinAccessProject [
 
 { #category : #'as yet unclassified' }
 FuReplicant >> visitForm: aForm [
-	self
-		push: (self replicateForm: aForm)
-		during: [ super visitForm: aForm.
-			stack top ensureUnload ].
+	self replicateForm: aForm.
 	aForm ensureUnload
-]
-
-{ #category : #'as yet unclassified' }
-FuReplicant >> visitFormControl: aControl [
-	self replicateControl: aControl
-]
-
-{ #category : #'as yet unclassified' }
-FuReplicant >> visitFormModule: aModule [
-	self
-		push: (self replicateModuleForm: aModule)
-		during: [ super visitFormModule: aModule ]
 ]
 
 { #category : #'as yet unclassified' }

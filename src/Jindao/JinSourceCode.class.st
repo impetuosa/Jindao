@@ -35,12 +35,26 @@ JinSourceCode >> contents [
 ]
 
 { #category : #'as yet unclassified' }
+JinSourceCode >> contentsFrom: from [ 
+	^ self contentsFrom: from to: self amountOfLines 
+]
+
+{ #category : #'as yet unclassified' }
 JinSourceCode >> contentsFrom: from to: to [
 	^ handle
 		propertyNamed: #Lines
 		withArguments:
 			{from.
 			to}
+]
+
+{ #category : #'as yet unclassified' }
+JinSourceCode >> deleteLine: aNumber [
+	handle
+		dispatch: #DeleteLines
+		withArguments:
+			{aNumber.
+			1}
 ]
 
 { #category : #'as yet unclassified' }

@@ -29,6 +29,21 @@ JinTableBody >> fields [
 ]
 
 { #category : #'as yet unclassified' }
+JinTableBody >> indexes [
+	^ JinCollection newDefault
+		handle: (handle propertyNamed: #Indexes)
+		factory:
+			(JinRemoteObjectOnlyGenericsFactory new
+				defaultHierarchyClass: JinIndexBody;
+				yourself)
+]
+
+{ #category : #'as yet unclassified' }
+JinTableBody >> relations [
+	self shouldBeImplemented.
+]
+
+{ #category : #'as yet unclassified' }
 JinTableBody >> sourceTableName [
 	^ handle propertyNamed: #SourceTableName 
 ]

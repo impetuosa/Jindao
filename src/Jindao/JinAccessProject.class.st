@@ -78,6 +78,11 @@ JinAccessProject >> close: aJinForm [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessProject >> close: aJinForm save: aBool [
+	application close: aJinForm save: aBool
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessProject >> createControl: aName inForm: aJinForm type: aTypeNumber section: aSection [
 	application
 		createControl: aName
