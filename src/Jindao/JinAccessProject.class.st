@@ -114,6 +114,16 @@ JinAccessProject >> createControl: aName inReport: aJinReport type: aTypeNumber 
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessProject >> createForm [
+	| formHandle |
+	formHandle := application createForm.
+	^ (self forms
+		detect: [ :r | r name = (formHandle propertyNamed: #Name) ])
+		body: formHandle;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessProject >> createFormNamed: aString [
 	application createFormNamed: aString.
 	^ (self forms detect: [ :r | r name = aString ])
@@ -148,7 +158,6 @@ JinAccessProject >> createModule: aKind named: aName properties: aCollection [
 			f delete.
 			module := self modules detect: [ :m | m name = aName ].
 			module save.
-			application refreshDatabaseWindow.
 			^ module ]
 ]
 
@@ -159,8 +168,17 @@ JinAccessProject >> createModuleNamed: aName fromFile: aFileReference [
 		ifFound: [ :m | m ]
 		ifNone: [ self vbeProject import: aFileReference.
 			application saveModuleNamed: aName.
-			application refreshDatabaseWindow.
 			^ self modules detect: [ :m | m name = aName ] ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> createReport [
+	| createReport |
+	createReport := application createReport.
+	^ (self reports
+		detect: [ :r | r name = (createReport propertyNamed: #Name) ])
+		body: createReport;
+		yourself
 ]
 
 { #category : #'as yet unclassified' }
@@ -302,7 +320,8 @@ JinAccessProject >> newForm [
 
 { #category : #'form-api' }
 JinAccessProject >> openForm: aJinForm [
-	^ application openForm: aJinForm
+	^ application openForm: aJinForm.
+
 ]
 
 { #category : #'module-api' }
@@ -350,6 +369,11 @@ JinAccessProject >> relations [
 				defaultHierarchyClass: JinTableRelation;
 				scopedBy: self;
 				yourself)
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> rename: anObject with: aName [
+	^ application rename: anObject with: aName
 ]
 
 { #category : #'report-api' }

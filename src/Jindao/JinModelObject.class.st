@@ -22,6 +22,11 @@ JinModelObject >> body [
 ]
 
 { #category : #'as yet unclassified' }
+JinModelObject >> body: aCOMDispatchInstance [ 
+	body := aCOMDispatchInstance
+]
+
+{ #category : #'as yet unclassified' }
 JinModelObject >> close [
 	project close: self.
 	body := nil
@@ -80,6 +85,11 @@ JinModelObject >> privateLoadBodyObject [
 { #category : #accessing }
 JinModelObject >> project: aJinAccessProject [ 
 	project := aJinAccessProject
+]
+
+{ #category : #'as yet unclassified' }
+JinModelObject >> rename: aName [
+	project rename: self with: aName
 ]
 
 { #category : #accessing }

@@ -354,7 +354,14 @@ JinTabControl >> controlType: aParam1 [
 
 { #category : #'property - generated' }
 JinTabControl >> createIn: aForm [
-self halt. 
+	super createIn: aForm.
+	
+"	| control pages |
+	control := super createIn: aForm.
+	pages := control pages.
+	(pages propertyNamed: #Count)
+		timesRepeat: [ pages dispatch: #Remove ].
+	^ control"
 ]
 
 { #category : #'property - generated' }

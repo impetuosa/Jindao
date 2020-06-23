@@ -177,11 +177,23 @@ JinAccessApplication >> createControl: aName inReport: aJinReport type: aTypeNum
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessApplication >> createForm [
+	| form defaultName |
+	form := handle dispatch: #CreateForm.
+	defaultName := form propertyNamed: #Name.
+	self
+		command: #Save
+		withArguments:
+			{JinForm typeNumber.
+			defaultName}.
+	^ form
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessApplication >> createFormNamed: aString [
 	| form defaultName |
 	form := handle dispatch: #CreateForm.
 	defaultName := form propertyNamed: #Name.
-	self refreshDatabaseWindow.
 	self
 		command: #Close
 		withArguments:
@@ -248,11 +260,23 @@ JinAccessApplication >> createNewProject: aFileReference [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessApplication >> createReport [
+	| report defaultName |
+	report := handle dispatch: #CreateReport.
+	defaultName := report propertyNamed: #Name.
+	self
+		command: #Save
+		withArguments:
+			{JinReport typeNumber.
+			defaultName}.
+	^ report
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessApplication >> createReportNamed: aString [
 	| report defaultName |
 	report := handle dispatch: #CreateReport.
 	defaultName := (report propertyNamed: #Name).
-	self refreshDatabaseWindow.
 
 	self
 		command: #Close
@@ -341,9 +365,19 @@ JinAccessApplication >> open: aFileReference [
 ]
 
 { #category : #'form-api' }
-JinAccessApplication >> openForm: aJinForm [ 
-	self command: #OpenForm withArguments: {aJinForm name . 1}.
-	^ self openedFormsHandles detect: [ :m | m name = aJinForm name ]
+JinAccessApplication >> openForm: aJinForm [
+	[ self
+		command: #OpenForm
+		withArguments:
+			{aJinForm name.
+			1}.
+	^ self openedFormsHandles detect: [ :m | m name = aJinForm name ] ]
+		on: Win32Error
+		do: [ :e | 
+			e passIfNotError0x80020009.
+			[ ^ self activeForm ]
+				on: Win32Error
+				do: [ :e2 | e pass ] ]
 ]
 
 { #category : #'module-api' }
@@ -432,6 +466,11 @@ JinAccessApplication >> openedTableHandles [
 				yourself)
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> quit [ 
+	handle dispatch:#Quit
+]
+
 { #category : #accessing }
 JinAccessApplication >> references [
 	^ references
@@ -446,6 +485,16 @@ JinAccessApplication >> references [
 { #category : #'as yet unclassified' }
 JinAccessApplication >> refreshDatabaseWindow [
 	handle dispatch: #RefreshDatabaseWindow
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> rename: anObject with: aName [
+	self
+		command: #Rename
+		withArguments:
+			{aName.
+			anObject typeNumber.
+			anObject name}
 ]
 
 { #category : #'as yet unclassified' }

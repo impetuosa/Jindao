@@ -58,14 +58,15 @@ FuReplicant >> infuseProperties: aJinObjectSource into: aJinObjectTarget [
 	table := Dictionary new.
 	aJinObjectSource properties
 		do: [ :p | 
-			| value |
-			value := [ p value ]
+			| name value |
+			[ name := p name.
+			value := p value ]
 				on: Error
 				do: [ :e | 
 					((e isKindOf: KeyNotFound) or: [ e isError0x80020009 ])
-						ifTrue: [ nil ]
+						ifTrue: [ value := nil ]
 						ifFalse: [ e signal ] ].
-			table at: p name put: value ].
+			name ifNotNil: [ table at: name put: value ] ].
 	aJinObjectTarget properties
 		collect: [ :p | 
 			[ (table at: p name) ifNotNil: [ :v | p value: v ] ]
@@ -95,7 +96,7 @@ FuReplicant >> replicate [
 { #category : #'as yet unclassified' }
 FuReplicant >> replicateForm: aForm [
 	| form tuples |
-	form := target createFormNamed: aForm name.
+	form := target createForm.
 	self replicateModuleForm: aForm module into: form.
 	aForm hasHeaderFooter
 		ifTrue: [ form installHeaderFooter ].
@@ -117,6 +118,7 @@ FuReplicant >> replicateForm: aForm [
 	self infuseProperties: aForm into: form.
 	form save.
 	form close.
+	form rename: aForm name.
 	^ form
 ]
 
@@ -160,7 +162,6 @@ FuReplicant >> replicateModuleForm: aModuleForm into: form [
 { #category : #'as yet unclassified' }
 FuReplicant >> replicateQuery: aJinQuery [ 
 	target database createQueryDefNamed: aJinQuery name sql: aJinQuery sql. 
-	target application refreshDatabaseWindow
 ]
 
 { #category : #'as yet unclassified' }
@@ -171,7 +172,7 @@ FuReplicant >> replicateRelations [
 { #category : #'as yet unclassified' }
 FuReplicant >> replicateReport: aJinReport [
 	| report tuples |
-	report := target createReportNamed: aJinReport name.
+	report := target createReport.
 	self replicateModuleForm: aJinReport module into: report.
 	aJinReport groupLevels
 		do: [ :g | self replicateGroupLevel: g into: report ].
@@ -201,6 +202,7 @@ FuReplicant >> replicateReport: aJinReport [
 	self infuseProperties: aJinReport into: report.
 	report save.
 	report close.
+	report rename: aJinReport name.
 	^ report
 ]
 
@@ -291,7 +293,6 @@ FuReplicant >> visitReference: aReference [
 { #category : #'as yet unclassified' }
 FuReplicant >> visitReport: aModelObject [
 	self replicateReport: aModelObject.
-	target application refreshDatabaseWindow 
 ]
 
 { #category : #'as yet unclassified' }
