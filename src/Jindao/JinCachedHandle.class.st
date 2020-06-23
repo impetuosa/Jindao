@@ -23,11 +23,11 @@ JinCachedHandle >> asStateTrackingHandle [
 
 { #category : #properties }
 JinCachedHandle >> dispatch: aFunctionName withArguments: arguments [
-	^ self privateMethodsCache
+	^ super dispatch: aFunctionName withArguments: arguments "self privateMethodsCache
 		at:
 			{aFunctionName.
 			arguments}
-		ifAbsentPut: [ super dispatch: aFunctionName withArguments: arguments ]
+		ifAbsentPut: [ super dispatch: aFunctionName withArguments: arguments ]"
 ]
 
 { #category : #properties }

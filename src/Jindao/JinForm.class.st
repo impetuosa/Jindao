@@ -70,6 +70,11 @@ JinForm >> hasModule [
 ]
 
 { #category : #'as yet unclassified' }
+JinForm >> hasModule: aValue [
+	^ self body hasModule: aValue
+]
+
+{ #category : #'as yet unclassified' }
 JinForm >> hasPageHeaderFooter [
 	^ self body hasPageHeaderFooter
 ]

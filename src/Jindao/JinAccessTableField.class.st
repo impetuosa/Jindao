@@ -59,11 +59,6 @@ JinAccessTableField >> printOn: aStream [
 ]
 
 { #category : #'as yet unclassified' }
-JinAccessTableField >> project: anUndefinedObject [ 
-
-]
-
-{ #category : #'as yet unclassified' }
 JinAccessTableField >> properties [
 	^ properties
 		ifNil: [ 

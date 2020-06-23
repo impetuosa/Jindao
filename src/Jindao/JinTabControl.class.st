@@ -353,6 +353,11 @@ JinTabControl >> controlType: aParam1 [
 ]
 
 { #category : #'property - generated' }
+JinTabControl >> createIn: aForm [
+self halt. 
+]
+
+{ #category : #'property - generated' }
 JinTabControl >> displayWhen [
 <getter>
 	^ (handle propertyNamed: #'DisplayWhen' ).

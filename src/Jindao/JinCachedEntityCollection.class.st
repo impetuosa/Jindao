@@ -11,6 +11,6 @@ JinCachedEntityCollection >> at: anIndex [
 				at: anIndex
 				put:
 					(factory
-						elementFor: (handle propertyNamed: 'Item' withArguments: {(anIndex - 1)})) ].
+						elementFor: (handle propertyNamed: 'Item' withArguments: {(anIndex - base)})) ].
 	^ self collection at: anIndex
 ]

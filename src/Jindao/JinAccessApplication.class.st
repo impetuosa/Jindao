@@ -371,13 +371,13 @@ JinAccessApplication >> openReport: aJinReport [
 
 { #category : #'table-api' }
 JinAccessApplication >> openTable: aJinTable [
-	| wsp |
-	wsp := self workspace.
+	"
 	self
 		command: #OpenTable
 		withArguments:
 			{aJinTable name.
-			1}.
+			1}."
+
 	^ self openedTableHandles detect: [ :m | m name = aJinTable name ]
 ]
 

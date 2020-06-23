@@ -341,6 +341,17 @@ JinAccessProject >> references [
 	^ application references
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessProject >> relations [
+	^ JinCollection newDefault
+		handle: (application database propertyNamed: #Relations)
+		factory:
+			(JinRemoteObjectOnlyGenericsFactory new
+				defaultHierarchyClass: JinTableRelation;
+				scopedBy: self;
+				yourself)
+]
+
 { #category : #'report-api' }
 JinAccessProject >> reports [
 	^ JinCollection newDefault

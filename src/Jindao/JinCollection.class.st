@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'handle',
-		'factory'
+		'factory',
+		'base'
 	],
 	#category : #'Jindao-RemoteCollections'
 }
@@ -20,7 +21,12 @@ JinCollection class >> newDefaultForMethod [
 
 { #category : #'as yet unclassified' }
 JinCollection >> at: anIndex [
-	^ factory elementFor: (handle propertyNamed: 'Item' withArguments: {(anIndex - 1)})
+	^ factory elementFor: (handle propertyNamed: 'Item' withArguments: {(anIndex  - base )})
+]
+
+{ #category : #'as yet unclassified' }
+JinCollection >> base: aBase [
+	base := aBase
 ]
 
 { #category : #'as yet unclassified' }
@@ -112,6 +118,12 @@ JinCollection >> handle: aHandle [
 JinCollection >> handle: aCOMDispatchInstance factory: anInstanceFactory [
 	handle := aCOMDispatchInstance.
 	factory := anInstanceFactory
+]
+
+{ #category : #'as yet unclassified' }
+JinCollection >> initialize [
+	super initialize.
+	base := 1
 ]
 
 { #category : #'as yet unclassified' }

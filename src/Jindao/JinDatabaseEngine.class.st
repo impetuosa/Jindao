@@ -14,6 +14,25 @@ JinDatabaseEngine >> createQueryDefNamed: aName sql: aSql [
 ]
 
 { #category : #'as yet unclassified' }
+JinDatabaseEngine >> createRelation: aJinTableRelation [
+	| relation |
+	relation := handle
+		dispatch: #CreateRelation
+		withArguments:
+			{aJinTableRelation name.
+			aJinTableRelation tableName.
+			aJinTableRelation foreignTableName}.
+	relation := JinTableRelation new
+		scopedBy: project;
+		handle: relation.
+	aJinTableRelation fields
+		do: [ :f | relation createField: f sourceName to: f foreignName ].
+	(handle propertyNamed: #Relations)
+		dispatch: #Append
+		withArguments: {relation handle}
+]
+
+{ #category : #'as yet unclassified' }
 JinDatabaseEngine >> createRemoteTableNamed: aName fields: fields attributes: anAttributeNumber sourceTableName: anOtherName connect: aConnectionString [
 	| def fieldsProperty |
 	" For understanding this magic numbers, go to JinTable isAttachedODBC and others ."

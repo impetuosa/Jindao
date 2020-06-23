@@ -29,6 +29,22 @@ FuReplicant class >> replicate: aJinAccessProject into: aJinAccessProject2 [
 ]
 
 { #category : #'as yet unclassified' }
+FuReplicant class >> replicateForms: source into: target [ 
+	^ self new
+		source: source;
+		target: target;
+		replicateForms
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant class >> replicateRelations: source into: target [ 
+	^ self new
+		source: source;
+		target: target;
+		replicateRelations
+]
+
+{ #category : #'as yet unclassified' }
 FuReplicant class >> replicateTables: source into: target [
 	^ self new
 		source: source;
@@ -80,13 +96,13 @@ FuReplicant >> replicate [
 FuReplicant >> replicateForm: aForm [
 	| form tuples |
 	form := target createFormNamed: aForm name.
-	aForm hasModule
-		ifTrue: [ self replicateModuleForm: aForm module into: form ].
+	self replicateModuleForm: aForm module into: form.
 	aForm hasHeaderFooter
 		ifTrue: [ form installHeaderFooter ].
 	aForm hasPageHeaderFooter
 		ifTrue: [ form installPageHeaderFooter ]
 		ifFalse: [ form ensureItHasNonPageHeaderFooter ].
+	self infuseProperties: aForm into: form.
 	tuples := Dictionary new.
 	aForm controls
 		do: [ :c | 
@@ -99,10 +115,14 @@ FuReplicant >> replicateForm: aForm [
 	tuples
 		keysAndValuesDo: [ :cs :ct | self infuseProperties: cs into: ct ].
 	self infuseProperties: aForm into: form.
-	self halt. 
 	form save.
 	form close.
 	^ form
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> replicateForms [
+	self visitCollection: source forms
 ]
 
 { #category : #'as yet unclassified' }
@@ -144,11 +164,15 @@ FuReplicant >> replicateQuery: aJinQuery [
 ]
 
 { #category : #'as yet unclassified' }
+FuReplicant >> replicateRelations [
+	self visitCollection: source relations
+]
+
+{ #category : #'as yet unclassified' }
 FuReplicant >> replicateReport: aJinReport [
 	| report tuples |
 	report := target createReportNamed: aJinReport name.
-	aJinReport hasModule
-		ifTrue: [ self replicateModuleForm: aJinReport module into: report ].
+	self replicateModuleForm: aJinReport module into: report.
 	aJinReport groupLevels
 		do: [ :g | self replicateGroupLevel: g into: report ].
 	aJinReport hasHeaderFooter
@@ -156,6 +180,7 @@ FuReplicant >> replicateReport: aJinReport [
 	aJinReport hasPageHeaderFooter
 		ifTrue: [ report installPageHeaderFooter ]
 		ifFalse: [ report ensureItHasNonPageHeaderFooter ].
+	self infuseProperties: aJinReport into: report.
 	tuples := Dictionary new.
 	aJinReport controls
 		do: [ :c | 
@@ -174,7 +199,6 @@ FuReplicant >> replicateReport: aJinReport [
 	tuples
 		keysAndValuesDo: [ :cs :ct | self infuseProperties: cs into: ct ].
 	self infuseProperties: aJinReport into: report.
-	self halt.
 	report save.
 	report close.
 	^ report
@@ -183,21 +207,19 @@ FuReplicant >> replicateReport: aJinReport [
 { #category : #'as yet unclassified' }
 FuReplicant >> replicateTable: aJinTable [
 	aJinTable isLocal
-		ifTrue: [ | table |
-			table := target database
+		ifTrue: [ target database
 				createTableNamed: aJinTable name
 				fields: aJinTable fields
 				attributes: aJinTable attributes
 				sourceTableName: aJinTable sourceTableName
-				connect: aJinTable connect.
-			table contents: aJinTable contents ]
+				connect: aJinTable connect ]
 		ifFalse: [ target database
 				createRemoteTableNamed: aJinTable name
 				fields: aJinTable fields
 				attributes: aJinTable attributes
 				sourceTableName: aJinTable sourceTableName
 				connect: aJinTable connect ].
-	^ target
+	^ target tables detect: [ :t | t name = aJinTable name ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -222,6 +244,19 @@ FuReplicant >> visitForm: aForm [
 ]
 
 { #category : #'as yet unclassified' }
+FuReplicant >> visitIndex: aJinIndex [
+	| index |
+	aJinIndex isForeign
+		ifFalse: [ index := stack top createIndex: aJinIndex name.
+			aJinIndex fields do: [ :f | index createField: f name  ].
+			index clustered: aJinIndex clustered.
+			index ignoreNulls: aJinIndex ignoreNulls.
+			index primaryKey: aJinIndex primaryKey.
+			index unique: aJinIndex unique.
+			stack top registerIndex: index ]
+]
+
+{ #category : #'as yet unclassified' }
 FuReplicant >> visitMacro: aModelObject [
 	self
 		push: (self replicateMacro: aModelObject)
@@ -230,14 +265,16 @@ FuReplicant >> visitMacro: aModelObject [
 
 { #category : #'as yet unclassified' }
 FuReplicant >> visitModule: aModule [
-	self replicateModule: aModule
+	self replicateModule: aModule.
+	aModule ensureUnload
 ]
 
 { #category : #'as yet unclassified' }
 FuReplicant >> visitQuery: anObject [
 	self
 		push: (self replicateQuery: anObject)
-		during: [ super visitQuery: anObject ]
+		during: [ super visitQuery: anObject ].
+	anObject ensureUnload
 ]
 
 { #category : #'as yet unclassified' }
@@ -266,4 +303,12 @@ FuReplicant >> visitTable: anObject [
 		ifNone: [ self
 				push: (self replicateTable: anObject)
 				during: [ super visitTable: anObject ] ]
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> visitTableRelation: aJinTableRelation [
+	(aJinTableRelation isReflexiveRelation
+		or: [ aJinTableRelation table isSystemTable ])
+		ifTrue: [ ^ self ].
+	target database createRelation: aJinTableRelation
 ]

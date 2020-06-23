@@ -18,6 +18,20 @@ JinTableBody >> connect [
 ]
 
 { #category : #'as yet unclassified' }
+JinTableBody >> contents [
+	self shouldBeImplemented.
+]
+
+{ #category : #'as yet unclassified' }
+JinTableBody >> createIndex: aString [
+	| r |
+	r := handle dispatch: #CreateIndex withArguments: {aString}.
+	^ JinIndexBody new
+		handle: r;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
 JinTableBody >> fields [
 	^ JinCollection newDefault
 		handle: (handle propertyNamed: #Fields)
@@ -36,6 +50,14 @@ JinTableBody >> indexes [
 			(JinRemoteObjectOnlyGenericsFactory new
 				defaultHierarchyClass: JinIndexBody;
 				yourself)
+]
+
+{ #category : #'as yet unclassified' }
+JinTableBody >> registerIndex: aJinIndexBody [
+	(handle propertyNamed: #Indexes)
+		dispatch: #Append
+		withArguments: {aJinIndexBody handle}.
+	(handle propertyNamed: #Indexes) dispatch: #Refresh
 ]
 
 { #category : #'as yet unclassified' }

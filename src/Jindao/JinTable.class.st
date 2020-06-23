@@ -34,6 +34,16 @@ JinTable >> connect [
 ]
 
 { #category : #'as yet unclassified' }
+JinTable >> contents [
+	^ self body contents
+]
+
+{ #category : #'as yet unclassified' }
+JinTable >> createIndex: aString [
+	^ self body createIndex: aString
+]
+
+{ #category : #'as yet unclassified' }
 JinTable >> fields [
 	^ self body fields 
 ]
@@ -106,6 +116,12 @@ JinTable >> isSystemTable [
 { #category : #accessing }
 JinTable >> privateLoadBodyObject [
 	^ (project openTable: self)
+]
+
+{ #category : #'as yet unclassified' }
+JinTable >> registerIndex: aJinIndexBody [
+	self close.
+	self body registerIndex: aJinIndexBody
 ]
 
 { #category : #'as yet unclassified' }

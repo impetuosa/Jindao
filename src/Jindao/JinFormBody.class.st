@@ -46,6 +46,11 @@ JinFormBody >> hasModule [
 ]
 
 { #category : #'as yet unclassified' }
+JinFormBody >> hasModule: aValue [
+	^ handle propertyNamed: #HasModule put: aValue
+]
+
+{ #category : #'as yet unclassified' }
 JinFormBody >> hasPageHeaderFooter [
 	"3 	acPageHeader 	Form page header section
 4 	acPageFooter 	Form page footer section"

@@ -709,6 +709,11 @@ JinVisitor >> visitInSelection:aInSelection [
 
 ]
 
+{ #category : #'as yet unclassified' }
+JinVisitor >> visitIndex: aJinIndexBody [
+	self subclassResponsibility
+]
+
 { #category : #'visit-control-properties' }
 JinVisitor >> visitInheritValueList:aInheritValueList [
 	^ self visitAccessProperty: aInheritValueList. 
@@ -1201,13 +1206,12 @@ JinVisitor >> visitPressedTint:aPressedTint [
 JinVisitor >> visitProject: aJinAccessProject [
 	self visitCollection: aJinAccessProject references.
 	self visitCollection: aJinAccessProject tables.
-	self visitCollection: aJinAccessProject relations.
 	self visitCollection: aJinAccessProject queries.
 	self visitCollection: aJinAccessProject modules.
 	self visitCollection: aJinAccessProject reports.
 	self visitCollection: aJinAccessProject forms.
-"	self visitCollection: aJinAccessProject macros."
-	
+	self visitCollection: aJinAccessProject relations
+	"	self visitCollection: aJinAccessProject macros."
 ]
 
 { #category : #'visit-first-objects' }
@@ -1449,6 +1453,11 @@ JinVisitor >> visitTabStop:aTabStop [
 JinVisitor >> visitTable: aJinTable [
 	self visitCollection: aJinTable indexes.
 
+]
+
+{ #category : #'as yet unclassified' }
+JinVisitor >> visitTableRelation: aJinTableRelation [
+	self subclassResponsibility
 ]
 
 { #category : #'visit-control-properties' }
