@@ -77,6 +77,38 @@ JinLine class >> mappedTypeName [
 ]
 
 { #category : #generated }
+JinLine class >> propertiesToInfuse [
+	^ #(
+    BorderColor
+    BorderShade
+    BorderStyle
+    BorderThemeColorIndex
+    BorderTint
+    BorderWidth
+    ControlType
+    DisplayWhen
+    EventProcPrefix
+    Height
+    HorizontalAnchor
+    InSelection
+    IsVisible
+    Left
+    LineSlant
+    Name
+    OldBorderStyle
+    Parent
+    Properties
+    Section
+    SpecialEffect
+    Tag
+    Top
+    VerticalAnchor
+    Visible
+    Width
+)
+]
+
+{ #category : #generated }
 JinLine >> acceptVisitor: aVisitor [
 	^ aVisitor visitLine: self
 ]

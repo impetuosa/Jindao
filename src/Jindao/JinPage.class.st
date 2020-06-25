@@ -109,6 +109,40 @@ JinPage class >> mappedTypeName [
 	^#'_Page'
 ]
 
+{ #category : #accessing }
+JinPage class >> propertiesToInfuse [
+	^ #(Caption
+Controls
+ControlTipText
+ControlType
+Enabled
+EventProcPrefix
+Height
+HelpContextId
+InSelection
+IsVisible
+Left
+Name
+OnClick
+OnDblClick
+OnMouseDown
+OnMouseMove
+OnMouseUp
+PageIndex
+Parent
+Picture
+PictureData
+PictureType
+Properties
+Section
+ShortcutMenuBar
+StatusBarText
+Tag
+Top
+Visible
+Width)
+]
+
 { #category : #generated }
 JinPage >> acceptVisitor: aVisitor [
 	^ aVisitor visitPage: self

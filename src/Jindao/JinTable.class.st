@@ -119,6 +119,14 @@ JinTable >> privateLoadBodyObject [
 ]
 
 { #category : #'as yet unclassified' }
+JinTable >> recordset [
+	self assert: self isLocal.
+	^ self body recordset
+		table: self;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
 JinTable >> registerIndex: aJinIndexBody [
 	self close.
 	self body registerIndex: aJinIndexBody

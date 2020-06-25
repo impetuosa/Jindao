@@ -856,6 +856,11 @@ JinVisitor >> visitLocked:aLocked [
 ]
 
 { #category : #'visit-first-objects' }
+JinVisitor >> visitMacro: aMacro [
+	self subclassResponsibility
+]
+
+{ #category : #'visit-first-objects' }
 JinVisitor >> visitModule: aJinModule [ 
 	aJinModule code acceptVisitor: self.
 	

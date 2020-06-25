@@ -125,6 +125,26 @@ JinAccessApplication >> close: aJinModelObject save: aBool [
 				ifFalse: [ 2 ])}
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> close: aName type: aTypeNumber save: aBool [
+	"	
+		Third parameter is about saving or not: 
+		
+		acSaveNo  == 2 
+		acSavePrompt == 0
+		acSaveYes == 1
+		"
+
+	self
+		command: #Close
+		withArguments:
+			{aTypeNumber.
+			aName.
+			(aBool
+				ifTrue: [ 1 ]
+				ifFalse: [ 2 ])}
+]
+
 { #category : #initialization }
 JinAccessApplication >> closeProject: aProject [
 	self handle dispatch: 'CloseCurrentDatabase' withArguments: {}
@@ -138,6 +158,13 @@ JinAccessApplication >> command [
 { #category : #convenience }
 JinAccessApplication >> command: aString withArguments: aCollection [ 
 	^ self command dispatch: aString withArguments: aCollection 
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> compileAll [
+	"acCmdCompileAllModules 	125"
+
+	self command: #RunCommand withArguments: {125}
 ]
 
 { #category : #'as yet unclassified' }
@@ -179,6 +206,7 @@ JinAccessApplication >> createControl: aName inReport: aJinReport type: aTypeNum
 { #category : #'as yet unclassified' }
 JinAccessApplication >> createForm [
 	| form defaultName |
+	self ensureNonOtherFormtIsOpen.
 	form := handle dispatch: #CreateForm.
 	defaultName := form propertyNamed: #Name.
 	self
@@ -248,21 +276,24 @@ JinAccessApplication >> createModule: aKind named: aName properties: aCollection
 
 { #category : #'as yet unclassified' }
 JinAccessApplication >> createNewProject: aFileReference [
-	| newProject | 
-	newProject := self handle
+	self handle
 		dispatch: 'NewCurrentDatabase'
 		withArguments: {aFileReference fullName}.
 	^ JinAccessProject new
 		handle: (handle propertyNamed: 'CurrentProject')
 			dataHandle: (handle propertyNamed: #CurrentData)
 			application: self;
+		projectPath: aFileReference;
 		yourself
 ]
 
 { #category : #'as yet unclassified' }
 JinAccessApplication >> createReport [
 	| report defaultName |
-	report := handle dispatch: #CreateReport.
+	self ensureNonOtherReportIsOpen.
+	[ report := handle dispatch: #CreateReport ]
+		on: Win32Error
+		do: [ :e | report := handle dispatch: #CreateReport ].
 	defaultName := report propertyNamed: #Name.
 	self
 		command: #Save
@@ -331,6 +362,39 @@ content := 'Attribute VB_Name = "{1}"
 	^ f
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> ensureNonOtherFormtIsOpen [
+	[ self
+		close: (self activeForm propertyNamed: #Name)
+		type: JinForm typeNumber
+		save: false ]
+		on: Error
+		do: [ :e |  ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> ensureNonOtherReportIsOpen [
+	[ self
+		close: (self activeReport propertyNamed: #Name)
+		type: JinReport typeNumber
+		save: false ]
+		on: Error
+		do: [ :e |  ]
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> export: aJinModelObject toFolder: aFileReference [
+	| destination |
+	destination := aFileReference / aJinModelObject name
+		, (aJinModelObject class name copyReplaceAll: 'Jin' with: '').
+	handle
+		dispatch: #SaveAsText
+		withArguments:
+			{aJinModelObject typeNumber.
+			aJinModelObject name.
+			destination fullName}
+]
+
 { #category : #initialization }
 JinAccessApplication >> handle [
 	^ handle
@@ -361,6 +425,20 @@ JinAccessApplication >> open: aFileReference [
 		handle: (handle propertyNamed: 'CurrentProject')
 			dataHandle: (handle propertyNamed: #CurrentData)
 			application: self;
+		projectPath: aFileReference;
+		yourself
+]
+
+{ #category : #initialization }
+JinAccessApplication >> open: aFileReference into: aProject [
+	self handle
+		dispatch: 'OpenCurrentDatabase'
+		withArguments: {aFileReference fullName}.
+	^ aProject
+		handle: (handle propertyNamed: 'CurrentProject')
+			dataHandle: (handle propertyNamed: #CurrentData)
+			application: self;
+		projectPath: aFileReference;
 		yourself
 ]
 
@@ -467,19 +545,19 @@ JinAccessApplication >> openedTableHandles [
 ]
 
 { #category : #'as yet unclassified' }
-JinAccessApplication >> quit [ 
-	handle dispatch:#Quit
+JinAccessApplication >> quit [
+	handle dispatch: #Quit.
+	handle := nil
 ]
 
 { #category : #accessing }
 JinAccessApplication >> references [
-	^ references
-		ifNil: [ references := JinCollection newDefaultForMethod
-				handle: (handle propertyNamed: #References)
-				factory:
-					(JinRemoteObjectOnlyGenericsFactory new
-						defaultHierarchyClass: JinReference;
-						yourself) ]
+	^ JinCollection newDefaultForMethod
+		handle: (handle propertyNamed: #References)
+		factory:
+			(JinRemoteObjectOnlyGenericsFactory new
+				defaultHierarchyClass: JinReference;
+				yourself)
 ]
 
 { #category : #'as yet unclassified' }
@@ -488,13 +566,28 @@ JinAccessApplication >> refreshDatabaseWindow [
 ]
 
 { #category : #'as yet unclassified' }
-JinAccessApplication >> rename: anObject with: aName [
+JinAccessApplication >> rename: aName typeNumber: aNumber with: aNewName [
 	self
 		command: #Rename
 		withArguments:
-			{aName.
-			anObject typeNumber.
-			anObject name}
+			{aNewName.
+			aNumber.
+			aName}
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> rename: anObject with: aName [
+	self
+		rename: anObject name
+		typeNumber: anObject typeNumber
+		with: aName
+]
+
+{ #category : #initialization }
+JinAccessApplication >> reopen: aFileReference into: aProject [
+	aProject close.
+	self quit.
+	self open: aFileReference into: aProject
 ]
 
 { #category : #'as yet unclassified' }
@@ -546,7 +639,8 @@ JinAccessApplication >> visible [
 
 { #category : #initialization }
 JinAccessApplication >> visible: aBoolean [
-	visible := aBoolean 
+	visible := aBoolean.
+	handle ifNotNil: [ handle propertyNamed: #Visible put: aBoolean ]
 ]
 
 { #category : #'table-api' }

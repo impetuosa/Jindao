@@ -130,6 +130,77 @@ JinSubForm class >> mappedTypeName [
 ]
 
 { #category : #generated }
+JinSubForm class >> propertiesToInfuse [
+"https://docs.microsoft.com/en-us/office/vba/api/access.subform"
+	^ #(
+    AddColon
+    AutoLabel
+    BorderColor
+    BorderShade
+    BorderStyle
+    BorderThemeColorIndex
+    BorderTint
+    BorderWidth
+    BottomPadding
+    CanGrow
+    CanShrink
+    Controls
+    ControlType
+    DisplayWhen
+    Enabled
+    EventProcPrefix
+    FilterOnEmptyMaster
+    Form
+    GridlineColor
+    GridlineShade
+    GridlineStyleBottom
+    GridlineStyleLeft
+    GridlineStyleRight
+    GridlineStyleTop
+    GridlineThemeColorIndex
+    GridlineTint
+    GridlineWidthBottom
+    GridlineWidthLeft
+    GridlineWidthRight
+    GridlineWidthTop
+    Height
+    HorizontalAnchor
+    InSelection
+    IsVisible
+    LabelAlign
+    LabelX
+    LabelY
+    Layout
+    LayoutID
+    Left
+    LeftPadding
+    LinkChildFields
+    LinkMasterFields
+    Locked
+    Name
+    OldBorderStyle
+    OnEnter
+    OnExit
+    Parent
+    Properties
+    Report
+    RightPadding
+    Section
+    SourceObject
+    SpecialEffect
+    StatusBarText
+    TabIndex
+    TabStop
+    Tag
+    Top
+    TopPadding
+    VerticalAnchor
+    Visible
+    Width
+)
+]
+
+{ #category : #generated }
 JinSubForm >> acceptVisitor: aVisitor [
 	^ aVisitor visitSubForm: self
 ]

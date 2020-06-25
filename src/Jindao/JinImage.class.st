@@ -138,6 +138,80 @@ JinImage class >> mappedTypeName [
 	^#'_Image'
 ]
 
+{ #category : #accessing }
+JinImage class >> propertiesToInfuse [
+	^ #(BackColor
+BackShade
+BackStyle
+BackThemeColorIndex
+BackTint
+BorderColor
+BorderShade
+BorderStyle
+BorderThemeColorIndex
+BorderTint
+BorderWidth
+BottomPadding
+Controls
+ControlTipText
+ControlType
+DisplayWhen
+EventProcPrefix
+GridlineColor
+GridlineShade
+GridlineStyleBottom
+GridlineStyleLeft
+GridlineStyleRight
+GridlineStyleTop
+GridlineThemeColorIndex
+GridlineTint
+GridlineWidthBottom
+GridlineWidthLeft
+GridlineWidthRight
+GridlineWidthTop
+Height
+HelpContextId
+HorizontalAnchor
+Hyperlink
+HyperlinkAddress
+HyperlinkSubAddress
+ImageHeight
+ImageWidth
+InSelection
+IsVisible
+Layout
+LayoutID
+Left
+LeftPadding
+Name
+ObjectPalette
+OldBorderStyle
+OldValue
+OnClick
+OnDblClick
+OnMouseDown
+OnMouseMove
+OnMouseUp
+Parent
+Picture
+PictureAlignment
+PictureData
+PictureTiling
+PictureType
+Properties
+RightPadding
+Section
+ShortcutMenuBar
+SizeMode
+SpecialEffect
+Tag
+Top
+TopPadding
+VerticalAnchor
+Visible
+Width)
+]
+
 { #category : #generated }
 JinImage >> acceptVisitor: aVisitor [
 	^ aVisitor visitImage: self

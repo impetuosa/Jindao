@@ -30,7 +30,6 @@ JinAccessObject >> handle [
 { #category : #accessing }
 JinAccessObject >> handle: aHandle [
 	handle := aHandle.
-	self beCached
 ]
 
 { #category : #accessing }

@@ -236,6 +236,134 @@ JinListBox class >> mappedTypeName [
 ]
 
 { #category : #generated }
+JinListBox class >> propertiesToInfuse [
+	^ #(
+    AddColon
+    AfterUpdate
+    AllowValueListEdits
+    AutoLabel
+    BackColor
+    BackShade
+    BackThemeColorIndex
+    BackTint
+    BeforeUpdate
+    BorderColor
+    BorderShade
+    BorderStyle
+    BorderThemeColorIndex
+    BorderTint
+    BorderWidth
+    BottomPadding
+    BoundColumn
+    Column
+    ColumnCount
+    ColumnHeads
+    ColumnHidden
+    ColumnOrder
+    ColumnWidth
+    ColumnWidths
+    Controls
+    ControlSource
+    ControlTipText
+    ControlType
+    DefaultValue
+    DisplayWhen
+    Enabled
+    EventProcPrefix
+    FontBold
+    FontItalic
+    FontName
+    FontSize
+    FontUnderline
+    FontWeight
+    ForeColor
+    ForeShade
+    ForeThemeColorIndex
+    ForeTint
+    GridlineColor
+    GridlineShade
+    GridlineStyleBottom
+    GridlineStyleLeft
+    GridlineStyleRight
+    GridlineStyleTop
+    GridlineThemeColorIndex
+    GridlineTint
+    GridlineWidthBottom
+    GridlineWidthLeft
+    GridlineWidthRight
+    GridlineWidthTop
+    Height
+    HelpContextId
+    HideDuplicates
+    HorizontalAnchor
+    Hyperlink
+    IMEHold
+    IMEMode
+    IMESentenceMode
+    InheritValueList
+    InSelection
+    IsVisible
+    ItemData
+    ItemsSelected
+    LabelAlign
+    LabelX
+    LabelY
+    Layout
+    LayoutID
+    Left
+    LeftPadding
+    ListCount
+    ListIndex
+    ListItemsEditForm
+    Locked
+    MultiSelect
+    Name
+    NumeralShapes
+    OldBorderStyle
+    OldValue
+    OnClick
+    OnDblClick
+    OnEnter
+    OnExit
+    OnGotFocus
+    OnKeyDown
+    OnKeyPress
+    OnKeyUp
+    OnLostFocus
+    OnMouseDown
+    OnMouseMove
+    OnMouseUp
+    Parent
+    Properties
+    ReadingOrder
+    Recordset
+    RightPadding
+    RowSource
+    RowSourceType
+    ScrollBarAlign
+    Section
+    Selected
+    ShortcutMenuBar
+    ShowOnlyRowSourceValues
+    SmartTags
+    SpecialEffect
+    StatusBarText
+    TabIndex
+    TabStop
+    Tag
+    ThemeFontIndex
+    Top
+    TopPadding
+    ValidationRule
+    ValidationText
+    Value
+    VerticalAnchor
+    Visible
+    Width
+)
+]
+
+{ #category : #generated }
 JinListBox >> acceptVisitor: aVisitor [
 	^ aVisitor visitListBox: self
 ]

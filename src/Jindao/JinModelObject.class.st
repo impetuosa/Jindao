@@ -49,6 +49,11 @@ JinModelObject >> ensureUnload [
 	body := nil.
 ]
 
+{ #category : #'as yet unclassified' }
+JinModelObject >> exportToFolder: aFolder [
+	^ project export: self toFolder: aFolder
+]
+
 { #category : #accessing }
 JinModelObject >> isLoaded [
 	^ body isNotNil and: [ description isLoaded ]
@@ -89,7 +94,8 @@ JinModelObject >> project: aJinAccessProject [
 
 { #category : #'as yet unclassified' }
 JinModelObject >> rename: aName [
-	project rename: self with: aName
+	project rename: self with: aName.
+	description  := project descritionFor: aName
 ]
 
 { #category : #accessing }

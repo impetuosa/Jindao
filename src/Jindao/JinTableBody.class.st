@@ -53,6 +53,11 @@ JinTableBody >> indexes [
 ]
 
 { #category : #'as yet unclassified' }
+JinTableBody >> recordset [
+	^ JinRecordset new handle: (handle dispatch: #OpenRecordset)
+]
+
+{ #category : #'as yet unclassified' }
 JinTableBody >> registerIndex: aJinIndexBody [
 	(handle propertyNamed: #Indexes)
 		dispatch: #Append

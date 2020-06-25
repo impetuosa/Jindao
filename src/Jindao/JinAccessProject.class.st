@@ -9,12 +9,7 @@ Class {
 		'programHandle',
 		'dataHandle',
 		'application',
-		'forms',
-		'macros',
-		'modules',
-		'queries',
-		'reports',
-		'tables'
+		'projectPath'
 	],
 	#category : #'Jindao-Core'
 }
@@ -69,7 +64,9 @@ JinAccessProject >> application [
 
 { #category : #'initialize-release' }
 JinAccessProject >> close [
-	application closeProject: self. 
+	application closeProject: self.
+	programHandle := nil.
+	dataHandle := nil
 ]
 
 { #category : #'as yet unclassified' }
@@ -80,6 +77,11 @@ JinAccessProject >> close: aJinForm [
 { #category : #'as yet unclassified' }
 JinAccessProject >> close: aJinForm save: aBool [
 	application close: aJinForm save: aBool
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> compileAll [
+	application compileAll
 ]
 
 { #category : #'as yet unclassified' }
@@ -119,7 +121,10 @@ JinAccessProject >> createForm [
 	formHandle := application createForm.
 	^ (self forms
 		detect: [ :r | r name = (formHandle propertyNamed: #Name) ])
-		body: formHandle;
+		body:
+			(JinFormBody new
+				handle: formHandle;
+				yourself);
 		yourself
 ]
 
@@ -177,7 +182,7 @@ JinAccessProject >> createReport [
 	createReport := application createReport.
 	^ (self reports
 		detect: [ :r | r name = (createReport propertyNamed: #Name) ])
-		body: createReport;
+		body: (JinReportBody new handle: createReport; yourself);
 		yourself
 ]
 
@@ -195,6 +200,11 @@ JinAccessProject >> database [
 		handle: application database;
 		project: self; 
 		yourself
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> descritionFor: aString [
+	^ (self forms detect: [ :f | f name = aString ]) description
 ]
 
 { #category : #'as yet unclassified' }
@@ -246,6 +256,11 @@ JinAccessProject >> ensurePageHeaderFooter: aJinFormOrModule [
 		ifFalse: [ application command: #RunCommand withArguments: {182} ]
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessProject >> export: aJinTable toFolder: aFileReference [
+	^ application export: aJinTable toFolder: aFileReference
+]
+
 { #category : #'form-api' }
 JinAccessProject >> forms [
 	^ JinCollection newDefault
@@ -286,26 +301,22 @@ JinAccessProject >> installReportHeaderFooterOn: aJinReport [
 
 { #category : #'macro-api' }
 JinAccessProject >> macros [
-	^ macros
-		ifNil: [ macros := JinCollection newDefault
-				handle: (programHandle propertyNamed: #AllMacros)
-				factory:
-					((JinFirstClassCitizenModelFactory defaultFor: JinMacro)
-						project: self;
-						yourself) ]
+	^ JinCollection newDefault
+		handle: (programHandle propertyNamed: #AllMacros)
+		factory:
+			((JinFirstClassCitizenModelFactory defaultFor: JinMacro)
+				project: self;
+				yourself)
 ]
 
 { #category : #'module-api' }
 JinAccessProject >> modules [
-	^ modules
-		ifNil: [ modules := JinCollection newDefault
-				handle: (programHandle propertyNamed: #AllModules)
-				factory:
-					((JinFirstClassCitizenModelFactory defaultFor: JinModule)
-						project: self;
-						yourself) ]
-		ifNotNil: [ modules handle: (programHandle propertyNamed: #AllModules).
-			modules ]
+	^ JinCollection newDefault
+		handle: (programHandle propertyNamed: #AllModules)
+		factory:
+			((JinFirstClassCitizenModelFactory defaultFor: JinModule)
+				project: self;
+				yourself)
 ]
 
 { #category : #accessing }
@@ -344,15 +355,19 @@ JinAccessProject >> openTable: aJinTable [
 	^ application openTable: aJinTable 
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessProject >> projectPath: aFileReference [
+	projectPath := aFileReference
+]
+
 { #category : #'query-api' }
 JinAccessProject >> queries [
-	^ queries
-		ifNil: [ queries := JinCollection newDefault
-				handle: (dataHandle propertyNamed: #AllQueries)
-				factory:
-					((JinFirstClassCitizenModelFactory defaultFor: JinQuery)
-						project: self;
-						yourself) ]
+	^ JinCollection newDefault
+		handle: (dataHandle propertyNamed: #AllQueries)
+		factory:
+			((JinFirstClassCitizenModelFactory defaultFor: JinQuery)
+				project: self;
+				yourself)
 ]
 
 { #category : #accessing }
@@ -374,6 +389,11 @@ JinAccessProject >> relations [
 { #category : #'as yet unclassified' }
 JinAccessProject >> rename: anObject with: aName [
 	^ application rename: anObject with: aName
+]
+
+{ #category : #accessing }
+JinAccessProject >> reopen [
+	application reopen: projectPath into: self
 ]
 
 { #category : #'report-api' }

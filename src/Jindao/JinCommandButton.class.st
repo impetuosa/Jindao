@@ -204,6 +204,137 @@ JinCommandButton class >> mappedTypeName [
 	^#'_CommandButton'
 ]
 
+{ #category : #accessing }
+JinCommandButton class >> propertiesToInfuse [
+	^ #(
+    AddColon
+    Alignment
+    AutoLabel
+    AutoRepeat
+    BackColor
+    BackShade
+    BackStyle
+    BackThemeColorIndex
+    BackTint
+    Bevel
+    BorderColor
+    BorderShade
+    BorderStyle
+    BorderThemeColorIndex
+    BorderTint
+    BorderWidth
+    BottomPadding
+    Cancel
+    Caption
+    Controls
+    ControlTipText
+    ControlType
+    CursorOnHover
+    Default
+    DisplayWhen
+    Enabled
+    EventProcPrefix
+    FontBold
+    FontItalic
+    FontName
+    FontSize
+    FontUnderline
+    FontWeight
+    ForeColor
+    ForeShade
+    ForeThemeColorIndex
+    ForeTint
+    Glow
+    Gradient
+    GridlineColor
+    GridlineShade
+    GridlineStyleBottom
+    GridlineStyleLeft
+    GridlineStyleRight
+    GridlineStyleTop
+    GridlineThemeColorIndex
+    GridlineTint
+    GridlineWidthBottom
+    GridlineWidthLeft
+    GridlineWidthRight
+    GridlineWidthTop
+    Height
+    HelpContextId
+    HorizontalAnchor
+    HoverColor
+    HoverForeColor
+    HoverForeShade
+    HoverForeThemeColorIndex
+    HoverForeTint
+    HoverShade
+    HoverThemeColorIndex
+    HoverTint
+    Hyperlink
+    HyperlinkAddress
+    HyperlinkSubAddress
+    InSelection
+    IsVisible
+    LabelAlign
+    LabelX
+    LabelY
+    Layout
+    LayoutID
+    Left
+    LeftPadding
+    Name
+    ObjectPalette
+    OldValue
+    OnClick
+    OnDblClick
+    OnEnter
+    OnExit
+    OnGotFocus
+    OnKeyDown
+    OnKeyPress
+    OnKeyUp
+    OnLostFocus
+    OnMouseDown
+    OnMouseMove
+    OnMouseUp
+    OnPush
+    Parent
+    Picture
+    PictureCaptionArrangement
+    PictureData
+    PictureType
+    PressedColor
+    PressedForeColor
+    PressedForeShade
+    PressedForeThemeColorIndex
+    PressedForeTint
+    PressedShade
+    PressedThemeColorIndex
+    PressedTint
+    Properties
+    QuickStyle
+    QuickStyleMask
+    ReadingOrder
+    RightPadding
+    Section
+    Shadow
+    Shape
+    ShortcutMenuBar
+    SoftEdges
+    StatusBarText
+    TabIndex
+    TabStop
+    Tag
+    ThemeFontIndex
+    Top
+    TopPadding
+    Transparent
+    UseTheme
+    VerticalAnchor
+    Visible
+    Width
+)
+]
+
 { #category : #generated }
 JinCommandButton >> acceptVisitor: aVisitor [
 	^ aVisitor visitCommandButton: self

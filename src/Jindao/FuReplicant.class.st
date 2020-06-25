@@ -15,7 +15,8 @@ Class {
 	#superclass : #JinStackVisitor,
 	#instVars : [
 		'source',
-		'target'
+		'target',
+		'renames'
 	],
 	#category : #'Jindao-FuZhi'
 }
@@ -25,7 +26,8 @@ FuReplicant class >> replicate: aJinAccessProject into: aJinAccessProject2 [
 	^ self new
 		source: aJinAccessProject;
 		target: aJinAccessProject2;
-		replicate
+		replicate;
+		yourself
 ]
 
 { #category : #'as yet unclassified' }
@@ -50,6 +52,27 @@ FuReplicant class >> replicateTables: source into: target [
 		source: source;
 		target: target;
 		replicateTables
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant class >> source: aJinAccessProject target: aJinAccessProject2 [
+	^ self new
+		source: aJinAccessProject;
+		target: aJinAccessProject2;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> applyRenames [
+	target reopen.
+	renames do: [ :r | r applyOn: target ]
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> infuseProperties2: anAccessObject into: anOtherAccessObject [
+	anAccessObject propertiesToInfuse 
+		do:
+			[ :p | self set: p from: anAccessObject handle to: anOtherAccessObject handle ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -78,6 +101,12 @@ FuReplicant >> infuseProperties: aJinObjectSource into: aJinObjectTarget [
 ]
 
 { #category : #'as yet unclassified' }
+FuReplicant >> initialize [
+	super initialize.
+	renames := OrderedCollection new
+]
+
+{ #category : #'as yet unclassified' }
 FuReplicant >> isEasyToTransfer: aProperty [
 	" The property has to be readable, writable, have a getter with none arguments and a setter that receives only one value "
 	^ aProperty setter isNotNil
@@ -97,13 +126,21 @@ FuReplicant >> replicate [
 FuReplicant >> replicateForm: aForm [
 	| form tuples |
 	form := target createForm.
-	self replicateModuleForm: aForm module into: form.
+	renames
+		add:
+			(FuRename
+				object: form
+				to: aForm name
+				hasModule: aForm hasModule
+				moduleContents: aForm module code contents).
+	
 	aForm hasHeaderFooter
 		ifTrue: [ form installHeaderFooter ].
 	aForm hasPageHeaderFooter
 		ifTrue: [ form installPageHeaderFooter ]
 		ifFalse: [ form ensureItHasNonPageHeaderFooter ].
-	self infuseProperties: aForm into: form.
+	self infuseProperties2: aForm into: form.
+	self sectionsFrom: aForm into: form.
 	tuples := Dictionary new.
 	aForm controls
 		do: [ :c | 
@@ -114,11 +151,11 @@ FuReplicant >> replicateForm: aForm [
 				" tuples at: c put: (c createIn: form) ] ].
 	form module code insertLines: aForm module code content.
 	tuples
-		keysAndValuesDo: [ :cs :ct | self infuseProperties: cs into: ct ].
-	self infuseProperties: aForm into: form.
+		keysAndValuesDo: [ :cs :ct | self infuseProperties2: cs into: ct ].
+	self infuseProperties2: aForm into: form.
+	self replicateModuleForm: aForm module into: form.
 	form save.
 	form close.
-	form rename: aForm name.
 	^ form
 ]
 
@@ -154,9 +191,12 @@ FuReplicant >> replicateModule: aJinModule [
 FuReplicant >> replicateModuleForm: aModuleForm into: form [
 	| content |
 	content := aModuleForm code content.
-	content lines size > 1
-		ifTrue: [ form module code deleteLine: 1.
-			form module code insertLines: content ]
+	form module code deleteLine: 1.
+	form module code insertLines: content.
+	content = 'Option Compare Database'
+		ifTrue: [ content := 'Option Compare Database
+		Option Explicit' ].
+	form module code insertLines: ' '
 ]
 
 { #category : #'as yet unclassified' }
@@ -173,7 +213,13 @@ FuReplicant >> replicateRelations [
 FuReplicant >> replicateReport: aJinReport [
 	| report tuples |
 	report := target createReport.
-	self replicateModuleForm: aJinReport module into: report.
+	renames
+		add:
+			(FuRename
+				object: report
+				to: aJinReport name
+				hasModule: aJinReport hasModule
+				moduleContents: aJinReport module code contents).
 	aJinReport groupLevels
 		do: [ :g | self replicateGroupLevel: g into: report ].
 	aJinReport hasHeaderFooter
@@ -181,7 +227,8 @@ FuReplicant >> replicateReport: aJinReport [
 	aJinReport hasPageHeaderFooter
 		ifTrue: [ report installPageHeaderFooter ]
 		ifFalse: [ report ensureItHasNonPageHeaderFooter ].
-	self infuseProperties: aJinReport into: report.
+	self infuseProperties2: aJinReport into: report.
+	self sectionsFrom: aJinReport into: report.
 	tuples := Dictionary new.
 	aJinReport controls
 		do: [ :c | 
@@ -198,11 +245,10 @@ FuReplicant >> replicateReport: aJinReport [
 								type: c controlTypeNumber
 								section: c section) ] ].
 	tuples
-		keysAndValuesDo: [ :cs :ct | self infuseProperties: cs into: ct ].
-	self infuseProperties: aJinReport into: report.
+		keysAndValuesDo: [ :cs :ct | self infuseProperties2: cs into: ct ].
+	self replicateModuleForm: aJinReport module into: report.
 	report save.
 	report close.
-	report rename: aJinReport name.
 	^ report
 ]
 
@@ -230,6 +276,34 @@ FuReplicant >> replicateTables [
 ]
 
 { #category : #'as yet unclassified' }
+FuReplicant >> sectionsFrom: aJinReport into: report [
+	| sectionFrom sectionTo |
+	0 to: 10 do: [ :i | 
+		[ sectionFrom := aJinReport body handle
+			propertyNamed: #Section
+			withArguments: {i}.
+		sectionTo := report body handle
+			propertyNamed: #Section
+			withArguments: {i}.
+		sectionTo
+			propertyNamed: #Height
+			put: (sectionFrom propertyNamed: #Height) ]
+			on: Error
+			do: [ :e | ] ]
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> set: aName from: aHandle to: otherHandle [
+	[ otherHandle
+		propertyNamed: aName
+		put: (aHandle propertyNamed: aName) ]
+		on: Win32Error
+		do: [ :e | 
+			e passIfNotError0x80020009.
+			self halt ]
+]
+
+{ #category : #'as yet unclassified' }
 FuReplicant >> source: aJinAccessProject [
 	source := aJinAccessProject
 ]
@@ -240,9 +314,26 @@ FuReplicant >> target: aJinAccessProject [
 ]
 
 { #category : #'as yet unclassified' }
+FuReplicant >> transferContentFrom: aTable to: anOtherTable [
+	| from to |
+	aTable close.
+	anOtherTable close.
+	to := anOtherTable recordset.
+	from := aTable recordset.
+	[ [ from atEnd ] whileFalse: [ to nextPut: from next ] ]
+		on: Error
+		do: [ :e | 
+			(e isKindOf: Win32Error)
+				ifFalse: [ self halt ] ].
+	from close.
+	to close.
+]
+
+{ #category : #'as yet unclassified' }
 FuReplicant >> visitForm: aForm [
 	self replicateForm: aForm.
-	aForm ensureUnload
+	aForm ensureUnload.
+	
 ]
 
 { #category : #'as yet unclassified' }
@@ -272,6 +363,22 @@ FuReplicant >> visitModule: aModule [
 ]
 
 { #category : #'as yet unclassified' }
+FuReplicant >> visitProject: aJinAccessProject [
+
+	self visitCollection: aJinAccessProject references.
+	self visitCollection: aJinAccessProject tables.
+	self visitCollection: aJinAccessProject queries.
+	self visitCollection: aJinAccessProject modules.
+	target compileAll.
+	self visitCollection: aJinAccessProject reports.
+	target compileAll.
+	self visitCollection: aJinAccessProject forms.
+	target compileAll.
+	self applyRenames.
+	self visitCollection: aJinAccessProject relations
+]
+
+{ #category : #'as yet unclassified' }
 FuReplicant >> visitQuery: anObject [
 	self
 		push: (self replicateQuery: anObject)
@@ -293,6 +400,7 @@ FuReplicant >> visitReference: aReference [
 { #category : #'as yet unclassified' }
 FuReplicant >> visitReport: aModelObject [
 	self replicateReport: aModelObject.
+	aModelObject ensureUnload
 ]
 
 { #category : #'as yet unclassified' }
@@ -303,7 +411,8 @@ FuReplicant >> visitTable: anObject [
 		detect: [ :t | t name = anObject name ]
 		ifNone: [ self
 				push: (self replicateTable: anObject)
-				during: [ super visitTable: anObject ] ]
+				during: [ self transferContentFrom: anObject to: stack top.
+					super visitTable: anObject ] ]
 ]
 
 { #category : #'as yet unclassified' }

@@ -97,6 +97,47 @@ JinRectangle class >> mappedTypeName [
 	^#'_Rectangle'
 ]
 
+{ #category : #accessing }
+JinRectangle class >> propertiesToInfuse [
+	^ #(
+    BackColor
+    BackShade
+    BackStyle
+    BackThemeColorIndex
+    BackTint
+    BorderColor
+    BorderShade
+    BorderStyle
+    BorderThemeColorIndex
+    BorderTint
+    BorderWidth
+    ControlType
+    DisplayWhen
+    EventProcPrefix
+    Height
+    HorizontalAnchor
+    InSelection
+    IsVisible
+    Left
+    Name
+    OldBorderStyle
+    OnClick
+    OnDblClick
+    OnMouseDown
+    OnMouseMove
+    OnMouseUp
+    Parent
+    Properties
+    Section
+    SpecialEffect
+    Tag
+    Top
+    VerticalAnchor
+    Visible
+    Width
+)
+]
+
 { #category : #generated }
 JinRectangle >> acceptVisitor: aVisitor [
 	^ aVisitor visitRectangle: self

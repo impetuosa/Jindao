@@ -48,6 +48,11 @@ JinAccessTableField >> acceptVisitor: aVisitor [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessTableField >> isComplexType [
+	^ handle propertyNamed: #IsComplex
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessTableField >> printOn: aStream [
 	aStream
 		nextPutAll:
@@ -81,4 +86,14 @@ JinAccessTableField >> type [
 { #category : #'as yet unclassified' }
 JinAccessTableField >> typeName [
 	^ self class fieldTypeMapping: self type
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessTableField >> value [
+	^ handle propertyNamed: #Value
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessTableField >> value: aValue [
+	aValue ifNotNil: [ handle propertyNamed: #Value put: aValue ]
 ]

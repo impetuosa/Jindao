@@ -160,6 +160,111 @@ JinTabControl class >> mappedTypeName [
 	^#'_TabControl'
 ]
 
+{ #category : #accessing }
+JinTabControl class >> propertiesToInfuse [
+"https://docs.microsoft.com/en-us/office/vba/api/access.tabcontrol"
+	^ #(
+    
+    BackColor
+    BackShade
+    BackStyle
+    BackThemeColorIndex
+    BackTint
+    BorderColor
+    BorderShade
+    BorderStyle
+    BorderThemeColorIndex
+    BorderTint
+    BottomPadding
+    ControlType
+    DisplayWhen
+    Enabled
+    EventProcPrefix
+    FontBold
+    FontItalic
+    FontName
+    FontSize
+    FontUnderline
+    FontWeight
+    ForeColor
+    ForeShade
+    ForeThemeColorIndex
+    ForeTint
+    Gradient
+    GridlineColor
+    GridlineShade
+    GridlineStyleBottom
+    GridlineStyleLeft
+    GridlineStyleRight
+    GridlineStyleTop
+    GridlineThemeColorIndex
+    GridlineTint
+    GridlineWidthBottom
+    GridlineWidthLeft
+    GridlineWidthRight
+    GridlineWidthTop
+    Height
+    HelpContextId
+    HorizontalAnchor
+    HoverColor
+    HoverForeColor
+    HoverForeShade
+    HoverForeThemeColorIndex
+    HoverForeTint
+    HoverShade
+    HoverThemeColorIndex
+    HoverTint
+    InSelection
+    IsVisible
+    Layout
+    LayoutID
+    Left
+    LeftPadding
+    MultiRow
+    Name
+    OldValue
+    OnChange
+    OnClick
+    OnDblClick
+    OnKeyDown
+    OnKeyPress
+    OnKeyUp
+    OnMouseDown
+    OnMouseMove
+    OnMouseUp
+    Pages
+    Parent
+    PressedColor
+    PressedForeColor
+    PressedForeShade
+    PressedForeThemeColorIndex
+    PressedForeTint
+    PressedShade
+    PressedThemeColorIndex
+    PressedTint
+    Properties
+    RightPadding
+    Section
+    Shape
+    ShortcutMenuBar
+    StatusBarText
+    Style
+    TabFixedHeight
+    TabFixedWidth
+    TabIndex
+    TabStop
+    Tag
+    ThemeFontIndex
+    Top
+    TopPadding
+    UseTheme
+    Value
+    VerticalAnchor
+    Visible
+    Width
+)
+]
+
 { #category : #generated }
 JinTabControl >> acceptVisitor: aVisitor [
 	^ aVisitor visitTabControl: self
