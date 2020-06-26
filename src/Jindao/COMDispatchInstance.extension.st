@@ -25,3 +25,11 @@ COMDispatchInstance >> asStateTrackingHandle [
 		handle: self;
 		yourself
 ]
+
+{ #category : #'*Jindao' }
+COMDispatchInstance >> propertyNamed: aPropName putIfWritable: aValue [
+	| prop |
+	prop := self getDispatchType properties
+		detect: [ :e | e name = aPropName ].
+	prop setter ifNotNil: [ ^ prop write: aValue to: self ]
+]
