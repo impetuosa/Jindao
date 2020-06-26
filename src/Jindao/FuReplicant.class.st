@@ -81,12 +81,34 @@ FuReplicant >> create: c in: form [
 		on: Win32Error
 		do: [ :e | 
 			self
-				registerFailedEntity:
-					[{#CreateControl.
+				registerFailedEntity: [ {#CreateControl.
 					e messageText.
 					c name.
 					c handle getTypeInfo name.
-					form} ]]
+					form}.
+					^ nil ] ]
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> create: c inReport: report [
+	[ | val |
+	val := report
+		createControl: c name
+		type: c controlTypeNumber
+		section: c section.
+	self
+		registerSuccess: [ {#CreateReportControl.
+			val printString} ].
+	^ val ]
+		on: Win32Error
+		do: [ :e | 
+			self
+				registerFailedEntity: [ {#CreateReportControl.
+					e messageText.
+					c name.
+					c handle getTypeInfo name.
+					report}.
+					^ nil ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -270,7 +292,7 @@ FuReplicant >> replicateReport: aJinReport [
 				ifFalse:
 					[ "				https://docs.microsoft.com/en-us/office/vba/api/Access.EmptyCell
 				An EmptyCell object is created when a control layout contains an empty cell. You cannot explicitly create or delete an EmptyCell object.
-				" tuples at: c put: (self create: c in: report) ] ].
+				" tuples at: c put: (self create: c inReport: report) ] ].
 	tuples
 		keysAndValuesDo: [ :cs :ct | self infuseProperties2: cs into: ct ].
 	self replicateModuleForm: aJinReport module into: report.
@@ -368,7 +390,7 @@ FuReplicant >> transferContentFrom: aTable to: anOtherTable [
 	[ from atEnd ]
 		whileFalse:
 			[ to nextPut: from next.
-			x := x + 1 ] from close.
+			x := x + 1 ]. from close.
 	to close.
 	^ x
 ]
@@ -498,11 +520,10 @@ FuReplicant >> visitTable: anObject [
 						do: [ :e | 
 							e passIfNotError0x80020009.
 							self
-								registerFailedEntity:
-									[{#TransferContent.
+								registerFailedEntity: [ {#TransferContent.
 									e messageText.
-									anObject name} ]] ].
-			super visitTable: anObject ]
+									anObject name} ] ].
+					super visitTable: anObject ] ]
 ]
 
 { #category : #'as yet unclassified' }
