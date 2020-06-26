@@ -252,6 +252,107 @@ JinAttachment class >> mappedTypeName [
 	^#'_Attachment'
 ]
 
+{ #category : #'as yet unclassified' }
+JinAttachment class >> propertiesToInfuse [
+^#(
+    AddColon
+    AfterUpdate
+    AttachmentCount
+    AutoLabel
+    BackColor
+    BackShade
+    BackStyle
+    BackThemeColorIndex
+    BackTint
+    BeforeUpdate
+	AfterUpdateMacro
+	 BeforeUpdateMacro
+    BorderColor
+    BorderShade
+    BorderStyle
+    BorderThemeColorIndex
+    BorderTint
+    BorderWidth
+    BottomPadding
+    ColumnHidden
+    ColumnOrder
+    ColumnWidth
+    ControlSource
+    ControlTipText
+    ControlType
+    CurrentAttachment
+    DefaultPicture
+    DefaultPictureType
+    DisplayAs
+    DisplayWhen
+    Enabled
+    EventProcPrefix
+    FileName
+    FileType
+    FileURL
+    GridlineColor
+    GridlineShade
+    GridlineStyleBottom
+    GridlineStyleLeft
+    GridlineStyleRight
+    GridlineStyleTop
+    GridlineThemeColorIndex
+    GridlineTint
+    GridlineWidthBottom
+    GridlineWidthLeft
+    GridlineWidthRight
+    GridlineWidthTop
+    Height
+    HelpContextId
+    HorizontalAnchor
+    InSelection
+    IsVisible
+    LabelAlign
+    LabelX
+    LabelY
+    Layout
+    LayoutID
+    Left
+    LeftPadding
+    Locked
+    Name
+    OldBorderStyle
+    OldValue
+    OnAttachmentCurrent
+    OnChange
+    OnClick
+    OnDblClick
+    OnDirty
+    OnEnter
+    OnExit
+    OnGotFocus
+    OnKeyDown
+    OnKeyPress
+    OnKeyUp
+    OnLostFocus
+    OnMouseDown
+    OnMouseMove
+    OnMouseUp
+'OnAttachmentCurrentMacro' 'OnChangeMacro' 'OnClickMacro' 'OnDblClickMacro' 'OnDirtyMacro' 'OnEnterMacro' 'OnExitMacro' 'OnGotFocusMacro' 'OnKeyDownMacro' 'OnKeyPressMacro' 'OnKeyUpMacro' 'OnLostFocusMacro' 'OnMouseDownMacro' 'OnMouseMoveMacro' 'OnMouseUpMacro'
+    PictureAlignment
+    PictureSizeMode
+    PictureTiling
+    RightPadding
+    Section
+    ShortcutMenuBar
+    SpecialEffect
+    StatusBarText
+    TabIndex
+    TabStop
+    Tag
+    Top
+    TopPadding
+    VerticalAnchor
+    Visible
+    Width
+)
+]
+
 { #category : #generated }
 JinAttachment >> acceptVisitor: aVisitor [
 	^ aVisitor visitAttachment: self

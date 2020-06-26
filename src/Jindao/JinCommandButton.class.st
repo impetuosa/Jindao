@@ -226,7 +226,6 @@ JinCommandButton class >> propertiesToInfuse [
     BottomPadding
     Cancel
     Caption
-    Controls
     ControlTipText
     ControlType
     CursorOnHover
@@ -269,7 +268,6 @@ JinCommandButton class >> propertiesToInfuse [
     HoverShade
     HoverThemeColorIndex
     HoverTint
-    Hyperlink
     HyperlinkAddress
     HyperlinkSubAddress
     InSelection
@@ -277,8 +275,6 @@ JinCommandButton class >> propertiesToInfuse [
     LabelAlign
     LabelX
     LabelY
-    Layout
-    LayoutID
     Left
     LeftPadding
     Name
@@ -296,8 +292,19 @@ JinCommandButton class >> propertiesToInfuse [
     OnMouseDown
     OnMouseMove
     OnMouseUp
+OnClickMacro
+OnDblClickMacro
+OnEnterMacro
+OnExitMacro
+OnGotFocusMacro
+OnKeyDownMacro
+OnKeyPressMacro
+OnKeyUpMacro
+OnLostFocusMacro
+OnMouseDownMacro
+OnMouseMoveMacro
+OnMouseUpMacro
     OnPush
-    Parent
     Picture
     PictureCaptionArrangement
     PictureData
@@ -310,7 +317,6 @@ JinCommandButton class >> propertiesToInfuse [
     PressedShade
     PressedThemeColorIndex
     PressedTint
-    Properties
     QuickStyle
     QuickStyleMask
     ReadingOrder

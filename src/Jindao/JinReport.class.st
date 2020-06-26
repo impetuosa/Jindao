@@ -7,7 +7,6 @@ Class {
 { #category : #accessing }
 JinReport class >> propertiesToInfuse [
 	^ #(
-    ActiveControl
     AllowLayoutView
     AllowReportView
     AutoCenter
@@ -16,7 +15,6 @@ JinReport class >> propertiesToInfuse [
     Caption
     CloseButton
     ControlBox
-    Controls
     Count
     CurrentRecord
     CurrentView
@@ -62,7 +60,6 @@ JinReport class >> propertiesToInfuse [
     MenuBar
     MinMaxButtons
     Modal
-    Module
     MouseWheel
     Moveable
     MoveLayout
@@ -92,6 +89,7 @@ JinReport class >> propertiesToInfuse [
     OnResize
     OnTimer
     OnUnload
+'OnActivateMacro' 'OnApplyFilterMacro' 'OnClickMacro' 'OnCloseMacro' 'OnCurrentMacro' 'OnDblClickMacro' 'OnDeactivateMacro' 'OnErrorMacro' 'OnFilterMacro' 'OnGotFocusMacro' 'OnKeyDownMacro' 'OnKeyPressMacro' 'OnKeyUpMacro' 'OnLoadMacro' 'OnLostFocusMacro' 'OnMouseDownMacro' 'OnMouseMoveMacro' 'OnMouseUpMacro' 'OnNoDataMacro' 'OnOpenMacro' 'OnPageMacro' 'OnResizeMacro' 'OnTimerMacro' 'OnUnloadMacro'
     OpenArgs
     OrderBy
     OrderByOn
@@ -104,7 +102,6 @@ JinReport class >> propertiesToInfuse [
     Painting
     PaintPalette
     PaletteSource
-    Parent
     Picture
     PictureAlignment
     PictureData
@@ -115,9 +112,7 @@ JinReport class >> propertiesToInfuse [
     PictureType
     PopUp
     PrintCount
-    Printer
     PrintSection
-    Properties
     PrtDevMode
     PrtDevNames
     PrtMip
@@ -125,7 +120,6 @@ JinReport class >> propertiesToInfuse [
     Recordset
     RecordSource
     RecordSourceQualifier
-    Report
     RibbonName
     ScaleHeight
     ScaleLeft

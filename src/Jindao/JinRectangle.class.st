@@ -126,9 +126,7 @@ JinRectangle class >> propertiesToInfuse [
     OnMouseDown
     OnMouseMove
     OnMouseUp
-    Parent
-    Properties
-    Section
+'OnClickMacro' 'OnDblClickMacro' 'OnMouseDownMacro' 'OnMouseMoveMacro' 'OnMouseUpMacro'
     SpecialEffect
     Tag
     Top

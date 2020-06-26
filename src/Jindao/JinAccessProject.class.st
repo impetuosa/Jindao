@@ -38,15 +38,6 @@ JinAccessProject >> activeEntityName [
 ]
 
 { #category : #'as yet unclassified' }
-JinAccessProject >> addReference: aName builtIn: isBuiltIn path: aFileReference guid: aGuid [
-	^ application
-		addReference: aName
-		builtIn: isBuiltIn
-		path: aFileReference
-		guid: aGuid
-]
-
-{ #category : #'as yet unclassified' }
 JinAccessProject >> addReference: aName builtIn: isBuiltIn path: aFileReference guid: aGuid major: aMajor minor: aMinor [
 	^ application
 		addReference: aName
@@ -71,7 +62,9 @@ JinAccessProject >> close [
 
 { #category : #'as yet unclassified' }
 JinAccessProject >> close: aJinForm [
-	application close: aJinForm
+	[ application close: aJinForm ]
+		on: Error
+		do: [ :e | self assert: aJinForm isLoaded not ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -118,6 +111,7 @@ JinAccessProject >> createControl: aName inReport: aJinReport type: aTypeNumber 
 { #category : #'as yet unclassified' }
 JinAccessProject >> createForm [
 	| formHandle |
+
 	formHandle := application createForm.
 	^ (self forms
 		detect: [ :r | r name = (formHandle propertyNamed: #Name) ])
@@ -393,7 +387,8 @@ JinAccessProject >> rename: anObject with: aName [
 
 { #category : #accessing }
 JinAccessProject >> reopen [
-	application reopen: projectPath into: self
+	application reopen: projectPath into: self.
+	5 seconds wait. 
 ]
 
 { #category : #'report-api' }
@@ -408,7 +403,11 @@ JinAccessProject >> reports [
 
 { #category : #'as yet unclassified' }
 JinAccessProject >> sanitizedName [
-	^ (self name readStream upTo: $.) asLowercase
+	| s |
+	s := (self name readStream upTo: $.) asLowercase.
+	s = 'access_example_vba'
+		ifTrue: [ ^ 'example_database' ].
+	^ s
 ]
 
 { #category : #'as yet unclassified' }

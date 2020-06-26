@@ -144,13 +144,11 @@ JinSubForm class >> propertiesToInfuse [
     BottomPadding
     CanGrow
     CanShrink
-    Controls
     ControlType
     DisplayWhen
     Enabled
     EventProcPrefix
     FilterOnEmptyMaster
-    Form
     GridlineColor
     GridlineShade
     GridlineStyleBottom
@@ -181,9 +179,7 @@ JinSubForm class >> propertiesToInfuse [
     OldBorderStyle
     OnEnter
     OnExit
-    Parent
-    Properties
-    Report
+'OnEnterMacro' 'OnExitMacro'
     RightPadding
     Section
     SourceObject

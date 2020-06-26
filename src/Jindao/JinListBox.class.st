@@ -247,6 +247,8 @@ JinListBox class >> propertiesToInfuse [
     BackThemeColorIndex
     BackTint
     BeforeUpdate
+	AfterUpdateMacro
+	 BeforeUpdateMacro
     BorderColor
     BorderShade
     BorderStyle
@@ -262,7 +264,6 @@ JinListBox class >> propertiesToInfuse [
     ColumnOrder
     ColumnWidth
     ColumnWidths
-    Controls
     ControlSource
     ControlTipText
     ControlType
@@ -296,7 +297,6 @@ JinListBox class >> propertiesToInfuse [
     HelpContextId
     HideDuplicates
     HorizontalAnchor
-    Hyperlink
     IMEHold
     IMEMode
     IMESentenceMode
@@ -333,8 +333,7 @@ JinListBox class >> propertiesToInfuse [
     OnMouseDown
     OnMouseMove
     OnMouseUp
-    Parent
-    Properties
+'OnClickMacro' 'OnDblClickMacro' 'OnEnterMacro' 'OnExitMacro' 'OnGotFocusMacro' 'OnKeyDownMacro' 'OnKeyPressMacro' 'OnKeyUpMacro' 'OnLostFocusMacro' 'OnMouseDownMacro' 'OnMouseMoveMacro' 'OnMouseUpMacro'
     ReadingOrder
     Recordset
     RightPadding

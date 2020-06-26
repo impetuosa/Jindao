@@ -152,7 +152,6 @@ BorderThemeColorIndex
 BorderTint
 BorderWidth
 BottomPadding
-Controls
 ControlTipText
 ControlType
 DisplayWhen
@@ -172,7 +171,6 @@ GridlineWidthTop
 Height
 HelpContextId
 HorizontalAnchor
-Hyperlink
 HyperlinkAddress
 HyperlinkSubAddress
 ImageHeight
@@ -192,13 +190,12 @@ OnDblClick
 OnMouseDown
 OnMouseMove
 OnMouseUp
-Parent
+'OnClickMacro' 'OnDblClickMacro' 'OnMouseDownMacro' 'OnMouseMoveMacro' 'OnMouseUpMacro'
 Picture
 PictureAlignment
 PictureData
 PictureTiling
 PictureType
-Properties
 RightPadding
 Section
 ShortcutMenuBar

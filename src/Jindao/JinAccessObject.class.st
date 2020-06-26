@@ -32,6 +32,11 @@ JinAccessObject >> handle: aHandle [
 	handle := aHandle.
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessObject >> isCustomControl [
+	^ false
+]
+
 { #category : #accessing }
 JinAccessObject >> name [
 	^ handle propertyNamed: #Name

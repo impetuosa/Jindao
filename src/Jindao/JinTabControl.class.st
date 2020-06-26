@@ -232,8 +232,7 @@ JinTabControl class >> propertiesToInfuse [
     OnMouseDown
     OnMouseMove
     OnMouseUp
-    Pages
-    Parent
+'OnChangeMacro' 'OnClickMacro' 'OnDblClickMacro' 'OnKeyDownMacro' 'OnKeyPressMacro' 'OnKeyUpMacro' 'OnMouseDownMacro' 'OnMouseMoveMacro' 'OnMouseUpMacro'
     PressedColor
     PressedForeColor
     PressedForeShade
@@ -242,7 +241,6 @@ JinTabControl class >> propertiesToInfuse [
     PressedShade
     PressedThemeColorIndex
     PressedTint
-    Properties
     RightPadding
     Section
     Shape

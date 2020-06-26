@@ -16,7 +16,9 @@ Class {
 	#instVars : [
 		'source',
 		'target',
-		'renames'
+		'renames',
+		'failures',
+		'successes'
 	],
 	#category : #'Jindao-FuZhi'
 }
@@ -69,15 +71,38 @@ FuReplicant >> applyRenames [
 ]
 
 { #category : #'as yet unclassified' }
+FuReplicant >> create: c in: form [
+	[ | val |
+	val := c createIn: form.
+	self
+		registerSuccess: [ {#CreateControl.
+			val printString} ].
+	^ val ]
+		on: Win32Error
+		do: [ :e | 
+			self
+				registerFailedEntity:
+					[{#CreateControl.
+					e messageText.
+					c name.
+					c handle getTypeInfo name.
+					form} ]]
+]
+
+{ #category : #'as yet unclassified' }
 FuReplicant >> infuseProperties2: anAccessObject into: anOtherAccessObject [
-	anAccessObject propertiesToInfuse 
+anOtherAccessObject ifNil: [ ^ self ].
+	anAccessObject isCustomControl
+		ifTrue: [ ^ self infuseProperties: anAccessObject into: anOtherAccessObject ].
+	anAccessObject propertiesToInfuse
 		do:
 			[ :p | self set: p from: anAccessObject handle to: anOtherAccessObject handle ]
 ]
 
 { #category : #'as yet unclassified' }
 FuReplicant >> infuseProperties: aJinObjectSource into: aJinObjectTarget [
-	| table selectors |
+	| table  |
+	aJinObjectTarget ifNil: [ ^ self ].
 	table := Dictionary new.
 	aJinObjectSource properties
 		do: [ :p | 
@@ -103,18 +128,23 @@ FuReplicant >> infuseProperties: aJinObjectSource into: aJinObjectTarget [
 { #category : #'as yet unclassified' }
 FuReplicant >> initialize [
 	super initialize.
-	renames := OrderedCollection new
+	renames := OrderedCollection new.
+	failures := OrderedCollection new.
+	successes := OrderedCollection new.
 ]
 
 { #category : #'as yet unclassified' }
-FuReplicant >> isEasyToTransfer: aProperty [
-	" The property has to be readable, writable, have a getter with none arguments and a setter that receives only one value "
-	^ aProperty setter isNotNil
-		and: [ aProperty getter isNotNil
-				and: [ aProperty setter parameterNames size
-						- aProperty setter optionalParameters = 1
-						and: [ aProperty getter parameterNames size
-								- aProperty getter optionalParameters = 0 ] ] ]
+FuReplicant >> registerFailedEntity: anEntity [
+	[ failures add: anEntity value ]
+		on: Error
+		do: [ :e | self halt ]
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> registerSuccess: anEntity [
+	[ successes add: anEntity value ]
+		on: Error
+		do: [ :e | self halt ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -126,20 +156,12 @@ FuReplicant >> replicate [
 FuReplicant >> replicateForm: aForm [
 	| form tuples |
 	form := target createForm.
-	renames
-		add:
-			(FuRename
-				object: form
-				to: aForm name
-				hasModule: aForm hasModule
-				moduleContents: aForm module code contents).
-	
 	aForm hasHeaderFooter
 		ifTrue: [ form installHeaderFooter ].
 	aForm hasPageHeaderFooter
 		ifTrue: [ form installPageHeaderFooter ]
 		ifFalse: [ form ensureItHasNonPageHeaderFooter ].
-	self infuseProperties2: aForm into: form.
+	self infuseProperties2: aForm body into: form body.
 	self sectionsFrom: aForm into: form.
 	tuples := Dictionary new.
 	aForm controls
@@ -148,14 +170,20 @@ FuReplicant >> replicateForm: aForm [
 				ifFalse:
 					[ "				https://docs.microsoft.com/en-us/office/vba/api/Access.EmptyCell
 				An EmptyCell object is created when a control layout contains an empty cell. You cannot explicitly create or delete an EmptyCell object.
-				" tuples at: c put: (c createIn: form) ] ].
+				" tuples at: c put: (self create:c in: form) ] ].
 	form module code insertLines: aForm module code content.
 	tuples
 		keysAndValuesDo: [ :cs :ct | self infuseProperties2: cs into: ct ].
-	self infuseProperties2: aForm into: form.
 	self replicateModuleForm: aForm module into: form.
 	form save.
 	form close.
+	renames
+		add:
+			(FuRename
+				object: form
+				to: aForm name
+				hasModule: aForm hasModule
+				moduleContents: aForm module code contents).
 	^ form
 ]
 
@@ -200,8 +228,10 @@ FuReplicant >> replicateModuleForm: aModuleForm into: form [
 ]
 
 { #category : #'as yet unclassified' }
-FuReplicant >> replicateQuery: aJinQuery [ 
-	target database createQueryDefNamed: aJinQuery name sql: aJinQuery sql. 
+FuReplicant >> replicateQuery: aJinQuery [
+	target database
+		createQueryDefNamed: aJinQuery name
+		sql: aJinQuery sql
 ]
 
 { #category : #'as yet unclassified' }
@@ -212,7 +242,11 @@ FuReplicant >> replicateRelations [
 { #category : #'as yet unclassified' }
 FuReplicant >> replicateReport: aJinReport [
 	| report tuples |
-	report := target createReport.
+	[ report := target createReport ]
+		on: Error
+		do: [ :e | 
+			target reopen.
+			report := target createReport ].
 	renames
 		add:
 			(FuRename
@@ -227,8 +261,8 @@ FuReplicant >> replicateReport: aJinReport [
 	aJinReport hasPageHeaderFooter
 		ifTrue: [ report installPageHeaderFooter ]
 		ifFalse: [ report ensureItHasNonPageHeaderFooter ].
-	self infuseProperties2: aJinReport into: report.
-	self sectionsFrom: aJinReport into: report.
+	self infuseProperties2: aJinReport body into: report body.
+	self sectionsFrom: aJinReport into: report body.
 	tuples := Dictionary new.
 	aJinReport controls
 		do: [ :c | 
@@ -236,14 +270,7 @@ FuReplicant >> replicateReport: aJinReport [
 				ifFalse:
 					[ "				https://docs.microsoft.com/en-us/office/vba/api/Access.EmptyCell
 				An EmptyCell object is created when a control layout contains an empty cell. You cannot explicitly create or delete an EmptyCell object.
-				"
-					tuples
-						at: c
-						put:
-							(report
-								createControl: c name
-								type: c controlTypeNumber
-								section: c section) ] ].
+				" tuples at: c put: (self create: c in: report) ] ].
 	tuples
 		keysAndValuesDo: [ :cs :ct | self infuseProperties2: cs into: ct ].
 	self replicateModuleForm: aJinReport module into: report.
@@ -294,13 +321,30 @@ FuReplicant >> sectionsFrom: aJinReport into: report [
 
 { #category : #'as yet unclassified' }
 FuReplicant >> set: aName from: aHandle to: otherHandle [
-	[ otherHandle
-		propertyNamed: aName
-		put: (aHandle propertyNamed: aName) ]
-		on: Win32Error
+	| value  |
+	[ value := aHandle propertyNamed: aName.
+	value = (otherHandle propertyNamed: aName)
+		ifFalse: [ otherHandle propertyNamed: aName putIfWritable: value ].
+		
+	value = (otherHandle propertyNamed: aName)
+		ifTrue: [ self
+				registerSuccess: [ {#SetProperty.
+					aName.
+					(aHandle propertyNamed: #Name).
+					aHandle getTypeInfo name} ] ]
+		ifFalse: [ self
+				registerSuccess: [ {#SetPropertyFailed.
+					aName.
+					(aHandle propertyNamed: #Name).
+					aHandle getTypeInfo name . value . (otherHandle propertyNamed: aName) } ]  ] ]
+		on: Win32Error , KeyNotFound
 		do: [ :e | 
-			e passIfNotError0x80020009.
-			self halt ]
+			self
+				registerFailedEntity:
+				[	{#SetProperty.
+					e messageText.
+					aName.
+					aHandle getTypeInfo name} ]]
 ]
 
 { #category : #'as yet unclassified' }
@@ -315,38 +359,70 @@ FuReplicant >> target: aJinAccessProject [
 
 { #category : #'as yet unclassified' }
 FuReplicant >> transferContentFrom: aTable to: anOtherTable [
-	| from to |
+	| from to x |
 	aTable close.
 	anOtherTable close.
 	to := anOtherTable recordset.
 	from := aTable recordset.
-	[ [ from atEnd ] whileFalse: [ to nextPut: from next ] ]
-		on: Error
-		do: [ :e | 
-			(e isKindOf: Win32Error)
-				ifFalse: [ self halt ] ].
-	from close.
+	x := 1.
+	[ from atEnd ]
+		whileFalse:
+			[ to nextPut: from next.
+			x := x + 1 ] from close.
 	to close.
+	^ x
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> visitCollection: aCollection [
+	aCollection
+		do: [ :element | 
+			[ element acceptVisitor: self . 
+			self registerSuccess: [{ #ReplicateObject . element }].
+			]
+				on: Win32Error
+				do: [ :e | 
+					e passIfNotError0x80020009.
+					self
+						registerFailedEntity:
+							[{#ReplicateObject.
+							e messageText.
+							element}] ] ]
 ]
 
 { #category : #'as yet unclassified' }
 FuReplicant >> visitForm: aForm [
-	self replicateForm: aForm.
-	aForm ensureUnload.
-	
+	[ self replicateForm: aForm ]
+		on: Win32Error
+		do: [ :e | 
+			target reopen.
+			self replicateForm: aForm ].
+	aForm ensureUnload
 ]
 
 { #category : #'as yet unclassified' }
 FuReplicant >> visitIndex: aJinIndex [
 	| index |
-	aJinIndex isForeign
+	[ aJinIndex isForeign
 		ifFalse: [ index := stack top createIndex: aJinIndex name.
-			aJinIndex fields do: [ :f | index createField: f name  ].
+			aJinIndex fields do: [ :f | index createField: f name ].
 			index clustered: aJinIndex clustered.
 			index ignoreNulls: aJinIndex ignoreNulls.
 			index primaryKey: aJinIndex primaryKey.
 			index unique: aJinIndex unique.
-			stack top registerIndex: index ]
+			stack top registerIndex: index.
+			self
+				registerSuccess: [ {#CreateIndex.
+					aJinIndex name.
+					stack top name} ] ] ]
+		on: Win32Error
+		do: [ :e | 
+			e passIfNotError0x80020009.
+			self
+				registerFailedEntity:
+					[{#IndexCreation.
+					e messageText.
+					aJinIndex name}] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -411,8 +487,22 @@ FuReplicant >> visitTable: anObject [
 		detect: [ :t | t name = anObject name ]
 		ifNone: [ self
 				push: (self replicateTable: anObject)
-				during: [ self transferContentFrom: anObject to: stack top.
-					super visitTable: anObject ] ]
+				during: [ [ | amount |
+					amount := self transferContentFrom: anObject to: stack top.
+					self
+						registerSuccess: [ {#TransferContent.
+							anObject name.
+							stack top name.
+							amount} ] ]
+						on: Win32Error
+						do: [ :e | 
+							e passIfNotError0x80020009.
+							self
+								registerFailedEntity:
+									[{#TransferContent.
+									e messageText.
+									anObject name} ]] ].
+			super visitTable: anObject ]
 ]
 
 { #category : #'as yet unclassified' }

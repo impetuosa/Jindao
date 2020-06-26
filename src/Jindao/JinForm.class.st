@@ -6,7 +6,9 @@ Class {
 
 { #category : #accessing }
 JinForm class >> propertiesToInfuse [
-	^ #(AfterDelConfirm
+	^ #(
+TabularCharSet	
+AfterDelConfirm
 AfterFinalRender
 AfterInsert
 AfterLayout
@@ -21,7 +23,6 @@ AllowFormView
 AllowLayoutView
 AllowPivotChartView
 AllowPivotTableView
-Application
 AutoCenter
 AutoResize
 BeforeDelConfirm
@@ -40,7 +41,6 @@ CommandChecked
 CommandEnabled
 CommandExecute
 ControlBox
-Controls
 Count
 CurrentRecord
 CurrentSectionLeft
@@ -74,7 +74,6 @@ Filter
 FilterOn
 FilterOnLoad
 FitToScreen
-Form
 FrozenColumns
 GridX
 GridY
@@ -84,8 +83,6 @@ HelpFile
 HorizontalDatasheetGridlineStyle
 Hwnd
 InputParameters
-InsideHeight
-InsideWidth
 KeyPreview
 LayoutForPrint
 MaxRecButton
@@ -93,7 +90,6 @@ MaxRecords
 MenuBar
 MinMaxButtons
 Modal
-Module
 MouseWheel
 Moveable
 Name
@@ -128,6 +124,7 @@ OnResize
 OnTimer
 OnUndo
 OnUnload
+'OnClickMacro' 'OnCloseMacro' 'OnConnectMacro' 'OnCurrentMacro' 'OnDblClickMacro' 'OnDeactivateMacro' 'OnDeleteMacro' 'OnDirtyMacro' 'OnDisconnectMacro' 'OnErrorMacro' 'OnFilterMacro' 'OnGotFocusMacro' 'OnKeyDownMacro' 'OnKeyPressMacro' 'OnKeyUpMacro' 'OnLoadMacro' 'OnLostFocusMacro' 'OnMouseDownMacro' 'OnMouseMoveMacro' 'OnMouseUpMacro' 'OnOpenMacro' 'OnResizeMacro' 'OnTimerMacro' 'OnUndoMacro' 'OnUnloadMacro'
 OpenArgs
 OrderBy
 OrderByOn
@@ -149,8 +146,6 @@ PictureType
 PivotTable
 PivotTableChange
 PopUp
-Printer
-Properties
 PrtDevMode
 PrtDevNames
 PrtMip
@@ -253,6 +248,11 @@ JinForm >> description [
 { #category : #'as yet unclassified' }
 JinForm >> ensureItHasNonPageHeaderFooter [
 	^ project ensureItHasNonPageHeaderFooter: self 
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> handle [
+	self shouldBeImplemented.
 ]
 
 { #category : #'as yet unclassified' }

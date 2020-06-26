@@ -246,6 +246,8 @@ JinTextbox class >> propertiesToInfuse [
     BackThemeColorIndex
     BackTint
     BeforeUpdate
+	AfterUpdateMacro
+	 BeforeUpdateMacro
     BorderColor
     BorderShade
     BorderStyle
@@ -259,7 +261,6 @@ JinTextbox class >> propertiesToInfuse [
     ColumnHidden
     ColumnOrder
     ColumnWidth
-    Controls
     ControlSource
     ControlTipText
     ControlType
@@ -282,7 +283,6 @@ JinTextbox class >> propertiesToInfuse [
     ForeThemeColorIndex
     ForeTint
     Format
-    FormatConditions
     FuriganaControl
     GridlineColor
     GridlineShade
@@ -300,7 +300,6 @@ JinTextbox class >> propertiesToInfuse [
     HelpContextId
     HideDuplicates
     HorizontalAnchor
-    Hyperlink
     IMEHold
     IMEMode
     IMESentenceMode
@@ -312,8 +311,6 @@ JinTextbox class >> propertiesToInfuse [
     LabelAlign
     LabelX
     LabelY
-    Layout
-    LayoutID
     Left
     LeftMargin
     LeftPadding
@@ -338,9 +335,8 @@ JinTextbox class >> propertiesToInfuse [
     OnMouseMove
     OnMouseUp
     OnUndo
-    Parent
+'OnChangeMacro' 'OnClickMacro' 'OnDblClickMacro'  'OnEnterMacro' 'OnExitMacro' 'OnGotFocusMacro' 'OnKeyDownMacro' 'OnKeyPressMacro' 'OnKeyUpMacro' 'OnLostFocusMacro' 'OnMouseDownMacro' 'OnMouseMoveMacro' 'OnMouseUpMacro'
     PostalAddress
-    Properties
     ReadingOrder
     RightMargin
     RightPadding

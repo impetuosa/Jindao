@@ -51,6 +51,11 @@ JinControl >> createIn: aJinForm [
 ]
 
 { #category : #'as yet unclassified' }
+JinControl >> isCustomControl [
+	^ false
+]
+
+{ #category : #'as yet unclassified' }
 JinControl >> isEmptyCell [
 	^ false 
 ]
@@ -92,6 +97,11 @@ JinControl >> properties [
 { #category : #'as yet unclassified' }
 JinControl >> propertiesFactory [
 	^ JinRemotesFactory newDefaultAccessPropertyFactory
+]
+
+{ #category : #'as yet unclassified' }
+JinControl >> propertiesToInfuse [
+	^ self class propertiesToInfuse
 ]
 
 { #category : #'as yet unclassified' }

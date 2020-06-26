@@ -366,6 +366,8 @@ JinCombobox class >> propertiesToInfuse [
     BackThemeColorIndex
     BackTint
     BeforeUpdate
+	AfterUpdateMacro
+	 BeforeUpdateMacro
     BorderColor
     BorderShade
     BorderStyle
@@ -384,7 +386,6 @@ JinCombobox class >> propertiesToInfuse [
     ColumnOrder
     ColumnWidth
     ColumnWidths
-    Controls
     ControlSource
     ControlTipText
     ControlType
@@ -405,7 +406,6 @@ JinCombobox class >> propertiesToInfuse [
     ForeThemeColorIndex
     ForeTint
     Format
-    FormatConditions
     GridlineColor
     GridlineShade
     GridlineStyleBottom
@@ -422,7 +422,6 @@ JinCombobox class >> propertiesToInfuse [
     HelpContextId
     HideDuplicates
     HorizontalAnchor
-    Hyperlink
     IMEHold
     IMEMode
     IMESentenceMode
@@ -437,8 +436,6 @@ JinCombobox class >> propertiesToInfuse [
     LabelAlign
     LabelX
     LabelY
-    Layout
-    LayoutID
     Left
     LeftMargin
     LeftPadding
@@ -469,9 +466,7 @@ JinCombobox class >> propertiesToInfuse [
     OnMouseUp
     OnNotInList
     OnUndo
-    Parent
-    Properties
-    ReadingOrder
+'OnChangeMacro' 'OnClickMacro' 'OnDblClickMacro' 'OnEnterMacro' 'OnExitMacro' 'OnGotFocusMacro' 'OnKeyDownMacro' 'OnKeyPressMacro' 'OnKeyUpMacro' 'OnLostFocusMacro' 'OnMouseDownMacro' 'OnMouseMoveMacro' 'OnMouseUpMacro' 'OnNotInListMacro'     ReadingOrder
     Recordset
     RightMargin
     RightPadding

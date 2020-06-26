@@ -198,13 +198,10 @@ GridlineWidthTop
 Height
 HelpContextId
 HorizontalAnchor
-Hyperlink
 HyperlinkAddress
 HyperlinkSubAddress
 InSelection
 IsVisible
-Layout
-LayoutID
 Left
 LeftMargin
 LeftPadding
@@ -217,8 +214,7 @@ OnDblClick
 OnMouseDown
 OnMouseMove
 OnMouseUp
-Parent
-Properties
+'OnClickMacro' 'OnDblClickMacro' 'OnMouseDownMacro' 'OnMouseMoveMacro' 'OnMouseUpMacro'
 ReadingOrder
 RightMargin
 RightPadding

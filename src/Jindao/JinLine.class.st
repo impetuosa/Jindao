@@ -96,8 +96,6 @@ JinLine class >> propertiesToInfuse [
     LineSlant
     Name
     OldBorderStyle
-    Parent
-    Properties
     Section
     SpecialEffect
     Tag

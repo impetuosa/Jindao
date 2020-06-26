@@ -26,3 +26,8 @@ JinReportBody >> groupLevels [
 JinReportBody >> name: aString [
 	handle propertyNamed: #Name put: aString
 ]
+
+{ #category : #'as yet unclassified' }
+JinReportBody >> propertiesToInfuse [
+	^ JinReport propertiesToInfuse
+]

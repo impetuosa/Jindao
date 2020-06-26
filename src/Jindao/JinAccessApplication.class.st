@@ -70,16 +70,6 @@ JinAccessApplication >> activeReport [
 ]
 
 { #category : #'as yet unclassified' }
-JinAccessApplication >> addReference: aName builtIn: isBuiltIn path: aFileReference guid: aGuid [
-[	(handle propertyNamed: #References)
-		dispatch: #AddFromFile
-		withArguments: {aFileReference fullName}] on: Error do: [ :e | 
-		
-			
-		 ]
-]
-
-{ #category : #'as yet unclassified' }
 JinAccessApplication >> addReference: aName builtIn: isBuiltIn path: aFileReference guid: aGuid major: aMajor minor: aMinor [
 	| addedRef |
 	self references
@@ -546,8 +536,8 @@ JinAccessApplication >> openedTableHandles [
 
 { #category : #'as yet unclassified' }
 JinAccessApplication >> quit [
-	handle dispatch: #Quit.
-	handle := nil
+	[ handle dispatch: #Quit ]
+		ensure: [ handle := nil ]
 ]
 
 { #category : #accessing }
@@ -585,8 +575,12 @@ JinAccessApplication >> rename: anObject with: aName [
 
 { #category : #initialization }
 JinAccessApplication >> reopen: aFileReference into: aProject [
-	aProject close.
-	self quit.
+	[ aProject close ]
+		on: Error
+		do: [ :e |  ].
+	[ self quit ]
+		on: Error
+		do: [ :e |  ].
 	self open: aFileReference into: aProject
 ]
 

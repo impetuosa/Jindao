@@ -91,6 +91,11 @@ JinFormBody >> module [
 ]
 
 { #category : #'as yet unclassified' }
+JinFormBody >> propertiesToInfuse [
+	^ JinForm propertiesToInfuse
+]
+
+{ #category : #'as yet unclassified' }
 JinFormBody >> resolveObjectFor: aHandle [
 	| name |
 	name := aHandle propertyNamed: #Name.

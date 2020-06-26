@@ -161,6 +161,99 @@ JinCheckbox class >> mappedTypeName [
 	^#'_Checkbox'
 ]
 
+{ #category : #'as yet unclassified' }
+JinCheckbox class >> propertiesToInfuse [
+^#(
+    AddColon
+    AfterUpdate
+    AutoLabel
+    BeforeUpdate
+	AfterUpdateMacro
+	 BeforeUpdateMacro
+    BorderColor
+    BorderShade
+    BorderStyle
+    BorderThemeColorIndex
+    BorderTint
+    BorderWidth
+    BottomPadding
+    ColumnHidden
+    ColumnOrder
+    ColumnWidth
+    Controls
+    ControlSource
+    ControlTipText
+    ControlType
+    DefaultValue
+    DisplayWhen
+    Enabled
+    EventProcPrefix
+    GridlineColor
+    GridlineShade
+    GridlineStyleBottom
+    GridlineStyleLeft
+    GridlineStyleRight
+    GridlineStyleTop
+    GridlineThemeColorIndex
+    GridlineTint
+    GridlineWidthBottom
+    GridlineWidthLeft
+    GridlineWidthRight
+    GridlineWidthTop
+    Height
+    HelpContextId
+    HideDuplicates
+    HorizontalAnchor
+    InSelection
+    IsVisible
+    LabelAlign
+    LabelX
+    LabelY
+    Layout
+    LayoutID
+    Left
+    LeftPadding
+    Locked
+    Name
+    OldBorderStyle
+    OldValue
+    OnClick
+    OnDblClick
+    OnEnter
+    OnExit
+    OnGotFocus
+    OnKeyDown
+    OnKeyPress
+    OnKeyUp
+    OnLostFocus
+    OnMouseDown
+    OnMouseMove
+    OnMouseUp
+'OnClickMacro' 'OnDblClickMacro' 'OnEnterMacro' 'OnExitMacro' 'OnGotFocusMacro' 'OnKeyDownMacro' 'OnKeyPressMacro' 'OnKeyUpMacro' 'OnLostFocusMacro' 'OnMouseDownMacro' 'OnMouseMoveMacro' 'OnMouseUpMacro'
+    OptionValue
+    Parent
+    Properties
+    ReadingOrder
+    RightPadding
+    Section
+    ShortcutMenuBar
+    SpecialEffect
+    StatusBarText
+    TabIndex
+    TabStop
+    Tag
+    Top
+    TopPadding
+    TripleState
+    ValidationRule
+    ValidationText
+    Value
+    VerticalAnchor
+    Visible
+    Width
+)
+]
+
 { #category : #generated }
 JinCheckbox >> acceptVisitor: aVisitor [
 	^ aVisitor visitCheckbox: self

@@ -112,35 +112,29 @@ JinPage class >> mappedTypeName [
 { #category : #accessing }
 JinPage class >> propertiesToInfuse [
 	^ #(Caption
-Controls
 ControlTipText
 ControlType
 Enabled
 EventProcPrefix
-Height
 HelpContextId
 InSelection
 IsVisible
-Left
 Name
 OnClick
 OnDblClick
 OnMouseDown
 OnMouseMove
 OnMouseUp
+'OnClickMacro' 'OnDblClickMacro' 'OnMouseDownMacro' 'OnMouseMoveMacro' 'OnMouseUpMacro'
 PageIndex
-Parent
 Picture
 PictureData
 PictureType
-Properties
 Section
 ShortcutMenuBar
 StatusBarText
 Tag
-Top
-Visible
-Width)
+Visible)
 ]
 
 { #category : #generated }
