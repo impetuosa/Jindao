@@ -18,7 +18,8 @@ Class {
 		'target',
 		'renames',
 		'failures',
-		'successes'
+		'successes',
+		'statistics'
 	],
 	#category : #'Jindao-FuZhi'
 }
@@ -64,7 +65,7 @@ FuReplicant class >> source: aJinAccessProject target: aJinAccessProject2 [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visit-first-objects' }
 FuReplicant >> applyRenames [
 	target reopen.
 	renames do: [ :r | r applyOn: target ]
@@ -74,19 +75,12 @@ FuReplicant >> applyRenames [
 FuReplicant >> create: c in: form [
 	[ | val |
 	val := c createIn: form.
-	self
-		registerSuccess: [ {#CreateControl.
-			val printString} ].
+	self registerStatisticChild: c.
 	^ val ]
 		on: Win32Error
 		do: [ :e | 
-			self
-				registerFailedEntity: [ {#CreateControl.
-					e messageText.
-					c name.
-					c handle getTypeInfo name.
-					form}.
-					^ nil ] ]
+			self registerFailStatisticChild: c error: e messageText.
+			^ nil ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -96,19 +90,26 @@ FuReplicant >> create: c inReport: report [
 		createControl: c name
 		type: c controlTypeNumber
 		section: c section.
-	self
-		registerSuccess: [ {#CreateReportControl.
-			val printString} ].
+	self registerStatisticChild: c.
 	^ val ]
 		on: Win32Error
 		do: [ :e | 
-			self
-				registerFailedEntity: [ {#CreateReportControl.
-					e messageText.
-					c name.
-					c handle getTypeInfo name.
-					report}.
-					^ nil ] ]
+			self registerFailStatisticChild: c error: e messageText.
+			^ nil ]
+]
+
+{ #category : #statistics }
+FuReplicant >> createdFirstCitizen [
+	^ (((successes groupedBy: #first) at: #ReplicateObject)
+		groupedBy: [ :a | a second className ]) associations
+		collect: [ :a | a key -> a value size ]
+]
+
+{ #category : #statistics }
+FuReplicant >> failedFirstCitizen [
+	^ (((failures groupedBy: #first) at: #ReplicateObject)
+		groupedBy: [ :a | a third className ]) associations
+		collect: [ :a | a key -> a value size ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -147,26 +148,112 @@ FuReplicant >> infuseProperties: aJinObjectSource into: aJinObjectTarget [
 						ifFalse: [ e signal ] ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 FuReplicant >> initialize [
 	super initialize.
 	renames := OrderedCollection new.
 	failures := OrderedCollection new.
 	successes := OrderedCollection new.
+	statistics := Dictionary new. 
 ]
 
 { #category : #'as yet unclassified' }
-FuReplicant >> registerFailedEntity: anEntity [
-	[ failures add: anEntity value ]
-		on: Error
-		do: [ :e | self halt ]
+FuReplicant >> registerFailStatistic: anElement error: e [ 
+	statistics
+		at: anElement name
+		put:
+			(FuObject new
+				type: anElement class name;
+				name: anElement name;
+				success: false;
+				errorText: e messageText;
+				yourself)
 ]
 
 { #category : #'as yet unclassified' }
-FuReplicant >> registerSuccess: anEntity [
-	[ successes add: anEntity value ]
-		on: Error
-		do: [ :e | self halt ]
+FuReplicant >> registerFailStatisticChild: aControl error: errorText [
+	(statistics at: aControl parentName)
+		addChild:
+			(FuObject new
+				type: aControl class name;
+				name: aControl name;
+				success: false;
+				errorText: errorText;
+				yourself)
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> registerStatistic: anElement [
+	statistics
+		at: anElement name
+		put:
+			(FuObject new
+				type: anElement class name;
+				name: anElement name;
+				success: true;
+				yourself)
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> registerStatisticChild: aControl [
+	(statistics at: aControl parentName)
+		addChild:
+			(FuObject new 
+				type: aControl class name;
+				name: aControl name;
+				success: true;
+				yourself)
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> registerStatisticProperty: aName childOf: aHandle [
+	(statistics
+		at: ((aHandle propertyNamed: #Parent) propertyNamed: #Name))
+		addProperty:
+			(FuObject new
+				type: aHandle getTypeInfo name;
+				name: aName;
+				success: true;
+				yourself)
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> registerStatisticPropertyFailedToRead: aName childOf: aHandle [
+	(statistics
+		at: ((aHandle propertyNamed: #Parent) propertyNamed: #Name))
+		addProperty:
+			(FuObject new
+				type: aHandle getTypeInfo name;
+				name: aName;
+				success: false;
+				error: 'Failed to read from source application'
+				yourself)
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> registerStatisticPropertyFailedToWrite: aName childOf: aHandle [
+	(statistics
+		at: ((aHandle propertyNamed: #Parent) propertyNamed: #Name))
+		addProperty:
+			(FuObject new
+				type: aHandle getTypeInfo name;
+				name: aName;
+				success: false;
+				error: 'Failed to write to target application'
+				yourself)
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> registerStatisticPropertyReadOnly: aName childOf: aHandle [
+	(statistics
+		at: ((aHandle propertyNamed: #Parent) propertyNamed: #Name))
+		addProperty:
+			(FuObject new
+				type: aHandle getTypeInfo name;
+				name: aName;
+				success: #readOnly;
+				error: 'Readonly property'
+				yourself)
 ]
 
 { #category : #'as yet unclassified' }
@@ -341,40 +428,28 @@ FuReplicant >> sectionsFrom: aJinReport into: report [
 			do: [ :e | ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #initialization }
 FuReplicant >> set: aName from: aHandle to: otherHandle [
-	| value  |
-	[ value := aHandle propertyNamed: aName.
-	value = (otherHandle propertyNamed: aName)
-		ifFalse: [ otherHandle propertyNamed: aName putIfWritable: value ].
-		
-	value = (otherHandle propertyNamed: aName)
-		ifTrue: [ self
-				registerSuccess: [ {#SetProperty.
-					aName.
-					(aHandle propertyNamed: #Name).
-					aHandle getTypeInfo name} ] ]
-		ifFalse: [ self
-				registerSuccess: [ {#SetPropertyFailed.
-					aName.
-					(aHandle propertyNamed: #Name).
-					aHandle getTypeInfo name . value . (otherHandle propertyNamed: aName) } ]  ] ]
+	| value |
+	[ value := aHandle propertyNamed: aName ]
 		on: Win32Error , KeyNotFound
-		do: [ :e | 
-			self
-				registerFailedEntity:
-				[	{#SetProperty.
-					e messageText.
-					aName.
-					aHandle getTypeInfo name} ]]
+		do:
+			[ :e | ^ self registerStatisticPropertyFailedToRead: aName childOf: aHandle ].
+	value = (otherHandle propertyNamed: aName)
+		ifFalse: [ [ (otherHandle propertyNamed: aName putIfWritable: value)
+				ifFalse: [ ^ self registerStatisticPropertyReadOnly: aName childOf: aHandle ] ]
+				on: Win32Error , KeyNotFound
+				do:
+					[ :e | ^ self registerStatisticPropertyFailedToWrite: aName childOf: aHandle ] ].
+	self registerStatisticProperty: aName childOf: aHandle 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 FuReplicant >> source: aJinAccessProject [
 	source := aJinAccessProject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 FuReplicant >> target: aJinAccessProject [ 
 	target := aJinAccessProject
 ]
@@ -395,24 +470,19 @@ FuReplicant >> transferContentFrom: aTable to: anOtherTable [
 	^ x
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visit-first-objects' }
 FuReplicant >> visitCollection: aCollection [
 	aCollection
 		do: [ :element | 
-			[ element acceptVisitor: self . 
-			self registerSuccess: [{ #ReplicateObject . element }].
-			]
+			[ element acceptVisitor: self.
+			self registerStatistic: element ]
 				on: Win32Error
 				do: [ :e | 
 					e passIfNotError0x80020009.
-					self
-						registerFailedEntity:
-							[{#ReplicateObject.
-							e messageText.
-							element}] ] ]
+					self registerFailStatistic: element error: e ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visit-first-objects' }
 FuReplicant >> visitForm: aForm [
 	[ self replicateForm: aForm ]
 		on: Win32Error
@@ -433,34 +503,27 @@ FuReplicant >> visitIndex: aJinIndex [
 			index primaryKey: aJinIndex primaryKey.
 			index unique: aJinIndex unique.
 			stack top registerIndex: index.
-			self
-				registerSuccess: [ {#CreateIndex.
-					aJinIndex name.
-					stack top name} ] ] ]
+			self registerStatisticChild: aJinIndex ] ]
 		on: Win32Error
 		do: [ :e | 
 			e passIfNotError0x80020009.
-			self
-				registerFailedEntity:
-					[{#IndexCreation.
-					e messageText.
-					aJinIndex name}] ]
+			self registerFailStatisticChild: aJinIndex error: e messageText ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visit-first-objects' }
 FuReplicant >> visitMacro: aModelObject [
 	self
 		push: (self replicateMacro: aModelObject)
 		during: [ super visitMacro: aModelObject ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visit-first-objects' }
 FuReplicant >> visitModule: aModule [
 	self replicateModule: aModule.
 	aModule ensureUnload
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visit-first-objects' }
 FuReplicant >> visitProject: aJinAccessProject [
 
 	self visitCollection: aJinAccessProject references.
@@ -476,7 +539,7 @@ FuReplicant >> visitProject: aJinAccessProject [
 	self visitCollection: aJinAccessProject relations
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visit-first-objects' }
 FuReplicant >> visitQuery: anObject [
 	self
 		push: (self replicateQuery: anObject)
@@ -484,7 +547,7 @@ FuReplicant >> visitQuery: anObject [
 	anObject ensureUnload
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visit-first-objects' }
 FuReplicant >> visitReference: aReference [
 	target
 		addReference: aReference name
@@ -495,13 +558,13 @@ FuReplicant >> visitReference: aReference [
 		minor: aReference minor
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visit-first-objects' }
 FuReplicant >> visitReport: aModelObject [
 	self replicateReport: aModelObject.
 	aModelObject ensureUnload
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visit-first-objects' }
 FuReplicant >> visitTable: anObject [
 	anObject isSystemTable
 		ifTrue: [ ^ self ].
@@ -511,19 +574,26 @@ FuReplicant >> visitTable: anObject [
 				push: (self replicateTable: anObject)
 				during: [ [ | amount |
 					amount := self transferContentFrom: anObject to: stack top.
-					self
-						registerSuccess: [ {#TransferContent.
-							anObject name.
-							stack top name.
-							amount} ] ]
+					(statistics at: anObject name)
+						addChild:
+							(FuObject new
+								name: #TransferContent;
+								type: #NewRows;
+								success: true;
+								properties: {amount};
+								yourself) ]
 						on: Win32Error
 						do: [ :e | 
 							e passIfNotError0x80020009.
-							self
-								registerFailedEntity: [ {#TransferContent.
-									e messageText.
-									anObject name} ] ].
-					super visitTable: anObject ] ]
+							(statistics at: anObject name)
+								addChild:
+									(FuObject new
+										name: #TransferContent;
+										type: #NewRows;
+										success: false;
+										errorText: e messageText;
+										yourself).
+							super visitTable: anObject ] ] ]
 ]
 
 { #category : #'as yet unclassified' }

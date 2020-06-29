@@ -27,6 +27,7 @@ JinTableBody >> createIndex: aString [
 	| r |
 	r := handle dispatch: #CreateIndex withArguments: {aString}.
 	^ JinIndexBody new
+		table: self;
 		handle: r;
 		yourself
 ]

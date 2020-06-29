@@ -104,6 +104,11 @@ JinModelObject >> save [
 ]
 
 { #category : #'as yet unclassified' }
+JinModelObject >> typeGuid [
+	self shouldBeImplemented.
+]
+
+{ #category : #'as yet unclassified' }
 JinModelObject >> typeNumber [
 	^ self class typeNumber
 ]

@@ -2,7 +2,8 @@ Class {
 	#name : #JinIndexBody,
 	#superclass : #JinBodyObject,
 	#instVars : [
-		'fields'
+		'fields',
+		'table'
 	],
 	#category : #'Jindao-Core'
 }
@@ -67,6 +68,11 @@ JinIndexBody >> isForeign [
 ]
 
 { #category : #accessing }
+JinIndexBody >> parentName [
+	^ table name
+]
+
+{ #category : #accessing }
 JinIndexBody >> primaryKey [
 	^ handle propertyNamed: #Primary
 ]
@@ -84,6 +90,11 @@ JinIndexBody >> required [
 { #category : #accessing }
 JinIndexBody >> required: aBoolean [
 	handle propertyNamed: #Required put: aBoolean
+]
+
+{ #category : #accessing }
+JinIndexBody >> scopedBy: aTable [
+	table := aTable
 ]
 
 { #category : #accessing }

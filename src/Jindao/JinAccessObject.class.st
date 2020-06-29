@@ -53,3 +53,8 @@ JinAccessObject >> nameWithoutSpaces [
 JinAccessObject >> printOn: aStream [
 	aStream nextPutAll: self class name ; nextPut:$[ ; nextPutAll: self name ; nextPut: $]
 ]
+
+{ #category : #'as yet unclassified' }
+JinAccessObject >> typeGuid [
+	^ handle getTypeInfo guid
+]
