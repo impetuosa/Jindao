@@ -74,7 +74,9 @@ JinAccessProject >> close: aJinForm save: aBool [
 
 { #category : #'as yet unclassified' }
 JinAccessProject >> compileAll [
-	application compileAll
+	[ application compileAll ]
+		on: Error
+		do: [ self reopen ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -255,6 +257,16 @@ JinAccessProject >> export: aJinTable toFolder: aFileReference [
 	^ application export: aJinTable toFolder: aFileReference
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessProject >> exportXml: aJinTable toFolder: aFileReference [
+	application exportXml: aJinTable toFolder: aFileReference
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> fileName [
+	^ projectPath basename
+]
+
 { #category : #'form-api' }
 JinAccessProject >> forms [
 	^ JinCollection newDefault
@@ -347,6 +359,11 @@ JinAccessProject >> openReport: aJinReport [
 { #category : #'table-api' }
 JinAccessProject >> openTable: aJinTable [ 
 	^ application openTable: aJinTable 
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> parent [
+	^ projectPath
 ]
 
 { #category : #'as yet unclassified' }

@@ -68,11 +68,6 @@ JinIndexBody >> isForeign [
 ]
 
 { #category : #accessing }
-JinIndexBody >> parentName [
-	^ table name
-]
-
-{ #category : #accessing }
 JinIndexBody >> primaryKey [
 	^ handle propertyNamed: #Primary
 ]
@@ -93,8 +88,23 @@ JinIndexBody >> required: aBoolean [
 ]
 
 { #category : #accessing }
+JinIndexBody >> scope: aTable [
+	table := aTable
+]
+
+{ #category : #accessing }
 JinIndexBody >> scopedBy: aTable [
 	table := aTable
+]
+
+{ #category : #accessing }
+JinIndexBody >> scopingName [
+	^ table name
+]
+
+{ #category : #'as yet unclassified' }
+JinIndexBody >> table: aJinTableBody [ 
+	table := aJinTableBody
 ]
 
 { #category : #accessing }

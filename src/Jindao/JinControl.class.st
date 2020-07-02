@@ -51,6 +51,11 @@ JinControl >> createIn: aJinForm [
 ]
 
 { #category : #'as yet unclassified' }
+JinControl >> isControl [
+	^true
+]
+
+{ #category : #'as yet unclassified' }
 JinControl >> isCustomControl [
 	^ false
 ]
@@ -107,6 +112,11 @@ JinControl >> propertiesToInfuse [
 { #category : #'as yet unclassified' }
 JinControl >> scopedBy: aFormOrReport [
 	scope := aFormOrReport
+]
+
+{ #category : #'as yet unclassified' }
+JinControl >> scopingName [
+	^ scope name
 ]
 
 { #category : #'as yet unclassified' }

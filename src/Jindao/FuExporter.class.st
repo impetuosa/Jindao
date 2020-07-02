@@ -37,7 +37,9 @@ FuExporter >> visitModule: anObject [
 FuExporter >> visitProject: aJinAccessProject [
 	self visitCollection: aJinAccessProject modules.
 	self visitCollection: aJinAccessProject reports.
-	self visitCollection: aJinAccessProject forms
+	self visitCollection: aJinAccessProject forms.
+	self visitCollection: aJinAccessProject tables.
+	self visitCollection: aJinAccessProject queries.
 
 	"	self visitCollection: aJinAccessProject macros."
 ]
@@ -54,5 +56,5 @@ FuExporter >> visitReport: anObject [
 
 { #category : #'visit-first-objects' }
 FuExporter >> visitTable: anObject [
-	self export: anObject.
+	[self export: anObject.] on: Error do: [ :e |  ]
 ]

@@ -15,6 +15,13 @@ JinQuery >> acceptVisitor: aVisitor [
 ]
 
 { #category : #accessing }
+JinQuery >> exportToFolder: aFolder [
+	(aFolder / self name , 'QUERY') writeStream
+		nextPutAll: self sql;
+		close
+]
+
+{ #category : #accessing }
 JinQuery >> privateLoadBodyObject [
 	^ (project openQuery: self)
 ]

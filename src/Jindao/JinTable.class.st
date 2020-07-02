@@ -44,6 +44,11 @@ JinTable >> createIndex: aString [
 ]
 
 { #category : #'as yet unclassified' }
+JinTable >> exportToFolder: aFolder [
+	^ project exportXml: self toFolder: aFolder
+]
+
+{ #category : #'as yet unclassified' }
 JinTable >> fields [
 	^ self body fields 
 ]

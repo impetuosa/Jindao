@@ -119,7 +119,7 @@ anOtherAccessObject ifNil: [ ^ self ].
 		ifTrue: [ ^ self infuseProperties: anAccessObject into: anOtherAccessObject ].
 	anAccessObject propertiesToInfuse
 		do:
-			[ :p | self set: p from: anAccessObject handle to: anOtherAccessObject handle ]
+			[ :p | self set: p from: anAccessObject handle to: anOtherAccessObject handle context: anAccessObject  ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -158,13 +158,32 @@ FuReplicant >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+FuReplicant >> points [
+	^ (statistics values collect: #points) average
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> pointsPerType [
+	^ (statistics values groupedBy: #type) associations
+		collect: [ :o | o key -> (o value collect: #points) average asFloat ]
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> printOn: aStream [
+	aStream nextPutAll: 'Replicant[P:'.
+	aStream
+		nextPutAll: source fileName;
+		nextPutAll: ']'
+]
+
+{ #category : #'as yet unclassified' }
 FuReplicant >> registerFailStatistic: anElement error: e [ 
 	statistics
-		at: anElement name
+		at: ([anElement name] ifError:[anElement class name, anElement handle getTypeInfo guid ])
 		put:
 			(FuObject new
 				type: anElement class name;
-				name: anElement name;
+				name: ([anElement name] ifError:[anElement class name, anElement handle getTypeInfo guid ]);
 				success: false;
 				errorText: e messageText;
 				yourself)
@@ -172,7 +191,7 @@ FuReplicant >> registerFailStatistic: anElement error: e [
 
 { #category : #'as yet unclassified' }
 FuReplicant >> registerFailStatisticChild: aControl error: errorText [
-	(statistics at: aControl parentName)
+	(statistics at: aControl scopingName)
 		addChild:
 			(FuObject new
 				type: aControl class name;
@@ -185,18 +204,18 @@ FuReplicant >> registerFailStatisticChild: aControl error: errorText [
 { #category : #'as yet unclassified' }
 FuReplicant >> registerStatistic: anElement [
 	statistics
-		at: anElement name
-		put:
+		at: ([anElement name] ifError:[anElement class name, anElement handle getTypeInfo guid ])
+		ifAbsentPut:[
 			(FuObject new
 				type: anElement class name;
-				name: anElement name;
+				name:([anElement name] ifError:[anElement class name, anElement handle getTypeInfo guid ]);
 				success: true;
-				yourself)
+				yourself)]
 ]
 
 { #category : #'as yet unclassified' }
 FuReplicant >> registerStatisticChild: aControl [
-	(statistics at: aControl parentName)
+	(statistics at: aControl scopingName)
 		addChild:
 			(FuObject new 
 				type: aControl class name;
@@ -206,54 +225,83 @@ FuReplicant >> registerStatisticChild: aControl [
 ]
 
 { #category : #'as yet unclassified' }
-FuReplicant >> registerStatisticProperty: aName childOf: aHandle [
-	(statistics
-		at: ((aHandle propertyNamed: #Parent) propertyNamed: #Name))
-		addProperty:
-			(FuObject new
-				type: aHandle getTypeInfo name;
-				name: aName;
-				success: true;
-				yourself)
+FuReplicant >> registerStatisticProperty: aName childOf: aModelObject [
+	aModelObject isControl
+		ifFalse: [ (statistics at: aModelObject name)
+				addProperty:
+					(FuObject new
+						type: aModelObject class name;
+						name: aName;
+						success: true;
+						yourself) ]
+		ifTrue: [ ((statistics at: aModelObject scopingName) children
+				detect: [ :f | f name = aModelObject name ])
+				addProperty:
+					(FuObject new
+						type: aModelObject class name;
+						name: aName;
+						success: true;
+						yourself) ]
 ]
 
 { #category : #'as yet unclassified' }
-FuReplicant >> registerStatisticPropertyFailedToRead: aName childOf: aHandle [
-	(statistics
-		at: ((aHandle propertyNamed: #Parent) propertyNamed: #Name))
-		addProperty:
-			(FuObject new
-				type: aHandle getTypeInfo name;
-				name: aName;
-				success: false;
-				error: 'Failed to read from source application'
-				yourself)
+FuReplicant >> registerStatisticPropertyFailedToRead: aName childOf: aModelObject [
+	aModelObject isControl
+		ifFalse: [ (statistics at: aModelObject name)
+				addProperty:
+					(FuObject new
+						type: aModelObject class name;
+						name: aName;
+						success: false;
+						errorText: 'Failed to read from source application' yourself) ]
+		ifTrue: [ ((statistics at: aModelObject scopingName) children
+				detect: [ :f | f name = aModelObject name ])
+				addProperty:
+					(FuObject new
+						type: aModelObject class name;
+						name: aName;
+						success: false;
+						errorText: 'Failed to read from source application' yourself) ]
 ]
 
 { #category : #'as yet unclassified' }
-FuReplicant >> registerStatisticPropertyFailedToWrite: aName childOf: aHandle [
-	(statistics
-		at: ((aHandle propertyNamed: #Parent) propertyNamed: #Name))
-		addProperty:
-			(FuObject new
-				type: aHandle getTypeInfo name;
-				name: aName;
-				success: false;
-				error: 'Failed to write to target application'
-				yourself)
+FuReplicant >> registerStatisticPropertyFailedToWrite: aName childOf: aModelObject [
+	aModelObject isControl
+		ifFalse: [ (statistics at: aModelObject name)
+				addProperty:
+					(FuObject new
+						type: aModelObject class name;
+						name: aName;
+						success: false;
+						errorText: 'Failed to write to target application' yourself) ]
+		ifTrue: [ ((statistics at: aModelObject scopingName) children
+				detect: [ :f | f name = aModelObject name ])
+				addProperty:
+					(FuObject new
+						type: aModelObject class name;
+						name: aName;
+						success: false;
+						errorText: 'Failed to write to target application' yourself) ]
 ]
 
 { #category : #'as yet unclassified' }
-FuReplicant >> registerStatisticPropertyReadOnly: aName childOf: aHandle [
-	(statistics
-		at: ((aHandle propertyNamed: #Parent) propertyNamed: #Name))
-		addProperty:
-			(FuObject new
-				type: aHandle getTypeInfo name;
-				name: aName;
-				success: #readOnly;
-				error: 'Readonly property'
-				yourself)
+FuReplicant >> registerStatisticPropertyReadOnly: aName childOf: aModelObject [
+	aModelObject isControl
+		ifFalse: [ (statistics at: aModelObject name)
+				addProperty:
+					(FuObject new
+						type: aModelObject class name;
+						name: aName;
+						success: #readOnly;
+						errorText: 'Readonly property' yourself) ]
+		ifTrue: [ ((statistics at: aModelObject scopingName) children 
+				detect: [ :f | f name = aModelObject name ])
+				addProperty:
+					(FuObject new
+						type: aModelObject class name;
+						name: aName;
+						success: #readOnly;
+						errorText: 'Readonly property' yourself) ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -403,6 +451,7 @@ FuReplicant >> replicateTable: aJinTable [
 				attributes: aJinTable attributes
 				sourceTableName: aJinTable sourceTableName
 				connect: aJinTable connect ].
+	self registerStatistic: aJinTable.
 	^ target tables detect: [ :t | t name = aJinTable name ]
 ]
 
@@ -444,6 +493,22 @@ FuReplicant >> set: aName from: aHandle to: otherHandle [
 	self registerStatisticProperty: aName childOf: aHandle 
 ]
 
+{ #category : #initialization }
+FuReplicant >> set: aName from: aHandle to: otherHandle context: aModelObject [ 
+	| value |
+	[ value := aHandle propertyNamed: aName ]
+		on: Win32Error , KeyNotFound
+		do:
+			[ :e | ^ self registerStatisticPropertyFailedToRead: aName childOf: aModelObject ].
+	value = (otherHandle propertyNamed: aName)
+		ifFalse: [ [ (otherHandle propertyNamed: aName putIfWritable: value)
+				ifFalse: [ ^ self registerStatisticPropertyReadOnly: aName childOf:  aModelObject ] ]
+				on: Win32Error , KeyNotFound
+				do:
+					[ :e | ^ self registerStatisticPropertyFailedToWrite: aName childOf:  aModelObject ] ].
+	self registerStatisticProperty: aName childOf:  aModelObject 
+]
+
 { #category : #accessing }
 FuReplicant >> source: aJinAccessProject [
 	source := aJinAccessProject
@@ -474,8 +539,10 @@ FuReplicant >> transferContentFrom: aTable to: anOtherTable [
 FuReplicant >> visitCollection: aCollection [
 	aCollection
 		do: [ :element | 
-			[ element acceptVisitor: self.
-			self registerStatistic: element ]
+			[ 
+			self registerStatistic: element.
+			element acceptVisitor: self.
+			 ]
 				on: Win32Error
 				do: [ :e | 
 					e passIfNotError0x80020009.
@@ -580,7 +647,7 @@ FuReplicant >> visitTable: anObject [
 								name: #TransferContent;
 								type: #NewRows;
 								success: true;
-								properties: {amount};
+								properties: {amount} asOrderedCollection ;
 								yourself) ]
 						on: Win32Error
 						do: [ :e | 

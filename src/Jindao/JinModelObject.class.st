@@ -54,6 +54,10 @@ JinModelObject >> exportToFolder: aFolder [
 	^ project export: self toFolder: aFolder
 ]
 
+{ #category : #'as yet unclassified' }
+JinModelObject >> isControl [ 	^ false
+]
+
 { #category : #accessing }
 JinModelObject >> isLoaded [
 	^ body isNotNil and: [ description isLoaded ]

@@ -385,6 +385,24 @@ JinAccessApplication >> export: aJinModelObject toFolder: aFileReference [
 			destination fullName}
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessApplication >> exportXml: aJinModelObject toFolder: aFileReference [
+	| destination xsd |
+	destination := aFileReference / aJinModelObject name
+		,
+			((aJinModelObject class name copyReplaceAll: 'Jin' with: '')
+				, 'CONTENT').
+	xsd := aFileReference / aJinModelObject name
+		, (aJinModelObject class name copyReplaceAll: 'Jin' with: '').
+	handle
+		dispatch: #ExportXML
+		withArguments:
+			{aJinModelObject typeNumber.
+			aJinModelObject name.
+			destination fullName.
+			xsd fullName}
+]
+
 { #category : #initialization }
 JinAccessApplication >> handle [
 	^ handle

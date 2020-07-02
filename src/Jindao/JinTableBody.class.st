@@ -50,6 +50,7 @@ JinTableBody >> indexes [
 		factory:
 			(JinRemoteObjectOnlyGenericsFactory new
 				defaultHierarchyClass: JinIndexBody;
+				scopedBy: self;
 				yourself)
 ]
 

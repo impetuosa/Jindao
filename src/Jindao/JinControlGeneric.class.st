@@ -33,7 +33,7 @@ JinControlGeneric >> printOn: aStream [
 
 { #category : #'as yet unclassified' }
 JinControlGeneric >> propertiesToInfuse [
-	self assert: handle getTypeInfo name = '_CustomControl'.
+"	self assert: handle getTypeInfo name = '_CustomControl'."
 	^ self properties collect: #name
 ]
 
