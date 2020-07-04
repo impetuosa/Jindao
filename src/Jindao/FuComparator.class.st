@@ -6,8 +6,38 @@ Class {
 		'target',
 		'registry'
 	],
+	#classInstVars : [
+		'data'
+	],
 	#category : #'Jindao-FuZhi'
 }
+
+{ #category : #'as yet unclassified' }
+FuComparator class >> data [
+	^ data
+]
+
+{ #category : #'as yet unclassified' }
+FuComparator class >> data: aCollection [
+	data := aCollection
+]
+
+{ #category : #'as yet unclassified' }
+FuComparator >> aggregationPerType [
+
+^ (registry groupedBy: #type) associations
+		collect: [ :ass | 
+			| comp |
+			comp := ass value collect: [: d | d completeness  ].
+			{
+			ass key.
+			comp max.
+			comp min.
+			((comp collect: [ :v | v roundUpTo: 1 ]) mode) asFloat.
+			((comp collect: [ :v | v roundUpTo: 1 ]) median) asFloat.
+			comp averageOrZero.
+			comp stdevOrZero} ]
+]
 
 { #category : #'visit-first-objects' }
 FuComparator >> compare [
@@ -141,6 +171,21 @@ FuComparator >> compareTable: aTable with: anOtherTable [
 FuComparator >> initialize [
 	super initialize.
 	registry := OrderedCollection new
+]
+
+{ #category : #'as yet unclassified' }
+FuComparator >> name [
+	^ source fileName readStream upTo: $.
+]
+
+{ #category : #'as yet unclassified' }
+FuComparator >> overview [
+	^ registry
+		collect: [ :c | 
+		{	self name.
+		(	c type asString  copyReplaceAll: 'Jin' with:'').
+			c name .
+			c completeness }  ]
 ]
 
 { #category : #accessing }

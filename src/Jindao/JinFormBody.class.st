@@ -83,6 +83,11 @@ JinFormBody >> height: anInteger [
 ]
 
 { #category : #'as yet unclassified' }
+JinFormBody >> left [
+	^ handle propertyNamed: 'WindowLeft'
+]
+
+{ #category : #'as yet unclassified' }
 JinFormBody >> module [
 	^ module
 		ifNil: [ module := JinSubModuleBody new
@@ -102,6 +107,16 @@ JinFormBody >> resolveObjectFor: aHandle [
 	^ self name = name
 		ifTrue: [ self ]
 		ifFalse: [ self controls detect: [ :c | c name = name ] ]
+]
+
+{ #category : #'as yet unclassified' }
+JinFormBody >> right [
+	^ handle propertyNamed: 'WindowRight'
+]
+
+{ #category : #'as yet unclassified' }
+JinFormBody >> top [
+	^ handle propertyNamed: 'WindowTop'
 ]
 
 { #category : #'as yet unclassified' }

@@ -21,8 +21,21 @@ Class {
 		'successes',
 		'statistics'
 	],
+	#classInstVars : [
+		'data'
+	],
 	#category : #'Jindao-FuZhi'
 }
+
+{ #category : #'as yet unclassified' }
+FuReplicant class >> data [
+	^ data
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant class >> data: aCollection [
+	data := aCollection
+]
 
 { #category : #'as yet unclassified' }
 FuReplicant class >> replicate: aJinAccessProject into: aJinAccessProject2 [
@@ -63,6 +76,34 @@ FuReplicant class >> source: aJinAccessProject target: aJinAccessProject2 [
 		source: aJinAccessProject;
 		target: aJinAccessProject2;
 		yourself
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> aggregation [
+	| comp |
+	comp := statistics values collect: [ :d | d failures * 100 ].
+	^ {comp max.
+	comp min.
+	(comp collect: [ :v | v roundUpTo: 1 ]) mode asFloat.
+	(comp collect: [ :v | v roundUpTo: 1 ]) median asFloat.
+	comp averageOrZero.
+	comp stdevOrZero}
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> aggregationPerType [
+^ self statisticsPerType associations
+		collect: [ :ass | 
+			| comp |
+			comp := ass value collect: [: d | d failures * 100 ].
+			{
+			ass key.
+			comp max.
+			comp min.
+			((comp collect: [ :v | v roundUpTo: 1 ]) mode) asFloat.
+			((comp collect: [ :v | v roundUpTo: 1 ]) median) asFloat.
+			comp averageOrZero.
+			comp stdevOrZero} ]
 ]
 
 { #category : #'visit-first-objects' }
@@ -155,6 +196,21 @@ FuReplicant >> initialize [
 	failures := OrderedCollection new.
 	successes := OrderedCollection new.
 	statistics := Dictionary new. 
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> name [
+	^ source fileName readStream upTo: $.
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> overview [
+	^ statistics values
+		collect: [ :c | 
+			{self name.
+			c type asString copyReplaceAll: 'Jin' with: ''.
+			c name.
+			c failures * 100 }]
 ]
 
 { #category : #'as yet unclassified' }
@@ -512,6 +568,11 @@ FuReplicant >> set: aName from: aHandle to: otherHandle context: aModelObject [
 { #category : #accessing }
 FuReplicant >> source: aJinAccessProject [
 	source := aJinAccessProject
+]
+
+{ #category : #'as yet unclassified' }
+FuReplicant >> statisticsPerType [
+	^ statistics values groupedBy: #type
 ]
 
 { #category : #accessing }

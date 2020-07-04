@@ -59,6 +59,22 @@ FuObject >> children: anObject [
 ]
 
 { #category : #accessing }
+FuObject >> completeness [
+	^ (1 - self distance ) *100
+]
+
+{ #category : #accessing }
+FuObject >> distance [
+	^ (success
+		ifFalse: [ 1 ]
+		ifTrue: [ children
+				ifEmpty: [ (properties collect: [ :p | p distance ]) averageOrZero ]
+				ifNotEmpty: [ 0.3 * (properties collect: [ :p | p distance]) averageOrZero
+						+ (0.7 * (children collect: [ :p | p distance]) averageOrZero) ] ])
+		asFloat
+]
+
+{ #category : #accessing }
 FuObject >> errorText [
 	^ errorText
 ]
@@ -66,6 +82,20 @@ FuObject >> errorText [
 { #category : #accessing }
 FuObject >> errorText: anObject [
 	errorText := anObject
+]
+
+{ #category : #accessing }
+FuObject >> failures [
+	| base |
+	base := success = true
+		ifTrue: [ 0 ]
+		ifFalse: [ 1 ].
+	^ (base + (children
+		ifEmpty: [ (properties reject:[ : p | p isLiteral ] thenCollect: [ :p | p failures  ]) averageOrZero ]
+		ifNotEmpty: [ 
+			(0.1 * (properties  reject:[ : p | p isLiteral ] thenCollect: [ :p | p failures ]) averageOrZero )+
+			(0.9 * (children collect: [ :p | p failures ]) averageOrZero)
+			 ])) asFloat
 ]
 
 { #category : #initialization }
