@@ -1,3 +1,6 @@
+"
+i am a factory that generates classes on demand. 
+"
 Class {
 	#name : #JinRemoteObjectGeneratorFactory,
 	#superclass : #JinRemoteObjectMappedTypesFactory,

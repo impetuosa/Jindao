@@ -1,3 +1,6 @@
+"
+I am a module. I have the power of dealing with my content 
+"
 Class {
 	#name : #JinModule,
 	#superclass : #JinVBObject,

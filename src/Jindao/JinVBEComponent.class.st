@@ -1,3 +1,6 @@
+"
+Some components have three faces. I represent the VBEnvironment representation, where low level properties of a form or report are available 
+"
 Class {
 	#name : #JinVBEComponent,
 	#superclass : #JinAccessObject,

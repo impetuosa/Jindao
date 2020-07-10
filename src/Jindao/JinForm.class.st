@@ -1,3 +1,6 @@
+"
+I am a form. 
+"
 Class {
 	#name : #JinForm,
 	#superclass : #JinVBObject,

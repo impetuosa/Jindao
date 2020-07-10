@@ -1,3 +1,6 @@
+"
+I do represent a Report. A report contains controls and oftenly a related module with the related code. As well i have more grouplevels than a form 
+"
 Class {
 	#name : #JinReportBody,
 	#superclass : #JinFormBody,

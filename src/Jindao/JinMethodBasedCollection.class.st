@@ -1,3 +1,6 @@
+"
+I differ from the point of view that i do not use a property to access content but a method. 
+"
 Class {
 	#name : #JinMethodBasedCollection,
 	#superclass : #JinCollection,

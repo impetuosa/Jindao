@@ -1,3 +1,6 @@
+"
+I represent a query 
+"
 Class {
 	#name : #JinQuery,
 	#superclass : #JinModelObject,

@@ -452,18 +452,12 @@ JinAccessApplication >> open: aFileReference into: aProject [
 
 { #category : #'form-api' }
 JinAccessApplication >> openForm: aJinForm [
-	[ self
+	self
 		command: #OpenForm
 		withArguments:
 			{aJinForm name.
 			1}.
-	^ self openedFormsHandles detect: [ :m | m name = aJinForm name ] ]
-		on: Win32Error
-		do: [ :e | 
-			e passIfNotError0x80020009.
-			[ ^ self activeForm ]
-				on: Win32Error
-				do: [ :e2 | e pass ] ]
+	^ self openedFormsHandles detect: [ :m | m name = aJinForm name ]
 ]
 
 { #category : #'module-api' }

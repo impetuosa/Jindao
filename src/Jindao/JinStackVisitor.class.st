@@ -1,3 +1,6 @@
+"
+I am a massive visitor. I can visit what ever in an access system . i add push:during for subclasses to be able to scope visiting 
+"
 Class {
 	#name : #JinStackVisitor,
 	#superclass : #JinVisitor,

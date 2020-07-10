@@ -1,3 +1,6 @@
+"
+I represent a model object with 3 faces instead  of 2. I merge in my self the knowledge extracted from the VB environment 
+"
 Class {
 	#name : #JinVBObject,
 	#superclass : #JinModelObject,

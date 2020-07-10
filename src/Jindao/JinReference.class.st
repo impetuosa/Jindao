@@ -1,3 +1,8 @@
+"
+I represent a static dependency of a project .
+
+
+"
 Class {
 	#name : #JinReference,
 	#superclass : #JinAccessObject,

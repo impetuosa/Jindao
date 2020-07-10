@@ -1,3 +1,6 @@
+"
+I represent a macro at the first citizen level. 
+"
 Class {
 	#name : #JinMacro,
 	#superclass : #JinModelObject,

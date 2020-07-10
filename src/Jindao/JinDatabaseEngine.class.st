@@ -1,3 +1,6 @@
+"
+I a represent the DBEngine main object. I have access to workspaces, relations etc. 
+"
 Class {
 	#name : #JinDatabaseEngine,
 	#superclass : #JinAccessObject,

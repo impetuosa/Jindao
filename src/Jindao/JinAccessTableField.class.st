@@ -1,3 +1,6 @@
+"
+I am a field of table. I know how to get  my name and i know if i am complex 
+"
 Class {
 	#name : #JinAccessTableField,
 	#superclass : #JinAccessObject,

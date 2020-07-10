@@ -1,3 +1,6 @@
+"
+I represent a table index. I put together field names tables and configurations 
+"
 Class {
 	#name : #JinIndexBody,
 	#superclass : #JinBodyObject,

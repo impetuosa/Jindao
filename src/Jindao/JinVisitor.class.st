@@ -1,3 +1,6 @@
+"
+I am a massive visitor. I can visit what ever in an access system . 
+"
 Class {
 	#name : #JinVisitor,
 	#superclass : #Object,

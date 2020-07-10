@@ -1,3 +1,6 @@
+"
+I point to a remote access collection. I have a cache at the level of accessed content (before passing by the factory. I for creation of entities at eachtime )
+"
 Class {
 	#name : #JinCachedMethodCollection,
 	#superclass : #JinMethodBasedCollection,

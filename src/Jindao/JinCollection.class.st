@@ -1,3 +1,6 @@
+"
+I am a proxy to an access collection .
+"
 Class {
 	#name : #JinCollection,
 	#superclass : #Object,

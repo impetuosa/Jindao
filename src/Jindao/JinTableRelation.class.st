@@ -1,3 +1,6 @@
+"
+I represent a fk relation in between to tables. I have one or many relation fields 
+"
 Class {
 	#name : #JinTableRelation,
 	#superclass : #JinAccessObject,

@@ -1,3 +1,8 @@
+"
+Property defines a Proprety object from the Access model. 
+This properties are an object representation of attributes from some specific object.
+
+"
 Class {
 	#name : #JinAccessProperty,
 	#superclass : #JinAccessObject,

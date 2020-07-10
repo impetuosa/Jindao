@@ -1,3 +1,6 @@
+"
+I do represent the body of a query. I can get the sql definition 
+"
 Class {
 	#name : #JinQueryBody,
 	#superclass : #JinBodyObject,

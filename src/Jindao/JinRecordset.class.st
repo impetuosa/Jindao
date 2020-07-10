@@ -1,3 +1,7 @@
+"
+I am a recordset. I represent the return of some query. 
+I behave like a stream 
+"
 Class {
 	#name : #JinRecordset,
 	#superclass : #JinAccessObject,

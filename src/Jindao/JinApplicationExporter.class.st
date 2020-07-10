@@ -1,3 +1,6 @@
+"
+I do export first citizen from an application 
+"
 Class {
 	#name : #JinApplicationExporter,
 	#superclass : #JinStackVisitor,

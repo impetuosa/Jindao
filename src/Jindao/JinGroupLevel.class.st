@@ -1,3 +1,6 @@
+"
+a group level defines some kind of composition and or agreggation in a report or complex form. 
+"
 Class {
 	#name : #JinGroupLevel,
 	#superclass : #JinAccessObject,

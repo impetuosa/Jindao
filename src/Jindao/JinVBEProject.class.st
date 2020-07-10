@@ -1,3 +1,6 @@
+"
+I represent a project that is included in the compilation. Either the project of my self, or a dependency 
+"
 Class {
 	#name : #JinVBEProject,
 	#superclass : #JinAccessObject,

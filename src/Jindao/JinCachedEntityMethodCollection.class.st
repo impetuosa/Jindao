@@ -1,3 +1,6 @@
+"
+I have a cache at the level of local entity. I return the same entity for the same positon always. 
+"
 Class {
 	#name : #JinCachedEntityMethodCollection,
 	#superclass : #JinCachedMethodCollection,

@@ -1,3 +1,7 @@
+"
+I represent a first citizen element. 
+I have the feature of being loadable, i put together many faces of the same concept (ex JinForm+JinFormBody+JinVBeForm)
+"
 Class {
 	#name : #JinModelObject,
 	#superclass : #Object,

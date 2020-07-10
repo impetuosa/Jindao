@@ -1,3 +1,6 @@
+"
+I am a factory that returns allways instances of a given class. 
+"
 Class {
 	#name : #JinRemoteObjectOnlyGenericsFactory,
 	#superclass : #JinRemotesFactory,

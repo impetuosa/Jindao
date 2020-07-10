@@ -1,3 +1,6 @@
+"
+a report is kind of a form with some extrea features  
+"
 Class {
 	#name : #JinReport,
 	#superclass : #JinForm,

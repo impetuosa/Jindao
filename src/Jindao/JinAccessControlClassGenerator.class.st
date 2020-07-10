@@ -38,7 +38,8 @@ JinAccessControlClassGenerator >> forceGenerationOfAllClasses [
 		flatCollect: [ :c | 
 			c controls
 				factory: JinRemoteObjectGeneratorFactory newControlSimpleClassBasedFactory ])
-		collect: [ :c | c yourself ]
+		collect: [ :c | c yourself ].
+
 ]
 
 { #category : #tests }

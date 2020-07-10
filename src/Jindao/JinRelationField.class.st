@@ -1,3 +1,6 @@
+"
+I represent a relationship field. I aput together a field of one table with the field name of other table 
+"
 Class {
 	#name : #JinRelationField,
 	#superclass : #JinAccessObject,

@@ -1,3 +1,6 @@
+"
+I am a table body. I now many things about the table. I can connect and get rows alsow 
+"
 Class {
 	#name : #JinTableBody,
 	#superclass : #JinBodyObject,
