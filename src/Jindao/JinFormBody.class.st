@@ -18,6 +18,11 @@ JinFormBody >> code [
 ]
 
 { #category : #'as yet unclassified' }
+JinFormBody >> componentKnownProperties [
+	^ JinForm componentKnownProperties
+]
+
+{ #category : #'as yet unclassified' }
 JinFormBody >> controls [
 	^ JinCollection newDefault
 		handle: (handle propertyNamed: #Controls)
@@ -93,11 +98,6 @@ JinFormBody >> module [
 		ifNil: [ module := JinSubModuleBody new
 				handle: (handle propertyNamed: #Module);
 				yourself ]
-]
-
-{ #category : #'as yet unclassified' }
-JinFormBody >> propertiesToInfuse [
-	^ JinForm propertiesToInfuse
 ]
 
 { #category : #'as yet unclassified' }

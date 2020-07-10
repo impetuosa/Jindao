@@ -227,16 +227,11 @@ End Sub
 Class {
 	#name : #JinListBox,
 	#superclass : #JinControlAbstractListBox,
-	#category : #'Jindao-FormControls-Generated'
+	#category : #'Jindao-FormControls-Builtin'
 }
 
 { #category : #generated }
-JinListBox class >> mappedTypeName [
-	^#'_ListBox'
-]
-
-{ #category : #generated }
-JinListBox class >> propertiesToInfuse [
+JinListBox class >> componentKnownProperties [
 	^ #(
     AddColon
     AfterUpdate
@@ -360,6 +355,11 @@ JinListBox class >> propertiesToInfuse [
     Visible
     Width
 )
+]
+
+{ #category : #generated }
+JinListBox class >> mappedTypeName [
+	^#'_ListBox'
 ]
 
 { #category : #generated }

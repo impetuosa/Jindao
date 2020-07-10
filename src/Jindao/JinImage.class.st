@@ -130,16 +130,11 @@ You can use the image control or an [Unbound object frame](overview/Access.md) f
 Class {
 	#name : #JinImage,
 	#superclass : #JinControlAbstractImage,
-	#category : #'Jindao-FormControls-Generated'
+	#category : #'Jindao-FormControls-Builtin'
 }
 
-{ #category : #generated }
-JinImage class >> mappedTypeName [
-	^#'_Image'
-]
-
 { #category : #accessing }
-JinImage class >> propertiesToInfuse [
+JinImage class >> componentKnownProperties [
 	^ #(BackColor
 BackShade
 BackStyle
@@ -207,6 +202,11 @@ TopPadding
 VerticalAnchor
 Visible
 Width)
+]
+
+{ #category : #generated }
+JinImage class >> mappedTypeName [
+	^#'_Image'
 ]
 
 { #category : #generated }

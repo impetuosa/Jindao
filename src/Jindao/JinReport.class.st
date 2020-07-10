@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #accessing }
-JinReport class >> propertiesToInfuse [
+JinReport class >> componentKnownProperties [
 	^ #(
     AllowLayoutView
     AllowReportView

@@ -152,16 +152,11 @@ With the tab control, you can construct a single form or dialog box that contain
 Class {
 	#name : #JinTabControl,
 	#superclass : #JinControlAbstractTabControl,
-	#category : #'Jindao-FormControls-Generated'
+	#category : #'Jindao-FormControls-Builtin'
 }
 
-{ #category : #generated }
-JinTabControl class >> mappedTypeName [
-	^#'_TabControl'
-]
-
 { #category : #accessing }
-JinTabControl class >> propertiesToInfuse [
+JinTabControl class >> componentKnownProperties [
 "https://docs.microsoft.com/en-us/office/vba/api/access.tabcontrol"
 	^ #(
     
@@ -261,6 +256,11 @@ JinTabControl class >> propertiesToInfuse [
     Visible
     Width
 )
+]
+
+{ #category : #generated }
+JinTabControl class >> mappedTypeName [
+	^#'_TabControl'
 ]
 
 { #category : #generated }

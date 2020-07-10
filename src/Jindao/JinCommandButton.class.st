@@ -196,16 +196,11 @@ You can display text on a command button by setting its **Caption** property, or
 Class {
 	#name : #JinCommandButton,
 	#superclass : #JinControlAbstractCommandButton,
-	#category : #'Jindao-FormControls-Generated'
+	#category : #'Jindao-FormControls-Builtin'
 }
 
-{ #category : #generated }
-JinCommandButton class >> mappedTypeName [
-	^#'_CommandButton'
-]
-
 { #category : #accessing }
-JinCommandButton class >> propertiesToInfuse [
+JinCommandButton class >> componentKnownProperties [
 	^ #(
     AddColon
     Alignment
@@ -339,6 +334,11 @@ OnMouseUpMacro
     Visible
     Width
 )
+]
+
+{ #category : #generated }
+JinCommandButton class >> mappedTypeName [
+	^#'_CommandButton'
 ]
 
 { #category : #generated }

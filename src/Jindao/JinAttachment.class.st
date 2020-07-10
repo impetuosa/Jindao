@@ -244,16 +244,11 @@ Office Access 2007 blocks the following types of attached files. At this time, y
 Class {
 	#name : #JinAttachment,
 	#superclass : #JinControlAbstractAttachment,
-	#category : #'Jindao-FormControls-Generated'
+	#category : #'Jindao-FormControls-Builtin'
 }
 
-{ #category : #generated }
-JinAttachment class >> mappedTypeName [
-	^#'_Attachment'
-]
-
 { #category : #'as yet unclassified' }
-JinAttachment class >> propertiesToInfuse [
+JinAttachment class >> componentKnownProperties [
 ^#(
     AddColon
     AfterUpdate
@@ -351,6 +346,11 @@ JinAttachment class >> propertiesToInfuse [
     Visible
     Width
 )
+]
+
+{ #category : #generated }
+JinAttachment class >> mappedTypeName [
+	^#'_Attachment'
 ]
 
 { #category : #generated }

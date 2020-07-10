@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinReportBody >> componentKnownProperties [
+	^ JinReport componentKnownProperties
+]
+
+{ #category : #'as yet unclassified' }
 JinReportBody >> groupLevelNumber: anInteger [
 	^ JinGroupLevel new
 		handle: (handle propertyNamed: #GroupLevel withArguments: {anInteger});
@@ -25,9 +30,4 @@ JinReportBody >> groupLevels [
 { #category : #'as yet unclassified' }
 JinReportBody >> name: aString [
 	handle propertyNamed: #Name put: aString
-]
-
-{ #category : #'as yet unclassified' }
-JinReportBody >> propertiesToInfuse [
-	^ JinReport propertiesToInfuse
 ]

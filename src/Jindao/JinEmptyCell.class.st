@@ -1,7 +1,10 @@
+"
+Enitty produced by access with the only reason of layout adjustment. 
+"
 Class {
 	#name : #JinEmptyCell,
 	#superclass : #JinControlGeneric,
-	#category : #'Jindao-FormControls-Generated'
+	#category : #'Jindao-FormControls-Builtin'
 }
 
 { #category : #'as yet unclassified' }

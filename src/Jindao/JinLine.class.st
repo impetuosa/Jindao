@@ -68,16 +68,11 @@ You can use the **BorderWidth** property to change the line width. You can use t
 Class {
 	#name : #JinLine,
 	#superclass : #JinControlAbstractLine,
-	#category : #'Jindao-FormControls-Generated'
+	#category : #'Jindao-FormControls-Builtin'
 }
 
 { #category : #generated }
-JinLine class >> mappedTypeName [
-	^#'_Line'
-]
-
-{ #category : #generated }
-JinLine class >> propertiesToInfuse [
+JinLine class >> componentKnownProperties [
 	^ #(
     BorderColor
     BorderShade
@@ -104,6 +99,11 @@ JinLine class >> propertiesToInfuse [
     Visible
     Width
 )
+]
+
+{ #category : #generated }
+JinLine class >> mappedTypeName [
+	^#'_Line'
 ]
 
 { #category : #generated }

@@ -14,6 +14,12 @@ JinControlGeneric class >> mappedTypeName [
 ]
 
 { #category : #'as yet unclassified' }
+JinControlGeneric >> componentKnownProperties [
+"	self assert: handle getTypeInfo name = '_CustomControl'."
+	^ self properties collect: #name
+]
+
+{ #category : #'as yet unclassified' }
 JinControlGeneric >> controlType [
 	^ handle propertyNamed: #ControlType
 ]
@@ -29,12 +35,6 @@ JinControlGeneric >> printOn: aStream [
 		nextPutAll: 'JinControlGeneric[';
 		nextPutAll: handle getTypeInfo name;
 		nextPut: $]
-]
-
-{ #category : #'as yet unclassified' }
-JinControlGeneric >> propertiesToInfuse [
-"	self assert: handle getTypeInfo name = '_CustomControl'."
-	^ self properties collect: #name
 ]
 
 { #category : #'as yet unclassified' }

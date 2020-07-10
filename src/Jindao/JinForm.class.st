@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #accessing }
-JinForm class >> propertiesToInfuse [
+JinForm class >> componentKnownProperties [
 	^ #(
 TabularCharSet	
 AfterDelConfirm
@@ -217,6 +217,11 @@ JinForm >> code [
 ]
 
 { #category : #'as yet unclassified' }
+JinForm >> componentKnownProperties [
+	^ self class componentKnownProperties
+]
+
+{ #category : #'as yet unclassified' }
 JinForm >> controls [
 	^ self body controls 
 ]
@@ -303,11 +308,6 @@ JinForm >> module [
 { #category : #accessing }
 JinForm >> privateLoadBodyObject [
 	^ (project openForm: self)
-]
-
-{ #category : #'as yet unclassified' }
-JinForm >> propertiesToInfuse [
-	^ self class propertiesToInfuse
 ]
 
 { #category : #accessing }

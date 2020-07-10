@@ -343,16 +343,11 @@ End Sub
 Class {
 	#name : #JinCombobox,
 	#superclass : #JinControlAbstractCombobox,
-	#category : #'Jindao-FormControls-Generated'
+	#category : #'Jindao-FormControls-Builtin'
 }
 
 { #category : #generated }
-JinCombobox class >> mappedTypeName [
-	^#'_Combobox'
-]
-
-{ #category : #generated }
-JinCombobox class >> propertiesToInfuse [
+JinCombobox class >> componentKnownProperties [
 	^ #(
     AddColon
     AfterUpdate
@@ -500,6 +495,11 @@ JinCombobox class >> propertiesToInfuse [
     Visible
     Width
 )
+]
+
+{ #category : #generated }
+JinCombobox class >> mappedTypeName [
+	^#'_Combobox'
 ]
 
 { #category : #generated }

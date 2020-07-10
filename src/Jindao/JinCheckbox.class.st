@@ -153,16 +153,11 @@ You can also use check boxes in an option group to display values to choose from
 Class {
 	#name : #JinCheckbox,
 	#superclass : #JinControlAbstractCheckbox,
-	#category : #'Jindao-FormControls-Generated'
+	#category : #'Jindao-FormControls-Builtin'
 }
 
-{ #category : #generated }
-JinCheckbox class >> mappedTypeName [
-	^#'_Checkbox'
-]
-
 { #category : #'as yet unclassified' }
-JinCheckbox class >> propertiesToInfuse [
+JinCheckbox class >> componentKnownProperties [
 ^#(
     AddColon
     AfterUpdate
@@ -252,6 +247,11 @@ JinCheckbox class >> propertiesToInfuse [
     Visible
     Width
 )
+]
+
+{ #category : #generated }
+JinCheckbox class >> mappedTypeName [
+	^#'_Checkbox'
 ]
 
 { #category : #generated }

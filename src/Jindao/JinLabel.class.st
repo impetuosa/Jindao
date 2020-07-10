@@ -145,16 +145,11 @@ When you create a label by using the **Label** tool, the label stands on its own
 Class {
 	#name : #JinLabel,
 	#superclass : #JinControlAbstractLabel,
-	#category : #'Jindao-FormControls-Generated'
+	#category : #'Jindao-FormControls-Builtin'
 }
 
 { #category : #generated }
-JinLabel class >> mappedTypeName [
-	^#'_Label'
-]
-
-{ #category : #generated }
-JinLabel class >> propertiesToInfuse [
+JinLabel class >> componentKnownProperties [
 	^ #(BackColor
 BackShade
 BackStyle
@@ -232,6 +227,11 @@ Vertical
 VerticalAnchor
 Visible
 Width)
+]
+
+{ #category : #generated }
+JinLabel class >> mappedTypeName [
+	^#'_Label'
 ]
 
 { #category : #generated }

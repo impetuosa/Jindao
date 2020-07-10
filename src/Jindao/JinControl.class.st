@@ -19,6 +19,11 @@ JinControl >> acceptVisitor: aVisitor [
 ]
 
 { #category : #'as yet unclassified' }
+JinControl >> componentKnownProperties [
+	^ self class componentKnownProperties
+]
+
+{ #category : #'as yet unclassified' }
 JinControl >> containingWidget [
 	^ self parent 
 ]
@@ -102,11 +107,6 @@ JinControl >> properties [
 { #category : #'as yet unclassified' }
 JinControl >> propertiesFactory [
 	^ JinRemotesFactory newDefaultAccessPropertyFactory
-]
-
-{ #category : #'as yet unclassified' }
-JinControl >> propertiesToInfuse [
-	^ self class propertiesToInfuse
 ]
 
 { #category : #'as yet unclassified' }

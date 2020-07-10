@@ -222,16 +222,11 @@ End Sub
 Class {
 	#name : #JinTextbox,
 	#superclass : #JinControlAbstractTextbox,
-	#category : #'Jindao-FormControls-Generated'
+	#category : #'Jindao-FormControls-Builtin'
 }
 
-{ #category : #generated }
-JinTextbox class >> mappedTypeName [
-	^#'_Textbox'
-]
-
 { #category : #accessing }
-JinTextbox class >> propertiesToInfuse [
+JinTextbox class >> componentKnownProperties [
 "https://docs.microsoft.com/en-us/office/vba/api/access.textbox"
 	^ #(
     AddColon
@@ -370,6 +365,11 @@ JinTextbox class >> propertiesToInfuse [
     Visible
     Width
 )
+]
+
+{ #category : #generated }
+JinTextbox class >> mappedTypeName [
+	^#'_Textbox'
 ]
 
 { #category : #generated }

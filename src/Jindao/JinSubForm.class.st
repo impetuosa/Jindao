@@ -121,16 +121,11 @@ Instead of creating the main form, and then adding the subform control to it, yo
 Class {
 	#name : #JinSubForm,
 	#superclass : #JinControlAbstractSubForm,
-	#category : #'Jindao-FormControls-Generated'
+	#category : #'Jindao-FormControls-Builtin'
 }
 
 { #category : #generated }
-JinSubForm class >> mappedTypeName [
-	^#'_SubForm'
-]
-
-{ #category : #generated }
-JinSubForm class >> propertiesToInfuse [
+JinSubForm class >> componentKnownProperties [
 "https://docs.microsoft.com/en-us/office/vba/api/access.subform"
 	^ #(
     AddColon
@@ -194,6 +189,11 @@ JinSubForm class >> propertiesToInfuse [
     Visible
     Width
 )
+]
+
+{ #category : #generated }
+JinSubForm class >> mappedTypeName [
+	^#'_SubForm'
 ]
 
 { #category : #generated }

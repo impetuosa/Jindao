@@ -1,40 +1,40 @@
 Class {
-	#name : #FuExporter,
+	#name : #JinApplicationExporter,
 	#superclass : #JinStackVisitor,
 	#instVars : [
 		'folder'
 	],
-	#category : #'Jindao-FuZhi'
+	#category : #'Jindao-Exporting'
 }
 
 { #category : #'visit-first-objects' }
-FuExporter >> export: anObject [
+JinApplicationExporter >> export: anObject [
 	anObject exportToFolder: folder
 ]
 
 { #category : #'as yet unclassified' }
-FuExporter >> folder: aFileReference [ 
+JinApplicationExporter >> folder: aFileReference [ 
 	folder := aFileReference.
 	aFileReference ensureCreateDirectory 
 ]
 
 { #category : #'visit-first-objects' }
-FuExporter >> visitForm: aForm [
+JinApplicationExporter >> visitForm: aForm [
 	self export: aForm.
 ]
 
 { #category : #'visit-first-objects' }
-FuExporter >> visitMacro: anObject [
+JinApplicationExporter >> visitMacro: anObject [
 	self export: anObject.
 ]
 
 { #category : #'visit-first-objects' }
-FuExporter >> visitModule: anObject [
+JinApplicationExporter >> visitModule: anObject [
 	self export: anObject.
 ]
 
 { #category : #'visit-first-objects' }
-FuExporter >> visitProject: aJinAccessProject [
+JinApplicationExporter >> visitProject: aJinAccessProject [
 	self visitCollection: aJinAccessProject modules.
 	self visitCollection: aJinAccessProject reports.
 	self visitCollection: aJinAccessProject forms.
@@ -45,16 +45,16 @@ FuExporter >> visitProject: aJinAccessProject [
 ]
 
 { #category : #'visit-first-objects' }
-FuExporter >> visitQuery: anObject [
+JinApplicationExporter >> visitQuery: anObject [
 	self export: anObject.
 ]
 
 { #category : #'visit-first-objects' }
-FuExporter >> visitReport: anObject [
+JinApplicationExporter >> visitReport: anObject [
 	self export: anObject.
 ]
 
 { #category : #'visit-first-objects' }
-FuExporter >> visitTable: anObject [
+JinApplicationExporter >> visitTable: anObject [
 	[self export: anObject.] on: Error do: [ :e |  ]
 ]

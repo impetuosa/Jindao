@@ -101,16 +101,11 @@ Each **Page** object can also contain one or more controls. Controls on a **Page
 Class {
 	#name : #JinPage,
 	#superclass : #JinControlAbstractPage,
-	#category : #'Jindao-FormControls-Generated'
+	#category : #'Jindao-FormControls-Builtin'
 }
 
-{ #category : #generated }
-JinPage class >> mappedTypeName [
-	^#'_Page'
-]
-
 { #category : #accessing }
-JinPage class >> propertiesToInfuse [
+JinPage class >> componentKnownProperties [
 	^ #(Caption
 ControlTipText
 ControlType
@@ -135,6 +130,11 @@ ShortcutMenuBar
 StatusBarText
 Tag
 Visible)
+]
+
+{ #category : #generated }
+JinPage class >> mappedTypeName [
+	^#'_Page'
 ]
 
 { #category : #generated }
