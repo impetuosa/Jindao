@@ -216,6 +216,7 @@ JinVisitor >> visitCheckbox: aJinControlCheckbox [
 
 { #category : #'visit-first-objects' }
 JinVisitor >> visitCollection: aCollection [
+
 	aCollection do: [ :element | element acceptVisitor: self ]
 ]
 

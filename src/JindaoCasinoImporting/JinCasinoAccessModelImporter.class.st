@@ -18,7 +18,7 @@ JinCasinoAccessModelImporter >> errors [
 { #category : #'as yet unclassified' }
 JinCasinoAccessModelImporter >> import [
 	| importer |
-	importer := JinCasinoVisitor new.
+	importer := JinCasinoVisitor defaultNew.
 	importer useModel: importedModel.
 	project acceptVisitor: importer.
 	errors := importer errors .

@@ -25,7 +25,7 @@ JinControl >> componentKnownProperties [
 
 { #category : #'as yet unclassified' }
 JinControl >> containingWidget [
-	^ self parent 
+	^ self parentObject 
 ]
 
 { #category : #'as yet unclassified' }

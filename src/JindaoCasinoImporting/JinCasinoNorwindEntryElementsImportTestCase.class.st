@@ -27,7 +27,7 @@ JinCasinoNorwindEntryElementsImportTestCase >> testImportedFormGeneratesOnlyOneB
 { #category : #tests }
 JinCasinoNorwindEntryElementsImportTestCase >> testImportedGeneratedBusinessPageHasTheSameNameAsTheForm [
 	self importAnyForm.
-	self assert: importedForm businessPage first name equals: form name.
+	self assert: importedForm businessPage first name equals: form nameWithoutSpaces.
 ]
 
 { #category : #tests }
@@ -40,8 +40,8 @@ JinCasinoNorwindEntryElementsImportTestCase >> testJinFormImportsIntoJinPage [
 { #category : #tests }
 JinCasinoNorwindEntryElementsImportTestCase >> testJinFormImportsTheNameAndNoneWidgets [
 	self importAnyForm.
-	self assert: importedForm name equals: form name.
-	self assert: importedForm realClassName equals: #JinFormBody.
+	self assert: importedForm name equals: form nameWithoutSpaces.
+	self assert: importedForm realClassName equals: #JinForm.
 	self assert: importedForm widgets isEmpty
 ]
 
