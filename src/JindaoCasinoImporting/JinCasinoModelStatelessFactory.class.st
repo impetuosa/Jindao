@@ -156,7 +156,11 @@ JinCasinoModelStatelessFactory >> visitLabel: aJinControlLabel [
 	| input |
 	input := CSNUIParagraph new.
 	input name: aJinControlLabel nameWithoutSpaces.
-	input text: aJinControlLabel caption.
+	input
+		addAttribute:
+			(CSNUILabel new
+				attributeValue: aJinControlLabel caption;
+				yourself).
 	^ input
 ]
 
@@ -235,9 +239,16 @@ JinCasinoModelStatelessFactory >> visitTextFormat: aJinTextFormat [
 { #category : #'visit - control' }
 JinCasinoModelStatelessFactory >> visitTextbox: aJinControlTextbox [
 	| input |
-	input := (aJinControlTextbox showDatePicker = 1
+	"
+	
+	(aJinControlTextbox showDatePicker = 1
 		ifTrue: [ CSNUIInputDate ]
 		ifFalse: [ CSNUIInputText ]) new.
+	
+	Regardless what the documentation says, this property is not enough to know if we shall or not use a datepicker. 
+	It is mostly a mix of this and the data type bounded. (by example a column of a table).
+	"
+	input := CSNUIInputText new.
 	input name: aJinControlTextbox nameWithoutSpaces.
 	input value: aJinControlTextbox defaultValue.
 	^ input

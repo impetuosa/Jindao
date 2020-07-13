@@ -13,6 +13,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinCasinoVisitor class >> defaultNew [ 
+	^ JinSingleFormVisitor new
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoVisitor >> errors [
 	^ errors
 ]
@@ -74,9 +79,7 @@ JinCasinoVisitor >> useModel: aModel [
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> visitAccessProperty: aJinAccessProperty [
-	^ self
-		pushInStack: (self importAccessProperty: aJinAccessProperty)
-		during: [ super visitAccessProperty: aJinAccessProperty ]
+	^ self importAccessProperty: aJinAccessProperty
 ]
 
 { #category : #'as yet unclassified' }
@@ -90,14 +93,15 @@ JinCasinoVisitor >> visitForm: aJinForm [
 JinCasinoVisitor >> visitFormControl: aJinFormControl [
 	^ self
 		pushInStack: (self importFormControl: aJinFormControl)
-		during: [" super visitFormControl: aJinFormControl" ]
+		during: [ super visitFormControl: aJinFormControl ]
 ]
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> visitProject: aJinAccessProject [
 	^ importedProject := self
 		pushInStack: (self importProject: aJinAccessProject)
-		during: [ self visitCollection: aJinAccessProject references.
+		during: [ 
+			self visitCollection: aJinAccessProject references.
 			self visitCollection: (aJinAccessProject forms select: #isLoaded).
 			self visitCollection: aJinAccessProject queries.
 			self visitCollection: aJinAccessProject reports.
