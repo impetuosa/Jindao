@@ -14,7 +14,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor class >> defaultNew [ 
-	^ JinSingleFormVisitor new
+	^ self new
 ]
 
 { #category : #'as yet unclassified' }
@@ -42,9 +42,7 @@ JinCasinoVisitor >> importForm: aForm [
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> importFormControl: aControl [
-	^ [ self factory importControl: aControl inTheContextOf: stack top ]
-		on: Error
-		do: [ :err | ^ nil ]
+	^ self factory importControl: aControl inTheContextOf: stack top
 ]
 
 { #category : #'as yet unclassified' }
@@ -86,14 +84,15 @@ JinCasinoVisitor >> visitAccessProperty: aJinAccessProperty [
 JinCasinoVisitor >> visitForm: aJinForm [
 	^ self
 		pushInStack: (self importForm: aJinForm)
-		during: [ super visitForm: aJinForm ] 
+		during: [ super visitForm: aJinForm.
+			aJinForm ensureUnload ]
 ]
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> visitFormControl: aJinFormControl [
 	^ self
 		pushInStack: (self importFormControl: aJinFormControl)
-		during: [ super visitFormControl: aJinFormControl ]
+		during: [ stack top ifNotNil: [self visitCollection: aJinFormControl properties ]]
 ]
 
 { #category : #'as yet unclassified' }
@@ -101,9 +100,14 @@ JinCasinoVisitor >> visitProject: aJinAccessProject [
 	^ importedProject := self
 		pushInStack: (self importProject: aJinAccessProject)
 		during: [ 
-			self visitCollection: aJinAccessProject references.
-			self visitCollection: (aJinAccessProject forms select: #isLoaded).
-			self visitCollection: aJinAccessProject queries.
+"			self visitCollection: aJinAccessProject references."
+			self visitCollection: (aJinAccessProject forms).
+"			self visitCollection: aJinAccessProject queries.
 			self visitCollection: aJinAccessProject reports.
-			self visitCollection: aJinAccessProject tables ]
+			self visitCollection: aJinAccessProject tables "]
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoVisitor >> visitSubForm: aJinControlSubForm [
+	^ self factory importSubform: aJinControlSubForm inTheContextOf: stack top
 ]

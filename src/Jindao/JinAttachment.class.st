@@ -1513,9 +1513,8 @@ JinAttachment >> rightPadding: aParam1 [
 
 { #category : #'property - generated' }
 JinAttachment >> section [
-<getter>
-	^ (handle propertyNamed: #'Section' ).
-
+	<getter>
+	^ handle propertyNamed: #Section
 ]
 
 { #category : #'property - generated' }

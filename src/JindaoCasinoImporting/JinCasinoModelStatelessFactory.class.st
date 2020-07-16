@@ -1,6 +1,6 @@
 Class {
 	#name : #JinCasinoModelStatelessFactory,
-	#superclass : #Object,
+	#superclass : #JinVisitor,
 	#category : #JindaoCasinoImporting
 }
 
@@ -20,19 +20,26 @@ JinCasinoModelStatelessFactory >> height: aJinControlCheckbox [
 
 { #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> importAccessProperty: aProperty inTheContextOf: anImportedControl [
-	"| attribute |
+	| attribute |
 	attribute := aProperty acceptVisitor: self.
 	(attribute isNil or: [ attribute = self ])
 		ifTrue: [ ^ nil ].
+	anImportedControl mooseModel add: attribute. 
 	anImportedControl addAttribute: attribute.
-	^ attribute"
+	^ attribute
 ]
 
 { #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> importControl: aControl inTheContextOf: aWidget [
-	| control |
+	| control intro |
 	control := self importModelFrom: aControl.
-	aWidget addWidget: control.
+	control ifNotNil: [
+	aWidget mooseModel add: control.
+	intro := self
+		resolveLayoutContainer: aControl layoutID
+		type: aControl layoutName
+		inTheContextOf: aWidget.
+	intro addWidget: control.].
 	^ control
 ]
 
@@ -62,6 +69,38 @@ JinCasinoModelStatelessFactory >> importProject: aProject model: aModel [
 		yourself
 ]
 
+{ #category : #'as yet unclassified' }
+JinCasinoModelStatelessFactory >> importSubform: aJinControlSubForm inTheContextOf: aForm [
+	
+	^ JinCasinoWidgetUsage new
+		widgetName: aJinControlSubForm name;
+		mooseModel: aForm mooseModel;
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoModelStatelessFactory >> resolveLayoutContainer: aLayoutId type: aLayoutTypeName inTheContextOf: aContainer [
+	| layoutedContainer |
+	^ aContainer businessPage first widgets
+		detect: [ :c | 
+			c isContainer
+				and:
+					[ c layout isNotNil and: [ (c propertyNamed: 'LayoutID') = aLayoutId ] ] ]
+		ifNone: [ layoutedContainer := (aLayoutId = 0
+				ifTrue: [ CSNUIPanel ]
+				ifFalse: [ CSNUIFieldset ]) new.
+			layoutedContainer propertyNamed: 'LayoutID' put: aLayoutId.
+			layoutedContainer
+				layout:
+					(aLayoutId = 0
+						ifTrue: [ CSNLAbsolutePositionLayout ]
+						ifFalse: [ CSNLTabulateLayout ]) new.
+			aContainer mooseModel add: layoutedContainer.
+			aContainer mooseModel add: layoutedContainer layout.
+			aContainer addWidget: layoutedContainer.
+			layoutedContainer ]
+]
+
 { #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitAccessProperty: aProperty [ 
 	"nothing to do"
@@ -75,12 +114,69 @@ JinCasinoModelStatelessFactory >> visitAttachment: aJinControlAttachment [
 	^ input
 ]
 
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitBackColor: aJinBackColor [ 
+	
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitBackShade: aJinBackShade [ 
+	"CAnnot read type yet "
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitBackStyle: aJinBackStyle [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitBackThemeColorIndex: aJinBackThemeColorIndex [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitBackTint: aJinBackTint [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitBorderColor: aJinBorderColor [ 
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitBorderLineStyle: aJinBorderLineStyle [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitBorderShade: aJinBorderShade [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitBorderStyle: aJinBorderStyle [ 	
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitBorderThemeColorIndex: aJinBorderThemeColorIndex [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitBorderTint: aJinBorderTint [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitBorderWidth: aJinBorderWidth [ 
+]
+
 { #category : #'visit - control' }
 JinCasinoModelStatelessFactory >> visitCheckbox: aJinControlCheckbox [ 
 	| input |
 	input := CSNUIInputCheckbox new. 
 	input name: aJinControlCheckbox nameWithoutSpaces.
-	input value: aJinControlCheckbox value.
+	[input value: aJinControlCheckbox value.] on: Win32Error do: [ :e | e passIfNotError0x80020009  ].
 	^ input 
 ]
 
@@ -98,6 +194,11 @@ JinCasinoModelStatelessFactory >> visitCommandButton: aJinControlCommandButton [
 	| input |
 	input := CSNUIButton new.
 	input name: aJinControlCommandButton nameWithoutSpaces.
+	input
+		addAttribute:
+			(CSNUILabel new
+				attributeValue: aJinControlCommandButton caption;
+				yourself).
 	^ input
 ]
 
@@ -111,19 +212,25 @@ JinCasinoModelStatelessFactory >> visitControlType: aJinControlType [
 	 self visitAccessProperty: aJinControlType
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitDatasheetCaption: aJinDatasheetCaption [
 	aJinDatasheetCaption value
 		ifNotEmpty: [ :val | 
+			self halt. 
 			^ CSNUILabel new
 				attributeValue: val;
 				yourself ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitDecimalPlaces: aJinDecimalPlaces [
-	self assert: aJinDecimalPlaces value = 255.
+"	self assert: aJinDecimalPlaces value = 255."
 	self visitAccessProperty: aJinDecimalPlaces 
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitDisplayAsHyperlink: aJinDisplayAsHyperlink [ 
+
 ]
 
 { #category : #'visiting - properties' }
@@ -131,24 +238,105 @@ JinCasinoModelStatelessFactory >> visitEventProcPrefix: aJinEventProcPrefix [
 	 self visitAccessProperty: aJinEventProcPrefix
 ]
 
-{ #category : #'as yet unclassified' }
-JinCasinoModelStatelessFactory >> visitFormat: aJinFormat [ 
-	self assert: aJinFormat value = ''.
-	self visitAccessProperty: aJinFormat 
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitFontBold: aJinFontBold [ 
+
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitFontItalic: aJinFontItalic [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitFontName: aJinFontName [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitFontSize: aJinFontSize [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitFontUnderline: aJinFontUnderline [ 
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitFontWeight: aJinFontWeight [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitForeColor: aJinForeColor [ 
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitForeShade: aJinForeShade [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitForeThemeColorIndex: aJinForeThemeColorIndex [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitForeTint: aJinForeTint [ 
+
+]
+
+{ #category : #'visiting - properties' }
+JinCasinoModelStatelessFactory >> visitFormat: aJinFormat [ 
+"	self assert: aJinFormat value = ''.
+	self visitAccessProperty: aJinFormat "
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitGridlineStyleBottom: aJinGridlineStyleBottom [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitGridlineStyleLeft: aJinGridlineStyleLeft [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitGridlineStyleRight: aJinGridlineStyleRight [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitGridlineStyleTop: aJinGridlineStyleTop [ 
+
+]
+
+{ #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitHeight: aJinHeight [
-		self warn: 
-			' I dont know yet how to manage height . it seems to be a bit more complex than expected '
+	^ CSNUIAbsoluteHeight new
+		attributeValue: aJinHeight value;
+		name: #height;
+		yourself
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitHyperlinkTarget: aJinHyperlinkTarget [ 
+
 ]
 
 { #category : #'visit - control' }
 JinCasinoModelStatelessFactory >> visitImage: aJinControlImage [
 	| input |
-	input := CSNUILabel new.
+	input := CSNUIImage new.
 	input name: aJinControlImage nameWithoutSpaces.
+	
 	^ input
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitIsHyperlink: aJinIsHyperlink [ 
+
 ]
 
 { #category : #'visit - control' }
@@ -166,17 +354,25 @@ JinCasinoModelStatelessFactory >> visitLabel: aJinControlLabel [
 
 { #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitLabelName: aJinLabelName [
-	Warning signal: 'JinLabelName fails on getting value. this visit may have to do something '
+
 ]
 
-{ #category : #'as yet unclassified' }
-JinCasinoModelStatelessFactory >> visitLeft: aJinLeft [ 
-	self shouldBeImplemented.
+{ #category : #'visiting - properties' }
+JinCasinoModelStatelessFactory >> visitLeft: aJinLeft [
+	^ CSNUILeft new
+		attributeValue: aJinLeft value;
+		name: #left;
+		yourself
 ]
 
 { #category : #'visit - control' }
 JinCasinoModelStatelessFactory >> visitLine: aJinControlLine [ 
-	self error: 'There is no widget for Line yet. '
+"	self error: 'There is no widget for Line yet. '"
+	^ nil
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitLineSpacing: aJinLineSpacing [ 
 ]
 
 { #category : #'visit - control' }
@@ -190,6 +386,11 @@ JinCasinoModelStatelessFactory >> visitListBox: aJinControlListBox [
 { #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitName: aJinName [
 	self visitAccessProperty: aJinName
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitOldBorderStyle: aJinOldBorderStyle [ 
+
 ]
 
 { #category : #'visit - control' }
@@ -208,9 +409,19 @@ JinCasinoModelStatelessFactory >> visitRectangle: aJinControlRectangle [
 	^ input
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitScrollBars: aJinScrollBars [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
 JinCasinoModelStatelessFactory >> visitShowDatePicker: aJinShowDatePicker [ 
 	" this property is used during the building of the text box. nothing to do here "
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitSpecialEffect: aJinSpecialEffect [ 
 
 ]
 
@@ -230,9 +441,19 @@ JinCasinoModelStatelessFactory >> visitTabControl: aJinControlTabControl [
 	^ input
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitTextAlign: aJinTextAlign [ 
+
+]
+
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitTextFontCharSet: aJinTextFontCharSet [ 
+
+]
+
+{ #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitTextFormat: aJinTextFormat [
-	self assert: aJinTextFormat value = 0.
+"	self assert: aJinTextFormat value = 0."
 	self visitAccessProperty: aJinTextFormat
 ]
 
@@ -254,25 +475,35 @@ JinCasinoModelStatelessFactory >> visitTextbox: aJinControlTextbox [
 	^ input
 ]
 
-{ #category : #'as yet unclassified' }
-JinCasinoModelStatelessFactory >> visitTop: aJinTop [ 
-	self warn: 'Top should be interesting for layout annotating '
+{ #category : #'not -yet -implemented' }
+JinCasinoModelStatelessFactory >> visitThemeFontIndex: aJinThemeFontIndex [ 
+
 ]
 
-{ #category : #'as yet unclassified' }
-JinCasinoModelStatelessFactory >> visitVisible: aJinVisible [
-	aJinVisible value
-		ifTrue: [ ^ self visitAccessProperty: aJinVisible ].
-	self halt: 'Invisible thing. check what to do'.
-	^ CSNUIVisibility new
-		attributeValue: false;
+{ #category : #'visiting - properties' }
+JinCasinoModelStatelessFactory >> visitTop: aJinTop [
+	^ CSNUITop new
+		attributeValue: aJinTop value;
+		name:#top;
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'visiting - properties' }
+JinCasinoModelStatelessFactory >> visitVisible: aJinVisible [
+	aJinVisible value
+		ifTrue: [ ^ self visitAccessProperty: aJinVisible ].
+	"^ CSNUIVisibility new
+		name: #hidden;
+		attributeValue: true;
+		yourself"
+]
+
+{ #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitWidth: aJinWidth [
-		self warn: 
-			' I dont know yet how to manage width. it seems to be a bit more complex than expected '
+	^ CSNUIAbsoluteWidth new
+		attributeValue: aJinWidth value;
+		name: #width;
+		yourself
 ]
 
 { #category : #'as yet unclassified' }
