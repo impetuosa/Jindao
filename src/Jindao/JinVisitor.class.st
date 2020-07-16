@@ -1425,8 +1425,8 @@ JinVisitor >> visitStyle:aStyle [
 ]
 
 { #category : #'visit-controls' }
-JinVisitor >> visitSubForm: aJinControlSubForm [ 
-		self visitFormControl: aJinControlSubForm
+JinVisitor >> visitSubForm: aJinControlSubForm [
+	self visitFormControl: aJinControlSubForm
 ]
 
 { #category : #'visit-controls' }
