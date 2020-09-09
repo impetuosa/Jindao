@@ -30,7 +30,7 @@ COMDispatchInstance >> asStateTrackingHandle [
 COMDispatchInstance >> propertyNamed: aPropName putIfWritable: aValue [
 	| prop |
 	prop := self getDispatchType properties
-		detect: [ :e | e name = aPropName ].
+		at:aPropName .
 	prop setter
 		ifNil: [ ^ false ]
 		ifNotNil: [ prop write: aValue to: self.

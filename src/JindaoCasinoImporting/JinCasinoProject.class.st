@@ -38,6 +38,11 @@ JinCasinoProject >> model: aModel [
 ]
 
 { #category : #'as yet unclassified' }
+JinCasinoProject >> mooseModel [
+	^ model
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoProject >> name [
 	^ name
 ]

@@ -41,3 +41,8 @@ JinControlGeneric >> printOn: aStream [
 JinControlGeneric >> section [
 	^ handle propertyNamed:#Section
 ]
+
+{ #category : #'as yet unclassified' }
+JinControlGeneric >> type [
+	^ handle getTypeInfo name copyReplaceAll: '_' with: ''
+]

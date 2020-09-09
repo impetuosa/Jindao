@@ -20,7 +20,7 @@ JinControl class >> layoutNameFor: aTypeNumber [
 
 { #category : #'as yet unclassified' }
 JinControl >> acceptVisitor: aVisitor [
-	aVisitor visitFormControl: self
+	^ aVisitor visitCustomControl: self
 ]
 
 { #category : #'as yet unclassified' }

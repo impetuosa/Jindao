@@ -11,7 +11,7 @@ Class {
 
 { #category : #visiting }
 JinAccessProperty >> acceptVisitor: aVisitor [
-	aVisitor visitAccessProperty: self
+	^ aVisitor visitAccessProperty: self
 ]
 
 { #category : #'remote methods' }

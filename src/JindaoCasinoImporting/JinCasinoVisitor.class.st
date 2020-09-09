@@ -81,6 +81,13 @@ JinCasinoVisitor >> visitAccessProperty: aJinAccessProperty [
 ]
 
 { #category : #'as yet unclassified' }
+JinCasinoVisitor >> visitCustomControl: aJinControlGeneric [ 
+	^ self
+		pushInStack: (self importFormControl: aJinControlGeneric)
+		during: [ stack top ifNotNil: [self visitCollection: aJinControlGeneric properties ]]
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoVisitor >> visitForm: aJinForm [
 	^ self
 		pushInStack: (self importForm: aJinForm)

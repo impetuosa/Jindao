@@ -10,11 +10,6 @@ Class {
 }
 
 { #category : #generated }
-JinLeft class >> acceptVisitor: aVisitor [
-	^ aVisitor visitJinLeft
-]
-
-{ #category : #generated }
 JinLeft class >> mappedTypeName [
 	^#'Left'
 ]

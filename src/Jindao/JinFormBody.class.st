@@ -12,6 +12,18 @@ Class {
 	#category : #'Jindao-Core'
 }
 
+{ #category : #accessing }
+JinFormBody class >> formTypeEnum [
+	"Single Form 	0 	(Default) Displays one record at a time.
+Continuous Forms 	1 	Displays multiple records (as many as will fit in the current window), each in its own copy of the form's detail section.
+Datasheet 	2 	Displays the form fields arranged in rows and columns like a spreadsheet.
+PivotTable 	3 	Displays the form as a PivotTable.
+PivotChart 	4 	Displays the form as a PivotChart.
+Split Form 	5"
+
+	^ #(SingleForm ContinuousForm Datasheet PivotTable PivotChart SplitForm)
+]
+
 { #category : #'as yet unclassified' }
 JinFormBody >> code [
 	^ self module code 
@@ -34,6 +46,16 @@ JinFormBody >> controlsFactory [
 	^ JinRemotesFactory newDefaultControlsFactory
 		scopedBy: self;
 		yourself
+]
+
+{ #category : #'as yet unclassified' }
+JinFormBody >> formType [
+	^ self class formTypeEnum at: self formTypeNumber + 1
+]
+
+{ #category : #'as yet unclassified' }
+JinFormBody >> formTypeNumber [
+	^ handle propertyNamed:#DefaultView. 
 ]
 
 { #category : #'as yet unclassified' }

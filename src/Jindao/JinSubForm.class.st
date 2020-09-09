@@ -970,6 +970,13 @@ JinSubForm >> sourceObject: aParam1 [
 
 ]
 
+{ #category : #'as yet unclassified' }
+JinSubForm >> sourceObjectWithoutSpaces [
+	^ ((self sourceObject copyReplaceAll: ' ' with: '')
+		copyReplaceAll: '/'
+		with: '') copyReplaceAll: '-' with: '_'
+]
+
 { #category : #'property - generated' }
 JinSubForm >> specialEffect [
 <getter>

@@ -13,7 +13,7 @@ Class {
 
 { #category : #'instance creation' }
 JinRemotesFactory class >> defaultFactory [
-	^ JinRemoteObjectGeneratorFactory
+	^ JinRemoteObjectMappedTypesFactory
 ]
 
 { #category : #'instance creation' }

@@ -1,9 +1,8 @@
 Class {
 	#name : #JinCasinoWidgetUsage,
-	#superclass : #Object,
+	#superclass : #CSNWidget,
 	#instVars : [
-		'widgetName',
-		'mooseModel'
+		'widgetName'
 	],
 	#category : #JindaoCasinoImporting
 }
@@ -16,11 +15,6 @@ JinCasinoWidgetUsage >> accept: aCSNModelVisitor [
 { #category : #accessing }
 JinCasinoWidgetUsage >> mooseModel [
 	^ mooseModel
-]
-
-{ #category : #accessing }
-JinCasinoWidgetUsage >> mooseModel: anObject [
-	mooseModel := anObject
 ]
 
 { #category : #accessing }

@@ -199,6 +199,18 @@ WindowWidth)
 ]
 
 { #category : #accessing }
+JinForm class >> formTypeEnum [
+	"Single Form 	0 	(Default) Displays one record at a time.
+Continuous Forms 	1 	Displays multiple records (as many as will fit in the current window), each in its own copy of the form's detail section.
+Datasheet 	2 	Displays the form fields arranged in rows and columns like a spreadsheet.
+PivotTable 	3 	Displays the form as a PivotTable.
+PivotChart 	4 	Displays the form as a PivotChart.
+Split Form 	5"
+
+	^ #(SingleForm ContinuousForm Datasheet PivotTable PivotChart SplitForm)
+]
+
+{ #category : #accessing }
 JinForm class >> typeNumber [
 	^ 2
 ]
@@ -256,6 +268,11 @@ JinForm >> description [
 { #category : #'as yet unclassified' }
 JinForm >> ensureItHasNonPageHeaderFooter [
 	^ project ensureItHasNonPageHeaderFooter: self 
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> formType [
+	^ self body formType 
 ]
 
 { #category : #'as yet unclassified' }

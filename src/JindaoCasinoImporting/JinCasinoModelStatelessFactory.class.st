@@ -37,23 +37,37 @@ JinCasinoModelStatelessFactory >> importControl: aControl inTheContextOf: aWidge
 	aWidget mooseModel add: control.
 	intro := self
 		resolveLayoutContainer: aControl layoutID
+		section: aControl section
 		type: aControl layoutName
 		inTheContextOf: aWidget.
 	intro addWidget: control.].
 	^ control
+	
 ]
 
 { #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> importForm: aForm inTheContextOf: aProject [
-	^ JinCasinoPage new
+	| layout container page ppage |
+	
+	layout := CSNLVerticalLayout new .
+	aProject mooseModel add: layout.
+	container := CSNUIPanel new.
+	aProject mooseModel add: container.
+	container layout: layout.
+	page := JinCasinoBusinessPage new
+		name: aForm nameWithoutSpaces.
+	page mainContainer: container. 
+		
+		
+	aProject mooseModel add: page.
+	ppage := JinCasinoPage new
 		realClassName: aForm class name;
-		addBusinessPage:
-			(CSNBusinessPage new
-				name: aForm nameWithoutSpaces;
-				yourself);
+		addBusinessPage: page;
 		name: aForm nameWithoutSpaces;
 		project: aProject;
-		yourself
+		yourself.
+	aProject mooseModel add: ppage.
+	^ ppage
 ]
 
 { #category : #'as yet unclassified' }
@@ -71,39 +85,52 @@ JinCasinoModelStatelessFactory >> importProject: aProject model: aModel [
 
 { #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> importSubform: aJinControlSubForm inTheContextOf: aForm [
-	
-	^ JinCasinoWidgetUsage new
-		widgetName: aJinControlSubForm name;
-		mooseModel: aForm mooseModel;
-		yourself
+	| wu |
+
+	wu := JinCasinoWidgetUsage new
+		name: aJinControlSubForm name ;
+		widgetName: aJinControlSubForm sourceObjectWithoutSpaces;
+		yourself.
+	aForm mooseModel add: wu.
+	aForm addWidget: wu
 ]
 
 { #category : #'as yet unclassified' }
-JinCasinoModelStatelessFactory >> resolveLayoutContainer: aLayoutId type: aLayoutTypeName inTheContextOf: aContainer [
-	| layoutedContainer |
-	^ aContainer businessPage first widgets
+JinCasinoModelStatelessFactory >> resolveLayoutContainer: aLayoutId section: aSection type: aLayoutTypeName inTheContextOf: aContainer [
+	| layoutedContainer section |
+	
+	section := (aContainer businessPage first section: aSection) .
+	^ section widgets
 		detect: [ :c | 
 			c isContainer
 				and:
 					[ c layout isNotNil and: [ (c propertyNamed: 'LayoutID') = aLayoutId ] ] ]
-		ifNone: [ layoutedContainer := (aLayoutId = 0
+		ifNone: [ 
+			layoutedContainer := CSNUIPanel new.
+			" (aLayoutId = 0
 				ifTrue: [ CSNUIPanel ]
-				ifFalse: [ CSNUIFieldset ]) new.
+				ifFalse: [ CSNUIFieldset ]) new."
 			layoutedContainer propertyNamed: 'LayoutID' put: aLayoutId.
 			layoutedContainer
 				layout:
 					(aLayoutId = 0
 						ifTrue: [ CSNLAbsolutePositionLayout ]
 						ifFalse: [ CSNLTabulateLayout ]) new.
-			aContainer mooseModel add: layoutedContainer.
-			aContainer mooseModel add: layoutedContainer layout.
-			aContainer addWidget: layoutedContainer.
+			section mooseModel add: layoutedContainer.
+			section mooseModel add: layoutedContainer layout.
+			section addWidget: layoutedContainer.
 			layoutedContainer ]
+]
+
+{ #category : #'visiting - properties' }
+JinCasinoModelStatelessFactory >> toPixelSize: aValue [
+	^ aValue / 10
 ]
 
 { #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitAccessProperty: aProperty [ 
 	"nothing to do"
+	^ nil
 ]
 
 { #category : #'visit - control' }
@@ -212,6 +239,47 @@ JinCasinoModelStatelessFactory >> visitControlType: aJinControlType [
 	 self visitAccessProperty: aJinControlType
 ]
 
+{ #category : #'as yet unclassified' }
+JinCasinoModelStatelessFactory >> visitCustomControl: aJinControlGeneric [
+	aJinControlGeneric type = 'OptionGroup'
+		ifTrue: [ ^ nil ].
+	aJinControlGeneric type = 'OptionButton'
+		ifTrue: [ ^ nil ].
+	(aJinControlGeneric handle propertyNamed: #OLEClass)
+		= 'WMEBoutons020000.BoutonGenerique'
+		ifTrue: [ | input |
+			input := CSNUIButton new.
+			input name: aJinControlGeneric nameWithoutSpaces.
+			input
+				addAttribute:
+					(CSNUILabel new
+						attributeValue: (aJinControlGeneric handle propertyNamed: 'ControlTipText');
+						yourself).
+			^ input ].
+	(aJinControlGeneric handle propertyNamed: #OLEClass)
+		= 'WMEBoutons020000.BoutonLibelle'
+		ifTrue: [ | input |
+			input := CSNUIButton new.
+			input name: aJinControlGeneric nameWithoutSpaces.
+			input
+				addAttribute:
+					(CSNUILabel new
+						attributeValue: (aJinControlGeneric handle propertyNamed: 'Name');
+						yourself).
+			^ input ].
+		
+	(aJinControlGeneric handle propertyNamed: #OLEClass) = 	'Microsoft Web Browser' ifTrue: [ ^ nil ].
+	(aJinControlGeneric handle propertyNamed: #OLEClass)
+		= 'ImageComboCtl'
+		ifTrue: [ ^ nil ].
+	(aJinControlGeneric handle propertyNamed: #OLEClass) = 'TreeCtrl'
+		ifTrue: [ ^ nil ].
+	(aJinControlGeneric handle propertyNamed: #OLEClass)
+		= 'ImageListCtrl'
+		ifTrue: [ ^ nil ].
+	self halt
+]
+
 { #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitDatasheetCaption: aJinDatasheetCaption [
 	aJinDatasheetCaption value
@@ -315,7 +383,7 @@ JinCasinoModelStatelessFactory >> visitGridlineStyleTop: aJinGridlineStyleTop [
 { #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitHeight: aJinHeight [
 	^ CSNUIAbsoluteHeight new
-		attributeValue: aJinHeight value;
+		attributeValue:  (self toPixelSize: aJinHeight  value);
 		name: #height;
 		yourself
 ]
@@ -360,7 +428,7 @@ JinCasinoModelStatelessFactory >> visitLabelName: aJinLabelName [
 { #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitLeft: aJinLeft [
 	^ CSNUILeft new
-		attributeValue: aJinLeft value;
+		attributeValue: (self toPixelSize: aJinLeft value);
 		name: #left;
 		yourself
 ]
@@ -483,7 +551,7 @@ JinCasinoModelStatelessFactory >> visitThemeFontIndex: aJinThemeFontIndex [
 { #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitTop: aJinTop [
 	^ CSNUITop new
-		attributeValue: aJinTop value;
+		attributeValue: (self toPixelSize: aJinTop value);
 		name:#top;
 		yourself
 ]
@@ -501,7 +569,7 @@ JinCasinoModelStatelessFactory >> visitVisible: aJinVisible [
 { #category : #'visiting - properties' }
 JinCasinoModelStatelessFactory >> visitWidth: aJinWidth [
 	^ CSNUIAbsoluteWidth new
-		attributeValue: aJinWidth value;
+		attributeValue: (self toPixelSize: aJinWidth value);
 		name: #width;
 		yourself
 ]
