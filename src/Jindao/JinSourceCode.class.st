@@ -24,6 +24,13 @@ JinSourceCode >> amountOfLines [
 	^ handle propertyNamed: #CountOfLines
 ]
 
+{ #category : #ast }
+JinSourceCode >> ast [
+	^ [ (self class environment at: #VBParser) parse: self contents ]
+		on: Error
+		do: [ :e | e ]
+]
+
 { #category : #'as yet unclassified' }
 JinSourceCode >> content [
 	^ self contents
