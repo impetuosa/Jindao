@@ -17,6 +17,11 @@ JinModule >> acceptVisitor: aVisitor [
 	aVisitor visitModule: self 
 ]
 
+{ #category : #ast }
+JinModule >> ast [
+	^ self code ast 
+]
+
 { #category : #'as yet unclassified' }
 JinModule >> code [
 	^ self body code

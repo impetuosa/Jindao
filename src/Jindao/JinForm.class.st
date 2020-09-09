@@ -214,6 +214,11 @@ JinForm >> addControl: aJinLabel [
 	self shouldBeImplemented.
 ]
 
+{ #category : #ast }
+JinForm >> ast [
+	^ self code ast 
+]
+
 { #category : #'as yet unclassified' }
 JinForm >> code [
 	^ self body code
@@ -310,7 +315,7 @@ JinForm >> module [
 
 { #category : #accessing }
 JinForm >> privateLoadBodyObject [
-	^ (project openForm: self)
+	^ project openForm: self
 ]
 
 { #category : #accessing }
