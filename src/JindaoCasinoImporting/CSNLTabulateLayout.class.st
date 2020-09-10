@@ -10,6 +10,11 @@ CSNLTabulateLayout >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'as yet unclassified' }
+CSNLTabulateLayout >> getLayoutAttribute [
+	^ {}
+]
+
+{ #category : #'as yet unclassified' }
 CSNLTabulateLayout >> rows [
 	| rows |
 	" 

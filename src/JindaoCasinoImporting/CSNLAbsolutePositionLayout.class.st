@@ -13,6 +13,11 @@ CSNLAbsolutePositionLayout >> accept: aCSNModelVisitor [
 ]
 
 { #category : #'as yet unclassified' }
+CSNLAbsolutePositionLayout >> getLayoutAttribute [
+	^ {}
+]
+
+{ #category : #'as yet unclassified' }
 CSNLAbsolutePositionLayout >> rows [
 	| rows |
 	" 
