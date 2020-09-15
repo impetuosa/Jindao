@@ -33,6 +33,11 @@ JinDashboard class >> projectExplorerWidth [
 	^ 400
 ]
 
+{ #category : #'as yet unclassified' }
+JinDashboard >> activatedObject: aSpSingleSelectionMode [ 
+	self openObjectInspector: aSpSingleSelectionMode selectedItem. 
+]
+
 { #category : #initialization }
 JinDashboard >> emptyViewport [
 
@@ -106,6 +111,7 @@ JinDashboard >> initializePresenters [
 		activateOnDoubleClick ;
 		beMultipleSelection ;
 		whenActivatedDo: [ : object | self activatedObject: object ];
+		contextMenu: self tableMenu; 
 		beResizable.
 
 
@@ -139,6 +145,20 @@ JinDashboard >> openAccessProject [
 		^ self ].
 
 	self openProject: path
+]
+
+{ #category : #'as yet unclassified' }
+JinDashboard >> openObjectInspector: anObject [
+
+	viewport addPage: (self newNotebookPage
+			 beCloseable;
+			 title: 'Inspector ' , anObject printString;
+			 presenterProvider:
+				 ((JinInspectorBuilder new inspectorFor: anObject into: self)
+					  needRebuild: true;
+					  yourself);
+			 yourself).
+	self update
 ]
 
 { #category : #initialization }
@@ -191,6 +211,43 @@ JinDashboard >> project [
 JinDashboard >> tableContents [
 
 	^ model entities 
+]
+
+{ #category : #initialization }
+JinDashboard >> tableMenu [
+
+	| table1 |
+	table1 := projectExplorer.
+	^ self newMenu
+		  title: 'Context menu example';
+		  addGroup: [ :aGroup | 
+			  aGroup
+				  addItem: [ :anItem | 
+					  anItem
+						  name: 'Print in transcript';
+						  shortcut: $p meta;
+						  description: 'Print the selected class on Transcript';
+						  action: [ projectExplorer selectedItems traceCr ] ];
+				  addItem: [ :anItem | 
+					  anItem
+						  name: 'Browse';
+						  iconName: #open;
+						  action: [ projectExplorer selectedItems browse ] ];
+				  addItem: [ :anItem | 
+					  anItem
+						  name: 'Print infos';
+						  subMenu: (self newMenu addGroup: [ :aSubGroup | 
+									   aSubGroup
+										   addItem: [ :item | 
+											   item
+												   name: 'Print number of methods';
+												   action: [ table1 selectedItems methods size traceCr ] ];
+										   addItem: [ :item | 
+											   item
+												   name: 'Print number of variables';
+												   action: [ 
+													   projectExplorer selectedItems instanceVariables size
+														   traceCr ] ] ]) ] ]
 ]
 
 { #category : #initialization }

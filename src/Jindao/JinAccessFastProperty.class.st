@@ -6,7 +6,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'accessObject',
-		'name'
+		'name',
+		'value'
 	],
 	#category : #'Jindao-Core'
 }
@@ -36,6 +37,14 @@ JinAccessFastProperty >> printOn: aStream [
 		nextPutAll: '.';
 		nextPutAll: self name;
 		nextPut: $]
+]
+
+{ #category : #accessing }
+JinAccessFastProperty >> safeValue [
+
+	^ [ value ifNil: [ value := self value ] ]
+		  on: Error
+		  do: [ :e | e ]
 ]
 
 { #category : #accessing }

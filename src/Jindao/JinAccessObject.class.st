@@ -2,7 +2,8 @@ Class {
 	#name : #JinAccessObject,
 	#superclass : #Object,
 	#instVars : [
-		'handle'
+		'handle',
+		'name'
 	],
 	#category : #'Jindao-Core'
 }
@@ -53,7 +54,7 @@ JinAccessObject >> mooseName [
 
 { #category : #accessing }
 JinAccessObject >> name [
-	^ handle propertyNamed: #Name
+	^ name ifNil: [ name := handle propertyNamed: #Name]
 ]
 
 { #category : #'as yet unclassified' }
