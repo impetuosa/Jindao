@@ -18,6 +18,11 @@ JinAccessObject class >> mapsWith: aTypeName [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessObject class >> mooseName [
+	^ self name copyReplaceAll: 'Jin' with: ''
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessObject >> beCached [
 	handle := handle asCachedHandle.
 ]
@@ -39,6 +44,11 @@ JinAccessObject >> isControl [ 	^ false
 { #category : #'as yet unclassified' }
 JinAccessObject >> isCustomControl [
 	^ false
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessObject >> mooseName [
+	^ self  name 
 ]
 
 { #category : #accessing }

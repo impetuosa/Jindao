@@ -29,6 +29,12 @@ JinTable >> attributes [
 ]
 
 { #category : #'as yet unclassified' }
+JinTable >> children [
+
+	^ self fields
+]
+
+{ #category : #'as yet unclassified' }
 JinTable >> connect [
 	^ self body connect 
 ]

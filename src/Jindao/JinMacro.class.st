@@ -18,6 +18,11 @@ JinMacro >> acceptVisitor: aVisitor [
 ]
 
 { #category : #accessing }
+JinMacro >> color [
+	^ Color blue darker 
+]
+
+{ #category : #accessing }
 JinMacro >> privateLoadBodyObject [
 	^ (project openMacro: self) 
 ]

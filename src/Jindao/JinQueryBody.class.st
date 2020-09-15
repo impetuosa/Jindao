@@ -8,6 +8,17 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinQueryBody >> fields [
+	^ JinCollection newDefault
+		handle: (handle propertyNamed: #Fields)
+			factory:
+			(JinRemoteObjectOnlyGenericsFactory new
+				defaultHierarchyClass: JinAccessTableField;
+				yourself);
+		yourself
+]
+
+{ #category : #'as yet unclassified' }
 JinQueryBody >> sql [
 	^ handle propertyNamed: #SQL
 ]

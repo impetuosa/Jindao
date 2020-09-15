@@ -72,6 +72,13 @@ JinAccessProject >> close: aJinForm save: aBool [
 	application close: aJinForm save: aBool
 ]
 
+{ #category : #'initialize-release' }
+JinAccessProject >> closeAndQuit [
+	self close.
+	application quit.
+	application := nil. 
+]
+
 { #category : #'as yet unclassified' }
 JinAccessProject >> compileAll [
 	[ application compileAll ]

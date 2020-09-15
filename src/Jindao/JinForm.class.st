@@ -232,6 +232,15 @@ JinForm >> ast [
 ]
 
 { #category : #'as yet unclassified' }
+JinForm >> children [
+
+	| controls |
+	self close.
+	controls := self controls collect: [ :c | c yourself ].
+	^ controls
+]
+
+{ #category : #'as yet unclassified' }
 JinForm >> code [
 	^ self body code
 ]

@@ -123,10 +123,32 @@ JinCollection >> handle: aCOMDispatchInstance factory: anInstanceFactory [
 	factory := anInstanceFactory
 ]
 
+{ #category : #testing }
+JinCollection >> ifEmpty: aFullBlockClosure [ 
+	^ self isEmpty ifTrue: aFullBlockClosure 
+]
+
 { #category : #'as yet unclassified' }
 JinCollection >> initialize [
 	super initialize.
 	base := 1
+]
+
+{ #category : #'as yet unclassified' }
+JinCollection >> isCollection [
+
+	^ true
+]
+
+{ #category : #testing }
+JinCollection >> isEmpty [
+
+	^ self size = 0
+]
+
+{ #category : #testing }
+JinCollection >> isNotEmpty [
+	^ self isEmpty not 
 ]
 
 { #category : #'as yet unclassified' }
@@ -172,4 +194,9 @@ JinCollection >> select: selectBock thenDo: aBlock [
 { #category : #'as yet unclassified' }
 JinCollection >> size [
 	^ handle propertyNamed: #Count
+]
+
+{ #category : #Moose }
+JinCollection >> sorted: aFullBlockClosure [ 
+	^ self 
 ]

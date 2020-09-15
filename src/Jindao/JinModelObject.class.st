@@ -42,6 +42,12 @@ JinModelObject >> closeAndSave [
 	body := nil
 ]
 
+{ #category : #'as yet unclassified' }
+JinModelObject >> collect: aBlock [
+
+	^ {  }
+]
+
 { #category : #accessing }
 JinModelObject >> description: aDescription [
 	description := aDescription
@@ -59,7 +65,9 @@ JinModelObject >> exportToFolder: aFolder [
 ]
 
 { #category : #'as yet unclassified' }
-JinModelObject >> isControl [ 	^ false
+JinModelObject >> isControl [
+
+	^ false
 ]
 
 { #category : #accessing }

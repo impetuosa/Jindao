@@ -24,6 +24,16 @@ JinControl >> acceptVisitor: aVisitor [
 ]
 
 { #category : #'as yet unclassified' }
+JinControl >> children [
+	^ self documentedProperties 
+]
+
+{ #category : #'initialize-release' }
+JinControl >> close [
+
+]
+
+{ #category : #'as yet unclassified' }
 JinControl >> componentKnownProperties [
 	^ self class componentKnownProperties
 ]
@@ -58,6 +68,16 @@ JinControl >> createIn: aJinForm [
 				type: self controlType
 				section: self sectionNumber
 				parent: parentName ]
+]
+
+{ #category : #'as yet unclassified' }
+JinControl >> documentedProperties [
+
+	^ self componentKnownProperties collect: [ :p | 
+		  JinAccessFastProperty new
+			  accessObject: self;
+			  name: p;
+			  yourself ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -133,6 +153,10 @@ JinControl >> properties [
 { #category : #'as yet unclassified' }
 JinControl >> propertiesFactory [
 	^ JinRemotesFactory newDefaultAccessPropertyFactory
+]
+
+{ #category : #'as yet unclassified' }
+JinControl >> propertyNamed: asd [
 ]
 
 { #category : #'as yet unclassified' }

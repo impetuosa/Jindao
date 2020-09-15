@@ -18,10 +18,21 @@ JinQuery >> acceptVisitor: aVisitor [
 ]
 
 { #category : #accessing }
+JinQuery >> children [
+
+	^ self fields
+]
+
+{ #category : #accessing }
 JinQuery >> exportToFolder: aFolder [
 	(aFolder / self name , 'QUERY') writeStream
 		nextPutAll: self sql;
 		close
+]
+
+{ #category : #'as yet unclassified' }
+JinQuery >> fields [
+	^ self body fields 
 ]
 
 { #category : #accessing }
