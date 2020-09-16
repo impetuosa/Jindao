@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'project',
 		'path',
-		'parent'
+		'parent',
+		'entities'
 	],
 	#category : #JindaoMoose
 }
@@ -34,6 +35,12 @@ JinAccessMooseModel >> allDeclaredPropertiesIn: aMetamodel [
 	self halt 
 ]
 
+{ #category : #accessing }
+JinAccessMooseModel >> children [
+
+	^ self entities
+]
+
 { #category : #'initialize-release' }
 JinAccessMooseModel >> closeAndQuit [
 
@@ -52,6 +59,7 @@ JinAccessMooseModel >> collect: aFullBlockClosure [
 JinAccessMooseModel >> ensureClosed [
 
 	project ifNotNil: [ 
+		entities := nil. 
 		project closeAndQuit.
 		project := nil ]
 ]
@@ -59,12 +67,11 @@ JinAccessMooseModel >> ensureClosed [
 { #category : #MooseCompatibility }
 JinAccessMooseModel >> entities [
 
-
-	^ (self project forms collect: [: o| JinPath object: o obtainedBySending: (Message selector:#__NOT_POSSIBLE_TO_RECOVER) to: JinPath  ])
-	  , (self project reports collect: [: o| JinPath object: o obtainedBySending: (Message selector:#__NOT_POSSIBLE_TO_RECOVER) to: JinPath  ])
-	  , (self project tables collect: [: o| JinPath object: o obtainedBySending: (Message selector:#__NOT_POSSIBLE_TO_RECOVER) to: JinPath  ])
-	  , (self project queries collect: [: o| JinPath object: o obtainedBySending: (Message selector:#__NOT_POSSIBLE_TO_RECOVER) to: JinPath  ]),
-	(self project macros collect: [: o| JinPath object: o obtainedBySending: (Message selector:#__NOT_POSSIBLE_TO_RECOVER) to: JinPath  ])
+	^ entities ifNil: [ entities := (self project forms collect: #yourself)
+	  , (self project reports collect: #yourself)
+	  , (self project tables collect: #yourself)
+	  , (self project queries collect: #yourself)
+	  , (self project macros collect: #yourself)]
 ]
 
 { #category : #MooseCompatibility }
@@ -128,6 +135,17 @@ JinAccessMooseModel >> project [
 	^ self isOpen
 		  ifTrue: [ project ]
 		  ifFalse: [ self open. project ]
+]
+
+{ #category : #MooseCompatibility }
+JinAccessMooseModel >> proxifiedEntities [
+
+
+	^ (self project forms collect: [: o| JinPath object: o obtainedBySending: (Message selector:#__NOT_POSSIBLE_TO_RECOVER) to: JinPath  ])
+	  , (self project reports collect: [: o| JinPath object: o obtainedBySending: (Message selector:#__NOT_POSSIBLE_TO_RECOVER) to: JinPath  ])
+	  , (self project tables collect: [: o| JinPath object: o obtainedBySending: (Message selector:#__NOT_POSSIBLE_TO_RECOVER) to: JinPath  ])
+	  , (self project queries collect: [: o| JinPath object: o obtainedBySending: (Message selector:#__NOT_POSSIBLE_TO_RECOVER) to: JinPath  ]),
+	(self project macros collect: [: o| JinPath object: o obtainedBySending: (Message selector:#__NOT_POSSIBLE_TO_RECOVER) to: JinPath  ])
 ]
 
 { #category : #MooseCompatibility }

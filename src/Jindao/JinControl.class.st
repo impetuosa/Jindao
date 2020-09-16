@@ -8,7 +8,8 @@ Class {
 	#superclass : #JinAccessObject,
 	#instVars : [
 		'properties',
-		'scope'
+		'scope',
+		'documentedProperties'
 	],
 	#category : #'Jindao-FormControls'
 }
@@ -73,11 +74,13 @@ JinControl >> createIn: aJinForm [
 { #category : #'as yet unclassified' }
 JinControl >> documentedProperties [
 
-	^ self componentKnownProperties collect: [ :p | 
-		  JinAccessFastProperty new
-			  accessObject: self;
-			  name: p;
-			  yourself ]
+	^ documentedProperties ifNil: [ 
+		  documentedProperties := self componentKnownProperties collect: [ 
+			                          :p | 
+			                          JinAccessFastProperty new
+				                          accessObject: self;
+				                          name: p;
+				                          yourself ] ]
 ]
 
 { #category : #'as yet unclassified' }

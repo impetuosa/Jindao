@@ -34,8 +34,7 @@ JinIcons class >> iconFor: anElement [
 	aClass = JinQuery ifTrue: [ ^ self iconQueryIcon ].
 	aClass = JinMacro ifTrue: [ ^ self iconMacroIcon ].
 	aClass = JinModule ifTrue: [ ^ self iconModuleIcon ].
-	self halt.
-	self error: 'Invalid element'
+	^ self iconTableIcon
 ]
 
 { #category : #'accessing - icons' }

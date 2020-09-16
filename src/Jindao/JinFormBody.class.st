@@ -36,9 +36,11 @@ JinFormBody >> componentKnownProperties [
 
 { #category : #'as yet unclassified' }
 JinFormBody >> controls [
-	^ JinCollection newDefault
-		handle: (handle propertyNamed: #Controls)
-		factory: self controlsFactory
+
+	^ controls ifNil: [ 
+		  controls := JinCollection newDefault
+			              handle: (handle propertyNamed: #Controls)
+			              factory: self controlsFactory ]
 ]
 
 { #category : #'as yet unclassified' }

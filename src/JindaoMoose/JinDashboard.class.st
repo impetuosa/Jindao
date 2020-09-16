@@ -33,6 +33,44 @@ JinDashboard class >> projectExplorerWidth [
 	^ 400
 ]
 
+{ #category : #'as yet unclassified' }
+JinDashboard >> activatedObject: aSpSingleSelectionMode [ 
+	self openObjectInspector: aSpSingleSelectionMode selectedItem. 
+]
+
+{ #category : #initialization }
+JinDashboard >> createNewProjectExplorerPaneFor: aModel [
+
+	| table |
+	(aModel respondsTo:#children ) ifFalse:[^ nil  ].
+	table := self newTable.
+	table
+		addColumn: ((SpCheckBoxTableColumn
+				  title: ' '
+				  evaluated: [ :class | components includes: class ])
+				 onActivation: [ :class | components add: class ];
+				 onDeactivation: [ :class | 
+					 components remove: class ifAbsent: [  ] ];
+				 width: 20;
+				 yourself);
+		addColumn:
+			((SpImageTableColumn
+				  title: 'Icon'
+				  evaluated: [ :e | self iconFor: e ])
+				 width: 50;
+				 yourself);
+		addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
+		activateOnDoubleClick;
+		beMultipleSelection;
+		whenActivatedDo: [ :object | self activatedObject: object ];
+		contextMenu: (self tableMenuFor: table);
+		beResizable.
+		
+	table items: aModel children.
+
+	^ table
+]
+
 { #category : #initialization }
 JinDashboard >> emptyViewport [
 
@@ -54,7 +92,7 @@ JinDashboard >> initializePresenters [
 	toolbar := self newToolbar.
 	toolbar beBoth.
 	toolbar
-		addItem: (SpToolbarButtonPresenter  new
+		addItem: (SpToolbarButtonPresenter new
 				 label: 'Open';
 				 icon: (self theme iconNamed: #smallOpen);
 				 help: 'Opens an access project';
@@ -84,38 +122,29 @@ JinDashboard >> initializePresenters [
 				 help: 'Tree map overview';
 				 action: [ self openTreeMapOverview ];
 				 yourself).
-	projectExplorer := self newTable.
+	
+	
+	projectExplorer := self newProjectExplorer.
 
+	
 
-	projectExplorer
-		addColumn: ((SpCheckBoxTableColumn
-				  title: ' '
-				  evaluated: [ :class | components includes: class ])
-				 onActivation: [ :class | components add: class ];
-				 onDeactivation: [ :class | 
-					 components remove: class ifAbsent: [  ] ];
-				 width: 20;
-				 yourself);
-		addColumn:
-			((SpImageTableColumn
-				  title: 'Icon'
-				  evaluated: [ :e | self iconFor: e ])
-				 width: 50;
-				 yourself);
-		addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
-		activateOnDoubleClick ;
-		beMultipleSelection ;
-		whenActivatedDo: [ : object | self activatedObject: object ];
-		beResizable.
+	viewport := self newNotebook.
 
-
-	viewport := self newNotebook
 ]
 
 { #category : #initialization }
 JinDashboard >> initializeWindow: aWindowPresenter [ 	
 	super initializeWindow: aWindowPresenter.
 	aWindowPresenter whenWillCloseDo: [ self windowClosing ].
+]
+
+{ #category : #initialization }
+JinDashboard >> newProjectExplorer [
+
+	^ SpMillerColumnPresenter new
+		  presenterBlock: [ :aModel | 
+			  self createNewProjectExplorerPaneFor: aModel ];
+		  yourself
 ]
 
 { #category : #initialization }
@@ -141,9 +170,25 @@ JinDashboard >> openAccessProject [
 	self openProject: path
 ]
 
+{ #category : #'as yet unclassified' }
+JinDashboard >> openObjectInspector: anObject [
+
+	viewport addPage: (self newNotebookPage
+			 beCloseable;
+			title:'';
+			 presenterProvider:
+				 ((JinInspectorBuilder new inspectorFor: anObject into: self)
+					  needRebuild: true;
+					  yourself);
+			 yourself).
+	
+	.
+	self update
+]
+
 { #category : #initialization }
 JinDashboard >> openProject: path [
-	
+
 	model ifNotNil: [ 
 		(UIManager default
 			 confirm:
@@ -154,12 +199,13 @@ JinDashboard >> openProject: path [
 				model := nil ]
 			ifFalse: [ ^ self ] ].
 
-	model := JinAccessMooseModel new path: path asFileReference; yourself .
-	mapOverviewPage ifNotNil: [
-	mapOverviewPage presenterProvider model: model. ].
-	components := Set new .
-	
-	projectExplorer items: self tableContents
+	model := JinAccessMooseModel new
+		         path: path asFileReference;
+		         yourself.
+	mapOverviewPage ifNotNil: [ 
+		mapOverviewPage presenterProvider model: model ].
+	components := Set new.
+	projectExplorer setRootModel: model
 ]
 
 { #category : #initialization }
@@ -172,7 +218,7 @@ JinDashboard >> openTreeMapOverview [
 
 	mapOverviewPage := self newNotebookPage
 		                   beCloseable;
-		                   title: 'Tree map';
+		                   title: '';
 		                   presenterProvider: widget;
 		                   yourself.
 	viewport addPage: mapOverviewPage.
@@ -191,6 +237,78 @@ JinDashboard >> project [
 JinDashboard >> tableContents [
 
 	^ model entities 
+]
+
+{ #category : #initialization }
+JinDashboard >> tableMenu [
+
+	| table1 |
+	table1 := projectExplorer.
+	^ self newMenu
+		  title: 'Context menu example';
+		  addGroup: [ :aGroup | 
+			  aGroup
+				  addItem: [ :anItem | 
+					  anItem
+						  name: 'Print in transcript';
+						  shortcut: $p meta;
+						  description: 'Print the selected class on Transcript';
+						  action: [ table1 selectedItems traceCr ] ];
+				  addItem: [ :anItem | 
+					  anItem
+						  name: 'Browse';
+						  iconName: #open;
+						  action: [ projectExplorer selectedItems browse ] ];
+				  addItem: [ :anItem | 
+					  anItem
+						  name: 'Print infos';
+						  subMenu: (self newMenu addGroup: [ :aSubGroup | 
+									   aSubGroup
+										   addItem: [ :item | 
+											   item
+												   name: 'Print number of methods';
+												   action: [ table1 selectedItems methods size traceCr ] ];
+										   addItem: [ :item | 
+											   item
+												   name: 'Print number of variables';
+												   action: [ 
+													   projectExplorer selectedItems instanceVariables size
+														   traceCr ] ] ]) ] ]
+]
+
+{ #category : #initialization }
+JinDashboard >> tableMenuFor: table1 [
+
+	^ self newMenu
+		  title: 'Context menu example';
+		  addGroup: [ :aGroup | 
+			  aGroup
+				  addItem: [ :anItem | 
+					  anItem
+						  name: 'Print in transcript';
+						  shortcut: $p meta;
+						  description: 'Print the selected class on Transcript';
+						  action: [ table1 selectedItems traceCr ] ];
+				  addItem: [ :anItem | 
+					  anItem
+						  name: 'Browse';
+						  iconName: #open;
+						  action: [ projectExplorer selectedItems browse ] ];
+				  addItem: [ :anItem | 
+					  anItem
+						  name: 'Print infos';
+						  subMenu: (self newMenu addGroup: [ :aSubGroup | 
+									   aSubGroup
+										   addItem: [ :item | 
+											   item
+												   name: 'Print number of methods';
+												   action: [ table1 selectedItems methods size traceCr ] ];
+										   addItem: [ :item | 
+											   item
+												   name: 'Print number of variables';
+												   action: [ 
+													   projectExplorer selectedItems instanceVariables size
+														   traceCr ] ] ]) ] ]
 ]
 
 { #category : #initialization }

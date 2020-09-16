@@ -17,3 +17,10 @@ JinCachedEntityCollection >> at: anIndex [
 						elementFor: (handle propertyNamed: 'Item' withArguments: {(anIndex - base)})) ].
 	^ self collection at: anIndex
 ]
+
+{ #category : #accessing }
+JinCachedEntityCollection >> at: anInteger ifAbsent: aFullBlockClosure [
+	^ (anInteger between: 1 and: self size)
+		  ifTrue: [ self at: anInteger ]
+		  ifFalse: [ aFullBlockClosure value ]
+]
