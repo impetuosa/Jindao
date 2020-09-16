@@ -9,7 +9,14 @@ Class {
 		'programHandle',
 		'dataHandle',
 		'application',
-		'projectPath'
+		'projectPath',
+		'forms',
+		'modules',
+		'macros',
+		'tables',
+		'reports',
+		'relations',
+		'queries'
 	],
 	#category : #'Jindao-Core'
 }
@@ -276,12 +283,14 @@ JinAccessProject >> fileName [
 
 { #category : #'form-api' }
 JinAccessProject >> forms [
-	^ JinCollection newDefault
-		handle: (programHandle propertyNamed: #AllForms)
-		factory:
-			((JinFirstClassCitizenModelFactory defaultFor: JinForm)
-				project: self;
-				yourself)
+
+	^ forms ifNil: [ 
+		  forms := JinCollection newDefault
+			           handle: (programHandle propertyNamed: #AllForms)
+			           factory:
+				           ((JinFirstClassCitizenModelFactory defaultFor: JinForm)
+					            project: self;
+					            yourself) ]
 ]
 
 { #category : #accessing }
@@ -314,22 +323,24 @@ JinAccessProject >> installReportHeaderFooterOn: aJinReport [
 
 { #category : #'macro-api' }
 JinAccessProject >> macros [
-	^ JinCollection newDefault
+	^ macros ifNil: [ 
+		  macros := JinCollection newDefault
 		handle: (programHandle propertyNamed: #AllMacros)
 		factory:
 			((JinFirstClassCitizenModelFactory defaultFor: JinMacro)
 				project: self;
-				yourself)
+				yourself)]
 ]
 
 { #category : #'module-api' }
 JinAccessProject >> modules [
-	^ JinCollection newDefault
+	^ modules ifNil: [ 
+		  modules := JinCollection newDefault
 		handle: (programHandle propertyNamed: #AllModules)
 		factory:
 			((JinFirstClassCitizenModelFactory defaultFor: JinModule)
 				project: self;
-				yourself)
+				yourself)]
 ]
 
 { #category : #accessing }
@@ -380,12 +391,15 @@ JinAccessProject >> projectPath: aFileReference [
 
 { #category : #'query-api' }
 JinAccessProject >> queries [
-	^ JinCollection newDefault
-		handle: (dataHandle propertyNamed: #AllQueries)
-		factory:
-			((JinFirstClassCitizenModelFactory defaultFor: JinQuery)
-				project: self;
-				yourself)
+
+	^ queries ifNil: [ 
+		  queries := JinCollection newDefault
+			             handle: (dataHandle propertyNamed: #AllQueries)
+			             factory:
+				             ((JinFirstClassCitizenModelFactory defaultFor:
+						               JinQuery)
+					              project: self;
+					              yourself) ]
 ]
 
 { #category : #accessing }
@@ -395,13 +409,15 @@ JinAccessProject >> references [
 
 { #category : #'as yet unclassified' }
 JinAccessProject >> relations [
-	^ JinCollection newDefault
-		handle: (application database propertyNamed: #Relations)
-		factory:
-			(JinRemoteObjectOnlyGenericsFactory new
-				defaultHierarchyClass: JinTableRelation;
-				scopedBy: self;
-				yourself)
+
+	^ relations ifNil: [ 
+		  relations := JinCollection newDefault
+			               handle:
+			               (application database propertyNamed: #Relations)
+			               factory: (JinRemoteObjectOnlyGenericsFactory new
+					                defaultHierarchyClass: JinTableRelation;
+					                scopedBy: self;
+					                yourself) ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -417,12 +433,13 @@ JinAccessProject >> reopen [
 
 { #category : #'report-api' }
 JinAccessProject >> reports [
-	^ JinCollection newDefault
+	^ reports ifNil: [ 
+		  reports := JinCollection newDefault
 		handle: (programHandle propertyNamed: #AllReports)
 		factory:
 			((JinFirstClassCitizenModelFactory defaultFor: JinReport)
 				project: self;
-				yourself)
+				yourself)]
 ]
 
 { #category : #'as yet unclassified' }
@@ -441,12 +458,13 @@ JinAccessProject >> save: aJinModule [
 
 { #category : #'table-api' }
 JinAccessProject >> tables [
-	^ JinCollection newDefault
+	^ tables ifNil: [ 
+		  tables := JinCollection newDefault
 		handle: (dataHandle propertyNamed: #AllTables)
 		factory:
 			((JinFirstClassCitizenModelFactory defaultFor: JinTable)
 				project: self;
-				yourself)
+				yourself)]
 ]
 
 { #category : #'as yet unclassified' }

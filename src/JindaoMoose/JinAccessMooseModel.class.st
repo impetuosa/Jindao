@@ -35,6 +35,12 @@ JinAccessMooseModel >> allDeclaredPropertiesIn: aMetamodel [
 	self halt 
 ]
 
+{ #category : #accessing }
+JinAccessMooseModel >> children [
+
+	^ self entities
+]
+
 { #category : #'initialize-release' }
 JinAccessMooseModel >> closeAndQuit [
 
