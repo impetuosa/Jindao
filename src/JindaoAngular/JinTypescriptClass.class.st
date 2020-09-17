@@ -5,7 +5,8 @@ Class {
 		'types',
 		'methods',
 		'superclass',
-		'properties'
+		'properties',
+		'decorator'
 	],
 	#classInstVars : [
 		'object'
@@ -26,6 +27,18 @@ JinTypescriptClass class >> object [
 JinTypescriptClass >> addMethod: aJinTypescriptMethod [ 
 	methods  add: aJinTypescriptMethod .
 	aJinTypescriptMethod setOwnerClass: self . 
+]
+
+{ #category : #accessing }
+JinTypescriptClass >> decorator [
+
+	^ decorator
+]
+
+{ #category : #accessing }
+JinTypescriptClass >> decorator: aDeco [
+
+	decorator := aDeco
 ]
 
 { #category : #generated }

@@ -34,7 +34,7 @@ JinTypescriptClassLoader >> visitClassExpression: aClassExpression [
 	result name: aClassExpression name name value.
 	result implements: (aClassExpression types collect: [ :t | 
 			 JinTypescriptTypeLoader load: t file: file ]).
-
+	result decorator: decorator. 
 	self acceptNodes: aClassExpression elements.
 	
 ]
