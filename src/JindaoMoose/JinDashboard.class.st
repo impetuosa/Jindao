@@ -7,7 +7,9 @@ Class {
 		'toolbar',
 		'model',
 		'components',
-		'mapOverviewPage'
+		'mapOverviewPage',
+		'angularExplorer',
+		'angularModel'
 	],
 	#category : #JindaoMoose
 }
@@ -18,13 +20,16 @@ JinDashboard class >> defaultSpec [
 	^ SpBoxLayout newVertical
 		  add: #toolbar
 		  withConstraints: [ :constraints | 
-			  constraints height: self toolbarHeight *2 ];
+			  constraints height: self toolbarHeight * 2 ];
 		  add: (SpBoxLayout newHorizontal
-				   add: #projectExplorer  withConstraints: [ :constraints | 
-		  constraints width: self projectExplorerWidth ];
+				   add: #projectExplorer
+				   withConstraints: [ :constraints | 
+					   constraints width: self projectExplorerWidth ];
 				   add: #viewport;
-				   yourself)
-		 ;
+				   add: #angularExplorer
+				   withConstraints:
+					   [ :constraints | constraints width: self projectExplorerWidth ]
+						   yourself);
 		  yourself
 ]
 
@@ -33,9 +38,10 @@ JinDashboard class >> projectExplorerWidth [
 	^ 400
 ]
 
-{ #category : #'as yet unclassified' }
-JinDashboard >> activatedObject: aSpSingleSelectionMode [ 
-	self openObjectInspector: aSpSingleSelectionMode selectedItem. 
+{ #category : #initialization }
+JinDashboard >> components [
+
+	^ components
 ]
 
 { #category : #initialization }
@@ -62,7 +68,6 @@ JinDashboard >> createNewProjectExplorerPaneFor: aModel [
 		addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
 		activateOnDoubleClick;
 		beMultipleSelection;
-		whenActivatedDo: [ :object | self activatedObject: object ];
 		contextMenu: (self tableMenuFor: table);
 		beResizable.
 		
@@ -92,61 +97,46 @@ JinDashboard >> initializePresenters [
 	toolbar := self newToolbar.
 	toolbar beBoth.
 	toolbar
-		addItem: (SpToolbarButtonPresenter  new
-				 label: 'Open';
+		addItemLeft: (SpToolbarButtonPresenter  new
+				 label: 'Access';
 				 icon: (self theme iconNamed: #smallOpen);
 				 help: 'Opens an access project';
 				 action: [ self openAccessProject ];
 				 yourself);
-		addItem: (SpToolbarButtonPresenter new
+		addItemLeft: (SpToolbarButtonPresenter new
 				 label: 'Accueil';
 				 icon: (self theme iconNamed: #smallOpen);
 				 help: 'Opens CAcceuille project';
 				 action: [ 
-					 self openProject:
-							 'D:\Users\Santiago.BRAGAGNOLO\Documents\PhD\Resources\11.50.00.02\Produit\caccueil.accdb'
-								 asFileReference ];
+					 self openAccueille];
 				 yourself);
-		addItem: (SpToolbarButtonPresenter new
+		addItemLeft: (SpToolbarButtonPresenter new
 				 label: 'NW';
 				 icon: (self theme iconNamed: #smallOpen);
 				 help: 'Opens Northwind project';
 				 action: [ 
-					 self openProject:
-							 'D:\Users\Santiago.BRAGAGNOLO\Documents\norwind\Northwind.accdb'
-								 asFileReference ];
+					self openNorthwind ];
 				 yourself);
-		addItem: (SpToolbarButtonPresenter new
+		addItemLeft: (SpToolbarButtonPresenter new
 				 label: 'TreeMap';
-				 icon: (self theme iconNamed: #smallOpen);
+				 icon: (self theme iconNamed: #branch);
 				 help: 'Tree map overview';
 				 action: [ self openTreeMapOverview ];
+				 yourself);
+		addItemRight: (SpToolbarButtonPresenter new
+				 label: 'Angular';
+				 icon: (self theme iconNamed: #smallOpen);
+				 help: 'openAngularProject';
+				 action: [ self openAngularProject ];
+				 yourself);
+		addItemRight: (SpToolbarButtonPresenter new
+				 label: 'CW3';
+				 icon: (self theme iconNamed: #smallOpen);
+				 help: 'Open core web 3 ';
+				 action: [ self openCW3];
 				 yourself).
-	projectExplorer := self newTable.
-
-
-	projectExplorer
-		addColumn: ((SpCheckBoxTableColumn
-				  title: ' '
-				  evaluated: [ :class | components includes: class ])
-				 onActivation: [ :class | components add: class ];
-				 onDeactivation: [ :class | 
-					 components remove: class ifAbsent: [  ] ];
-				 width: 20;
-				 yourself);
-		addColumn:
-			((SpImageTableColumn
-				  title: 'Icon'
-				  evaluated: [ :e | self iconFor: e ])
-				 width: 50;
-				 yourself);
-		addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
-		activateOnDoubleClick ;
-		beMultipleSelection ;
-		whenActivatedDo: [ : object | self activatedObject: object ];
-		contextMenu: self tableMenu; 
-		beResizable.
-
+	projectExplorer := self newProjectExplorer .
+	angularExplorer := self newProjectExplorer .
 
 	viewport := self newNotebook
 ]
@@ -162,7 +152,7 @@ JinDashboard >> newProjectExplorer [
 
 	^ SpMillerColumnPresenter new
 		  presenterBlock: [ :aModel | 
-			  self createNewProjectExplorerPaneFor: aModel ];
+			  JinInspectorBuilder new inspectorFor: aModel into: self ];
 		  yourself
 ]
 
@@ -176,7 +166,7 @@ JinDashboard >> open [
 { #category : #initialization }
 JinDashboard >> openAccessProject [
 
-	| path new |
+	| path |
 	path := UIManager default
 		        chooseFullFileNameMatching: nil
 		        label: 'Access project'.
@@ -186,25 +176,11 @@ JinDashboard >> openAccessProject [
 		UIManager default inform: 'Invalid file'.
 		^ self ].
 
-	self openProject: path
-]
-
-{ #category : #'as yet unclassified' }
-JinDashboard >> openObjectInspector: anObject [
-
-	viewport addPage: (self newNotebookPage
-			 beCloseable;
-			 title: 'Inspector ' , anObject printString;
-			 presenterProvider:
-				 ((JinInspectorBuilder new inspectorFor: anObject into: self)
-					  needRebuild: true;
-					  yourself);
-			 yourself).
-	self update
+	self openAccessProject: path
 ]
 
 { #category : #initialization }
-JinDashboard >> openProject: path [
+JinDashboard >> openAccessProject: path [
 
 	model ifNotNil: [ 
 		(UIManager default
@@ -226,9 +202,66 @@ JinDashboard >> openProject: path [
 ]
 
 { #category : #initialization }
+JinDashboard >> openAccueille [
+
+	self openAccessProject:
+		'D:\Users\Santiago.BRAGAGNOLO\Documents\PhD\Resources\11.50.00.02\Produit\caccueil.accdb'
+			asFileReference
+]
+
+{ #category : #initialization }
+JinDashboard >> openAngularProject [
+
+	| path |
+	path := UIManager default
+		        chooseFullFileNameMatching: nil
+		        label: 'Angular project'.
+	path ifNil: [ ^ self ].
+	path := path asFileReference.
+	path exists ifFalse: [ 
+		UIManager default inform: 'Invalid file'.
+		^ self ].
+
+	self openAngularProject: path
+]
+
+{ #category : #'as yet unclassified' }
+JinDashboard >> openAngularProject: aFileReference [
+
+	angularModel ifNotNil: [ 
+		(UIManager default
+			 confirm:
+			 'Open a new project requires to close the already opened one. Do you want to continue?'
+			 label: 'Close project?')
+			ifTrue: [ 
+				angularModel closeAndQuit.
+				angularModel := nil ]
+			ifFalse: [ ^ self ] ].
+
+	angularModel := JinAngularScheme onPath: aFileReference.
+
+
+	angularExplorer setRootModel: angularModel
+]
+
+{ #category : #initialization }
+JinDashboard >> openCW3 [ 
+	self openAngularProject: 'D:\Users\Santiago.BRAGAGNOLO\Documents\git-repositories\coreweb3\export' asFileReference 
+]
+
+{ #category : #initialization }
+JinDashboard >> openNorthwind [
+
+	self openAccessProject:
+		'D:\Users\Santiago.BRAGAGNOLO\Documents\norwind\Northwind.accdb'
+			asFileReference
+]
+
+{ #category : #initialization }
 JinDashboard >> openTreeMapOverview [
 
 	| widget |
+	model ifNil: [ UIManager inform: 'none project is opened!' .^ self ].
 	mapOverviewPage ifNotNil: [ ^ self ].
 
 	widget := self instantiate: JinTreeMapPresenter.
@@ -271,41 +304,6 @@ JinDashboard >> tableMenu [
 						  shortcut: $p meta;
 						  description: 'Print the selected class on Transcript';
 						  action: [ projectExplorer selectedItems traceCr ] ];
-				  addItem: [ :anItem | 
-					  anItem
-						  name: 'Browse';
-						  iconName: #open;
-						  action: [ projectExplorer selectedItems browse ] ];
-				  addItem: [ :anItem | 
-					  anItem
-						  name: 'Print infos';
-						  subMenu: (self newMenu addGroup: [ :aSubGroup | 
-									   aSubGroup
-										   addItem: [ :item | 
-											   item
-												   name: 'Print number of methods';
-												   action: [ table1 selectedItems methods size traceCr ] ];
-										   addItem: [ :item | 
-											   item
-												   name: 'Print number of variables';
-												   action: [ 
-													   projectExplorer selectedItems instanceVariables size
-														   traceCr ] ] ]) ] ]
-]
-
-{ #category : #initialization }
-JinDashboard >> tableMenuFor: table1 [
-
-	^ self newMenu
-		  title: 'Context menu example';
-		  addGroup: [ :aGroup | 
-			  aGroup
-				  addItem: [ :anItem | 
-					  anItem
-						  name: 'Print in transcript';
-						  shortcut: $p meta;
-						  description: 'Print the selected class on Transcript';
-						  action: [ table1 selectedItems traceCr ] ];
 				  addItem: [ :anItem | 
 					  anItem
 						  name: 'Browse';

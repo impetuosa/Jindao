@@ -30,6 +30,12 @@ JinAccessMooseModel class >> startup: isImageStarting [
 
 ]
 
+{ #category : #'model ' }
+JinAccessMooseModel >> acceptVisitor: aJinInspectorBuilder [
+
+	^ aJinInspectorBuilder visitAccessMooseModel: self
+]
+
 { #category : #MooseCompatibility }
 JinAccessMooseModel >> allDeclaredPropertiesIn: aMetamodel [
 	self halt 
@@ -69,6 +75,7 @@ JinAccessMooseModel >> entities [
 
 	^ entities ifNil: [ entities := (self project forms collect: #yourself)
 	  , (self project reports collect: #yourself)
+	, (self project modules  collect: #yourself)
 	  , (self project tables collect: #yourself)
 	  , (self project queries collect: #yourself)
 	  , (self project macros collect: #yourself)]

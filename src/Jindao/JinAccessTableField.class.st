@@ -82,6 +82,11 @@ JinAccessTableField >> size [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessTableField >> sourceTableName [
+	^ handle propertyNamed: #SourceTable 
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessTableField >> type [
 	^ handle propertyNamed: #Type
 ]
