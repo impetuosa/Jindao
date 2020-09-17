@@ -130,7 +130,7 @@ JinInspectorBuilder >> visitAngularComponentBehavior: aJinAngularComponentBehavi
 	inspector := self createIconNameTable.
 	inspector 	addColumn: (SpStringTableColumn title: 'Type' evaluated: #type ).
 	inspector items: 
-		aJinAngularComponentBehaviour parents, 
+		{aJinAngularComponentBehaviour superclass} , 
 		aJinAngularComponentBehaviour interfaces,  
 		aJinAngularComponentBehaviour properties, 
 		aJinAngularComponentBehaviour methods 
@@ -261,4 +261,12 @@ JinInspectorBuilder >> visitTable: aJinTable [
 		beResizable.
 	table items: aJinTable fields.
 	inspector := table
+]
+
+{ #category : #visiting }
+JinInspectorBuilder >> visitTypescriptMethod: aJinTypescriptMethod [ 
+	
+	inspector := owner newText. 
+	inspector text: aJinTypescriptMethod sourceCode 
+	
 ]

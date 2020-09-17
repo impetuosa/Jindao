@@ -17,8 +17,18 @@ JinAngularComponentBehaviour >> acceptVisitor: aJinInspectorBuilder [
 JinAngularComponentBehaviour >> classRepresentation [
 
 	^ classRepresentation ifNil: [ 
-		  classRepresentation := JinTypescriptLoader loadClassFromStream:
-			                         path readStream ]
+		  classRepresentation := JinTypescriptClassLoader 
+			                         loadClassFromFile: path ]
+]
+
+{ #category : #generated }
+JinAngularComponentBehaviour >> interfaces [
+	^ self classRepresentation types 
+]
+
+{ #category : #accessing }
+JinAngularComponentBehaviour >> methods [
+	^ self classRepresentation methods 
 ]
 
 { #category : #accessing }
@@ -30,4 +40,14 @@ JinAngularComponentBehaviour >> name [
 JinAngularComponentBehaviour >> parents [
 
 	^ self classRepresentation parents
+]
+
+{ #category : #accessing }
+JinAngularComponentBehaviour >> properties [
+	^ self classRepresentation properties 
+]
+
+{ #category : #accessing }
+JinAngularComponentBehaviour >> superclass [
+	^ self classRepresentation superclass 
 ]
