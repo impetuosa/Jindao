@@ -8,8 +8,9 @@ Class {
 }
 
 { #category : #visiting }
-JinAngularComponent >> acceptVisitor: aJinInspectorBuilder [ 
-	aJinInspectorBuilder visitAngularComponent: self 
+JinAngularComponent >> acceptVisitor: aJinInspectorBuilder [
+
+	aJinInspectorBuilder visitAngularComponent: self
 ]
 
 { #category : #accessing }

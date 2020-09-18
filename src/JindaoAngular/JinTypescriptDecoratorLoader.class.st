@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #visiting }
+JinTypescriptDecoratorLoader >> visitArrayLiteral: aLiteral [
+	self visitLiteral: aLiteral 
+]
+
+{ #category : #visiting }
 JinTypescriptDecoratorLoader >> visitCallExpression: aCallExpression [
 
 	result name: aCallExpression expression name value.

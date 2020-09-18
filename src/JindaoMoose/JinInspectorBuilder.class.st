@@ -23,7 +23,7 @@ JinInspectorBuilder >> createIconNameTable [
 		addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
 		activateOnDoubleClick;
 		beMultipleSelection;
-		contextMenu: (self tableMenuFor: table);
+		contextMenu: (self tableMenuForAngular: table);
 		beResizable.
 	^ table 
 ]
@@ -55,7 +55,7 @@ JinInspectorBuilder >> newTable [
 JinInspectorBuilder >> tableMenuFor: table1 [
 
 	^ self newMenu
-		  title: 'Context menu example';
+
 		  addGroup: [ :aGroup | 
 			  aGroup
 				  addItem: [ :anItem | 
@@ -86,6 +86,110 @@ JinInspectorBuilder >> tableMenuFor: table1 [
 														   traceCr ] ] ]) ] ]
 ]
 
+{ #category : #initialization }
+JinInspectorBuilder >> tableMenuForAngular: aTable [
+
+	^ self newMenu
+		  addGroup: [ :aGroup | 
+			  aGroup addItem: [ :anItem | 
+					  anItem
+						  name: 'Inspect';
+						  description: 'Inspect';
+						  action: [ aTable selectedItems inspect ] ].
+			  aGroup addItem: [ : menuItem | 
+				  menuItem
+					name:'New';
+					  subMenu: (self newMenu
+							   
+							   addGroup: [ :newGroup | 
+								   newGroup
+									   addItem: [ :anItem | 
+										   anItem
+											   name: 'Create new module';
+											   description: 'new module';
+											   action: [ owner createNewAngularModule ] ];
+									   addItem: [ :anItem | 
+										   anItem
+											   name: 'New component';
+											   description: 'Create New Component';
+											   action: [ owner createNewAngularComponent ] ];
+									   addItem: [ :anItem | 
+										   anItem
+											   name: 'New model';
+											   description: 'Create New Model';
+											   action: [ owner createNewAngularModel ] ] ]) ] ]
+]
+
+{ #category : #initialization }
+JinInspectorBuilder >> tableMenuForQuery: aTable [
+
+	^ self newMenu
+		  addGroup: [ :aGroup | 
+			  aGroup addItem: [ :anItem | 
+					  anItem
+						  name: 'Inspect';
+						  shortcut: $i meta;
+						  description: 'Inspect';
+						  action: [ aTable selectedItems inspect ] ] ]
+]
+
+{ #category : #initialization }
+JinInspectorBuilder >> tableMenuForTable: aTable [
+
+	^ self newMenu
+
+		  addGroup: [ :aGroup | 
+			  aGroup addItem: [ :anItem | 
+					  anItem
+						  name: 'Inspect';
+						  shortcut: $i meta;
+						  description: 'Inspect';
+						  action: [ aTable selectedItems inspect ] ] ]
+]
+
+{ #category : #initialization }
+JinInspectorBuilder >> tableMenuForms: aTable [
+
+	^ self newMenu
+		  addGroup: [ :aGroup | 
+			  aGroup
+				  addItem: [ :anItem | 
+					  anItem
+						  name: 'Inspect';
+						  shortcut: $i meta;
+						  description: 'Inspect';
+						  action: [ aTable selectedItems inspect ] ];
+				  addItem: [ :anItem | 
+					  anItem
+						  name: 'Selective Migration';
+						  description: 'Migrate UI Selecting new Component';
+						  action: [ owner selectiveMigrateAll: aTable selectedItems ] ] ]
+]
+
+{ #category : #initialization }
+JinInspectorBuilder >> tableMenuProject: aTable [
+
+	^ self newMenu
+		  addGroup: [ :aGroup | 
+			  aGroup
+				  addItem: [ :anItem | 
+					  anItem
+						  name: 'Inspect';
+						  shortcut: $i meta;
+						  description: 'Inspect';
+						  action: [ aTable selectedItems inspect ] ];
+				  addItem: [ :anItem | 
+					  anItem
+						  name: 'Move to angular';
+						  description: 'Migrate UI As new Component';
+						  action: [ owner fullMigrateAll: aTable selectedItems ] ];
+				  addItem: [ :anItem | 
+					  anItem
+						  name: 'Selective Migration';
+						  description: 'Migrate UI Selecting new Component';
+						  action: [ owner selectiveMigrateAll: aTable selectedItems ] ] ]
+]
+
 { #category : #buileder }
 JinInspectorBuilder >> visitAccessMooseModel: aJinAccessMooseModel [
 
@@ -109,7 +213,7 @@ JinInspectorBuilder >> visitAccessMooseModel: aJinAccessMooseModel [
 		addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
 		activateOnDoubleClick;
 		beMultipleSelection;
-		contextMenu: (self tableMenuFor: table);
+		contextMenu: (self tableMenuProject: table);
 		beResizable.
 
 	table items: aJinAccessMooseModel entities .
@@ -137,10 +241,17 @@ JinInspectorBuilder >> visitAngularComponentBehavior: aJinAngularComponentBehavi
 ]
 
 { #category : #'visit angular' }
-JinInspectorBuilder >> visitAngularComponentTemplate: aJinAngularComponentTemplate [ 
+JinInspectorBuilder >> visitAngularComponentTemplate: aJinAngularComponentTemplate [
 
-	inspector := self createIconNameTable.
-	inspector items:{ }
+	inspector := owner newTreeTable.
+	inspector
+		addColumn: (SpStringTableColumn title: 'Element' evaluated: [ : e |( e respondsTo:#name )ifTrue: [e name ] ifFalse:[ e class name,'[', e hash asString , ']' ]  ] );
+		roots: { aJinAngularComponentTemplate ast };
+		children: [ :anElement | 
+			anElement hasChildren
+				ifTrue: [ anElement nodes ]
+				ifFalse: [ {  } ] ];
+		yourself
 ]
 
 { #category : #'visit angular' }
@@ -186,7 +297,7 @@ JinInspectorBuilder >> visitForm: aForm [
 		addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
 		activateOnDoubleClick;
 		beMultipleSelection;
-		contextMenu: (self tableMenuFor: table);
+		contextMenu: (self tableMenuForms: table);
 		beResizable.
 	table items: aForm controls.
 	inspector := table
@@ -227,7 +338,7 @@ JinInspectorBuilder >> visitQuery: aQuery [
 		addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
 		activateOnDoubleClick;
 		beMultipleSelection;
-		contextMenu: (self tableMenuFor: table);
+		contextMenu: (self tableMenuForQuery: table);
 		beResizable.
 	table items: aQuery fields.
 	inspector := table
@@ -257,7 +368,7 @@ JinInspectorBuilder >> visitTable: aJinTable [
 		addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
 		activateOnDoubleClick;
 		beMultipleSelection;
-		contextMenu: (self tableMenuFor: table);
+		contextMenu: (self tableMenuForTable: table);
 		beResizable.
 	table items: aJinTable fields.
 	inspector := table

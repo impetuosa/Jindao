@@ -11,11 +11,13 @@ Class {
 { #category : #'as yet unclassified' }
 JinTypescriptObject >> anchorFrom: aJSDecoratorExpressionNode at: aFileReference [
 
+	| start stop |
+	start := aJSDecoratorExpressionNode startPosition.
+	stop := aJSDecoratorExpressionNode stopPosition.
+
 	anchor := JinAnchor new
-		          start:
-			          (aJSDecoratorExpressionNode attributes at: #startPosition);
-		          stop:
-			          (aJSDecoratorExpressionNode attributes at: #stopPosition);
+		          start: start;
+		          stop: stop;
 		          file: aFileReference;
 		          yourself
 ]

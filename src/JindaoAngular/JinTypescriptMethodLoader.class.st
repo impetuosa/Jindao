@@ -32,6 +32,6 @@ JinTypescriptMethodLoader >> visitMethodDefinition: aMethodDefinition [
 JinTypescriptMethodLoader >> visitVariableDeclaration: aVarDeclaration [
 
 	| param |
-	param := JinTypescriptVariableDeclarationLoader load: aVarDeclaration.
+	param := JinTypescriptVariableDeclarationLoader load: aVarDeclaration file: file .
 	result addParameter: param
 ]

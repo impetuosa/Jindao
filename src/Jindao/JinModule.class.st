@@ -27,6 +27,11 @@ JinModule >> code [
 	^ self body code
 ]
 
+{ #category : #accessing }
+JinModule >> color [
+	^ Color yellow 
+]
+
 { #category : #'as yet unclassified' }
 JinModule >> deleteLine: aNumber [
 	^ self code deleteLine: aNumber

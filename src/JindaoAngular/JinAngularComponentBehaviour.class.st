@@ -48,6 +48,11 @@ JinAngularComponentBehaviour >> properties [
 ]
 
 { #category : #accessing }
+JinAngularComponentBehaviour >> sourceCode [
+	^ path readStream upToEnd 
+]
+
+{ #category : #accessing }
 JinAngularComponentBehaviour >> superclass [
 	^ self classRepresentation superclass 
 ]

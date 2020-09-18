@@ -45,38 +45,6 @@ JinDashboard >> components [
 ]
 
 { #category : #initialization }
-JinDashboard >> createNewProjectExplorerPaneFor: aModel [
-
-	| table |
-	(aModel respondsTo:#children ) ifFalse:[^ nil  ].
-	table := self newTable.
-	table
-		addColumn: ((SpCheckBoxTableColumn
-				  title: ' '
-				  evaluated: [ :class | components includes: class ])
-				 onActivation: [ :class | components add: class ];
-				 onDeactivation: [ :class | 
-					 components remove: class ifAbsent: [  ] ];
-				 width: 20;
-				 yourself);
-		addColumn:
-			((SpImageTableColumn
-				  title: 'Icon'
-				  evaluated: [ :e | self iconFor: e ])
-				 width: 50;
-				 yourself);
-		addColumn: (SpStringTableColumn title: 'Name' evaluated: #name);
-		activateOnDoubleClick;
-		beMultipleSelection;
-		contextMenu: (self tableMenuFor: table);
-		beResizable.
-		
-	table items: aModel children.
-
-	^ table
-]
-
-{ #category : #initialization }
 JinDashboard >> emptyViewport [
 
 	mapOverviewPage ifNotNil: [ 
@@ -84,10 +52,34 @@ JinDashboard >> emptyViewport [
 		mapOverviewPage := nil ]
 ]
 
+{ #category : #'as yet unclassified' }
+JinDashboard >> fullMigrateAll: aCollection [
+
+	| migrator path modulePage selectedModule |
+	path := angularExplorer pages reversed.
+	modulePage := path detect: [ :p | 
+		              p selectedItems anySatisfy: [ :i | 
+			              i isKindOf: JinAngularModule ] ].
+	selectedModule := modulePage selectedItems detect: [ :i | 
+		                  i isKindOf: JinAngularModule ].
+	migrator := JinMigrationManager new.
+	migrator
+		registerElements: aCollection;
+		destination: selectedModule.
+	migrator calculateComponents. 
+	self halt
+]
+
 { #category : #initialization }
 JinDashboard >> iconFor: anElement [
 
-	^ JinIcons iconFor: anElement
+	^ (JinIcons iconFor: anElement) scaledToSize: 20@17
+]
+
+{ #category : #initialization }
+JinDashboard >> informSelectingModel: aModel [
+
+	JinViewportPageBuilder new buildPageFor: aModel into: viewport
 ]
 
 { #category : #initialization }
@@ -152,7 +144,9 @@ JinDashboard >> newProjectExplorer [
 
 	^ SpMillerColumnPresenter new
 		  presenterBlock: [ :aModel | 
-			  JinInspectorBuilder new inspectorFor: aModel into: self ];
+				self informSelectingModel: aModel. 
+				JinInspectorBuilder new inspectorFor: aModel into: self.
+			 ];
 		  yourself
 ]
 
@@ -272,7 +266,7 @@ JinDashboard >> openTreeMapOverview [
 		                   presenterProvider: widget;
 		                   yourself.
 	viewport addPage: mapOverviewPage.
-
+	viewport selectPage: mapOverviewPage.
 	widget needRebuild: true.
 	self update.
 	widget model: model
@@ -287,43 +281,6 @@ JinDashboard >> project [
 JinDashboard >> tableContents [
 
 	^ model entities 
-]
-
-{ #category : #initialization }
-JinDashboard >> tableMenu [
-
-	| table1 |
-	table1 := projectExplorer.
-	^ self newMenu
-		  title: 'Context menu example';
-		  addGroup: [ :aGroup | 
-			  aGroup
-				  addItem: [ :anItem | 
-					  anItem
-						  name: 'Print in transcript';
-						  shortcut: $p meta;
-						  description: 'Print the selected class on Transcript';
-						  action: [ projectExplorer selectedItems traceCr ] ];
-				  addItem: [ :anItem | 
-					  anItem
-						  name: 'Browse';
-						  iconName: #open;
-						  action: [ projectExplorer selectedItems browse ] ];
-				  addItem: [ :anItem | 
-					  anItem
-						  name: 'Print infos';
-						  subMenu: (self newMenu addGroup: [ :aSubGroup | 
-									   aSubGroup
-										   addItem: [ :item | 
-											   item
-												   name: 'Print number of methods';
-												   action: [ table1 selectedItems methods size traceCr ] ];
-										   addItem: [ :item | 
-											   item
-												   name: 'Print number of variables';
-												   action: [ 
-													   projectExplorer selectedItems instanceVariables size
-														   traceCr ] ] ]) ] ]
 ]
 
 { #category : #initialization }

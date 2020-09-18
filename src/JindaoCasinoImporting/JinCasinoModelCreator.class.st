@@ -9,6 +9,19 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinCasinoModelCreator class >> createModelOnSpecific: migratingItems named: aString [
+
+	| importer |
+	importer := self new.
+	importer
+		model: (CSNUICWModel new
+				 name: 'Showroom';
+				 yourself);
+		items: migratingItems.
+	importer basicRun
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoModelCreator class >> norwindExample [
 	| project importer |
 	project := JinAccessApplication default
@@ -23,7 +36,7 @@ JinCasinoModelCreator class >> norwindExample [
 				yourself);
 		blApplication: project.
 	importer basicRun.
-	CSNModelExporterAngularBLSpecific export: importer model
+	JinCSNModelExporterAngularBLSpecific export: importer model
 ]
 
 { #category : #accessing }
