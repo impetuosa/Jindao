@@ -67,7 +67,7 @@ JinDashboard >> fullMigrateAll: aCollection [
 		registerElements: aCollection;
 		destination: selectedModule.
 	migrator calculateComponents. 
-	self halt
+
 ]
 
 { #category : #initialization }

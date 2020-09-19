@@ -49,7 +49,7 @@ JinAccessMooseModel >> children [
 
 { #category : #'initialize-release' }
 JinAccessMooseModel >> closeAndQuit [
-
+	project ifNil: [ ^ self . ].
 	[ project closeAndQuit ]
 		on: Win32Error
 		do: [ :e | e passIfNotError0x80020009 ]

@@ -31,7 +31,8 @@ JinCasinoToAngularModel >> calculateAngularModel [
 
 	createdEntitites := Set new.
 	origin model accept: self.
-	destination components addAll: createdEntitites
+	destination components addAll: createdEntitites.
+	createdEntitites do: [ : c | c module: destination  ]
 ]
 
 { #category : #'as yet unclassified' }

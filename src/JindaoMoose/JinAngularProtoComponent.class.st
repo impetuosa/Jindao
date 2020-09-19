@@ -2,6 +2,7 @@ Class {
 	#name : #JinAngularProtoComponent,
 	#superclass : #Object,
 	#instVars : [
+		'module',
 		'template',
 		'behaviour',
 		'name'
@@ -29,6 +30,12 @@ JinAngularProtoComponent >> behavior: aJinTypescriptClass [
 ]
 
 { #category : #accessing }
+JinAngularProtoComponent >> module: aModule [
+
+	module := aModule
+]
+
+{ #category : #accessing }
 JinAngularProtoComponent >> name [
 	^ name
 ]
@@ -36,6 +43,24 @@ JinAngularProtoComponent >> name [
 { #category : #accessing }
 JinAngularProtoComponent >> name: aString [ 
 	name := aString 
+]
+
+{ #category : #actions }
+JinAngularProtoComponent >> save [
+
+	| ref |
+	self assert: (module components includes: self).
+	ref := module path / ('{1}.component.ts' format: { name }).
+	self assert: ref exists not.
+	ref writeStream
+		nextPutAll: behaviour sourceCode;
+		close.
+	ref := module path / ('{1}.component.html' format: { name }).
+	self assert: ref exists not.
+	ref writeStream
+		nextPutAll: template sourceCode;
+		close.
+	module components remove: self
 ]
 
 { #category : #accessing }

@@ -16,24 +16,23 @@ JinAngularModule >> acceptVisitor: aJinInspectorBuilder [
 JinAngularModule >> components [
 
 	^ components ifNil: [ 
-		  | directories |
-		  directories := (path / #components) directories.
-		  components := directories
-			                select: [ :d | 
-				                d entries anySatisfy: [ :e | 
-					                e basename endsWith: 'component.ts' ] ]
-			                thenCollect: [ :d | 
-				                | file |
-				                file := (d entries detect: [ :e | 
-					                         e basename endsWith: 'component.ts' ])
-					                        asFileReference.
+		  components := path files
+			                select: [ :e | e basename endsWith: 'component.ts' ]
+			                thenCollect: [ :f | 
+				                | ref |
+				                ref := f asFileReference.
 				                JinAngularComponent new
 					                name:
-						                (file basename
+						                (ref basename
 							                 copyReplaceAll: '.component.ts'
 							                 with: '');
-					                path: file parent;
+					                path: ref parent;
 					                yourself ].
-					components := components asOrderedCollection .
-				 ].
+
+		  components := components asOrderedCollection ]
+]
+
+{ #category : #accessing }
+JinAngularModule >> path [
+	^ path 
 ]

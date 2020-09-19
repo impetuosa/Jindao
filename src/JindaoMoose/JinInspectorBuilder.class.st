@@ -9,9 +9,10 @@ Class {
 }
 
 { #category : #'visit angular' }
-JinInspectorBuilder >> createIconNameTable [ 
-	
+JinInspectorBuilder >> createIconNameTable [
+
 	| table |
+	
 	table := self newTable.
 	table
 		addColumn:
@@ -25,7 +26,9 @@ JinInspectorBuilder >> createIconNameTable [
 		beMultipleSelection;
 		contextMenu: (self tableMenuForAngular: table);
 		beResizable.
-	^ table 
+		
+		
+	^ table
 ]
 
 { #category : #'as yet unclassified' }
@@ -49,6 +52,11 @@ JinInspectorBuilder >> newMenu [
 { #category : #'as yet unclassified' }
 JinInspectorBuilder >> newTable [
 	^ owner newTable
+]
+
+{ #category : #visiting }
+JinInspectorBuilder >> saveIntoProject: aCollection [ 
+	aCollection do: [ : c | c save ].
 ]
 
 { #category : #initialization }
@@ -89,35 +97,38 @@ JinInspectorBuilder >> tableMenuFor: table1 [
 { #category : #initialization }
 JinInspectorBuilder >> tableMenuForAngular: aTable [
 
-	^ self newMenu
-		  addGroup: [ :aGroup | 
-			  aGroup addItem: [ :anItem | 
-					  anItem
-						  name: 'Inspect';
-						  description: 'Inspect';
-						  action: [ aTable selectedItems inspect ] ].
-			  aGroup addItem: [ : menuItem | 
-				  menuItem
-					name:'New';
-					  subMenu: (self newMenu
-							   
-							   addGroup: [ :newGroup | 
-								   newGroup
-									   addItem: [ :anItem | 
-										   anItem
-											   name: 'Create new module';
-											   description: 'new module';
-											   action: [ owner createNewAngularModule ] ];
-									   addItem: [ :anItem | 
-										   anItem
-											   name: 'New component';
-											   description: 'Create New Component';
-											   action: [ owner createNewAngularComponent ] ];
-									   addItem: [ :anItem | 
-										   anItem
-											   name: 'New model';
-											   description: 'Create New Model';
-											   action: [ owner createNewAngularModel ] ] ]) ] ]
+	^ self newMenu addGroup: [ :aGroup | 
+		  aGroup
+			  addItem: [ :anItem | 
+				  anItem
+					  name: 'Inspect';
+					  description: 'Inspect';
+					  action: [ aTable selectedItems inspect ] ];
+			  addItem: [ :anItem | 
+				  anItem
+					  name: 'Save';
+					  description: 'Save into project';
+					  action: [ self saveIntoProject: inspector selectedItems ] ].
+		  aGroup addItem: [ :menuItem | 
+			  menuItem
+				  name: 'New';
+				  subMenu: (self newMenu addGroup: [ :newGroup | 
+							   newGroup
+								   addItem: [ :anItem | 
+									   anItem
+										   name: 'Create new module';
+										   description: 'new module';
+										   action: [ owner createNewAngularModule ] ];
+								   addItem: [ :anItem | 
+									   anItem
+										   name: 'New component';
+										   description: 'Create New Component';
+										   action: [ owner createNewAngularComponent ] ];
+								   addItem: [ :anItem | 
+									   anItem
+										   name: 'New model';
+										   description: 'Create New Model';
+										   action: [ owner createNewAngularModel ] ] ]) ] ]
 ]
 
 { #category : #initialization }
