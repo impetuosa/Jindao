@@ -19,17 +19,34 @@ JinCasinoPartialModelCreator class >> createModelOnSpecific: migratingItems name
 				 name: 'Showroom';
 				 yourself);
 		items: migratingItems.
-	importer basicRun
+	importer basicRun.
+	^ importer
 ]
 
 { #category : #run }
 JinCasinoPartialModelCreator >> basicRun [
+
 	| importer |
 	importer := JinCasinoAccessModelPartialImporter new
-		import: items; 
-		into: model.
-	importedProject := importer importedProject .
-	errors := importer errors. 
+		            import: items
+		            into: model.
+	importedProject := importer importedProject.
+	errors := importer errors
+]
+
+{ #category : #accessing }
+JinCasinoPartialModelCreator >> firstClassCitizenMooseModels [
+	^ items collect: [ :i |  importedProject  mooseModelMappedTo: i  ]
+]
+
+{ #category : #accessing }
+JinCasinoPartialModelCreator >> importedProject [
+	^ importedProject
+]
+
+{ #category : #accessing }
+JinCasinoPartialModelCreator >> items [
+	^ items
 ]
 
 { #category : #run }

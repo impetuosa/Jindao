@@ -54,7 +54,11 @@ JinIcons class >> iconFor: anElement [
 	aClass = JinAngularComponentBehaviour ifTrue: [ 
 		^ self typescriptIcon ].
 	aClass = JinAngularComponentTemplate ifTrue: [ ^ self indexIcon ].
-
+	
+		aClass = JinAngularProtoComponent ifTrue: [ ^ self angularIcon asGrayScale].
+		aClass = JinAngularProtoComponentBehavior ifTrue: [ 
+		^ self typescriptIcon asGrayScale ].
+	aClass = JinAngularProtoComponentTemplate ifTrue: [ ^ self indexIcon asGrayScale  ].
 
 
 

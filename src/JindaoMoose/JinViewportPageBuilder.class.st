@@ -62,6 +62,22 @@ JinViewportPageBuilder >> visitAngularModule: aJinAngularModule [
 ]
 
 { #category : #visiting }
+JinViewportPageBuilder >> visitAngularProtoComponent: aJinAngularProtoComponent [
+
+	self visitAngularComponent: aJinAngularProtoComponent
+]
+
+{ #category : #visiting }
+JinViewportPageBuilder >> visitAngularProtoComponentBehavior: aJinAngularProtoComponentBehavior [ 
+	self visitAngularComponentBehavior: aJinAngularProtoComponentBehavior
+]
+
+{ #category : #visiting }
+JinViewportPageBuilder >> visitAngularProtoComponentTemplate: aJinAngularProtoComponentTemplate [ 
+	self visitAngularComponentTemplate: aJinAngularProtoComponentTemplate
+]
+
+{ #category : #visiting }
 JinViewportPageBuilder >> visitAngularScheme: aJinAngularScheme [ 
 	
 ]

@@ -33,5 +33,7 @@ JinAngularModule >> components [
 							                 copyReplaceAll: '.component.ts'
 							                 with: '');
 					                path: file parent;
-					                yourself ] ]
+					                yourself ].
+					components := components asOrderedCollection .
+				 ].
 ]

@@ -8,6 +8,39 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinCasinoPage >> addWidget: aWidget [
+	self mainContainer addWidget: aWidget
+]
+
+{ #category : #accessing }
+JinCasinoPage >> gtActionsIn: composite [
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoPage >> gtAttributesIn: composite [
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoPage >> gtSourceCodeIn: composite [
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoPage >> mainContainer [
+	^ self widgets first
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoPage >> mainContainer: aContainer [
+	self assert: self widgets isEmpty.
+	super addWidget: aContainer
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoPage >> mainContainerWidgets [
+	^ self mainContainer layout cell collect: [ :f | f widget ]
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoPage >> project [
 	^ project
 ]
@@ -16,5 +49,19 @@ JinCasinoPage >> project [
 JinCasinoPage >> project: aJinCasinoProject [ 
 	project := aJinCasinoProject.
 	mooseModel := aJinCasinoProject model .
-	aJinCasinoProject addPage: self. 
+	aJinCasinoProject mooseModel add: self. 
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoPage >> section: anInteger [
+	| container |
+	^ self mainContainerWidgets
+		detect: [ :c | 
+			c isContainer
+				and: [ (c propertyNamed: 'SectionID') = anInteger asString ] ]
+		ifNone: [ container := CSNUIPanel new.
+			container propertyNamed: 'SectionID' put: anInteger asString.
+			self mainContainer addWidget: container.
+			mooseModel add: container.
+			container ]
 ]

@@ -47,27 +47,25 @@ JinCasinoModelStatelessFactory >> importControl: aControl inTheContextOf: aWidge
 
 { #category : #'as yet unclassified' }
 JinCasinoModelStatelessFactory >> importForm: aForm inTheContextOf: aProject [
-	| layout container page ppage |
-	
-	layout := CSNLVerticalLayout new .
+
+	| layout container page |
+	layout := CSNLVerticalLayout new.
 	aProject mooseModel add: layout.
 	container := CSNUIPanel new.
 	aProject mooseModel add: container.
 	container layout: layout.
-	page := JinCasinoBusinessPage new
-		name: aForm nameWithoutSpaces.
-	page mainContainer: container. 
-		
-		
+
+
+
+	page := JinCasinoPage new
+		        realClassName: aForm class name;
+		        name: aForm nameWithoutSpaces;
+		        project: aProject;
+		        yourself.
+	page mainContainer: container.
+
 	aProject mooseModel add: page.
-	ppage := JinCasinoPage new
-		realClassName: aForm class name;
-		addBusinessPage: page;
-		name: aForm nameWithoutSpaces;
-		project: aProject;
-		yourself.
-	aProject mooseModel add: ppage.
-	^ ppage
+	^ page
 ]
 
 { #category : #'as yet unclassified' }
@@ -99,7 +97,7 @@ JinCasinoModelStatelessFactory >> importSubform: aJinControlSubForm inTheContext
 JinCasinoModelStatelessFactory >> resolveLayoutContainer: aLayoutId section: aSection type: aLayoutTypeName inTheContextOf: aContainer [
 	| layoutedContainer section |
 	
-	section := (aContainer businessPage first section: aSection) .
+	section := (aContainer section: aSection) .
 	^ section widgets
 		detect: [ :c | 
 			c isContainer

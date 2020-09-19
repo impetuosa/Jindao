@@ -12,10 +12,13 @@ Class {
 
 { #category : #'as yet unclassified' }
 JinMigrationManager >> calculateComponents [
-	casinoModel := JinCasinoModelCreator createModelOnSpecific: itemsToMigrate  named:'MigrationProcess'.
-	angularModel := JinCasinoToAngularModel loadFrom: casinoModel.
-	
-	
+
+	casinoModel := JinCasinoPartialModelCreator
+		               createModelOnSpecific: itemsToMigrate
+		               named: 'MigrationProcess'.
+	angularModel := JinCasinoToAngularModel
+		                loadFrom: casinoModel
+		                into: destination
 ]
 
 { #category : #accessing }

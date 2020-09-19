@@ -269,6 +269,17 @@ JinInspectorBuilder >> visitAngularProject: aJinAngularProject [
 	inspector items: aJinAngularProject modules
 ]
 
+{ #category : #visiting }
+JinInspectorBuilder >> visitAngularProtoComponent: aJinAngularProtoComponent [
+
+	self visitAngularComponent: aJinAngularProtoComponent
+]
+
+{ #category : #visiting }
+JinInspectorBuilder >> visitAngularProtoComponentTemplate: aJinAngularProtoComponentTemplate [ 
+	self visitAngularComponentTemplate: aJinAngularProtoComponentTemplate
+]
+
 { #category : #'visit angular' }
 JinInspectorBuilder >> visitAngularScheme: aJinAngularScheme [
 

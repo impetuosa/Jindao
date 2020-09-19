@@ -29,20 +29,35 @@ JinCasinoVisitor >> factory [
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> importAccessProperty: aProperty [
-	^ self factory
-		importAccessProperty: aProperty
-		inTheContextOf: stack top
+
+	| casinoModel |
+	casinoModel := self factory
+		               importAccessProperty: aProperty
+		               inTheContextOf: stack top.
+	importedProject map: aProperty to: casinoModel.
+	^ casinoModel
 ]
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> importForm: aForm [
-	^ self factory importForm: aForm inTheContextOf: stack top.
-	
+
+	| casinoModel |
+	casinoModel := self factory
+		               importForm: aForm
+		               inTheContextOf: stack top.
+	importedProject map: aForm to: casinoModel.
+	^ casinoModel
 ]
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> importFormControl: aControl [
-	^ self factory importControl: aControl inTheContextOf: stack top
+
+	| casinoModel |
+	casinoModel := self factory
+		               importControl: aControl
+		               inTheContextOf: stack top.
+	importedProject map: aControl to: casinoModel.
+	^ casinoModel
 ]
 
 { #category : #'as yet unclassified' }
@@ -61,6 +76,15 @@ JinCasinoVisitor >> initialize [
 	super initialize.
 	stack := Stack new.
 	errors := Dictionary  new.
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoVisitor >> installPartialProject [
+
+	importedProject := JinCasinoProject new.
+	importedProject model: importingIntoThisModel.
+	stack push: importedProject.
+	^ importedProject
 ]
 
 { #category : #'as yet unclassified' }

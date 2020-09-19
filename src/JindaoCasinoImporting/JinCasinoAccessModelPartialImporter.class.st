@@ -21,6 +21,7 @@ JinCasinoAccessModelPartialImporter >> import [
 	| importer |
 	importer := JinCasinoVisitor defaultNew.
 	importer useModel: importedModel.
+	importer installPartialProject. 
 	items do: [ :i | i acceptVisitor: importer ].
 	errors := importer errors.
 	importedProject := importer importedProject

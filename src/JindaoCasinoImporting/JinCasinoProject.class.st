@@ -4,27 +4,25 @@ Class {
 	#instVars : [
 		'name',
 		'pages',
-		'model'
+		'model',
+		'mapping'
 	],
 	#category : #JindaoCasinoImporting
 }
-
-{ #category : #'as yet unclassified' }
-JinCasinoProject >> add: aCSNBusinessPage [
-	self addPage: aCSNBusinessPage.
-	^ aCSNBusinessPage
-]
-
-{ #category : #adding }
-JinCasinoProject >> addPage: aJinPage [ 
-	pages add: aJinPage.
-	model add: aJinPage 
-]
 
 { #category : #accessing }
 JinCasinoProject >> initialize [
 	super initialize.
 	pages := Set new.
+	mapping := OrderedCollection new.
+]
+
+{ #category : #accessing }
+JinCasinoProject >> map: aJinDaoElement to: aCasinoElement [
+
+	mapping add: { 
+			aJinDaoElement.
+			aCasinoElement }
 ]
 
 { #category : #'as yet unclassified' }
@@ -40,6 +38,11 @@ JinCasinoProject >> model: aModel [
 { #category : #'as yet unclassified' }
 JinCasinoProject >> mooseModel [
 	^ model
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoProject >> mooseModelMappedTo: aJinForm [ 
+	^ (mapping detect: [ : m | m includes: aJinForm  ]) second 
 ]
 
 { #category : #'as yet unclassified' }
