@@ -276,6 +276,11 @@ JinInspectorBuilder >> visitAngularProtoComponent: aJinAngularProtoComponent [
 ]
 
 { #category : #visiting }
+JinInspectorBuilder >> visitAngularProtoComponentBehavior: aJinAngularProtoComponentBehavior [ 
+	^ self visitAngularComponentBehavior: aJinAngularProtoComponentBehavior
+]
+
+{ #category : #visiting }
 JinInspectorBuilder >> visitAngularProtoComponentTemplate: aJinAngularProtoComponentTemplate [ 
 	self visitAngularComponentTemplate: aJinAngularProtoComponentTemplate
 ]

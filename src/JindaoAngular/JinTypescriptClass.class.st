@@ -18,9 +18,14 @@ Class {
 JinTypescriptClass class >> object [
 
 	^ object ifNil: [ 
-		  object := JinTypescriptClass new
+		  object := JinTypescriptTypeReference new
 			            name: #Object;
 			            yourself ]
+]
+
+{ #category : #visiting }
+JinTypescriptClass >> acceptVisitor: aJinTypescriptCodeGenerator [ 
+	aJinTypescriptCodeGenerator visitTypescriptClass: self .
 ]
 
 { #category : #adding }

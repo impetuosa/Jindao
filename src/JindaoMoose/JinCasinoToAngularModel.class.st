@@ -28,8 +28,10 @@ JinCasinoToAngularModel class >> loadFrom: aJinCasinoPartialModelCreator into: a
 
 { #category : #'as yet unclassified' }
 JinCasinoToAngularModel >> calculateAngularModel [
-	createdEntitites := Set new .
-	origin model accept: self .  
+
+	createdEntitites := Set new.
+	origin model accept: self.
+	destination components addAll: createdEntitites
 ]
 
 { #category : #'as yet unclassified' }

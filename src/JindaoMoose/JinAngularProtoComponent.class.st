@@ -23,6 +23,12 @@ JinAngularProtoComponent >> behavior [
 ]
 
 { #category : #accessing }
+JinAngularProtoComponent >> behavior: aJinTypescriptClass [
+
+	behaviour := aJinTypescriptClass
+]
+
+{ #category : #accessing }
 JinAngularProtoComponent >> name [
 	^ name
 ]

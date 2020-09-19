@@ -36,7 +36,12 @@ JinTypescriptObject >> name: aName [
 
 { #category : #generated }
 JinTypescriptObject >> sourceCode [
-	^ anchor sourceCode 
+
+	^ anchor ifNotNil: [ anchor sourceCode ] ifNil: [ 
+		  | gen |
+		  gen := JinTypescriptCodeGenerator new.
+		  self acceptVisitor: gen.
+		  gen sourceCode ]
 ]
 
 { #category : #generated }

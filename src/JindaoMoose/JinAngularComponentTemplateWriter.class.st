@@ -59,6 +59,11 @@ JinAngularComponentTemplateWriter >> visitCSNLVerticalLayout: aCSNLVerticalLayou
 ]
 
 { #category : #visiting }
+JinAngularComponentTemplateWriter >> visitCSNPage: aJinCasinoPage [ 
+	aJinCasinoPage widgets do: [ : w | w accept: self  ]
+]
+
+{ #category : #visiting }
 JinAngularComponentTemplateWriter >> visitCSNUIInputText: aCSNUIInputText [
 
 	self writeLeafElement: aCSNUIInputText

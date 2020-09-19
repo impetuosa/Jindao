@@ -28,6 +28,16 @@ JinTypescriptMethod >> initialize [
 ]
 
 { #category : #accessing }
+JinTypescriptMethod >> parameters [
+	^ parameters
+]
+
+{ #category : #accessing }
+JinTypescriptMethod >> selector [
+	^ selector
+]
+
+{ #category : #accessing }
 JinTypescriptMethod >> selector: aString [
 
 	selector := aString.
