@@ -24,7 +24,7 @@ JinCasinoVisitor >> errors [
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> factory [
-	^ factory ifNil: [ JinCasinoModelStatelessFactory new ]
+	^ factory ifNil: [ JinCasinoUIModelStatelessFactory new ]
 ]
 
 { #category : #'as yet unclassified' }

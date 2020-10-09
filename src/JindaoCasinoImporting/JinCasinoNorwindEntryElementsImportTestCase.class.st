@@ -7,7 +7,7 @@ Class {
 { #category : #tests }
 JinCasinoNorwindEntryElementsImportTestCase >> setUp [
 	super setUp.
-	factory := JinCasinoModelStatelessFactory  new
+	factory := JinCasinoUIModelStatelessFactory  new
 ]
 
 { #category : #tests }

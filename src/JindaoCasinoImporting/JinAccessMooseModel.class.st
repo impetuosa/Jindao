@@ -36,11 +36,6 @@ JinAccessMooseModel >> acceptVisitor: aJinInspectorBuilder [
 	^ aJinInspectorBuilder visitAccessMooseModel: self
 ]
 
-{ #category : #MooseCompatibility }
-JinAccessMooseModel >> allDeclaredPropertiesIn: aMetamodel [
-	self halt 
-]
-
 { #category : #accessing }
 JinAccessMooseModel >> children [
 

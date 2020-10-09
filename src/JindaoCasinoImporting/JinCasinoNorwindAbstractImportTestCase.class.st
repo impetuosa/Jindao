@@ -64,5 +64,5 @@ JinCasinoNorwindAbstractImportTestCase >> importProject [
 { #category : #running }
 JinCasinoNorwindAbstractImportTestCase >> setUp [
 	super setUp.
-	factory := JinCasinoModelStatelessFactory  new
+	factory := JinCasinoUIModelStatelessFactory  new
 ]

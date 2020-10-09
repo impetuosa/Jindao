@@ -12,6 +12,12 @@ JinCasinoPage >> addWidget: aWidget [
 	self mainContainer addWidget: aWidget
 ]
 
+{ #category : #'as yet unclassified' }
+JinCasinoPage >> bindings [
+
+	^ self attributeAt: #bindings ifAbsentPut: [ OrderedCollection new ]
+]
+
 { #category : #accessing }
 JinCasinoPage >> gtActionsIn: composite [
 ]
