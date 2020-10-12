@@ -14,7 +14,7 @@ JinQuery class >> typeNumber [
 
 { #category : #'as yet unclassified' }
 JinQuery >> acceptVisitor: aVisitor [
-	aVisitor visitQuery: self 
+	^ aVisitor visitQuery: self 
 ]
 
 { #category : #accessing }

@@ -13,6 +13,11 @@ JinCasinoPage >> addWidget: aWidget [
 ]
 
 { #category : #'as yet unclassified' }
+JinCasinoPage >> attributeNamed: aString put: aMDDataRead [ 
+	self attributeAt: aString put: aMDDataRead 
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoPage >> bindings [
 
 	^ self attributeAt: #bindings ifAbsentPut: [ OrderedCollection new ]

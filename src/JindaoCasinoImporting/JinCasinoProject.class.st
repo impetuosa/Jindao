@@ -19,10 +19,11 @@ JinCasinoProject >> initialize [
 
 { #category : #accessing }
 JinCasinoProject >> map: aJinDaoElement to: aCasinoElement [
-
-	mapping add: { 
-			aJinDaoElement.
-			aCasinoElement }
+	(aJinDaoElement isNotNil and: [ aCasinoElement isNotNil ])
+		ifTrue: [ mapping
+				add:
+					{aJinDaoElement.
+					aCasinoElement} ]
 ]
 
 { #category : #'as yet unclassified' }

@@ -12,6 +12,11 @@ Class {
 	#category : #'Jindao-Core'
 }
 
+{ #category : #'as yet unclassified' }
+JinAccessFastProperty >> acceptVisitor: aJinCasinoVisitor [ 
+	^ aJinCasinoVisitor visitAccessProperty: self 
+]
+
 { #category : #accessing }
 JinAccessFastProperty >> accessObject: aJinLabel [ 
 	accessObject := aJinLabel

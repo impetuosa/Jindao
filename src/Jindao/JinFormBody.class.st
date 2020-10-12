@@ -25,6 +25,26 @@ Split Form 	5"
 ]
 
 { #category : #'as yet unclassified' }
+JinFormBody >> allowAdditions [
+	^ handle propertyNamed: 'AllowAdditions'
+]
+
+{ #category : #'as yet unclassified' }
+JinFormBody >> allowDeletions [
+	^ handle propertyNamed: 'AllowDeletions'
+]
+
+{ #category : #'as yet unclassified' }
+JinFormBody >> allowEdits [
+	^ handle propertyNamed: 'AllowEdits'
+]
+
+{ #category : #'as yet unclassified' }
+JinFormBody >> allowFilters [
+	^ handle propertyNamed: 'AllowFilters'
+]
+
+{ #category : #'as yet unclassified' }
 JinFormBody >> code [
 	^ self module code 
 ]
@@ -122,6 +142,11 @@ JinFormBody >> module [
 		ifNil: [ module := JinSubModuleBody new
 				handle: (handle propertyNamed: #Module);
 				yourself ]
+]
+
+{ #category : #'as yet unclassified' }
+JinFormBody >> recordSource [
+	^ handle propertyNamed: #RecordSource
 ]
 
 { #category : #'as yet unclassified' }

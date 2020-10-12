@@ -226,6 +226,26 @@ JinForm >> addControl: aJinLabel [
 	self shouldBeImplemented.
 ]
 
+{ #category : #'as yet unclassified' }
+JinForm >> allowAdditions [
+	^ self body allowAdditions
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> allowDeletions [
+	^ self body allowDeletions
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> allowEdits [
+	^ self body allowEdits
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> allowFilters [
+	^ self body allowFilters
+]
+
 { #category : #ast }
 JinForm >> ast [
 	^ self code ast 
@@ -342,6 +362,18 @@ JinForm >> module [
 { #category : #accessing }
 JinForm >> privateLoadBodyObject [
 	^ project openForm: self
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> recordSource [
+	| source |
+	source := self body recordSource trimBoth.
+	source ifEmpty: [ ^ nil ].
+	^ (source includesSubstring: 'select' caseSensitive: false)
+		ifTrue: [ self halt ]
+		ifFalse: [ project tables
+				detect: [ :t | t name = source ]
+				ifNone: [ project queries detect: [ :q | q name = source ] ] ]
 ]
 
 { #category : #accessing }

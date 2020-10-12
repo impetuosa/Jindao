@@ -460,8 +460,10 @@ JinVisitor >> visitForeTint:aForeTint [
 
 { #category : #'visit-first-objects' }
 JinVisitor >> visitForm: aJinForm [
-	aJinForm hasModule ifTrue: [  aJinForm module acceptVisitor: self  ].
-	self visitCollection: aJinForm controls 
+	aJinForm hasModule
+		ifTrue: [ aJinForm module acceptVisitor: self ].
+	
+	self visitCollection: aJinForm controls
 ]
 
 { #category : #'visit-first-objects' }

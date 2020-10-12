@@ -18,6 +18,18 @@ JinCasinoVisitor class >> defaultNew [
 ]
 
 { #category : #'as yet unclassified' }
+JinCasinoVisitor >> bindDataReadAccess: aJinForm [
+	| dataEntity |
+	dataEntity := self importDataEntity: aJinForm recordResource.
+	dataEntity allowEdits: aJinForm allowEdits.
+	dataEntity allowDeletions: aJinForm allowDeletions.
+	dataEntity allowAdditions: aJinForm allowAdditions.
+	dataEntity allowFilters: aJinForm allowFilters.
+	stack top dataBinding: dataEntity read.
+	dataEntity read addReader: stack top
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoVisitor >> errors [
 	^ errors
 ]
@@ -39,6 +51,11 @@ JinCasinoVisitor >> importAccessProperty: aProperty [
 ]
 
 { #category : #'as yet unclassified' }
+JinCasinoVisitor >> importDataEntity: aJinDataEntity [
+	^ aJinDataEntity acceptVisitor: self 
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoVisitor >> importForm: aForm [
 
 	| casinoModel |
@@ -51,11 +68,10 @@ JinCasinoVisitor >> importForm: aForm [
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> importFormControl: aControl [
-
 	| casinoModel |
 	casinoModel := self factory
-		               importControl: aControl
-		               inTheContextOf: stack top.
+		importControl: aControl
+		inTheContextOf: stack top.
 	importedProject map: aControl to: casinoModel.
 	^ casinoModel
 ]
@@ -105,6 +121,13 @@ JinCasinoVisitor >> visitAccessProperty: aJinAccessProperty [
 ]
 
 { #category : #'as yet unclassified' }
+JinCasinoVisitor >> visitControlSource: aSource [
+	aSource value
+		ifNotEmpty:
+			[ :val | stack top dataBinding: (stack second dataBinding readsColumn: val) ]
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoVisitor >> visitCustomControl: aJinControlGeneric [ 
 	^ self
 		pushInStack: (self importFormControl: aJinControlGeneric)
@@ -115,7 +138,8 @@ JinCasinoVisitor >> visitCustomControl: aJinControlGeneric [
 JinCasinoVisitor >> visitForm: aJinForm [
 	^ self
 		pushInStack: (self importForm: aJinForm)
-		during: [ super visitForm: aJinForm.
+		during: [ self bindDataReadAccess: aJinForm.
+			super visitForm: aJinForm.
 			aJinForm ensureUnload ]
 ]
 
@@ -123,7 +147,8 @@ JinCasinoVisitor >> visitForm: aJinForm [
 JinCasinoVisitor >> visitFormControl: aJinFormControl [
 	^ self
 		pushInStack: (self importFormControl: aJinFormControl)
-		during: [ stack top ifNotNil: [self visitCollection: aJinFormControl properties ]]
+		during: [ stack top
+				ifNotNil: [ self visitCollection: aJinFormControl properties ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -136,6 +161,13 @@ JinCasinoVisitor >> visitProject: aJinAccessProject [
 "			self visitCollection: aJinAccessProject queries.
 			self visitCollection: aJinAccessProject reports.
 			self visitCollection: aJinAccessProject tables "]
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoVisitor >> visitQuery: aQuery [
+	^ self factory
+		importQueryEntity: aQuery
+		inTheContextOf: importingIntoThisModel
 ]
 
 { #category : #'as yet unclassified' }
