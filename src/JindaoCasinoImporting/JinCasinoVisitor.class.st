@@ -20,11 +20,11 @@ JinCasinoVisitor class >> defaultNew [
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> bindDataReadAccess: aJinForm [
 	| dataEntity |
-	dataEntity := self importDataEntity: aJinForm recordResource.
-	dataEntity allowEdits: aJinForm allowEdits.
-	dataEntity allowDeletions: aJinForm allowDeletions.
-	dataEntity allowAdditions: aJinForm allowAdditions.
-	dataEntity allowFilters: aJinForm allowFilters.
+	dataEntity := self importDataEntity: aJinForm recordSource.
+	dataEntity read allowEdits: aJinForm allowEdits.
+	dataEntity read allowDeletions: aJinForm allowDeletions.
+	dataEntity read allowAdditions: aJinForm allowAdditions.
+	dataEntity read allowFilters: aJinForm allowFilters.
 	stack top dataBinding: dataEntity read.
 	dataEntity read addReader: stack top
 ]
