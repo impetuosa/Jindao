@@ -83,6 +83,13 @@ JinCasinoVisitor >> importProject: aProject [
 ]
 
 { #category : #'as yet unclassified' }
+JinCasinoVisitor >> importTable: aTable [
+	^ self factory
+		importTableEntity: aTable
+		inTheContextOf: importingIntoThisModel
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoVisitor >> importedProject [
 	^ importedProject
 ]
@@ -152,6 +159,24 @@ JinCasinoVisitor >> visitFormControl: aJinFormControl [
 ]
 
 { #category : #'as yet unclassified' }
+JinCasinoVisitor >> visitIndex: aJinIndexBody [
+	| index |
+	index := MDIndex new.
+	index
+		elements:
+			(aJinIndexBody fields
+				collect: [ :d | stack top elements detect: [ :f | f name = d name ] ]).
+	aJinIndexBody unique
+		ifTrue: [ index kind: #Unique ].
+	aJinIndexBody primaryKey
+		ifTrue: [ index kind: #PrimaryKey ].
+	aJinIndexBody foreign
+		ifTrue: [ index kind: #ForeignKey.
+			self halt ].
+	stack top addIndex: index
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoVisitor >> visitProject: aJinAccessProject [
 	^ importedProject := self
 		pushInStack: (self importProject: aJinAccessProject)
@@ -173,4 +198,12 @@ JinCasinoVisitor >> visitQuery: aQuery [
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> visitSubForm: aJinControlSubForm [
 	^ self factory importSubform: aJinControlSubForm inTheContextOf: stack top
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoVisitor >> visitTable: aTable [
+	^ self
+		pushInStack: (self importTable: aTable)
+		during: [ super visitTable: aTable.
+			aTable ensureUnload ]
 ]

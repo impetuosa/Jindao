@@ -58,11 +58,11 @@ JinAccessMooseModel >> collect: aFullBlockClosure [
 
 { #category : #MooseGroupCompatibility }
 JinAccessMooseModel >> ensureClosed [
-
+[
 	project ifNotNil: [ 
 		entities := nil. 
 		project closeAndQuit.
-		project := nil ]
+		project := nil ]] on: Error do:[ :e | self halt. ]
 ]
 
 { #category : #MooseCompatibility }

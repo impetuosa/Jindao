@@ -58,6 +58,7 @@ JinCasinoUIModelStatelessFactory >> importForm: aForm inTheContextOf: aProject [
 		name: aForm nameWithoutSpaces;
 		project: aProject;
 		yourself.
+	page kindOfPage: aForm formType.
 	page mainContainer: container.
 	aProject mooseModel add: page.
 	^ page
@@ -125,6 +126,31 @@ JinCasinoUIModelStatelessFactory >> importSubform: aJinControlSubForm inTheConte
 		yourself.
 	aForm mooseModel add: wu.
 	aForm addWidget: wu
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoUIModelStatelessFactory >> importTableEntity: aJinTable inTheContextOf: aCSNUICWModel [
+	| schema element columns |
+	schema := self
+		importOrGetSchema: aJinTable
+		inTheContextOf: aCSNUICWModel.
+	^ schema elements
+		detect: [ :e | e name = aJinTable name ]
+		ifNone: [ element := MDRelationalTable new.
+			element name: aJinTable name.
+			columns := aJinTable fields
+				collect: [ :f | 
+					| col |
+					col := MDColumn new
+						name: f name;
+						type: (self mapType: f typeName);
+						yourself.
+					element addElement: col.
+					col ].
+			schema addElement: element.
+			aCSNUICWModel addAll: columns.
+			aCSNUICWModel add: element.
+			element ]
 ]
 
 { #category : #'as yet unclassified' }

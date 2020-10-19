@@ -355,6 +355,11 @@ JinForm >> installPageHeaderFooter [
 ]
 
 { #category : #'as yet unclassified' }
+JinForm >> isSingleForm [
+	^ self body isSingleForm
+]
+
+{ #category : #'as yet unclassified' }
 JinForm >> module [
 	^ self body module
 ]

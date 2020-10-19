@@ -15,7 +15,7 @@ JinCasinoModelCreator class >> createModelOnSpecific: migratingItems named: aStr
 	importer := self new.
 	importer
 		model: (CSNUICWModel new
-				 name: 'Showroom';
+				 name: aString;
 				 yourself);
 		items: migratingItems.
 	importer basicRun

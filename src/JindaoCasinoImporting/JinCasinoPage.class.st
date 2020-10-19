@@ -2,7 +2,8 @@ Class {
 	#name : #JinCasinoPage,
 	#superclass : #CSNPage,
 	#instVars : [
-		'project'
+		'project',
+		'kindOfPage'
 	],
 	#category : #JindaoCasinoImporting
 }
@@ -33,6 +34,11 @@ JinCasinoPage >> gtAttributesIn: composite [
 
 { #category : #'as yet unclassified' }
 JinCasinoPage >> gtSourceCodeIn: composite [
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoPage >> kindOfPage: aString [
+	kindOfPage := aString asSymbol
 ]
 
 { #category : #'as yet unclassified' }
