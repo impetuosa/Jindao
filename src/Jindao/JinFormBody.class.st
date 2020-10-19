@@ -132,6 +132,11 @@ JinFormBody >> height: anInteger [
 ]
 
 { #category : #'as yet unclassified' }
+JinFormBody >> isAccessForm [
+	^ true
+]
+
+{ #category : #'as yet unclassified' }
 JinFormBody >> isSingleForm [
 	^ self formType = #SingleForm
 ]

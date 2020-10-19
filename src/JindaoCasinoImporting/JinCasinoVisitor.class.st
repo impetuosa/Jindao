@@ -68,10 +68,16 @@ JinCasinoVisitor >> importForm: aForm [
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> importFormControl: aControl [
-	| casinoModel |
+	| casinoModel parent parentModel context |
+	parent := aControl parentObject.
+	context := parent isAccessForm
+		ifTrue: [ stack top ]
+		ifFalse: [ self nearestContainerTo: parent ].
+	context isContainer
+		ifFalse: [ context := stack top ].
 	casinoModel := self factory
 		importControl: aControl
-		inTheContextOf: stack top.
+		inTheContextOf: context.
 	importedProject map: aControl to: casinoModel.
 	^ casinoModel
 ]
@@ -108,6 +114,17 @@ JinCasinoVisitor >> installPartialProject [
 	importedProject model: importingIntoThisModel.
 	stack push: importedProject.
 	^ importedProject
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoVisitor >> nearestContainerTo: parent [
+	| context |
+	context := importedProject
+		mappedModelFor: parent
+		ifNone: [ self importFormControl: parent ].
+	^ context isContainer
+		ifTrue: [ context ]
+		ifFalse: [ self nearestContainerTo: parent parentObject ]
 ]
 
 { #category : #'as yet unclassified' }

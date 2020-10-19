@@ -20,7 +20,7 @@ JinTable class >> typeNumber [
 
 { #category : #'as yet unclassified' }
 JinTable >> acceptVisitor: aVisitor [
-	aVisitor visitTable: self 
+	^ aVisitor visitTable: self
 ]
 
 { #category : #'as yet unclassified' }

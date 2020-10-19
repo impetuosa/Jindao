@@ -63,6 +63,14 @@ MDDataAccess >> entity: anEntity [
 
 { #category : #'as yet unclassified' }
 MDDataAccess >> readsColumn: aString [
-
-	^ (entity elements detect: [ :e | e name = aString ]) read
+	| bindingName |
+	bindingName := (aString beginsWith: '=')
+		ifTrue: [ aString
+				copyFrom: (aString indexOf: $[) + 1
+				to: (aString indexOf: $]) - 1 ]
+		ifFalse: [ aString ].
+	^ entity elements
+		detect: [ :e | e name = bindingName ]
+		ifFound: [ :e | e read ]
+		ifNone: [ self halt. nil ]
 ]

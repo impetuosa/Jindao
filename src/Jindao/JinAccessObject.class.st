@@ -39,6 +39,11 @@ JinAccessObject >> handle: aHandle [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessObject >> isAccessForm [
+	^ false 
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessObject >> isControl [ 	^ false
 ]
 

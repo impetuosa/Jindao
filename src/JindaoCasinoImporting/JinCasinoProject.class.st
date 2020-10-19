@@ -27,6 +27,19 @@ JinCasinoProject >> map: aJinDaoElement to: aCasinoElement [
 ]
 
 { #category : #'as yet unclassified' }
+JinCasinoProject >> mappedModelFor: aJinTabControl [
+	^ (mapping detect: [ :a | a first = aJinTabControl ]) second
+]
+
+{ #category : #'as yet unclassified' }
+JinCasinoProject >> mappedModelFor: aJinTabControl ifNone: aBlockClosure [
+	^ mapping
+		detect: [ :a | a first = aJinTabControl ]
+		ifFound: [ :v | v second ]
+		ifNone: [ aBlockClosure value ]
+]
+
+{ #category : #'as yet unclassified' }
 JinCasinoProject >> model [
 	^ model
 ]
