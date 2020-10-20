@@ -20,13 +20,15 @@ JinCasinoVisitor class >> defaultNew [
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> bindDataReadAccess: aJinForm [
 	| dataEntity |
-	dataEntity := self importDataEntity: aJinForm recordSource.
-	dataEntity read allowEdits: aJinForm allowEdits.
-	dataEntity read allowDeletions: aJinForm allowDeletions.
-	dataEntity read allowAdditions: aJinForm allowAdditions.
-	dataEntity read allowFilters: aJinForm allowFilters.
-	stack top dataBinding: dataEntity read.
-	dataEntity read addReader: stack top
+	aJinForm recordSource
+		ifNotNil: [ :entity | 
+			dataEntity := self importDataEntity: entity.
+			dataEntity read allowEdits: aJinForm allowEdits.
+			dataEntity read allowDeletions: aJinForm allowDeletions.
+			dataEntity read allowAdditions: aJinForm allowAdditions.
+			dataEntity read allowFilters: aJinForm allowFilters.
+			stack top dataBinding: dataEntity read.
+			dataEntity read addReader: stack top ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -119,6 +121,8 @@ JinCasinoVisitor >> installPartialProject [
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> nearestContainerTo: parent [
 	| context |
+	parent isAccessForm
+		ifTrue: [ ^ stack top ].
 	context := importedProject
 		mappedModelFor: parent
 		ifNone: [ self importFormControl: parent ].
@@ -146,9 +150,9 @@ JinCasinoVisitor >> visitAccessProperty: aJinAccessProperty [
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> visitControlSource: aSource [
-	aSource value
-		ifNotEmpty:
-			[ :val | stack top dataBinding: (stack second dataBinding readsColumn: val) ]
+	(stack second dataBinding isNotNil and: [ aSource value isNotEmpty ])
+		ifTrue:
+			[ stack top dataBinding: (stack second dataBinding readsColumn: aSource value) ]
 ]
 
 { #category : #'as yet unclassified' }
