@@ -193,7 +193,7 @@ JinCasinoVisitor >> visitIndex: aJinIndexBody [
 		ifTrue: [ index kind: #PrimaryKey ].
 	aJinIndexBody foreign
 		ifTrue: [ index kind: #ForeignKey.
-			self halt ].
+ ].
 	stack top addIndex: index
 ]
 
@@ -211,9 +211,12 @@ JinCasinoVisitor >> visitProject: aJinAccessProject [
 
 { #category : #'as yet unclassified' }
 JinCasinoVisitor >> visitQuery: aQuery [
-	^ self factory
+	| importedQuery |
+	importedQuery := self factory
 		importQueryEntity: aQuery
-		inTheContextOf: importingIntoThisModel
+		inTheContextOf: importingIntoThisModel.
+	aQuery ensureUnload.
+	^ importedQuery
 ]
 
 { #category : #'as yet unclassified' }

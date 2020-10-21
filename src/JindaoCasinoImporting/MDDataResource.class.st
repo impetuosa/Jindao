@@ -10,7 +10,9 @@ Class {
 
 { #category : #'as yet unclassified' }
 MDDataResource >> compilableIdentifier [
-	^ name uncapitalized copyReplaceAll: ' ' with: ''
+	^ (((name uncapitalized copyReplaceAll: ' ' with: '')
+		copyReplaceAll: '/'
+		with: '') copyReplaceAll: '\' with: '') copyReplaceAll: '-' with: ''
 ]
 
 { #category : #'as yet unclassified' }

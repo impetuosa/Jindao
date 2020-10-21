@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #accessing }
+MDIndex >> accept: aVisitor [
+	aVisitor visitIndex: self
+]
+
+{ #category : #accessing }
 MDIndex >> addElement: anElement [
 	self halt: ' Maybe is not a good idea. super addElement changes the parent. here we add columns, that belong to a table and not to the index '
 ]
@@ -15,6 +20,11 @@ MDIndex >> addElement: anElement [
 { #category : #accessing }
 MDIndex >> elements: columns [
 	elements := columns
+]
+
+{ #category : #'as yet unclassified' }
+MDIndex >> kind [
+	^ kind
 ]
 
 { #category : #'as yet unclassified' }

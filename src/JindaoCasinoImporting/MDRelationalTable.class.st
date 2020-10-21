@@ -18,6 +18,11 @@ MDRelationalTable >> addIndex: aMDIndex [
 ]
 
 { #category : #'as yet unclassified' }
+MDRelationalTable >> indexes [
+	^ indexes
+]
+
+{ #category : #'as yet unclassified' }
 MDRelationalTable >> initialize [
 	super initialize.
 	indexes := OrderedCollection new

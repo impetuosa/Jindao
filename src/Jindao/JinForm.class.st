@@ -380,8 +380,7 @@ JinForm >> recordSource [
 	source := self body recordSource trimBoth.
 	source ifEmpty: [ ^ nil ].
 	^ (source includesSubstring: 'select' caseSensitive: false)
-		ifTrue: [ self halt.
-			^ nil ]
+		ifTrue: [ ^ nil ]
 		ifFalse: [ project tables
 				detect: [ :t | t name = source ]
 				ifNone: [ project queries detect: [ :q | q name = source ] ] ]

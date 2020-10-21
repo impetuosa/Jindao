@@ -72,5 +72,5 @@ MDDataAccess >> readsColumn: aString [
 	^ entity elements
 		detect: [ :e | e name = bindingName ]
 		ifFound: [ :e | e read ]
-		ifNone: [ self halt. nil ]
+		ifNone: [ nil ]
 ]
