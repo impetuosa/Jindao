@@ -18,6 +18,7 @@ JinNorwindProjectResource class >> reset [
 
 { #category : #running }
 JinNorwindProjectResource >> norwind [
+	" Must be modified "
 	^ 'c:\Northwind.accdb' asFileReference
 ]
 
