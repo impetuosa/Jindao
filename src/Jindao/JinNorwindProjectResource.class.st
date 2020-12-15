@@ -18,7 +18,7 @@ JinNorwindProjectResource class >> reset [
 
 { #category : #running }
 JinNorwindProjectResource >> norwind [
-	^ 'D:\Users\Santiago.BRAGAGNOLO\Documents\norwind\Northwind.accdb' asFileReference
+	^ 'c:\Northwind.accdb' asFileReference
 ]
 
 { #category : #running }
