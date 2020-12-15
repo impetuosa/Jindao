@@ -1,6 +1,6 @@
 Class {
 	#name : #JinCasinoPartialModelCreator,
-	#superclass : #CSNMooseModelCreator,
+	#superclass : #JinAccidentalMooseModelCreator,
 	#instVars : [
 		'importedProject',
 		'errors',
