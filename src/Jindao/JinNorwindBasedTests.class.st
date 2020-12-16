@@ -20,15 +20,11 @@ JinNorwindBasedTests >> runCaseManaged [
 { #category : #running }
 JinNorwindBasedTests >> setUp [
 	super setUp.
-	project := JinNorwindProjectResource current project
+	project := JinAccessApplication default open: self norwind 
 ]
 
 { #category : #running }
 JinNorwindBasedTests >> tearDown [
-	[ 
-	project forms do: #close.
-	project reports do: #close.
-	project tables do: #close ]
-		on: Error
-		do: [ :e |  ]
+	[ project close ]
+		ensure: [ project quit ]
 ]
