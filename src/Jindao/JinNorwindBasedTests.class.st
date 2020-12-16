@@ -20,7 +20,7 @@ JinNorwindBasedTests >> runCaseManaged [
 { #category : #running }
 JinNorwindBasedTests >> setUp [
 	super setUp.
-	project := JinAccessApplication default open: self norwind 
+	project := JinAccessApplication default open: self class norwind 
 ]
 
 { #category : #running }

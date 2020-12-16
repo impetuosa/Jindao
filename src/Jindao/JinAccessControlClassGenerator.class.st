@@ -50,6 +50,7 @@ JinAccessControlClassGenerator >> tearDown [
 
 { #category : #tests }
 JinAccessControlClassGenerator >> testAllTheExpectedAccessPropertyTypesAreCreated [
+	self skip. 
 	self forceGenerationOfAllAccessPropertiesClasses.
 	JinControl allSubclasses
 		remove: JinControlGeneric;
@@ -58,6 +59,7 @@ JinAccessControlClassGenerator >> testAllTheExpectedAccessPropertyTypesAreCreate
 
 { #category : #tests }
 JinAccessControlClassGenerator >> testAllTheExpectedControlsAreCreated [
+	self skip.
 	self forceDoubleGenerationOfAllClasses.
 	self
 		assert:

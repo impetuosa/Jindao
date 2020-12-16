@@ -11,7 +11,7 @@ Class {
 { #category : #running }
 JinMetricsTests >> setUp [
 	super setUp.
-	extractor := JinMetricsExtractor new.
+	extractor := JinStructuralMetricsExtractor new.
 	metrics := extractor metricsFor: project
 ]
 
@@ -50,6 +50,11 @@ JinMetricsTests >> testAllTablesHaveFields [
 { #category : #running }
 JinMetricsTests >> testClassModulesAre2 [
 	self assert: metrics classModules size equals: 2
+]
+
+{ #category : #running }
+JinMetricsTests >> testErrorHandlingModuleMetrics [
+	self halt 
 ]
 
 { #category : #running }

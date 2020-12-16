@@ -1,20 +1,17 @@
 Class {
-	#name : #JinMetricsExtractor,
+	#name : #JinStructuralMetricsExtractor,
 	#superclass : #JinStackVisitor,
-	#instVars : [
-		'metrics'
-	],
 	#category : #'Jindao-Metrics'
 }
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> initialize [ 
+JinStructuralMetricsExtractor >> initialize [ 
 	super initialize. 
 	stack push: JinMetrics new.
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> loadMetricsFromFormOrReport: aForm [
+JinStructuralMetricsExtractor >> loadMetricsFromFormOrReport: aForm [
 	| dataSource |
 	self metrics register: #name value: aForm name.
 	self metrics register: #type value: aForm formType.
@@ -30,12 +27,12 @@ JinMetricsExtractor >> loadMetricsFromFormOrReport: aForm [
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> metrics [
+JinStructuralMetricsExtractor >> metrics [
 	^ stack top
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> metricsFor: aProject [
+JinStructuralMetricsExtractor >> metricsFor: aProject [
 	aProject acceptVisitor: self.
 	self
 		assert: stack size = 1
@@ -44,12 +41,17 @@ JinMetricsExtractor >> metricsFor: aProject [
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> visitAccessProperty: aProperty [
+JinStructuralMetricsExtractor >> sourceCodeMetrixExtractor [
+	^ JinASTMetricsExtractor new
+]
+
+{ #category : #'visit-first-objects' }
+JinStructuralMetricsExtractor >> visitAccessProperty: aProperty [
 	self metrics incrementCounterFor: #Properties
 ]
 
 { #category : #'as yet unclassified' }
-JinMetricsExtractor >> visitCustomControl: aControl [
+JinStructuralMetricsExtractor >> visitCustomControl: aControl [
 	" 
 	Some controls arrive here by accident...
 	JinControl delegate bydefault to visitCustomControl:. Probably is a bad decision . Should change it 
@@ -64,7 +66,7 @@ JinMetricsExtractor >> visitCustomControl: aControl [
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> visitForm: aForm [
+JinStructuralMetricsExtractor >> visitForm: aForm [
 	self
 		push: self metrics newFormMetric
 		during: [ 
@@ -75,38 +77,41 @@ JinMetricsExtractor >> visitForm: aForm [
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> visitFormControl: aControl [
+JinStructuralMetricsExtractor >> visitFormControl: aControl [
 	self metrics incrementCounterFor: #Controls
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> visitIndex: aJinIndex [
+JinStructuralMetricsExtractor >> visitIndex: aJinIndex [
 	"Should we include this?"
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> visitMacro: anObject [
+JinStructuralMetricsExtractor >> visitMacro: anObject [
 	self metrics newMacroMetric
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> visitModule: anObject [
+JinStructuralMetricsExtractor >> visitModule: anObject [
 	| mtrx |
 	mtrx := anObject isClassModule
 		ifTrue: [ self metrics newClassModuleMetric ]
 		ifFalse: [ self metrics newModuleMetric ].
-	self push: mtrx during: [ super visitModule: anObject ].
+	self push: mtrx during: [ 
+
+		super visitModule: anObject 
+		].
 	anObject ensureUnload
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> visitProject: aJinAccessProject [
+JinStructuralMetricsExtractor >> visitProject: aJinAccessProject [
 	super visitProject: aJinAccessProject.
 	self visitCollection: aJinAccessProject macros
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> visitQuery: anObject [
+JinStructuralMetricsExtractor >> visitQuery: anObject [
 	self
 		push: self metrics newQueryMetric
 		during: [ self metrics register: #Fields value: anObject fields size.
@@ -119,7 +124,7 @@ JinMetricsExtractor >> visitQuery: anObject [
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> visitReference: aRef [
+JinStructuralMetricsExtractor >> visitReference: aRef [
 	| metric |
 	metric := self metrics newReferenceMetric.
 	metric register: #BuiltIn value: aRef isBuiltIn.
@@ -129,7 +134,7 @@ JinMetricsExtractor >> visitReference: aRef [
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> visitReport: aReport [
+JinStructuralMetricsExtractor >> visitReport: aReport [
 	self
 		push: self metrics newReportMetric
 		during: [ 
@@ -139,13 +144,20 @@ JinMetricsExtractor >> visitReport: aReport [
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> visitSubForm: aSubform [
+JinStructuralMetricsExtractor >> visitSourceCode: aSourceCode [
+	self metrics
+		register: #ASTMetrics
+		value: (self sourceCodeMetrixExtractor metricsFor: aSourceCode)
+]
+
+{ #category : #'visit-first-objects' }
+JinStructuralMetricsExtractor >> visitSubForm: aSubform [
 	self metrics registerDependancy: aSubform name kind: #Form.
 	super visitSubForm: aSubform
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> visitTable: anObject [
+JinStructuralMetricsExtractor >> visitTable: anObject [
 	self
 		push: self metrics newTableMetric
 		during: [ 
@@ -157,6 +169,6 @@ JinMetricsExtractor >> visitTable: anObject [
 ]
 
 { #category : #'visit-first-objects' }
-JinMetricsExtractor >> visitTableRelation: aJinTableRelation [
+JinStructuralMetricsExtractor >> visitTableRelation: aJinTableRelation [
 	"Should we include this?"
 ]
