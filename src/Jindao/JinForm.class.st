@@ -386,6 +386,18 @@ JinForm >> recordSource [
 				ifNone: [ project queries detect: [ :q | q name = source ] ] ]
 ]
 
+{ #category : #'as yet unclassified' }
+JinForm >> recordSourceFull [
+	| source |
+	source := self body recordSource trimBoth.
+	source ifEmpty: [ ^ nil ].
+	^ (source includesSubstring: 'select' caseSensitive: false)
+		ifTrue: [ ^ source ]
+		ifFalse: [ project tables
+				detect: [ :t | t name = source ]
+				ifNone: [ project queries detect: [ :q | q name = source ] ] ]
+]
+
 { #category : #accessing }
 JinForm >> vbeComponentName [
 	^ 'Form_' , self name

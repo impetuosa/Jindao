@@ -13,6 +13,11 @@ JinEmptyCell class >> mappedTypeName [
 ]
 
 { #category : #testing }
+JinEmptyCell >> isCustomControl [
+	^ false
+]
+
+{ #category : #testing }
 JinEmptyCell >> isEmptyCell [
 	^ true 
 ]

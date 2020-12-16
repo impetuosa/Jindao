@@ -1261,8 +1261,10 @@ JinVisitor >> visitReference: aJinReference [
 ]
 
 { #category : #'visit-first-objects' }
-JinVisitor >> visitReport: aJinReport [ 
-	" Visiting "
+JinVisitor >> visitReport: aJinReport [
+	aJinReport hasModule
+		ifTrue: [ aJinReport module acceptVisitor: self ].
+	self visitCollection: aJinReport controls
 ]
 
 { #category : #'visit-control-properties' }

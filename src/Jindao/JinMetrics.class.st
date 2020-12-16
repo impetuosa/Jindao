@@ -110,6 +110,12 @@ JinMetrics >> register: aName value: aValue [
 	entries at: aName put: aValue
 ]
 
+{ #category : #initialization }
+JinMetrics >> registerDependancy: aDependancy kind: aKindOfDependancy [
+	(entries at: #Dependencies ifAbsentPut: [ OrderedCollection new ])
+		add: {aKindOfDependancy . aDependancy}
+]
+
 { #category : #'as yet unclassified' }
 JinMetrics >> reports [
 	^ entries at: #Report
