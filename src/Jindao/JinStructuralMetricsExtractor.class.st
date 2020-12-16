@@ -7,7 +7,7 @@ Class {
 { #category : #'visit-first-objects' }
 JinStructuralMetricsExtractor >> initialize [ 
 	super initialize. 
-	stack push: JinMetrics new.
+	stack push: JinStructuralMetric new.
 ]
 
 { #category : #'visit-first-objects' }
@@ -147,7 +147,7 @@ JinStructuralMetricsExtractor >> visitReport: aReport [
 JinStructuralMetricsExtractor >> visitSourceCode: aSourceCode [
 	self metrics
 		register: #ASTMetrics
-		value: (self sourceCodeMetrixExtractor metricsFor: aSourceCode)
+		value: (self sourceCodeMetrixExtractor metricsFor: aSourceCode ast)
 ]
 
 { #category : #'visit-first-objects' }
