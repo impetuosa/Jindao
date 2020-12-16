@@ -148,7 +148,11 @@ JinMetricsExtractor >> visitSubForm: aSubform [
 JinMetricsExtractor >> visitTable: anObject [
 	self
 		push: self metrics newTableMetric
-		during: [ super visitTable: anObject ].
+		during: [ 
+			self metrics register: #Fields value: anObject fields size.
+			(anObject fields collect: [ :f | f typeName ]) asSet
+				do: [ :n | self metrics registerDependancy: n kind: #DBType ].
+			super visitTable: anObject ].
 	anObject ensureUnload
 ]
 

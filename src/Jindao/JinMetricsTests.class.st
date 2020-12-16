@@ -16,6 +16,38 @@ JinMetricsTests >> setUp [
 ]
 
 { #category : #running }
+JinMetricsTests >> testAllQueriesHaveDependencies [
+	self
+		assert:
+			(metrics queries
+				allSatisfy: [ :q | q registeredDependencies isNotEmpty ])
+]
+
+{ #category : #running }
+JinMetricsTests >> testAllQueriesHaveFields [
+	self
+		assert:
+			(metrics queries
+				allSatisfy: [ :q | (q value:#Fields ) > 0  ])
+]
+
+{ #category : #running }
+JinMetricsTests >> testAllTablesHaveDependencies [
+	self
+		assert:
+			(metrics tables
+				allSatisfy: [ :q | q registeredDependencies isNotEmpty ])
+]
+
+{ #category : #running }
+JinMetricsTests >> testAllTablesHaveFields [
+	self
+		assert:
+			(metrics tables
+				allSatisfy: [ :q | (q value:#Fields ) > 0  ])
+]
+
+{ #category : #running }
 JinMetricsTests >> testClassModulesAre2 [
 	self assert: metrics classModules size equals: 2
 ]

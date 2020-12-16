@@ -117,6 +117,11 @@ JinMetrics >> registerDependancy: aDependancy kind: aKindOfDependancy [
 ]
 
 { #category : #'as yet unclassified' }
+JinMetrics >> registeredDependencies [
+	^ entries at: #Dependencies ifAbsent: [ Array empty ]
+]
+
+{ #category : #'as yet unclassified' }
 JinMetrics >> reports [
 	^ entries at: #Report
 ]
@@ -124,4 +129,9 @@ JinMetrics >> reports [
 { #category : #'as yet unclassified' }
 JinMetrics >> tables [
 	^ entries at: #Table
+]
+
+{ #category : #'as yet unclassified' }
+JinMetrics >> value: aString [
+	^ entries at: aString
 ]
