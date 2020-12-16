@@ -25,9 +25,10 @@ JinNorwindBasedTests >> setUp [
 
 { #category : #running }
 JinNorwindBasedTests >> tearDown [
-	[ project forms do: #close.
+	[ 
+	project forms do: #close.
 	project reports do: #close.
 	project tables do: #close ]
-		on: Win32Error
-		do: [ :e | e passIfNotError0x80020009 ]
+		on: Error
+		do: [ :e |  ]
 ]
