@@ -23,6 +23,18 @@ JinCollection class >> newDefaultForMethod [
 ]
 
 { #category : #'as yet unclassified' }
+JinCollection >> anySatisfy: aBlock [
+	"Evaluate aBlock with the elements of the receiver.
+	If aBlock returns true for any element return true.
+	Otherwise return false."
+	"#(1 3) anySatisfy: [ :each | each even ] >>> false"
+	"#(1 2) anySatisfy: [ :each | each even ] >>> true"
+
+	self do: [:each | (aBlock value: each) ifTrue: [^ true]].
+	^ false
+]
+
+{ #category : #'as yet unclassified' }
 JinCollection >> at: anIndex [
 	^ factory elementFor: (handle propertyNamed: 'Item' withArguments: {(anIndex  - base )})
 ]

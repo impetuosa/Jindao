@@ -13,3 +13,13 @@ Class {
 JinSubModuleBody >> acceptVisitor: aVisitor [
 	aVisitor visitFormModule: self 
 ]
+
+{ #category : #'as yet unclassified' }
+JinSubModuleBody >> ensureUnload [
+	" nothing to do here "
+]
+
+{ #category : #'as yet unclassified' }
+JinSubModuleBody >> isClassModule [
+	^ true
+]

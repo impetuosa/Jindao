@@ -47,6 +47,12 @@ JinModule >> insertLines: aString [
 	^ self code insertLines: aString
 ]
 
+{ #category : #'as yet unclassified' }
+JinModule >> isClassModule [
+	^ self vbeComponent properties
+		anySatisfy: [ :p | p name = 'Instancing' ]
+]
+
 { #category : #accessing }
 JinModule >> privateLoadBodyObject [
 	^ (project openModule: self) 
