@@ -35,7 +35,9 @@ JinASTMetricsExtractor >> push: aValue during: aBlock [
 
 { #category : #initialization }
 JinASTMetricsExtractor >> visitAsTypeAndNew: aTypeAndNew [
-	self halt
+	self metrics
+		registerDependancy: (aTypeAndNew source copyReplaceAll: 'As ' with: '')
+		kind: #TypeAndNew
 ]
 
 { #category : #initialization }
