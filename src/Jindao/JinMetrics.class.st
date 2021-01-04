@@ -25,6 +25,7 @@ JinMetrics >> initialize [
 JinMetrics >> newEntryForType: anObjectType [
 	| metric |
 	metric := self class new.
+	metric register: #AccesType value: anObjectType.
 	(entries at: anObjectType ifAbsentPut: [ OrderedCollection new ])
 		add: metric.
 	^ metric

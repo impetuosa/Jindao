@@ -56,13 +56,16 @@ JinStructuralMetricsExtractor >> visitCustomControl: aControl [
 	Some controls arrive here by accident...
 	JinControl delegate bydefault to visitCustomControl:. Probably is a bad decision . Should change it 
 	"
+	 "Can we get the class of this custom control? "
 
 	aControl isCustomControl
-		ifTrue: [ self halt.
-			"Can we get the class of this custom control? "
-			self metrics
+		ifTrue: [ [ self metrics
 				registerDependancy: aControl name
 				kind: 'CustomControl' ]
+				on: Error
+				do: [ self metrics
+						registerDependancy: 'ErrorGettingName'
+						kind: 'CustomControl' ] ]
 ]
 
 { #category : #'visit-first-objects' }
@@ -145,9 +148,15 @@ JinStructuralMetricsExtractor >> visitReport: aReport [
 
 { #category : #'visit-first-objects' }
 JinStructuralMetricsExtractor >> visitSourceCode: aSourceCode [
-	self metrics
-		register: #ASTMetrics
-		value: (self sourceCodeMetrixExtractor metricsFor: aSourceCode ast)
+	| sourceMetrics |
+	[ sourceMetrics := self sourceCodeMetrixExtractor
+		metricsFor: aSourceCode ast ]
+		on: Error
+		do: [ :e | 
+			sourceMetrics := JinAstMetric new
+				register: #ERROR value: e messageText;
+				yourself ].
+	self metrics register: #ASTMetrics value: sourceMetrics
 ]
 
 { #category : #'visit-first-objects' }
