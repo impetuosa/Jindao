@@ -385,6 +385,11 @@ JinAccessProject >> parent [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessProject >> projectPath [
+	^ projectPath
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessProject >> projectPath: aFileReference [
 	projectPath := aFileReference
 ]
@@ -448,7 +453,7 @@ JinAccessProject >> sanitizedName [
 	s := (self name readStream upTo: $.) asLowercase.
 	s = 'access_example_vba'
 		ifTrue: [ ^ 'example_database' ].
-	^ s
+	^ s select: [ :a | a isAlphaNumeric ]
 ]
 
 { #category : #'as yet unclassified' }

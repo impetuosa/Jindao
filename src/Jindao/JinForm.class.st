@@ -394,8 +394,10 @@ JinForm >> recordSourceFull [
 	^ (source includesSubstring: 'select' caseSensitive: false)
 		ifTrue: [ ^ source ]
 		ifFalse: [ project tables
-				detect: [ :t | t name = source ]
-				ifNone: [ project queries detect: [ :q | q name = source ] ] ]
+				detect: [ :t | t name includesSubstring: source caseSensitive: false ]
+				ifNone: [ project queries
+						detect: [ :q | q name includesSubstring: source caseSensitive: false ]
+						ifNone: [ nil ] ] ]
 ]
 
 { #category : #accessing }

@@ -31,14 +31,14 @@ JinSourceCode >> ast [
 	[ [ result := (self class environment at: #VBParser)
 		parse: self contents ]
 		on: Error
-		do: [ :e | result := e messageText ].
+		do: [ :e | result := e ].
 	semaphore signal ] forkAt: Processor userBackgroundPriority.
 	^ semaphore
 		wait: 30 seconds
-		onCompletion: [ result isString
-				ifTrue: [ ^ self error: result ].
+		onCompletion: [ result isError
+				ifTrue: [ ^ result signal ].
 			result ]
-		onTimeout: [ self error: 'Timeout' ]
+		onTimeout: [ TimedOut new signal: 'TO'   ]
 ]
 
 { #category : #'as yet unclassified' }

@@ -26,5 +26,5 @@ JinVBEProject >> import: aFileReference [
 
 { #category : #'as yet unclassified' }
 JinVBEProject >> sanitizedName [
-	^ self name asLowercase
+	^ self name asLowercase select:[ : c | c isAlphaNumeric] 
 ]

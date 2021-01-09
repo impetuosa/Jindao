@@ -149,9 +149,10 @@ JinStructuralMetricsExtractor >> visitReport: aReport [
 { #category : #'visit-first-objects' }
 JinStructuralMetricsExtractor >> visitSourceCode: aSourceCode [
 	| sourceMetrics |
+	self metrics register: #LOC value: aSourceCode amountOfLines.
 	[ sourceMetrics := self sourceCodeMetrixExtractor
 		metricsFor: aSourceCode ast ]
-		on: Error
+		on: SmaCCParserError , TimedOut, Win32Error 
 		do: [ :e | 
 			sourceMetrics := JinAstMetric new
 				register: #ERROR value: e messageText;

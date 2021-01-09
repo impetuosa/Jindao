@@ -6,22 +6,22 @@ Class {
 
 { #category : #'as yet unclassified' }
 JinStructuralMetric >> classModules [
-	^ entries at: #ClassModule
+	^ children at: #ClassModule
 ]
 
 { #category : #'as yet unclassified' }
 JinStructuralMetric >> forms [
-	^ entries at: #Form
+	^ children at: #Form
 ]
 
 { #category : #'as yet unclassified' }
 JinStructuralMetric >> macros [
-	^ entries at: #Macro ifAbsent: [ {} ]
+	^ children at: #Macro ifAbsent: [ {} ]
 ]
 
 { #category : #'as yet unclassified' }
 JinStructuralMetric >> modules [
-	^ entries at: #Module
+	^ children at: #Module
 ]
 
 { #category : #initialization }
@@ -56,7 +56,7 @@ JinStructuralMetric >> newQueryMetric [
 
 { #category : #initialization }
 JinStructuralMetric >> newReferenceMetric [
-	^ self newEntryForType: #Refrence
+	^ self newEntryForType: #Reference
 ]
 
 { #category : #initialization }
@@ -71,20 +71,20 @@ JinStructuralMetric >> newTableMetric [
 
 { #category : #'as yet unclassified' }
 JinStructuralMetric >> queries [
-	^ entries at: #Query
+	^ children at: #Query
 ]
 
 { #category : #initialization }
 JinStructuralMetric >> references [
-	^ entries at: #Refrence
+	^ children at: #Refrence
 ]
 
 { #category : #'as yet unclassified' }
 JinStructuralMetric >> reports [
-	^ entries at: #Report
+	^ children at: #Report
 ]
 
 { #category : #'as yet unclassified' }
 JinStructuralMetric >> tables [
-	^ entries at: #Table
+	^ children at: #Table
 ]

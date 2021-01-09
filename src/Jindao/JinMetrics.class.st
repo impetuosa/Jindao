@@ -2,52 +2,59 @@ Class {
 	#name : #JinMetrics,
 	#superclass : #Object,
 	#instVars : [
-		'entries'
+		'children',
+		'properties',
+		'dependancies'
 	],
 	#category : #'Jindao-Metrics'
 }
 
 { #category : #'as yet unclassified' }
-JinMetrics >> incrementCounterFor: aString [ 
+JinMetrics >> incrementCounterFor: aString [
 	| val |
-	val := entries at: aString ifAbsentPut:[0].
-	entries at: aString put: val +1 .
-	
+	val := properties at: aString ifAbsentPut: [ 0 ].
+	properties at: aString put: val + 1
 ]
 
 { #category : #initialization }
-JinMetrics >> initialize [  
-	super initialize. 
-	entries := Dictionary new.
+JinMetrics >> initialize [
+	super initialize.
+	children := Dictionary new.
+	properties := Dictionary new.
+	dependancies := Set new
 ]
 
 { #category : #initialization }
 JinMetrics >> newEntryForType: anObjectType [
-	| metric |
-	metric := self class new.
+	| metric type |
+	type := self class environment
+		at: ('Jin{1}Metric' format: {anObjectType}) asSymbol.
+	metric := type new.
 	metric register: #AccesType value: anObjectType.
-	(entries at: anObjectType ifAbsentPut: [ OrderedCollection new ])
+	(children at: anObjectType ifAbsentPut: [ OrderedCollection new ])
 		add: metric.
 	^ metric
 ]
 
 { #category : #initialization }
 JinMetrics >> register: aName value: aValue [
-	entries at: aName put: aValue
+	properties at: aName put: aValue
 ]
 
 { #category : #initialization }
 JinMetrics >> registerDependancy: aDependancy kind: aKindOfDependancy [
-	(entries at: #Dependencies ifAbsentPut: [ Set new ])
-		add: {aKindOfDependancy . aDependancy}
+	dependancies
+		add:
+			{aKindOfDependancy.
+			aDependancy}
 ]
 
 { #category : #'as yet unclassified' }
 JinMetrics >> registeredDependencies [
-	^ entries at: #Dependencies ifAbsent: [ Array empty ]
+	^ dependancies
 ]
 
 { #category : #'as yet unclassified' }
 JinMetrics >> value: aString [
-	^ entries at: aString
+	^ properties at: aString
 ]
