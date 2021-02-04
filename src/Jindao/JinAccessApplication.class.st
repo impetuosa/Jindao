@@ -626,6 +626,9 @@ JinAccessApplication >> vbeComponentFor: aJinModule in: aJinAccessProject [
 JinAccessApplication >> vbeProjectFor: aJinAccessProject [
 	^ self vbeProjects
 		detect: [ :p | p sanitizedName = aJinAccessProject sanitizedName ]
+		ifNone: [ self vbeProjects size = 1
+				ifTrue: [ self vbeProjects first ]
+				ifFalse: [ self halt ] ]
 ]
 
 { #category : #'as yet unclassified' }

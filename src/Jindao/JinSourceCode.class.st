@@ -48,7 +48,11 @@ JinSourceCode >> content [
 
 { #category : #'as yet unclassified' }
 JinSourceCode >> contents [
-	^ self contentsFrom: 1 to: self amountOfLines 
+	| lines |
+	lines := self amountOfLines.
+	lines <= 0
+		ifTrue: [ ^ '' ].
+	^ self contentsFrom: 1 to: lines
 ]
 
 { #category : #'as yet unclassified' }

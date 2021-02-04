@@ -42,7 +42,7 @@ JinAccessTableField class >> fieldTypeMapping: aNumber [
 	(10 -> 'dbText').
 	(22 -> 'dbTime').
 	(23 -> 'dbTimeStamp').
-	(17 -> 'dbVarBinary')} asDictionary at: aNumber
+	(17 -> 'dbVarBinary')} asDictionary at: aNumber ifAbsent: [ 'UnknownCode ', aNumber asString ]
 ]
 
 { #category : #visiting }
