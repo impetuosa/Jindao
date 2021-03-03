@@ -84,6 +84,13 @@ JinSourcedEntity >> hadSyntaxErrorOnCalculation [
 	^ (sourceMetrics properties at:#ERROR) = 'Token not expected'
 ]
 
+{ #category : #'as yet unclassified' }
+JinSourcedEntity >> hadTimeOutErrorOnCalculation [
+	sourceMetrics ifNil: [ ^ false ].
+	sourceMetrics hadErrorOnCalculation ifFalse: [ ^ false ].
+	^ ((sourceMetrics properties at:#ERROR) = 'Token not expected') not
+]
+
 { #category : #accessing }
 JinSourcedEntity >> loops [
 	<cvs: #Loop at: 11>
