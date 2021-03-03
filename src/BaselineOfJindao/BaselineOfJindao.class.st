@@ -11,15 +11,9 @@ BaselineOfJindao >> baseline: spec [
 		baseline: 'PharoWin32'
 		with: [ spec repository: 'github://tesonep/pharo-com' ].
 	spec
-		baseline: 'Casino'
-		with: [ spec repository: 'github://badetitou/casino' ].
-	spec
 		baseline: 'VBParser'
 		with: [ spec repository: 'github://impetuosa/VBParser' ].
-	spec package: 'Jindao' with: [ spec requires: #(PharoWin32 VBParser) ].
 	spec
-		package: 'JindaoCasinoImporting'
-		with: [ spec requires: #(Jindao Casino) ].
-	spec group: 'default' with: #(Jindao).
-	spec group: 'full' with: #(default JindaoCasinoImporting)
+		package: 'Jindao'
+		with: [ spec requires: #(PharoWin32 VBParser) ]
 ]
