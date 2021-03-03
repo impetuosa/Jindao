@@ -13,34 +13,6 @@ Class {
 }
 
 { #category : #properties }
-JinHandle >> asCachedHandle [
-	^ JinCachedHandle new
-		handle: handle;
-		yourself
-]
-
-{ #category : #properties }
-JinHandle >> asSnapshotHandle [
-	^ JinSnapshotHandle new
-		handle: handle;
-		yourself
-]
-
-{ #category : #properties }
-JinHandle >> asSnifferHandle [
-	^ JinSnifferHandle new
-		handle: handle;
-		yourself
-]
-
-{ #category : #properties }
-JinHandle >> asStateTrackingHandle [
-	^ JinStateTrackingHandle new
-		handle: handle;
-		yourself
-]
-
-{ #category : #properties }
 JinHandle >> dispatch: aFunctionName [ 
 	^ self dispatch: aFunctionName withArguments: #().
 ]

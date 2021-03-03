@@ -24,11 +24,6 @@ JinAccessObject class >> mooseName [
 ]
 
 { #category : #'as yet unclassified' }
-JinAccessObject >> beCached [
-	handle := handle asCachedHandle.
-]
-
-{ #category : #'as yet unclassified' }
 JinAccessObject >> handle [
 	^ handle asCOMHandle
 ]
