@@ -25,6 +25,5 @@ JinNorwindBasedTests >> setUp [
 
 { #category : #running }
 JinNorwindBasedTests >> tearDown [
-	[ project close ]
-		ensure: [ project quit ]
+	project closeAndQuit
 ]
