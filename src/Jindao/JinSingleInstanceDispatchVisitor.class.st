@@ -7,14 +7,32 @@ Class {
 		'gui',
 		'database',
 		'code',
-		'syntax'
+		'syntax',
+		'project'
 	],
 	#category : #'Jindao-Subvisitor'
 }
 
+{ #category : #accessing }
+JinSingleInstanceDispatchVisitor class >> default [
+	^ self new
+		code: JinCodeFirstCitizenVisitor new;
+		database: JinDatabaseFirstCitizenVisitor new;
+		gui: JinGUIFirstCitizenVisitor new;
+		control: JinGUIControlVisitor new;
+		syntax: VBProgramNodeVisitor new;
+		project: JinProjectVisitor new;
+		yourself
+]
+
+{ #category : #accessing }
+JinSingleInstanceDispatchVisitor class >> nullVisitor [
+	^ self new
+]
+
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> code [
-	^ code ifNil: [ code := JinCodeFirstCitizenVisitor new ]
+	^ code
 ]
 
 { #category : #'visit-first-objects' }
@@ -24,7 +42,7 @@ JinSingleInstanceDispatchVisitor >> code: aVisitor [
 
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> control [
-	^ control ifNil: [ control := JinGUIControlVisitor new ]
+	^ control
 ]
 
 { #category : #'visit-first-objects' }
@@ -34,7 +52,7 @@ JinSingleInstanceDispatchVisitor >> control: aControl [
 
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> database [
-	^ database ifNil: [ database := JinDatabaseFirstCitizenVisitor new ]
+	^ database
 ]
 
 { #category : #'visit-first-objects' }
@@ -49,7 +67,7 @@ JinSingleInstanceDispatchVisitor >> firstClassCitizen [
 
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> gui [
-	^ gui ifNil: [ gui := JinGUIFirstCitizenVisitor new ]
+	^ gui
 ]
 
 { #category : #'visit-first-objects' }
@@ -58,8 +76,18 @@ JinSingleInstanceDispatchVisitor >> gui: aGuiVisitor [
 ]
 
 { #category : #'visit-first-objects' }
+JinSingleInstanceDispatchVisitor >> project [
+	^ project
+]
+
+{ #category : #'visit-first-objects' }
+JinSingleInstanceDispatchVisitor >> project: aProjectVisitor [
+	project := aProjectVisitor
+]
+
+{ #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> syntax [
-	^ syntax ifNil: [ syntax := VBProgramNodeVisitor new ]
+	^ syntax
 ]
 
 { #category : #'visit-first-objects' }

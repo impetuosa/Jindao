@@ -10,6 +10,11 @@ JinCodeFirstCitizenVisitor >> code [
 ]
 
 { #category : #'as yet unclassified' }
+JinCodeFirstCitizenVisitor >> visitFormModule: aJinFormModule [
+	self visitModule: aJinFormModule
+]
+
+{ #category : #'as yet unclassified' }
 JinCodeFirstCitizenVisitor >> visitMacro: aMacro [
 ]
 

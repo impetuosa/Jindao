@@ -36,11 +36,6 @@ JinGUIFirstCitizenVisitor >> visitForm: aJinForm [
 	self visitCollection: aJinForm controls
 ]
 
-{ #category : #'entry-point' }
-JinGUIFirstCitizenVisitor >> visitFormModule: aJinFormModule [ 
-	self code visitModule: aJinFormModule 
-]
-
 { #category : #'visit-controls' }
 JinGUIFirstCitizenVisitor >> visitImage: aJinControlImage [ 
 	self visitFormControl: aJinControlImage 

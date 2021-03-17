@@ -32,6 +32,11 @@ JinSubvisitor >> gui [
 	^ parent gui
 ]
 
+{ #category : #'as yet unclassified' }
+JinSubvisitor >> project [
+	^ parent project
+]
+
 { #category : #accessing }
 JinSubvisitor >> state [ 	
 	^ parent state

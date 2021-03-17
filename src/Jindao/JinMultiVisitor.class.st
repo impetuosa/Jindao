@@ -30,6 +30,11 @@ JinMultiVisitor >> gui [
 ]
 
 { #category : #'part visitor' }
+JinMultiVisitor >> project [
+	^ self subclassResponsibility
+]
+
+{ #category : #'part visitor' }
 JinMultiVisitor >> syntax [
 	^ self subclassResponsibility 
 ]
@@ -47,71 +52,67 @@ JinMultiVisitor >> visitCollection: aCollection [
 
 { #category : #'delegate to subvisitor' }
 JinMultiVisitor >> visitForm: aJinForm [
-	self gui visitForm: aJinForm .
-	
+	self gui ifNotNil: [ :sv | sv visitForm: aJinForm ]
 ]
 
 { #category : #'delegate to subvisitor' }
 JinMultiVisitor >> visitFormControl: aJinControlObject [
-	self control visitFormControl: aJinControlObject
+	self control
+		ifNotNil: [ :sv | sv visitFormControl: aJinControlObject ]
+]
+
+{ #category : #'entry-point' }
+JinMultiVisitor >> visitFormModule: aJinFormModule [ 
+	self code visitFormModule: aJinFormModule 
 ]
 
 { #category : #'visit-first-objects' }
-JinMultiVisitor >> visitHandleObject: aJinReference [ 
-	" Leaf object arriving "
+JinMultiVisitor >> visitHandleObject: aJinReference [
+	self project ifNotNil: [ :sv | sv visitHandleObject: aJinReference ]
 ]
 
 { #category : #'delegate to subvisitor' }
 JinMultiVisitor >> visitIndex: aJinIndexBody [
-	self database visitIndex: aJinIndexBody
+	self database ifNotNil: [ :sv | sv visitIndex: aJinIndexBody ]
 ]
 
 { #category : #'delegate to subvisitor' }
 JinMultiVisitor >> visitMacro: aMacro [
-	self code visitMacro: aMacro
+	self code ifNotNil: [ :sv | sv visitMacro: aMacro ]
 ]
 
 { #category : #'delegate to subvisitor' }
 JinMultiVisitor >> visitModule: aJinModule [
-	self code visitModule: aJinModule
+	self code ifNotNil: [ :sv | sv visitModule: aJinModule ]
 ]
 
 { #category : #'visit-first-objects' }
 JinMultiVisitor >> visitProject: aJinAccessProject [
-	self visitCollection: aJinAccessProject references.
-	self visitCollection: aJinAccessProject tables.
-	self visitCollection: aJinAccessProject queries.
-	self visitCollection: aJinAccessProject modules.
-	self visitCollection: aJinAccessProject reports.
-	self visitCollection: aJinAccessProject forms.
-	self visitCollection: aJinAccessProject relations
-	"	self visitCollection: aJinAccessProject macros."
+	self project ifNotNil: [ :sv | sv visitProject: aJinAccessProject ]
 ]
 
 { #category : #'delegate to subvisitor' }
 JinMultiVisitor >> visitQuery: aJinQuery [
-	self database visitQuery: aJinQuery
+	self database ifNotNil: [ :sv | sv visitQuery: aJinQuery ]
 ]
 
 { #category : #'visit-first-objects' }
-JinMultiVisitor >> visitReference: aJinReference [ 
-
-
-	self visitHandleObject: aJinReference 
+JinMultiVisitor >> visitReference: aJinReference [
+	self project ifNotNil: [ :sv | sv visitReference: aJinReference ]
 ]
 
 { #category : #'delegate to subvisitor' }
 JinMultiVisitor >> visitReport: aJinReport [
-	self gui visitReport: aJinReport
+	self gui ifNotNil: [ :sv | sv visitReport: aJinReport ]
 ]
 
 { #category : #'delegate to subvisitor' }
 JinMultiVisitor >> visitTable: aJinTable [
-	self database visitTable: aJinTable 
-
+	self database ifNotNil: [ :sv | sv visitTable: aJinTable ]
 ]
 
 { #category : #'delegate to subvisitor' }
 JinMultiVisitor >> visitTableRelation: aJinTableRelation [
-	self database visitTableRelation: aJinTableRelation
+	self database
+		ifNotNil: [ :sv | sv visitTableRelation: aJinTableRelation ]
 ]
