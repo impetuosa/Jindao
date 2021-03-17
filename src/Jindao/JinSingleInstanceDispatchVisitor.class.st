@@ -37,7 +37,8 @@ JinSingleInstanceDispatchVisitor >> code [
 
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> code: aVisitor [
-	code := aVisitor
+	code := aVisitor.
+	aVisitor parent: self.
 ]
 
 { #category : #'visit-first-objects' }
@@ -47,7 +48,8 @@ JinSingleInstanceDispatchVisitor >> control [
 
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> control: aControl [
-	control := aControl
+	control := aControl.
+	aControl parent: self.
 ]
 
 { #category : #'visit-first-objects' }
@@ -57,7 +59,8 @@ JinSingleInstanceDispatchVisitor >> database [
 
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> database: aDBVisitor [
-	database := aDBVisitor
+	database := aDBVisitor.
+	aDBVisitor parent: self
 ]
 
 { #category : #'as yet unclassified' }
@@ -72,7 +75,8 @@ JinSingleInstanceDispatchVisitor >> gui [
 
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> gui: aGuiVisitor [
-	gui := aGuiVisitor
+	gui := aGuiVisitor.
+	aGuiVisitor parent: self
 ]
 
 { #category : #'visit-first-objects' }
@@ -82,7 +86,8 @@ JinSingleInstanceDispatchVisitor >> project [
 
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> project: aProjectVisitor [
-	project := aProjectVisitor
+	project := aProjectVisitor.
+	aProjectVisitor parent: self
 ]
 
 { #category : #'visit-first-objects' }
@@ -92,5 +97,6 @@ JinSingleInstanceDispatchVisitor >> syntax [
 
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> syntax: aVisitor [
-	syntax := aVisitor
+	syntax := aVisitor.
+	aVisitor parent: self
 ]
