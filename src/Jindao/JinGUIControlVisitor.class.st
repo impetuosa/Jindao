@@ -285,6 +285,11 @@ JinGUIControlVisitor >> visitCursorOnHover:aCursorOnHover [
 
 ]
 
+{ #category : #'entry-point' }
+JinGUIControlVisitor >> visitCustomControl: aJinControlObject [
+	self visitFormControl: aJinControlObject.
+]
+
 { #category : #'visit-control-properties' }
 JinGUIControlVisitor >> visitDatasheetCaption:aDatasheetCaption [
 	^ self visitAccessProperty: aDatasheetCaption. 

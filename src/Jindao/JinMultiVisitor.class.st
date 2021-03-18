@@ -34,6 +34,11 @@ JinMultiVisitor >> project [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'as yet unclassified' }
+JinMultiVisitor >> state [
+	^ self subclassResponsibility
+]
+
 { #category : #'part visitor' }
 JinMultiVisitor >> syntax [
 	^ self subclassResponsibility 
@@ -51,6 +56,12 @@ JinMultiVisitor >> visitCollection: aCollection [
 ]
 
 { #category : #'delegate to subvisitor' }
+JinMultiVisitor >> visitCustomControl: aJinControlObject [
+	self control
+		ifNotNil: [ :sv | sv visitCustomControl: aJinControlObject ]
+]
+
+{ #category : #'delegate to subvisitor' }
 JinMultiVisitor >> visitForm: aJinForm [
 	self gui ifNotNil: [ :sv | sv visitForm: aJinForm ]
 ]
@@ -62,8 +73,8 @@ JinMultiVisitor >> visitFormControl: aJinControlObject [
 ]
 
 { #category : #'entry-point' }
-JinMultiVisitor >> visitFormModule: aJinFormModule [ 
-	self code visitFormModule: aJinFormModule 
+JinMultiVisitor >> visitFormModule: aJinFormModule [
+	self code ifNotNil: [ :sv | sv visitFormModule: aJinFormModule ]
 ]
 
 { #category : #'visit-first-objects' }

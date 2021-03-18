@@ -38,7 +38,7 @@ JinSingleInstanceDispatchVisitor >> code [
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> code: aVisitor [
 	code := aVisitor.
-	aVisitor parent: self.
+	aVisitor ifNotNil: [ :v | v parent: self ]
 ]
 
 { #category : #'visit-first-objects' }
@@ -49,7 +49,7 @@ JinSingleInstanceDispatchVisitor >> control [
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> control: aControl [
 	control := aControl.
-	aControl parent: self.
+	aControl ifNotNil: [ :v | v parent: self ]
 ]
 
 { #category : #'visit-first-objects' }
@@ -60,7 +60,7 @@ JinSingleInstanceDispatchVisitor >> database [
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> database: aDBVisitor [
 	database := aDBVisitor.
-	aDBVisitor parent: self
+	aDBVisitor ifNotNil: [ :v | v parent: self ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -76,7 +76,7 @@ JinSingleInstanceDispatchVisitor >> gui [
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> gui: aGuiVisitor [
 	gui := aGuiVisitor.
-	aGuiVisitor parent: self
+	aGuiVisitor ifNotNil: [ :v | v parent: self ]
 ]
 
 { #category : #'visit-first-objects' }
@@ -87,7 +87,12 @@ JinSingleInstanceDispatchVisitor >> project [
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> project: aProjectVisitor [
 	project := aProjectVisitor.
-	aProjectVisitor parent: self
+	aProjectVisitor ifNotNil: [ :v | v parent: self ]
+]
+
+{ #category : #'as yet unclassified' }
+JinSingleInstanceDispatchVisitor >> state [
+	^ state
 ]
 
 { #category : #'visit-first-objects' }
@@ -98,5 +103,5 @@ JinSingleInstanceDispatchVisitor >> syntax [
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> syntax: aVisitor [
 	syntax := aVisitor.
-	aVisitor parent: self
+	aVisitor ifNotNil: [ :v | v parent: self ]
 ]
