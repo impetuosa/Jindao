@@ -5,6 +5,13 @@ Class {
 }
 
 { #category : #'world menu' }
+JinCILaunch class >> launchAlce [
+
+	WebBrowser openOn:
+		'https://ci.inria.fr/access-replicant/job/alce/build?token=0db223bd-7474-0d00-b692-21c90a593b10'
+]
+
+{ #category : #'world menu' }
 JinCILaunch class >> launchJindao [
 
 	WebBrowser openOn:
@@ -27,7 +34,6 @@ JinCILaunch class >> launchSuntzu [
 
 { #category : #'world menu' }
 JinCILaunch class >> worldMenuOn: aBuilder [
-
 	<worldMenu>
 	(aBuilder item: #Jenkins)
 		order: 20;
@@ -47,5 +53,10 @@ JinCILaunch class >> worldMenuOn: aBuilder [
 		parent: #Jenkins;
 		order: 0;
 		icon: (self iconNamed: #glamorousGo);
-		action: [ self launchSuntzu ]
+		action: [ self launchSuntzu ].
+	(aBuilder item: 'Launch Alce Build')
+		parent: #Jenkins;
+		order: 0;
+		icon: (self iconNamed: #glamorousGo);
+		action: [ self launchAlce ]
 ]
