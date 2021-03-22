@@ -119,6 +119,11 @@ JinMultiVisitor >> visitReport: aJinReport [
 ]
 
 { #category : #'delegate to subvisitor' }
+JinMultiVisitor >> visitSourceCode: aCode [
+	self syntax ifNotNil: [ :sv | sv visitSourceCode: aCode ]
+]
+
+{ #category : #'delegate to subvisitor' }
 JinMultiVisitor >> visitTable: aJinTable [
 	self database ifNotNil: [ :sv | sv visitTable: aJinTable ]
 ]

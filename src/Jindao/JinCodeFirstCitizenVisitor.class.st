@@ -22,8 +22,3 @@ JinCodeFirstCitizenVisitor >> visitMacro: aMacro [
 JinCodeFirstCitizenVisitor >> visitModule: aJinModule [
 	aJinModule code acceptVisitor: self
 ]
-
-{ #category : #'visit-first-objects' }
-JinCodeFirstCitizenVisitor >> visitSourceCode: aJinSourceCode [ 
-	self visitHandleObject: aJinSourceCode 
-]
