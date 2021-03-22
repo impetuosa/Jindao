@@ -114,7 +114,8 @@ JinMultiVisitor >> visitReference: aJinReference [
 
 { #category : #'delegate to subvisitor' }
 JinMultiVisitor >> visitReport: aJinReport [
-	self gui ifNotNil: [ :sv | sv visitReport: aJinReport ]
+	self gui ifNotNil: [ :sv | sv visitReport: aJinReport ].
+
 ]
 
 { #category : #'delegate to subvisitor' }
