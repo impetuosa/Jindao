@@ -69,7 +69,7 @@ JinAccessObject >> printOn: aStream [
 	aStream nextPutAll: self class name ; nextPut:$[ ; nextPutAll: self name ; nextPut: $]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessObject >> typeGuid [
 	^ handle getTypeInfo guid
 ]
