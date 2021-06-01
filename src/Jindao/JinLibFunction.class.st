@@ -18,6 +18,11 @@ JinLibFunction >> printOn: aStream [
 	aStream nextPutAll: library name; nextPutAll:'::'; nextPutAll: selector; nextPutAll:'(...)'.
 ]
 
+{ #category : #accessing }
+JinLibFunction >> selector [
+	^ selector
+]
+
 { #category : #accesisng }
 JinLibFunction >> selector: aString [ 
 	selector := aString

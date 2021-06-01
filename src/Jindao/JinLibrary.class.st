@@ -46,12 +46,18 @@ JinLibrary >> fetchLibraryFunctions [
 		callback: [ :pSymbol :size :usc | " The pSymbol pointer is valid **ONLY** during the callback execution. "
 			| symbol |
 			symbol := DBGSymbolInfo fromHandle: pSymbol.
-			symbol flags = 16r00000800 ifTrue: [ 
+			" 
+			https://docs.microsoft.com/en-us/windows/win32/api/dbghelp/ns-dbghelp-symbol_info
+			SYMFLAG_EXPORT = 0x00000200
+			The symbol is from the export table. 
+			"
+			self traceCr: symbol flags hex.
+			symbol flags = 16r200 ifTrue: [ 
 				ff add: (JinLibFunction new
 						 library: self;
 						 selector: symbol name;
-						 yourself).
-				true ] ].
+						 yourself) ].
+			true ].
 	^ ff
 ]
 

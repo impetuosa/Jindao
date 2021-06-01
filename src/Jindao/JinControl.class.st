@@ -119,6 +119,11 @@ JinControl >> layoutNameFor: typr [
 ]
 
 { #category : #'as yet unclassified' }
+JinControl >> mappedTypeName [
+	^ self class mappedTypeName
+]
+
+{ #category : #'as yet unclassified' }
 JinControl >> parent [
 	^ handle propertyNamed: #Parent
 ]

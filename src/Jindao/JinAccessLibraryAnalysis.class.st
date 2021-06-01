@@ -19,7 +19,6 @@ JinAccessLibraryAnalysis >> libraryNamed: aName [
 
 { #category : #tests }
 JinAccessLibraryAnalysis >> testContainsReferenceToDAOLibrary [
-
 	self assert: (self libraryNamed: #DAO) name equals: #DAO
 ]
 
@@ -58,7 +57,7 @@ JinAccessLibraryAnalysis >> testProjectHasReferences [
 { #category : #tests }
 JinAccessLibraryAnalysis >> testVBALibraryHasFunctions [
 
-	self assert: self vba library functions size equals: 2
+	self assert: self vba library functions size equals: 600
 ]
 
 { #category : #tests }

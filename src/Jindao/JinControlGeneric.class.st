@@ -30,6 +30,12 @@ JinControlGeneric >> isCustomControl [
 ]
 
 { #category : #printing }
+JinControlGeneric >> mappedTypeName [
+
+	^ handle getTypeInfo name
+]
+
+{ #category : #printing }
 JinControlGeneric >> printOn: aStream [
 	aStream
 		nextPutAll: 'JinControlGeneric[';
