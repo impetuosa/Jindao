@@ -44,11 +44,14 @@ JinLibrary >> fetchLibraryFunctions [
 	DBGHelpLib uniqueInstance
 		enumerateSymbols: self dbgHandle
 		callback: [ :pSymbol :size :usc | " The pSymbol pointer is valid **ONLY** during the callback execution. "
-			ff add: (JinLibFunction new
-					 library: self;
-					 selector: (DBGSymbolInfo fromHandle: pSymbol) name;
-					 yourself).
-			true ].
+			| symbol |
+			symbol := DBGSymbolInfo fromHandle: pSymbol.
+			symbol flags = 16r00000800 ifTrue: [ 
+				ff add: (JinLibFunction new
+						 library: self;
+						 selector: symbol name;
+						 yourself).
+				true ] ].
 	^ ff
 ]
 
