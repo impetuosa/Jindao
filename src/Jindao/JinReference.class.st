@@ -6,6 +6,9 @@ I represent a static dependency of a project .
 Class {
 	#name : #JinReference,
 	#superclass : #JinAccessObject,
+	#instVars : [
+		'library'
+	],
 	#category : #'Jindao-Core'
 }
 
@@ -19,6 +22,12 @@ JinReference >> guid [
 	^ handle propertyNamed: #Guid
 ]
 
+{ #category : #testing }
+JinReference >> isAccessProject [
+
+	^ self path extension asLowercase beginsWith: 'accd'
+]
+
 { #category : #'as yet unclassified' }
 JinReference >> isBroken [
 	^ handle propertyNamed: #IsBroken
@@ -27,6 +36,20 @@ JinReference >> isBroken [
 { #category : #'as yet unclassified' }
 JinReference >> isBuiltIn [
 	^ handle propertyNamed: #BuiltIn
+]
+
+{ #category : #testing }
+JinReference >> isLibrary [
+	^ self isAccessProject not 
+]
+
+{ #category : #accessing }
+JinReference >> library [
+
+	^ library ifNil: [ 
+		  library := JinLibrary new
+			             reference: self;
+			             yourself ]
 ]
 
 { #category : #'as yet unclassified' }
