@@ -5,7 +5,9 @@ Class {
 		'reference',
 		'functions',
 		'libraryHandle',
-		'dbgHandle'
+		'dbgHandle',
+		'types',
+		'typeLoader'
 	],
 	#category : #'Jindao-LibraryAnalysis'
 }
@@ -83,4 +85,17 @@ JinLibrary >> name [
 JinLibrary >> reference: aJinReference [
 
 	reference := aJinReference
+]
+
+{ #category : #accessing }
+JinLibrary >> typeLoader [
+	^ typeLoader ifNil: [ typeLoader := JinLibraryTypeLoader new  ].
+]
+
+{ #category : #accewssing }
+JinLibrary >> types [
+
+	^ types ifNil: [ 
+		  types := self libraryHandle typeInfos collect: [ :i | 
+			           self typeLoader load: i ] ]
 ]
