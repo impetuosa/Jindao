@@ -1,11 +1,17 @@
 Class {
 	#name : #JinLibraryType,
-	#superclass : #Object,
+	#superclass : #JinLibraryElement,
 	#instVars : [
 		'name'
 	],
 	#category : #'Jindao-LibraryAnalysis'
 }
+
+{ #category : #accessing }
+JinLibraryType >> name [
+
+	^ name
+]
 
 { #category : #accessing }
 JinLibraryType >> name: aString [ 

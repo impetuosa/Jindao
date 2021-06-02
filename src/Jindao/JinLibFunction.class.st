@@ -1,21 +1,15 @@
 Class {
 	#name : #JinLibFunction,
-	#superclass : #Object,
+	#superclass : #JinLibraryElement,
 	#instVars : [
-		'library',
 		'selector'
 	],
 	#category : #'Jindao-LibraryAnalysis'
 }
 
 { #category : #accessing }
-JinLibFunction >> library: aJinLibrary [ 
-	library := aJinLibrary
-]
-
-{ #category : #accessing }
 JinLibFunction >> printOn: aStream [
-	aStream nextPutAll: library name; nextPutAll:'::'; nextPutAll: selector; nextPutAll:'(...)'.
+	aStream nextPutAll: owner name; nextPutAll:'::'; nextPutAll: selector; nextPutAll:'(...)'.
 ]
 
 { #category : #accessing }

@@ -1,10 +1,6 @@
 Class {
 	#name : #JinLibraryEnumValue,
-	#superclass : #Object,
-	#instVars : [
-		'name',
-		'value'
-	],
+	#superclass : #JinLibraryConstant,
 	#category : #'Jindao-LibraryAnalysis'
 }
 

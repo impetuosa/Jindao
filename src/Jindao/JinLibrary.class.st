@@ -56,7 +56,7 @@ JinLibrary >> fetchLibraryFunctions [
 			self traceCr: symbol flags hex.
 			symbol flags = 16r200 ifTrue: [ 
 				ff add: (JinLibFunction new
-						 library: self;
+						 owner: self;
 						 selector: symbol name;
 						 yourself) ].
 			true ].
@@ -89,7 +89,11 @@ JinLibrary >> reference: aJinReference [
 
 { #category : #accessing }
 JinLibrary >> typeLoader [
-	^ typeLoader ifNil: [ typeLoader := JinLibraryTypeLoader new  ].
+
+	^ typeLoader ifNil: [ 
+		  typeLoader := JinLibraryTypeLoader new
+			                library: self;
+			                yourself ]
 ]
 
 { #category : #accewssing }
