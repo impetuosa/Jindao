@@ -101,5 +101,6 @@ JinLibrary >> types [
 
 	^ types ifNil: [ 
 		  types := self libraryHandle typeInfos collect: [ :i | 
-			           self typeLoader load: i ] ]
+			           self typeLoader load: i ].
+		  types ]
 ]

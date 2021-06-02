@@ -24,7 +24,8 @@ JinLibraryTypeLoader >> load: aCOMTypeInfo [
 					           copyReplaceAll: 'TKIND_'
 					           with: '') asLowercase capitalized , ':')) asSymbol
 		        withArguments: { aCOMTypeInfo }.
-	type owner: library
+	type owner: library.
+	^ type
 ]
 
 { #category : #'as yet unclassified' }
@@ -34,7 +35,6 @@ JinLibraryTypeLoader >> loadCoclass: aCOMTypeInfo [
 	coclass := JinLibraryCoClass new
 		            name: aCOMTypeInfo name;
 		            yourself.
-	self loadTypeMembers: aCOMTypeInfo into: coclass.
 	^ coclass
 ]
 
@@ -106,12 +106,14 @@ JinLibraryTypeLoader >> loadModule: aCOMTypeInfo [
 ]
 
 { #category : #'as yet unclassified' }
-JinLibraryTypeLoader >> loadProperty: aCOMProperty [ 
+JinLibraryTypeLoader >> loadProperty: aCOMProperty [
+
 	| prop |
-	prop := JinLibraryProperty new .
+	prop := JinLibraryProperty new.
 	prop name: aCOMProperty name.
 	prop setter: (self loadMethod: aCOMProperty setter).
 	prop getter: (self loadMethod: aCOMProperty getter).
+	^ prop
 ]
 
 { #category : #'load module' }

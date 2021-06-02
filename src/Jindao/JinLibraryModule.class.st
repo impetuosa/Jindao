@@ -11,10 +11,20 @@ Class {
 }
 
 { #category : #accessing }
+JinLibraryModule >> constants [
+	^ constants
+]
+
+{ #category : #accessing }
 JinLibraryModule >> constants: aCollection [
 
 	constants := aCollection.
 	aCollection do: [ :m | m owner: self ]
+]
+
+{ #category : #accessing }
+JinLibraryModule >> methods [
+	^ methods
 ]
 
 { #category : #accessing }
@@ -44,6 +54,11 @@ JinLibraryModule >> properties: aCollection [
 
 	properties := aCollection.
 	aCollection do: [ :m | m owner: self ]
+]
+
+{ #category : #accessing }
+JinLibraryModule >> staticVariables [
+	^ staticVariables
 ]
 
 { #category : #accessing }

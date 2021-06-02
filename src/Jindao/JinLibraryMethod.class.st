@@ -9,8 +9,10 @@ Class {
 }
 
 { #category : #accessing }
-JinLibraryMethod >> parameters: aCollectionOfParameters [ 
-	parameters := aCollectionOfParameters 
+JinLibraryMethod >> parameters: aCollectionOfParameters [
+
+	parameters := aCollectionOfParameters.
+	aCollectionOfParameters do: [ :a | a owner: self ]
 ]
 
 { #category : #accessing }

@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #accessing }
+JinLibraryStructure >> instanceVariables [
+	^ instanceVariables
+]
+
+{ #category : #accessing }
 JinLibraryStructure >> instanceVariables: aCollection [
 
 	instanceVariables := aCollection.

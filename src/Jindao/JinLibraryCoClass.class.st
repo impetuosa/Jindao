@@ -26,6 +26,17 @@ JinLibraryCoClass >> methods [
 ]
 
 { #category : #accessing }
+JinLibraryCoClass >> printOn: aStream [
+
+	aStream
+		nextPutAll: 'CoClass(';
+		nextPutAll: name;
+		nextPut: $:.
+	self linkedType printOn: aStream.
+	aStream nextPutAll: ')'
+]
+
+{ #category : #accessing }
 JinLibraryCoClass >> properties [
 	^ self linkedType properties
 ]
