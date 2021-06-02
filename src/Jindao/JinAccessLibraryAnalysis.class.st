@@ -37,7 +37,7 @@ JinAccessLibraryAnalysis >> testDAOLibraryHasFunctions [
 { #category : #tests }
 JinAccessLibraryAnalysis >> testDAOLibraryHasTypes [
 
-	self assert: self dao library types size equals: 30
+	self assert: self dao library types size equals: 76
 ]
 
 { #category : #tests }
@@ -63,7 +63,7 @@ JinAccessLibraryAnalysis >> testVBALibraryHasFunctions [
 { #category : #tests }
 JinAccessLibraryAnalysis >> testVBALibraryHasTypes [
 
-	self assert: self vba library types size equals: 30
+	self assert: self vba library types size equals: 26
 ]
 
 { #category : #convenience }

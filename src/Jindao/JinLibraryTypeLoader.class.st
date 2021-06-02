@@ -69,6 +69,17 @@ JinLibraryTypeLoader >> loadEnum: aCOMTypeInfo [
 						 yourself ])
 ]
 
+{ #category : #visiting }
+JinLibraryTypeLoader >> loadInterface: aCOMTypeInfo [ 
+	
+	| interface |
+	interface := JinLibraryInterface new
+		            name: aCOMTypeInfo name;
+		            yourself.
+	self loadTypeMembers: aCOMTypeInfo into: interface.
+	^ interface
+]
+
 { #category : #'as yet unclassified' }
 JinLibraryTypeLoader >> loadMethod: aCOMMethod [
 
