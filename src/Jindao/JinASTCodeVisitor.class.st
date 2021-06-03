@@ -7,6 +7,11 @@ Class {
 }
 
 { #category : #'delegate to subvisitor' }
+JinASTCodeVisitor >> syntax [ 
+	^ self 
+]
+
+{ #category : #'delegate to subvisitor' }
 JinASTCodeVisitor >> visitSourceCode: aCode [
 	aCode ast acceptVisitor: self
 ]

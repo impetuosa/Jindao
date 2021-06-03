@@ -8,7 +8,8 @@ Class {
 		'database',
 		'code',
 		'syntax',
-		'project'
+		'project',
+		'reference'
 	],
 	#category : #'Jindao-Subvisitor'
 }
@@ -88,6 +89,17 @@ JinSingleInstanceDispatchVisitor >> project [
 JinSingleInstanceDispatchVisitor >> project: aProjectVisitor [
 	project := aProjectVisitor.
 	aProjectVisitor ifNotNil: [ :v | v parent: self ]
+]
+
+{ #category : #'visit-first-objects' }
+JinSingleInstanceDispatchVisitor >> reference [
+	^ reference
+]
+
+{ #category : #'visit-first-objects' }
+JinSingleInstanceDispatchVisitor >> reference: aVisitor [
+	reference := aVisitor.
+	aVisitor ifNotNil: [ :v | v parent: self ]
 ]
 
 { #category : #'as yet unclassified' }

@@ -38,6 +38,11 @@ JinSubvisitor >> project [
 ]
 
 { #category : #accessing }
+JinSubvisitor >> reference [
+	^ parent reference
+]
+
+{ #category : #accessing }
 JinSubvisitor >> state [ 	
 	^ parent state
 ]

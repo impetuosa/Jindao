@@ -34,6 +34,11 @@ JinMultiVisitor >> project [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'part visitor' }
+JinMultiVisitor >> reference [
+	^ self subclassResponsibility
+]
+
 { #category : #'as yet unclassified' }
 JinMultiVisitor >> state [
 	^ self subclassResponsibility
