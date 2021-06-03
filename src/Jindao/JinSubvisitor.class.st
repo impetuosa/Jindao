@@ -38,8 +38,13 @@ JinSubvisitor >> project [
 ]
 
 { #category : #accessing }
-JinSubvisitor >> reference [
-	^ parent reference
+JinSubvisitor >> referenceAccess [
+	^ parent referenceAccess
+]
+
+{ #category : #accessing }
+JinSubvisitor >> referenceLibrary [ 
+	^ parent referenceLibrary
 ]
 
 { #category : #accessing }

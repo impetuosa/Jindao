@@ -9,7 +9,9 @@ Class {
 		'code',
 		'syntax',
 		'project',
-		'reference'
+		'reference',
+		'referenceLibrary',
+		'referenceAccess'
 	],
 	#category : #'Jindao-Subvisitor'
 }
@@ -92,13 +94,24 @@ JinSingleInstanceDispatchVisitor >> project: aProjectVisitor [
 ]
 
 { #category : #'visit-first-objects' }
-JinSingleInstanceDispatchVisitor >> reference [
-	^ reference
+JinSingleInstanceDispatchVisitor >> referenceAccess [
+	^ referenceAccess
 ]
 
 { #category : #'visit-first-objects' }
-JinSingleInstanceDispatchVisitor >> reference: aVisitor [
-	reference := aVisitor.
+JinSingleInstanceDispatchVisitor >> referenceAccess: aVisitor [
+	referenceAccess := aVisitor.
+	aVisitor ifNotNil: [ :v | v parent: self ]
+]
+
+{ #category : #'visit-first-objects' }
+JinSingleInstanceDispatchVisitor >> referenceLibrary [
+	^ referenceLibrary
+]
+
+{ #category : #'visit-first-objects' }
+JinSingleInstanceDispatchVisitor >> referenceLibrary: aVisitor [
+	referenceLibrary := aVisitor.
 	aVisitor ifNotNil: [ :v | v parent: self ]
 ]
 

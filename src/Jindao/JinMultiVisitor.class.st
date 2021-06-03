@@ -35,7 +35,12 @@ JinMultiVisitor >> project [
 ]
 
 { #category : #'part visitor' }
-JinMultiVisitor >> reference [
+JinMultiVisitor >> referenceAccess [
+	^ self subclassResponsibility
+]
+
+{ #category : #'part visitor' }
+JinMultiVisitor >> referenceLibrary [
 	^ self subclassResponsibility
 ]
 

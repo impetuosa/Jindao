@@ -1,11 +1,11 @@
 Class {
-	#name : #JinLibraryVisitor,
+	#name : #JinLibraryReferenceVisitor,
 	#superclass : #JinSubvisitor,
 	#category : #'Jindao-Subvisitor'
 }
 
 { #category : #accessing }
-JinLibraryVisitor >> reference [
+JinLibraryReferenceVisitor >> referenceLibrary [
 
 	^ self
 ]

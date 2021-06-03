@@ -25,7 +25,7 @@ JinReference >> guid [
 { #category : #testing }
 JinReference >> isAccessProject [
 
-	^ self path extension asLowercase beginsWith: 'accd'
+	^ self path extension asLowercase beginsWith: 'accdb'
 ]
 
 { #category : #'as yet unclassified' }
