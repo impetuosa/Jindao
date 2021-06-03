@@ -10,6 +10,12 @@ Class {
 	#category : #'Jindao-LibraryAnalysis'
 }
 
+{ #category : #'as yet unclassified' }
+JinLibraryModule >> accept: aVisitor [
+	^ aVisitor visitModule: self.
+
+]
+
 { #category : #accessing }
 JinLibraryModule >> constants [
 	^ constants

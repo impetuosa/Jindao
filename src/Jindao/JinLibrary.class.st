@@ -55,7 +55,7 @@ JinLibrary >> fetchLibraryFunctions [
 			"
 			self traceCr: symbol flags hex.
 			symbol flags = 16r200 ifTrue: [ 
-				ff add: (JinLibFunction new
+				ff add: (JinLibraryFunction new
 						 owner: self;
 						 selector: symbol name;
 						 yourself) ].

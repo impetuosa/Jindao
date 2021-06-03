@@ -7,6 +7,12 @@ Class {
 	#category : #'Jindao-LibraryAnalysis'
 }
 
+{ #category : #'as yet unclassified' }
+JinLibraryStructure >> accept: aVisitor [
+	^ aVisitor visitStructure: self.
+
+]
+
 { #category : #accessing }
 JinLibraryStructure >> instanceVariables [
 	^ instanceVariables

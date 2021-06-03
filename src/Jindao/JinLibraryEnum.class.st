@@ -7,6 +7,12 @@ Class {
 	#category : #'Jindao-LibraryAnalysis'
 }
 
+{ #category : #'as yet unclassified' }
+JinLibraryEnum >> accept: aVisitor [
+	^ aVisitor visitEnum: self.
+
+]
+
 { #category : #accessing }
 JinLibraryEnum >> printOn: aStream [
 

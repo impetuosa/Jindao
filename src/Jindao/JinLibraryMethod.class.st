@@ -1,12 +1,18 @@
 Class {
 	#name : #JinLibraryMethod,
-	#superclass : #JinLibFunction,
+	#superclass : #JinLibraryFunction,
 	#instVars : [
 		'parameters',
 		'returnTypeName'
 	],
 	#category : #'Jindao-LibraryAnalysis'
 }
+
+{ #category : #'as yet unclassified' }
+JinLibraryMethod >> accept: aVisitor [
+	^ aVisitor visitMethod: self.
+
+]
 
 { #category : #accessing }
 JinLibraryMethod >> parameters: aCollectionOfParameters [

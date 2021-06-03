@@ -7,6 +7,12 @@ Class {
 	#category : #'Jindao-LibraryAnalysis'
 }
 
+{ #category : #'as yet unclassified' }
+JinLibraryParameter >> accept: aVisitor [
+	^ aVisitor visitParameter: self.
+
+]
+
 { #category : #accessing }
 JinLibraryParameter >> isOptional: aBoolean [ 
 	isOptional := aBoolean

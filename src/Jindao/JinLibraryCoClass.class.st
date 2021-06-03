@@ -4,6 +4,12 @@ Class {
 	#category : #'Jindao-LibraryAnalysis'
 }
 
+{ #category : #'as yet unclassified' }
+JinLibraryCoClass >> accept: aVisitor [
+	^ aVisitor visitCoClass: self.
+
+]
+
 { #category : #accessing }
 JinLibraryCoClass >> constants [
 	^ self linkedType constants

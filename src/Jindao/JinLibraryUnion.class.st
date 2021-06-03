@@ -3,3 +3,9 @@ Class {
 	#superclass : #JinLibraryStructure,
 	#category : #'Jindao-LibraryAnalysis'
 }
+
+{ #category : #'as yet unclassified' }
+JinLibraryUnion >> accept: aVisitor [
+	^ aVisitor visitUnion: self.
+
+]

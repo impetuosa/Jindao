@@ -1,5 +1,5 @@
 Class {
-	#name : #JinLibFunction,
+	#name : #JinLibraryFunction,
 	#superclass : #JinLibraryElement,
 	#instVars : [
 		'selector'
@@ -7,17 +7,23 @@ Class {
 	#category : #'Jindao-LibraryAnalysis'
 }
 
+{ #category : #'as yet unclassified' }
+JinLibraryFunction >> accept: aVisitor [
+	^ aVisitor visitFunction: self.
+
+]
+
 { #category : #accessing }
-JinLibFunction >> printOn: aStream [
+JinLibraryFunction >> printOn: aStream [
 	aStream nextPutAll: owner name; nextPutAll:'::'; nextPutAll: selector; nextPutAll:'(...)'.
 ]
 
 { #category : #accessing }
-JinLibFunction >> selector [
+JinLibraryFunction >> selector [
 	^ selector
 ]
 
 { #category : #accesisng }
-JinLibFunction >> selector: aString [ 
+JinLibraryFunction >> selector: aString [ 
 	selector := aString
 ]

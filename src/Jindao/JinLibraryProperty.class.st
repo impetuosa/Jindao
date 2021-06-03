@@ -8,6 +8,12 @@ Class {
 	#category : #'Jindao-LibraryAnalysis'
 }
 
+{ #category : #'as yet unclassified' }
+JinLibraryProperty >> accept: aVisitor [
+	^ aVisitor visitProperty: self.
+
+]
+
 { #category : #acecessing }
 JinLibraryProperty >> getter: aJinLibraryMethod [ 
 	getter := aJinLibraryMethod

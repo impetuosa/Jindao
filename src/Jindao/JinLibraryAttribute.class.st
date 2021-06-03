@@ -8,6 +8,12 @@ Class {
 	#category : #'Jindao-LibraryAnalysis'
 }
 
+{ #category : #'as yet unclassified' }
+JinLibraryAttribute >> accept: aVisitor [
+	^ aVisitor visitAttribute: self.
+
+]
+
 { #category : #testing }
 JinLibraryAttribute >> isConstant [
 	^ false 

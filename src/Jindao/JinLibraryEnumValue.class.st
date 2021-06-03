@@ -4,6 +4,12 @@ Class {
 	#category : #'Jindao-LibraryAnalysis'
 }
 
+{ #category : #'as yet unclassified' }
+JinLibraryEnumValue >> accept: aVisitor [
+	^ aVisitor visitEnumValue: self.
+
+]
+
 { #category : #accessing }
 JinLibraryEnumValue >> name: aString [ 
 	name := aString
