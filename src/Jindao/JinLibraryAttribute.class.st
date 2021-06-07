@@ -9,8 +9,8 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinLibraryAttribute >> accept: aVisitor [
-	^ aVisitor visitAttribute: self.
+JinLibraryAttribute >> acceptVisitor: aVisitor [
+ aVisitor visitLibraryAttribute: self.
 
 ]
 
@@ -29,6 +29,11 @@ JinLibraryAttribute >> name [
 JinLibraryAttribute >> name: anObject [
 
 	name := anObject
+]
+
+{ #category : #accessing }
+JinLibraryAttribute >> type [
+	^ typeName
 ]
 
 { #category : #accessing }

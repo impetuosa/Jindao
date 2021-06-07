@@ -9,14 +9,37 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinLibraryProperty >> accept: aVisitor [
-	^ aVisitor visitProperty: self.
+JinLibraryProperty >> acceptVisitor: aVisitor [
 
+	aVisitor visitLibraryProperty: self
+]
+
+{ #category : #accessing }
+JinLibraryProperty >> getter [
+
+	^ getter
 ]
 
 { #category : #acecessing }
 JinLibraryProperty >> getter: aJinLibraryMethod [ 
 	getter := aJinLibraryMethod
+]
+
+{ #category : #accessing }
+JinLibraryProperty >> printOn: aStream [
+
+	aStream
+		nextPutAll: typeName asString ;
+		nextPutAll: ' ';
+		nextPutAll: (owner ifNil: [ '...' ] ifNotNil: [ owner name ]);
+		nextPutAll: '::';
+		nextPutAll: name
+]
+
+{ #category : #accessing }
+JinLibraryProperty >> setter [
+
+	^ setter
 ]
 
 { #category : #accessing }

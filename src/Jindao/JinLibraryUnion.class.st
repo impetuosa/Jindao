@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinLibraryUnion >> accept: aVisitor [
-	^ aVisitor visitUnion: self.
+JinLibraryUnion >> acceptVisitor: aVisitor [
+ aVisitor visitLibraryUnion: self.
 
 ]

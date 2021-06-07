@@ -8,9 +8,14 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinLibraryType >> accept: aVisitor [
-	^ aVisitor visitType: self.
+JinLibraryType >> acceptVisitor: aVisitor [
+ aVisitor visitLibraryType: self.
 
+]
+
+{ #category : #accessing }
+JinLibraryType >> definitions [  
+	^ self subclassResponsibility 
 ]
 
 { #category : #accessing }

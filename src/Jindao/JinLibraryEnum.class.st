@@ -8,9 +8,14 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinLibraryEnum >> accept: aVisitor [
-	^ aVisitor visitEnum: self.
+JinLibraryEnum >> acceptVisitor: aVisitor [
+ aVisitor visitLibraryEnum: self.
 
+]
+
+{ #category : #accessing }
+JinLibraryEnum >> definitions [
+	 ^ values 
 ]
 
 { #category : #accessing }
@@ -22,6 +27,11 @@ JinLibraryEnum >> printOn: aStream [
 		nextPut: $#;
 		nextPutAll: values size asString ;
 		nextPut: $)
+]
+
+{ #category : #accessing }
+JinLibraryEnum >> values [
+	^ values
 ]
 
 { #category : #accessing }

@@ -8,8 +8,8 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinLibraryConstant >> accept: aVisitor [
-	^ aVisitor visitConstant: self.
+JinLibraryConstant >> acceptVisitor: aVisitor [
+ aVisitor visitLibraryConstant: self.
 
 ]
 

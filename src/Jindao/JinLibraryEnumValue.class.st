@@ -5,14 +5,9 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinLibraryEnumValue >> accept: aVisitor [
-	^ aVisitor visitEnumValue: self.
+JinLibraryEnumValue >> acceptVisitor: aVisitor [
+ aVisitor visitLibraryEnumValue: self.
 
-]
-
-{ #category : #accessing }
-JinLibraryEnumValue >> name: aString [ 
-	name := aString
 ]
 
 { #category : #accessing }
@@ -24,9 +19,4 @@ JinLibraryEnumValue >> printOn: aStream [
 		nextPutAll: '=';
 		nextPutAll: value asString;
 		nextPutAll: ')'
-]
-
-{ #category : #accessing }
-JinLibraryEnumValue >> value: aCOMVar [ 
-	value := aCOMVar
 ]

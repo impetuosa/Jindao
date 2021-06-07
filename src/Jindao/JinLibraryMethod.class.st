@@ -9,9 +9,19 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinLibraryMethod >> accept: aVisitor [
-	^ aVisitor visitMethod: self.
+JinLibraryMethod >> acceptVisitor: aVisitor [
 
+	^ aVisitor visitLibraryMethod: self
+]
+
+{ #category : #accessing }
+JinLibraryMethod >> name [
+	^ selector 
+]
+
+{ #category : #accessing }
+JinLibraryMethod >> parameters [
+	^ parameters
 ]
 
 { #category : #accessing }
@@ -27,7 +37,7 @@ JinLibraryMethod >> printOn: aStream [
 	aStream
 		nextPutAll: returnTypeName;
 		nextPutAll: ' ';
-		nextPutAll: owner name;
+		nextPutAll: (owner ifNil: [ '...' ] ifNotNil: [ owner name ]);
 		nextPutAll: '::';
 		nextPutAll: selector;
 		nextPut: $(.
@@ -37,7 +47,17 @@ JinLibraryMethod >> printOn: aStream [
 ]
 
 { #category : #accessing }
+JinLibraryMethod >> returnTypeName [
+	^ returnTypeName
+]
+
+{ #category : #accessing }
 JinLibraryMethod >> returnTypeName: aString [
 
 	returnTypeName := aString
+]
+
+{ #category : #accessing }
+JinLibraryMethod >> type [
+	^ returnTypeName 
 ]

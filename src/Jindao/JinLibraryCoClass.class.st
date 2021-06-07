@@ -5,14 +5,19 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinLibraryCoClass >> accept: aVisitor [
-	^ aVisitor visitCoClass: self.
+JinLibraryCoClass >> acceptVisitor: aVisitor [
 
+	^ aVisitor visitLibraryCoClass: self
 ]
 
 { #category : #accessing }
 JinLibraryCoClass >> constants [
 	^ self linkedType constants
+]
+
+{ #category : #accessing }
+JinLibraryCoClass >> definitions [ 
+	^ self linkedType ifNotNil:[ :t | t definitions ] ifNil: [ {  } ]
 ]
 
 { #category : #accessing }
@@ -23,7 +28,7 @@ JinLibraryCoClass >> instanceVariables [
 { #category : #accessing }
 JinLibraryCoClass >> linkedType [
 	^ owner types detect: [ :t | 
-		  (t name compare: '_' , name caseSensitive: true) = 2 ]
+		  (t name compare: '_' , name caseSensitive: false) = 2 ] ifNone: [ nil ]
 ]
 
 { #category : #accessing }
@@ -38,7 +43,7 @@ JinLibraryCoClass >> printOn: aStream [
 		nextPutAll: 'CoClass(';
 		nextPutAll: name;
 		nextPut: $:.
-	self linkedType printOn: aStream.
+	self linkedType ifNotNil: [: l| l printOn: aStream].
 	aStream nextPutAll: ')'
 ]
 

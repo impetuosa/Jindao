@@ -12,6 +12,12 @@ Class {
 	#category : #'Jindao-LibraryAnalysis'
 }
 
+{ #category : #visiting }
+JinLibrary >> accept: anAlceLibraryReferenceImporter [
+
+	^ anAlceLibraryReferenceImporter visitLibrary: self
+]
+
 { #category : #accessing }
 JinLibrary >> dbgHandle [
 

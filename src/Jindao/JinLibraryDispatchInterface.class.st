@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinLibraryDispatchInterface >> accept: aVisitor [
-	^ aVisitor visitDispatchInterface: self.
+JinLibraryDispatchInterface >> acceptVisitor: aVisitor [
 
+	^ aVisitor visitLibraryDispatchInterface: self
 ]

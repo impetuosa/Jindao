@@ -8,9 +8,14 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinLibraryStructure >> accept: aVisitor [
-	^ aVisitor visitStructure: self.
+JinLibraryStructure >> acceptVisitor: aVisitor [
+ aVisitor visitLibraryStructure: self.
 
+]
+
+{ #category : #accessing }
+JinLibraryStructure >> definitions [
+	^ self instanceVariables 
 ]
 
 { #category : #accessing }

@@ -8,9 +8,15 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinLibraryParameter >> accept: aVisitor [
-	^ aVisitor visitParameter: self.
+JinLibraryParameter >> acceptVisitor: aVisitor [
 
+	aVisitor visitLibraryParameter: self
+]
+
+{ #category : #accessing }
+JinLibraryParameter >> isOptional [
+
+	^ isOptional
 ]
 
 { #category : #accessing }
@@ -21,7 +27,7 @@ JinLibraryParameter >> isOptional: aBoolean [
 { #category : #accessing }
 JinLibraryParameter >> printOn: aStream [
 
-	isOptional ifTrue: [ aStream nextPutAll: '[OPT] ' ].
+	self isOptional ifTrue: [ aStream nextPutAll: '[OPT] ' ].
 	aStream
 		nextPutAll: typeName;
 		nextPutAll: ' ';

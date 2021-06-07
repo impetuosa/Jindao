@@ -76,7 +76,8 @@ JinLibraryTypeLoader >> loadInterface: aCOMTypeInfo [
 	interface := JinLibraryInterface new
 		            name: aCOMTypeInfo name;
 		            yourself.
-	self loadTypeMembers: aCOMTypeInfo into: interface.
+	self assert: (aCOMTypeInfo properties, aCOMTypeInfo methods ) isEmpty .
+"	self loadTypeMembers: aCOMTypeInfo into: interface."
 	^ interface
 ]
 

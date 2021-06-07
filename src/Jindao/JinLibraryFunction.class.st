@@ -7,10 +7,10 @@ Class {
 	#category : #'Jindao-LibraryAnalysis'
 }
 
-{ #category : #'as yet unclassified' }
-JinLibraryFunction >> accept: aVisitor [
-	^ aVisitor visitFunction: self.
+{ #category : #visiting }
+JinLibraryFunction >> acceptVisitor: aVisitor [
 
+	aVisitor visitLibraryFunction: self
 ]
 
 { #category : #accessing }
