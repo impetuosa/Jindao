@@ -2,10 +2,17 @@ Class {
 	#name : #JinLibraryTypeLoader,
 	#superclass : #Object,
 	#instVars : [
-		'library'
+		'library',
+		'log'
 	],
 	#category : #'Jindao-LibraryAnalysis'
 }
+
+{ #category : #'as yet unclassified' }
+JinLibraryTypeLoader >> initialize [
+ 	super initialize .
+	log := 'log.log' asFileReference ensureCreateFile writeStream .
+]
 
 { #category : #loader }
 JinLibraryTypeLoader >> library: aLibrary [
@@ -17,6 +24,13 @@ JinLibraryTypeLoader >> library: aLibrary [
 JinLibraryTypeLoader >> load: aCOMTypeInfo [
 
 	| type |
+	log nextPutAll: DateAndTime now asString; nextPutAll: ' '.
+	log nextPutAll: 'loading ',  ((aCOMTypeInfo typeKind item
+					           copyReplaceAll: 'TKIND_'
+					           with: '') asLowercase capitalized , ':') asSymbol.
+	log nextPutAll:' ', aCOMTypeInfo name. 
+	log nextPutAll: OSPlatform current lineEnding.
+	log flush .
 	type := self
 		        perform: ('load'
 			         ,
@@ -26,6 +40,17 @@ JinLibraryTypeLoader >> load: aCOMTypeInfo [
 		        withArguments: { aCOMTypeInfo }.
 	type owner: library.
 	^ type
+]
+
+{ #category : #'as yet unclassified' }
+JinLibraryTypeLoader >> loadAlias: aCOMTypeInfo [
+
+	| coclass |
+	coclass := JinLibraryAlias new
+		           name: aCOMTypeInfo name;
+		           aliaseeTypeName: aCOMTypeInfo aliasType typeName;
+		           yourself.
+	^ coclass
 ]
 
 { #category : #'as yet unclassified' }
@@ -76,8 +101,8 @@ JinLibraryTypeLoader >> loadInterface: aCOMTypeInfo [
 	interface := JinLibraryInterface new
 		            name: aCOMTypeInfo name;
 		            yourself.
-	self assert: (aCOMTypeInfo properties, aCOMTypeInfo methods ) isEmpty .
-"	self loadTypeMembers: aCOMTypeInfo into: interface."
+
+	self loadTypeMembers: aCOMTypeInfo into: interface.
 	^ interface
 ]
 
@@ -126,6 +151,17 @@ JinLibraryTypeLoader >> loadProperty: aCOMProperty [
 	prop setter: (self loadMethod: aCOMProperty setter).
 	prop getter: (self loadMethod: aCOMProperty getter).
 	^ prop
+]
+
+{ #category : #'load module' }
+JinLibraryTypeLoader >> loadRecord: aCOMTypeInfo [
+
+	| record |
+	record := JinLibraryStructure new
+		          name: aCOMTypeInfo name;
+		          yourself.
+	self traceCr: 'Loading record ', record name.
+	^ record
 ]
 
 { #category : #'load module' }

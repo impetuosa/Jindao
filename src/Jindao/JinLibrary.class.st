@@ -79,7 +79,7 @@ JinLibrary >> libraryHandle [
 
 	^ libraryHandle ifNil: [ 
 		  libraryHandle := (COMTypeLibName readFromRegistry detect: [ :r | 
-			                    r guid = reference guid ]) loadWithRegistryInfo ]
+			                    r guid = reference guid ]) load ]
 ]
 
 { #category : #lazy }

@@ -1,6 +1,6 @@
 Class {
 	#name : #JinLibraryInterface,
-	#superclass : #JinLibraryCoClass,
+	#superclass : #JinLibraryModule,
 	#category : #'Jindao-LibraryAnalysis'
 }
 
