@@ -9,8 +9,8 @@ Class {
 
 { #category : #'as yet unclassified' }
 JinLibraryType >> acceptVisitor: aVisitor [
- aVisitor visitLibraryType: self.
 
+	^ aVisitor visitLibraryType: self
 ]
 
 { #category : #accessing }

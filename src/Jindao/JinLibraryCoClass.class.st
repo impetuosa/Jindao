@@ -43,7 +43,7 @@ JinLibraryCoClass >> printOn: aStream [
 		nextPutAll: 'CoClass(';
 		nextPutAll: name;
 		nextPut: $:.
-	self linkedType ifNotNil: [: l| l printOn: aStream].
+"	self linkedType ifNotNil: [: l| l printOn: aStream]."
 	aStream nextPutAll: ')'
 ]
 

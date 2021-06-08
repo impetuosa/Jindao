@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #accessing }
+JinLibraryAlias >> acceptVisitor: aVisitor [
+
+	^ aVisitor visitLibraryAlias: self
+]
+
+{ #category : #accessing }
 JinLibraryAlias >> aliaseeTypeName: aString [ 
 	aliaseeTypeName := aString
 ]

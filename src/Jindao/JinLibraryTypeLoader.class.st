@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'library',
-		'log'
+		'log',
+		'i'
 	],
 	#category : #'Jindao-LibraryAnalysis'
 }
@@ -11,7 +12,9 @@ Class {
 { #category : #'as yet unclassified' }
 JinLibraryTypeLoader >> initialize [
  	super initialize .
-	log := 'log.log' asFileReference ensureCreateFile writeStream .
+	log := 'log.log' asFileReference writeStream .
+	log setToEnd .
+	i := 0.
 ]
 
 { #category : #loader }
@@ -24,13 +27,9 @@ JinLibraryTypeLoader >> library: aLibrary [
 JinLibraryTypeLoader >> load: aCOMTypeInfo [
 
 	| type |
-	log nextPutAll: DateAndTime now asString; nextPutAll: ' '.
-	log nextPutAll: 'loading ',  ((aCOMTypeInfo typeKind item
-					           copyReplaceAll: 'TKIND_'
-					           with: '') asLowercase capitalized , ':') asSymbol.
-	log nextPutAll:' ', aCOMTypeInfo name. 
-	log nextPutAll: OSPlatform current lineEnding.
-	log flush .
+	self log: aCOMTypeInfo.
+	
+	
 	type := self
 		        perform: ('load'
 			         ,
@@ -79,6 +78,7 @@ JinLibraryTypeLoader >> loadDispatch: aCOMTypeInfo [
 	dispatch := JinLibraryDispatchInterface new
 		            name: aCOMTypeInfo name;
 		            yourself.
+	
 	self loadTypeMembers: aCOMTypeInfo into: dispatch.
 	^ dispatch
 ]
@@ -92,6 +92,15 @@ JinLibraryTypeLoader >> loadEnum: aCOMTypeInfo [
 						 name: v name;
 						 value: v value;
 						 yourself ])
+]
+
+{ #category : #'load module' }
+JinLibraryTypeLoader >> loadInstanceVariable: aVar [
+
+	^ JinLibraryAttribute new
+		  name: aVar name;
+		  typeName: aVar typeName;
+		  yourself
 ]
 
 { #category : #visiting }
@@ -156,19 +165,19 @@ JinLibraryTypeLoader >> loadProperty: aCOMProperty [
 { #category : #'load module' }
 JinLibraryTypeLoader >> loadRecord: aCOMTypeInfo [
 
-	| record |
+	| record | 
 	record := JinLibraryStructure new
 		          name: aCOMTypeInfo name;
 		          yourself.
+	self loadStructureMembers: aCOMTypeInfo into: record. 
 	^ record
 ]
 
 { #category : #'load module' }
 JinLibraryTypeLoader >> loadStructureMembers: aCOMTypeInfo into: module [
-
 	module instanceVariables:
-		(aCOMTypeInfo instanceVariables collect: [ :i | 
-			 self loadInstanceVariable: i ])
+		(aCOMTypeInfo instanceVariables collect: [ :in | 
+			 self loadInstanceVariable: in ])
 ]
 
 { #category : #'load module' }
@@ -184,4 +193,17 @@ JinLibraryTypeLoader >> loadTypeMembers: aCOMTypeInfo into: module [
 		(aCOMTypeInfo properties collect: [ :p | self loadProperty: p ]).
 	module methods:
 		(aCOMTypeInfo methods collect: [ :p | self loadMethod: p ])
+]
+
+{ #category : #loader }
+JinLibraryTypeLoader >> log: aCOMTypeInfo [.
+	i := i + 1. 
+	log nextPutAll: i asString, ': '.
+	log nextPutAll: 'loading ',  ((aCOMTypeInfo typeKind item
+					           copyReplaceAll: 'TKIND_'
+					           with: '') asLowercase capitalized , ':') asSymbol.
+	log nextPutAll:' ', aCOMTypeInfo name. 
+	log nextPutAll: OSPlatform current lineEnding.
+	log flush .
+
 ]

@@ -10,8 +10,8 @@ Class {
 
 { #category : #'as yet unclassified' }
 JinLibraryAttribute >> acceptVisitor: aVisitor [
- aVisitor visitLibraryAttribute: self.
 
+	^ aVisitor visitLibraryAttribute: self
 ]
 
 { #category : #testing }
@@ -32,7 +32,23 @@ JinLibraryAttribute >> name: anObject [
 ]
 
 { #category : #accessing }
+JinLibraryAttribute >> printOn: aStream [
+
+	aStream
+		nextPutAll: 'VAR(';
+		nextPutAll: typeName;
+		nextPutAll: ':';
+		nextPutAll: name;
+		nextPutAll: ')'
+]
+
+{ #category : #accessing }
 JinLibraryAttribute >> type [
+	^ typeName
+]
+
+{ #category : #accessing }
+JinLibraryAttribute >> typeName [
 	^ typeName
 ]
 
