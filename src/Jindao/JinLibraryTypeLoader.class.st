@@ -160,7 +160,6 @@ JinLibraryTypeLoader >> loadRecord: aCOMTypeInfo [
 	record := JinLibraryStructure new
 		          name: aCOMTypeInfo name;
 		          yourself.
-	self traceCr: 'Loading record ', record name.
 	^ record
 ]
 
