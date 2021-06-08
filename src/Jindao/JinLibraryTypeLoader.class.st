@@ -2,20 +2,10 @@ Class {
 	#name : #JinLibraryTypeLoader,
 	#superclass : #Object,
 	#instVars : [
-		'library',
-		'log',
-		'i'
+		'library'
 	],
 	#category : #'Jindao-LibraryAnalysis'
 }
-
-{ #category : #'as yet unclassified' }
-JinLibraryTypeLoader >> initialize [
- 	super initialize .
-	log := 'log.log' asFileReference writeStream .
-	log setToEnd .
-	i := 0.
-]
 
 { #category : #loader }
 JinLibraryTypeLoader >> library: aLibrary [
@@ -27,7 +17,6 @@ JinLibraryTypeLoader >> library: aLibrary [
 JinLibraryTypeLoader >> load: aCOMTypeInfo [
 
 	| type |
-	self log: aCOMTypeInfo.
 	
 	
 	type := self
@@ -193,17 +182,4 @@ JinLibraryTypeLoader >> loadTypeMembers: aCOMTypeInfo into: module [
 		(aCOMTypeInfo properties collect: [ :p | self loadProperty: p ]).
 	module methods:
 		(aCOMTypeInfo methods collect: [ :p | self loadMethod: p ])
-]
-
-{ #category : #loader }
-JinLibraryTypeLoader >> log: aCOMTypeInfo [.
-	i := i + 1. 
-	log nextPutAll: i asString, ': '.
-	log nextPutAll: 'loading ',  ((aCOMTypeInfo typeKind item
-					           copyReplaceAll: 'TKIND_'
-					           with: '') asLowercase capitalized , ':') asSymbol.
-	log nextPutAll:' ', aCOMTypeInfo name. 
-	log nextPutAll: OSPlatform current lineEnding.
-	log flush .
-
 ]

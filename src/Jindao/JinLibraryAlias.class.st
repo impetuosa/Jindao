@@ -14,6 +14,11 @@ JinLibraryAlias >> acceptVisitor: aVisitor [
 ]
 
 { #category : #accessing }
+JinLibraryAlias >> aliaseeTypeName [
+	^ aliaseeTypeName
+]
+
+{ #category : #accessing }
 JinLibraryAlias >> aliaseeTypeName: aString [ 
 	aliaseeTypeName := aString
 ]
