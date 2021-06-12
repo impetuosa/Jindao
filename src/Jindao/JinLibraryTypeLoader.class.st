@@ -17,8 +17,6 @@ JinLibraryTypeLoader >> library: aLibrary [
 JinLibraryTypeLoader >> load: aCOMTypeInfo [
 
 	| type |
-	
-	
 	type := self
 		        perform: ('load'
 			         ,
