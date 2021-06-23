@@ -26,19 +26,26 @@ JinSourceCode >> amountOfLines [
 
 { #category : #ast }
 JinSourceCode >> ast [
-	| semaphore result |
+
+	| semaphore result process |
 	semaphore := Semaphore new.
-	[ [ result := (self class environment at: #VBParser)
-		parse: self contents ]
-		on: Error
-		do: [ :e | result := e ].
-	semaphore signal ] forkAt: Processor userBackgroundPriority.
+	process := [ 
+	           [ 
+	           result := (self class environment at: #VBParser) parse:
+		                     self contents ]
+		           on: Error
+		           do: [ :e | result := e ].
+	           semaphore signal ] forkAt:
+		           Processor userBackgroundPriority.
 	^ semaphore
-		wait: 30 seconds
-		onCompletion: [ result isError
-				ifTrue: [ ^ result signal ].
-			result ]
-		onTimeout: [ TimedOut new signal: 'TO'   ]
+		  wait: 30 seconds
+		  onCompletion: [ 
+			  process terminate.
+			  result isError ifTrue: [ ^ result signal ].
+			  result ]
+		  onTimeout: [ 
+			  process terminate.
+			  TimedOut new signal: 'TO' ]
 ]
 
 { #category : #'as yet unclassified' }
