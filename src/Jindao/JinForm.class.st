@@ -248,7 +248,8 @@ JinForm >> allowFilters [
 
 { #category : #ast }
 JinForm >> ast [
-	^ self code ast 
+
+	^ self hasModule ifTrue: [ self code ast ]
 ]
 
 { #category : #'as yet unclassified' }
