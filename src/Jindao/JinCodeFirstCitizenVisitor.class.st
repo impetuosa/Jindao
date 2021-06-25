@@ -20,13 +20,5 @@ JinCodeFirstCitizenVisitor >> visitMacro: aMacro [
 
 { #category : #'as yet unclassified' }
 JinCodeFirstCitizenVisitor >> visitModule: aJinModule [
-
-	({ 'CBeanOEC'. 'CBeanDeclarants'. 'FactLieuCelebMariageUsuelFiche'.
-	 'Form_FactLieuCelebMariageUsuelFiche'.
-	 'FactLieuDecesUsuelFiche'. 'Form_FactLieuDecesUsuelFiche'.
-	 'FactLieuTribunalFiche'. 'Form_FactLieuTribunalFiche'.
-	 'FactLieuAccouchementUsuelFiche'. 'Form_FactLieuAccouchementUsuelFiche' } 
-		 includes: aJinModule name) ifTrue: [ 
-		^ self state top astCannotLoad ].
 	aJinModule code acceptVisitor: self
 ]
