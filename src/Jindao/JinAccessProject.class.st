@@ -249,6 +249,21 @@ content := 'Attribute VB_Name = "{1}"
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessProject >> ensureIsOpen [
+
+	programHandle isNull ifTrue: [ 
+		forms := nil.
+		modules := nil.
+		macros := nil.
+		reports := nil.
+		relations := nil.
+		queries := nil.
+		tables := nil.
+		dataHandle := nil.
+		self reopen ]
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessProject >> ensureItHasNonPageHeaderFooter: aJinFormOrModule [
 	" acCmdPageHdrFtr 	182 "
 
