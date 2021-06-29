@@ -46,7 +46,10 @@ JinFormBody >> allowFilters [
 
 { #category : #'as yet unclassified' }
 JinFormBody >> code [
-	^ self module code 
+
+	^ self hasModule
+		  ifFalse: [ '' ]
+		  ifTrue: [ self module code ]
 ]
 
 { #category : #'as yet unclassified' }
