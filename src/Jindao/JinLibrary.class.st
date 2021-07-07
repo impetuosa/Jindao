@@ -49,6 +49,7 @@ JinLibrary >> fetchLibraryFunctions [
 	| ff |
 	ff := OrderedCollection new.
 
+	[ 
 	DBGHelpLib uniqueInstance
 		enumerateSymbols: self dbgHandle
 		callback: [ :pSymbol :size :usc | " The pSymbol pointer is valid **ONLY** during the callback execution. "
@@ -65,7 +66,9 @@ JinLibrary >> fetchLibraryFunctions [
 						 owner: self;
 						 selector: symbol name;
 						 yourself) ].
-			true ].
+			true ] ]
+		on: Error
+		do: [ :e | e traceCr ].
 	^ ff
 ]
 
