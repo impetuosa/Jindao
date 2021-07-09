@@ -109,7 +109,8 @@ JinMultiVisitor >> visitModule: aJinModule [
 
 { #category : #'visit-first-objects' }
 JinMultiVisitor >> visitProject: aJinAccessProject [
-	self project ifNotNil: [ :sv | sv visitProject: aJinAccessProject ]
+
+	^ self project ifNotNil: [ :sv | sv visitProject: aJinAccessProject ]
 ]
 
 { #category : #'delegate to subvisitor' }

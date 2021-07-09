@@ -14,7 +14,7 @@ JinASTCodeVisitor >> syntax [
 { #category : #'delegate to subvisitor' }
 JinASTCodeVisitor >> visitSourceCode: aCode [
 	| ast |
-	[ast := aCode ast.] on: Error do:[  self state top astCannotLoad. ^ self  ].
-	ast ifNil: [  self state top astCannotLoad. ^ self  ].
+	[ast := aCode ast.] on: Error do:[  self state top astCannotLoad: true . ^ self  ].
+	ast ifNil: [  self state top astCannotLoad: true . ^ self  ].
 	ast acceptVisitor: self
 ]
