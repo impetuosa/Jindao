@@ -9,6 +9,12 @@ Class {
 	#category : #'Jindao-NamespaceIndex'
 }
 
+{ #category : #visiting }
+JinNSNameEntry >> acceptVisitor: aJinNSVisitorCounter [
+
+	aJinNSVisitorCounter visitNameEntry: self
+]
+
 { #category : #accessing }
 JinNSNameEntry >> kind: aJinNSKind [ 
 	kind := aJinNSKind

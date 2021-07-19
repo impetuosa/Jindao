@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #accessing }
+JinNSSubNamespace >> acceptVisitor: aJinNSVisitorCounter [
+
+	aJinNSVisitorCounter visitSubNamespace: self
+]
+
+{ #category : #accessing }
 JinNSSubNamespace >> kind: aJinNSKind [ 
 	tag := aJinNSKind
 ]

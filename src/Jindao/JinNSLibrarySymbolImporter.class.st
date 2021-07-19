@@ -29,20 +29,23 @@ JinNSLibrarySymbolImporter >> buildFor: aJinNSBuilder [
 	"The builder is required to register whatever future we may offer"
 
 	self visitCollection: library types
-	"	isConcurrent
-		ifTrue: [ 
-			futureRegistry addFuture: ([ 
-				 [ self visitCollection: library types ]
-					 on: Error
-					 do: [ :e | self halt ] ] future: self runner) ]
-		ifFalse: [ ""	self visitCollection: library functions. "" 
-			self visitCollection: library types ]"
+	"self visitCollection: library functions. "
 ]
 
 { #category : #'as yet unclassified' }
 JinNSLibrarySymbolImporter >> currentNamespace [
 
 	^ stack top
+]
+
+{ #category : #building }
+JinNSLibrarySymbolImporter >> isConcurrent: aBool [
+
+	isConcurrent := false.
+	self
+		assert: aBool not
+		description:
+		'The library symbol importer is not suitable for concurrent access, since COM interface for pharo is not suitable '
 ]
 
 { #category : #accessing }
@@ -65,6 +68,12 @@ JinNSLibrarySymbolImporter >> owner [
 JinNSLibrarySymbolImporter >> runner [
 
 	^ TKTConfiguration runner
+]
+
+{ #category : #'as yet unclassified' }
+JinNSLibrarySymbolImporter >> visitCollection: aCollection [
+
+	aCollection do: [ :a | a acceptVisitor: self ]
 ]
 
 { #category : #visiting }

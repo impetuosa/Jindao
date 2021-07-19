@@ -23,6 +23,18 @@ Class {
 	#category : #'Jindao-NamespaceIndex'
 }
 
+{ #category : #visiting }
+JinNSNamespace >> acceptVisitor: aJinNSVisitorCounter [
+
+	aJinNSVisitorCounter visitNamespace: self
+]
+
+{ #category : #accessing }
+JinNSNamespace >> count [
+
+	^ (JinNSVisitorCounter new count: self) count
+]
+
 { #category : #'as yet unclassified' }
 JinNSNamespace >> entriesHolderFor: aString [
 
@@ -84,6 +96,12 @@ JinNSNamespace >> printOn: aStream [
 		nextPutAll: '(';
 		nextPutAll: entries size asString;
 		nextPutAll: ')'
+]
+
+{ #category : #'as yet unclassified' }
+JinNSNamespace >> readEntries [
+
+	^ entries values flatCollect: #yourself
 ]
 
 { #category : #'as yet unclassified' }

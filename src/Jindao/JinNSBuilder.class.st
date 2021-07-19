@@ -142,7 +142,6 @@ JinNSBuilder >> visitLibrary: aJinLibrary [
 	^ JinNSLibrarySymbolImporter new
 		  assembly: self currentAssemblyNamespace;
 		  library: aJinLibrary;
-		  isConcurrent: true;
 		  buildFor: self
 ]
 
