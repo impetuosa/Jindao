@@ -4,6 +4,9 @@ I am a form.
 Class {
 	#name : #JinForm,
 	#superclass : #JinVBObject,
+	#instVars : [
+		'src'
+	],
 	#category : #'Jindao-Core'
 }
 
@@ -272,6 +275,16 @@ JinForm >> componentKnownProperties [
 ]
 
 { #category : #'as yet unclassified' }
+JinForm >> contentHash [
+
+	| code |
+	code := self src.
+
+	^ (MD5 hashMessage: 'Report|Form' , self controls asString , code)
+		  hex
+]
+
+{ #category : #'as yet unclassified' }
 JinForm >> controls [
 	^ self body controls 
 ]
@@ -399,6 +412,15 @@ JinForm >> recordSourceFull [
 				ifNone: [ project queries
 						detect: [ :q | q name includesSubstring: source caseSensitive: false ]
 						ifNone: [ nil ] ] ]
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> src [
+
+	^ src ifNil: [ 
+		  src := self body code.
+		  src = '' ifFalse: [ src := src contents ].
+		  src ]
 ]
 
 { #category : #accessing }

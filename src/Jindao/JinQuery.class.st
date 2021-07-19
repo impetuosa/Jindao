@@ -23,6 +23,12 @@ JinQuery >> children [
 	^ self fields
 ]
 
+{ #category : #'as yet unclassified' }
+JinQuery >> contentHash [
+
+	^ (MD5 hashMessage: self sql) hex
+]
+
 { #category : #accessing }
 JinQuery >> exportToFolder: aFolder [
 	(aFolder / self name , 'QUERY') writeStream

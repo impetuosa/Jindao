@@ -18,14 +18,24 @@ JinLibrary >> accept: anAlceLibraryReferenceImporter [
 	^ anAlceLibraryReferenceImporter visitLibrary: self
 ]
 
+{ #category : #visiting }
+JinLibrary >> acceptVisitor: anAlceLibraryReferenceImporter [
+
+	^ anAlceLibraryReferenceImporter visitLibrary: self
+]
+
+{ #category : #'as yet unclassified' }
+JinLibrary >> contentHash [
+
+	^ (MD5 hashStream: self path binaryReadStream) hex
+]
+
 { #category : #accessing }
 JinLibrary >> dbgHandle [
 
 	| path |
 	^ dbgHandle ifNil: [ 
-		path := reference path exists
-			        ifTrue: [ reference path ]
-			        ifFalse: [ self libraryHandle win32Path ].
+		path := self path. 
 		path ifNil: [ self error: 'cannot resolve address for library! ' ].
 
 		DBGHelpLib uniqueInstance enumerateModules: [ :moduleName :baseDll :void | 
@@ -91,6 +101,14 @@ JinLibrary >> name [
 ]
 
 { #category : #accessing }
+JinLibrary >> path [
+
+	^ reference path exists
+		  ifTrue: [ reference path ]
+		  ifFalse: [ self libraryHandle win32Path ]
+]
+
+{ #category : #accessing }
 JinLibrary >> reference: aJinReference [
 
 	reference := aJinReference
@@ -112,4 +130,11 @@ JinLibrary >> types [
 		  types := self libraryHandle typeInfos collect: [ :i | 
 			           self typeLoader load: i ].
 		  types ]
+]
+
+{ #category : #'as yet unclassified' }
+JinLibrary >> uniqueName [
+
+	^ reference name, reference major asString , '.'
+	  , reference minor asString
 ]

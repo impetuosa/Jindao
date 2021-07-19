@@ -23,6 +23,19 @@ JinCollection class >> newDefaultForMethod [
 ]
 
 { #category : #'as yet unclassified' }
+JinCollection >> allNames [
+
+	| names hand |
+	names := OrderedCollection new.
+	1 to: self size do: [ :anIndex | 
+		hand := handle
+			        propertyNamed: 'Item'
+			        withArguments: { (anIndex - base) }.
+		names add: (hand propertyNamed: 'Name') ].
+	^ names
+]
+
+{ #category : #'as yet unclassified' }
 JinCollection >> anySatisfy: aBlock [
 	"Evaluate aBlock with the elements of the receiver.
 	If aBlock returns true for any element return true.

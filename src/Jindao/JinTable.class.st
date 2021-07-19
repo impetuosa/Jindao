@@ -40,6 +40,13 @@ JinTable >> connect [
 ]
 
 { #category : #'as yet unclassified' }
+JinTable >> contentHash [
+
+	^ (MD5 hashMessage: 'Table ' , self name , self fields size asString)
+		  hex
+]
+
+{ #category : #'as yet unclassified' }
 JinTable >> contents [
 	^ self body contents
 ]

@@ -4,6 +4,9 @@ I am a module. I have the power of dealing with my content
 Class {
 	#name : #JinModule,
 	#superclass : #JinVBObject,
+	#instVars : [
+		'src'
+	],
 	#category : #'Jindao-Core'
 }
 
@@ -30,6 +33,12 @@ JinModule >> code [
 { #category : #accessing }
 JinModule >> color [
 	^ Color yellow 
+]
+
+{ #category : #'as yet unclassified' }
+JinModule >> contentHash [
+
+	^ (MD5 hashMessage: self src) hex
 ]
 
 { #category : #'as yet unclassified' }
@@ -61,6 +70,15 @@ JinModule >> privateLoadBodyObject [
 { #category : #'as yet unclassified' }
 JinModule >> save [
 	project save: self .
+]
+
+{ #category : #accessing }
+JinModule >> src [
+
+	^ src ifNil: [ 
+		  src := self body code.
+		  src = '' ifFalse: [ src := src contents ].
+		  src ]
 ]
 
 { #category : #'as yet unclassified' }
