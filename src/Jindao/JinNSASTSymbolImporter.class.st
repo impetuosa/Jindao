@@ -215,6 +215,12 @@ JinNSASTSymbolImporter >> visitDefineType: aVBDefineTypeNode [
 ]
 
 { #category : #accessing }
+JinNSASTSymbolImporter >> visitDimMultipleVariables: avar [
+
+	self visitCollection: avar variables variables
+]
+
+{ #category : #accessing }
 JinNSASTSymbolImporter >> visitDimVariable: dimVar [
 	 self visitVariable: dimVar variable 
 ]
@@ -299,6 +305,11 @@ JinNSASTSymbolImporter >> visitModuleConstant: aVBModuleConstantNode [
 		kind: JinNSKind constant
 		owner: owner
 		visibility: aVBModuleConstantNode visibility value
+]
+
+{ #category : #'as yet unclassified' }
+JinNSASTSymbolImporter >> visitModuleMultipleProperties: props [
+	self visitCollection: 	 props variables variables
 ]
 
 { #category : #visiting }

@@ -26,7 +26,11 @@ JinQuery >> children [
 { #category : #'as yet unclassified' }
 JinQuery >> contentHash [
 
-	^ (MD5 hashMessage: self sql) hex
+	| sql |
+	[ sql := self sql ]
+		on: Error
+		do: [ :e | sql := self name ].
+	^ (MD5 hashMessage: sql) hex
 ]
 
 { #category : #accessing }
@@ -38,7 +42,7 @@ JinQuery >> exportToFolder: aFolder [
 
 { #category : #'as yet unclassified' }
 JinQuery >> fields [
-	^ self body fields 
+	 [ ^ self body fields ] on: Error do: [ :e | ^ {  } ]
 ]
 
 { #category : #accessing }
