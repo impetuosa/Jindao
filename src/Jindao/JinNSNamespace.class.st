@@ -18,7 +18,8 @@ Class {
 		'tag',
 		'name',
 		'entries',
-		'entriesMutex'
+		'entriesMutex',
+		'friends'
 	],
 	#category : #'Jindao-NamespaceIndex'
 }
@@ -61,11 +62,12 @@ JinNSNamespace >> entriesHoldersFor: aStringOrderedCollection [
 JinNSNamespace >> initialize [ 
 	 super initialize.
 	entries := Dictionary new. 
+	friends := Set new. 
 ]
 
 { #category : #accessing }
 JinNSNamespace >> installAllAssemblySymbolsFrom: anOtherNS [
-	 self halt. 
+	 friends add: anOtherNS
 ]
 
 { #category : #accessing }

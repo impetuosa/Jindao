@@ -223,21 +223,30 @@ JinNSBuilder >> visitReference: aJinReference [
 	(visitedReferences includes: aJinReference path fullName asLowercase) 
 		ifFalse: [ 
 			visitedReferences add: aJinReference path fullName asLowercase.
-			self
-				pushNewAssemblyFor: aJinReference
-				owner: (self typeOwnerFor: aJinReference).
+
 			aJinReference isAccessProject
 				ifTrue: [ 
 					| project |
 					project := JinAccessApplication default open:
 						           aJinReference path asFileReference.
+
+					self
+						pushNewAssemblyFor: aJinReference
+						owner: (self typeOwnerFor: project).
 					project acceptVisitor: self.
 					project closeAndQuit.
 					self popAssemblyFor: project ]
-				ifFalse: [ aJinReference library acceptVisitor: self ] ].
+				ifFalse: [ 
+					self
+						pushNewAssemblyFor: aJinReference
+						owner: (self typeOwnerFor: aJinReference library).
+
+					aJinReference library acceptVisitor: self.
+					self popAssemblyFor: aJinReference. 
+					 ] ].
 	self currentAssemblyNamespace installAllAssemblySymbolsFrom:
 		(assemblyNamespaces detect: [ :a | 
-			 a name = aJinReference path fullName asLowercase ])
+			 a name = aJinReference path basename asLowercase ])
 ]
 
 { #category : #visiting }

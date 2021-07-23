@@ -94,6 +94,28 @@ JinAccessProject >> compileAll [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessProject >> contentHash [
+
+	| message |
+	message := String streamContents: [ :str | 
+		           str
+			           nextPutAll: self path fullName;
+			           nextPutAll: #forms;
+			           nextPutAll: self forms size asString;
+			           nextPutAll: #reports;
+			           nextPutAll: self reports size asString;
+			           nextPutAll: #tables;
+			           nextPutAll: self tables size asString;
+			           nextPutAll: #queries;
+			           nextPutAll: self queries size asString;
+			           nextPutAll: #modules;
+			           nextPutAll: self modules size asString;
+			           nextPutAll: #macros;
+			           nextPutAll: self macros size asString ].
+	^ (MD5 hashMessage: message) hex 
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessProject >> createControl: aName inForm: aJinForm type: aTypeNumber section: aSection [
 	application
 		createControl: aName
@@ -396,6 +418,11 @@ JinAccessProject >> openTable: aJinTable [
 
 { #category : #'as yet unclassified' }
 JinAccessProject >> parent [
+	^ projectPath
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> path [
 	^ projectPath
 ]
 

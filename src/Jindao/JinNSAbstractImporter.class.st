@@ -27,7 +27,7 @@ JinNSAbstractImporter >> copyStack [
 { #category : #'as yet unclassified' }
 JinNSAbstractImporter >> currentAssemblyNamespace [
 
-	^ self enclosingNamespaceTagged: #assembly
+	^ self enclosingNamespaceTagged: JinNSKind assembly 
 ]
 
 { #category : #'as yet unclassified' }
@@ -76,7 +76,7 @@ JinNSAbstractImporter >> newAssemblyNamespace: aJinAccessProject owner: anOwner 
 	parent := self currentExternalNamespace.
 	"self assert: parent name = aJinAccessProject name."
 	^ parent
-		  registerSubNamespace: aJinAccessProject path fullName asLowercase 
+		  registerSubNamespace: aJinAccessProject path basename asLowercase 
 		  kind: JinNSKind assembly
 		  owner: anOwner
 ]
@@ -98,7 +98,7 @@ JinNSAbstractImporter >> popAssemblyFor: project [
 
 	| assembly |
 	stackMutex critical: [ 
-		self assert: stack top name = project name.
+		self assert: stack top name = project path basename asLowercase.
 		assembly := stack pop ].
 	^ assembly
 ]
