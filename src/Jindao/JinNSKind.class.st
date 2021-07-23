@@ -11,6 +11,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinNSKind class >> assembly [
+
+	^ self entry: #assembly
+]
+
+{ #category : #'as yet unclassified' }
 JinNSKind class >> classAlias [
 
 	^ self entry: #classAlias

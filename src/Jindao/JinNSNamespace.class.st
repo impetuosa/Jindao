@@ -64,6 +64,11 @@ JinNSNamespace >> initialize [
 ]
 
 { #category : #accessing }
+JinNSNamespace >> installAllAssemblySymbolsFrom: anOtherNS [
+	 self halt. 
+]
+
+{ #category : #accessing }
 JinNSNamespace >> modifyEntriesWith: aBlock [
 
 	entriesMutex ifNil: [ entriesMutex := Mutex new ].

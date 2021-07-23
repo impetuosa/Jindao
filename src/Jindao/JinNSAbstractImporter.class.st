@@ -70,16 +70,15 @@ JinNSAbstractImporter >> isConcurrent: abool [
 ]
 
 { #category : #'instance creation' }
-JinNSAbstractImporter >> newAssemblyNamespace: aJinAccessProject [
+JinNSAbstractImporter >> newAssemblyNamespace: aJinAccessProject owner: anOwner [
 
 	| parent |
 	parent := self currentExternalNamespace.
-	self assert: parent name = aJinAccessProject name.
-	^ JinNSNamespace new
-		  tag: #assembly;
-		  name: aJinAccessProject name;
-		  parent: parent;
-		  yourself
+	"self assert: parent name = aJinAccessProject name."
+	^ parent
+		  registerSubNamespace: aJinAccessProject path fullName asLowercase 
+		  kind: JinNSKind assembly
+		  owner: anOwner
 ]
 
 { #category : #'instance creation' }
@@ -95,6 +94,16 @@ JinNSAbstractImporter >> newExternalNamespaceFor: aJinAccessProject [
 ]
 
 { #category : #initialization }
+JinNSAbstractImporter >> popAssemblyFor: project [
+
+	| assembly |
+	stackMutex critical: [ 
+		self assert: stack top name = project name.
+		assembly := stack pop ].
+	^ assembly
+]
+
+{ #category : #initialization }
 JinNSAbstractImporter >> push: aJinNSNamespace during: aFullBlockClosure [
 
 	| ret |
@@ -103,6 +112,15 @@ JinNSAbstractImporter >> push: aJinNSNamespace during: aFullBlockClosure [
 		aFullBlockClosure value.
 		ret := stack pop ].
 	^ ret
+]
+
+{ #category : #initialization }
+JinNSAbstractImporter >> pushNewAssemblyFor: aProject owner: anOwner [
+
+	| assembly |
+	assembly := self newAssemblyNamespace: aProject owner: anOwner.
+	stackMutex critical: [ stack push: assembly ].
+	^ assembly
 ]
 
 { #category : #'as yet unclassified' }

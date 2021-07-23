@@ -68,7 +68,7 @@ JinNSASTSymbolImporter >> buildFor: aJinNSBuilder [
 			futureRegistry addFuture: ([ 
 				 [ self ast acceptVisitor: self ]
 					 on: Error
-					 do: [ :e | self halt ] ] future: self runner) ]
+					 do: [ :e |( e isKindOf: SmaCCParserError ) ifFalse: [ self halt] ] ] future: self runner) ]
 		ifFalse: [ self ast acceptVisitor: self ]
 ]
 
@@ -80,7 +80,7 @@ JinNSASTSymbolImporter >> buildFormFor: aJinNSBuilder [
 { #category : #'as yet unclassified' }
 JinNSASTSymbolImporter >> buildModuleFor: aJinNSBuilder [ 
 	 buildingModule := true. 
-	^ self buildFor: aJinNSBuilder 
+	^ self buildFor: aJinNSBuilder.
 ]
 
 { #category : #'as yet unclassified' }
@@ -115,20 +115,28 @@ JinNSASTSymbolImporter >> owner: aJinNSEntryOwner [
 ]
 
 { #category : #'as yet unclassified' }
-JinNSASTSymbolImporter >> register: aName kind: aJinNSKind owner: aJinNSEntryOwner visibility: aVisibility [ 
-	| visibility | 
-	visibility := aVisibility ifNil: [ #Friend ] ifNotNil: [ aVisibility asSymbol ].
-	 self assert: (#(Public Private Friend) includes: visibility ).
-	visibility = #Public ifTrue: [ 
-		self currentExternalNamespace 	register: aName kind: aJinNSKind owner: aJinNSEntryOwner.
-	].
+JinNSASTSymbolImporter >> register: aName kind: aJinNSKind owner: aJinNSEntryOwner visibility: aVisibility [
+
+	| visibility |
+	visibility := aVisibility
+		              ifNil: [ #Friend ]
+		              ifNotNil: [ aVisibility asSymbol ].
+	self assert: (#( Global Public Private Friend ) includes: visibility).
+	(visibility = #Public or: [ visibility = #Global ]) ifTrue: [ 
+		self currentExternalNamespace
+			register: aName
+			kind: aJinNSKind
+			owner: aJinNSEntryOwner ].
 	visibility = #Friend ifTrue: [ 
-		self currentAssemblyNamespace 	register: aName kind: aJinNSKind owner: aJinNSEntryOwner 		
-	 ].
+		self currentAssemblyNamespace
+			register: aName
+			kind: aJinNSKind
+			owner: aJinNSEntryOwner ].
 	visibility = #Private ifTrue: [ 
-		self currentNamespace register: aName kind: aJinNSKind owner: aJinNSEntryOwner 	
-	]
-	
+		self currentNamespace
+			register: aName
+			kind: aJinNSKind
+			owner: aJinNSEntryOwner ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -206,6 +214,54 @@ JinNSASTSymbolImporter >> visitDefineType: aVBDefineTypeNode [
 					owner: owner ] ]
 ]
 
+{ #category : #accessing }
+JinNSASTSymbolImporter >> visitDimVariable: dimVar [
+	 self visitVariable: dimVar variable 
+]
+
+{ #category : #visiting }
+JinNSASTSymbolImporter >> visitEvent: anEvent [
+
+	self
+		registerSubNamespace: anEvent selector token value asSymbol
+		kind: JinNSKind event
+		owner: owner
+		visibility: anEvent visibility value
+		during: [ 
+			self visitCollection:
+				(anEvent allNodesSelect: [ :n | n isKindOf: VBParameterNode ]) ]
+]
+
+{ #category : #visiting }
+JinNSASTSymbolImporter >> visitExternalFunction: aVBFunctionDefinitionNode [
+
+	self
+		registerSubNamespace:
+		aVBFunctionDefinitionNode selector token value asSymbol
+		kind: JinNSKind externalFunction 
+		owner: owner
+		visibility: aVBFunctionDefinitionNode visibility value
+		during: [ 
+			self visitCollection:
+				(aVBFunctionDefinitionNode allNodesSelect: [ :n | 
+					 n isKindOf: VBParameterNode ]) ]
+]
+
+{ #category : #visiting }
+JinNSASTSymbolImporter >> visitExternalSub: aVBFunctionDefinitionNode [
+
+	self
+		registerSubNamespace:
+		aVBFunctionDefinitionNode selector token value asSymbol
+		kind: JinNSKind externalFunction 
+		owner: owner
+		visibility: aVBFunctionDefinitionNode visibility value
+		during: [ 
+			self visitCollection:
+				(aVBFunctionDefinitionNode allNodesSelect: [ :n | 
+					 n isKindOf: VBParameterNode ]) ]
+]
+
 { #category : #visiting }
 JinNSASTSymbolImporter >> visitFunctionDefinition: aVBFunctionDefinitionNode [
 
@@ -223,6 +279,10 @@ JinNSASTSymbolImporter >> visitFunctionDefinition: aVBFunctionDefinitionNode [
 			self visitCollection:
 				(aVBFunctionDefinitionNode allNodesSelect: [ :n | 
 					 n isKindOf: VBVariableNode ]) ]
+]
+
+{ #category : #visiting }
+JinNSASTSymbolImporter >> visitImplements: anImplements [
 ]
 
 { #category : #visiting }
@@ -267,7 +327,7 @@ JinNSASTSymbolImporter >> visitModulePropertyGet: aVBModulePropertyGetNode [
 		aVBModulePropertyGetNode selector token value asSymbol
 		kind: kind
 		owner: owner
-		visibility: aVBModulePropertyGetNode visibility value asSymbol
+		visibility: aVBModulePropertyGetNode visibility value 
 		during: [ 
 			self visitCollection:
 				(aVBModulePropertyGetNode allNodesSelect: [ :n | 
@@ -276,6 +336,11 @@ JinNSASTSymbolImporter >> visitModulePropertyGet: aVBModulePropertyGetNode [
 			self visitCollection:
 				(aVBModulePropertyGetNode allNodesSelect: [ :n | 
 					 n isKindOf: VBVariableNode ]) ]
+]
+
+{ #category : #visiting }
+JinNSASTSymbolImporter >> visitOptionBase: aVBOptionCompareDatabaseNode [ 
+
 ]
 
 { #category : #visiting }

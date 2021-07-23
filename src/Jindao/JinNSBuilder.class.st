@@ -5,7 +5,8 @@ Class {
 		'futures',
 		'table',
 		'externalNamespaces',
-		'assemblyNamespaces'
+		'assemblyNamespaces',
+		'visitedReferences'
 	],
 	#category : #'Jindao-NamespaceIndex'
 }
@@ -31,12 +32,30 @@ JinNSBuilder >> assembly [
 JinNSBuilder >> buildFor: anAccessProject [
 
 	stack push: (self newExternalNamespaceFor: anAccessProject).
-	stack push: (self newAssemblyNamespace: anAccessProject).
-
+	stack push: (self
+			 newAssemblyNamespace: anAccessProject
+			 owner: (self typeOwnerFor: anAccessProject)).
+	visitedReferences add: anAccessProject path fullName asLowercase.
 	anAccessProject acceptVisitor: self.
-	
-	futures inspect.
-	self joinFutures. 
+
+	self joinFutures.
+	self checkTasksSanity.
+	^ JinNSSymbolTable new
+		  external: externalNamespaces;
+		  assembly: assemblyNamespaces;
+		  yourself
+]
+
+{ #category : #initialization }
+JinNSBuilder >> checkTasksSanity [
+
+	(futures anySatisfy: [ :f | f isFailure ]) ifTrue: [ 
+		| pct |
+		pct := (futures select: [ :f | f isFailure ]) size / futures size
+		       * 100 asFloat.
+		self notify: '%' , pct asString
+			,
+			' of the indexing tasks failed. Inspect futures collection to have insight on the problem' ]
 ]
 
 { #category : #initialization }
@@ -46,6 +65,7 @@ JinNSBuilder >> initialize [
 	futures := OrderedCollection new .
 	externalNamespaces := OrderedCollection new. 
 	assemblyNamespaces := OrderedCollection new. 
+	visitedReferences := OrderedCollection new. 
 ]
 
 { #category : #initialization }
@@ -64,10 +84,10 @@ JinNSBuilder >> joinFutures [
 ]
 
 { #category : #'as yet unclassified' }
-JinNSBuilder >> newAssemblyNamespace: aJinAccessProject [
+JinNSBuilder >> newAssemblyNamespace: aJinAccessProject owner: anOwner [
 
 	| new |
-	new := super newAssemblyNamespace: aJinAccessProject.
+	new := super newAssemblyNamespace: aJinAccessProject owner: anOwner.
 
 	assemblyNamespaces add: new.
 	^ new
@@ -200,9 +220,24 @@ JinNSBuilder >> visitQuery: aJinQuery [
 { #category : #visiting }
 JinNSBuilder >> visitReference: aJinReference [
 
-	aJinReference isAccessProject
-		ifTrue: [ self halt ]
-		ifFalse: [ aJinReference library acceptVisitor: self ]
+	(visitedReferences includes: aJinReference path fullName asLowercase) 
+		ifFalse: [ 
+			visitedReferences add: aJinReference path fullName asLowercase.
+			self
+				pushNewAssemblyFor: aJinReference
+				owner: (self typeOwnerFor: aJinReference).
+			aJinReference isAccessProject
+				ifTrue: [ 
+					| project |
+					project := JinAccessApplication default open:
+						           aJinReference path asFileReference.
+					project acceptVisitor: self.
+					project closeAndQuit.
+					self popAssemblyFor: project ]
+				ifFalse: [ aJinReference library acceptVisitor: self ] ].
+	self currentAssemblyNamespace installAllAssemblySymbolsFrom:
+		(assemblyNamespaces detect: [ :a | 
+			 a name = aJinReference path fullName asLowercase ])
 ]
 
 { #category : #visiting }

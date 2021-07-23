@@ -2,6 +2,7 @@ Class {
 	#name : #JinSingleInstanceDispatchVisitor,
 	#superclass : #JinMultiVisitor,
 	#instVars : [
+		'symbolTable',
 		'state',
 		'control',
 		'gui',
@@ -15,23 +16,6 @@ Class {
 	],
 	#category : #'Jindao-Subvisitor'
 }
-
-{ #category : #accessing }
-JinSingleInstanceDispatchVisitor class >> default [
-	^ self new
-		code: JinCodeFirstCitizenVisitor new;
-		database: JinDatabaseFirstCitizenVisitor new;
-		gui: JinGUIFirstCitizenVisitor new;
-		control: JinGUIControlVisitor new;
-		syntax: VBProgramNodeVisitor new;
-		project: JinProjectVisitor new;
-		yourself
-]
-
-{ #category : #accessing }
-JinSingleInstanceDispatchVisitor class >> nullVisitor [
-	^ self new
-]
 
 { #category : #'visit-first-objects' }
 JinSingleInstanceDispatchVisitor >> code [
