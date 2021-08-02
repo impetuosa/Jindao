@@ -278,9 +278,9 @@ JinForm >> componentKnownProperties [
 JinForm >> contentHash [
 
 	| code |
-	code := self src.
+	[code := self src, self controls asString] on: Error do: [  code:= self name  ].
 
-	^ (MD5 hashMessage: 'Report|Form' , self controls asString , code)
+	^ (MD5 hashMessage: 'Report|Form' ,  code)
 		  hex
 ]
 

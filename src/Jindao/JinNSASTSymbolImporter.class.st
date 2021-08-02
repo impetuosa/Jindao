@@ -68,7 +68,7 @@ JinNSASTSymbolImporter >> buildFor: aJinNSBuilder [
 			futureRegistry addFuture: ([ 
 				 [ self ast acceptVisitor: self ]
 					 on: Error
-					 do: [ :e |( e isKindOf: SmaCCParserError ) ifFalse: [ self halt] ] ] future: self runner) ]
+					 do: [ :e |( e isKindOf: SmaCCParserError ) ifFalse: [ self halt] ] ] asTask future: self runner timeout: 45 second ) ]
 		ifFalse: [ self ast acceptVisitor: self ]
 ]
 
@@ -180,6 +180,12 @@ JinNSASTSymbolImporter >> registerSubNamespace: aName kind: aJinNSKind owner: aJ
 JinNSASTSymbolImporter >> runner [
 
 	^ TKTConfiguration runner
+]
+
+{ #category : #accessing }
+JinNSASTSymbolImporter >> visitCollection: aCollection [
+
+	aCollection do: [ :a | a acceptVisitor: self ]
 ]
 
 { #category : #visiting }

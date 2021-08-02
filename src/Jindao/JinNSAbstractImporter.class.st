@@ -151,6 +151,6 @@ JinNSAbstractImporter >> visitCollection: aCollection [
 	isConcurrent
 		ifTrue: [ 
 			futureRegistry addFutures:
-				(aCollection collect: [ :a | [ [a acceptVisitor: self ] on:Error do:[ : e | self halt] ] future: self runner  ]) ]
+				(aCollection collect: [ :a | [ [a acceptVisitor: self ] on:Error do:[ : e | self halt] ] asTask future: self runner  ]) ]
 		ifFalse: [ aCollection do: [ :a | a acceptVisitor: self ] ]
 ]

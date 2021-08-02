@@ -475,6 +475,8 @@ JinAccessProject >> rename: anObject with: aName [
 { #category : #accessing }
 JinAccessProject >> reopen [
 	application reopen: projectPath into: self.
+	self resetCollections.
+	
 	5 seconds wait. 
 ]
 
@@ -487,6 +489,18 @@ JinAccessProject >> reports [
 			((JinFirstClassCitizenModelFactory defaultFor: JinReport)
 				project: self;
 				yourself)]
+]
+
+{ #category : #accessing }
+JinAccessProject >> resetCollections [
+
+	forms := nil.
+	modules := nil.
+	macros := nil.
+	tables := nil.
+	reports := nil.
+	relations := nil.
+	queries := nil
 ]
 
 { #category : #'as yet unclassified' }

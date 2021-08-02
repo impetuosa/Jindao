@@ -123,6 +123,18 @@ JinNSBuilder >> uniqueNameFor: aJinTable [
 ]
 
 { #category : #visiting }
+JinNSBuilder >> visitCollection: aCollection from: project [
+
+	1 to: aCollection value size do: [ :i | 
+		" Try to visit. If it fails it restarts the project and it does continue. If it fails twice it let the exception to go "
+		[ (aCollection value at: i) acceptVisitor: self ]
+			on: Error
+			do: [ :e | 
+				project reopen.
+				(aCollection value at: i) acceptVisitor: self ] ]
+]
+
+{ #category : #visiting }
 JinNSBuilder >> visitControls: aJinCachedEntityCollection for: aJinNSEntryOwner [
 
 	self currentNamespace
@@ -199,16 +211,17 @@ JinNSBuilder >> visitModule: aJinModule [
 { #category : #visiting }
 JinNSBuilder >> visitProject: aJinAccessProject [
 
-	self visitCollection: aJinAccessProject modules.
-	self visitCollection: aJinAccessProject references.
-	self visitCollection: aJinAccessProject forms.
-	self visitCollection: aJinAccessProject reports.
+	self visitCollection: [aJinAccessProject modules] from: aJinAccessProject.
+	self visitCollection: [aJinAccessProject references] from: aJinAccessProject.
+	
+	self visitCollection: [aJinAccessProject forms] from: aJinAccessProject.
+	self visitCollection: [aJinAccessProject reports] from: aJinAccessProject.
 	
 	
-	self visitCollection: aJinAccessProject tables.
-	self visitCollection: aJinAccessProject queries.
-	self visitCollection: aJinAccessProject relations.
-	self visitCollection: aJinAccessProject macros
+	self visitCollection: [aJinAccessProject tables] from: aJinAccessProject.
+	self visitCollection: [aJinAccessProject queries] from: aJinAccessProject.
+	self visitCollection: [aJinAccessProject relations] from: aJinAccessProject.
+	self visitCollection: [aJinAccessProject macros] from: aJinAccessProject
 ]
 
 { #category : #visiting }
