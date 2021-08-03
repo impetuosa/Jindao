@@ -8,8 +8,23 @@ Class {
 		'assemblyNamespaces',
 		'visitedReferences'
 	],
+	#classInstVars : [
+		'instances'
+	],
 	#category : #'Jindao-NamespaceIndex'
 }
+
+{ #category : #'instance creation' }
+JinNSBuilder class >> instances [
+
+	^ instances ifNil: [ instances := OrderedCollection new ]
+]
+
+{ #category : #'instance creation' }
+JinNSBuilder class >> newRegisteredBuilder [
+
+	^ self instances add: self new
+]
 
 { #category : #visiting }
 JinNSBuilder >> addFuture: aFuture [

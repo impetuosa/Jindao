@@ -8,6 +8,16 @@ Class {
 	#category : #'Jindao-NamespaceIndex'
 }
 
+{ #category : #private }
+JinNSSymbolTable class >> loadFrom: aString [
+
+	| instance |
+	instance := STON fromStream: aString asFileReference readStream.
+	self assert: (instance isKindOf: self).
+
+	^ instance
+]
+
 { #category : #accessing }
 JinNSSymbolTable >> assembly: aCollection [ 
 	assembly := aCollection
@@ -16,4 +26,16 @@ JinNSSymbolTable >> assembly: aCollection [
 { #category : #accessing }
 JinNSSymbolTable >> external: aCollection [ 
 	external := aCollection
+]
+
+{ #category : #saving }
+JinNSSymbolTable >> saveAs: aString [
+
+	| stream |
+	stream := aString asFileReference writeStream.
+
+	STON put: self onStream: stream.
+	stream
+		flush;
+		close
 ]
