@@ -19,6 +19,7 @@ JinNSASTSymbolImporter >> assemblyRegisterAndPushSubNameSpaceEntry: aString kind
 		      registerSubNamespace: aString
 		      kind: aJinNSKind
 		      owner: aJinNSEntryOwner.
+	ns parent: self currentNamespace.
 	self push: ns during: aFullBlockClosure
 ]
 
@@ -106,6 +107,7 @@ JinNSASTSymbolImporter >> externalRegisterAndPushSubNameSpaceEntry: aString kind
 		      registerSubNamespace: aString
 		      kind: aJinNSKind
 		      owner: aJinNSEntryOwner.
+	ns parent: self currentNamespace.
 	self push: ns during: aFullBlockClosure
 ]
 

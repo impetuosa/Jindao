@@ -107,6 +107,7 @@ JinLibraryTypeLoader >> loadMethod: aCOMMethod [
 
 	| m |
 	aCOMMethod ifNil: [ ^ nil ].
+
 	m := JinLibraryMethod new.
 	m selector: aCOMMethod name.
 	m parameters: (self loadMethodParameters: aCOMMethod).
@@ -131,6 +132,8 @@ JinLibraryTypeLoader >> loadMethodParameters: aCOMMethod [
 JinLibraryTypeLoader >> loadModule: aCOMTypeInfo [
 
 	| module |
+	
+	
 	module := JinLibraryModule new
 		          name: aCOMTypeInfo name;
 		          yourself.

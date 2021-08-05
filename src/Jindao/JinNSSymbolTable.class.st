@@ -24,6 +24,11 @@ JinNSSymbolTable >> assembly: aCollection [
 ]
 
 { #category : #accessing }
+JinNSSymbolTable >> external [
+	^ external
+]
+
+{ #category : #accessing }
 JinNSSymbolTable >> external: aCollection [ 
 	external := aCollection
 ]
@@ -32,6 +37,7 @@ JinNSSymbolTable >> external: aCollection [
 JinNSSymbolTable >> saveAs: aString [
 
 	| stream |
+	aString asFileReference ensureDelete.
 	stream := aString asFileReference writeStream.
 
 	STON put: self onStream: stream.

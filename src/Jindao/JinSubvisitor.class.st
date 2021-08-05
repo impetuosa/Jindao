@@ -32,6 +32,22 @@ JinSubvisitor >> gui [
 	^ parent gui
 ]
 
+{ #category : #accessing }
+JinSubvisitor >> instantiate: aClass [
+
+	^ parent instantiate: aClass
+]
+
+{ #category : #accessing }
+JinSubvisitor >> parent [ 
+	^ parent 
+]
+
+{ #category : #accessing }
+JinSubvisitor >> parent: aParent [ 
+	 parent := aParent 
+]
+
 { #category : #'as yet unclassified' }
 JinSubvisitor >> project [
 	^ parent project
@@ -45,6 +61,12 @@ JinSubvisitor >> referenceAccess [
 { #category : #accessing }
 JinSubvisitor >> referenceLibrary [ 
 	^ parent referenceLibrary
+]
+
+{ #category : #'instance creation' }
+JinSubvisitor >> sdkLibrary [
+
+	^ parent sdkLibrary
 ]
 
 { #category : #accessing }

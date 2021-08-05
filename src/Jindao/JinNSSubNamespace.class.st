@@ -13,14 +13,24 @@ JinNSSubNamespace >> acceptVisitor: aJinNSVisitorCounter [
 	aJinNSVisitorCounter visitSubNamespace: self
 ]
 
+{ #category : #description }
+JinNSSubNamespace >> kind [
+ 	^ tag
+]
+
 { #category : #accessing }
 JinNSSubNamespace >> kind: aJinNSKind [ 
 	tag := aJinNSKind
 ]
 
 { #category : #accessing }
+JinNSSubNamespace >> owner [
+	^ owner
+]
+
+{ #category : #accessing }
 JinNSSubNamespace >> owner: aJinNSEntryOwner [ 
-	owner := aJinNSEntryOwner
+	owner := aJinNSEntryOwner.
 ]
 
 { #category : #accessing }
@@ -37,4 +47,10 @@ JinNSSubNamespace >> printOn: aStream [
 		nextPutAll:
 			(entries ifNil: [ 0 ] ifNotNil: [ entries size ]) asString;
 		nextPutAll: ')'
+]
+
+{ #category : #'as yet unclassified' }
+JinNSSubNamespace >> referersTo: aString [
+
+	^ name asLowercase = aString asLowercase
 ]

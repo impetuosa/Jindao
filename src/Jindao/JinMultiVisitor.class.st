@@ -29,6 +29,11 @@ JinMultiVisitor >> gui [
 	^ self subclassResponsibility
 ]
 
+{ #category : #'instance creation' }
+JinMultiVisitor >> instantiate: aClass [ 
+	self shouldBeImplemented.
+]
+
 { #category : #'part visitor' }
 JinMultiVisitor >> project [
 	^ self subclassResponsibility

@@ -36,6 +36,11 @@ JinNSNamespace >> count [
 	^ (JinNSVisitorCounter new count: self) count
 ]
 
+{ #category : #accessing }
+JinNSNamespace >> entries [
+	^ entries
+]
+
 { #category : #'as yet unclassified' }
 JinNSNamespace >> entriesHolderFor: aString [
 
@@ -56,6 +61,11 @@ JinNSNamespace >> entriesHoldersFor: aStringOrderedCollection [
 			       entr at: s ifAbsentPut: JinSharedCollection new ] ].
 
 	^ col
+]
+
+{ #category : #accessing }
+JinNSNamespace >> friends [
+	^ friends
 ]
 
 { #category : #'as yet unclassified' }
@@ -85,6 +95,33 @@ JinNSNamespace >> name [
 { #category : #accessing }
 JinNSNamespace >> name: aString [ 
 	 name := aString  
+]
+
+{ #category : #'as yet unclassified' }
+JinNSNamespace >> namespaceFor: aString kind: aJinNSKind [
+
+	| ns |
+	" Do i have it ? "
+	ns := {  }.
+	entries
+		at: aString
+		ifPresent: [ :e | ns := e select: [ :ee | ee kind = aJinNSKind ] ].
+	self assert: ns size < 2.
+	ns ifNotEmpty: [ ^ ns ].
+	" Does a friend has it? "
+	ns := (friends flatCollect: [ :f | 
+		       f namespaceFor: aString kind: aJinNSKind ])
+		      asOrderedCollection.
+	self assert: ns size < 2.
+	ns ifNotEmpty: [ ^ ns ].
+	"Does my parent has it? "
+	parent ifNil: [ ^ {  } ].
+	^ parent namespaceFor: aString kind: aJinNSKind
+]
+
+{ #category : #accessing }
+JinNSNamespace >> parent [
+	^ parent
 ]
 
 { #category : #accessing }
@@ -147,6 +184,22 @@ JinNSNamespace >> registerSubNamespace: aString kind: aJinNSKind owner: aJinNSEn
 
 	(self entriesHolderFor: aString) add: ns.
 	^ ns
+]
+
+{ #category : #'as yet unclassified' }
+JinNSNamespace >> symbolsRespondingTo: aString [
+
+	| col curr symbol |
+	symbol := aString asSymbol. 
+	col := OrderedCollection new.
+	curr := self.
+	[ curr isNotNil ] whileTrue: [ 
+		curr entries at: symbol ifPresent: [ :s | col addAll: s ].
+		curr friends do: [ :f | 
+			f entries at: symbol ifPresent: [ :s | col addAll: s ] ].
+		curr := curr parent ].
+	
+	^ col
 ]
 
 { #category : #accessing }

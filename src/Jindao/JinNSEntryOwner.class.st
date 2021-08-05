@@ -22,6 +22,7 @@ JinNSEntryOwner >> name [
 
 { #category : #accessing }
 JinNSEntryOwner >> name: aString [ 
+	 aString = 'Access9.0' ifTrue:[self halt ]. 
 	name := aString
 ]
 
@@ -31,8 +32,19 @@ JinNSEntryOwner >> printOn: aStream [
 	aStream
 		nextPutAll: name;
 		nextPutAll: '(';
-		nextPutAll: contentHash;
+		nextPutAll: contentHash asString ;
 		nextPutAll: ')'
+]
+
+{ #category : #'as yet unclassified' }
+JinNSEntryOwner >> simpleName [
+
+	^ ('.' split: name) last
+]
+
+{ #category : #accessing }
+JinNSEntryOwner >> type [
+	^ type
 ]
 
 { #category : #accessing }

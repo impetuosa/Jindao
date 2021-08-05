@@ -131,10 +131,3 @@ JinLibrary >> types [
 			           self typeLoader load: i ].
 		  types ]
 ]
-
-{ #category : #'as yet unclassified' }
-JinLibrary >> uniqueName [
-
-	^ reference name, reference major asString , '.'
-	  , reference minor asString
-]

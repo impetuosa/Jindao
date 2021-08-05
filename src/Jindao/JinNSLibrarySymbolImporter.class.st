@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'assembly',
 		'library',
-		'owner'
+		'owner',
+		'static'
 	],
 	#category : #'Jindao-NamespaceIndex'
 }
@@ -35,7 +36,16 @@ JinNSLibrarySymbolImporter >> buildFor: aJinNSBuilder [
 { #category : #'as yet unclassified' }
 JinNSLibrarySymbolImporter >> currentNamespace [
 
-	^ stack top
+	^ static
+		  ifTrue: [ assembly ]
+		  ifFalse: [ stack top ]
+]
+
+{ #category : #visiting }
+JinNSLibrarySymbolImporter >> initialize [
+
+	super initialize.
+	static := false
 ]
 
 { #category : #building }
@@ -59,7 +69,7 @@ JinNSLibrarySymbolImporter >> owner [
 	^ owner ifNil: [ 
 		  owner := JinNSEntryOwner new
 			           type: library class;
-			           name: library uniqueName;
+			           name: library name;
 			           contentHash: library contentHash;
 			           yourself ]
 ]
@@ -87,14 +97,15 @@ JinNSLibrarySymbolImporter >> visitLibraryAlias: aJinLibraryAlias [
 
 { #category : #visiting }
 JinNSLibrarySymbolImporter >> visitLibraryCoClass: aJinLibraryCoClass [
-
+	static := true.
 	self
 		registerAndPushSubNameSpaceEntry: aJinLibraryCoClass name
 		kind: JinNSKind classModule
 		owner: self owner
 		during: [ 
 			aJinLibraryCoClass linkedType ifNotNil: [ 
-				self visitCollection: aJinLibraryCoClass linkedType definitions ] ]
+				self visitCollection: aJinLibraryCoClass linkedType definitions ] ].
+	static := false.
 ]
 
 { #category : #visiting }

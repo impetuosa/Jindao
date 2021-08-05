@@ -16,6 +16,16 @@ JinNSKind class >> assembly [
 	^ self entry: #assembly
 ]
 
+{ #category : #accessing }
+JinNSKind class >> attribute [
+	 ^ self entry: #attribute 
+]
+
+{ #category : #accessing }
+JinNSKind class >> attributes [
+  ^ self attribute 
+]
+
 { #category : #'as yet unclassified' }
 JinNSKind class >> classAlias [
 
@@ -86,9 +96,20 @@ JinNSKind class >> form [
 ]
 
 { #category : #convenience }
+JinNSKind class >> forms [ 
+	^ self form 
+]
+
+{ #category : #convenience }
 JinNSKind class >> function [ 
 
 	^ self entry: #function
+]
+
+{ #category : #convenience }
+JinNSKind class >> functions [
+
+	^ self function
 ]
 
 { #category : #convenience }
@@ -97,8 +118,24 @@ JinNSKind class >> get [
 ]
 
 { #category : #convenience }
+JinNSKind class >> globalVariable [
+
+	^ self entry: #globalVariable
+]
+
+{ #category : #convenience }
 JinNSKind class >> initialize [ 	
 	entries := Dictionary new .
+]
+
+{ #category : #generated }
+JinNSKind class >> interface [
+	 ^ self entry: #interface. 
+]
+
+{ #category : #generated }
+JinNSKind class >> interfaces [
+	 ^ self interface 
 ]
 
 { #category : #convenience }
@@ -112,9 +149,27 @@ JinNSKind class >> module [
 	^ self entry: #module
 ]
 
+{ #category : #convenience }
+JinNSKind class >> modules [
+
+	^ self module 
+]
+
 { #category : #accessing }
 JinNSKind class >> parameter [
 	 ^ self entry: #parameter 
+]
+
+{ #category : #convenience }
+JinNSKind class >> primitiveType [
+
+	^ self entry: #primitiveType
+]
+
+{ #category : #convenience }
+JinNSKind class >> queries [
+
+	^ self query 
 ]
 
 { #category : #convenience }
@@ -123,10 +178,28 @@ JinNSKind class >> query [
 	^ self entry: #query
 ]
 
+{ #category : #'as yet unclassified' }
+JinNSKind class >> reference [
+
+	^ self entry: #reference
+]
+
+{ #category : #accessing }
+JinNSKind class >> references [
+
+	^ self reference
+]
+
 { #category : #convenience }
 JinNSKind class >> report [
 
 	^ self entry: #report
+]
+
+{ #category : #convenience }
+JinNSKind class >> reports [
+
+	^ self report   
 ]
 
 { #category : #convenience }
@@ -153,6 +226,12 @@ JinNSKind class >> table [
 ]
 
 { #category : #convenience }
+JinNSKind class >> tables [ 
+
+	^ self table  
+]
+
+{ #category : #convenience }
 JinNSKind class >> typeProperty [
 
 	^ self entry: #typeProperty
@@ -168,6 +247,18 @@ JinNSKind class >> userType [
 JinNSKind class >> variable [
 
 	^ self entry: #variable
+]
+
+{ #category : #testing }
+JinNSKind >> = anObject [ 
+	self species = anObject species ifFalse: [^false].
+	^ kind = anObject kind 
+]
+
+{ #category : #accessing }
+JinNSKind >> hash [
+
+	^ kind hash
 ]
 
 { #category : #testing }
@@ -276,8 +367,18 @@ JinNSKind >> isParameter [
 ]
 
 { #category : #testing }
+JinNSKind >> isPrimitiveType [ 
+	 ^ kind = #primitiveType 
+]
+
+{ #category : #testing }
 JinNSKind >> isQuery [
 	^ kind = #query
+]
+
+{ #category : #testing }
+JinNSKind >> isReference [ 
+	^ kind = #reference
 ]
 
 { #category : #testing }
@@ -310,7 +411,7 @@ JinNSKind >> isType [
 
 	^ self isAnyOf:
 		  #( isForm isReport isModule isClassModule isTable isQuery isEnum
-		     isUserType isStruct isClassAlias)
+		     isUserType isStruct isClassAlias isPrimitiveType )
 ]
 
 { #category : #testing }
@@ -326,6 +427,12 @@ JinNSKind >> isUserType [
 { #category : #testing }
 JinNSKind >> isVariable [ 
 	 ^ kind = #variable 
+]
+
+{ #category : #accessing }
+JinNSKind >> kind [
+
+	^ kind
 ]
 
 { #category : #accessing }

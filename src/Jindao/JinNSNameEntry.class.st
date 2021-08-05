@@ -16,8 +16,18 @@ JinNSNameEntry >> acceptVisitor: aJinNSVisitorCounter [
 ]
 
 { #category : #accessing }
+JinNSNameEntry >> kind [
+	^ kind
+]
+
+{ #category : #accessing }
 JinNSNameEntry >> kind: aJinNSKind [ 
 	kind := aJinNSKind
+]
+
+{ #category : #accessing }
+JinNSNameEntry >> name [
+	^ name
 ]
 
 { #category : #accessing }
@@ -26,8 +36,13 @@ JinNSNameEntry >> name: aString [
 ]
 
 { #category : #accessing }
-JinNSNameEntry >> owner: aJinNSEntryOwner [ 
-	owner := aJinNSEntryOwner
+JinNSNameEntry >> owner [
+	^ owner
+]
+
+{ #category : #accessing }
+JinNSNameEntry >> owner: aJinNSEntryOwner [
+	owner := aJinNSEntryOwner.
 ]
 
 { #category : #accessing }
@@ -39,4 +54,9 @@ JinNSNameEntry >> printOn: aStream [
 	kind printOn: aStream.
 	aStream nextPutAll: '::'.
 	owner printOn: aStream
+]
+
+{ #category : #'as yet unclassified' }
+JinNSNameEntry >> referersTo: aString [ 
+	^ name asLowercase = aString asLowercase 
 ]

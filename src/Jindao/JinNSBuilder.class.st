@@ -113,14 +113,13 @@ JinNSBuilder >> newExternalNamespaceFor: aJinAccessProject [
 
 	| new |
 	new := super newExternalNamespaceFor: aJinAccessProject.
-
+	JinNSSDKLibraryBuilder new buildOn: new.
 	externalNamespaces add: new.
 	^ new
 ]
 
 { #category : #'as yet unclassified' }
 JinNSBuilder >> typeOwnerFor: aJinTable [
-
 	^ JinNSEntryOwner new
 		  type: aJinTable class;
 		  name: (self uniqueNameFor: aJinTable);
