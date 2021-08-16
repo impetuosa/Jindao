@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinDAMReport >> arelatedSymbolKind [
+JinDAMReport >> relatedSymbolKind [
 
 	^ JinNSKind report 
 ]

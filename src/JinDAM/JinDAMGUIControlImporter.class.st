@@ -13,11 +13,15 @@ JinDAMGUIControlImporter >> nodeToTypeReferenceName: aVBNode context: aContext [
 
 { #category : #'entry-point' }
 JinDAMGUIControlImporter >> visitFormControl: anObject [
+
 	| attribute |
 	attribute := self instantiate: JinDAMAttribute.
 	attribute visibility: #Public.
 	attribute name: anObject name.
 	attribute anchor: self state top anchor / #controls / anObject name.
-	attribute typeName: (self typeNameReference: anObject mappedTypeName).
-	self state top addMember: attribute
+	attribute typeReference: (self
+			 instantiateReferenceForNames: { anObject mappedTypeName }
+			 context: attribute
+			 preferring: { #isType }).
+	self state top addAttribute:  attribute
 ]

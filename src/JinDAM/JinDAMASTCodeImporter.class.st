@@ -20,23 +20,6 @@ JinDAMASTCodeImporter >> codeElementReferenceName: aString context: aJinDAMAcces
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMASTCodeImporter >> currentNamespace [
-
-	| reverseStack ns temp |
-	reverseStack := self state reverse.
-	ns := self symbolTable
-		      namespaceFor: reverseStack first
-		      kind: reverseStack first relatedSymbolKind.
-
-	^ reverseStack allButFirst inject: ns first into: [ :nns :element | 
-		  temp := nns
-			          namespaceFor: element name
-			          kind: element relatedSymbolKind.
-		  temp first kind isInvocable ifTrue: [ ^ temp first ].
-		  temp first ]
-]
-
-{ #category : #'as yet unclassified' }
 JinDAMASTCodeImporter >> ensureInContextOf: aClass or: aClass2 [
 
 	({ 
