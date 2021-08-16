@@ -3,3 +3,9 @@ Class {
 	#superclass : #JinDAMInvocable,
 	#category : #'JinDAM-Model'
 }
+
+{ #category : #accessing }
+JinDAMEvent >> relatedSymbolKind [
+
+	^ JinNSKind event 
+]

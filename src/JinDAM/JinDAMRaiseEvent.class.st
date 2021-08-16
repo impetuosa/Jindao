@@ -1,5 +1,5 @@
 Class {
 	#name : #JinDAMRaiseEvent,
-	#superclass : #JinDAMInvocation,
+	#superclass : #JinDAMMemberReference,
 	#category : #'JinDAM-Model'
 }

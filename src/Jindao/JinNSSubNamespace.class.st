@@ -13,6 +13,11 @@ JinNSSubNamespace >> acceptVisitor: aJinNSVisitorCounter [
 	aJinNSVisitorCounter visitSubNamespace: self
 ]
 
+{ #category : #accessing }
+JinNSSubNamespace >> anchor [
+	 ^ nil
+]
+
 { #category : #description }
 JinNSSubNamespace >> kind [
  	^ tag

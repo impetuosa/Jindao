@@ -3,7 +3,47 @@ Class {
 	#superclass : #JinDAMEntity,
 	#instVars : [
 		'context',
-		'candidate'
+		'candidate',
+		'candidateAnchor'
 	],
 	#category : #'JinDAM-Model'
 }
+
+{ #category : #'as yet unclassified' }
+JinDAMReference >> adaptToAlceAnchorPathFragment [
+
+	| a segments |
+	a := self.
+	segments := OrderedCollection new.
+	[ a isKindOf: JinDAMReference ] whileTrue: [ 
+		segments addFirst: a typeName.
+		a := a context ].
+	^ '.' join: segments
+]
+
+{ #category : #accessing }
+JinDAMReference >> candidate: aJinDAMPrimitiveType [ 
+	self assert: candidate isNil. 
+	candidate := aJinDAMPrimitiveType
+]
+
+{ #category : #accessing }
+JinDAMReference >> candidateAnchor: aCandidateAnchor [
+ 	candidateAnchor := aCandidateAnchor. 
+]
+
+{ #category : #accessing }
+JinDAMReference >> context [
+	^ context
+]
+
+{ #category : #accessing }
+JinDAMReference >> context: aJinDAMTypeReference [ 
+	context := aJinDAMTypeReference
+]
+
+{ #category : #accessing }
+JinDAMReference >> isReference [
+
+	^ true
+]

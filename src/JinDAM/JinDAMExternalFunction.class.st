@@ -7,3 +7,9 @@ Class {
 	],
 	#category : #'JinDAM-Model'
 }
+
+{ #category : #accessing }
+JinDAMExternalFunction >> relatedSymbolKind [
+
+	^ JinNSKind externalFunction
+]

@@ -2,12 +2,17 @@ Class {
 	#name : #JinDAMAlias,
 	#superclass : #JinDAMType,
 	#instVars : [
-		'type'
+		'typeReference'
 	],
 	#category : #'JinDAM-Model'
 }
 
 { #category : #accessing }
-JinDAMAlias >> type: aJinDAMPrimitiveType [ 
-	type := aJinDAMPrimitiveType
+JinDAMAlias >> type [ 
+	^ typeReference value 
+]
+
+{ #category : #accessing }
+JinDAMAlias >> typeReference: aJinDAMPrimitiveType [ 
+	typeReference := aJinDAMPrimitiveType
 ]

@@ -3,3 +3,9 @@ Class {
 	#superclass : #JinDAMClass,
 	#category : #'JinDAM-Model'
 }
+
+{ #category : #'as yet unclassified' }
+JinDAMReport >> arelatedSymbolKind [
+
+	^ JinNSKind report 
+]

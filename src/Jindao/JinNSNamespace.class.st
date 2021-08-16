@@ -63,6 +63,29 @@ JinNSNamespace >> entriesHoldersFor: aStringOrderedCollection [
 	^ col
 ]
 
+{ #category : #'as yet unclassified' }
+JinNSNamespace >> findSymbol: aString [ 
+	| ns |
+	" Do i have it ? "
+	ns := OrderedCollection new.
+	entries
+		at: aString
+		ifPresent: [ :e | ns := e unsafeCopyCollection ]
+		ifAbsent: [ 
+			entries
+				at: aString asLowercase
+				ifPresent: [ :e | ns := e unsafeCopyCollection ]].
+
+	" Does a friend has it? "
+	ns := ns, (friends flatCollect: [ :f | 
+		      f findSymbol: aString ])
+		      asOrderedCollection.
+	
+	"Does my parent has it? "
+	parent ifNil: [ ^ ns removeDuplicates ].
+	^ (ns, ( parent findSymbol: aString )) removeDuplicates. 
+]
+
 { #category : #accessing }
 JinNSNamespace >> friends [
 	^ friends
@@ -105,8 +128,17 @@ JinNSNamespace >> namespaceFor: aString kind: aJinNSKind [
 	ns := {  }.
 	entries
 		at: aString
-		ifPresent: [ :e | ns := e select: [ :ee | ee kind = aJinNSKind ] ].
-	self assert: ns size < 2.
+		ifPresent: [ :e | 
+			ns := e unsafeSelect: [ :ee | 
+				      aJinNSKind isSymbol
+					      ifTrue: [ ee kind perform: aJinNSKind ]
+					      ifFalse: [ ee kind = aJinNSKind ] ] ]
+		ifAbsent: [ 
+			entries at: aString asLowercase ifPresent: [ :e | 
+				ns := e unsafeSelect: [ :ee | 
+					      aJinNSKind isSymbol
+						      ifTrue: [ ee kind perform: aJinNSKind ]
+						      ifFalse: [ ee kind = aJinNSKind ] ] ] ].
 	ns ifNotEmpty: [ ^ ns ].
 	" Does a friend has it? "
 	ns := (friends flatCollect: [ :f | 

@@ -6,6 +6,11 @@ Class {
 	#category : #'JinDAM-Importers'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMGUIControlImporter >> nodeToTypeReferenceName: aVBNode context: aContext [ 
+	^ self referenceNameConverter toTypeReferenceName: aVBNode context: aContext 
+]
+
 { #category : #'entry-point' }
 JinDAMGUIControlImporter >> visitFormControl: anObject [
 	| attribute |

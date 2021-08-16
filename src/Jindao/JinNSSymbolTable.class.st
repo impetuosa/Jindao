@@ -33,6 +33,13 @@ JinNSSymbolTable >> external: aCollection [
 	external := aCollection
 ]
 
+{ #category : #'as yet unclassified' }
+JinNSSymbolTable >> namespaceFor: aJinDAMAccessModule kind: aJinNSKind [
+
+	self assert: external size = 1.
+	^ external first namespaceFor: aJinDAMAccessModule name  kind: aJinNSKind
+]
+
 { #category : #saving }
 JinNSSymbolTable >> saveAs: aString [
 

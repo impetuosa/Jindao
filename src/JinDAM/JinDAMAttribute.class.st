@@ -6,3 +6,8 @@ Class {
 	],
 	#category : #'JinDAM-Model'
 }
+
+{ #category : #accessing }
+JinDAMAttribute >> visibility: aString [ 
+	visibility := aString
+]

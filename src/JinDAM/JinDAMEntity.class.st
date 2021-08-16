@@ -8,7 +8,23 @@ Class {
 }
 
 { #category : #accessing }
+JinDAMEntity >> anchor [
+	^ anchor
+]
+
+{ #category : #accessing }
 JinDAMEntity >> anchor: jinAnchor [
 
 	anchor := jinAnchor
+]
+
+{ #category : #testing }
+JinDAMEntity >> isReference [
+	 ^ false 
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMEntity >> relatedSymbolKind [
+
+	^ #isAttribute
 ]

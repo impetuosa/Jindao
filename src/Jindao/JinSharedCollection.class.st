@@ -66,3 +66,15 @@ JinSharedCollection >> select: aBlock [
 
 	^ self copyCollection select: [ :a | aBlock value: a ]
 ]
+
+{ #category : #'as yet unclassified' }
+JinSharedCollection >> unsafeCopyCollection [
+
+	^ collection copy
+]
+
+{ #category : #enumerating }
+JinSharedCollection >> unsafeSelect: aFullBlockClosure [
+
+	^ collection select: aFullBlockClosure
+]

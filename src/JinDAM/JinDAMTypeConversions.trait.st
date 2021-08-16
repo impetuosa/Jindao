@@ -7,11 +7,6 @@ Trait {
 	#category : #'JinDAM-Importers'
 }
 
-{ #category : #'as yet unclassified' }
-JinDAMTypeConversions >> nodeToInvocableReferenceName: aVBNode [
-	^ self referenceNameConverter toInvocableReferenceName: aVBNode
-]
-
 { #category : #helper }
 JinDAMTypeConversions >> nodeToString: aNode [
 	| str |
@@ -20,13 +15,13 @@ JinDAMTypeConversions >> nodeToString: aNode [
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMTypeConversions >> nodeToTypeReferenceName: aVBNode [
-	^ self referenceNameConverter toTypeReferenceName: aVBNode
+JinDAMTypeConversions >> nodeToTypeReferenceName: aVBNode context: aContext [ 
+	^ self referenceNameConverter toTypeReferenceName: aVBNode context: aContext 
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMTypeConversions >> nodeToVariableReferenceName: aVBNode [
-	^ self referenceNameConverter toVariableReferenceName: aVBNode
+JinDAMTypeConversions >> nodeToVariableReferenceName: aVBSimpleIdentifierNode context: aJinDAMAccessRead anchoringSymbol: aJinNSNameEntry [ 
+	self shouldBeImplemented.
 ]
 
 { #category : #'as yet unclassified' }
@@ -47,17 +42,33 @@ JinDAMTypeConversions >> stringConverter [
 
 { #category : #'functions - subs - events' }
 JinDAMTypeConversions >> typeName: aTypeOrNil [
+	 self halt: ' should be using typeName: context: '
+]
+
+{ #category : #'functions - subs - events' }
+JinDAMTypeConversions >> typeName: aTypeOrNil context: aContext [ 
 	^ aTypeOrNil
-		ifNil: [self referenceNameConverter undefinedTypeReference ]
-		ifNotNil: [ self nodeToTypeReferenceName: aTypeOrNil ]
+		ifNil: [self referenceNameConverter undefinedTypeReferenceContext: aContext  ]
+		ifNotNil: [ self nodeToTypeReferenceName: aTypeOrNil context: aContext  ]
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMTypeConversions >> typeNameReference: aString [
-	self assert: (aString indexOf: $.) = 0.
-	^ (self instantiate: JinDAMTypeReference)
-		names: {aString};
-		yourself
+JinDAMTypeConversions >> typeReferenceName: aString context: aContext [ 
+
+	^ self typeReferenceName: aString type: nil context: aContext 
+
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMTypeConversions >> typeReferenceName: aString type: aJinDAMPrimitiveType context: aContext [
+
+	| reference |
+	self assert: (aString indexOf: '.') = 0.
+	reference := self instantiate: JinDAMTypeReference.
+	reference context: aContext. 
+	reference typeName: aString.
+	reference candidate: aJinDAMPrimitiveType.
+	^ reference
 ]
 
 { #category : #'as yet unclassified' }

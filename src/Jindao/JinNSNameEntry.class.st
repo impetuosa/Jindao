@@ -16,6 +16,19 @@ JinNSNameEntry >> acceptVisitor: aJinNSVisitorCounter [
 ]
 
 { #category : #accessing }
+JinNSNameEntry >> anchor [
+	 ^ nil 
+]
+
+{ #category : #'as yet unclassified' }
+JinNSNameEntry >> findSymbol: aString [
+
+	^ (name compare: aString caseSensitive: false) = 2
+		  ifTrue: [ { self } ]
+		  ifFalse: [ {  } ]
+]
+
+{ #category : #accessing }
 JinNSNameEntry >> kind [
 	^ kind
 ]

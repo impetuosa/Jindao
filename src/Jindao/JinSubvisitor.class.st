@@ -74,6 +74,11 @@ JinSubvisitor >> state [
 	^ parent state
 ]
 
+{ #category : #'instance creation' }
+JinSubvisitor >> symbolTable [
+	^ parent symbolTable 
+]
+
 { #category : #accessing }
 JinSubvisitor >> syntax [
 	^ parent syntax

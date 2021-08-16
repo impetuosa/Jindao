@@ -15,6 +15,28 @@ JinDAMASTCodeImporter >> codeAnchor: aString for: aVBModulePropertyNode [
 ]
 
 { #category : #'as yet unclassified' }
+JinDAMASTCodeImporter >> codeElementReferenceName: aString context: aJinDAMAccessRead [ 
+	self shouldBeImplemented.
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMASTCodeImporter >> currentNamespace [
+
+	| reverseStack ns temp |
+	reverseStack := self state reverse.
+	ns := self symbolTable
+		      namespaceFor: reverseStack first
+		      kind: reverseStack first relatedSymbolKind.
+
+	^ reverseStack allButFirst inject: ns first into: [ :nns :element | 
+		  temp := nns
+			          namespaceFor: element name
+			          kind: element relatedSymbolKind.
+		  temp first kind isInvocable ifTrue: [ ^ temp first ].
+		  temp first ]
+]
+
+{ #category : #'as yet unclassified' }
 JinDAMASTCodeImporter >> ensureInContextOf: aClass or: aClass2 [
 
 	({ 
@@ -24,73 +46,91 @@ JinDAMASTCodeImporter >> ensureInContextOf: aClass or: aClass2 [
 ]
 
 { #category : #'member access' }
-JinDAMASTCodeImporter >> instantiateAccess: aMemberOrDictAccess [
+JinDAMASTCodeImporter >> instantiateReferenceForNames: names context: aContext [
 
-	| read |
-	read := self instantiateAccessForReference:
-		        (self nodeToVariableReferenceName: aMemberOrDictAccess).
-	read anchor:
-		(self codeAnchor: read printString for: aMemberOrDictAccess).
-	^ read
+	| symbols tip |
+	symbols := self currentNamespace findSymbol: names first.
+
+	self assert: symbols size < 2.
+	tip := self
+		       instantiateReferenceForSymbol: (symbols ifEmpty:[ nil ] ifNotEmpty: [ symbols first ])
+		       name: names first
+		       context: aContext.
+
+	names allButFirst inject:  (symbols ifEmpty:[ nil ] ifNotEmpty: [ symbols first ]) into: [ :acc :name | 
+		symbols := acc ifNil: [ {  } ] ifNotNil: [ acc findSymbol: name ].
+		self assert: symbols size < 2.
+		tip := self
+			       instantiateReferenceForSymbol:
+			       (symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ])
+			       name: name
+			       context: tip.
+		symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ] ].
+	^ tip
 ]
 
 { #category : #'member access' }
-JinDAMASTCodeImporter >> instantiateAccessForReference: aReference [
-	| access |
-	access := self instantiate: JinDAMAccessRead.
-	access isWriting: false.
-	access
-		rightElementName: aReference.
-	^ access
+JinDAMASTCodeImporter >> instantiateReferenceForNames: names context: aContext preferring: rules [
+
+	| select symbols tip |
+	symbols := self currentNamespace findSymbol: names first.
+
+	symbols size > 1 ifTrue: [ 
+		select := symbols select: [ :s | 
+			          rules anySatisfy: [ :r | s kind perform: r ] ].
+		self assert: select isNotEmpty.
+		symbols := select ].
+
+
+	tip := self
+		       instantiateReferenceForSymbol:
+		       (symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ])
+		       name: names first
+		       context: aContext.
+
+	names allButFirst
+		inject: (symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ])
+		into: [ :acc :name | 
+			symbols := acc ifNil: [ {  } ] ifNotNil: [ acc findSymbol: name ].
+			symbols size > 1 ifTrue: [ 
+				select := symbols select: [ :s | 
+					          rules anySatisfy: [ :r | s kind perform: r ] ].
+				self assert: select isNotEmpty.
+				symbols := select ].
+			tip := self
+				       instantiateReferenceForSymbol:
+				       (symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ])
+				       name: name
+				       context: tip.
+			symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ] ].
+	^ tip
 ]
 
-{ #category : #invocations }
-JinDAMASTCodeImporter >> instantiateFlatInvocation: selector for: aCall [
+{ #category : #'as yet unclassified' }
+JinDAMASTCodeImporter >> instantiateReferenceForSymbol: symbol name: aName context: context [
 
-	| call |
-	call := self instantiate: JinDAMInvocation.
-	call selector: selector.
-	call anchor:
-		(self codeAnchor: (self nodeToString: aCall selector) for: aCall).
-	aCall arguments ifNotNil: [ :r | 
-		r arguments do: [ :a | 
-			| arg |
-			arg := self instantiate: JinDAMArgument.
-			arg value: (self nodeToString: a).
-			call addArgument: arg ] ].
-	self state top addOutgoingInvocation: call
-]
+	| inter |
+	symbol
+		ifNil: [ 
+			inter := self instantiate: JinDAMMemberReference.
+			inter name: aName ]
+		ifNotNil: [ 
+			symbol kind isEnumEntry ifTrue: [ 
+				inter := self instantiate: JinDAMTypeReference.
+				inter typeName: aName ].
 
-{ #category : #invocations }
-JinDAMASTCodeImporter >> instantiateInvocation: aCall [
-	| selector |
-	aCall selector ifNil: [ self flag: #ShouldManageArrayAccessInHere . ^ self ].
-	selector := self nodeToInvocableReferenceName: aCall selector.
-	selector selectorSeemsToBeMethodInvocation
-		ifTrue: [ self instantiateMethodInvocation: selector for: aCall ]
-		ifFalse: [ self instantiateFlatInvocation: selector for: aCall ]
-]
-
-{ #category : #invocations }
-JinDAMASTCodeImporter >> instantiateMethodInvocation: selector for: aCall [
-
-	| receiver call |
-	receiver := self instantiateAccessForReference:
-		            selector dropReceiverOutOfSelector.
-
-	receiver anchor: (self codeAnchor: receiver printString for: aCall).
-	self state top addAccess: receiver.
-	call := self instantiate:JinDAMMethodInvocation.
-	call receiver: receiver.
-	call selector: selector.
-	call anchor: (self codeAnchor: selector printString for: aCall).
-
-	aCall arguments ifNotNil: [ :col | col arguments do: [ :a | 
-		| arg |
-		arg := self instantiate: JinDAMArgument.
-		arg value: (self nodeToString: a).
-		call addArgument: arg ].].
-	self state top addOutgoingInvocation: call
+			symbol kind isType ifTrue: [ 
+				inter := self instantiate: JinDAMTypeReference.
+				inter typeName: aName ].
+			symbol kind isAttribute ifTrue: [ 
+				inter := self instantiate: JinDAMMemberReference.
+				inter name: aName ].
+			symbol kind isInvocable ifTrue: [ 
+				inter := self instantiate: JinDAMMemberReference.
+				inter selector: aName ].
+			inter candidateAnchor: symbol anchor ].
+	inter context: context.
+	^ inter
 ]
 
 { #category : #'properties - variables' }
@@ -99,7 +139,7 @@ JinDAMASTCodeImporter >> instantiateVariable: aClass from: aVariable [
 	| var |
 	var := self instantiate: aClass.
 	var name: (self nodeToString: aVariable name).
-	var typeName: (self typeName: aVariable type).
+	var typeReference: (self typeName: aVariable type context: var).
 	var instantiatesObjectOnDefinition:
 		aVariable type class = VBAsTypeAndNewNode.
 	var anchor: (self codeAnchor: var name for: aVariable).
@@ -107,15 +147,39 @@ JinDAMASTCodeImporter >> instantiateVariable: aClass from: aVariable [
 	^ var
 ]
 
+{ #category : #'as yet unclassified' }
+JinDAMASTCodeImporter >> nodeToTypeReferenceName: aVBNode context: aContext [ 
+	^ self referenceNameConverter toTypeReferenceName: aVBNode context: aContext 
+]
+
 { #category : #'properties - variables' }
 JinDAMASTCodeImporter >> registerSpecialVariable: aName type: aType [
+
 	| var |
 	var := self instantiate: JinDAMAttribute.
 	var name: aName.
-	var typeName: (self typeNameReference: aType name).
-	var type: aType.
+	var typeReference: (self typeReferenceName: aType name type: aType context: var).
 	var anchor: self state top anchor / #variables / var name.
 	^ var
+]
+
+{ #category : #generated }
+JinDAMASTCodeImporter >> visitArgument: anArgument [
+	| arg |  
+	arg := self instantiate:	JinDAMArgument.
+	
+	arg text: (self nodeToString: anArgument ).
+	self state top addArgument: arg. 
+	self state push: arg. 
+	anArgument value acceptVisitor: self.
+	self state pop. 
+	
+]
+
+{ #category : #generated }
+JinDAMASTCodeImporter >> visitArgumentList: anArgumentList [
+
+	self visitCollection: anArgumentList arguments
 ]
 
 { #category : #generated }
@@ -132,7 +196,7 @@ JinDAMASTCodeImporter >> visitConstant: aConstant [
 		ifTrue: [ 
 			fn := self instantiate: JinDAMAttribute.
 			fn visibility: #Public.
-			self state top addMember: fn ]
+			self state top addAttribute: fn ]
 		ifFalse: [ 
 			(self state top isKindOf: JinDAMInvocable)
 				ifTrue: [ 
@@ -188,7 +252,7 @@ JinDAMASTCodeImporter >> visitDefineEnum: aDefineEnum [
 
 		en addEnumValue: ((self instantiate: JinDAMEnumValue)
 				 name: (self nodeToString: d name);
-				 Value: i;
+				 value: i;
 				 yourself) ]
 ]
 
@@ -201,7 +265,7 @@ JinDAMASTCodeImporter >> visitDefineType: aDefineType [
 	en anchor: self state top anchor / #types / en name.
 	self state top addType: en.
 	aDefineType fields doWithIndex: [ :d :i | 
-		| name |
+		| name attr |
 		name := self nodeToString: d name.
 		d type sizes ifNotEmpty: [ 
 			name := name
@@ -209,17 +273,33 @@ JinDAMASTCodeImporter >> visitDefineType: aDefineType [
 			        ('-' join:
 				         (d type sizes collect: [ :d2 | self nodeToString: d2 ])) ].
 		self assert: d type class = VBTypedThingNode.
-		en addMember: ((self instantiate: JinDAMAttribute)
-				 anchor: (self codeAnchor: name for: d);
-				 name: name;
-				 typeName: (self nodeToTypeReferenceName: d type type);
-				 visibility: #Public;
-				 yourself) ]
+		attr := self instantiate: JinDAMAttribute.
+		attr
+			anchor: (self codeAnchor: name for: d);
+			name: name;
+			visibility: #Public.
+		attr typeReference: (self typeName: d type context: attr).
+
+
+
+		en addAttribute: attr ]
 ]
 
 { #category : #'member access' }
 JinDAMASTCodeImporter >> visitDictionaryAccess: aDictionaryAccess [
-	self state top addAccess: (self instantiateAccess: aDictionaryAccess)
+
+	| names tip read |
+	names := aDictionaryAccess acceptVisitor: self referenceNameConverter.
+
+	read := self instantiate: JinDAMAccessRead.
+	tip := self
+		       instantiateReferenceForNames: names
+		       context: read
+		       preferring: { #isInvocable. #isAttribute. #isType }.
+
+	read readReference: tip.
+	self state top addAccess: read.
+	^ read
 ]
 
 { #category : #'properties - variables' }
@@ -275,9 +355,9 @@ JinDAMASTCodeImporter >> visitEquals: anAssignementOrEquals [
 					 for: anAssignementOrEquals).
 			access isWriting: true.
 			access leftElementName:
-				(self nodeToVariableReferenceName: anAssignementOrEquals left).
+				(self nodeToVariableReferenceName: anAssignementOrEquals left context: access).
 			access rightElementName:
-				(self nodeToVariableReferenceName: anAssignementOrEquals right).
+				(self nodeToVariableReferenceName: anAssignementOrEquals right context: access).
 			self state top addAccess: access ]
 		ifFalse: [ anAssignementOrEquals left acceptVisitor: self ].
 	anAssignementOrEquals right acceptVisitor: self
@@ -299,20 +379,29 @@ JinDAMASTCodeImporter >> visitEvent: anEvent [
 { #category : #assignments }
 JinDAMASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 
-	| access |
+	| access read write tempNames |
 	access := self instantiate: JinDAMAccessWrite.
-	access isReturn: (anExplicitAssignement isReturn).
-	access anchor: (self
-			 codeAnchor: (self writeStringSelector: anExplicitAssignement)
-			 for: anExplicitAssignement).
-	access isWriting: true.
-	access leftElementName:
-		(self nodeToVariableReferenceName: anExplicitAssignement left).
-	access rightElementName:
-		(self nodeToVariableReferenceName: anExplicitAssignement right).
-	access isNewObject: (anExplicitAssignement right isKindOf: VBNewClauseNode).
+	tempNames := self nodeToString: anExplicitAssignement left.
+	anExplicitAssignement isReturn
+		ifFalse: [ 
+			write := self
+				         instantiateReferenceForNames: ('.' split: tempNames)
+				         context: access
+				         preferring: { #isAttribute } ]
+		ifTrue: [ 
+			write := self
+				         instantiateReferenceForNames: ('.' split: tempNames)
+				         context: access
+				         preferring: { #isInvocable } ].
+	read := anExplicitAssignement right acceptVisitor: self.
+	access
+		readReference: read;
+		writeReference: write;
+		isReturn: anExplicitAssignement isReturn.
+	access isNewObject:
+		(anExplicitAssignement right isKindOf: VBNewClauseNode).
 	self state top addAccess: access.
-	anExplicitAssignement right acceptVisitor: self
+	^ access
 ]
 
 { #category : #invocations }
@@ -393,14 +482,14 @@ JinDAMASTCodeImporter >> visitFunctionDefinition: aDefinition [
 	return instantiatesObjectOnDefinition: false.
 	return anchor: self state top anchor / #return / return name.
 	fn addLocalVariable: return.
+	
 	aDefinition type ifNotNil: [ 
-		fn typeName: (self typeName: aDefinition type).
+		fn typeReference: (self typeName: aDefinition type context: fn).
 		fn typeAnchor: self state top anchor / #functions
-			/ fn typeName adaptToAlceAnchorPathFragment / #'@src'
+			/ fn typeReference adaptToAlceAnchorPathFragment / #'@src'
 			/ aDefinition type startPosition asString / #to
 			/ aDefinition type stopPosition asString.
-
-		return typeName: (self typeName: aDefinition type) ].
+		return typeReference: (self typeName: aDefinition type context: return )].
 
 
 
@@ -440,8 +529,17 @@ JinDAMASTCodeImporter >> visitImplements: anImplements [
 
 { #category : #invocations }
 JinDAMASTCodeImporter >> visitImplicitParenthesesLessCall: anImplicitParenthesesLessCall [
-	self instantiateInvocation: anImplicitParenthesesLessCall.
-	anImplicitParenthesesLessCall arguments acceptVisitor: self
+
+	| element |
+	element := anImplicitParenthesesLessCall selector acceptVisitor: self.
+
+	" Element should be either an access or an invocation. both cases it may have arguments (either for invocation or array access). "
+
+	" Can we visit the arguments? we may need to add them as arguments int o the element."
+	self state push: element.
+
+	anImplicitParenthesesLessCall arguments acceptVisitor: self.
+	self state pop
 ]
 
 { #category : #'avoiding visit' }
@@ -456,13 +554,25 @@ JinDAMASTCodeImporter >> visitLabelTag: aLabel [
 
 { #category : #'member access' }
 JinDAMASTCodeImporter >> visitMemberAccess: aMemberAccess [
-	self state top addAccess: (self instantiateAccess: aMemberAccess)
+
+	| names tip read |
+	names := '.' split: (self nodeToString: aMemberAccess).
+
+	read := self instantiate: JinDAMAccessRead.
+	tip := self
+		       instantiateReferenceForNames: names
+		       context: read
+		       preferring: { #isInvocable. #isAttribute. #isType }.
+
+	read readReference: tip.
+	self state top addAccess: read.
+	^ read
 ]
 
 { #category : #'type definition' }
 JinDAMASTCodeImporter >> visitModule: aModule [
 	(self state top isKindOf: JinDAMClass) ifTrue: [ 
-		self state top addMember:
+		self state top addAttribute:
 			(self registerSpecialVariable: #Me type: self state top) ].
 	^ self visitProgram: aModule
 ]
@@ -485,7 +595,7 @@ JinDAMASTCodeImporter >> visitModuleProperty: aModuleProperty [
 	| fn |
 	fn := self instantiate: JinDAMAttribute.
 	fn name: (self nodeToString: aModuleProperty variable name).
-	fn typeName: (self typeName: aModuleProperty variable type).
+	fn typeReference: (self typeName: aModuleProperty variable type context: fn).
 	fn visibility: (aModuleProperty visibility
 			 ifNil: [ #Private ]
 			 ifNotNil: [ self nodeToString: aModuleProperty visibility ])
@@ -493,14 +603,14 @@ JinDAMASTCodeImporter >> visitModuleProperty: aModuleProperty [
 	fn isConstant: false.
 
 	fn anchor: (self codeAnchor: fn name for: aModuleProperty).
-	self state top addMember: fn
+	self state top addAttribute: fn
 ]
 
 { #category : #'properties - variables' }
 JinDAMASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 
 	| acc statement kindSymbol attributeName |
-	acc := self instantiate:JinDAMAttributeAccessor.
+	acc := self instantiate: JinDAMAttributeAccessor.
 	self state top addInvocable: acc.
 	kindSymbol := aModulePropertyGet getToken ifNil: [ 
 		              aModulePropertyGet setToken ].
@@ -521,9 +631,9 @@ JinDAMASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 	acc kind = #Get
 		ifTrue: [ 
 			aModulePropertyGet type ifNotNil: [ 
-				acc typeName: (self typeName: aModulePropertyGet type).
+				acc typeReference: (self typeName: aModulePropertyGet type context: acc).
 				acc typeAnchor: self state top anchor / #accessors
-					/ acc typeName adaptToAlceAnchorPathFragment / #'@src'
+					/ acc typeReference adaptToAlceAnchorPathFragment  / #'@src'
 					/ aModulePropertyGet type startPosition asString / #to
 					/ aModulePropertyGet type stopPosition asString ].
 
@@ -553,7 +663,7 @@ JinDAMASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 
 
 	acc attribute: (attributeName ifNotNil: [ 
-			 self state top members
+			 self state top attributes
 				 detect: [ :p | p name = attributeName ]
 				 ifNone: [ nil ] ]).
 	self state push: acc.
@@ -582,7 +692,7 @@ JinDAMASTCodeImporter >> visitParameter: aParameter [
 	| param |
 	param := self instantiate: JinDAMParameter.
 	param name: (self nodeToString: aParameter name).
-	param typeName: (self typeName: aParameter type).
+	param typeReference:  (self typeName: aParameter type context: param).
 	param isOptional: aParameter isOptional.
 	param anchor: (self codeAnchor: param name for: aParameter ).
 	self state top addParameter: param
@@ -590,8 +700,17 @@ JinDAMASTCodeImporter >> visitParameter: aParameter [
 
 { #category : #invocations }
 JinDAMASTCodeImporter >> visitProcedureCallOrArrayAccess: aProcedureCallOrArrayAccess [
-	self instantiateInvocation: aProcedureCallOrArrayAccess.
-	aProcedureCallOrArrayAccess arguments acceptVisitor: self
+
+	| element |
+	element := aProcedureCallOrArrayAccess selector acceptVisitor: self.
+
+	" Element should be either an access or an invocation. both cases it may have arguments (either for invocation or array access). "
+
+	" Can we visit the arguments? we may need to add them as arguments int o the element."
+	self state push: element.
+
+	aProcedureCallOrArrayAccess arguments acceptVisitor: self.
+	self state pop
 ]
 
 { #category : #generated }
@@ -652,9 +771,26 @@ JinDAMASTCodeImporter >> visitResumeNext: aResomeNext [
 
 { #category : #'member access' }
 JinDAMASTCodeImporter >> visitSimpleIdentifier: aSimpleIdentifier [
-	(self state top isKindOf: JinDAMInvocable)
-		ifTrue: [ self state top
-				addAccess: (self instantiateAccess: aSimpleIdentifier) ]
+
+	| read tip |
+	({ 
+		 JinDAMInvocable.
+		 JinDAMArgument } anySatisfy: [ :a | self state top isKindOf: a ]) 
+		ifTrue: [ 
+			read := self instantiate: JinDAMAccessRead.
+			tip := self
+				       instantiateReferenceForNames:
+				       { aSimpleIdentifier token value }
+				       context: read
+				       preferring: { #isAttribute. #isInvocable }.
+			read readReference: tip.
+			self state top addAccess: read ].
+
+	read ifNil: [ 
+		(self state top isKindOf: JinDAMAttribute) ifFalse: [ 
+			self error: 'What is the symbol? ' ] ].
+
+	^ read
 ]
 
 { #category : #'functions - subs - events' }

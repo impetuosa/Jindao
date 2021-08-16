@@ -32,56 +32,67 @@ JinDAMVBVisitorToReferenceName >> noteProcessedElement [
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> toInvocableReferenceName: aNode [
+JinDAMVBVisitorToReferenceName >> toCodeElementReferenceName: aNode context: aContext [ 
 
-	| refChain |
+	| refChain tip tap |
 	processedElement := false.
 	refChain := aNode acceptVisitor: self.
-		self halt. 
-	^ refChain ifNil: [ self error: 'Unexpected ' ] ifNotNil: [ 
-		  (importer instantiate: nil)
-			  names: (aNode acceptVisitor: self);
-			  isProcessedElement: processedElement;
-			  yourself ]
+	processedElement ifTrue: [ 
+		self halt: 'Type that comes out of process? ' ].
+	refChain ifNil: [ 
+		^ self error: 'Unexpected ' "self undefinedTypeReference " ].
+
+
+	" Lets consider an attribute A typed DAO.Recordset2. 
+		DAO's context is the attribute A. 
+		Recordset2 context is DAO keyword context.
+		Now the type of the attribute A is Recordset2. 
+	"
+	tip := importer codeElementReferenceName: refChain first context: aContext.
+
+	tap := refChain allButFirst
+		       inject: tip
+		       into: [ :ref :segment | 
+		       importer typeReferenceName: segment context: ref ].
+
+	^ tap
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> toTypeReferenceName: aNode [
-	| refChain |
-	processedElement := false. 
-	refChain := aNode acceptVisitor: self.
-	self halt. 
-	^ refChain
-		ifNil: [ self error: 'Unexpected ' . "self undefinedTypeReference "  ]
-		ifNotNil: [ 
-			 (importer instantiate: nil)
-				names: (aNode acceptVisitor: self);
-				isProcessedElement: processedElement;
-				yourself ]
-]
+JinDAMVBVisitorToReferenceName >> toTypeReferenceName: aNode context: context [
 
-{ #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> toVariableReferenceName: aNode [
-
-	| refChain |
+	| refChain tip tap |
 	processedElement := false.
-	
 	refChain := aNode acceptVisitor: self.
-		self halt. 
-	^ refChain ifNil: [ self noneAttribute ] ifNotNil: [ 
-		  (importer instantiate: nil)
-			  names: (aNode acceptVisitor: self);
-			  isProcessedElement: processedElement;
-			  yourself ]
+	processedElement ifTrue: [ 
+		self halt: 'Type that comes out of process? ' ].
+	refChain ifNil: [ 
+		^ self error: 'Unexpected ' "self undefinedTypeReference " ].
+
+
+	" Lets consider an attribute A typed DAO.Recordset2. 
+		DAO's context is the attribute A. 
+		Recordset2 context is DAO keyword context.
+		Now the type of the attribute A is Recordset2. 
+	"
+	tip := importer typeReferenceName: refChain first context: context.
+
+	tap := refChain allButFirst
+		       inject: tip
+		       into: [ :ref :segment | 
+		       importer typeReferenceName: segment context: ref ].
+
+	^ tap
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> undefinedTypeReference [
- 	self halt. 
-	^ nil new
-		names: {#Undefined};
-		isProcessedElement: false;
-		yourself
+JinDAMVBVisitorToReferenceName >> undefinedTypeReferenceContext: aContext [
+
+
+	^ JinDAMTypeReference new
+		  typeName: '#_TypeUndefined';
+		  context: aContext;
+		  yourself
 ]
 
 { #category : #'as yet unclassified' }

@@ -8,3 +8,29 @@ Class {
 	],
 	#category : #'JinDAM-Model'
 }
+
+{ #category : #adding }
+JinDAMInvocable >> addParameter: aJinDAMParameter [
+
+	parameters add: aJinDAMParameter
+]
+
+{ #category : #accessing }
+JinDAMInvocable >> name [
+	 ^ selector 
+]
+
+{ #category : #accessing }
+JinDAMInvocable >> relatedSymbolKind [
+	 self subclassResponsibility 
+]
+
+{ #category : #accessing }
+JinDAMInvocable >> selector [ 
+	 ^ selector 
+]
+
+{ #category : #accessing }
+JinDAMInvocable >> selector: aString [ 
+	selector := aString
+]

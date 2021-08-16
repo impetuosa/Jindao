@@ -485,14 +485,14 @@ JinDAMSDKLibraryBuilder >> enumNamed: aName definedWith: aStringDefinition [
 	^ created at: genname, 'EnumConstant' ifAbsent: [ 
 		defLines := aStringDefinition lines collect: [ :l | 
 			            l trimBoth copyReplaceAll: String tab with: '' ].
-		enum := self instantiate: AlcixEnum.
+		enum := self instantiate: JinDAMEnum.
 		enum name: genname. 
 		defLines do: [ :l | 
-			value := self instantiate: AlcixEnumValue.
+			value := self instantiate: JinDAMEnumValue.
 			value enum: enum.
 			stream := l readStream.
 			value name: (stream upToAll: ' ') trimBoth.
-			value Value: (stream upToAll: ' ') trimBoth ].
+			value value: (stream upToAll: ' ') trimBoth ].
 		enum ]
 ]
 
@@ -1381,8 +1381,7 @@ JinDAMSDKLibraryBuilder >> newAlias: aName to: aType [
 		  | t |
 		  t := self instantiate: JinDAMAlias.
 		  t name: aName.
-		  t type: aType.
-		  t typeName: (self typeNameReference: aType name).
+		  t typeReference: (self typeReferenceName: aType name type: aType context: t).
 		  t ]
 ]
 
@@ -1393,7 +1392,7 @@ JinDAMSDKLibraryBuilder >> newAlias: aName toName: anOtherName [
 		  | t |
 		  t := self instantiate: JinDAMAlias.
 		  t name: aName.
-		  t typeName: (self typeNameReference: anOtherName).
+		  t typeReference: (self typeReferenceName: anOtherName type: nil context: t).
 		  t ]
 ]
 
@@ -1405,7 +1404,7 @@ JinDAMSDKLibraryBuilder >> newAttribute: aName typeName: aTypeName [
 		  t := self instantiate: JinDAMAttribute.
 		  t visibility: #Public.
 		  t name: aName.
-		  t typeName: (self typeNameReference: aTypeName).
+		  t typeReference: (self typeReferenceName: aTypeName type: nil context: t ).
 		  t ]
 ]
 
@@ -2001,28 +2000,26 @@ character 	Required; Variant. Character code specifying the character or string 
 
 { #category : #'sdk statements' }
 JinDAMSDKLibraryBuilder >> subProcedureNamed: aName parametersFromString: aStringDefinition [
+
 	| func param defLines stream type |
-	^ created
-		at: aName , 'function'
-		ifAbsentPut: [ func := self instantiate: JinDAMSubProcedure.
-			func selector: aName.
-			defLines := aStringDefinition lines
-				collect:
-					[ :l | l trimBoth copyReplaceAll: String tab with: '' ].
-			defLines
-				do: [ :l | 
-					|typeName | 
-					param := self instantiate: JinDAMParameter.
-					func addParameter: param.
-					stream := l readStream.
-					param name: (stream upToAll: ' ') trimBoth.
-					param
-						isOptional: (self isOptionalOrNot: (stream upToAll: ' ') trimBoth).
-					typeName := (stream upToAll: ' ') trimBoth.
-					type := self typeNamed: typeName.
-					param type: type.
-					param typeName:( self typeNameReference: typeName). ].
-			func ]
+	^ created at: aName , 'function' ifAbsentPut: [ 
+		  func := self instantiate: JinDAMSubProcedure.
+		  func selector: aName.
+		  defLines := aStringDefinition lines collect: [ :l | 
+			              l trimBoth copyReplaceAll: String tab with: '' ].
+		  defLines do: [ :l | 
+			  | typeName |
+			  param := self instantiate: JinDAMParameter.
+			  func addParameter: param.
+			  stream := l readStream.
+			  param name: (stream upToAll: ' ') trimBoth.
+			  param isOptional:
+				  (self isOptionalOrNot: (stream upToAll: ' ') trimBoth).
+			  typeName := (stream upToAll: ' ') trimBoth.
+			  type := self typeNamed: typeName.
+			  param typeReference:
+				  (self typeReferenceName: typeName type: type context: param ) ].
+		  func ]
 ]
 
 { #category : #'sdk functions' }
@@ -2158,14 +2155,6 @@ JinDAMSDKLibraryBuilder >> typeName [
 		  parametersFromString: 'variableName required variant'
 ]
 
-{ #category : #'as yet unclassified' }
-JinDAMSDKLibraryBuilder >> typeNameReference: aString [
-	self assert: (aString indexOf: $.) = 0.
-	^ (self instantiate: AlcixTypeReference)
-		names: {aString};
-		yourself
-]
-
 { #category : #'sdk functions' }
 JinDAMSDKLibraryBuilder >> typeNamed: aName [
 	"
@@ -2180,6 +2169,18 @@ JinDAMSDKLibraryBuilder >> typeNamed: aName [
 	(self respondsTo: aName uncapitalized asSymbol)
 		ifTrue: [ ^ self perform: aName uncapitalized asSymbol ].
 	^ self variant
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMSDKLibraryBuilder >> typeReferenceName: aString type: aJinDAMPrimitiveType context: aContext [
+
+	| reference |
+	self assert: (aString indexOf: '.') = 0.
+	reference := self instantiate: JinDAMTypeReference.
+	reference context: aContext. 
+	reference typeName: aString.
+	reference candidate: aJinDAMPrimitiveType.
+	^ reference
 ]
 
 { #category : #building }

@@ -5,7 +5,8 @@ Class {
 		'project',
 		'phase',
 		'processedReferences',
-		'projects'
+		'projects',
+		'savingPhases'
 	],
 	#category : #'JinDAM-Importers'
 }
@@ -39,6 +40,12 @@ JinDAMProjectImporter >> projects [
 	^ projects
 ]
 
+{ #category : #'instance creation' }
+JinDAMProjectImporter >> savingPhases [
+
+	^ savingPhases ifNil: [ false ]
+]
+
 { #category : #'visit-first-objects' }
 JinDAMProjectImporter >> visitCollection: aCollectionBlock [
 
@@ -67,7 +74,7 @@ JinDAMProjectImporter >> visitProject: aJinAccessProject [
 	
 	self state top name: aJinAccessProject name.
 	self state top anchor: (JinAnchor on: #/) / aJinAccessProject name.
-	self state top addReference: self sdkLibrary.
+	self state top addDependency: self sdkLibrary.
 	self state top path: aJinAccessProject projectPath fullName. 
 	
 	processedReferences

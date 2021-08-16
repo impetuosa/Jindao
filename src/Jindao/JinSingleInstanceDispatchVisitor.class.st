@@ -105,6 +105,11 @@ JinSingleInstanceDispatchVisitor >> state [
 ]
 
 { #category : #accessing }
+JinSingleInstanceDispatchVisitor >> symbolTable [
+	^ symbolTable 
+]
+
+{ #category : #accessing }
 JinSingleInstanceDispatchVisitor >> symbolTable: aJinNSSymbolTable [ 
 	symbolTable := aJinNSSymbolTable
 ]

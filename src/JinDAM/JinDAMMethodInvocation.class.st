@@ -1,8 +1,13 @@
 Class {
 	#name : #JinDAMMethodInvocation,
-	#superclass : #JinDAMInvocation,
+	#superclass : #JinDAMMemberReference,
 	#instVars : [
 		'receiver'
 	],
 	#category : #'JinDAM-Model'
 }
+
+{ #category : #accessing }
+JinDAMMethodInvocation >> receiver: aJinDAMTypeReference [ 
+	receiver := aJinDAMTypeReference
+]

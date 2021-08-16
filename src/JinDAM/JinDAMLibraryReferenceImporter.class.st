@@ -50,6 +50,11 @@ JinDAMLibraryReferenceImporter >> instantiateSetterAccessorMethod: aJinLibraryMe
 	anAttribute addAttributeAccessor: acc
 ]
 
+{ #category : #'as yet unclassified' }
+JinDAMLibraryReferenceImporter >> nodeToTypeReferenceName: aVBNode context: aContext [ 
+	^ self referenceNameConverter toTypeReferenceName: aVBNode context: aContext 
+]
+
 { #category : #visiting }
 JinDAMLibraryReferenceImporter >> visitLibrary: aJinLibrary [
 
