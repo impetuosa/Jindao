@@ -22,7 +22,7 @@ JinDAMLibraryReferenceImporter >> instantiateGetterAccessorMethod: aJinLibraryMe
 
 
 	acc selector: selector.
-	acc typeName: (self typeName: aJinLibraryMethod).
+	acc typeReference: (self typeName: aJinLibraryMethod context:acc ).
 
 	self state top addInvocable: acc.
 	self state push: acc.
@@ -41,7 +41,7 @@ JinDAMLibraryReferenceImporter >> instantiateSetterAccessorMethod: aJinLibraryMe
 
 
 	acc selector: selector.
-	acc typeName: (self typeName: aJinLibraryMethod).
+	acc typeReference: (self typeName: aJinLibraryMethod context: acc ).
 
 	self state top addInvocable: acc.
 	self state push: acc.
@@ -72,8 +72,8 @@ JinDAMLibraryReferenceImporter >> visitLibraryAlias: aJinLibraryAlias [
 	self state top addType: obj.
 	obj name: aJinLibraryAlias name.
 	obj anchor: self state top anchor / #alias / aJinLibraryAlias name.
-	obj typeName:
-		(self typeNameReference: aJinLibraryAlias aliaseeTypeName).
+	obj typeReference:
+		(self typeReferenceName: aJinLibraryAlias aliaseeTypeName context: obj).
 ]
 
 { #category : #visiting }
@@ -82,34 +82,38 @@ JinDAMLibraryReferenceImporter >> visitLibraryAttribute: aJinLibraryAttribute [
 	| attr |
 	attr := self instantiate: JinDAMAttribute.
 	attr name: aJinLibraryAttribute name.
-	attr typeName:
-		(self typeNameReference: aJinLibraryAttribute typeName).
+	attr typeReference:
+		(self typeReferenceName: aJinLibraryAttribute typeName context: attr).
 	attr isConstant: false.
 	attr visibility: ((self state top isKindOf: JinDAMClass)
 			 ifTrue: [ #Private ]
 			 ifFalse: [ #Public ]).
 	attr anchor: (self dllAnchor: attr name for: aJinLibraryAttribute).
-	self state top addMember: attr
+	self state top addAttribute: attr
 ]
 
 { #category : #visiting }
 JinDAMLibraryReferenceImporter >> visitLibraryCoClass: aJinLibraryCoClass [
 
 	| obj typeName |
-	typeName := aJinLibraryCoClass linkedType
-		            ifNil: [ self undefinedTypeReference ]
-		            ifNotNil: [ 
-		            self typeNameReference:
-			            aJinLibraryCoClass linkedType name ].
 	obj := self instantiate: JinDAMAlias.
+	typeName := aJinLibraryCoClass linkedType
+		            ifNil: [ 
+		            self referenceNameConverter 
+			            undefinedTypeReferenceContext: obj ]
+		            ifNotNil: [ 
+			            self
+				            typeReferenceName: aJinLibraryCoClass linkedType name
+				            context: obj ].
+
 	self state top addType: obj.
 	obj name: aJinLibraryCoClass name.
 	obj anchor:
 		self state top anchor / #coclass / aJinLibraryCoClass name.
-	obj typeName: typeName.
-	
+	obj typeReference: typeName
 
-"visitLibraryCoClass: aJinLibraryCoClass
+
+	"visitLibraryCoClass: aJinLibraryCoClass
 
 	| attr typeName |
 	attr := self instantiate: AlcixAttribute.
@@ -137,11 +141,11 @@ JinDAMLibraryReferenceImporter >> visitLibraryConstant: aJinLibraryConstant [
 	fn name: aJinLibraryConstant name.
 	fn anchor: (self dllAnchor: fn name for: aJinLibraryConstant).
 	aJinLibraryConstant type
-		ifNil: [ fn typeName: self undefinedTypeReference ]
+		ifNil: [ fn typeReference: (self referenceNameConverter  undefinedTypeReferenceContext: fn) ]
 		ifNotNil: [ :t | fn typeName: (self typeNameReference: t) ].
 	fn isConstant: true.
 	fn anchor: self state top anchor / #attributes / fn name.
-	self state top addMember: fn
+	self state top addAttribute:  fn
 ]
 
 { #category : #visiting }
@@ -160,7 +164,7 @@ JinDAMLibraryReferenceImporter >> visitLibraryEnum: aJinLibraryEnum [
 	aJinLibraryEnum values do: [ :d | 
 		en addEnumValue: ((self instantiate: JinDAMEnumValue)
 				 name: d name;
-				 Value: d value;
+				 value: d value;
 				 yourself) ]
 ]
 
@@ -172,7 +176,7 @@ JinDAMLibraryReferenceImporter >> visitLibraryFunction: aJinLibraryFunction [
 	selector := ('_' split: aJinLibraryFunction selector) last.
 	fn selector: selector.
 	fn anchor: self state top anchor / #functions / fn selector.
-	fn typeName: self undefinedTypeReference.
+	fn typeReference: (self referenceNameConverter undefinedTypeReferenceContext: fn ).
 	self state top addInvocable: fn
 ]
 
@@ -199,7 +203,7 @@ JinDAMLibraryReferenceImporter >> visitLibraryMethod: aJinLibraryMethod [
 	selector :=( '_' split: aJinLibraryMethod selector) last.  
 	fn selector: selector.
 	fn anchor: self state top anchor / #functions / fn selector.
-	fn typeName: (self typeName: aJinLibraryMethod) .
+	fn typeReference: (self typeName: aJinLibraryMethod context:fn ) .
 	
 	self state top addInvocable: fn.
 	self state push: fn.
@@ -228,7 +232,7 @@ JinDAMLibraryReferenceImporter >> visitLibraryParameter: aJinLibraryParameter [
 	| param |
 	param := self instantiate: JinDAMParameter.
 	param name: aJinLibraryParameter name.
-	param typeName: (self typeNameReference: aJinLibraryParameter type).
+	param typeReference: (self typeReferenceName: aJinLibraryParameter type context: param).
 	param isOptional: aJinLibraryParameter isOptional.
 	self state top addParameter: param
 ]
@@ -250,14 +254,14 @@ JinDAMLibraryReferenceImporter >> visitLibraryProperty: aJinLibraryProperty [
 	attribute anchor:
 		self state top anchor / #attributes / attribute name.
 
-	self state top addMember: attribute.
+	self state top addAttribute:  attribute.
 	self assert: aJinLibraryProperty type isNil.
 
 	aJinLibraryProperty getter ifNotNil: [ 
 		self
 			instantiateGetterAccessorMethod: aJinLibraryProperty getter
 			into: attribute.
-		attribute typeName: attribute attributeAccessors first typeName ].
+		attribute typeReference: attribute attributeAccessors first typeReference ].
 	aJinLibraryProperty setter ifNotNil: [ 
 		self
 			instantiateSetterAccessorMethod: aJinLibraryProperty setter

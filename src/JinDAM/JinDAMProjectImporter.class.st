@@ -123,7 +123,7 @@ JinDAMProjectImporter >> visitReference: aJinReference [
 	processedReferences
 		at: aJinReference path fullName asLowercase
 		ifPresent: [ :a | 
-			self state top addSecondary: a.
+			self state top addReference: a.
 			^ self ].
 
 	aJinReference isAccessProject
@@ -143,7 +143,6 @@ JinDAMProjectImporter >> visitReference: aJinReference [
 	ref path: aJinReference path fullName.
 	ref name: aJinReference name.
 	self state top addReference: ref.
-	self state top addSecondary: ref.
 	self state push: ref.
 	aJinReference isAccessProject
 		ifTrue: [ 

@@ -129,11 +129,9 @@ JinNSBuilder >> typeOwnerFor: aJinTable [
 
 { #category : #'as yet unclassified' }
 JinNSBuilder >> uniqueNameFor: aJinTable [
-	
-	^ ('.' join: (self copyStack reverse flatCollect: [ :a | 
-			    { 
-				    a tag.
-				    a name } ])) , '.' , aJinTable name
+
+	^ ('.' join: (self copyStack reverse collect: [ :a | a name ])) , '.'
+	  , aJinTable name
 ]
 
 { #category : #visiting }

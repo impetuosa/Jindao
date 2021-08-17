@@ -13,6 +13,12 @@ JinDAMAccessModule >> addDependency: aJinDAMLibrary [
 	self dependencies add: aJinDAMLibrary
 ]
 
+{ #category : #adding }
+JinDAMAccessModule >> addReference: aJinDAMLibrary [
+
+	self dependencies add: aJinDAMLibrary
+]
+
 { #category : #accessing }
 JinDAMAccessModule >> dependencies [
 	^ dependencies ifNil: [ dependencies := OrderedCollection new  ]

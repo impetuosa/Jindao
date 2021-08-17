@@ -2,6 +2,7 @@ Class {
 	#name : #JinNSNameEntry,
 	#superclass : #Object,
 	#instVars : [
+		'parent',
 		'name',
 		'owner',
 		'kind'
@@ -56,6 +57,11 @@ JinNSNameEntry >> owner [
 { #category : #accessing }
 JinNSNameEntry >> owner: aJinNSEntryOwner [
 	owner := aJinNSEntryOwner.
+]
+
+{ #category : #accessing }
+JinNSNameEntry >> parent: aParent [ 
+	 parent := aParent 
 ]
 
 { #category : #accessing }

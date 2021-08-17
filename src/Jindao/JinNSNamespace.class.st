@@ -186,6 +186,7 @@ JinNSNamespace >> register: aString kind: aJinNSKind owner: aJinNSEntryOwner [
 	(self entriesHolderFor: aString) add: (JinNSNameEntry new
 			 name: aString;
 			 kind: aJinNSKind;
+			 parent: self;
 			 owner: aJinNSEntryOwner;
 			 yourself)
 ]
@@ -198,6 +199,7 @@ JinNSNamespace >> registerAll: aStringOrderedCollection kind: aJinNSKind owner: 
 	col with: aStringOrderedCollection do: [ :holder :aString | 
 		holder add: (JinNSNameEntry new
 				 name: aString;
+				 parent: self;
 				 kind: aJinNSKind;
 				 owner: aJinNSEntryOwner;
 				 yourself) ]

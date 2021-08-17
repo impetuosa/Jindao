@@ -323,27 +323,32 @@ JinDAMASTCodeImporter >> visitDimVariable: aDimVariable [
 ]
 
 { #category : #assignments }
-JinDAMASTCodeImporter >> visitEquals: anAssignementOrEquals [
+JinDAMASTCodeImporter >> visitEquals: anExplicitAssignement [
 
-	| access |
-	"
-	Ensure that is an assignment: 
-	"
-	anAssignementOrEquals isAssignment
+
+	| access read write tempNames |
+	access := self instantiate: JinDAMAccessWrite.
+	tempNames := self nodeToString: anExplicitAssignement left.
+	anExplicitAssignement isReturn
+		ifFalse: [ 
+			write := self
+				         instantiateReferenceForNames: ('.' split: tempNames)
+				         context: access
+				         preferring: { #isAttribute . #isType} ]
 		ifTrue: [ 
-			access := self instantiate: JinDAMAccessWrite.
-			access isReturn: anAssignementOrEquals isReturn.
-			access anchor: (self
-					 codeAnchor: (self writeStringSelector: anAssignementOrEquals)
-					 for: anAssignementOrEquals).
-			access isWriting: true.
-			access leftElementName:
-				(self nodeToVariableReferenceName: anAssignementOrEquals left context: access).
-			access rightElementName:
-				(self nodeToVariableReferenceName: anAssignementOrEquals right context: access).
-			self state top addAccess: access ]
-		ifFalse: [ anAssignementOrEquals left acceptVisitor: self ].
-	anAssignementOrEquals right acceptVisitor: self
+			write := self
+				         instantiateReferenceForNames: ('.' split: tempNames)
+				         context: access
+				         preferring: { #isInvocable } ].
+	read := anExplicitAssignement right acceptVisitor: self.
+	access
+		readReference: read;
+		writeReference: write;
+		isReturn: anExplicitAssignement isReturn.
+	access isNewObject:
+		(anExplicitAssignement right isKindOf: VBNewClauseNode).
+	self state top addAccess: access.
+	^ access
 ]
 
 { #category : #'functions - subs - events' }
