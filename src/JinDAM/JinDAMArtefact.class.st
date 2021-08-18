@@ -12,7 +12,6 @@ Class {
 
 { #category : #adding }
 JinDAMArtefact >> addGlobal: aJinDAMAttribute [
-
 	self globals add: aJinDAMAttribute
 ]
 

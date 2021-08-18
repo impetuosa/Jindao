@@ -14,6 +14,14 @@ JinDAMEnum >> addEnumValue: aJinDAMEnumValue [
 ]
 
 { #category : #accessing }
+JinDAMEnum >> printOn: aStream [
+
+	aStream
+		nextPutAll: 'Enum ';
+		nextPutAll: name
+]
+
+{ #category : #accessing }
 JinDAMEnum >> values [
 
 	^ values ifNil: [ values := OrderedCollection new ]

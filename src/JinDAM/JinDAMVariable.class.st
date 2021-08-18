@@ -42,6 +42,17 @@ JinDAMVariable >> name: aString [
 	name := aString
 ]
 
+{ #category : #'as yet unclassified' }
+JinDAMVariable >> printOn: aStream [
+
+	typeReference printOn: aStream.
+	aStream
+		nextPutAll: ':';
+		nextPutAll: (self className copyReplaceAll: 'JinDAM' with: '');
+		nextPutAll: ':';
+		nextPutAll: name
+]
+
 { #category : #accessing }
 JinDAMVariable >> typeReference: aJinDAMTypeReference [
 

@@ -255,6 +255,11 @@ JinNSKind >> = anObject [
 	^ kind = anObject kind 
 ]
 
+{ #category : #'as yet unclassified' }
+JinNSKind >> adaptToAlceAnchorPathFragment [
+	^ kind
+]
+
 { #category : #accessing }
 JinNSKind >> hash [
 
@@ -265,6 +270,11 @@ JinNSKind >> hash [
 JinNSKind >> isAnyOf: arrayOfSelectors [
 
 	^ arrayOfSelectors anySatisfy: [ :a | self perform: a ]
+]
+
+{ #category : #testing }
+JinNSKind >> isAssembly [
+	^ kind = ##assembly
 ]
 
 { #category : #testing }

@@ -23,3 +23,19 @@ JinDAMAttributeAccessor >> kind [
 JinDAMAttributeAccessor >> kind: aString [ 
 	kind := aString
 ]
+
+{ #category : #accessing }
+JinDAMAttributeAccessor >> printOn: aStream [
+
+	aStream
+		nextPutAll: typeReference name;
+		nextPutAll: ' ';
+		nextPutAll: kind;
+		nextPutAll: ' ';
+		nextPutAll: selector;
+		nextPutAll: ' ';
+		nextPut: $(.
+	aStream
+		nextPutAll: (',' join: (parameters collect: [ :a | a printString ]));
+		nextPut: $)
+]

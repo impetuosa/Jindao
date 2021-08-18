@@ -16,7 +16,7 @@ JinDAMReference >> adaptToAlceAnchorPathFragment [
 	a := self.
 	segments := OrderedCollection new.
 	[ a isKindOf: JinDAMReference ] whileTrue: [ 
-		segments addFirst: a typeName.
+		segments addFirst: a name.
 		a := a context ].
 	^ '.' join: segments
 ]
@@ -46,4 +46,18 @@ JinDAMReference >> context: aJinDAMTypeReference [
 JinDAMReference >> isReference [
 
 	^ true
+]
+
+{ #category : #printing }
+JinDAMReference >> printOn: aStream [
+
+	aStream
+		nextPutAll: ' -> ';
+		nextPutAll: self adaptToAlceAnchorPathFragment;
+		nextPutAll: ' ';
+		nextPutAll:
+			(candidate
+				 ifNil: [ 'Unsolved' ]
+				 ifNotNil: [ candidate printString ]).
+	
 ]

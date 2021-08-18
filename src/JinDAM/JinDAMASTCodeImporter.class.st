@@ -3,6 +3,9 @@ Class {
 	#superclass : #JinASTCodeVisitor,
 	#traits : 'JinDAMTypeConversions',
 	#classTraits : 'JinDAMTypeConversions classTrait',
+	#instVars : [
+		'literals'
+	],
 	#category : #'JinDAM-Importers'
 }
 
@@ -89,33 +92,6 @@ JinDAMASTCodeImporter >> instantiateReferenceForNames: names context: aContext p
 	^ tip
 ]
 
-{ #category : #'as yet unclassified' }
-JinDAMASTCodeImporter >> instantiateReferenceForSymbol: symbol name: aName context: context [
-
-	| inter |
-	symbol
-		ifNil: [ 
-			inter := self instantiate: JinDAMMemberReference.
-			inter name: aName ]
-		ifNotNil: [ 
-			symbol kind isEnumEntry ifTrue: [ 
-				inter := self instantiate: JinDAMTypeReference.
-				inter typeName: aName ].
-
-			symbol kind isType ifTrue: [ 
-				inter := self instantiate: JinDAMTypeReference.
-				inter typeName: aName ].
-			symbol kind isAttribute ifTrue: [ 
-				inter := self instantiate: JinDAMMemberReference.
-				inter name: aName ].
-			symbol kind isInvocable ifTrue: [ 
-				inter := self instantiate: JinDAMMemberReference.
-				inter selector: aName ].
-			inter candidateAnchor: symbol anchor ].
-	inter context: context.
-	^ inter
-]
-
 { #category : #'properties - variables' }
 JinDAMASTCodeImporter >> instantiateVariable: aClass from: aVariable [
 
@@ -128,6 +104,11 @@ JinDAMASTCodeImporter >> instantiateVariable: aClass from: aVariable [
 	var anchor: (self codeAnchor: var name for: aVariable).
 
 	^ var
+]
+
+{ #category : #'functions - subs - events' }
+JinDAMASTCodeImporter >> literals [
+	 ^ literals ifNil: [ literals := Dictionary new  ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -148,21 +129,33 @@ JinDAMASTCodeImporter >> registerSpecialVariable: aName type: aType [
 
 { #category : #generated }
 JinDAMASTCodeImporter >> visitArgument: anArgument [
-	| arg |  
-	arg := self instantiate:	JinDAMArgument.
-	
-	arg text: (self nodeToString: anArgument ).
-	self state top addArgument: arg. 
-	self state push: arg. 
+
+	| arg |
+	arg := self instantiate: JinDAMArgument.
+
+	arg text: (self nodeToString: anArgument).
+	self state top addArgument: arg.
+	self state push: arg.
 	anArgument value acceptVisitor: self.
-	self state pop. 
-	
+	self state pop
 ]
 
 { #category : #generated }
 JinDAMASTCodeImporter >> visitArgumentList: anArgumentList [
 
 	self visitCollection: anArgumentList arguments
+]
+
+{ #category : #'functions - subs - events' }
+JinDAMASTCodeImporter >> visitBooleanLiteral: aLiteral [
+
+	^ self visitLiteral: aLiteral
+]
+
+{ #category : #'functions - subs - events' }
+JinDAMASTCodeImporter >> visitColorLiteral: aLiteral [
+
+	^ self visitLiteral: aLiteral
 ]
 
 { #category : #generated }
@@ -177,13 +170,12 @@ JinDAMASTCodeImporter >> visitConstant: aConstant [
 	| fn |
 	(self state top isKindOf: JinDAMModule)
 		ifTrue: [ 
-			fn := self instantiate: JinDAMAttribute.
-			fn visibility: #Public.
+			fn := self instantiate: JinDAMConstant.
 			self state top addAttribute: fn ]
 		ifFalse: [ 
 			(self state top isKindOf: JinDAMInvocable)
 				ifTrue: [ 
-					fn := self instantiate: JinDAMLocalVariable.
+					fn := self instantiate: JinDAMConstant.
 					self state top addLocalVariable: fn ]
 				ifFalse: [ ^ self error: 'un expected ' ] ].
 
@@ -203,6 +195,12 @@ JinDAMASTCodeImporter >> visitConstant: aConstant [
 JinDAMASTCodeImporter >> visitConstantList: aConstantList [
 	^ self visitProgram: aConstantList.
 
+]
+
+{ #category : #'functions - subs - events' }
+JinDAMASTCodeImporter >> visitDateLiteral: aLiteral [
+
+	^ self visitLiteral: aLiteral
 ]
 
 { #category : #'type definition' }
@@ -325,30 +323,41 @@ JinDAMASTCodeImporter >> visitDimVariable: aDimVariable [
 { #category : #assignments }
 JinDAMASTCodeImporter >> visitEquals: anExplicitAssignement [
 
-
-	| access read write tempNames |
-	access := self instantiate: JinDAMAccessWrite.
-	tempNames := self nodeToString: anExplicitAssignement left.
-	anExplicitAssignement isReturn
-		ifFalse: [ 
-			write := self
-				         instantiateReferenceForNames: ('.' split: tempNames)
-				         context: access
-				         preferring: { #isAttribute . #isType} ]
+	| access write tempNames |
+	anExplicitAssignement isAssignment
 		ifTrue: [ 
-			write := self
-				         instantiateReferenceForNames: ('.' split: tempNames)
-				         context: access
-				         preferring: { #isInvocable } ].
-	read := anExplicitAssignement right acceptVisitor: self.
-	access
-		readReference: read;
-		writeReference: write;
-		isReturn: anExplicitAssignement isReturn.
-	access isNewObject:
-		(anExplicitAssignement right isKindOf: VBNewClauseNode).
-	self state top addAccess: access.
-	^ access
+			access := self instantiate: JinDAMAccessWrite.
+			tempNames := anExplicitAssignement left acceptVisitor:
+				             self referenceNameConverter.
+
+			anExplicitAssignement isReturn
+				ifFalse: [ 
+					write := self
+						         instantiateReferenceForNames: tempNames
+						         context: access
+						         preferring: { #isAttribute. #isType } ]
+				ifTrue: [ 
+					write := self
+						         instantiateReferenceForNames: tempNames
+						         context: access
+						         preferring: { #isInvocable } ].
+
+			self state push: access.
+			anExplicitAssignement right acceptVisitor: self.
+			self state pop.
+
+
+			access
+				writeReference: write;
+				isReturn: anExplicitAssignement isReturn.
+			self assert: access hasReads.
+
+			access isNewObject:
+				(anExplicitAssignement right isKindOf: VBNewClauseNode).
+
+			self state top addAccess: access.
+			^ access ]
+		ifFalse: [ anExplicitAssignement right acceptVisitor: self ]
 ]
 
 { #category : #'functions - subs - events' }
@@ -367,28 +376,38 @@ JinDAMASTCodeImporter >> visitEvent: anEvent [
 { #category : #assignments }
 JinDAMASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 
-	| access read write tempNames |
+	| access write tempNames |
 	access := self instantiate: JinDAMAccessWrite.
-	tempNames := self nodeToString: anExplicitAssignement left.
+	tempNames := anExplicitAssignement left acceptVisitor:
+		             self referenceNameConverter.
+
 	anExplicitAssignement isReturn
 		ifFalse: [ 
 			write := self
-				         instantiateReferenceForNames: ('.' split: tempNames)
+				         instantiateReferenceForNames: tempNames
 				         context: access
 				         preferring: { #isAttribute } ]
 		ifTrue: [ 
 			write := self
-				         instantiateReferenceForNames: ('.' split: tempNames)
+				         instantiateReferenceForNames: tempNames
 				         context: access
 				         preferring: { #isInvocable } ].
-	read := anExplicitAssignement right acceptVisitor: self.
+
+	self state push: access.
+	anExplicitAssignement right acceptVisitor: self.
+	self state pop.
+
+
 	access
-		readReference: read;
 		writeReference: write;
 		isReturn: anExplicitAssignement isReturn.
+	self assert: access hasReads.
+
 	access isNewObject:
 		(anExplicitAssignement right isKindOf: VBNewClauseNode).
+
 	self state top addAccess: access.
+
 	^ access
 ]
 
@@ -409,10 +428,14 @@ JinDAMASTCodeImporter >> visitExternalFunction: aDefinition [
 	| fn |
 	fn := self instantiate: JinDAMExternalFunction.
 	fn selector: (self nodeToString: aDefinition selector).
-	fn anchor: self state top anchor / #functions / fn selector / #'@src'
+	fn anchor:
+		self state top anchor / #functions / fn selector / #'@src'
 		/ aDefinition startPosition asString / #to
 		/ aDefinition stopPosition asString.
+		
+	
 	fn libraryName: (self nodeToString: aDefinition library).
+	fn typeReference: (self typeName: aDefinition type context: fn).
 
 	aDefinition alias ifNotNil: [ 
 		fn alias: (self nodeToString: aDefinition alias) ].
@@ -452,6 +475,12 @@ JinDAMASTCodeImporter >> visitExternalSub: aDefinition [
 	self state push: fn.
 	aDefinition parameters acceptVisitor: self.
 	self state pop
+]
+
+{ #category : #'functions - subs - events' }
+JinDAMASTCodeImporter >> visitFloatLiteral: aLiteral [
+
+	^ self visitLiteral: aLiteral
 ]
 
 { #category : #'functions - subs - events' }
@@ -503,6 +532,12 @@ JinDAMASTCodeImporter >> visitGoToStatement: aStatement [
 	
 ]
 
+{ #category : #'functions - subs - events' }
+JinDAMASTCodeImporter >> visitGuidLiteral: aLiteral [
+
+	^ self visitLiteral: aLiteral
+]
+
 { #category : #generated }
 JinDAMASTCodeImporter >> visitHeader: aHeader [
 	^ self visitProgram: aHeader.
@@ -530,6 +565,11 @@ JinDAMASTCodeImporter >> visitImplicitParenthesesLessCall: anImplicitParentheses
 	self state pop
 ]
 
+{ #category : #'functions - subs - events' }
+JinDAMASTCodeImporter >> visitIntegerLiteral: aLiteral [ 
+	^ self visitLiteral: aLiteral 
+]
+
 { #category : #'avoiding visit' }
 JinDAMASTCodeImporter >> visitLabel: aLabel [ 	
 	
@@ -538,6 +578,28 @@ JinDAMASTCodeImporter >> visitLabel: aLabel [
 { #category : #'avoiding visit' }
 JinDAMASTCodeImporter >> visitLabelTag: aLabel [ 	
 	
+]
+
+{ #category : #'functions - subs - events' }
+JinDAMASTCodeImporter >> visitLiteral: aLiteral [
+
+	| l read name |
+	l := self literals
+		     at: aLiteral token value , aLiteral className
+		     ifAbsentPut: [ 
+			     l := self instantiate: JinDAMLiteralReference.
+			     l candidate: aLiteral token value.
+			     name := aLiteral className
+				             copyFrom: 3
+				             to: aLiteral className size.
+			     name := name copyReplaceAll: 'Literal' with: ''.
+			     name := name copyReplaceAll: 'Node' with: ''.
+			     l literalKind: name asSymbol.
+			     l ].
+	read := self instantiate: JinDAMAccessRead.
+
+	read readReference: l.
+	self state top addAccess: read
 ]
 
 { #category : #'member access' }
@@ -659,6 +721,12 @@ JinDAMASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 	self state pop
 ]
 
+{ #category : #'functions - subs - events' }
+JinDAMASTCodeImporter >> visitNull: aLiteral [
+
+	^ self visitLiteral: aLiteral
+]
+
 { #category : #'avoiding visit' }
 JinDAMASTCodeImporter >> visitOnErrorGoTo: aStatement [
 	
@@ -711,15 +779,15 @@ JinDAMASTCodeImporter >> visitRaiseError: aRaiseError [
 JinDAMASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
 
 	| call args sel |
-	args := (aRaiseEvent selector class name asLowercase includesSubstring: 
-		         'identifier')
+	args := (aRaiseEvent selector class name asLowercase 
+		         includesSubstring: 'identifier')
 		        ifTrue: [ 
 			        sel := aRaiseEvent selector.
 			        args := #(  ) ]
 		        ifFalse: [ 
 			        sel := aRaiseEvent selector selector.
 			        args := aRaiseEvent selector arguments arguments ].
-	call := self instantiate: JinDAMRaiseEvent.
+	call := self instantiate: JinDAMMemberReference.
 	call selector: (self nodeToInvocableReferenceName: sel).
 	call anchor: (self codeAnchor: call selector for: aRaiseEvent).
 
@@ -762,6 +830,7 @@ JinDAMASTCodeImporter >> visitSimpleIdentifier: aSimpleIdentifier [
 
 	| read tip |
 	({ 
+		 JinDAMAccessWrite.
 		 JinDAMInvocable.
 		 JinDAMArgument } anySatisfy: [ :a | self state top isKindOf: a ]) 
 		ifTrue: [ 
@@ -775,10 +844,18 @@ JinDAMASTCodeImporter >> visitSimpleIdentifier: aSimpleIdentifier [
 			self state top addAccess: read ].
 
 	read ifNil: [ 
-		(self state top isKindOf: JinDAMAttribute) ifFalse: [ 
-			self error: 'What is the symbol? ' ] ].
+		({ 
+			 JinDAMAttribute.
+			 JinDAMConstant } anySatisfy: [ :a | self state top isKindOf: a ]) 
+			ifFalse: [ self error: 'What is the symbol? ' ] ].
 
 	^ read
+]
+
+{ #category : #'functions - subs - events' }
+JinDAMASTCodeImporter >> visitStringLiteral: aLiteral [
+
+	^ self visitLiteral: aLiteral
 ]
 
 { #category : #'functions - subs - events' }

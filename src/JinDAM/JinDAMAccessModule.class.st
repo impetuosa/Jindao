@@ -24,6 +24,15 @@ JinDAMAccessModule >> dependencies [
 	^ dependencies ifNil: [ dependencies := OrderedCollection new  ]
 ]
 
+{ #category : #accessing }
+JinDAMAccessModule >> printOn: aStream [
+
+	aStream nextPutAll: 'AM ('.
+	aStream
+		nextPutAll: name;
+		nextPut: $)
+]
+
 { #category : #'as yet unclassified' }
 JinDAMAccessModule >> relatedSymbolKind [
 

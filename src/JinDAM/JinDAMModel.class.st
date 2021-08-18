@@ -7,6 +7,11 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #accessing }
+JinDAMModel >> entities [
+	^ entities
+]
+
 { #category : #'instance creation' }
 JinDAMModel >> initialize [
 

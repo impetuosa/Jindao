@@ -14,6 +14,17 @@ JinDAMEnumValue >> name: aString [
 ]
 
 { #category : #accessing }
+JinDAMEnumValue >> printOn: aStream [
+
+	aStream nextPutAll: 'EV ('.
+	aStream
+		nextPutAll: name;
+		nextPut: $:;
+		nextPutAll: value asString;
+		nextPut: $)
+]
+
+{ #category : #accessing }
 JinDAMEnumValue >> value [
 
 	^ value

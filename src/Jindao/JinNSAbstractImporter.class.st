@@ -10,6 +10,18 @@ Class {
 	#category : #'Jindao-NamespaceIndex'
 }
 
+{ #category : #'as yet unclassified' }
+JinNSAbstractImporter >> assemblyRegisterAndPushSubNameSpaceEntry: aString kind: aJinNSKind owner: aJinNSEntryOwner during: aFullBlockClosure [
+
+	| ns |
+	ns := self currentAssemblyNamespace
+		      registerSubNamespace: aString
+		      kind: aJinNSKind
+		      owner: aJinNSEntryOwner.
+	ns parent: self currentNamespace.
+	self push: ns during: aFullBlockClosure
+]
+
 { #category : #'instance creation' }
 JinNSAbstractImporter >> beConcurrent [
 
@@ -49,6 +61,18 @@ JinNSAbstractImporter >> enclosingNamespaceTagged: aTag [
 		  ifNone: [ self error: 'Not found enclosing tag ' , aTag ]
 ]
 
+{ #category : #'as yet unclassified' }
+JinNSAbstractImporter >> externalRegisterAndPushSubNameSpaceEntry: aString kind: aJinNSKind owner: aJinNSEntryOwner during: aFullBlockClosure [
+
+	| ns |
+	ns := self currentExternalNamespace
+		      registerSubNamespace: aString
+		      kind: aJinNSKind
+		      owner: aJinNSEntryOwner.
+	ns parent: self currentNamespace.
+	self push: ns during: aFullBlockClosure
+]
+
 { #category : #'instance creation' }
 JinNSAbstractImporter >> futureRegistry: anAddFuturesUnderstandingObject [
 
@@ -75,10 +99,12 @@ JinNSAbstractImporter >> newAssemblyNamespace: aJinAccessProject owner: anOwner 
 	| parent |
 	parent := self currentExternalNamespace.
 	"self assert: parent name = aJinAccessProject name."
-	^ parent
-		  registerSubNamespace: aJinAccessProject path basename asLowercase 
-		  kind: JinNSKind assembly
-		  owner: anOwner
+	^ (parent
+		   registerSubNamespace: aJinAccessProject name
+		   kind: JinNSKind assembly
+		   owner: anOwner)
+		  path: aJinAccessProject path;
+		  yourself
 ]
 
 { #category : #'instance creation' }
@@ -98,7 +124,7 @@ JinNSAbstractImporter >> popAssemblyFor: project [
 
 	| assembly |
 	stackMutex critical: [ 
-		self assert: stack top name = project path basename asLowercase.
+		self assert: stack top name = project name.
 		assembly := stack pop ].
 	^ assembly
 ]
@@ -124,6 +150,31 @@ JinNSAbstractImporter >> pushNewAssemblyFor: aProject owner: anOwner [
 ]
 
 { #category : #'as yet unclassified' }
+JinNSAbstractImporter >> register: aName kind: aJinNSKind owner: aJinNSEntryOwner visibility: aVisibility [
+
+	| visibility |
+	visibility := aVisibility
+		              ifNil: [ #Friend ]
+		              ifNotNil: [ aVisibility asSymbol ].
+	self assert: (#( Global Public Private Friend ) includes: visibility).
+	(visibility = #Public or: [ visibility = #Global ]) ifTrue: [ 
+		(self currentExternalNamespace
+			 register: aName
+			 kind: aJinNSKind
+			 owner: aJinNSEntryOwner) parent: self currentNamespace ].
+	visibility = #Friend ifTrue: [ 
+		(self currentAssemblyNamespace
+			 register: aName
+			 kind: aJinNSKind
+			 owner: aJinNSEntryOwner) parent: self currentNamespace ].
+	visibility = #Private ifTrue: [ 
+		(self currentNamespace
+			 register: aName
+			 kind: aJinNSKind
+			 owner: aJinNSEntryOwner) parent: self currentNamespace ]
+]
+
+{ #category : #'as yet unclassified' }
 JinNSAbstractImporter >> registerAndPushSubNameSpaceEntry: aString kind: aJinNSKind owner: aJinNSEntryOwner during: aFullBlockClosure [
 
 	| ns |
@@ -132,6 +183,43 @@ JinNSAbstractImporter >> registerAndPushSubNameSpaceEntry: aString kind: aJinNSK
 		      kind: aJinNSKind
 		      owner: aJinNSEntryOwner.
 	self push: ns during: aFullBlockClosure
+]
+
+{ #category : #'as yet unclassified' }
+JinNSAbstractImporter >> registerSubNamespace: aName kind: aJinNSKind owner: aJinNSEntryOwner visibility: aVisibility during: aFullBlockClosure [
+
+	| visibility |
+	visibility := aVisibility
+		              ifNil: [ #Friend ]
+		              ifNotNil: [ :a | a asSymbol ].
+	self assert: (#( Public Private Friend ) includes: visibility).
+
+	self buildingModule ifFalse: [ 
+		self
+			registerAndPushSubNameSpaceEntry: aName
+			kind: aJinNSKind
+			owner: aJinNSEntryOwner
+			during: aFullBlockClosure.
+		^ self ].
+
+	visibility = #Public ifTrue: [ 
+		self
+			externalRegisterAndPushSubNameSpaceEntry: aName
+			kind: aJinNSKind
+			owner: aJinNSEntryOwner
+			during: aFullBlockClosure ].
+	visibility = #Friend ifTrue: [ 
+		self
+			assemblyRegisterAndPushSubNameSpaceEntry: aName
+			kind: aJinNSKind
+			owner: aJinNSEntryOwner
+			during: aFullBlockClosure ].
+	visibility = #Private ifTrue: [ 
+		self
+			registerAndPushSubNameSpaceEntry: aName
+			kind: aJinNSKind
+			owner: aJinNSEntryOwner
+			during: aFullBlockClosure ]
 ]
 
 { #category : #'as yet unclassified' }

@@ -20,6 +20,7 @@ JinNSSDKLibraryBuilder class >> forModel: aModel [
 JinNSSDKLibraryBuilder >> aliasTypes [
 
 	^ { 
+		  self float.
 		  self int32.
 		  self int16.
 		  self int.
@@ -150,6 +151,12 @@ JinNSSDKLibraryBuilder >> err [
 	^ self newAlias: #Err
 ]
 
+{ #category : #alias }
+JinNSSDKLibraryBuilder >> float [
+
+	^ self newAlias: #float
+]
+
 { #category : #globals }
 JinNSSDKLibraryBuilder >> globals [
 
@@ -179,7 +186,7 @@ JinNSSDKLibraryBuilder >> int32 [
 
 { #category : #'primitive types' }
 JinNSSDKLibraryBuilder >> integer [
-	^ self primitiveTypeNamed: #VOID
+	^ self primitiveTypeNamed: #Integer
 		
 	
 ]

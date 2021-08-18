@@ -19,6 +19,13 @@ JinDAMAccessRead >> name [
 ]
 
 { #category : #accessing }
+JinDAMAccessRead >> printOn: aStream [
+	aStream nextPutAll: '+R '.
+	readReference printOn: aStream
+]
+
+{ #category : #accessing }
 JinDAMAccessRead >> readReference: aJinDAMVariableReference [ 
-	readReference := aJinDAMVariableReference
+	
+	readReference := aJinDAMVariableReference.
 ]

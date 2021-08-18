@@ -52,6 +52,17 @@ JinDAMMemberReference >> name: aName [
 ]
 
 { #category : #accessing }
+JinDAMMemberReference >> printOn: aStream [
+
+	super printOn: aStream.
+	arguments ifNil: [ ^ self ].
+	aStream nextPut: $(.
+	aStream
+		nextPutAll: (',' join: (arguments collect: [ :a | a printString ]));
+		nextPut: $)
+]
+
+{ #category : #accessing }
 JinDAMMemberReference >> selector [ 
 	 ^ name 
 ]

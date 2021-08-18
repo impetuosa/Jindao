@@ -17,3 +17,18 @@ JinDAMUserType >> attributes [
 
 	^ attributes ifNil: [ attributes := OrderedCollection new ]
 ]
+
+{ #category : #adding }
+JinDAMUserType >> printOn: aStream [
+
+	aStream
+		nextPutAll: (self className copyReplaceAll: 'JinDAM' with: '');
+		nextPutAll: ':';
+		nextPutAll: name
+]
+
+{ #category : #adding }
+JinDAMUserType >> relatedSymbolKind [
+
+	^ #isType
+]

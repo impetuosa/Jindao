@@ -33,6 +33,17 @@ JinNSLibrarySymbolImporter >> buildFor: aJinNSBuilder [
 	"self visitCollection: library functions. "
 ]
 
+{ #category : #accessing }
+JinNSLibrarySymbolImporter >> buildingModule [
+	 ^ true 
+]
+
+{ #category : #'as yet unclassified' }
+JinNSLibrarySymbolImporter >> currentExternalNamespace [
+
+	^ self currentAssemblyNamespace 
+]
+
 { #category : #'as yet unclassified' }
 JinNSLibrarySymbolImporter >> currentNamespace [
 
@@ -126,15 +137,18 @@ JinNSLibrarySymbolImporter >> visitLibraryDispatchInterface: aJinLibraryDispatch
 { #category : #visiting }
 JinNSLibrarySymbolImporter >> visitLibraryEnum: aJinLibraryEnum [
 
-	assembly
-		register: aJinLibraryEnum name
+	self
+		registerSubNamespace: aJinLibraryEnum name
 		kind: JinNSKind enum
-		owner: self owner.
-	aJinLibraryEnum values do: [ :v | 
-		assembly
-			register: v name
-			kind: JinNSKind enumEntry
-			owner: self owner ]
+		owner: owner
+		visibility: #Public
+		during: [ 
+			aJinLibraryEnum values do: [ :v | 
+				self
+					register: v name
+					kind: JinNSKind enumEntry
+					owner: self owner
+					visibility: #Public ] ]
 ]
 
 { #category : #visiting }

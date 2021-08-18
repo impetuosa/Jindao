@@ -41,22 +41,10 @@ JinDAMTypeConversions >> stringConverter [
 ]
 
 { #category : #'functions - subs - events' }
-JinDAMTypeConversions >> typeName: aTypeOrNil [
-	 self halt: ' should be using typeName: context: '
-]
-
-{ #category : #'functions - subs - events' }
 JinDAMTypeConversions >> typeName: aTypeOrNil context: aContext [ 
 	^ aTypeOrNil
 		ifNil: [self referenceNameConverter undefinedTypeReferenceContext: aContext  ]
 		ifNotNil: [ self nodeToTypeReferenceName: aTypeOrNil context: aContext  ]
-]
-
-{ #category : #'as yet unclassified' }
-JinDAMTypeConversions >> typeReferenceName: aString context: aContext [ 
-
-	^ self typeReferenceName: aString type: nil context: aContext 
-
 ]
 
 { #category : #'as yet unclassified' }
@@ -68,6 +56,24 @@ JinDAMTypeConversions >> typeReferenceName: aString type: aJinDAMPrimitiveType c
 	reference context: aContext. 
 	reference typeName: aString.
 	reference candidate: aJinDAMPrimitiveType.
+	reference candidateAnchor: aJinDAMPrimitiveType anchor. 
+	^ reference
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMTypeConversions >> typeReferenceName: aString typeSymbol: aCollection context: aContext [
+
+	| reference potentialTypes  |
+	self assert: (aString indexOf: '.') = 0.
+	reference := self instantiate: JinDAMTypeReference.
+	reference context: aContext.
+	reference typeName: aString.
+	potentialTypes  := aCollection select:[: p | p kind isType].
+
+	(aCollection isEmpty and: [ {'NULL' . 'ERROR' . 'CARRAY'. 'SAFEARRAY' . 'COMUnknownInstance' . 'COMDispatchInstance' } includes: aString  ]) ifFalse: [ 
+		self assert: potentialTypes size = 1.
+		reference candidateAnchor: potentialTypes first anchor ].
+
 	^ reference
 ]
 

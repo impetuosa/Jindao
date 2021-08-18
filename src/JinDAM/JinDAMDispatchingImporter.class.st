@@ -60,7 +60,11 @@ JinDAMDispatchingImporter >> savingPhases: aBool [
 
 { #category : #'instance creation' }
 JinDAMDispatchingImporter >> sdkLibrary [
-	^ sdkLibrary ifNil: [  sdkLibrary := (JinDAMSDKLibraryBuilder forModel: model) build ]
+
+	^ sdkLibrary ifNil: [ 
+		  sdkLibrary := (JinDAMSDKLibraryBuilder
+			                 forModel: model
+			                 importer: self) build ]
 ]
 
 { #category : #'instance creation' }

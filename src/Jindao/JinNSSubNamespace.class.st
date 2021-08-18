@@ -2,7 +2,8 @@ Class {
 	#name : #JinNSSubNamespace,
 	#superclass : #JinNSNamespace,
 	#instVars : [
-		'owner'
+		'owner',
+		'path'
 	],
 	#category : #'Jindao-NamespaceIndex'
 }
@@ -13,9 +14,12 @@ JinNSSubNamespace >> acceptVisitor: aJinNSVisitorCounter [
 	aJinNSVisitorCounter visitSubNamespace: self
 ]
 
-{ #category : #accessing }
+{ #category : #description }
 JinNSSubNamespace >> anchor [
-	 ^ nil
+
+	^ ((parent isNil or: [ tag isAssembly ])
+		   ifTrue: [ (JinAnchor on: #/)  / name ]
+		   ifFalse: [ parent anchor / self kind / name ]) 
 ]
 
 { #category : #description }
@@ -36,6 +40,11 @@ JinNSSubNamespace >> owner [
 { #category : #accessing }
 JinNSSubNamespace >> owner: aJinNSEntryOwner [ 
 	owner := aJinNSEntryOwner.
+]
+
+{ #category : #accessing }
+JinNSSubNamespace >> path: aPath [
+	path := aPath 
 ]
 
 { #category : #accessing }

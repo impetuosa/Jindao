@@ -23,9 +23,12 @@ JinDAMImporter >> import: aProjectPath into: aModel [
 	| project visitor |
 	project := JinAccessApplication default open: aProjectPath.
 	visitor := self visitorFor: aModel.
-	[ project acceptVisitor: visitor.
-	^ aModel ]
-		ensure: [ project closeAndQuit ]
+	[ 
+		project acceptVisitor: visitor.
+ 		self link: aModel. 
+		^ aModel.  
+	]
+		ensure: [ project closeAndQuit ].
 ]
 
 { #category : #accessing }

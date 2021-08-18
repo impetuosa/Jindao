@@ -8,6 +8,11 @@ Class {
 }
 
 { #category : #accessing }
+JinDAMTypeReference >> name [
+	 ^ typeName 
+]
+
+{ #category : #accessing }
 JinDAMTypeReference >> typeName [
 
 	^ typeName

@@ -112,6 +112,7 @@ JinNSBuilder >> newAssemblyNamespace: aJinAccessProject owner: anOwner [
 JinNSBuilder >> newExternalNamespaceFor: aJinAccessProject [
 
 	| new |
+	self assert: externalNamespaces isEmpty. 
 	new := super newExternalNamespaceFor: aJinAccessProject.
 	JinNSSDKLibraryBuilder new buildOn: new.
 	externalNamespaces add: new.
@@ -271,7 +272,7 @@ JinNSBuilder >> visitReference: aJinReference [
 					 ] ].
 	self currentAssemblyNamespace installAllAssemblySymbolsFrom:
 		(assemblyNamespaces detect: [ :a | 
-			 a name = aJinReference path basename asLowercase ])
+			 a name = aJinReference name ])
 ]
 
 { #category : #visiting }

@@ -11,18 +11,6 @@ Class {
 	#category : #'Jindao-NamespaceIndex'
 }
 
-{ #category : #'as yet unclassified' }
-JinNSASTSymbolImporter >> assemblyRegisterAndPushSubNameSpaceEntry: aString kind: aJinNSKind owner: aJinNSEntryOwner during: aFullBlockClosure [
-
-	| ns |
-	ns := self currentAssemblyNamespace
-		      registerSubNamespace: aString
-		      kind: aJinNSKind
-		      owner: aJinNSEntryOwner.
-	ns parent: self currentNamespace.
-	self push: ns during: aFullBlockClosure
-]
-
 { #category : #accessing }
 JinNSASTSymbolImporter >> ast [
 
@@ -56,8 +44,12 @@ JinNSASTSymbolImporter >> ast [
 { #category : #'as yet unclassified' }
 JinNSASTSymbolImporter >> buildClassFor: aJinNSBuilder [
 
+	| ret |
 	buildingModule := false.
-	self buildFor: aJinNSBuilder
+	ret := self buildFor: aJinNSBuilder.
+
+
+	^ ret
 ]
 
 { #category : #building }
@@ -74,14 +66,20 @@ JinNSASTSymbolImporter >> buildFor: aJinNSBuilder [
 ]
 
 { #category : #'as yet unclassified' }
-JinNSASTSymbolImporter >> buildFormFor: aJinNSBuilder [ 
-	 ^ self buildClassFor: aJinNSBuilder 
+JinNSASTSymbolImporter >> buildFormFor: aJinNSBuilder [
+
+	^ self buildClassFor: aJinNSBuilder
 ]
 
 { #category : #'as yet unclassified' }
-JinNSASTSymbolImporter >> buildModuleFor: aJinNSBuilder [ 
-	 buildingModule := true. 
-	^ self buildFor: aJinNSBuilder.
+JinNSASTSymbolImporter >> buildModuleFor: aJinNSBuilder [
+
+	| ret |
+	buildingModule := true.
+	ret := self buildFor: aJinNSBuilder.
+
+
+	^ ret
 ]
 
 { #category : #'as yet unclassified' }
@@ -99,83 +97,9 @@ JinNSASTSymbolImporter >> content: aString [
 	content := aString
 ]
 
-{ #category : #'as yet unclassified' }
-JinNSASTSymbolImporter >> externalRegisterAndPushSubNameSpaceEntry: aString kind: aJinNSKind owner: aJinNSEntryOwner during: aFullBlockClosure [
-
-	| ns |
-	ns := self currentExternalNamespace
-		      registerSubNamespace: aString
-		      kind: aJinNSKind
-		      owner: aJinNSEntryOwner.
-	ns parent: self currentNamespace.
-	self push: ns during: aFullBlockClosure
-]
-
 { #category : #accessing }
 JinNSASTSymbolImporter >> owner: aJinNSEntryOwner [ 
 	 owner := aJinNSEntryOwner 
-]
-
-{ #category : #'as yet unclassified' }
-JinNSASTSymbolImporter >> register: aName kind: aJinNSKind owner: aJinNSEntryOwner visibility: aVisibility [
-
-	| visibility |
-	visibility := aVisibility
-		              ifNil: [ #Friend ]
-		              ifNotNil: [ aVisibility asSymbol ].
-	self assert: (#( Global Public Private Friend ) includes: visibility).
-	(visibility = #Public or: [ visibility = #Global ]) ifTrue: [ 
-		self currentExternalNamespace
-			register: aName
-			kind: aJinNSKind
-			owner: aJinNSEntryOwner ].
-	visibility = #Friend ifTrue: [ 
-		self currentAssemblyNamespace
-			register: aName
-			kind: aJinNSKind
-			owner: aJinNSEntryOwner ].
-	visibility = #Private ifTrue: [ 
-		self currentNamespace
-			register: aName
-			kind: aJinNSKind
-			owner: aJinNSEntryOwner ]
-]
-
-{ #category : #'as yet unclassified' }
-JinNSASTSymbolImporter >> registerSubNamespace: aName kind: aJinNSKind owner: aJinNSEntryOwner visibility: aVisibility during: aFullBlockClosure [
-
-	| visibility |
-	visibility := aVisibility
-		              ifNil: [ #Friend ]
-		              ifNotNil: [ :a | a asSymbol ].
-	self assert: (#( Public Private Friend ) includes: visibility).
-
-	self buildingModule ifFalse: [ 
-		self
-			registerAndPushSubNameSpaceEntry: aName
-			kind: aJinNSKind
-			owner: aJinNSEntryOwner
-			during: aFullBlockClosure.
-		^ self ].
-
-	visibility = #Public ifTrue: [ 
-		self
-			externalRegisterAndPushSubNameSpaceEntry: aName
-			kind: aJinNSKind
-			owner: aJinNSEntryOwner
-			during: aFullBlockClosure ].
-	visibility = #Friend ifTrue: [ 
-		self
-			assemblyRegisterAndPushSubNameSpaceEntry: aName
-			kind: aJinNSKind
-			owner: aJinNSEntryOwner
-			during: aFullBlockClosure ].
-	visibility = #Private ifTrue: [ 
-		self
-			registerAndPushSubNameSpaceEntry: aName
-			kind: aJinNSKind
-			owner: aJinNSEntryOwner
-			during: aFullBlockClosure ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -192,18 +116,20 @@ JinNSASTSymbolImporter >> visitCollection: aCollection [
 
 { #category : #visiting }
 JinNSASTSymbolImporter >> visitDefineEnum: aVBDefineEnumNode [
-
+	
+	buildingModule := buildingModule ifNil: [ true] . 
 	self
-		register: aVBDefineEnumNode name token value
+		registerSubNamespace: aVBDefineEnumNode name token value
 		kind: JinNSKind enum
 		owner: owner
-		visibility: aVBDefineEnumNode visibility value.
-	aVBDefineEnumNode fields do: [ :f | 
-		self
-			register: f name token value
-			kind: JinNSKind enumEntry
-			owner: owner
-			visibility: aVBDefineEnumNode visibility value ]
+		visibility: aVBDefineEnumNode visibility value
+		during: [ 
+			aVBDefineEnumNode fields do: [ :f | 
+				self
+					register: f name token value
+					kind: JinNSKind enumEntry
+					owner: owner
+					visibility: aVBDefineEnumNode visibility value ] ]
 ]
 
 { #category : #visiting }

@@ -9,6 +9,20 @@ Class {
 }
 
 { #category : #accessing }
+JinDAMFunction >> printOn: aStream [
+
+	typeReference printOn: aStream.
+	aStream
+		nextPutAll: ' ';
+		nextPutAll: selector;
+		nextPutAll: ' ';
+		nextPut: $(.
+	aStream
+		nextPutAll: (',' join: (parameters collect: [ :a | a printString ]));
+		nextPut: $)
+]
+
+{ #category : #accessing }
 JinDAMFunction >> relatedSymbolKind [
 
 	^ JinNSKind function

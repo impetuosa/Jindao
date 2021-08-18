@@ -14,7 +14,6 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'parent',
-		'names',
 		'tag',
 		'name',
 		'entries',
@@ -28,6 +27,14 @@ Class {
 JinNSNamespace >> acceptVisitor: aJinNSVisitorCounter [
 
 	aJinNSVisitorCounter visitNamespace: self
+]
+
+{ #category : #'as yet unclassified' }
+JinNSNamespace >> anchor [
+
+	^ ((parent isNil or: [ tag isAssembly ])
+		   ifTrue: [ JinAnchor on: #/ ]
+		   ifFalse: [ parent anchor ]) / name
 ]
 
 { #category : #accessing }
@@ -64,7 +71,8 @@ JinNSNamespace >> entriesHoldersFor: aStringOrderedCollection [
 ]
 
 { #category : #'as yet unclassified' }
-JinNSNamespace >> findSymbol: aString [ 
+JinNSNamespace >> findSymbol: aString [
+
 	| ns |
 	" Do i have it ? "
 	ns := OrderedCollection new.
@@ -74,16 +82,19 @@ JinNSNamespace >> findSymbol: aString [
 		ifAbsent: [ 
 			entries
 				at: aString asLowercase
-				ifPresent: [ :e | ns := e unsafeCopyCollection ]].
+				ifPresent: [ :e | ns := e unsafeCopyCollection ]
+				ifAbsent: [ 
+					entries
+						at: aString asLowercase capitalized
+						ifPresent: [ :e | ns := e unsafeCopyCollection ] ] ].
 
 	" Does a friend has it? "
-	ns := ns, (friends flatCollect: [ :f | 
-		      f findSymbol: aString ])
+	ns := ns , (friends flatCollect: [ :f | f findSymbol: aString ])
 		      asOrderedCollection.
-	
+
 	"Does my parent has it? "
 	parent ifNil: [ ^ ns removeDuplicates ].
-	^ (ns, ( parent findSymbol: aString )) removeDuplicates. 
+	^ (ns , (parent findSymbol: aString)) removeDuplicates
 ]
 
 { #category : #accessing }
@@ -101,6 +112,11 @@ JinNSNamespace >> initialize [
 { #category : #accessing }
 JinNSNamespace >> installAllAssemblySymbolsFrom: anOtherNS [
 	 friends add: anOtherNS
+]
+
+{ #category : #'as yet unclassified' }
+JinNSNamespace >> isAssembly [ 	 
+	^ tag = #assembly 
 ]
 
 { #category : #accessing }
@@ -183,12 +199,15 @@ JinNSNamespace >> readEntries [
 { #category : #'as yet unclassified' }
 JinNSNamespace >> register: aString kind: aJinNSKind owner: aJinNSEntryOwner [
 
-	(self entriesHolderFor: aString) add: (JinNSNameEntry new
-			 name: aString;
-			 kind: aJinNSKind;
-			 parent: self;
-			 owner: aJinNSEntryOwner;
-			 yourself)
+	| entry |
+	entry := JinNSNameEntry new
+		         name: aString;
+		         kind: aJinNSKind;
+		         parent: self;
+		         owner: aJinNSEntryOwner;
+		         yourself.
+	(self entriesHolderFor: aString) add: entry.
+	^ entry
 ]
 
 { #category : #'as yet unclassified' }

@@ -24,3 +24,18 @@ JinDAMLibrary >> isBuiltIn: aBoolean [
 
 	isBuiltIn := aBoolean
 ]
+
+{ #category : #testing }
+JinDAMLibrary >> printOn: aStream [
+
+	aStream nextPutAll: 'Lib ('.
+	aStream
+		nextPutAll: name;
+		nextPut: $)
+]
+
+{ #category : #testing }
+JinDAMLibrary >> relatedSymbolKind [
+
+	^ #isAssembly
+]

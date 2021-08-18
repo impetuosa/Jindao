@@ -18,7 +18,8 @@ JinNSNameEntry >> acceptVisitor: aJinNSVisitorCounter [
 
 { #category : #accessing }
 JinNSNameEntry >> anchor [
-	 ^ nil 
+
+	^ parent anchor / self kind / name
 ]
 
 { #category : #'as yet unclassified' }
@@ -57,6 +58,11 @@ JinNSNameEntry >> owner [
 { #category : #accessing }
 JinNSNameEntry >> owner: aJinNSEntryOwner [
 	owner := aJinNSEntryOwner.
+]
+
+{ #category : #accessing }
+JinNSNameEntry >> parent [
+	^ parent
 ]
 
 { #category : #accessing }

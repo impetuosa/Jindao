@@ -58,28 +58,24 @@ JinDAMProjectImporter >> visitCollection: aCollectionBlock [
 JinDAMProjectImporter >> visitProject: aJinAccessProject [
 
 	| ret |
-	
-	
-	
-	
 	projects push: aJinAccessProject.
 
 	phase := 0.
 
-
 	self state ifEmpty: [ 
 		self state push: (self instantiate: JinDAMAccessModule) ].
 	ret := self state top.
-	
-	
+
+
 	self state top name: aJinAccessProject name.
 	self state top anchor: (JinAnchor on: #/) / aJinAccessProject name.
-	self state top addDependency: self sdkLibrary.
-	self state top path: aJinAccessProject projectPath fullName. 
-	
+	self state top addDependency: (self sdkLibrary).
+	self state top path: aJinAccessProject projectPath fullName.
+
 	processedReferences
-		at:aJinAccessProject projectPath fullName asLowercase ifAbsentPut: [ self state top ].
-	
+		at: aJinAccessProject projectPath fullName asLowercase
+		ifAbsentPut: [ self state top ].
+
 	self visitCollection: [ 
 		aJinAccessProject
 			ensureIsOpen;
@@ -89,13 +85,13 @@ JinDAMProjectImporter >> visitProject: aJinAccessProject [
 		aJinAccessProject
 			ensureIsOpen;
 			reports ].
-	"self phaseFinished.
+	self phaseFinished.
 	self visitCollection: aJinAccessProject tables.
 	self phaseFinished.
 	self visitCollection: aJinAccessProject queries.
 	self phaseFinished.
 	self visitCollection: aJinAccessProject relations.
-	self phaseFinished.
+	"self phaseFinished.
 	self visitCollection: aJinAccessProject macros."
 	self phaseFinished.
 	self visitCollection: [ 
@@ -132,12 +128,9 @@ JinDAMProjectImporter >> visitReference: aJinReference [
 			ref := self instantiate: JinDAMLibrary.
 			ref isBuiltIn: aJinReference isBuiltIn ].
 
-
 	processedReferences
 		at: aJinReference path fullName asLowercase
 		put: ref.
-
-
 
 	ref anchor: self state top anchor / #references / aJinReference name.
 	ref path: aJinReference path fullName.

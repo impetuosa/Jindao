@@ -13,7 +13,10 @@ JinMultiVisitor >> currentNamespace [
 		  temp := nns
 			          namespaceFor: element name
 			          kind: element relatedSymbolKind.
+
 		  temp first kind isInvocable ifTrue: [ ^ temp first ].
+		  (temp first kind isType and: [ temp first owner type = JinLibrary ]) 
+			  ifTrue: [ ^ temp first parent].
 		  temp first ]
 ]
 
@@ -87,10 +90,12 @@ JinMultiVisitor >> instantiateReferenceForSymbol: symbol name: aName context: co
 			inter := self instantiate: JinDAMMemberReference.
 			inter name: aName ]
 		ifNotNil: [ 
+			symbol kind isAssembly ifTrue: [ 
+				inter := self instantiate: JinDAMLibraryReference.
+				inter name: aName ].
 			symbol kind isEnumEntry ifTrue: [ 
 				inter := self instantiate: JinDAMTypeReference.
 				inter typeName: aName ].
-
 			symbol kind isType ifTrue: [ 
 				inter := self instantiate: JinDAMTypeReference.
 				inter typeName: aName ].
@@ -100,6 +105,7 @@ JinMultiVisitor >> instantiateReferenceForSymbol: symbol name: aName context: co
 			symbol kind isInvocable ifTrue: [ 
 				inter := self instantiate: JinDAMMemberReference.
 				inter selector: aName ].
+			symbol anchor ifNil: [ self halt ].
 			inter candidateAnchor: symbol anchor ].
 	inter context: context.
 	^ inter

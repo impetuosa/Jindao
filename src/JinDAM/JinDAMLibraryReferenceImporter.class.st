@@ -72,18 +72,30 @@ JinDAMLibraryReferenceImporter >> visitLibraryAlias: aJinLibraryAlias [
 	self state top addType: obj.
 	obj name: aJinLibraryAlias name.
 	obj anchor: self state top anchor / #alias / aJinLibraryAlias name.
-	obj typeReference:
-		(self typeReferenceName: aJinLibraryAlias aliaseeTypeName context: obj).
+	obj typeReference: (self
+			 typeReferenceName: aJinLibraryAlias aliaseeTypeName
+			 typeSymbol:
+			 (self currentNamespace findSymbol:
+				  aJinLibraryAlias aliaseeTypeName)
+			 context: obj)
 ]
 
 { #category : #visiting }
 JinDAMLibraryReferenceImporter >> visitLibraryAttribute: aJinLibraryAttribute [
 
-	| attr |
+	| attr noPointerTypeName |
 	attr := self instantiate: JinDAMAttribute.
+
 	attr name: aJinLibraryAttribute name.
-	attr typeReference:
-		(self typeReferenceName: aJinLibraryAttribute typeName context: attr).
+
+	noPointerTypeName := aJinLibraryAttribute typeName
+		                     copyReplaceAll: '*'
+		                     with: ''.
+
+	attr typeReference: (self
+			 typeReferenceName: noPointerTypeName
+			 typeSymbol: (self currentNamespace findSymbol: noPointerTypeName)
+			 context: attr).
 	attr isConstant: false.
 	attr visibility: ((self state top isKindOf: JinDAMClass)
 			 ifTrue: [ #Private ]
@@ -104,6 +116,7 @@ JinDAMLibraryReferenceImporter >> visitLibraryCoClass: aJinLibraryCoClass [
 		            ifNotNil: [ 
 			            self
 				            typeReferenceName: aJinLibraryCoClass linkedType name
+								typeSymbol: (self currentNamespace findSymbol: aJinLibraryCoClass linkedType name)
 				            context: obj ].
 
 	self state top addType: obj.
@@ -229,10 +242,16 @@ JinDAMLibraryReferenceImporter >> visitLibraryModule: aModule [
 { #category : #visiting }
 JinDAMLibraryReferenceImporter >> visitLibraryParameter: aJinLibraryParameter [
 
-	| param |
+	| param notPointers |
 	param := self instantiate: JinDAMParameter.
 	param name: aJinLibraryParameter name.
-	param typeReference: (self typeReferenceName: aJinLibraryParameter type context: param).
+	notPointers := aJinLibraryParameter type copyReplaceAll: '*' with: ''.
+
+	param typeReference: (self
+			 typeReferenceName: notPointers
+			 typeSymbol: (self currentNamespace findSymbol: notPointers)
+			 context: param).
+	
 	param isOptional: aJinLibraryParameter isOptional.
 	self state top addParameter: param
 ]

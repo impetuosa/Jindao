@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'model',
-		'created'
+		'created',
+		'importer'
 	],
 	#category : #'JinDAM-Importer-Helpers'
 }
@@ -13,6 +14,15 @@ JinDAMSDKLibraryBuilder class >> forModel: aModel [
 
 	^ self new
 		  model: aModel;
+		  yourself
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMSDKLibraryBuilder class >> forModel: aJinDAMModel importer: aJinDAMDispatchingImporter [
+
+	^ self new
+		  model: aJinDAMModel;
+		  importer: aJinDAMDispatchingImporter;
 		  yourself
 ]
 
@@ -28,6 +38,7 @@ JinDAMSDKLibraryBuilder >> abs [
 JinDAMSDKLibraryBuilder >> aliasTypes [
 
 	^ { 
+		 self float. 
 		  self int32.
 		  self int16.
 		  self int.
@@ -611,6 +622,12 @@ JinDAMSDKLibraryBuilder >> fix [
 		  parametersFromString: 'number required double'
 ]
 
+{ #category : #alias }
+JinDAMSDKLibraryBuilder >> float [
+
+	^ self newAlias: #float to: self double
+]
+
 { #category : #'enum constants' }
 JinDAMSDKLibraryBuilder >> form [
 		^ self
@@ -853,6 +870,12 @@ vbIMEModeHangul 	10 	Half-width Hangul mode'
 
 ]
 
+{ #category : #accessing }
+JinDAMSDKLibraryBuilder >> importer: aJinDAMDispatchingImporter [
+
+	importer := aJinDAMDispatchingImporter
+]
+
 { #category : #'sdk functions' }
 JinDAMSDKLibraryBuilder >> inStr [
 	^ self
@@ -930,7 +953,7 @@ JinDAMSDKLibraryBuilder >> int32 [
 
 { #category : #'primitive types' }
 JinDAMSDKLibraryBuilder >> integer [
-	^ self primitiveTypeNamed: #VOID
+	^ self primitiveTypeNamed: #Integer
 		
 	
 ]
@@ -1392,7 +1415,10 @@ JinDAMSDKLibraryBuilder >> newAlias: aName toName: anOtherName [
 		  | t |
 		  t := self instantiate: JinDAMAlias.
 		  t name: aName.
-		  t typeReference: (self typeReferenceName: anOtherName type: nil context: t).
+		  t typeReference: (self
+				   typeReferenceName: anOtherName
+				   typeSymbol: (importer currentNamespace findSymbol: anOtherName)
+				   context: t).
 		  t ]
 ]
 
@@ -1404,7 +1430,12 @@ JinDAMSDKLibraryBuilder >> newAttribute: aName typeName: aTypeName [
 		  t := self instantiate: JinDAMAttribute.
 		  t visibility: #Public.
 		  t name: aName.
-		  t typeReference: (self typeReferenceName: aTypeName type: nil context: t ).
+
+		  t typeReference: (self
+				   typeReferenceName: aTypeName
+				   typeSymbol: (importer currentNamespace findSymbol: aTypeName)
+				   context: t).
+
 		  t ]
 ]
 
@@ -1494,7 +1525,6 @@ type 	Optional. Variant specifying when payments are due. Use 0 if payments are 
 
 { #category : #'primitive types' }
 JinDAMSDKLibraryBuilder >> primitiveTypeNamed: aName [
-
 	^ created at: aName, 'primitiveType' ifAbsentPut: [ 
 		  | t |
 		  t := self instantiate: JinDAMPrimitiveType.
@@ -2180,6 +2210,24 @@ JinDAMSDKLibraryBuilder >> typeReferenceName: aString type: aJinDAMPrimitiveType
 	reference context: aContext. 
 	reference typeName: aString.
 	reference candidate: aJinDAMPrimitiveType.
+	reference candidateAnchor: aJinDAMPrimitiveType anchor. 
+	^ reference
+]
+
+{ #category : #'+' }
+JinDAMSDKLibraryBuilder >> typeReferenceName: aString typeSymbol: aCollection context: aContext [
+
+	| reference |
+	self assert: (aString indexOf: '.') = 0.
+	reference := self instantiate: JinDAMTypeReference.
+	reference context: aContext.
+	reference typeName: aString.
+
+
+	(aCollection isEmpty and: [ aString = 'NULL' ]) ifFalse: [ 
+		self assert: aCollection size = 1.
+		reference candidateAnchor: aCollection first anchor ].
+
 	^ reference
 ]
 

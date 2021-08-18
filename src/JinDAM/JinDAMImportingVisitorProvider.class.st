@@ -68,6 +68,12 @@ JinDAMImportingVisitorProvider >> importCodeElements [
 	codeVisitor := JinDAMCodeImporter
 ]
 
+{ #category : #'instantiate parts' }
+JinDAMImportingVisitorProvider >> importDatabase [
+
+	databaseVisitor := JinDAMDatabaseImporter
+]
+
 { #category : #configuration }
 JinDAMImportingVisitorProvider >> importGUIControlElements [
 	controlVisitor := JinDAMGUIControlImporter

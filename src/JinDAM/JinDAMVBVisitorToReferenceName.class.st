@@ -32,57 +32,28 @@ JinDAMVBVisitorToReferenceName >> noteProcessedElement [
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> toCodeElementReferenceName: aNode context: aContext [ 
-
-	| refChain tip tap |
-	processedElement := false.
-	refChain := aNode acceptVisitor: self.
-	processedElement ifTrue: [ 
-		self halt: 'Type that comes out of process? ' ].
-	refChain ifNil: [ 
-		^ self error: 'Unexpected ' "self undefinedTypeReference " ].
-
-
-	" Lets consider an attribute A typed DAO.Recordset2. 
-		DAO's context is the attribute A. 
-		Recordset2 context is DAO keyword context.
-		Now the type of the attribute A is Recordset2. 
-	"
-	tip := importer codeElementReferenceName: refChain first context: aContext.
-
-	tap := refChain allButFirst
-		       inject: tip
-		       into: [ :ref :segment | 
-		       importer typeReferenceName: segment context: ref ].
-
-	^ tap
-]
-
-{ #category : #'as yet unclassified' }
 JinDAMVBVisitorToReferenceName >> toTypeReferenceName: aNode context: context [
 
-	| refChain tip tap |
+	| refChain |
 	processedElement := false.
 	refChain := aNode acceptVisitor: self.
+
 	processedElement ifTrue: [ 
 		self halt: 'Type that comes out of process? ' ].
 	refChain ifNil: [ 
 		^ self error: 'Unexpected ' "self undefinedTypeReference " ].
 
-
-	" Lets consider an attribute A typed DAO.Recordset2. 
+	"  Lets consider an attribute A typed DAO.Recordset2. 
 		DAO's context is the attribute A. 
 		Recordset2 context is DAO keyword context.
 		Now the type of the attribute A is Recordset2. 
 	"
-	tip := importer typeReferenceName: refChain first context: context.
 
-	tap := refChain allButFirst
-		       inject: tip
-		       into: [ :ref :segment | 
-		       importer typeReferenceName: segment context: ref ].
 
-	^ tap
+	^ importer
+		  instantiateReferenceForNames: refChain
+		  context: context
+		  preferring: { #isType. #isAssembly }
 ]
 
 { #category : #'as yet unclassified' }
