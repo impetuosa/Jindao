@@ -25,12 +25,6 @@ JinDAMBehavioural >> addLocalVariable: aJinDAMLocalVariable [
 	self localVariables add: aJinDAMLocalVariable
 ]
 
-{ #category : #adding }
-JinDAMBehavioural >> initialize [
-	 super initialize.
-	parameters := OrderedCollection new . 
-]
-
 { #category : #accessing }
 JinDAMBehavioural >> localVariables [
 	^ localVariables ifNil: [ localVariables := OrderedCollection new  ]

@@ -24,6 +24,23 @@ JinDAMAccessModule >> dependencies [
 	^ dependencies ifNil: [ dependencies := OrderedCollection new  ]
 ]
 
+{ #category : #'as yet unclassified' }
+JinDAMAccessModule >> find: aJinNSKind named: aString [
+
+	| lc |
+	lc := aString asLowercase.
+
+	aJinNSKind isType ifTrue: [ 
+		^ types
+			  detect: [ :t | t name asLowercase = lc ]
+			  ifNone: [ self vbaLang find: aJinNSKind named: aString ] ].
+	aJinNSKind isAttribute ifTrue: [ 
+		^ self globals
+			  detect: [ :t | t name asLowercase = lc ]
+			  ifNone: [ self vbaLang find: aJinNSKind named: aString ] ].
+	^ self error: '??'
+]
+
 { #category : #accessing }
 JinDAMAccessModule >> printOn: aStream [
 
@@ -37,4 +54,9 @@ JinDAMAccessModule >> printOn: aStream [
 JinDAMAccessModule >> relatedSymbolKind [
 
 	^ JinNSKind assembly
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMAccessModule >> vbaLang [
+	 ^ self dependencies detect: [  :d |  d name = 'VBALang' ]
 ]

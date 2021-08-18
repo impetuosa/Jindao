@@ -22,9 +22,20 @@ JinDAMReference >> adaptToAlceAnchorPathFragment [
 ]
 
 { #category : #accessing }
+JinDAMReference >> candidate [
+	^ candidate
+]
+
+{ #category : #accessing }
 JinDAMReference >> candidate: aJinDAMPrimitiveType [ 
 	self assert: candidate isNil. 
 	candidate := aJinDAMPrimitiveType
+]
+
+{ #category : #accessing }
+JinDAMReference >> candidateAnchor [
+
+	^ candidateAnchor
 ]
 
 { #category : #accessing }

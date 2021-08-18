@@ -62,6 +62,22 @@ JinDAMImporter >> initialize [
 ]
 
 { #category : #accessing }
+JinDAMImporter >> link: aJinDAMModel [
+
+	aJinDAMModel references do: [ :r | 
+		r candidate ifNil: [ 
+			r candidateAnchor ifNotNil: [ 
+				| artefact |
+				artefact := aJinDAMModel entities detect: [ :e | 
+					            (e isKindOf: JinDAMArtefact) and: [ 
+						            e name = r candidateAnchor elementProject and: [ 
+							            e isReference not ] ] ].
+				r candidate: (r candidateAnchor elementsNameKindPairs
+						 inject: artefact
+						 into: [ :nav :each | nav find: each second named: each first ]) ] ] ]
+]
+
+{ #category : #accessing }
 JinDAMImporter >> provider [
 	^ provider
 ]

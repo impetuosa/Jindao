@@ -19,6 +19,14 @@ JinDAMUserType >> attributes [
 ]
 
 { #category : #adding }
+JinDAMUserType >> find: aJinNSKind named: aString [
+
+	aJinNSKind isAttribute ifTrue: [ 
+		^ self attributes detect: [ :t | t name = aString ] ].
+	^ self error: '??'
+]
+
+{ #category : #adding }
 JinDAMUserType >> printOn: aStream [
 
 	aStream

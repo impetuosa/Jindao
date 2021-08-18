@@ -27,3 +27,8 @@ JinDAMModel >> instantiate: aClass [
 	entities add: obj.
 	^ obj
 ]
+
+{ #category : #accessing }
+JinDAMModel >> references [
+	^ entities select: [ :e | e isKindOf: JinDAMReference  ]
+]

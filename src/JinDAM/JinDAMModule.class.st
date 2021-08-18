@@ -18,6 +18,18 @@ JinDAMModule >> addType: aJinDAMPrimitiveType [
 	self types add: aJinDAMPrimitiveType
 ]
 
+{ #category : #testing }
+JinDAMModule >> find: aJinNSKind named: aString [
+
+	aJinNSKind isType ifTrue: [ 
+		^ types detect: [ :t | t name = aString ] ].
+
+	aJinNSKind isInvocable ifTrue: [ 
+		^ invocables detect: [ :t | t selector = aString ] ].
+	
+	^ super find: aJinNSKind named: aString
+]
+
 { #category : #accessing }
 JinDAMModule >> initialize [
 

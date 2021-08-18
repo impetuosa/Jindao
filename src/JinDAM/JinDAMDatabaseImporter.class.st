@@ -3,6 +3,9 @@ Class {
 	#superclass : #JinDatabaseFirstCitizenVisitor,
 	#traits : 'JinDAMTypeConversions',
 	#classTraits : 'JinDAMTypeConversions classTrait',
+	#instVars : [
+		'dbtypes'
+	],
 	#category : #'JinDAM-Importers'
 }
 
@@ -22,20 +25,36 @@ JinDAMDatabaseImporter >> dbTypeReferenceName: aString typeSymbol: aCollection c
 				         preferring: { #isEnumEntry }) ].
 	ref := self instantiate: JinDAMTypeReference.
 	ref candidate: type.
-	ref candidateAnchor: type typeEnumReference anchor.
+	ref candidateAnchor: type typeEnumReference candidateAnchor .
+	ref context: aJinDAMAttribute. 
 	^ ref
 ]
 
 { #category : #'as yet unclassified' }
 JinDAMDatabaseImporter >> dbtypes [
-
-	| dbtypes |
 	^ dbtypes ifNil: [ dbtypes := Dictionary new ] 
 ]
 
 { #category : #visiting }
 JinDAMDatabaseImporter >> visitQuery: aJinQuery [ 
-	self halt. 
+
+	| tab field |
+	tab := self instantiate: JinDAMQuery.
+	tab name: aJinQuery name.
+	tab anchor: self state top anchor / #tables / aJinQuery name.
+	self state top addType: tab.
+
+	aJinQuery fields do: [ :f | 
+		field := self instantiate: JinDAMTableField. 
+		field name: f name. 
+		field size: f size. 
+		field sourceTableName: f sourceTableName. 
+		field typeReference: (self
+				 dbTypeReferenceName: f typeName
+				 typeSymbol: (self currentNamespace findSymbol: f typeName)
+				 context: field).
+		tab addAttribute: field ].
+	aJinQuery ensureUnload
 ]
 
 { #category : #visiting }
@@ -48,8 +67,10 @@ JinDAMDatabaseImporter >> visitTable: aJinTable [
 	self state top addType: tab.
 
 	aJinTable fields do: [ :f | 
-		field := self instantiate: JinDAMAttribute.
+		field := self instantiate: JinDAMTableField.
 		field name: f name.
+		field size: f size. 
+		field sourceTableName: f sourceTableName. 
 		field typeReference: (self
 				 dbTypeReferenceName: f typeName
 				 typeSymbol: (self currentNamespace findSymbol: f typeName)
@@ -60,5 +81,11 @@ JinDAMDatabaseImporter >> visitTable: aJinTable [
 
 { #category : #visiting }
 JinDAMDatabaseImporter >> visitTableRelation: aJinTableRelation [
-	self halt. 
+
+	| relation |
+	relation := self instantiate: JinDAMTableRelation.
+	relation sourceTable: aJinTableRelation tableName.
+	relation foreignTable: aJinTableRelation foreignTableName.
+	aJinTableRelation fields do: [ :f | 
+		relation addMatch: f sourceName to: f foreignName ]
 ]

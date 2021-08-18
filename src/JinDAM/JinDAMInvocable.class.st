@@ -15,6 +15,12 @@ JinDAMInvocable >> addParameter: aJinDAMParameter [
 	parameters add: aJinDAMParameter
 ]
 
+{ #category : #initialization }
+JinDAMInvocable >> initialize [
+	 super initialize.
+	parameters := OrderedCollection new . 
+]
+
 { #category : #accessing }
 JinDAMInvocable >> name [
 	 ^ selector 

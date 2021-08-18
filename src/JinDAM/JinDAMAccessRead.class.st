@@ -13,12 +13,6 @@ JinDAMAccessRead >> addArgument: aJinDAMArgument [
 ]
 
 { #category : #accessing }
-JinDAMAccessRead >> name [
-
-	^ readReference name
-]
-
-{ #category : #accessing }
 JinDAMAccessRead >> printOn: aStream [
 	aStream nextPutAll: '+R '.
 	readReference printOn: aStream

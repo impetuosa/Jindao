@@ -78,6 +78,23 @@ JinAnchor >> elements [
 ]
 
 { #category : #enumerating }
+JinAnchor >> elementsNameKindNamePairs [
+
+	| limit |
+	limit := path segments indexOf: '@src'.
+	limit := limit = 0
+		         ifTrue: [ path size ]
+		         ifFalse: [ limit - 1 ].
+
+
+	^ (2 to: limit by: 2) collect: [ :a | 
+		{ 
+			(path at: a + 1).
+			(path at: a) asSymbol  } ].
+		
+]
+
+{ #category : #enumerating }
 JinAnchor >> elementsNameKindPairs [
 
 	| limit |
@@ -97,9 +114,10 @@ JinAnchor >> elementsNameKindPairs [
 { #category : #enumerating }
 JinAnchor >> ensureWellformed [
 
-	self assert:
-		({ 'modules'. 'forms'. 'reports'. 'table'. 'query'. 'references' } 
-			 includes: (path at: 2))
+	path size > 1 ifTrue: [ 
+		self assert:
+			({ 'modules'. 'forms'. 'reports'. 'table'. 'query'. 'references'. 'primitiveType'.  'enum'. 'function' .
+			 'classModule'. 'globalVariable' } includes: (path at: 2)) ]
 ]
 
 { #category : #arithmetic }
