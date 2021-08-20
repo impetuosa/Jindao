@@ -7,7 +7,8 @@ Class {
 		'reads',
 		'writes',
 		'isConstant',
-		'instantiatesObjectOnDefinition'
+		'instantiatesObjectOnDefinition',
+		'redimText'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -57,6 +58,11 @@ JinDAMVariable >> printOn: aStream [
 		nextPutAll: (self className copyReplaceAll: 'JinDAM' with: '');
 		nextPutAll: ':';
 		nextPutAll: name
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMVariable >> redim: aString [ 
+	redimText := aString 
 ]
 
 { #category : #generated }

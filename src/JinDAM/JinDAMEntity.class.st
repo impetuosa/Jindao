@@ -18,6 +18,12 @@ JinDAMEntity >> anchor: jinAnchor [
 	anchor := jinAnchor
 ]
 
+{ #category : #'as yet unclassified' }
+JinDAMEntity >> assert: aBool description: aDescription [
+
+	aBool ifFalse: [ self halt: aDescription ]
+]
+
 { #category : #testing }
 JinDAMEntity >> isReadAccess [
 	^ false 

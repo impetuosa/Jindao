@@ -3,7 +3,8 @@ Class {
 	#superclass : #JinDAMUserType,
 	#instVars : [
 		'invocables',
-		'types'
+		'types',
+		'astCannotLoad'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -16,6 +17,12 @@ JinDAMModule >> addInvocable: anInvocable [
 { #category : #accessing }
 JinDAMModule >> addType: aJinDAMPrimitiveType [
 	self types add: aJinDAMPrimitiveType
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMModule >> astCannotLoad: aBoolean [
+
+	astCannotLoad := aBoolean
 ]
 
 { #category : #testing }

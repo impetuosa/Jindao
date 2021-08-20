@@ -34,6 +34,12 @@ JinAnchor >> = anOtherAnchor [
 	^ path = anOtherAnchor privateGetPath
 ]
 
+{ #category : #enumerating }
+JinAnchor >> assert: aBool description: aDescription [
+
+	aBool ifFalse: [ self halt: aDescription ]
+]
+
 { #category : #arithmetic }
 JinAnchor >> basename [
 	^ path basename

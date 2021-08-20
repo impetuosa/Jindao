@@ -10,6 +10,12 @@ Class {
 { #category : #adding }
 JinDAMConstant >> addAccess: aJinDAMAccessRead [
 
-	self assert: value isNil.
-	value := aJinDAMAccessRead
+	value ifNil: [ 
+		value := aJinDAMAccessRead.
+		^ self ].
+	value isCollection ifFalse: [ 
+		value := OrderedCollection new
+			         add: value;
+			         yourself ].
+	value add: aJinDAMAccessRead 
 ]

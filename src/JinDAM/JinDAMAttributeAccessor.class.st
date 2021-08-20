@@ -39,3 +39,8 @@ JinDAMAttributeAccessor >> printOn: aStream [
 		nextPutAll: (',' join: (parameters collect: [ :a | a printString ]));
 		nextPut: $)
 ]
+
+{ #category : #accessing }
+JinDAMAttributeAccessor >> relatedSymbolKind [
+	^( #is, kind ) asSymbol 
+]

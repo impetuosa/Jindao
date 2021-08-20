@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'writeReference',
 		'isReturn',
-		'isNewObject'
+		'isNewObject',
+		'processing'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -12,7 +13,11 @@ Class {
 { #category : #adding }
 JinDAMAccessWrite >> addAccess: aJinDAMAccessRead [
 
-	self readReferences add: aJinDAMAccessRead.
+	processing = #write ifTrue: [ 
+		^ self writeReference: aJinDAMAccessRead ].
+	processing = #read ifTrue: [ 
+		^ self readReferences add: aJinDAMAccessRead ].
+	self error: ' asd '
 ]
 
 { #category : #testing }
@@ -40,6 +45,21 @@ JinDAMAccessWrite >> printOn: aStream [
 	writeReference printOn: aStream.
 	aStream nextPutAll: ' = '.
 	readReference printOn: aStream
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMAccessWrite >> processingFinished [
+	processing := #finished. 
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMAccessWrite >> processingRead [
+	processing := #read.
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMAccessWrite >> processingWrite [
+	processing := #write.
 ]
 
 { #category : #'as yet unclassified' }

@@ -2,18 +2,35 @@ Class {
 	#name : #JinDAMExternalFunction,
 	#superclass : #JinDAMInvocable,
 	#instVars : [
-		'library',
-		'typeReference'
+		'libraryName',
+		'typeReference',
+		'realSelector'
 	],
 	#category : #'JinDAM-Model'
 }
+
+{ #category : #generated }
+JinDAMExternalFunction >> alias: aString [ 
+	realSelector := selector.
+	selector := aString
+]
+
+{ #category : #accessing }
+JinDAMExternalFunction >> libraryName [
+	^ libraryName
+]
+
+{ #category : #generated }
+JinDAMExternalFunction >> libraryName: aString [ 
+	libraryName := aString 
+]
 
 { #category : #accessing }
 JinDAMExternalFunction >> printOn: aStream [
 
 	aStream
 		nextPutAll: ' external ( ';
-		nextPutAll: library;
+		nextPutAll: libraryName;
 		nextPutAll: ' )';
 		nextPutAll: typeReference typeName;
 		nextPutAll: ' ';
@@ -26,7 +43,23 @@ JinDAMExternalFunction >> printOn: aStream [
 ]
 
 { #category : #accessing }
+JinDAMExternalFunction >> realSelector [
+	^ realSelector
+]
+
+{ #category : #accessing }
 JinDAMExternalFunction >> relatedSymbolKind [
 
 	^ JinNSKind externalFunction
+]
+
+{ #category : #accessing }
+JinDAMExternalFunction >> typeReference: aJinDAMTypeReference [ 
+	typeReference := aJinDAMTypeReference
+]
+
+{ #category : #accessing }
+JinDAMExternalFunction >> visibility: aString [
+
+	visibility := aString
 ]

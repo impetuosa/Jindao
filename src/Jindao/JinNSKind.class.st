@@ -288,7 +288,7 @@ JinNSKind >> isAssembly [
 { #category : #testing }
 JinNSKind >> isAttribute [
 
-	^ self isAnyOf: #( isVariable isLocalVariable isGlobalVariable isField isTypeProperty isConstant isParameter)
+	^ self isAnyOf: #( isVariable isLocalVariable isGlobalVariable isField isTypeProperty isConstant isParameter isEnumEntry)
 ]
 
 { #category : #testing }
@@ -319,6 +319,12 @@ JinNSKind >> isEnumEntry [
 { #category : #testing }
 JinNSKind >> isEvent [
 	^ kind = #event
+]
+
+{ #category : #testing }
+JinNSKind >> isExternal [
+
+	^ self isAnyOf: #( isExternalFunction isExternalSub )
 ]
 
 { #category : #testing }

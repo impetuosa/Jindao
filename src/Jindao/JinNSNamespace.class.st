@@ -84,7 +84,7 @@ JinNSNamespace >> findSymbol: aString [
 
 
 	" Does a friend has it? "
-	ns := ns , (friends flatCollect: [ :f | f findSymbol: aString ])
+	ns := ns , (friends flatCollect: [ :f | f friendFindSymbol: aString ])
 		      asOrderedCollection.
 
 	"Does my parent has it? "
@@ -93,9 +93,50 @@ JinNSNamespace >> findSymbol: aString [
 	^ ns
 ]
 
+{ #category : #'as yet unclassified' }
+JinNSNamespace >> friendFindSymbol: aString [
+
+	| ns kw word |
+	" Do i have it ? ""	aString asLowercase = 'currentdb' ifTrue:[ self halt ]."
+	ns := OrderedCollection new.
+	entries
+		at: aString asLowercase
+		ifPresent: [ :e | ns := e unsafeCopyCollection ].
+
+	"Does my parent has it? "
+	parent ifNil: [ ^ ns removeDuplicates ].
+	ns := (ns , (parent friendFindSymbol: aString)) removeDuplicates.
+	^ ns
+]
+
 { #category : #accessing }
 JinNSNamespace >> friends [
 	^ friends
+]
+
+{ #category : #'as yet unclassified' }
+JinNSNamespace >> friendsNamespaceFor: aString kind: aJinNSKind [
+
+	| ns |
+	" Do i have it ? "
+	ns := {  }.
+	entries
+		at: aString
+		ifPresent: [ :e | 
+			ns := e unsafeSelect: [ :ee | 
+				      aJinNSKind isSymbol
+					      ifTrue: [ ee kind perform: aJinNSKind ]
+					      ifFalse: [ ee kind = aJinNSKind ] ] ]
+		ifAbsent: [ 
+			entries at: aString asLowercase ifPresent: [ :e | 
+				ns := e unsafeSelect: [ :ee | 
+					      aJinNSKind isSymbol
+						      ifTrue: [ ee kind perform: aJinNSKind ]
+						      ifFalse: [ ee kind = aJinNSKind ] ] ] ].
+	ns ifNotEmpty: [ ^ ns ].
+
+	parent ifNil: [ ^ {  } ].
+	^ parent friendsNamespaceFor: aString kind: aJinNSKind
 ]
 
 { #category : #'as yet unclassified' }
@@ -154,9 +195,9 @@ JinNSNamespace >> namespaceFor: aString kind: aJinNSKind [
 	ns ifNotEmpty: [ ^ ns ].
 	" Does a friend has it? "
 	ns := (friends flatCollect: [ :f | 
-		       f namespaceFor: aString kind: aJinNSKind ])
+		       f friendsNamespaceFor: aString kind: aJinNSKind ])
 		      asOrderedCollection.
-	self assert: ns size < 2.
+"	self assert: ns size < 2."
 	ns ifNotEmpty: [ ^ ns ].
 	"Does my parent has it? "
 	parent ifNil: [ ^ {  } ].

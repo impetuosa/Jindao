@@ -276,7 +276,7 @@ JinDAMASTCodeImporter >> visitDimVariable: aDimVariable [
 			       instantiateVariable:JinDAMAttribute
 			       from: aDimVariable variable.
 		var visibility: #Public.
-		self state top addMember: var.
+		self state top addAttribute: var.
 		^ self ].
 	self error: 'Unexpected case .'
 ]
@@ -304,7 +304,9 @@ JinDAMASTCodeImporter >> visitEquals: anExplicitAssignement [
 						         preferring: { #isInvocable } ].
 
 			self state push: access.
+			access processingRead.
 			anExplicitAssignement right acceptVisitor: self.
+			access processingFinished .
 			self state pop.
 
 
@@ -324,44 +326,46 @@ JinDAMASTCodeImporter >> visitEquals: anExplicitAssignement [
 { #category : #'functions - subs - events' }
 JinDAMASTCodeImporter >> visitEvent: anEvent [
 	| fn |
-	
 	fn := self instantiate: JinDAMEvent.
 	fn selector: (self nodeToString: anEvent selector).
 	fn anchor: self state top anchor / #events / fn selector.
 	self state top addInvocable: fn.
 	self state push: fn.
-	super visitEvent: anEvent.
+	anEvent parameters acceptVisitor: self.
 	self state pop
 ]
 
 { #category : #assignments }
 JinDAMASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 
-	| access write tempNames |
+	| access tempNames |
 	access := self instantiate: JinDAMAccessWrite.
+
+
+	"
 	tempNames := anExplicitAssignement left acceptVisitor:
 		             self referenceTaggedNameConverter.
-
 	anExplicitAssignement isReturn
 		ifFalse: [ 
 			write := self
 				         instantiateReferenceForNames: tempNames
 				         context: access
-				         preferring: { #isAttribute } ]
+				         preferring: { #isAttribute . #isSet . #isLet} ]
 		ifTrue: [ 
 			write := self
 				         instantiateReferenceForNames: tempNames
 				         context: access
-				         preferring: { #isInvocable } ].
+				         preferring: { #isInvocable } ]."
 
 	self state push: access.
+	access processingWrite.
+	anExplicitAssignement left acceptVisitor: self.
+	access processingRead.
 	anExplicitAssignement right acceptVisitor: self.
+	access processingFinished.
 	self state pop.
 
-
-	access
-		writeReference: write;
-		isReturn: anExplicitAssignement isReturn.
+	access isReturn: anExplicitAssignement isReturn.
 	self assert: access hasReads.
 
 	access isNewObject:
@@ -374,13 +378,7 @@ JinDAMASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 
 { #category : #invocations }
 JinDAMASTCodeImporter >> visitExplicitCall: anExplicitCall [
-
-	| param |
-	param := anExplicitCall selector isIdentifier
-		         ifTrue: [ anExplicitCall ]
-		         ifFalse: [ anExplicitCall selector ].
-	self instantiateInvocation: param.
-	anExplicitCall arguments ifNotNil: [ :a | a acceptVisitor: self ]
+	anExplicitCall selector acceptVisitor: self 
 ]
 
 { #category : #'functions - subs - events' }
@@ -704,6 +702,11 @@ JinDAMASTCodeImporter >> visitOnExpressionGo: aStatement [
 ]
 
 { #category : #'functions - subs - events' }
+JinDAMASTCodeImporter >> visitOptionBase: anOptionBase [
+
+]
+
+{ #category : #'functions - subs - events' }
 JinDAMASTCodeImporter >> visitParameter: aParameter [
 
 	| param |
@@ -727,7 +730,8 @@ JinDAMASTCodeImporter >> visitProcedureCallOrArrayAccess: aProcedureCallOrArrayA
 	self state push: element.
 
 	aProcedureCallOrArrayAccess arguments acceptVisitor: self.
-	self state pop
+	self state pop.
+	^ element 
 ]
 
 { #category : #generated }

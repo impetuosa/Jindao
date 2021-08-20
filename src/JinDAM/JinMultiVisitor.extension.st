@@ -10,13 +10,14 @@ JinMultiVisitor >> currentNamespace [
 		      kind: reverseStack first relatedSymbolKind.
 
 	^ reverseStack allButFirst inject: ns first into: [ :nns :element | 
+		  element relatedSymbolKind isExternal ifTrue: [ ^ nns ].
 		  temp := nns
 			          namespaceFor: element name
 			          kind: element relatedSymbolKind.
 
 		  temp first kind isInvocable ifTrue: [ ^ temp first ].
 		  (temp first kind isType and: [ temp first owner type = JinLibrary ]) 
-			  ifTrue: [ ^ temp first parent].
+			  ifTrue: [ ^ temp first parent ].
 		  temp first ]
 ]
 
