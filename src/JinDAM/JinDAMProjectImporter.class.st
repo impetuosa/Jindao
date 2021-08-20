@@ -2,7 +2,6 @@ Class {
 	#name : #JinDAMProjectImporter,
 	#superclass : #JinProjectVisitor,
 	#instVars : [
-		'project',
 		'phase',
 		'processedReferences',
 		'projects',
@@ -55,6 +54,18 @@ JinDAMProjectImporter >> visitCollection: aCollectionBlock [
 ]
 
 { #category : #'visit-first-objects' }
+JinDAMProjectImporter >> visitCollection: aCollection from: aProject [
+
+	1 to: aCollection value size do: [ :i | 
+		" Try to visit. If it fails it restarts the project and it does continue. If it fails twice it let the exception to go "
+		[ (aCollection value at: i) acceptVisitor: self ]
+			on: Error
+			do: [ :e | 
+				aProject reopen.
+				(aCollection value at: i) acceptVisitor: self ] ]
+]
+
+{ #category : #'visit-first-objects' }
 JinDAMProjectImporter >> visitProject: aJinAccessProject [
 
 	| ret |
@@ -76,34 +87,32 @@ JinDAMProjectImporter >> visitProject: aJinAccessProject [
 		at: aJinAccessProject projectPath fullName asLowercase
 		ifAbsentPut: [ self state top ].
 
-	self visitCollection: [ 
-		aJinAccessProject
-			ensureIsOpen;
-			modules ].
+
+
+self visitCollection: [aJinAccessProject modules] from: aJinAccessProject.
+self phaseFinished.
+	self visitCollection: [aJinAccessProject reports] from: aJinAccessProject.
 	self phaseFinished.
-	self visitCollection: [ 
-		aJinAccessProject
-			ensureIsOpen;
-			reports ].
+		self visitCollection: [aJinAccessProject forms] from: aJinAccessProject.
 	self phaseFinished.
-	self visitCollection: aJinAccessProject tables.
+
+	self visitCollection: [aJinAccessProject references] from: aJinAccessProject.
 	self phaseFinished.
-	self visitCollection: aJinAccessProject queries.
+	
+
+	
+	self visitCollection: [aJinAccessProject tables] from: aJinAccessProject.
 	self phaseFinished.
-	self visitCollection: aJinAccessProject relations.
-	"self phaseFinished.
-	self visitCollection: aJinAccessProject macros."
+	self visitCollection: [aJinAccessProject queries] from: aJinAccessProject.
 	self phaseFinished.
-	self visitCollection: [ 
-		aJinAccessProject
-			ensureIsOpen;
-			forms ].
+	self visitCollection: [aJinAccessProject relations] from: aJinAccessProject.
 	self phaseFinished.
-	self visitCollection: [ 
-		aJinAccessProject
-			ensureIsOpen;
-			references ].
-	self phaseFinished.
+	"self visitCollection: [aJinAccessProject macros] from: aJinAccessProject.
+self phaseFinished."
+
+
+
+
 	projects pop.
 	self assertIf: ret = self state top.
 
