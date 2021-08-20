@@ -67,6 +67,7 @@ JinMultiVisitor >> instantiateReferenceForNames: aCollection context: aContext p
 JinMultiVisitor >> instantiateReferenceForSymbol: symbol name: aName context: context [
 
 	| inter |
+
 	symbol
 		ifNil: [ 
 			inter := self instantiate: JinDAMMemberReference.

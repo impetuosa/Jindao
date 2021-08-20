@@ -19,7 +19,8 @@ JinNSAbstractImporter >> assemblyRegisterAndPushSubNameSpaceEntry: aString kind:
 		      kind: aJinNSKind
 		      owner: aJinNSEntryOwner.
 	ns parent: self currentNamespace.
-	self push: ns during: aFullBlockClosure
+	self push: ns during: aFullBlockClosure.
+	^ ns
 ]
 
 { #category : #'instance creation' }
@@ -70,7 +71,8 @@ JinNSAbstractImporter >> externalRegisterAndPushSubNameSpaceEntry: aString kind:
 		      kind: aJinNSKind
 		      owner: aJinNSEntryOwner.
 	ns parent: self currentNamespace.
-	self push: ns during: aFullBlockClosure
+	self push: ns during: aFullBlockClosure.
+	^ ns 
 ]
 
 { #category : #'instance creation' }
@@ -152,26 +154,27 @@ JinNSAbstractImporter >> pushNewAssemblyFor: aProject owner: anOwner [
 { #category : #'as yet unclassified' }
 JinNSAbstractImporter >> register: aName kind: aJinNSKind owner: aJinNSEntryOwner visibility: aVisibility [
 
-	| visibility |
+	| visibility ret |
 	visibility := aVisibility
 		              ifNil: [ #Friend ]
 		              ifNotNil: [ aVisibility asSymbol ].
 	self assert: (#( Global Public Private Friend ) includes: visibility).
 	(visibility = #Public or: [ visibility = #Global ]) ifTrue: [ 
-		(self currentExternalNamespace
-			 register: aName
-			 kind: aJinNSKind
-			 owner: aJinNSEntryOwner) parent: self currentNamespace ].
+		ret := (self currentExternalNamespace
+			        register: aName
+			        kind: aJinNSKind
+			        owner: aJinNSEntryOwner) parent: self currentNamespace ].
 	visibility = #Friend ifTrue: [ 
-		(self currentAssemblyNamespace
-			 register: aName
-			 kind: aJinNSKind
-			 owner: aJinNSEntryOwner) parent: self currentNamespace ].
+		ret := (self currentAssemblyNamespace
+			        register: aName
+			        kind: aJinNSKind
+			        owner: aJinNSEntryOwner) parent: self currentNamespace ].
 	visibility = #Private ifTrue: [ 
-		(self currentNamespace
-			 register: aName
-			 kind: aJinNSKind
-			 owner: aJinNSEntryOwner) parent: self currentNamespace ]
+		ret := (self currentNamespace
+			        register: aName
+			        kind: aJinNSKind
+			        owner: aJinNSEntryOwner) parent: self currentNamespace ].
+	^ ret
 ]
 
 { #category : #'as yet unclassified' }
@@ -182,44 +185,45 @@ JinNSAbstractImporter >> registerAndPushSubNameSpaceEntry: aString kind: aJinNSK
 		      registerSubNamespace: aString
 		      kind: aJinNSKind
 		      owner: aJinNSEntryOwner.
-	self push: ns during: aFullBlockClosure
+	self push: ns during: aFullBlockClosure.
+	^ ns
 ]
 
 { #category : #'as yet unclassified' }
 JinNSAbstractImporter >> registerSubNamespace: aName kind: aJinNSKind owner: aJinNSEntryOwner visibility: aVisibility during: aFullBlockClosure [
 
-	| visibility |
+	| visibility ret |
 	visibility := aVisibility
 		              ifNil: [ #Friend ]
 		              ifNotNil: [ :a | a asSymbol ].
 	self assert: (#( Public Private Friend ) includes: visibility).
 
 	self buildingModule ifFalse: [ 
-		self
-			registerAndPushSubNameSpaceEntry: aName
-			kind: aJinNSKind
-			owner: aJinNSEntryOwner
-			during: aFullBlockClosure.
-		^ self ].
+		^ self
+			  registerAndPushSubNameSpaceEntry: aName
+			  kind: aJinNSKind
+			  owner: aJinNSEntryOwner
+			  during: aFullBlockClosure ].
 
 	visibility = #Public ifTrue: [ 
-		self
-			externalRegisterAndPushSubNameSpaceEntry: aName
-			kind: aJinNSKind
-			owner: aJinNSEntryOwner
-			during: aFullBlockClosure ].
+		ret := self
+			       externalRegisterAndPushSubNameSpaceEntry: aName
+			       kind: aJinNSKind
+			       owner: aJinNSEntryOwner
+			       during: aFullBlockClosure ].
 	visibility = #Friend ifTrue: [ 
-		self
-			assemblyRegisterAndPushSubNameSpaceEntry: aName
-			kind: aJinNSKind
-			owner: aJinNSEntryOwner
-			during: aFullBlockClosure ].
+		ret := self
+			       assemblyRegisterAndPushSubNameSpaceEntry: aName
+			       kind: aJinNSKind
+			       owner: aJinNSEntryOwner
+			       during: aFullBlockClosure ].
 	visibility = #Private ifTrue: [ 
-		self
-			registerAndPushSubNameSpaceEntry: aName
-			kind: aJinNSKind
-			owner: aJinNSEntryOwner
-			during: aFullBlockClosure ]
+		ret := self
+			       registerAndPushSubNameSpaceEntry: aName
+			       kind: aJinNSKind
+			       owner: aJinNSEntryOwner
+			       during: aFullBlockClosure ].
+	^ ret
 ]
 
 { #category : #'as yet unclassified' }

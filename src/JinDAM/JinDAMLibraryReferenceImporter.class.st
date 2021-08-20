@@ -19,8 +19,9 @@ JinDAMLibraryReferenceImporter >> dllAnchor: aString for: aJinLibraryConstant [
 JinDAMLibraryReferenceImporter >> heuristicaltypeName: aTypeOrNil context: aContext [
 
 	self assert: (aContext isKindOf: JinDAMInvocable).
+
 	self heuristics at: aContext name asLowercase ifPresent: [ :n | 
-		self halt .
+
 		^ self
 			  typeReferenceName: n
 			  typeSymbol:
@@ -39,7 +40,10 @@ JinDAMLibraryReferenceImporter >> heuristics [
 		  heuristics at: 'currentdb' put: #Database.
 		  heuristics at: 'err' put: #ErrObject.
 		  heuristics at: 'docmd' put: #DoCmd.
-		heuristics at: 'tempvars' put: #_TempVars.
+		  heuristics at: 'tempvars' put: #TempVars.
+		  heuristics at: 'form' put: #Form.
+		  heuristics at: 'recordsetclone' put: #Recordset. 
+		
 		  heuristics ]
 ]
 

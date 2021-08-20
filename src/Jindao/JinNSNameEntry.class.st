@@ -67,7 +67,6 @@ JinNSNameEntry >> parent [
 
 { #category : #accessing }
 JinNSNameEntry >> parent: aParent [ 
-
 	 parent := aParent 
 ]
 

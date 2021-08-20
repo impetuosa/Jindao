@@ -116,20 +116,22 @@ JinNSASTSymbolImporter >> visitCollection: aCollection [
 
 { #category : #visiting }
 JinNSASTSymbolImporter >> visitDefineEnum: aVBDefineEnumNode [
-	
-	buildingModule := buildingModule ifNil: [ true] . 
-	self
-		registerSubNamespace: aVBDefineEnumNode name token value
-		kind: JinNSKind enum
-		owner: owner
-		visibility: aVBDefineEnumNode visibility value
-		during: [ 
-			aVBDefineEnumNode fields do: [ :f | 
-				self
-					register: f name token value
-					kind: JinNSKind enumEntry
-					owner: owner
-					visibility: aVBDefineEnumNode visibility value ] ]
+
+	| enumNs |
+	buildingModule := buildingModule ifNil: [ true ].
+	enumNs := self
+		          registerSubNamespace: aVBDefineEnumNode name token value
+		          kind: JinNSKind enum
+		          owner: owner
+		          visibility: aVBDefineEnumNode visibility value
+		          during: [  ].
+
+	aVBDefineEnumNode fields do: [ :f | 
+		(self
+			 register: f name token value
+			 kind: JinNSKind enumEntry
+			 owner: owner
+			 visibility: aVBDefineEnumNode visibility value) parent: enumNs ]
 ]
 
 { #category : #visiting }

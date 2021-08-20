@@ -40,6 +40,12 @@ JinDAMUserType >> findAttributeInvocable: aString amountArguments: amount [
 			       ifTrue: [ snd ]
 			       ifFalse: [ fst ] ].
 	^ fst
+		  ifEmpty: [ 
+			  (attributes ifNil: [ OrderedCollection new ]) select: [ :a | 
+				  (a name
+					   compare: (aString copyReplaceAll: '_' with: ' ')
+					   caseSensitive: false) = 2 ] ]
+		  ifNotEmpty: [ fst ]
 ]
 
 { #category : #adding }

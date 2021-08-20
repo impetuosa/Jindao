@@ -45,6 +45,14 @@ JinDAMReference >> candidateAnchor: aCandidateAnchor [
 ]
 
 { #category : #accessing }
+JinDAMReference >> candidateType [
+
+	^ candidate isCollection
+		  ifTrue: [ candidate first type ]
+		  ifFalse: [ candidate type ]
+]
+
+{ #category : #accessing }
 JinDAMReference >> context [
 	^ context
 ]

@@ -80,15 +80,15 @@ JinDAMImporter >> linkReference: r in: aJinDAMModel [
 	| candidates |
 	r candidate ifNil: [ 
 		r candidateAnchor ifNil: [ 
-			({ 'NULL'. 'ERROR'. 'CARRAY'. 'SAFEARRAY'. 'ParamArray'.
-			 'COMUnknownInstance'. 'COMDispatchInstance' } includes: r name) 
+			({ 'NULL'. 'ERROR'. 'CARRAY'. 'SAFEARRAY'. 'ParamArray'. 'HRESULT' .
+			 'COMUnknownInstance'. 'COMDispatchInstance' . 'USERDEFINED*' } includes: r name) 
 				ifTrue: [ ^ self ].
 			r context isReadAccess ifTrue: [ ^ self ].
 
 			self assert: r context isReference.
 			r context candidate ifNil: [ 
 				self linkReference: r context in: aJinDAMModel ].
-			candidates := r context candidate type
+			candidates := r context candidateType
 				              findAttributeInvocable: r name
 				              amountArguments: r arguments size.
 
