@@ -15,7 +15,7 @@ JinDAMGUIImporter >> visitForm: anObject [
 			 typeReferenceName: 'Form'
 			 typeSymbol: (self currentNamespace findSymbol: #Form)
 			 context: frm).
-	frm name: anObject name.
+	frm name: 'Form_' , anObject name.
 	frm anchor: self state top anchor / #forms / anObject name.
 	self state top addType: frm.
 	self state push: frm.
@@ -28,12 +28,12 @@ JinDAMGUIImporter >> visitForm: anObject [
 JinDAMGUIImporter >> visitReport: anObject [
 
 	| rpt |
-	rpt := self instantiate: JinDAMReport. 
+	rpt := self instantiate: JinDAMReport.
 	rpt superClassReference: (self
 			 typeReferenceName: 'Report'
 			 typeSymbol: (self currentNamespace findSymbol: #Report)
 			 context: rpt).
-	rpt name: anObject name.
+	rpt name: 'Report_' , anObject name.
 	rpt anchor: self state top anchor / #reports / anObject name.
 	self state top addType: rpt.
 	self state push: rpt.

@@ -19,6 +19,11 @@ JinNSSymbolTable class >> loadFrom: aString [
 ]
 
 { #category : #accessing }
+JinNSSymbolTable >> assembly [
+	^ assembly 
+]
+
+{ #category : #accessing }
 JinNSSymbolTable >> assembly: aCollection [ 
 	assembly := aCollection
 ]

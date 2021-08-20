@@ -75,9 +75,8 @@ JinNSNamespace >> entriesHoldersFor: aStringOrderedCollection [
 { #category : #'as yet unclassified' }
 JinNSNamespace >> findSymbol: aString [
 
-	| ns |
-	" Do i have it ? "
-"	aString asLowercase = 'currentdb' ifTrue:[ self halt ]."
+	| ns kw word |
+	" Do i have it ? ""	aString asLowercase = 'currentdb' ifTrue:[ self halt ]."
 	ns := OrderedCollection new.
 	entries
 		at: aString asLowercase
@@ -90,7 +89,8 @@ JinNSNamespace >> findSymbol: aString [
 
 	"Does my parent has it? "
 	parent ifNil: [ ^ ns removeDuplicates ].
-	^ (ns , (parent findSymbol: aString)) removeDuplicates
+	ns := (ns , (parent findSymbol: aString)) removeDuplicates.
+	^ ns
 ]
 
 { #category : #accessing }

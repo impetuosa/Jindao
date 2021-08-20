@@ -58,8 +58,14 @@ JinDAMASTCodeImporter >> literals [
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMASTCodeImporter >> nodeToTypeReferenceName: aVBNode context: aContext [ 
-	^ self referenceNameConverter toTypeReferenceName: aVBNode context: aContext 
+JinDAMASTCodeImporter >> nodeToTypeReferenceName: aVBNode context: aContext [
+
+	| t |
+	t := self referenceNameConverter
+		     toTypeReferenceName: aVBNode
+		     context: aContext.
+"	self assert: (t isKindOf: JinDAMTypeReference)."
+	^ t
 ]
 
 { #category : #'member access' }

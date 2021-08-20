@@ -30,7 +30,7 @@ JinDAMUserType >> find: aJinNSKind named: aString [
 JinDAMUserType >> findAttributeInvocable: aString amountArguments: amount [
 
 	| fst snd |
-	fst := attributes select: [ :a | 
+	fst := (attributes ifNil: [ OrderedCollection new ]) select: [ :a | 
 		       (a name compare: aString caseSensitive: false) = 2 ].
 	fst size > 2 ifTrue: [ 
 		snd := attributes select: [ :a | 

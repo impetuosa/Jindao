@@ -3,6 +3,9 @@ Class {
 	#superclass : #JinLibraryReferenceVisitor,
 	#traits : 'JinDAMTypeConversions',
 	#classTraits : 'JinDAMTypeConversions classTrait',
+	#instVars : [
+		'heuristics'
+	],
 	#category : #'JinDAM-Importers'
 }
 
@@ -10,6 +13,34 @@ Class {
 JinDAMLibraryReferenceImporter >> dllAnchor: aString for: aJinLibraryConstant [
 
 	^ self state top anchor / aString
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMLibraryReferenceImporter >> heuristicaltypeName: aTypeOrNil context: aContext [
+
+	self assert: (aContext isKindOf: JinDAMInvocable).
+	self heuristics at: aContext name asLowercase ifPresent: [ :n | 
+		self halt .
+		^ self
+			  typeReferenceName: n
+			  typeSymbol:
+				  ((self symbolTable assembly flatCollect: [ :f | f findSymbol: n ]) 
+					   select: [ :d | d kind isType ]) removeDuplicates
+			  context: aContext ].
+
+	^ self typeName: aTypeOrNil context: aContext
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMLibraryReferenceImporter >> heuristics [
+
+	^ heuristics ifNil: [ 
+		  heuristics := Dictionary new.
+		  heuristics at: 'currentdb' put: #Database.
+		  heuristics at: 'err' put: #ErrObject.
+		  heuristics at: 'docmd' put: #DoCmd.
+		heuristics at: 'tempvars' put: #_TempVars.
+		  heuristics ]
 ]
 
 { #category : #'visiting accessor' }
@@ -22,7 +53,7 @@ JinDAMLibraryReferenceImporter >> instantiateGetterAccessorMethod: aJinLibraryMe
 
 
 	acc selector: selector.
-	acc typeReference: (self typeName: aJinLibraryMethod context:acc ).
+	acc typeReference: (self heuristicaltypeName: aJinLibraryMethod context:acc ).
 
 	self state top addInvocable: acc.
 	self state push: acc.
@@ -41,7 +72,7 @@ JinDAMLibraryReferenceImporter >> instantiateSetterAccessorMethod: aJinLibraryMe
 
 
 	acc selector: selector.
-	acc typeReference: (self typeName: aJinLibraryMethod context: acc ).
+	acc typeReference: (self heuristicaltypeName: aJinLibraryMethod context: acc ).
 
 	self state top addInvocable: acc.
 	self state push: acc.
@@ -216,7 +247,9 @@ JinDAMLibraryReferenceImporter >> visitLibraryMethod: aJinLibraryMethod [
 	selector :=( '_' split: aJinLibraryMethod selector) last.  
 	fn selector: selector.
 	fn anchor: self state top anchor / #functions / fn selector.
-	fn typeReference: (self typeName: aJinLibraryMethod context:fn ) .
+	
+	
+	fn typeReference: (self heuristicaltypeName: aJinLibraryMethod context:fn ) .
 	
 	self state top addInvocable: fn.
 	self state push: fn.

@@ -163,7 +163,7 @@ JinNSBuilder >> visitForm: aJinForm [
 	aJinForm ensureUnload.
 	owner := self typeOwnerFor: aJinForm.
 	self
-		registerAndPushSubNameSpaceEntry: aJinForm name
+		registerAndPushSubNameSpaceEntry: 'Form_' , aJinForm name
 		kind: JinNSKind form
 		owner: owner
 		during: [ 
@@ -282,7 +282,7 @@ JinNSBuilder >> visitReport: aJinReport [
 	aJinReport ensureUnload.
 	owner := self typeOwnerFor: aJinReport.
 	self
-		registerAndPushSubNameSpaceEntry: aJinReport name
+		registerAndPushSubNameSpaceEntry: 'Report_' , aJinReport name
 		kind: JinNSKind report
 		owner: owner
 		during: [ 

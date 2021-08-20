@@ -37,7 +37,6 @@ JinDAMVBVisitorToReferenceName >> toTypeReferenceName: aNode context: context [
 	| refChain |
 	processedElement := false.
 	refChain := aNode acceptVisitor: self.
-
 	processedElement ifTrue: [ 
 		self halt: 'Type that comes out of process? ' ].
 	refChain ifNil: [ 
