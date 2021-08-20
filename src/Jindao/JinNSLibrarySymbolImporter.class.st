@@ -85,6 +85,19 @@ JinNSLibrarySymbolImporter >> owner [
 			           yourself ]
 ]
 
+{ #category : #building }
+JinNSLibrarySymbolImporter >> register: aString kind: aJinNSKind owner: aJinNSEntryOwner [
+
+	| entry |
+	entry := self currentNamespace
+		         register: aString
+		         kind: aJinNSKind
+		         owner: aJinNSEntryOwner.
+	static ifTrue: [ entry parent: stack top ].
+
+	^ entry
+]
+
 { #category : #'as yet unclassified' }
 JinNSLibrarySymbolImporter >> runner [
 
@@ -100,10 +113,10 @@ JinNSLibrarySymbolImporter >> visitCollection: aCollection [
 { #category : #visiting }
 JinNSLibrarySymbolImporter >> visitLibraryAlias: aJinLibraryAlias [
 
-	assembly
+(	assembly
 		register: aJinLibraryAlias name 
 		kind: JinNSKind classAlias
-		owner: self owner
+		owner: self owner) parent: stack top. 
 ]
 
 { #category : #visiting }
@@ -122,10 +135,10 @@ JinNSLibrarySymbolImporter >> visitLibraryCoClass: aJinLibraryCoClass [
 { #category : #visiting }
 JinNSLibrarySymbolImporter >> visitLibraryConstant: aJinLibraryConstant [
 
-	assembly
+	(assembly
 		register: aJinLibraryConstant name
 		kind: JinNSKind constant
-		owner: self owner
+		owner: self owner) parent: stack top 
 ]
 
 { #category : #visiting }
@@ -171,14 +184,14 @@ JinNSLibrarySymbolImporter >> visitLibraryInterface: aJinLibraryInterface [
 { #category : #visiting }
 JinNSLibrarySymbolImporter >> visitLibraryMethod: aJinLibraryMethod [
 
-	self currentNamespace
+	self 
 		register: aJinLibraryMethod selector
 		kind: JinNSKind function
 		owner: self owner.
 	(aJinLibraryMethod selector includesSubstring: '_') ifTrue: [ 
 		| pieces |
 		pieces := '_' split: aJinLibraryMethod selector.
-		self currentNamespace
+		self 
 			register: pieces last
 			kind: JinNSKind function
 			owner: self owner ]
@@ -187,17 +200,19 @@ JinNSLibrarySymbolImporter >> visitLibraryMethod: aJinLibraryMethod [
 { #category : #visiting }
 JinNSLibrarySymbolImporter >> visitLibraryModule: aJinLibraryModule [
 
-	assembly
-		register: aJinLibraryModule name
+	static := true.
+	self
+		registerAndPushSubNameSpaceEntry: aJinLibraryModule name
 		kind: JinNSKind module
-		owner: self owner.
-	self visitCollection: aJinLibraryModule definitions
+		owner: self owner
+		during: [ self visitCollection: aJinLibraryModule definitions ].
+	static := false
 ]
 
 { #category : #visiting }
 JinNSLibrarySymbolImporter >> visitLibraryProperty: aJinLibraryProperty [
 
-	self currentNamespace
+	self 
 		register: aJinLibraryProperty name
 		kind: JinNSKind typeProperty
 		owner: self owner.
@@ -214,7 +229,7 @@ JinNSLibrarySymbolImporter >> visitLibraryStructure: aJinLibraryStructure [
 		owner: self owner
 		during: [ 
 			aJinLibraryStructure instanceVariables do: [ :v | 
-				self currentNamespace
+				self
 					register: v name
 					kind: JinNSKind typeProperty
 					owner: self owner ] ]

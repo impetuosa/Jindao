@@ -3,7 +3,6 @@ Class {
 	#superclass : #JinDAMReference,
 	#instVars : [
 		'name',
-		'type',
 		'arguments'
 	],
 	#category : #'JinDAM-Model'
@@ -17,6 +16,11 @@ JinDAMMemberReference >> addArgument: aJinDAMArgument [
 { #category : #accessing }
 JinDAMMemberReference >> arguments [
 	^ arguments ifNil: [ arguments := OrderedCollection new  ]
+]
+
+{ #category : #accessing }
+JinDAMMemberReference >> dimensions [
+	 ^ 0
 ]
 
 { #category : #accessing }

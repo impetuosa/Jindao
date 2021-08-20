@@ -8,18 +8,6 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
-{ #category : #testing }
-JinDAMFunction >> find: aJinNSKind named: aString [
-
-	| lc |
-	lc := aString asLowercase.
-	aJinNSKind isAttribute ifTrue: [ 
-		^ localVariables
-			  detect: [ :p | p name asLowercase = lc ]
-			  ifNone: [ parameters detect: [ :p | p name asLowercase = lc ] ] ].
-	self error: '???'
-]
-
 { #category : #accessing }
 JinDAMFunction >> printOn: aStream [
 
@@ -38,6 +26,11 @@ JinDAMFunction >> printOn: aStream [
 JinDAMFunction >> relatedSymbolKind [
 
 	^ JinNSKind function
+]
+
+{ #category : #generated }
+JinDAMFunction >> type [
+	^ typeReference candidate 
 ]
 
 { #category : #accessing }

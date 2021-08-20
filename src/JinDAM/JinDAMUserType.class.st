@@ -26,6 +26,22 @@ JinDAMUserType >> find: aJinNSKind named: aString [
 	^ self error: '??'
 ]
 
+{ #category : #'as yet unclassified' }
+JinDAMUserType >> findAttributeInvocable: aString amountArguments: amount [
+
+	| fst snd |
+	fst := attributes select: [ :a | 
+		       (a name compare: aString caseSensitive: false) = 2 ].
+	fst size > 2 ifTrue: [ 
+		snd := attributes select: [ :a | 
+			       (a name compare: aString caseSensitive: false) = 2 and: [ 
+				       a parametersSize = amount ] ].
+		fst := (snd isNotEmpty and: [ snd size < fst size ])
+			       ifTrue: [ snd ]
+			       ifFalse: [ fst ] ].
+	^ fst
+]
+
 { #category : #adding }
 JinDAMUserType >> printOn: aStream [
 

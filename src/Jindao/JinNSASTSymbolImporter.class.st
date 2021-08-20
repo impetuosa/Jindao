@@ -137,7 +137,7 @@ JinNSASTSymbolImporter >> visitDefineType: aVBDefineTypeNode [
 
 	self
 		registerSubNamespace: aVBDefineTypeNode name token value asSymbol
-		kind: JinNSKind sub
+		kind: JinNSKind userType 
 		owner: owner
 		visibility: aVBDefineTypeNode visibility value
 		during: [ 

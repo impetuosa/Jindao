@@ -21,33 +21,13 @@ JinMultiVisitor >> currentNamespace [
 ]
 
 { #category : #'*JinDAM' }
-JinMultiVisitor >> instantiateReferenceForNames: names context: aContext [
+JinMultiVisitor >> instantiateReferenceForNames: aCollection context: aContext preferring: rules [
 
-	| symbols tip |
-	symbols := self currentNamespace findSymbol: names first.
-
-	self assert: symbols size < 2.
-	tip := self
-		       instantiateReferenceForSymbol: (symbols ifEmpty:[ nil ] ifNotEmpty: [ symbols first ])
-		       name: names first
-		       context: aContext.
-
-	names allButFirst inject:  (symbols ifEmpty:[ nil ] ifNotEmpty: [ symbols first ]) into: [ :acc :name | 
-		symbols := acc ifNil: [ {  } ] ifNotNil: [ acc findSymbol: name ].
-		self assert: symbols size < 2.
-		tip := self
-			       instantiateReferenceForSymbol:
-			       (symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ])
-			       name: name
-			       context: tip.
-		symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ] ].
-	^ tip
-]
-
-{ #category : #'*JinDAM' }
-JinMultiVisitor >> instantiateReferenceForNames: names context: aContext preferring: rules [
-
-	| select symbols tip |
+	| select symbols tip names kinds |
+	
+	
+	names := aCollection collect: [ :c | c isArray ifTrue: [ c first ] ifFalse: [c] ].
+	kinds := (aCollection collect: [ :c |  c isArray ifTrue: [ c second ] ifFalse: [ #member ]]) readStream.
 	symbols := self currentNamespace findSymbol: names first.
 
 	symbols size > 1 ifTrue: [ 
@@ -62,6 +42,7 @@ JinMultiVisitor >> instantiateReferenceForNames: names context: aContext preferr
 		       (symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ])
 		       name: names first
 		       context: aContext.
+	tip kind: kinds next.
 
 	names allButFirst
 		inject: (symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ])
@@ -77,6 +58,7 @@ JinMultiVisitor >> instantiateReferenceForNames: names context: aContext preferr
 				       (symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ])
 				       name: name
 				       context: tip.
+			tip kind: kinds next.
 			symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ] ].
 	^ tip
 ]
@@ -108,5 +90,13 @@ JinMultiVisitor >> instantiateReferenceForSymbol: symbol name: aName context: co
 			symbol anchor ifNil: [ self halt ].
 			inter candidateAnchor: symbol anchor ].
 	inter context: context.
+	
+	" Should deal with this differently do i? "
+	aName asLowercase = #me ifTrue: [ 
+		
+		
+		inter candidate: self enclosingClass.
+		inter candidateAnchor: inter candidate anchor.
+		 ].
 	^ inter
 ]

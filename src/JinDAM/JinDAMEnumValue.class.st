@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #accessing }
+JinDAMEnumValue >> name [
+	^ name
+]
+
+{ #category : #accessing }
 JinDAMEnumValue >> name: aString [ 
 	name := aString
 ]

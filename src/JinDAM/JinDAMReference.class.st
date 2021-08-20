@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'context',
 		'candidate',
-		'candidateAnchor'
+		'candidateAnchor',
+		'kindAccess'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -53,10 +54,27 @@ JinDAMReference >> context: aJinDAMTypeReference [
 	context := aJinDAMTypeReference
 ]
 
+{ #category : #testing }
+JinDAMReference >> isDictionaryAccess [
+
+	^ (kindAccess compare: 'dictionary' caseSensitive: false) = 2
+]
+
 { #category : #accessing }
 JinDAMReference >> isReference [
 
 	^ true
+]
+
+{ #category : #accessing }
+JinDAMReference >> kind [
+
+	^ kindAccess
+]
+
+{ #category : #accessing }
+JinDAMReference >> kind: aString [ 
+	kindAccess := aString 
 ]
 
 { #category : #printing }
@@ -69,6 +87,6 @@ JinDAMReference >> printOn: aStream [
 		nextPutAll:
 			(candidate
 				 ifNil: [ 'Unsolved' ]
-				 ifNotNil: [ candidate printString ]).
+				 ifNotNil: [ candidate name ]).
 	
 ]

@@ -6,3 +6,9 @@ Class {
 	],
 	#category : #'JinDAM-Model'
 }
+
+{ #category : #accessing }
+JinDAMQuery >> relatedSymbolKind [
+
+	^ #isQuery
+]

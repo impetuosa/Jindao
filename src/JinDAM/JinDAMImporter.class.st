@@ -25,7 +25,6 @@ JinDAMImporter >> import: aProjectPath into: aModel [
 	visitor := self visitorFor: aModel.
 	[ 
 		project acceptVisitor: visitor.
- 		self link: aModel. 
 		^ aModel.  
 	]
 		ensure: [ project closeAndQuit ].
@@ -64,17 +63,60 @@ JinDAMImporter >> initialize [
 { #category : #accessing }
 JinDAMImporter >> link: aJinDAMModel [
 
-	aJinDAMModel references do: [ :r | 
-		r candidate ifNil: [ 
-			r candidateAnchor ifNotNil: [ 
-				| artefact |
-				artefact := aJinDAMModel entities detect: [ :e | 
-					            (e isKindOf: JinDAMArtefact) and: [ 
-						            e name = r candidateAnchor elementProject and: [ 
-							            e isReference not ] ] ].
-				r candidate: (r candidateAnchor elementsNameKindPairs
-						 inject: artefact
-						 into: [ :nav :each | nav find: each second named: each first ]) ] ] ]
+	| references |
+	references := aJinDAMModel references.
+
+	references
+		select: [ :r | r isKindOf: JinDAMTypeReference ]
+		thenDo: [ :r | self linkReference: r in: aJinDAMModel ].
+	references
+		reject: [ :r | r isKindOf: JinDAMTypeReference ]
+		thenDo: [ :r | self linkReference: r in: aJinDAMModel ]
+]
+
+{ #category : #accessing }
+JinDAMImporter >> linkReference: r in: aJinDAMModel [
+
+	| candidates |
+	r candidate ifNil: [ 
+		r candidateAnchor ifNil: [ 
+			({ 'NULL'. 'ERROR'. 'CARRAY'. 'SAFEARRAY'. 'ParamArray'.
+			 'COMUnknownInstance'. 'COMDispatchInstance' } includes: r name) 
+				ifTrue: [ ^ self ].
+			r context isReadAccess ifTrue: [ ^ self ].
+
+			self assert: r context isReference.
+			r context candidate ifNil: [ 
+				self linkReference: r context in: aJinDAMModel ].
+			candidates := r context candidate type
+				              findAttributeInvocable: r name
+				              amountArguments: r arguments size.
+
+			candidates
+				ifEmpty: [ self assert: r isDictionaryAccess ]
+				ifNotEmpty: [ 
+					self assert: (candidates size = 1 or: [ 
+							 (candidates collect: [ :c | c typeReference name ]) asSet size
+							 = 1 and: [ 
+								 (candidates collect: [ :c | c parametersSize ]) asSet size
+								 = 1 ] ]).
+					candidates size = 1
+						ifTrue: [ 
+							r candidateAnchor: candidates first anchor.
+							r candidate: candidates first ]
+						ifFalse: [ r candidate: candidates ] ].
+			^ self ].
+
+
+		r candidateAnchor ifNotNil: [ 
+			| artefact |
+			artefact := aJinDAMModel entities detect: [ :e | 
+				            (e isKindOf: JinDAMArtefact) and: [ 
+					            e name = r candidateAnchor elementProject and: [ 
+						            e isReference not ] ] ].
+			r candidate: (r candidateAnchor elementsNameKindPairs
+					 inject: artefact
+					 into: [ :nav :each | nav find: each second named: each first ]) ] ]
 ]
 
 { #category : #accessing }

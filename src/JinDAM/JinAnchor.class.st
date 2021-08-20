@@ -116,8 +116,8 @@ JinAnchor >> ensureWellformed [
 
 	path size > 1 ifTrue: [ 
 		self assert:
-			({ 'modules'. 'forms'. 'reports'. 'table'. 'query'. 'references'. 'primitiveType'.  'enum'. 'function' .
-			 'classModule'. 'globalVariable' } includes: (path at: 2)) ]
+			({ 'modules'. 'forms'. 'reports'. 'table'. 'query'. 'references'. 'primitiveType'.  'enum'. 'function' . 'classAlias' .  'module' .'form'. 'report'.
+			 'classModule'. 'globalVariable' } includes: (path at: 2)) ] 
 ]
 
 { #category : #arithmetic }

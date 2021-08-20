@@ -260,6 +260,14 @@ JinNSKind >> adaptToAlceAnchorPathFragment [
 	^ kind
 ]
 
+{ #category : #'.' }
+JinNSKind >> compatibleWith: aKindOrSymbol [
+
+	^ aKindOrSymbol isSymbol
+		  ifTrue: [ self perform: aKindOrSymbol ]
+		  ifFalse: [ self = aKindOrSymbol ]
+]
+
 { #category : #accessing }
 JinNSKind >> hash [
 

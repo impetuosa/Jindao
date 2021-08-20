@@ -2,10 +2,21 @@ Class {
 	#name : #JinDAMTypeReference,
 	#superclass : #JinDAMReference,
 	#instVars : [
-		'typeName'
+		'typeName',
+		'dimensions'
 	],
 	#category : #'JinDAM-Model'
 }
+
+{ #category : #accessing }
+JinDAMTypeReference >> dimensions [
+	^ dimensions ifNil:[ 0  ]
+]
+
+{ #category : #accessing }
+JinDAMTypeReference >> isArray [ 
+	 ^ self dimensions > 0 
+]
 
 { #category : #accessing }
 JinDAMTypeReference >> name [
@@ -20,5 +31,7 @@ JinDAMTypeReference >> typeName [
 
 { #category : #accessing }
 JinDAMTypeReference >> typeName: aString [ 
-	typeName := aString
+	typeName := aString.
+	aString isCharacter ifTrue: [ self halt ].
+
 ]

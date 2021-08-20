@@ -19,6 +19,11 @@ JinDAMEntity >> anchor: jinAnchor [
 ]
 
 { #category : #testing }
+JinDAMEntity >> isReadAccess [
+	^ false 
+]
+
+{ #category : #testing }
 JinDAMEntity >> isReference [
 	 ^ false 
 ]

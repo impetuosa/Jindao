@@ -1,13 +1,20 @@
 Class {
 	#name : #JinDAMGUIImporter,
 	#superclass : #JinGUIFirstCitizenVisitor,
+	#traits : 'JinDAMTypeConversions',
+	#classTraits : 'JinDAMTypeConversions classTrait',
 	#category : #'JinDAM-Importers'
 }
 
 { #category : #'entry-point' }
 JinDAMGUIImporter >> visitForm: anObject [
+
 	| frm |
 	frm := self instantiate: JinDAMForm.
+	frm superClassReference: (self
+			 typeReferenceName: 'Form'
+			 typeSymbol: (self currentNamespace findSymbol: #Form)
+			 context: frm).
 	frm name: anObject name.
 	frm anchor: self state top anchor / #forms / anObject name.
 	self state top addType: frm.
@@ -19,8 +26,13 @@ JinDAMGUIImporter >> visitForm: anObject [
 
 { #category : #'entry-point' }
 JinDAMGUIImporter >> visitReport: anObject [
+
 	| rpt |
-	rpt := self instantiate: JinDAMReport.
+	rpt := self instantiate: JinDAMReport. 
+	rpt superClassReference: (self
+			 typeReferenceName: 'Report'
+			 typeSymbol: (self currentNamespace findSymbol: #Report)
+			 context: rpt).
 	rpt name: anObject name.
 	rpt anchor: self state top anchor / #reports / anObject name.
 	self state top addType: rpt.

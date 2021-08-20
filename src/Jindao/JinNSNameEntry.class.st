@@ -24,7 +24,6 @@ JinNSNameEntry >> anchor [
 
 { #category : #'as yet unclassified' }
 JinNSNameEntry >> findSymbol: aString [
-
 	^ (name compare: aString caseSensitive: false) = 2
 		  ifTrue: [ { self } ]
 		  ifFalse: [ {  } ]
@@ -67,6 +66,7 @@ JinNSNameEntry >> parent [
 
 { #category : #accessing }
 JinNSNameEntry >> parent: aParent [ 
+
 	 parent := aParent 
 ]
 

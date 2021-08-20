@@ -20,7 +20,7 @@ JinDAMGUIControlImporter >> visitFormControl: anObject [
 	attribute name: anObject name.
 	attribute anchor: self state top anchor / #controls / anObject name.
 	attribute typeReference: (self
-			 instantiateReferenceForNames: { anObject mappedTypeName }
+			 instantiateReferenceForNames: { {anObject mappedTypeName . #member } }
 			 context: attribute
 			 preferring: { #isType }).
 	self state top addAttribute:  attribute

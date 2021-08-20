@@ -27,6 +27,19 @@ JinDAMInvocable >> name [
 ]
 
 { #category : #accessing }
+JinDAMInvocable >> parameters [
+	 ^ parameters 
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMInvocable >> parametersSize [
+
+	^ (parameters anySatisfy: [ :p | p typeReference name = 'ParamArray' ])
+		  ifTrue: [ Float infinity ]
+		  ifFalse: [ parameters size ]
+]
+
+{ #category : #accessing }
 JinDAMInvocable >> relatedSymbolKind [
 	 self subclassResponsibility 
 ]

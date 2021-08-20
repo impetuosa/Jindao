@@ -17,3 +17,9 @@ JinDAMType >> name [
 JinDAMType >> name: aString [ 
 	name := aString
 ]
+
+{ #category : #generated }
+JinDAMType >> type [
+
+	^ self
+]

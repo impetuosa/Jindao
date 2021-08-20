@@ -51,21 +51,23 @@ JinNSNamespace >> entries [
 { #category : #'as yet unclassified' }
 JinNSNamespace >> entriesHolderFor: aString [
 
-	| col |
+	| col nsn |
+	nsn := aString asLowercase. 
 	self modifyEntriesWith: [ :e | 
-		e at: aString ifPresent: [ :c | col := c ] ifAbsent: [ 
+		e at: nsn ifPresent: [ :c | col := c ] ifAbsent: [ 
 			col := JinSharedCollection new.
-			e at: aString put: col ] ].
+			e at: nsn put: col ] ].
 	^ col
 ]
 
 { #category : #'as yet unclassified' }
 JinNSNamespace >> entriesHoldersFor: aStringOrderedCollection [
 
-	| col |
+	| col nsn |
 	self modifyEntriesWith: [ :entr | 
 		col := aStringOrderedCollection collect: [ :s | 
-			       entr at: s ifAbsentPut: JinSharedCollection new ] ].
+				nsn := s asLowercase. 
+			       entr at: nsn ifAbsentPut: JinSharedCollection new ] ].
 
 	^ col
 ]
@@ -75,18 +77,12 @@ JinNSNamespace >> findSymbol: aString [
 
 	| ns |
 	" Do i have it ? "
+"	aString asLowercase = 'currentdb' ifTrue:[ self halt ]."
 	ns := OrderedCollection new.
 	entries
-		at: aString
-		ifPresent: [ :e | ns := e unsafeCopyCollection ]
-		ifAbsent: [ 
-			entries
-				at: aString asLowercase
-				ifPresent: [ :e | ns := e unsafeCopyCollection ]
-				ifAbsent: [ 
-					entries
-						at: aString asLowercase capitalized
-						ifPresent: [ :e | ns := e unsafeCopyCollection ] ] ].
+		at: aString asLowercase
+		ifPresent: [ :e | ns := e unsafeCopyCollection ].
+
 
 	" Does a friend has it? "
 	ns := ns , (friends flatCollect: [ :f | f findSymbol: aString ])
@@ -200,6 +196,7 @@ JinNSNamespace >> readEntries [
 JinNSNamespace >> register: aString kind: aJinNSKind owner: aJinNSEntryOwner [
 
 	| entry |
+	
 	entry := JinNSNameEntry new
 		         name: aString;
 		         kind: aJinNSKind;
@@ -216,6 +213,7 @@ JinNSNamespace >> registerAll: aStringOrderedCollection kind: aJinNSKind owner: 
 	| col |
 	col := self entriesHoldersFor: aStringOrderedCollection.
 	col with: aStringOrderedCollection do: [ :holder :aString | 
+
 		holder add: (JinNSNameEntry new
 				 name: aString;
 				 parent: self;

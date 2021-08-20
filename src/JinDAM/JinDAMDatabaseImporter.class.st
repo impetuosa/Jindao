@@ -20,7 +20,7 @@ JinDAMDatabaseImporter >> dbTypeReferenceName: aString typeSymbol: aCollection c
 		        type := self instantiate: JinDAMDBType.
 		        type name: aString.
 		        type typeEnumReference: (self
-				         instantiateReferenceForNames: { aString }
+				         instantiateReferenceForNames: { {aString . #member} }
 				         context: aJinDAMAttribute
 				         preferring: { #isEnumEntry }) ].
 	ref := self instantiate: JinDAMTypeReference.
@@ -36,19 +36,23 @@ JinDAMDatabaseImporter >> dbtypes [
 ]
 
 { #category : #visiting }
-JinDAMDatabaseImporter >> visitQuery: aJinQuery [ 
+JinDAMDatabaseImporter >> visitQuery: aJinQuery [
 
 	| tab field |
 	tab := self instantiate: JinDAMQuery.
+	tab superClassReference: (self
+			 typeReferenceName: 'QueryDefs'
+			 typeSymbol: (self currentNamespace findSymbol: #QueryDefs)
+			 context: tab).
 	tab name: aJinQuery name.
 	tab anchor: self state top anchor / #tables / aJinQuery name.
 	self state top addType: tab.
 
 	aJinQuery fields do: [ :f | 
-		field := self instantiate: JinDAMTableField. 
-		field name: f name. 
-		field size: f size. 
-		field sourceTableName: f sourceTableName. 
+		field := self instantiate: JinDAMTableField.
+		field name: f name.
+		field size: f size.
+		field sourceTableName: f sourceTableName.
 		field typeReference: (self
 				 dbTypeReferenceName: f typeName
 				 typeSymbol: (self currentNamespace findSymbol: f typeName)
@@ -62,6 +66,10 @@ JinDAMDatabaseImporter >> visitTable: aJinTable [
 
 	| tab field |
 	tab := self instantiate: JinDAMTable.
+	tab superClassReference: (self
+			 typeReferenceName: 'TableDefs'
+			 typeSymbol: (self currentNamespace findSymbol: #TableDefs)
+			 context: tab).
 	tab name: aJinTable name.
 	tab anchor: self state top anchor / #tables / aJinTable name.
 	self state top addType: tab.
@@ -69,8 +77,8 @@ JinDAMDatabaseImporter >> visitTable: aJinTable [
 	aJinTable fields do: [ :f | 
 		field := self instantiate: JinDAMTableField.
 		field name: f name.
-		field size: f size. 
-		field sourceTableName: f sourceTableName. 
+		field size: f size.
+		field sourceTableName: f sourceTableName.
 		field typeReference: (self
 				 dbTypeReferenceName: f typeName
 				 typeSymbol: (self currentNamespace findSymbol: f typeName)

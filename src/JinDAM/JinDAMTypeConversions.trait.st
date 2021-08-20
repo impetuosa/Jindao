@@ -68,9 +68,11 @@ JinDAMTypeConversions >> typeReferenceName: aString typeSymbol: aCollection cont
 	reference := self instantiate: JinDAMTypeReference.
 	reference context: aContext.
 	reference typeName: aString.
-	potentialTypes  := aCollection select:[: p | p kind isType].
+	potentialTypes  := aCollection select:[: p | p kind isType ].
 
 	(aCollection isEmpty and: [ {'NULL' . 'ERROR' . 'CARRAY'. 'SAFEARRAY' . 'COMUnknownInstance' . 'COMDispatchInstance' } includes: aString  ]) ifFalse: [ 
+		({'VOID'  } includes: aString ) ifTrue: [  potentialTypes  := potentialTypes select:[ : p | p name = aString   ] ].
+		
 		self assert: potentialTypes size = 1.
 		reference candidateAnchor: potentialTypes first anchor ].
 

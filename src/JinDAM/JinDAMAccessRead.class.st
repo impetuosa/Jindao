@@ -13,9 +13,26 @@ JinDAMAccessRead >> addArgument: aJinDAMArgument [
 ]
 
 { #category : #accessing }
+JinDAMAccessRead >> candidate [
+	 ^ readReference candidate 
+]
+
+{ #category : #accessing }
+JinDAMAccessRead >> isReadAccess [
+	^ true 
+]
+
+{ #category : #accessing }
 JinDAMAccessRead >> printOn: aStream [
 	aStream nextPutAll: '+R '.
 	readReference printOn: aStream
+]
+
+{ #category : #accessing }
+JinDAMAccessRead >> readReference [
+
+	self assert: readReference isCollection not.
+	^ readReference
 ]
 
 { #category : #accessing }

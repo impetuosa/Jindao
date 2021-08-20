@@ -18,3 +18,19 @@ JinDAMLiteralReference >> literalKind: aString [
 JinDAMLiteralReference >> name [
 	^ candidate asString 
 ]
+
+{ #category : #'as yet unclassified' }
+JinDAMLiteralReference >> printOn: aStream [
+
+	aStream
+		nextPutAll: ' -> ( ';
+		nextPutAll: literalKind ; 
+		nextPutAll: ' Literal) ';
+		nextPutAll: self adaptToAlceAnchorPathFragment;
+		nextPutAll: ' ';
+		nextPutAll:
+			(candidate
+				 ifNil: [ 'Unsolved' ]
+				 ifNotNil: [ candidate asString ]).
+	
+]

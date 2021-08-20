@@ -31,6 +31,21 @@ JinDAMModule >> find: aJinNSKind named: aString [
 ]
 
 { #category : #accessing }
+JinDAMModule >> findAttributeInvocable: aString amountArguments: amount [
+
+	| sup this |
+	sup := super findAttributeInvocable: aString amountArguments: amount.
+	this := invocables select: [ :a | 
+		        (a name compare: aString caseSensitive: false) = 2 and: [ 
+			        amount = a parametersSize ] ].
+	this ifEmpty: [
+	this := invocables select: [ :a | 
+		        (a name compare: aString caseSensitive: false) = 2 and: [ 
+			        amount <= a parametersSize ] ]].
+^ sup , this
+]
+
+{ #category : #accessing }
 JinDAMModule >> initialize [
 
 	super initialize.

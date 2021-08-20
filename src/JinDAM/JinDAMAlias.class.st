@@ -7,6 +7,18 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #testing }
+JinDAMAlias >> find: aJinNSKind named: aString [
+
+	^ typeReference candidate find: aJinNSKind named: aString
+]
+
+{ #category : #accessing }
+JinDAMAlias >> findAttributeInvocable: aString amountArguments: amount [
+
+	^ self type findAttributeInvocable: aString amountArguments: amount
+]
+
 { #category : #accessing }
 JinDAMAlias >> printOn: aStream [
 
@@ -19,7 +31,7 @@ JinDAMAlias >> printOn: aStream [
 
 { #category : #accessing }
 JinDAMAlias >> type [ 
-	^ typeReference value 
+	^ typeReference candidate 
 ]
 
 { #category : #accessing }

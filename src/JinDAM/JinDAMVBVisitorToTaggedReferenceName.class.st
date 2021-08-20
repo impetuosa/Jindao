@@ -1,5 +1,5 @@
 Class {
-	#name : #JinDAMVBVisitorToReferenceName,
+	#name : #JinDAMVBVisitorToTaggedReferenceName,
 	#superclass : #Object,
 	#instVars : [
 		'processedElement',
@@ -12,27 +12,27 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName class >> noneAttribute [
+JinDAMVBVisitorToTaggedReferenceName class >> noneAttribute [
 	^ noneAttribute ifNil: [ noneAttribute := AlcixVariableReference new ]
 ]
 
 { #category : #accce }
-JinDAMVBVisitorToReferenceName >> importer: anAlceLibraryReferenceImporter [ 
+JinDAMVBVisitorToTaggedReferenceName >> importer: anAlceLibraryReferenceImporter [ 
 	importer := anAlceLibraryReferenceImporter
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> noneAttribute [
+JinDAMVBVisitorToTaggedReferenceName >> noneAttribute [
 	^ self class noneAttribute 
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> noteProcessedElement [
+JinDAMVBVisitorToTaggedReferenceName >> noteProcessedElement [
 	processedElement := true .
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> toTypeReferenceName: aNode context: context [
+JinDAMVBVisitorToTaggedReferenceName >> toTypeReferenceName: aNode context: context [
 
 	| refChain |
 	processedElement := false.
@@ -57,7 +57,7 @@ JinDAMVBVisitorToReferenceName >> toTypeReferenceName: aNode context: context [
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> undefinedTypeReferenceContext: aContext [
+JinDAMVBVisitorToTaggedReferenceName >> undefinedTypeReferenceContext: aContext [
 
 
 	^ JinDAMTypeReference new
@@ -67,38 +67,38 @@ JinDAMVBVisitorToReferenceName >> undefinedTypeReferenceContext: aContext [
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitArithmeticOperation: aVBArithmeticOperationNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitArithmeticOperation: aVBArithmeticOperationNode [
 	^ nil
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitAsTypeAndNew: aVBAsTypeAndNewNode [ 
+JinDAMVBVisitorToTaggedReferenceName >> visitAsTypeAndNew: aVBAsTypeAndNewNode [ 
 	^ aVBAsTypeAndNewNode type acceptVisitor: self 
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitBaseType: aVBBaseTypeNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitBaseType: aVBBaseTypeNode [
 	aVBBaseTypeNode variantToken ifNil: [ self error: ' ' ].
 	^ aVBBaseTypeNode variantToken acceptVisitor: self
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitBooleanLiteral: aVBBooleanLiteralNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitBooleanLiteral: aVBBooleanLiteralNode [
 	^ nil
 ]
 
 { #category : #visiting }
-JinDAMVBVisitorToReferenceName >> visitColorLiteral: aVBColorLiteralNode [ 
+JinDAMVBVisitorToTaggedReferenceName >> visitColorLiteral: aVBColorLiteralNode [ 
 	^ nil
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitComparisonOperation: aVBComparisonOperationNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitComparisonOperation: aVBComparisonOperationNode [
 	^ nil
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitComplexType: aVBComplexTypeNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitComplexType: aVBComplexTypeNode [
 	^ (aVBComplexTypeNode base acceptVisitor: self)
 		,
 			(aVBComplexTypeNode members
@@ -106,83 +106,92 @@ JinDAMVBVisitorToReferenceName >> visitComplexType: aVBComplexTypeNode [
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitConcatenationOperation: aVBConcatenationOperationNode [ 
+JinDAMVBVisitorToTaggedReferenceName >> visitConcatenationOperation: aVBConcatenationOperationNode [ 
 	^ nil
 ]
 
 { #category : #visiting }
-JinDAMVBVisitorToReferenceName >> visitDateLiteral: aVBDateLiteralNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitDateLiteral: aVBDateLiteralNode [
 
 	^ nil
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitDictionaryAccess: aVBDictionaryAccessNode [
-	^ self visitMemberAccess: aVBDictionaryAccessNode
+JinDAMVBVisitorToTaggedReferenceName >> visitDictionaryAccess: aVBDictionaryAccessNode [
+| receiver |
+	receiver := aVBDictionaryAccessNode receiver
+		ifNil: [ aVBDictionaryAccessNode enclosingWith with acceptVisitor: self ]
+		ifNotNil: [ aVBDictionaryAccessNode receiver acceptVisitor: self ].
+		
+ 
+	^ ((receiver ifNil: [ {} ])  collect: [ :a | a isArray ifTrue: [ a ] ifFalse: [ { a . #dictionary } ]  ])
+		, ((aVBDictionaryAccessNode member acceptVisitor: self) collect: [ : i | {  i. #dictionary } ])
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitEquals: aVBEqualsNode [ 
+JinDAMVBVisitorToTaggedReferenceName >> visitEquals: aVBEqualsNode [ 
 	^ nil
 ]
 
 { #category : #visiting }
-JinDAMVBVisitorToReferenceName >> visitFloatLiteral: aVBFloatLiteralNode [ 
+JinDAMVBVisitorToTaggedReferenceName >> visitFloatLiteral: aVBFloatLiteralNode [ 
 	^ nil
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitIntegerLiteral: aVBIntegerLiteralNode [ 
+JinDAMVBVisitorToTaggedReferenceName >> visitIntegerLiteral: aVBIntegerLiteralNode [ 
 	^ nil
 ]
 
 { #category : #visiting }
-JinDAMVBVisitorToReferenceName >> visitLibraryMethod: aJinLibraryMethod [
+JinDAMVBVisitorToTaggedReferenceName >> visitLibraryMethod: aJinLibraryMethod [
 
 	^ { aJinLibraryMethod returnTypeName }
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitMemberAccess: aVBMemberAccessNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitMemberAccess: aVBMemberAccessNode [
 	| receiver |
 	receiver := aVBMemberAccessNode receiver
 		ifNil: [ aVBMemberAccessNode enclosingWith with acceptVisitor: self ]
 		ifNotNil: [ aVBMemberAccessNode receiver acceptVisitor: self ].
-	^ (receiver ifNil: [ {} ])
-		, (aVBMemberAccessNode member acceptVisitor: self)
+		
+ 
+	^ ((receiver ifNil: [ {} ])  collect: [ :a | a isArray ifTrue: [ a ] ifFalse: [ { a . #member } ]  ])
+		, ((aVBMemberAccessNode member acceptVisitor: self) collect: [ : i | {  i. #member } ])
 ]
 
 { #category : #visiting }
-JinDAMVBVisitorToReferenceName >> visitNegatedOperation: aVBNegatedOperationNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitNegatedOperation: aVBNegatedOperationNode [
 
 	self noteProcessedElement.
 	^ aVBNegatedOperationNode value acceptVisitor: self
 ]
 
 { #category : #visiting }
-JinDAMVBVisitorToReferenceName >> visitNewClause: aVBNewClauseNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitNewClause: aVBNewClauseNode [
 
 	^ aVBNewClauseNode typeName acceptVisitor: self
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitNotOperation: aVBNotOperationNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitNotOperation: aVBNotOperationNode [
 	self noteProcessedElement.
 	^ aVBNotOperationNode value acceptVisitor: self
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitNull: aVBNullNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitNull: aVBNullNode [
 	^ {#Nothing}
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitParentheseesExpression: aVBParentheseesExpressionNode [ 
+JinDAMVBVisitorToTaggedReferenceName >> visitParentheseesExpression: aVBParentheseesExpressionNode [ 
 	^ aVBParentheseesExpressionNode expression acceptVisitor: self 
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitProcedureCallOrArrayAccess: aVBProcedureCallOrArrayAccessNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitProcedureCallOrArrayAccess: aVBProcedureCallOrArrayAccessNode [
 	self noteProcessedElement.
 	aVBProcedureCallOrArrayAccessNode arguments arguments size = 1
 		ifTrue: [ aVBProcedureCallOrArrayAccessNode arguments arguments first value
@@ -191,17 +200,17 @@ JinDAMVBVisitorToReferenceName >> visitProcedureCallOrArrayAccess: aVBProcedureC
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitSimpleIdentifier: aVBSimpleIdentifierNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitSimpleIdentifier: aVBSimpleIdentifierNode [
 	^ {aVBSimpleIdentifierNode token value}
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitSmaccToken: aSmaCCCaseInsensitiveToken [
+JinDAMVBVisitorToTaggedReferenceName >> visitSmaccToken: aSmaCCCaseInsensitiveToken [
 	^ {aSmaCCCaseInsensitiveToken value asSymbol}
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitSquareBracketIdentifier: aVBSquareBracketIdentifierNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitSquareBracketIdentifier: aVBSquareBracketIdentifierNode [
 	| str |
 	"Square brackets identifiers are used in vb for using whitespaces in a name. In our context we dont care about the first nor the last symbol  "
 	str := aVBSquareBracketIdentifierNode token value.
@@ -209,18 +218,18 @@ JinDAMVBVisitorToReferenceName >> visitSquareBracketIdentifier: aVBSquareBracket
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitStringLiteral: aVBStringLiteralNode [ 
+JinDAMVBVisitorToTaggedReferenceName >> visitStringLiteral: aVBStringLiteralNode [ 
 	^ nil
 ]
 
 { #category : #visiting }
-JinDAMVBVisitorToReferenceName >> visitTypeOf: aVBTypeOfNode [ 
+JinDAMVBVisitorToTaggedReferenceName >> visitTypeOf: aVBTypeOfNode [ 
 
 	^ nil.
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitTypeSize: aVBTypeSizeNode [
+JinDAMVBVisitorToTaggedReferenceName >> visitTypeSize: aVBTypeSizeNode [
 
 	((aVBTypeSizeNode parent respondsTo: #paramarrayToken) and: [ 
 		 aVBTypeSizeNode parent paramarrayToken isNotNil ]) ifTrue: [ 
@@ -230,14 +239,6 @@ JinDAMVBVisitorToReferenceName >> visitTypeSize: aVBTypeSizeNode [
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMVBVisitorToReferenceName >> visitTypedThing: aVBTypedThingNode [
-
-	^ ((aVBTypedThingNode type acceptVisitor: self) ifNil: [ {  } ]) 
-		  collect: [ :a | 
-			  a isArray
-				  ifTrue: [ a ]
-				  ifFalse: [ 
-					  { 
-						  a.
-						  #member } ] ]
+JinDAMVBVisitorToTaggedReferenceName >> visitTypedThing: aVBTypedThingNode [
+	^ aVBTypedThingNode type acceptVisitor: self
 ]

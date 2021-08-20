@@ -1,5 +1,5 @@
 Class {
 	#name : #JinDAMDataSource,
-	#superclass : #JinDAMUserType,
+	#superclass : #JinDAMClass,
 	#category : #'JinDAM-Model'
 }

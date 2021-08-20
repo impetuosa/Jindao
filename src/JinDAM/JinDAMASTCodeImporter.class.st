@@ -4,7 +4,8 @@ Class {
 	#traits : 'JinDAMTypeConversions',
 	#classTraits : 'JinDAMTypeConversions classTrait',
 	#instVars : [
-		'literals'
+		'literals',
+		'referenceTaggedNameConverter'
 	],
 	#category : #'JinDAM-Importers'
 }
@@ -23,73 +24,18 @@ JinDAMASTCodeImporter >> codeElementReferenceName: aString context: aJinDAMAcces
 ]
 
 { #category : #'as yet unclassified' }
+JinDAMASTCodeImporter >> enclosingClass [
+
+	^ self state detect: [ :s | s isKindOf: JinDAMClass ]
+]
+
+{ #category : #'as yet unclassified' }
 JinDAMASTCodeImporter >> ensureInContextOf: aClass or: aClass2 [
 
 	({ 
 		 aClass.
 		 aClass2 } anySatisfy: [ :c | self state top isKindOf: c ]) 
 		ifFalse: [ self error: 'Unexpected context' ]
-]
-
-{ #category : #'member access' }
-JinDAMASTCodeImporter >> instantiateReferenceForNames: names context: aContext [
-
-	| symbols tip |
-	symbols := self currentNamespace findSymbol: names first.
-
-	self assert: symbols size < 2.
-	tip := self
-		       instantiateReferenceForSymbol: (symbols ifEmpty:[ nil ] ifNotEmpty: [ symbols first ])
-		       name: names first
-		       context: aContext.
-
-	names allButFirst inject:  (symbols ifEmpty:[ nil ] ifNotEmpty: [ symbols first ]) into: [ :acc :name | 
-		symbols := acc ifNil: [ {  } ] ifNotNil: [ acc findSymbol: name ].
-		self assert: symbols size < 2.
-		tip := self
-			       instantiateReferenceForSymbol:
-			       (symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ])
-			       name: name
-			       context: tip.
-		symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ] ].
-	^ tip
-]
-
-{ #category : #'member access' }
-JinDAMASTCodeImporter >> instantiateReferenceForNames: names context: aContext preferring: rules [
-
-	| select symbols tip |
-	symbols := self currentNamespace findSymbol: names first.
-
-	symbols size > 1 ifTrue: [ 
-		select := symbols select: [ :s | 
-			          rules anySatisfy: [ :r | s kind perform: r ] ].
-		self assert: select isNotEmpty.
-		symbols := select ].
-
-
-	tip := self
-		       instantiateReferenceForSymbol:
-		       (symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ])
-		       name: names first
-		       context: aContext.
-
-	names allButFirst
-		inject: (symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ])
-		into: [ :acc :name | 
-			symbols := acc ifNil: [ {  } ] ifNotNil: [ acc findSymbol: name ].
-			symbols size > 1 ifTrue: [ 
-				select := symbols select: [ :s | 
-					          rules anySatisfy: [ :r | s kind perform: r ] ].
-				self assert: select isNotEmpty.
-				symbols := select ].
-			tip := self
-				       instantiateReferenceForSymbol:
-				       (symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ])
-				       name: name
-				       context: tip.
-			symbols ifEmpty: [ nil ] ifNotEmpty: [ symbols first ] ].
-	^ tip
 ]
 
 { #category : #'properties - variables' }
@@ -114,6 +60,14 @@ JinDAMASTCodeImporter >> literals [
 { #category : #'as yet unclassified' }
 JinDAMASTCodeImporter >> nodeToTypeReferenceName: aVBNode context: aContext [ 
 	^ self referenceNameConverter toTypeReferenceName: aVBNode context: aContext 
+]
+
+{ #category : #'member access' }
+JinDAMASTCodeImporter >> referenceTaggedNameConverter [
+
+	^ referenceTaggedNameConverter ifNil: [ 
+		  referenceTaggedNameConverter := JinDAMVBVisitorToTaggedReferenceName
+			                                  new ]
 ]
 
 { #category : #'properties - variables' }
@@ -270,7 +224,8 @@ JinDAMASTCodeImporter >> visitDefineType: aDefineType [
 JinDAMASTCodeImporter >> visitDictionaryAccess: aDictionaryAccess [
 
 	| names tip read |
-	names := aDictionaryAccess acceptVisitor: self referenceNameConverter.
+	names := aDictionaryAccess acceptVisitor:
+		         self referenceTaggedNameConverter.
 
 	read := self instantiate: JinDAMAccessRead.
 	tip := self
@@ -328,7 +283,7 @@ JinDAMASTCodeImporter >> visitEquals: anExplicitAssignement [
 		ifTrue: [ 
 			access := self instantiate: JinDAMAccessWrite.
 			tempNames := anExplicitAssignement left acceptVisitor:
-				             self referenceNameConverter.
+				             self referenceTaggedNameConverter.
 
 			anExplicitAssignement isReturn
 				ifFalse: [ 
@@ -379,7 +334,7 @@ JinDAMASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 	| access write tempNames |
 	access := self instantiate: JinDAMAccessWrite.
 	tempNames := anExplicitAssignement left acceptVisitor:
-		             self referenceNameConverter.
+		             self referenceTaggedNameConverter.
 
 	anExplicitAssignement isReturn
 		ifFalse: [ 
@@ -606,7 +561,7 @@ JinDAMASTCodeImporter >> visitLiteral: aLiteral [
 JinDAMASTCodeImporter >> visitMemberAccess: aMemberAccess [
 
 	| names tip read |
-	names := '.' split: (self nodeToString: aMemberAccess).
+	names :=  aMemberAccess acceptVisitor: self referenceTaggedNameConverter.
 
 	read := self instantiate: JinDAMAccessRead.
 	tip := self
@@ -778,26 +733,16 @@ JinDAMASTCodeImporter >> visitRaiseError: aRaiseError [
 { #category : #invocations }
 JinDAMASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
 
-	| call args sel |
-	args := (aRaiseEvent selector class name asLowercase 
-		         includesSubstring: 'identifier')
-		        ifTrue: [ 
-			        sel := aRaiseEvent selector.
-			        args := #(  ) ]
-		        ifFalse: [ 
-			        sel := aRaiseEvent selector selector.
-			        args := aRaiseEvent selector arguments arguments ].
-	call := self instantiate: JinDAMMemberReference.
-	call selector: (self nodeToInvocableReferenceName: sel).
-	call anchor: (self codeAnchor: call selector for: aRaiseEvent).
+	| element |
+	element := aRaiseEvent selector acceptVisitor: self.
 
-	args do: [ :a | 
-		| arg |
-		arg := self instantiate: JinDAMArgument.
-		arg value: (self nodeToString: a).
-		call addArgument: arg ].
-	self state top addOutgoingInvocation: call.
-	super visitRaiseEvent: aRaiseEvent
+	" Element should be either an access or an invocation. both cases it may have arguments (either for invocation or array access). "
+
+	" Can we visit the arguments? we may need to add them as arguments int o the element."
+	self state push: element.
+
+	aRaiseEvent arguments acceptVisitor: self.
+	self state pop
 ]
 
 { #category : #'properties - variables' }
@@ -837,7 +782,7 @@ JinDAMASTCodeImporter >> visitSimpleIdentifier: aSimpleIdentifier [
 			read := self instantiate: JinDAMAccessRead.
 			tip := self
 				       instantiateReferenceForNames:
-				       { aSimpleIdentifier token value }
+				       { {aSimpleIdentifier token value . #member }}
 				       context: read
 				       preferring: { #isAttribute. #isInvocable }.
 			read readReference: tip.
