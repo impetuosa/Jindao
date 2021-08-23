@@ -1,6 +1,6 @@
 Class {
 	#name : #JinNSBuilder,
-	#superclass : #JinNSAbstractImporter,
+	#superclass : #JinNSAbstractBuilder,
 	#instVars : [
 		'futures',
 		'table',
@@ -43,6 +43,12 @@ JinNSBuilder >> assembly [
 	 ^ assemblyNamespaces first 
 ]
 
+{ #category : #'as yet unclassified' }
+JinNSBuilder >> assemblyNamespaces [
+
+	^ assemblyNamespaces
+]
+
 { #category : #initialization }
 JinNSBuilder >> buildFor: anAccessProject [
 
@@ -73,6 +79,12 @@ JinNSBuilder >> checkTasksSanity [
 			' of the indexing tasks failed. Inspect futures collection to have insight on the problem' ]
 ]
 
+{ #category : #'as yet unclassified' }
+JinNSBuilder >> externalNamespaces [
+
+	^ externalNamespaces
+]
+
 { #category : #initialization }
 JinNSBuilder >> initialize [
 
@@ -98,151 +110,6 @@ JinNSBuilder >> joinFutures [
 		ifNone: [ roll := false ] ] doWhileTrue: [ roll ]
 ]
 
-{ #category : #'as yet unclassified' }
-JinNSBuilder >> newAssemblyNamespace: aJinAccessProject owner: anOwner [
-
-	| new |
-	new := super newAssemblyNamespace: aJinAccessProject owner: anOwner.
-
-	assemblyNamespaces add: new.
-	^ new
-]
-
-{ #category : #'as yet unclassified' }
-JinNSBuilder >> newExternalNamespaceFor: aJinAccessProject [
-
-	| new |
-	self assert: externalNamespaces isEmpty. 
-	new := super newExternalNamespaceFor: aJinAccessProject.
-	JinNSSDKLibraryBuilder new buildOn: new.
-	externalNamespaces add: new.
-	^ new
-]
-
-{ #category : #'as yet unclassified' }
-JinNSBuilder >> typeOwnerFor: aJinTable [
-	^ JinNSEntryOwner new
-		  type: aJinTable class;
-		  name: (self uniqueNameFor: aJinTable);
-		  contentHash: aJinTable contentHash;
-		  yourself
-]
-
-{ #category : #'as yet unclassified' }
-JinNSBuilder >> uniqueNameFor: aJinTable [
-
-	^ ('.' join: (self copyStack reverse collect: [ :a | a name ])) , '.'
-	  , aJinTable name
-]
-
-{ #category : #visiting }
-JinNSBuilder >> visitCollection: aCollection from: project [
-
-	1 to: aCollection value size do: [ :i | 
-		" Try to visit. If it fails it restarts the project and it does continue. If it fails twice it let the exception to go "
-		[ (aCollection value at: i) acceptVisitor: self ]
-			on: Error
-			do: [ :e | 
-				project reopen.
-				(aCollection value at: i) acceptVisitor: self ] ]
-]
-
-{ #category : #visiting }
-JinNSBuilder >> visitControls: aJinCachedEntityCollection for: aJinNSEntryOwner [
-
-	self currentNamespace
-		registerAll: aJinCachedEntityCollection allNames 
-		kind: JinNSKind typeProperty
-		owner: aJinNSEntryOwner
-]
-
-{ #category : #visiting }
-JinNSBuilder >> visitForm: aJinForm [
-
-	| importer owner |
-	aJinForm ensureUnload.
-	owner := self typeOwnerFor: aJinForm.
-	self
-		registerAndPushSubNameSpaceEntry: 'Form_' , aJinForm name
-		kind: JinNSKind form
-		owner: owner
-		during: [ 
-			| content |
-			content := aJinForm src.
-			content = '' ifFalse: [ 
-				importer := JinNSASTSymbolImporter new
-					            owner: owner;
-					            content: content;
-					            isConcurrent: true;
-					            stack: self copyStack.
-				importer buildFormFor: self ].
-
-			self visitControls: aJinForm controls for: owner ].
-	aJinForm ensureUnload
-]
-
-{ #category : #visiting }
-JinNSBuilder >> visitLibrary: aJinLibrary [
-
-	^ JinNSLibrarySymbolImporter new
-		  assembly: self currentAssemblyNamespace;
-		  library: aJinLibrary;
-		  buildFor: self
-]
-
-{ #category : #visiting }
-JinNSBuilder >> visitMacro: aJinMacro [ 
-
-]
-
-{ #category : #'instance creation' }
-JinNSBuilder >> visitModule: aJinModule [
-
-	| isClass importer owner |
-	isClass := aJinModule isClassModule.
-	owner := self typeOwnerFor: aJinModule.
-
-
-	self
-		registerAndPushSubNameSpaceEntry: aJinModule name
-		kind: (isClass
-				 ifTrue: [ JinNSKind classModule ]
-				 ifFalse: [ JinNSKind module ])
-		owner: owner
-		during: [ 
-			importer := JinNSASTSymbolImporter new
-				            owner: owner;
-				            content: aJinModule src;
-				            isConcurrent: true;
-				            stack: self copyStack.
-			isClass
-				ifTrue: [ importer buildClassFor: self ]
-				ifFalse: [ importer buildModuleFor: self ] ].
-	aJinModule ensureUnload
-]
-
-{ #category : #visiting }
-JinNSBuilder >> visitProject: aJinAccessProject [
-
-	self visitCollection: [aJinAccessProject modules] from: aJinAccessProject.
-	self visitCollection: [aJinAccessProject references] from: aJinAccessProject.
-	
-	self visitCollection: [aJinAccessProject forms] from: aJinAccessProject.
-	self visitCollection: [aJinAccessProject reports] from: aJinAccessProject.
-	
-	
-	self visitCollection: [aJinAccessProject tables] from: aJinAccessProject.
-	self visitCollection: [aJinAccessProject queries] from: aJinAccessProject.
-	self visitCollection: [aJinAccessProject relations] from: aJinAccessProject.
-	self visitCollection: [aJinAccessProject macros] from: aJinAccessProject
-]
-
-{ #category : #visiting }
-JinNSBuilder >> visitQuery: aJinQuery [
-
-	self visitTable: aJinQuery
-]
-
 { #category : #visiting }
 JinNSBuilder >> visitReference: aJinReference [
 
@@ -252,71 +119,27 @@ JinNSBuilder >> visitReference: aJinReference [
 
 			aJinReference isAccessProject
 				ifTrue: [ 
-					| project |
+					| project subbuilder |
 					project := JinAccessApplication default open:
 						           aJinReference path asFileReference.
+					subbuilder := JinNSSubBuilder new.
+					subbuilder subbuildFor: project builder: self.
 
-					self
-						pushNewAssemblyFor: aJinReference
-						owner: (self typeOwnerFor: project).
-					project acceptVisitor: self.
-					project closeAndQuit.
-					self popAssemblyFor: project ]
+
+					project closeAndQuit ]
 				ifFalse: [ 
 					self
 						pushNewAssemblyFor: aJinReference
 						owner: (self typeOwnerFor: aJinReference library).
 
 					aJinReference library acceptVisitor: self.
-					self popAssemblyFor: aJinReference. 
-					 ] ].
+					self popAssemblyFor: aJinReference ] ].
 	self currentAssemblyNamespace installAllAssemblySymbolsFrom:
-		(assemblyNamespaces detect: [ :a | 
-			 a name = aJinReference name ])
+		(assemblyNamespaces detect: [ :a | a name = aJinReference name ])
 ]
 
-{ #category : #visiting }
-JinNSBuilder >> visitReport: aJinReport [
+{ #category : #'as yet unclassified' }
+JinNSBuilder >> visitedReferences [
 
-	| importer owner content |
-	aJinReport ensureUnload.
-	owner := self typeOwnerFor: aJinReport.
-	self
-		registerAndPushSubNameSpaceEntry: 'Report_' , aJinReport name
-		kind: JinNSKind report
-		owner: owner
-		during: [ 
-			content := aJinReport src.
-			content := content = '' ifFalse: [ 
-				           importer := JinNSASTSymbolImporter new
-					                       owner: owner;
-					                       content: content;
-					                       isConcurrent: true;
-					                       stack: self copyStack.
-				           importer buildReportFor: self ].
-			self visitControls: aJinReport controls for: owner ].
-	aJinReport ensureUnload
-]
-
-{ #category : #visiting }
-JinNSBuilder >> visitTable: aJinTable [
-
-	| owner |
-	owner := self typeOwnerFor: aJinTable.
-	self
-		registerAndPushSubNameSpaceEntry: aJinTable name
-		kind: JinNSKind table
-		owner: owner
-		during: [ 
-			aJinTable fields do: [ :f | 
-				self currentNamespace
-					register: f name
-					kind: JinNSKind field
-					owner: owner ] ].
-	aJinTable ensureUnload
-]
-
-{ #category : #visiting }
-JinNSBuilder >> visitTableRelation: aJinTableRelation [ 
-
+	^ visitedReferences
 ]

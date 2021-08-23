@@ -91,6 +91,10 @@ JinDAMASTCodeImporter >> registerSpecialVariable: aName type: aType [
 JinDAMASTCodeImporter >> visitArgument: anArgument [
 
 	| arg |
+	"	EL ARGUMENTO SE ESTA TRATANDO DE AGREGAR A OTRO ARGUMENTO POR UQE NO ESTOY MANEJANDO BIEN EL TYPEOF (TYPEOF ES VISITADO COMO NODO A PARTE,PERO DEBIERA PRODUCIR UNA LLAMADA A FUNCION)"
+	self assert: (self state top isReference or: [ 
+			 self state top isKindOf: JinDAMAccessRead ]).
+
 	arg := self instantiate: JinDAMArgument.
 
 	arg text: (self nodeToString: anArgument).
@@ -721,8 +725,23 @@ JinDAMASTCodeImporter >> visitParameter: aParameter [
 { #category : #invocations }
 JinDAMASTCodeImporter >> visitProcedureCallOrArrayAccess: aProcedureCallOrArrayAccess [
 
-	| element |
-	element := aProcedureCallOrArrayAccess selector acceptVisitor: self.
+	| element ref |
+	self assert: (aProcedureCallOrArrayAccess selector isNil xor:
+			 aProcedureCallOrArrayAccess receiver isNil).
+
+	aProcedureCallOrArrayAccess selector
+		ifNotNil: [ 
+		element := aProcedureCallOrArrayAccess selector acceptVisitor: self ]
+		ifNil: [ 
+			element := self instantiate: JinDAMAccessRead.
+			ref := aProcedureCallOrArrayAccess receiver acceptVisitor: self.
+			ref := (self instantiate: JinDAMExpressionReference)
+				       candidate: ref;
+				       candidateAnchor: ref anchor;
+				       context: element;
+				       yourself.
+			element readReference: ref ].
+
 
 	" Element should be either an access or an invocation. both cases it may have arguments (either for invocation or array access). "
 
@@ -731,7 +750,7 @@ JinDAMASTCodeImporter >> visitProcedureCallOrArrayAccess: aProcedureCallOrArrayA
 
 	aProcedureCallOrArrayAccess arguments acceptVisitor: self.
 	self state pop.
-	^ element 
+	^ element
 ]
 
 { #category : #generated }
@@ -826,6 +845,30 @@ JinDAMASTCodeImporter >> visitSubDefinition: aDefinition [
 	aDefinition parameters acceptVisitor: self. 
 	aDefinition block acceptVisitor: self.
 	self state pop
+]
+
+{ #category : #'type definition' }
+JinDAMASTCodeImporter >> visitTypeOf: aTypeOf [
+
+	| element tip |
+	element := self instantiate: JinDAMAccessRead.
+	tip := self
+		       instantiateReferenceForNames: { 'TypeOf' }
+		       context: element
+		       preferring: { #isInvocable. #isAttribute. #isType }.
+
+	element readReference: tip.
+	self state top addAccess: element.
+
+	" Element should be either an access or an invocation. both cases it may have arguments (either for invocation or array access). "
+
+	" Can we visit the arguments? we may need to add them as arguments int o the element."
+	self state push: element.
+
+	aTypeOf argument acceptVisitor: self.
+	aTypeOf type acceptVisitor: self.
+	self state pop.
+	^ element
 ]
 
 { #category : #generated }
