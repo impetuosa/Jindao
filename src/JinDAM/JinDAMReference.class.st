@@ -75,6 +75,12 @@ JinDAMReference >> isReference [
 ]
 
 { #category : #accessing }
+JinDAMReference >> isTypeReference [
+
+	^ false
+]
+
+{ #category : #accessing }
 JinDAMReference >> kind [
 
 	^ kindAccess

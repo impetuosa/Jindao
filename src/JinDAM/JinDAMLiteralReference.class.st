@@ -9,6 +9,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinDAMLiteralReference >> literalKind [
+	^ literalKind 
+]
+
+{ #category : #'as yet unclassified' }
 JinDAMLiteralReference >> literalKind: aString [
 
 	literalKind := aString asSymbol

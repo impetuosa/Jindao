@@ -23,6 +23,11 @@ JinDAMAccessRead >> isReadAccess [
 ]
 
 { #category : #accessing }
+JinDAMAccessRead >> name [
+	^ readReference candidate ifNil:[ 'Unresolved' ] ifNotNil: [ readReference candidate name  ]
+]
+
+{ #category : #accessing }
 JinDAMAccessRead >> printOn: aStream [
 	aStream nextPutAll: '+R '.
 	readReference printOn: aStream

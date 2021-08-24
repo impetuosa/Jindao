@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #accessing }
+JinDAMForm >> isFormOrReport [
+
+	^ true
+]
+
+{ #category : #accessing }
 JinDAMForm >> relatedSymbolKind [
 
 	^ JinNSKind form

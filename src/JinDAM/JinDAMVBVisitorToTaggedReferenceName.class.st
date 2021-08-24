@@ -153,7 +153,10 @@ JinDAMVBVisitorToTaggedReferenceName >> visitLibraryMethod: aJinLibraryMethod [
 JinDAMVBVisitorToTaggedReferenceName >> visitMemberAccess: aVBMemberAccessNode [
 	| receiver |
 	receiver := aVBMemberAccessNode receiver
-		ifNil: [ aVBMemberAccessNode enclosingWith with acceptVisitor: self ]
+		ifNil: [ 
+			[aVBMemberAccessNode enclosingWith with acceptVisitor: self ] on: Error do: [ :e | self halt . nil ]
+			
+			]
 		ifNotNil: [ aVBMemberAccessNode receiver acceptVisitor: self ].
 		
  

@@ -35,7 +35,8 @@ JinNSSDKLibraryBuilder >> aliasTypes [
 		  self uint16.
 		  self currentDb.
 		  self err.
-		  self voidAlias }
+		  self voidAlias.
+		  self winWideString }
 ]
 
 { #category : #alias }
@@ -341,4 +342,10 @@ JinNSSDKLibraryBuilder >> voidAlias [
 JinNSSDKLibraryBuilder >> winVariant [
 
 	^ self newAlias: #Win32Variant
+]
+
+{ #category : #alias }
+JinNSSDKLibraryBuilder >> winWideString [
+
+	^ self newAlias: #Win32WideString 
 ]

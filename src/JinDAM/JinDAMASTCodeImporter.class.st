@@ -300,7 +300,7 @@ JinDAMASTCodeImporter >> visitEquals: anExplicitAssignement [
 					write := self
 						         instantiateReferenceForNames: tempNames
 						         context: access
-						         preferring: { #isAttribute. #isType } ]
+						         preferring: { #isAttribute. #isType . #isLet . #isSet } ]
 				ifTrue: [ 
 					write := self
 						         instantiateReferenceForNames: tempNames
@@ -741,7 +741,13 @@ JinDAMASTCodeImporter >> visitProcedureCallOrArrayAccess: aProcedureCallOrArrayA
 				       context: element;
 				       yourself.
 			element readReference: ref ].
-
+	element readReference isTypeReference ifTrue: [ 
+		| typeReference |
+		ref := self instantiate: JinDAMTypeMemberReference.
+		typeReference := element readReference. 
+		typeReference context: element. 
+		ref context: typeReference.
+		element readReference: ref ].
 
 	" Element should be either an access or an invocation. both cases it may have arguments (either for invocation or array access). "
 
@@ -762,16 +768,7 @@ JinDAMASTCodeImporter >> visitRaiseError: aRaiseError [
 { #category : #invocations }
 JinDAMASTCodeImporter >> visitRaiseEvent: aRaiseEvent [
 
-	| element |
-	element := aRaiseEvent selector acceptVisitor: self.
-
-	" Element should be either an access or an invocation. both cases it may have arguments (either for invocation or array access). "
-
-	" Can we visit the arguments? we may need to add them as arguments int o the element."
-	self state push: element.
-
-	aRaiseEvent arguments acceptVisitor: self.
-	self state pop
+	aRaiseEvent selector acceptVisitor: self
 ]
 
 { #category : #'properties - variables' }

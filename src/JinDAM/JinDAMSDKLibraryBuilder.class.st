@@ -38,7 +38,7 @@ JinDAMSDKLibraryBuilder >> abs [
 JinDAMSDKLibraryBuilder >> aliasTypes [
 
 	^ { 
-		 self float. 
+		  self float.
 		  self int32.
 		  self int16.
 		  self int.
@@ -53,7 +53,9 @@ JinDAMSDKLibraryBuilder >> aliasTypes [
 		  self uint16.
 		  self currentDb.
 		  self err.
-		  self voidAlias }
+		  self voidAlias.
+
+		  self winWideString }
 ]
 
 { #category : #'sdk functions' }
@@ -2342,6 +2344,12 @@ firstdayofweek 	Optional. DateEnum Numeric value indicating the first day of the
 JinDAMSDKLibraryBuilder >> winVariant [
 
 	^ self newAlias: #Win32Variant to: self object
+]
+
+{ #category : #alias }
+JinDAMSDKLibraryBuilder >> winWideString [
+
+	^ self newAlias: #Win32WideString to: self string
 ]
 
 { #category : #'sdk functions' }

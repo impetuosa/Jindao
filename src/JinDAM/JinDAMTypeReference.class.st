@@ -19,6 +19,11 @@ JinDAMTypeReference >> isArray [
 ]
 
 { #category : #accessing }
+JinDAMTypeReference >> isTypeReference [
+	^ true
+]
+
+{ #category : #accessing }
 JinDAMTypeReference >> name [
 	 ^ typeName 
 ]
@@ -30,8 +35,7 @@ JinDAMTypeReference >> typeName [
 ]
 
 { #category : #accessing }
-JinDAMTypeReference >> typeName: aString [ 
-	typeName := aString.
-	aString isCharacter ifTrue: [ self halt ].
+JinDAMTypeReference >> typeName: aString [
 
+	typeName := aString
 ]

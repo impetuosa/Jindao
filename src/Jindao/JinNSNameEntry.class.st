@@ -24,7 +24,6 @@ JinNSNameEntry >> anchor [
 
 { #category : #'as yet unclassified' }
 JinNSNameEntry >> findSymbol: aString [
-	(aString beginsWith:'Form_') ifTrue: [ self halt ].
 	^ (name compare: aString caseSensitive: false) = 2
 		  ifTrue: [ { self } ]
 		  ifFalse: [ {  } ]

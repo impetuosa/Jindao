@@ -63,18 +63,29 @@ JinDAMTypeConversions >> typeReferenceName: aString type: aJinDAMPrimitiveType c
 { #category : #'as yet unclassified' }
 JinDAMTypeConversions >> typeReferenceName: aString typeSymbol: aCollection context: aContext [
 
-	| reference potentialTypes  |
+	| reference potentialTypes |
 	self assert: (aString indexOf: '.') = 0.
-	reference := self instantiate: JinDAMTypeReference.
-	reference context: aContext.
-	reference typeName: aString.
-	potentialTypes  := aCollection select:[: p | p kind isType ].
 
-	(aCollection isEmpty and: [ {'NULL' . 'ERROR' . 'CARRAY'. 'SAFEARRAY' . 'COMUnknownInstance' . 'COMDispatchInstance' } includes: aString  ]) ifFalse: [ 
-		({'VOID'  } includes: aString ) ifTrue: [  potentialTypes  := potentialTypes select:[ : p | p name = aString   ] ].
+	
+	potentialTypes := aCollection select: [ :p | p kind isType ].
+	(aCollection isEmpty and: [  { 'NULL'. 'ERROR'. 'CARRAY'. 'SAFEARRAY'. 'ParamArray'. 'HRESULT' .
+			 'COMUnknownInstance'. 'COMDispatchInstance' . 'USERDEFINED' .'Win32WideString' } includes: aString ]) ifFalse: [ ({ 'VOID' } includes: aString) ifTrue: [ 
+			potentialTypes := potentialTypes select: [ :p | p name = aString ] ].
+			
 		
-		self assert: potentialTypes size = 1.
-		reference candidateAnchor: potentialTypes first anchor ].
+		self assert: potentialTypes isNotEmpty.
+		potentialTypes size = 1
+			ifTrue: [ 
+				reference := self instantiate: JinDAMTypeReference.
+				reference candidateAnchor: potentialTypes first anchor ]
+			ifFalse: [ 
+				self halt.
+				
+				reference := self instantiate: JinDAMMultipleTypeReference.
+				reference candidateAnchors:
+					(potentialTypes collect: [ :p | p anchor ]) ].
+		reference context: aContext.
+		reference typeName: aString ].
 
 	^ reference
 ]

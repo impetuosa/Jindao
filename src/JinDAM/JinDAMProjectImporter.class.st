@@ -56,11 +56,15 @@ JinDAMProjectImporter >> visitCollection: aCollectionBlock [
 { #category : #'visit-first-objects' }
 JinDAMProjectImporter >> visitCollection: aCollection from: aProject [
 
-	1 to: aCollection value size do: [ :i | 
-		" Try to visit. If it fails it restarts the project and it does continue. If it fails twice it let the exception to go "
+	| stackSize |
+	stackSize := self state size.
+
+	1 to: aCollection value size do: [ :i | " Try to visit. If it fails it restarts the project and it does continue. If it fails twice it let the exception to go "
 		[ (aCollection value at: i) acceptVisitor: self ]
 			on: Win32Error
 			do: [ :e | 
+				self state size = stackSize ifFalse: [ 
+					self halt: 'Umathching stacks!!' ].
 				aProject reopen.
 				(aCollection value at: i) acceptVisitor: self ] ]
 ]

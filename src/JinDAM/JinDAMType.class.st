@@ -8,6 +8,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #testing }
+JinDAMType >> isType [
+
+	^ true
+]
+
 { #category : #accessing }
 JinDAMType >> name [
 	^ name

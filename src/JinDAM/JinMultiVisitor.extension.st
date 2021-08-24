@@ -14,10 +14,14 @@ JinMultiVisitor >> currentNamespace [
 		  temp := nns
 			          namespaceFor: element name
 			          kind: element relatedSymbolKind.
-
+		  temp ifEmpty: [ 
+			  nns name = 'Form_FactDmdChgntPrenom13AnsEtPlusP4' ifFalse: [ 
+				  self halt: element name ].
+			  ^ nns ].
 		  temp first kind isInvocable ifTrue: [ ^ temp first ].
 		  (temp first kind isType and: [ temp first owner type = JinLibrary ]) 
 			  ifTrue: [ ^ temp first parent ].
+
 		  temp first ]
 ]
 

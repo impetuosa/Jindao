@@ -4,12 +4,6 @@ Class {
 	#category : #'Jindao-Subvisitor'
 }
 
-{ #category : #'as yet unclassified' }
-JinMultiVisitor >> assert: aBool description: aDescription [
-
-	aBool ifFalse: [ self halt: aDescription ]
-]
-
 { #category : #'part visitor' }
 JinMultiVisitor >> code [
 	^ self subclassResponsibility

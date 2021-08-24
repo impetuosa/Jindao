@@ -30,6 +30,11 @@ JinDAMArgument >> reads [
 ]
 
 { #category : #accessing }
+JinDAMArgument >> text [
+	^ text
+]
+
+{ #category : #accessing }
 JinDAMArgument >> text: aString [
 
 	text := aString

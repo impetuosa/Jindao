@@ -4,3 +4,9 @@ Extension { #name : #String }
 String >> adaptToAlceAnchorPathFragment [
 	 ^ self 
 ]
+
+{ #category : #'*JinDAM' }
+String >> name [
+
+	^ self
+]

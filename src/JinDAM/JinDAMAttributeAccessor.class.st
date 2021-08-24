@@ -27,9 +27,11 @@ JinDAMAttributeAccessor >> kind: aString [
 { #category : #accessing }
 JinDAMAttributeAccessor >> printOn: aStream [
 
+	kind = #Get ifTrue: [ 
+		aStream
+			nextPutAll: typeReference name;
+			nextPutAll: ' ' ].
 	aStream
-		nextPutAll: typeReference name;
-		nextPutAll: ' ';
 		nextPutAll: kind;
 		nextPutAll: ' ';
 		nextPutAll: selector;

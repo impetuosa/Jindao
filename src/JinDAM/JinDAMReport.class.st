@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinDAMReport >> isFormOrReport [
+
+	^ true
+]
+
+{ #category : #'as yet unclassified' }
 JinDAMReport >> relatedSymbolKind [
 
 	^ JinNSKind report 

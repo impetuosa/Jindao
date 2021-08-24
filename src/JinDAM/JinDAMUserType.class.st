@@ -49,6 +49,11 @@ JinDAMUserType >> findAttributeInvocable: aString amountArguments: amount [
 ]
 
 { #category : #adding }
+JinDAMUserType >> isFormOrReport [ 
+	^ false 
+]
+
+{ #category : #adding }
 JinDAMUserType >> printOn: aStream [
 
 	aStream

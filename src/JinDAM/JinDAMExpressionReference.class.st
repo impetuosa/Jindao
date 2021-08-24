@@ -16,3 +16,8 @@ JinDAMExpressionReference >> addArgument: aJinDAMArgument [
 JinDAMExpressionReference >> arguments [
 	^ arguments ifNil: [ arguments := OrderedCollection new  ]
 ]
+
+{ #category : #accessing }
+JinDAMExpressionReference >> name [
+	 ^ ' '
+]
