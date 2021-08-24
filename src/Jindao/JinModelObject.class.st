@@ -76,6 +76,12 @@ JinModelObject >> isLoaded [
 ]
 
 { #category : #accessing }
+JinModelObject >> isRootElement [
+
+	^ false
+]
+
+{ #category : #accessing }
 JinModelObject >> load [
 	self isLoaded
 		ifFalse: [ body := self privateLoadBodyObject ]

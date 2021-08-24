@@ -43,6 +43,11 @@ JinNSSubNamespace >> owner: aJinNSEntryOwner [
 ]
 
 { #category : #accessing }
+JinNSSubNamespace >> path [
+	^ path
+]
+
+{ #category : #accessing }
 JinNSSubNamespace >> path: aPath [
 	path := aPath 
 ]

@@ -32,6 +32,11 @@ JinSharedCollection >> collect: aBlock [
 	^ self copyCollection collect: [ :a | aBlock value: a ]
 ]
 
+{ #category : #accessing }
+JinSharedCollection >> collection [
+	^ collection
+]
+
 { #category : #adding }
 JinSharedCollection >> copyCollection [
 	| cp |

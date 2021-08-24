@@ -153,7 +153,7 @@ JinNSLibrarySymbolImporter >> visitLibraryEnum: aJinLibraryEnum [
 	self
 		registerSubNamespace: aJinLibraryEnum name
 		kind: JinNSKind enum
-		owner: owner
+		owner: self owner
 		visibility: #Public
 		during: [ 
 			aJinLibraryEnum values do: [ :v | 

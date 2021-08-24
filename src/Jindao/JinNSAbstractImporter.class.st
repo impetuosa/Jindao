@@ -137,8 +137,7 @@ JinNSAbstractImporter >> push: aJinNSNamespace during: aFullBlockClosure [
 	| ret |
 	stackMutex critical: [ 
 		stack push: aJinNSNamespace.
-		aFullBlockClosure value.
-		ret := stack pop ].
+		[ aFullBlockClosure value ] ensure: [ ret := stack pop ] ].
 	^ ret
 ]
 

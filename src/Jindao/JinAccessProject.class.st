@@ -358,6 +358,11 @@ JinAccessProject >> installReportHeaderFooterOn: aJinReport [
 	application command: #RunCommand withArguments: {36}
 ]
 
+{ #category : #accessing }
+JinAccessProject >> isRootElement [
+ 	^ true 
+]
+
 { #category : #'macro-api' }
 JinAccessProject >> macros [
 	^ macros ifNil: [ 

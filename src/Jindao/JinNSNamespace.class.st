@@ -29,6 +29,11 @@ JinNSNamespace >> acceptVisitor: aJinNSVisitorCounter [
 	aJinNSVisitorCounter visitNamespace: self
 ]
 
+{ #category : #accessing }
+JinNSNamespace >> addFriend: anOtherNS [
+	 friends add: anOtherNS
+]
+
 { #category : #'as yet unclassified' }
 JinNSNamespace >> anchor [
 
@@ -144,11 +149,6 @@ JinNSNamespace >> initialize [
 	 super initialize.
 	entries := Dictionary new. 
 	friends := Set new. 
-]
-
-{ #category : #accessing }
-JinNSNamespace >> installAllAssemblySymbolsFrom: anOtherNS [
-	 friends add: anOtherNS
 ]
 
 { #category : #'as yet unclassified' }

@@ -87,6 +87,11 @@ JinLibrary >> functions [
 	^ functions ifNil: [ functions := self fetchLibraryFunctions ]
 ]
 
+{ #category : #accessing }
+JinLibrary >> isRootElement [
+ 	^ true 
+]
+
 { #category : #handle }
 JinLibrary >> libraryHandle [
 

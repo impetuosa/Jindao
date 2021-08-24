@@ -66,18 +66,23 @@ JinNSAbstractBuilder >> typeOwnerFor: aJinTable [
 { #category : #'as yet unclassified' }
 JinNSAbstractBuilder >> uniqueNameFor: aJinTable [
 
-	^ ('.' join: (self copyStack reverse collect: [ :a | a name ])) , '.'
-	  , aJinTable name
+	^ aJinTable isRootElement
+		  ifTrue: [ aJinTable path basename ]
+		  ifFalse: [ 
+			  ^ ('.' join:
+				     (self copyStack allButLast reverse collect: [ :a | a name ]))
+			    , '.' , aJinTable name ]
 ]
 
 { #category : #visiting }
 JinNSAbstractBuilder >> visitCollection: aCollection from: project [
-
-	1 to: aCollection value size do: [ :i | 
-		" Try to visit. If it fails it restarts the project and it does continue. If it fails twice it let the exception to go "
+	| stackSize |
+	stackSize := stack size.  
+	1 to: aCollection value size do: [ :i | " Try to visit. If it fails it restarts the project and it does continue. If it fails twice it let the exception to go "
 		[ (aCollection value at: i) acceptVisitor: self ]
-			on: Error
+			on: Win32Error
 			do: [ :e | 
+				stack size = stackSize ifFalse: [ self halt: 'Umathching stacks!!' ].
 				project reopen.
 				(aCollection value at: i) acceptVisitor: self ] ]
 ]
@@ -95,8 +100,8 @@ JinNSAbstractBuilder >> visitControls: aJinCachedEntityCollection for: aJinNSEnt
 JinNSAbstractBuilder >> visitForm: aJinForm [
 
 	| importer owner |
-	aJinForm ensureUnload.
 	owner := self typeOwnerFor: aJinForm.
+	self assert: stack top path isNotNil .
 	self
 		registerAndPushSubNameSpaceEntry: 'Form_' , aJinForm name
 		kind: JinNSKind form
@@ -134,9 +139,10 @@ JinNSAbstractBuilder >> visitMacro: aJinMacro [
 JinNSAbstractBuilder >> visitModule: aJinModule [
 
 	| isClass importer owner |
+	self assert: stack top path isNotNil .
 	isClass := aJinModule isClassModule.
 	owner := self typeOwnerFor: aJinModule.
-
+	
 
 	self
 		registerAndPushSubNameSpaceEntry: aJinModule name
@@ -159,8 +165,9 @@ JinNSAbstractBuilder >> visitModule: aJinModule [
 { #category : #visiting }
 JinNSAbstractBuilder >> visitProject: aJinAccessProject [
 
+self visitCollection: [aJinAccessProject references] from: aJinAccessProject.
 	self visitCollection: [aJinAccessProject modules] from: aJinAccessProject.
-	self visitCollection: [aJinAccessProject references] from: aJinAccessProject.
+	
 	
 	self visitCollection: [aJinAccessProject forms] from: aJinAccessProject.
 	self visitCollection: [aJinAccessProject reports] from: aJinAccessProject.
@@ -181,15 +188,40 @@ JinNSAbstractBuilder >> visitQuery: aJinQuery [
 { #category : #visiting }
 JinNSAbstractBuilder >> visitReference: aJinReference [
 
-	self subclassResponsibility
+	(self visitedReferences includes:
+		 aJinReference path fullName asLowercase) ifFalse: [ 
+		self visitedReferences add: aJinReference path fullName asLowercase.
+
+		aJinReference isAccessProject
+			ifTrue: [ 
+				| project subbuilder |
+				project := JinAccessApplication default open:
+					           aJinReference path asFileReference.
+				subbuilder := JinNSSubBuilder new.
+				subbuilder
+					subbuildFor: project
+					builder: self
+					reference: aJinReference.
+				project closeAndQuit ]
+			ifFalse: [ 
+				self
+					pushNewAssemblyFor: aJinReference
+					owner: (self typeOwnerFor: aJinReference library).
+				aJinReference library acceptVisitor: self.
+				self popAssemblyFor: aJinReference ] ].
+		
+		
+	self currentAssemblyNamespace addFriend:
+		(self assemblyNamespaces detect: [ :a | a name = aJinReference name ])
 ]
 
 { #category : #visiting }
 JinNSAbstractBuilder >> visitReport: aJinReport [
 
 	| importer owner content |
-	aJinReport ensureUnload.
+	self assert: stack top path isNotNil .
 	owner := self typeOwnerFor: aJinReport.
+	
 	self
 		registerAndPushSubNameSpaceEntry: 'Report_' , aJinReport name
 		kind: JinNSKind report
@@ -211,6 +243,7 @@ JinNSAbstractBuilder >> visitReport: aJinReport [
 JinNSAbstractBuilder >> visitTable: aJinTable [
 
 	| owner |
+	self assert: stack top path isNotNil .
 	owner := self typeOwnerFor: aJinTable.
 	self
 		registerAndPushSubNameSpaceEntry: aJinTable name

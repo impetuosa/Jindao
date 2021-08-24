@@ -51,7 +51,6 @@ JinNSBuilder >> assemblyNamespaces [
 
 { #category : #initialization }
 JinNSBuilder >> buildFor: anAccessProject [
-
 	stack push: (self newExternalNamespaceFor: anAccessProject).
 	stack push: (self
 			 newAssemblyNamespace: anAccessProject
@@ -108,34 +107,6 @@ JinNSBuilder >> joinFutures [
 				do: [ :e | " nothing really " ].
 			roll := true ]
 		ifNone: [ roll := false ] ] doWhileTrue: [ roll ]
-]
-
-{ #category : #visiting }
-JinNSBuilder >> visitReference: aJinReference [
-
-	(visitedReferences includes: aJinReference path fullName asLowercase) 
-		ifFalse: [ 
-			visitedReferences add: aJinReference path fullName asLowercase.
-
-			aJinReference isAccessProject
-				ifTrue: [ 
-					| project subbuilder |
-					project := JinAccessApplication default open:
-						           aJinReference path asFileReference.
-					subbuilder := JinNSSubBuilder new.
-					subbuilder subbuildFor: project builder: self.
-
-
-					project closeAndQuit ]
-				ifFalse: [ 
-					self
-						pushNewAssemblyFor: aJinReference
-						owner: (self typeOwnerFor: aJinReference library).
-
-					aJinReference library acceptVisitor: self.
-					self popAssemblyFor: aJinReference ] ].
-	self currentAssemblyNamespace installAllAssemblySymbolsFrom:
-		(assemblyNamespaces detect: [ :a | a name = aJinReference name ])
 ]
 
 { #category : #'as yet unclassified' }
