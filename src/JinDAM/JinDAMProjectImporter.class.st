@@ -54,19 +54,22 @@ JinDAMProjectImporter >> visitCollection: aCollectionBlock [
 ]
 
 { #category : #'visit-first-objects' }
-JinDAMProjectImporter >> visitCollection: aCollection from: aProject [
+JinDAMProjectImporter >> visitCollection: aCollection from: project [
 
-	| stackSize |
+	| stackSize win32Error |
 	stackSize := self state size.
-
+	win32Error := false.
 	1 to: aCollection value size do: [ :i | " Try to visit. If it fails it restarts the project and it does continue. If it fails twice it let the exception to go "
 		[ (aCollection value at: i) acceptVisitor: self ]
 			on: Win32Error
-			do: [ :e | 
-				self state size = stackSize ifFalse: [ 
-					self halt: 'Umathching stacks!!' ].
-				aProject reopen.
-				(aCollection value at: i) acceptVisitor: self ] ]
+			do: [ :e | win32Error := true ].
+		win32Error ifTrue: [ 
+			win32Error := false.
+			self state size = stackSize ifFalse: [ 
+				self halt: 'Umathching stacks!!' ].
+			self state pop.
+			project reopen.
+			(aCollection value at: i) acceptVisitor: self ] ]
 ]
 
 { #category : #'visit-first-objects' }
