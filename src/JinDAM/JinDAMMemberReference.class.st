@@ -30,6 +30,7 @@ JinDAMMemberReference >> isInvocableReference [
 
 { #category : #accessing }
 JinDAMMemberReference >> isTypeReference [
+	candidate isCollection ifTrue: [ ^ candidate first isType  ]. 
 	^ candidate isNotNil and: [ candidate isType  ]
 ]
 

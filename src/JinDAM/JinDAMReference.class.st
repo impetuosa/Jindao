@@ -44,6 +44,13 @@ JinDAMReference >> candidateAnchor: aCandidateAnchor [
  	candidateAnchor := aCandidateAnchor. 
 ]
 
+{ #category : #'as yet unclassified' }
+JinDAMReference >> candidateName [
+
+	candidate isCollection ifFalse: [ ^ candidate name ].
+	^ (candidate collect: #name) removeDuplicates first
+]
+
 { #category : #accessing }
 JinDAMReference >> candidateType [
 
@@ -59,6 +66,7 @@ JinDAMReference >> context [
 
 { #category : #accessing }
 JinDAMReference >> context: aJinDAMTypeReference [ 
+	self assert: aJinDAMTypeReference isNotNil.
 	context := aJinDAMTypeReference
 ]
 
@@ -101,6 +109,6 @@ JinDAMReference >> printOn: aStream [
 		nextPutAll:
 			(candidate
 				 ifNil: [ 'Unsolved' ]
-				 ifNotNil: [ candidate name ]).
+				 ifNotNil: [ self candidateName ]).
 	
 ]

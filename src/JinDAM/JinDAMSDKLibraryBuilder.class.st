@@ -54,7 +54,8 @@ JinDAMSDKLibraryBuilder >> aliasTypes [
 		  self currentDb.
 		  self err.
 		  self voidAlias.
-
+		  self ulonglong.
+		  self ulong.
 		  self winWideString }
 ]
 
@@ -2277,6 +2278,18 @@ JinDAMSDKLibraryBuilder >> uint16 [
 JinDAMSDKLibraryBuilder >> uint32 [
 
 	^ self newAlias: #uint32 to: self integer
+]
+
+{ #category : #alias }
+JinDAMSDKLibraryBuilder >> ulong [
+
+	^ self newAlias: #ulong to: self long
+]
+
+{ #category : #alias }
+JinDAMSDKLibraryBuilder >> ulonglong [
+
+	^ self newAlias: #ulonglong to: self long
 ]
 
 { #category : #alias }

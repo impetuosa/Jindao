@@ -76,15 +76,19 @@ JinNSAbstractBuilder >> uniqueNameFor: aJinTable [
 
 { #category : #visiting }
 JinNSAbstractBuilder >> visitCollection: aCollection from: project [
-	| stackSize |
-	stackSize := stack size.  
+
+	| stackSize win32Error |
+	stackSize := stack size.
+	win32Error := false.
 	1 to: aCollection value size do: [ :i | " Try to visit. If it fails it restarts the project and it does continue. If it fails twice it let the exception to go "
 		[ (aCollection value at: i) acceptVisitor: self ]
 			on: Win32Error
-			do: [ :e | 
-				stack size = stackSize ifFalse: [ self halt: 'Umathching stacks!!' ].
-				project reopen.
-				(aCollection value at: i) acceptVisitor: self ] ]
+			do: [ :e | win32Error := true ].
+		win32Error ifTrue: [ 
+			win32Error := false.
+			stack size = stackSize ifFalse: [ self halt: 'Umathching stacks!!' ].
+			project reopen.
+			(aCollection value at: i) acceptVisitor: self ] ]
 ]
 
 { #category : #visiting }

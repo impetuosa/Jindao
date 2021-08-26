@@ -8,15 +8,16 @@ JinMultiVisitor >> currentNamespace [
 	ns := self symbolTable
 		      namespaceFor: reverseStack first
 		      kind: reverseStack first relatedSymbolKind.
-
+		
 	^ reverseStack allButFirst inject: ns first into: [ :nns :element | 
 		  element relatedSymbolKind isExternal ifTrue: [ ^ nns ].
 		  temp := nns
 			          namespaceFor: element name
 			          kind: element relatedSymbolKind.
 		  temp ifEmpty: [ 
-			  nns name = 'Form_FactDmdChgntPrenom13AnsEtPlusP4' ifFalse: [ 
-				  self halt: element name ].
+				self parent problematicForms add: { nns name . element name }.
+			"  ({'Form_FactDmdChgntPrenom13AnsEtPlusP4' .'Form_FgpeCollectiviteFiche' . 'Form_FdemCreationEchangeEtatCivil'} includes: nns name)  ifFalse: [ 
+				  self halt: element name ]."
 			  ^ nns ].
 		  temp first kind isInvocable ifTrue: [ ^ temp first ].
 		  (temp first kind isType and: [ temp first owner type = JinLibrary ]) 
@@ -81,9 +82,6 @@ JinMultiVisitor >> instantiateReferenceForSymbol: symbol name: aName context: co
 			symbol kind isAssembly ifTrue: [ 
 				inter := self instantiate: JinDAMLibraryReference.
 				inter name: aName ].
-			symbol kind isEnumEntry ifTrue: [ 
-				inter := self instantiate: JinDAMTypeReference.
-				inter typeName: aName ].
 			symbol kind isType ifTrue: [ 
 				inter := self instantiate: JinDAMTypeReference.
 				inter typeName: aName ].

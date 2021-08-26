@@ -36,6 +36,6 @@ JinDAMTypeReference >> typeName [
 
 { #category : #accessing }
 JinDAMTypeReference >> typeName: aString [
-
+	aString = 'eIdentifiant' ifTrue: [ self halt.  ].
 	typeName := aString
 ]

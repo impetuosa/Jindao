@@ -10,7 +10,8 @@ Class {
 
 { #category : #testing }
 JinDAMMultipleTypeReference >> candidate [
-	 self error: 'Use (s)'
+	^ candidate 
+	 "self error: 'Use (s)'"
 ]
 
 { #category : #testing }

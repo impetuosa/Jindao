@@ -68,12 +68,17 @@ JinDAMASTCodeImporter >> nodeToTypeReferenceName: aVBNode context: aContext [
 	^ t
 ]
 
+{ #category : #'as yet unclassified' }
+JinDAMASTCodeImporter >> problematicForms [
+	^ parent problematicForms 
+]
+
 { #category : #'member access' }
 JinDAMASTCodeImporter >> referenceTaggedNameConverter [
 
-	^ referenceTaggedNameConverter ifNil: [ 
+	^( referenceTaggedNameConverter ifNil: [ 
 		  referenceTaggedNameConverter := JinDAMVBVisitorToTaggedReferenceName
-			                                  new ]
+			                                  new ]) importer: self; yourself 
 ]
 
 { #category : #'properties - variables' }
@@ -96,8 +101,9 @@ JinDAMASTCodeImporter >> visitArgument: anArgument [
 			 self state top isKindOf: JinDAMAccessRead ]).
 
 	arg := self instantiate: JinDAMArgument.
-
+	
 	arg text: (self nodeToString: anArgument).
+	arg anchor: (self codeAnchor: #argument for: anArgument ).
 	self state top addArgument: arg.
 	self state push: arg.
 	anArgument value acceptVisitor: self.
@@ -242,7 +248,8 @@ JinDAMASTCodeImporter >> visitDictionaryAccess: aDictionaryAccess [
 		       instantiateReferenceForNames: names
 		       context: read
 		       preferring: { #isInvocable. #isAttribute. #isType }.
-
+	read anchor:
+		(self codeAnchor: #dictionaryRead for: aDictionaryAccess).
 	read readReference: tip.
 	self state top addAccess: read.
 	^ read
@@ -261,7 +268,7 @@ JinDAMASTCodeImporter >> visitDimMultipleVariables: aDimMultipleVariables [
 		aDimMultipleVariables variables variables do: [ :v | 
 			var := self instantiateVariable: JinDAMAttribute from: v.
 			var visibility: #Public.
-			self state top addMember: var ].
+			self state top addAttribute: var ].
 		^ self ]
 ]
 
@@ -292,6 +299,7 @@ JinDAMASTCodeImporter >> visitEquals: anExplicitAssignement [
 	anExplicitAssignement isAssignment
 		ifTrue: [ 
 			access := self instantiate: JinDAMAccessWrite.
+			access anchor: (self codeAnchor: #write for: anExplicitAssignement).
 			tempNames := anExplicitAssignement left acceptVisitor:
 				             self referenceTaggedNameConverter.
 
@@ -345,7 +353,7 @@ JinDAMASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 	| access tempNames |
 	access := self instantiate: JinDAMAccessWrite.
 
-
+	access anchor: (self codeAnchor: #write for: anExplicitAssignement).
 	"
 	tempNames := anExplicitAssignement left acceptVisitor:
 		             self referenceTaggedNameConverter.
@@ -507,9 +515,8 @@ JinDAMASTCodeImporter >> visitHeader: aHeader [
 
 ]
 
-{ #category : #generated }
+{ #category : #'member access' }
 JinDAMASTCodeImporter >> visitImplements: anImplements [
-	^ self visitProgram: anImplements.
 
 ]
 
@@ -557,11 +564,14 @@ JinDAMASTCodeImporter >> visitLiteral: aLiteral [
 				             to: aLiteral className size.
 			     name := name copyReplaceAll: 'Literal' with: ''.
 			     name := name copyReplaceAll: 'Node' with: ''.
+
 			     l literalKind: name asSymbol.
+			     l anchor:
+				     (self codeAnchor: name asSymbol , ' literal' for: aLiteral).
 			     l ].
 	read := self instantiate: JinDAMAccessRead.
-
 	read readReference: l.
+	read anchor: (self codeAnchor: 'literalRead' for: aLiteral).
 	self state top addAccess: read
 ]
 
@@ -578,6 +588,7 @@ JinDAMASTCodeImporter >> visitMemberAccess: aMemberAccess [
 		       preferring: { #isInvocable. #isAttribute. #isType }.
 
 	read readReference: tip.
+	read anchor: (self codeAnchor: 'memberRead' for: aMemberAccess ).
 	self state top addAccess: read.
 	^ read
 ]
@@ -731,21 +742,26 @@ JinDAMASTCodeImporter >> visitProcedureCallOrArrayAccess: aProcedureCallOrArrayA
 
 	aProcedureCallOrArrayAccess selector
 		ifNotNil: [ 
-		element := aProcedureCallOrArrayAccess selector acceptVisitor: self ]
+			element := aProcedureCallOrArrayAccess selector acceptVisitor: self ]
 		ifNil: [ 
 			element := self instantiate: JinDAMAccessRead.
 			ref := aProcedureCallOrArrayAccess receiver acceptVisitor: self.
 			ref := (self instantiate: JinDAMExpressionReference)
+				       anchor: (self
+						        codeAnchor: 'expression'
+						        for: aProcedureCallOrArrayAccess receiver);
 				       candidate: ref;
 				       candidateAnchor: ref anchor;
 				       context: element;
 				       yourself.
 			element readReference: ref ].
+	element anchor:
+		(self codeAnchor: 'memberRead' for: aProcedureCallOrArrayAccess).
 	element readReference isTypeReference ifTrue: [ 
 		| typeReference |
 		ref := self instantiate: JinDAMTypeMemberReference.
-		typeReference := element readReference. 
-		typeReference context: element. 
+		typeReference := element readReference.
+		typeReference context: element.
 		ref context: typeReference.
 		element readReference: ref ].
 
@@ -812,6 +828,7 @@ JinDAMASTCodeImporter >> visitSimpleIdentifier: aSimpleIdentifier [
 				       context: read
 				       preferring: { #isAttribute. #isInvocable }.
 			read readReference: tip.
+			read anchor: (self codeAnchor: 'memberRead' for: aSimpleIdentifier).
 			self state top addAccess: read ].
 
 	read ifNil: [ 
@@ -855,6 +872,7 @@ JinDAMASTCodeImporter >> visitTypeOf: aTypeOf [
 		       preferring: { #isInvocable. #isAttribute. #isType }.
 
 	element readReference: tip.
+	element anchor: (self codeAnchor: 'typeOfRead' for: aTypeOf).
 	self state top addAccess: element.
 
 	" Element should be either an access or an invocation. both cases it may have arguments (either for invocation or array access). "
@@ -870,8 +888,18 @@ JinDAMASTCodeImporter >> visitTypeOf: aTypeOf [
 
 { #category : #generated }
 JinDAMASTCodeImporter >> visitVariable: aVariable [
-	^ self visitProgram: aVariable.
 
+	| var |
+	(self state top isKindOf: JinDAMInvocable) ifTrue: [ 
+		var := self instantiateVariable: JinDAMLocalVariable from: aVariable.
+		self state top addLocalVariable: var.
+		^ self ].
+	(self state top isKindOf: JinDAMModule) ifTrue: [ 
+		var := self instantiateVariable: JinDAMAttribute from: aVariable.
+		var visibility: #Public.
+		self state top addAttribute: var.
+		^ self ].
+	self error: 'Unexpected case .'
 ]
 
 { #category : #generated }

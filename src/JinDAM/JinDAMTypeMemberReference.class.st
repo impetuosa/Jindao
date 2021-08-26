@@ -16,8 +16,9 @@ JinDAMTypeMemberReference >> context: aContext [
 	aContext candidate isNotNil
 		ifTrue: [ self assert: aContext candidate isFormOrReport ]
 		ifFalse: [ 
-			self assert: ((aContext typeName beginsWith: 'Report_') or: [ 
-					 aContext typeName beginsWith: 'Form_' ]) ].
+			self assert:
+				({ 'Report_'. 'Form_'. 'Databases' } anySatisfy: [ :s | 
+					 aContext typeName beginsWith: s ]) ].
 	super context: aContext
 ]
 

@@ -33,6 +33,8 @@ JinNSSDKLibraryBuilder >> aliasTypes [
 		  self uint.
 		  self uint32.
 		  self uint16.
+		  self ulonglong.
+		  self ulong.
 		  self currentDb.
 		  self err.
 		  self voidAlias.
@@ -310,6 +312,18 @@ JinNSSDKLibraryBuilder >> uint16 [
 JinNSSDKLibraryBuilder >> uint32 [
 
 	^ self newAlias: #uint32 
+]
+
+{ #category : #alias }
+JinNSSDKLibraryBuilder >> ulong [
+
+	^ self newAlias: #ulong
+]
+
+{ #category : #alias }
+JinNSSDKLibraryBuilder >> ulonglong [
+
+	^ self newAlias: #ulonglong
 ]
 
 { #category : #alias }

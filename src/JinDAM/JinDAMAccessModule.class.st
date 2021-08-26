@@ -42,11 +42,21 @@ JinDAMAccessModule >> find: aJinNSKind named: aString [
 ]
 
 { #category : #accessing }
+JinDAMAccessModule >> name [
+
+	| pieces |
+	pieces := '.' split: name.
+	^ pieces size > 1
+		  ifTrue: [ pieces first ]
+		  ifFalse: [ name ]
+]
+
+{ #category : #accessing }
 JinDAMAccessModule >> printOn: aStream [
 
 	aStream nextPutAll: 'AM ('.
 	aStream
-		nextPutAll: name;
+		nextPutAll: self name;
 		nextPut: $)
 ]
 

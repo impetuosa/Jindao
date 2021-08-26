@@ -6,7 +6,8 @@ Class {
 		'filter',
 		'sdkLibrary',
 		'savingPhases',
-		'references'
+		'references',
+		'problematicForms'
 	],
 	#category : #'JinDAM-Importers'
 }
@@ -39,6 +40,11 @@ JinDAMDispatchingImporter >> model [
 { #category : #'instance creation' }
 JinDAMDispatchingImporter >> model: aModel [
 	model := aModel
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMDispatchingImporter >> problematicForms [
+	^ problematicForms ifNil: [  problematicForms := OrderedCollection new  ]
 ]
 
 { #category : #'instance creation' }

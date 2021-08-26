@@ -25,10 +25,11 @@ JinDAMClass >> findAttributeInvocable: aString amountArguments: amount [
 		self assert: amount = 0.
 		n := JinDAMAttribute new
 			     name: aString;
-			     typeReference: (JinDAMTypeReference new
-					      typeName: #Variant;
-					      yourself);
 			     yourself.
+		n typeReference: (JinDAMTypeReference new
+				 context: n;
+				 typeName: #Variant;
+				 yourself).
 		attributes add: n.
 		attrs add: n ].
 

@@ -28,6 +28,11 @@ JinDAMEntity >> isReference [
 	 ^ false 
 ]
 
+{ #category : #testing }
+JinDAMEntity >> isType [
+	^ false 
+]
+
 { #category : #'as yet unclassified' }
 JinDAMEntity >> relatedSymbolKind [
 

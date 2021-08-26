@@ -2,17 +2,35 @@ Class {
 	#name : #JinDAMExternalSubProcedure,
 	#superclass : #JinDAMInvocable,
 	#instVars : [
-		'library'
+		'library',
+		'libraryName',
+		'alias'
 	],
 	#category : #'JinDAM-Model'
 }
+
+{ #category : #generated }
+JinDAMExternalSubProcedure >> alias: aString [
+
+	alias := aString
+]
+
+{ #category : #accessing }
+JinDAMExternalSubProcedure >> isExternal [ 
+	^ true 
+]
+
+{ #category : #generated }
+JinDAMExternalSubProcedure >> libraryName: aString [ 
+	libraryName := aString 
+]
 
 { #category : #accessing }
 JinDAMExternalSubProcedure >> printOn: aStream [
 
 	aStream
 		nextPutAll: ' external ( ';
-		nextPutAll: library;
+		nextPutAll: libraryName;
 		nextPutAll: ') ';
 		nextPutAll: selector;
 		nextPutAll: ' ';
@@ -26,4 +44,10 @@ JinDAMExternalSubProcedure >> printOn: aStream [
 JinDAMExternalSubProcedure >> relatedSymbolKind [
 
 	^ JinNSKind externalSub
+]
+
+{ #category : #accessing }
+JinDAMExternalSubProcedure >> visibility: aString [
+
+	visibility := aString
 ]

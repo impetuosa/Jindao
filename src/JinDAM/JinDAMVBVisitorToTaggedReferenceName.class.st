@@ -151,17 +151,33 @@ JinDAMVBVisitorToTaggedReferenceName >> visitLibraryMethod: aJinLibraryMethod [
 
 { #category : #'as yet unclassified' }
 JinDAMVBVisitorToTaggedReferenceName >> visitMemberAccess: aVBMemberAccessNode [
+
 	| receiver |
 	receiver := aVBMemberAccessNode receiver
-		ifNil: [ 
-			[aVBMemberAccessNode enclosingWith with acceptVisitor: self ] on: Error do: [ :e | self halt . nil ]
-			
-			]
-		ifNotNil: [ aVBMemberAccessNode receiver acceptVisitor: self ].
-		
- 
-	^ ((receiver ifNil: [ {} ])  collect: [ :a | a isArray ifTrue: [ a ] ifFalse: [ { a . #member } ]  ])
-		, ((aVBMemberAccessNode member acceptVisitor: self) collect: [ : i | {  i. #member } ])
+		            ifNil: [ 
+			            [ 
+			            aVBMemberAccessNode enclosingWith with acceptVisitor:
+				            self ]
+				            on: Error
+				            do: [ :e | 
+					            importer problematicForms add: importer state top.
+					            nil ] ]
+		            ifNotNil: [ 
+		            aVBMemberAccessNode receiver acceptVisitor: self ].
+
+
+	^ ((receiver ifNil: [ {  } ]) collect: [ :a | 
+		   a isArray
+			   ifTrue: [ a ]
+			   ifFalse: [ 
+				   { 
+					   a.
+					   #member } ] ])
+	  ,
+		  ((aVBMemberAccessNode member acceptVisitor: self) collect: [ :i | 
+			   { 
+				   i.
+				   #member } ])
 ]
 
 { #category : #visiting }

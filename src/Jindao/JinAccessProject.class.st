@@ -387,7 +387,10 @@ JinAccessProject >> modules [
 
 { #category : #accessing }
 JinAccessProject >> name [
-	^ programHandle propertyNamed: #Name 
+
+	^ (programHandle propertyNamed: #Name)
+		  copyReplaceAll: '.accdb'
+		  with: ''
 ]
 
 { #category : #'form-api' }

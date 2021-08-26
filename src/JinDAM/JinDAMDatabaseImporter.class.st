@@ -50,6 +50,7 @@ JinDAMDatabaseImporter >> visitQuery: aJinQuery [
 
 	aJinQuery fields do: [ :f | 
 		field := self instantiate: JinDAMTableField.
+		field anchor: tab anchor / #field / f name.
 		field name: f name.
 		field size: f size.
 		field sourceTableName: f sourceTableName.
@@ -76,6 +77,7 @@ JinDAMDatabaseImporter >> visitTable: aJinTable [
 
 	aJinTable fields do: [ :f | 
 		field := self instantiate: JinDAMTableField.
+		field anchor: tab anchor / #field / f name.
 		field name: f name.
 		field size: f size.
 		field sourceTableName: f sourceTableName.

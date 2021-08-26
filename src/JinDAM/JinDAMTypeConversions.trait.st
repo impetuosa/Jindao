@@ -69,7 +69,7 @@ JinDAMTypeConversions >> typeReferenceName: aString typeSymbol: aCollection cont
 	
 	potentialTypes := aCollection select: [ :p | p kind isType ].
 	(aCollection isEmpty and: [  { 'NULL'. 'ERROR'. 'CARRAY'. 'SAFEARRAY'. 'ParamArray'. 'HRESULT' .
-			 'COMUnknownInstance'. 'COMDispatchInstance' . 'USERDEFINED' .'Win32WideString' } includes: aString ]) ifFalse: [ ({ 'VOID' } includes: aString) ifTrue: [ 
+			 'COMUnknownInstance'. 'COMDispatchInstance' . 'USERDEFINED' .'Win32WideString' . 'ulonglong' } includes: aString ]) ifFalse: [ ({ 'VOID' } includes: aString) ifTrue: [ 
 			potentialTypes := potentialTypes select: [ :p | p name = aString ] ].
 			
 		
@@ -79,8 +79,6 @@ JinDAMTypeConversions >> typeReferenceName: aString typeSymbol: aCollection cont
 				reference := self instantiate: JinDAMTypeReference.
 				reference candidateAnchor: potentialTypes first anchor ]
 			ifFalse: [ 
-				self halt.
-				
 				reference := self instantiate: JinDAMMultipleTypeReference.
 				reference candidateAnchors:
 					(potentialTypes collect: [ :p | p anchor ]) ].

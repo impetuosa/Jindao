@@ -334,7 +334,7 @@ JinNSKind >> isExternalFunction [
 
 { #category : #testing }
 JinNSKind >> isExternalSub [
-	^ kind = #externalSubprocedure
+	^ kind = #externalSub
 ]
 
 { #category : #testing }

@@ -69,8 +69,11 @@ JinAnchor >> elementName [
 { #category : #enumerating }
 JinAnchor >> elementProject [
 
-	self ensureWellformed.
-	^ path at: 1
+	| pieces |
+	pieces := '.' split: (path at: 1).
+	^ pieces size > 1
+		  ifTrue: [ pieces first ]
+		  ifFalse: [ path at: 1 ]
 ]
 
 { #category : #enumerating }

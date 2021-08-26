@@ -224,7 +224,7 @@ JinDAMVBVisitorToReferenceName >> visitTypeSize: aVBTypeSizeNode [
 	((aVBTypeSizeNode parent respondsTo: #paramarrayToken) and: [ 
 		 aVBTypeSizeNode parent paramarrayToken isNotNil ]) ifTrue: [ 
 		^ { 'ParamArray' } ].
-	aVBTypeSizeNode sizes ifEmpty: [ ^ 'EmptyArray' ].
+	aVBTypeSizeNode sizes ifEmpty: [ ^ { 'EmptyArray' } ].
 	self error: 'Should do something else.'
 ]
 

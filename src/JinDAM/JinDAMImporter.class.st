@@ -3,14 +3,16 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'provider',
-		'symbolTable'
+		'symbolTable',
+		'importer',
+		'problematicRefs'
 	],
 	#category : #'JinDAM-Importers'
 }
 
 { #category : #accessing }
 JinDAMImporter >> createDefaultVisitor [
-	^ provider build
+	^ importer := provider build
 ]
 
 { #category : #accessing }
@@ -78,11 +80,12 @@ JinDAMImporter >> link: aJinDAMModel [
 JinDAMImporter >> linkReference: r in: aJinDAMModel [
 
 	| candidates |
+	[ 
 	r candidate ifNil: [ 
 		r candidateAnchor ifNil: [ 
-			({ 'NULL'. 'ERROR'. 'CARRAY'. 'SAFEARRAY'. 'ParamArray'. 'HRESULT' .
-			 'COMUnknownInstance'. 'COMDispatchInstance' . 'USERDEFINED*' } includes: r name) 
-				ifTrue: [ ^ self ].
+			({ 'NULL'. 'ERROR'. 'CARRAY'. 'SAFEARRAY'. 'ParamArray'.
+			 'HRESULT'. 'COMUnknownInstance'. 'COMDispatchInstance'.
+			 'USERDEFINED*' } includes: r name) ifTrue: [ ^ self ].
 			r context isReadAccess ifTrue: [ ^ self ].
 
 			self assert: r context isReference.
@@ -112,11 +115,22 @@ JinDAMImporter >> linkReference: r in: aJinDAMModel [
 			| artefact |
 			artefact := aJinDAMModel entities detect: [ :e | 
 				            (e isKindOf: JinDAMArtefact) and: [ 
-					            e name = r candidateAnchor elementProject and: [ 
+					            e name asLowercase
+					            = r candidateAnchor elementProject asLowercase and: [ 
 						            e isReference not ] ] ].
 			r candidate: (r candidateAnchor elementsNameKindPairs
 					 inject: artefact
-					 into: [ :nav :each | nav find: each second named: each first ]) ] ]
+					 into: [ :nav :each | nav find: each second named: each first ]) ] ] ]
+		on: Error
+		do: [ :e | 
+			self problematicRefs add: { 
+					r.
+					e } ]
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMImporter >> problematicRefs [
+^	problematicRefs ifNil: [ problematicRefs  := OrderedCollection new  ]
 ]
 
 { #category : #accessing }
