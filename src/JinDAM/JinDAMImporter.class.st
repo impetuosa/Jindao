@@ -5,7 +5,8 @@ Class {
 		'provider',
 		'symbolTable',
 		'importer',
-		'problematicRefs'
+		'problematicRefs',
+		'artefacts'
 	],
 	#category : #'JinDAM-Importers'
 }
@@ -67,6 +68,8 @@ JinDAMImporter >> link: aJinDAMModel [
 
 	| references |
 	references := aJinDAMModel references.
+	artefacts := aJinDAMModel entities select: [ :e | 
+		             e isKindOf: JinDAMArtefact ].
 
 	references
 		select: [ :r | r isKindOf: JinDAMTypeReference ]
@@ -113,11 +116,9 @@ JinDAMImporter >> linkReference: r in: aJinDAMModel [
 
 		r candidateAnchor ifNotNil: [ 
 			| artefact |
-			artefact := aJinDAMModel entities detect: [ :e | 
-				            (e isKindOf: JinDAMArtefact) and: [ 
-					            e name asLowercase
-					            = r candidateAnchor elementProject asLowercase and: [ 
-						            e isReference not ] ] ].
+			artefact := artefacts detect: [ :e | 
+				            e name asLowercase
+				            = r candidateAnchor elementProject asLowercase ].
 			r candidate: (r candidateAnchor elementsNameKindPairs
 					 inject: artefact
 					 into: [ :nav :each | nav find: each second named: each first ]) ] ] ]
