@@ -11,6 +11,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinDAMReference >> accept: aVisitor [  
+	^ aVisitor visitReference: self.
+
+]
+
+{ #category : #'as yet unclassified' }
 JinDAMReference >> adaptToAlceAnchorPathFragment [
 
 	| a segments |
@@ -20,6 +26,12 @@ JinDAMReference >> adaptToAlceAnchorPathFragment [
 		segments addFirst: a name.
 		a := a context ].
 	^ '.' join: segments
+]
+
+{ #category : #accessing }
+JinDAMReference >> arguments [
+
+	^ {  }
 ]
 
 { #category : #accessing }
@@ -76,6 +88,22 @@ JinDAMReference >> isDictionaryAccess [
 	^ (kindAccess compare: 'dictionary' caseSensitive: false) = 2
 ]
 
+{ #category : #testing }
+JinDAMReference >> isInvocableReference [
+ ^ false 
+]
+
+{ #category : #accessing }
+JinDAMReference >> isLiteralReference [
+	^ false 
+]
+
+{ #category : #accessing }
+JinDAMReference >> isMultipleReference [
+	
+	^ false 
+]
+
 { #category : #accessing }
 JinDAMReference >> isReference [
 
@@ -86,6 +114,17 @@ JinDAMReference >> isReference [
 JinDAMReference >> isTypeReference [
 
 	^ false
+]
+
+{ #category : #testing }
+JinDAMReference >> isUnknownReference [
+
+	^ candidate isNil
+]
+
+{ #category : #testing }
+JinDAMReference >> isUnknownType [
+	^ false 
 ]
 
 { #category : #accessing }
@@ -111,4 +150,9 @@ JinDAMReference >> printOn: aStream [
 				 ifNil: [ 'Unsolved' ]
 				 ifNotNil: [ self candidateName ]).
 	
+]
+
+{ #category : #accessing }
+JinDAMReference >> references [
+	 ^ { self }
 ]

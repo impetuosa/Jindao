@@ -8,6 +8,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMFunction >> accept: aVisitor [  
+	^ aVisitor visitFunction: self.
+
+]
+
 { #category : #accessing }
 JinDAMFunction >> printOn: aStream [
 
@@ -26,6 +32,13 @@ JinDAMFunction >> printOn: aStream [
 JinDAMFunction >> relatedSymbolKind [
 
 	^ JinNSKind function
+]
+
+{ #category : #accessing }
+JinDAMFunction >> signature [
+
+	^ (typeReference ifNil: [ 'Unknown' ] ifNotNil: [ :a | a name ])
+	  , ' ' , super signature
 ]
 
 { #category : #generated }

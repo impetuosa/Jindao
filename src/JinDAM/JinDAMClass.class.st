@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinDAMClass >> accept: aVisitor [  
+	^ aVisitor visitClass: self.
+
+]
+
+{ #category : #'as yet unclassified' }
 JinDAMClass >> findAttributeInvocable: aString amountArguments: amount [
 
 	| attrs n |

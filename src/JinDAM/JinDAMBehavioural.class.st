@@ -8,6 +8,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMBehavioural >> accept: aVisitor [  
+	^ aVisitor visitBehavioural: self.
+
+]
+
 { #category : #adding }
 JinDAMBehavioural >> accesses [
 

@@ -7,6 +7,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMAlias >> accept: aVisitor [  
+	^ aVisitor visitAlias: self.
+
+]
+
 { #category : #testing }
 JinDAMAlias >> find: aJinNSKind named: aString [
 
@@ -32,6 +38,11 @@ JinDAMAlias >> printOn: aStream [
 { #category : #accessing }
 JinDAMAlias >> type [ 
 	^ typeReference candidate 
+]
+
+{ #category : #accessing }
+JinDAMAlias >> typeReference [
+	^ typeReference
 ]
 
 { #category : #accessing }

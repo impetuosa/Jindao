@@ -10,6 +10,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMAccessWrite >> accept: aVisitor [  
+	^ aVisitor visitAccessWrite: self.
+
+]
+
 { #category : #adding }
 JinDAMAccessWrite >> addAccess: aJinDAMAccessRead [
 
@@ -66,6 +72,17 @@ JinDAMAccessWrite >> processingWrite [
 JinDAMAccessWrite >> readReferences [
 
 	^ readReference ifNil: [ readReference := OrderedCollection new ]
+]
+
+{ #category : #testing }
+JinDAMAccessWrite >> references [
+
+	^ readReference flatCollect: [ :r | r references ]
+]
+
+{ #category : #accessing }
+JinDAMAccessWrite >> writeReference [
+	^ writeReference
 ]
 
 { #category : #accessing }

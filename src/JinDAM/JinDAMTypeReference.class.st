@@ -8,6 +8,18 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMTypeReference >> accept: aVisitor [  
+	^ aVisitor visitTypeReference: self.
+
+]
+
+{ #category : #testing }
+JinDAMTypeReference >> beUndefinedType [
+
+	typeName := '#_TypeUndefined'
+]
+
 { #category : #accessing }
 JinDAMTypeReference >> dimensions [
 	^ dimensions ifNil:[ 0  ]
@@ -21,6 +33,22 @@ JinDAMTypeReference >> isArray [
 { #category : #accessing }
 JinDAMTypeReference >> isTypeReference [
 	^ true
+]
+
+{ #category : #testing }
+JinDAMTypeReference >> isUndefinedType [
+	 ^ typeName = '#_TypeUndefined'
+]
+
+{ #category : #testing }
+JinDAMTypeReference >> isUnknownType [
+
+	^ self isUndefinedType not and: [ candidate isNil ]
+]
+
+{ #category : #testing }
+JinDAMTypeReference >> isVariableReference [
+	 ^ candidate isVariable 
 ]
 
 { #category : #accessing }

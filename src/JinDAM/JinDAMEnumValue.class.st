@@ -8,6 +8,17 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMEnumValue >> accept: aVisitor [  
+	^ aVisitor visitEnumValue: self.
+
+]
+
+{ #category : #testing }
+JinDAMEnumValue >> isVariable [
+	^ true 
+]
+
 { #category : #accessing }
 JinDAMEnumValue >> name [
 	^ name

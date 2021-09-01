@@ -7,6 +7,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMAccessRead >> accept: aVisitor [  
+	^ aVisitor visitAccessRead: self.
+
+]
+
 { #category : #adding }
 JinDAMAccessRead >> addArgument: aJinDAMArgument [ 
 	readReference addArgument: aJinDAMArgument 
@@ -44,4 +50,9 @@ JinDAMAccessRead >> readReference [
 JinDAMAccessRead >> readReference: aJinDAMVariableReference [ 
 	
 	readReference := aJinDAMVariableReference.
+]
+
+{ #category : #accessing }
+JinDAMAccessRead >> references [
+	^ readReference references 
 ]

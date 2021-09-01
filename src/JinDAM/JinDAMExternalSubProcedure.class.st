@@ -9,6 +9,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMExternalSubProcedure >> accept: aVisitor [  
+	^ aVisitor visitExternalSubProcedure: self.
+
+]
+
 { #category : #generated }
 JinDAMExternalSubProcedure >> alias: aString [
 
@@ -18,6 +24,11 @@ JinDAMExternalSubProcedure >> alias: aString [
 { #category : #accessing }
 JinDAMExternalSubProcedure >> isExternal [ 
 	^ true 
+]
+
+{ #category : #accessing }
+JinDAMExternalSubProcedure >> libraryName [
+	^ libraryName
 ]
 
 { #category : #generated }

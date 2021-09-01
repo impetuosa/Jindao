@@ -9,6 +9,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMTableRelation >> accept: aVisitor [  
+	^ aVisitor visitTableRelation: self.
+
+]
+
 { #category : #adding }
 JinDAMTableRelation >> addMatch: aString to: aString2 [
 

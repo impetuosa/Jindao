@@ -4,6 +4,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMForm >> accept: aVisitor [  
+	^ aVisitor visitForm: self.
+
+]
+
 { #category : #accessing }
 JinDAMForm >> isFormOrReport [
 

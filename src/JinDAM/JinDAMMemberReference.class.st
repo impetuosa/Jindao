@@ -8,6 +8,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMMemberReference >> accept: aVisitor [  
+	^ aVisitor visitMemberReference: self.
+
+]
+
 { #category : #adding }
 JinDAMMemberReference >> addArgument: aJinDAMArgument [ 
 	 self arguments add: aJinDAMArgument
@@ -25,19 +31,38 @@ JinDAMMemberReference >> dimensions [
 
 { #category : #accessing }
 JinDAMMemberReference >> isInvocableReference [
-	^ candidate isNotNil and: [ candidate isInvocable   ]
+
+	^ candidate isNotNil and: [ 
+		  candidate isCollection
+			  ifTrue: [ candidate anySatisfy: #isInvocable ]
+			  ifFalse: [ candidate isInvocable ] ]
 ]
 
 { #category : #accessing }
 JinDAMMemberReference >> isTypeReference [
-	candidate isCollection ifTrue: [ ^ candidate first isType  ]. 
-	^ candidate isNotNil and: [ candidate isType  ]
+
+	candidate isCollection ifTrue: [ ^ candidate first isType ].
+	(candidate isNotNil and: [ candidate isType ]) ifTrue: [ ^ true ].
+	^ (context isVariable or: [ context isAttributeGetter ]) and: [ 
+		  context typeReference = self ]
+]
+
+{ #category : #accessing }
+JinDAMMemberReference >> isUndefinedType [
+
+	^ self isTypeReference and: [ name = '#_TypeUndefined' ]
 ]
 
 { #category : #accessing }
 JinDAMMemberReference >> isUnknownReference [
 
 	^ candidate isNil
+]
+
+{ #category : #accessing }
+JinDAMMemberReference >> isUnknownType [
+
+	^ self isTypeReference and: [ candidate isNil ]
 ]
 
 { #category : #accessing }
@@ -75,4 +100,9 @@ JinDAMMemberReference >> selector [
 { #category : #accessing }
 JinDAMMemberReference >> selector: aString [ 
 	name := aString
+]
+
+{ #category : #accessing }
+JinDAMMemberReference >> signature [
+	^ self printString 
 ]

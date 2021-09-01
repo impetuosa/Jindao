@@ -8,6 +8,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMAttribute >> accept: aVisitor [  
+	^ aVisitor visitAttribute: self.
+
+]
+
 { #category : #accessing }
 JinDAMAttribute >> accessors [
 	 ^ accessors ifNil: [ accessors := OrderedCollection new  ]
@@ -22,6 +28,11 @@ JinDAMAttribute >> addAttributeAccessor: aJinDAMAttributeAccessor [
 JinDAMAttribute >> attributeAccessors [
 
 	^ accessors
+]
+
+{ #category : #accessing }
+JinDAMAttribute >> visibility [
+	^ visibility ifNil: [ #Public ]
 ]
 
 { #category : #accessing }

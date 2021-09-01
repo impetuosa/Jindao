@@ -10,6 +10,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMArtefact >> accept: aVisitor [  
+	^ aVisitor visitArtefact: self.
+
+]
+
 { #category : #adding }
 JinDAMArtefact >> addGlobal: aJinDAMAttribute [
 	self globals add: aJinDAMAttribute
@@ -43,6 +49,17 @@ JinDAMArtefact >> name: aString [
 ]
 
 { #category : #accessing }
+JinDAMArtefact >> path [
+
+	^ path
+]
+
+{ #category : #accessing }
 JinDAMArtefact >> path: aString [ 
 	path := aString asFileReference 
+]
+
+{ #category : #adding }
+JinDAMArtefact >> types [ 
+	 ^ types 
 ]

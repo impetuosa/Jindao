@@ -59,9 +59,8 @@ JinDAMVBVisitorToTaggedReferenceName >> toTypeReferenceName: aNode context: cont
 { #category : #'as yet unclassified' }
 JinDAMVBVisitorToTaggedReferenceName >> undefinedTypeReferenceContext: aContext [
 
-
 	^ JinDAMTypeReference new
-		  typeName: '#_TypeUndefined';
+		  beUndefinedType;
 		  context: aContext;
 		  yourself
 ]

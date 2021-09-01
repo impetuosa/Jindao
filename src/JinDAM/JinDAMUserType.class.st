@@ -7,6 +7,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMUserType >> accept: aVisitor [  
+	^ aVisitor visitUserType: self.
+
+]
+
 { #category : #adding }
 JinDAMUserType >> addAttribute: aJinDAMAttribute [ 
 	self attributes add:aJinDAMAttribute

@@ -9,6 +9,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMExternalFunction >> accept: aVisitor [  
+	^ aVisitor visitExternalFunction: self.
+
+]
+
 { #category : #generated }
 JinDAMExternalFunction >> alias: aString [ 
 	realSelector := selector.
@@ -51,6 +57,11 @@ JinDAMExternalFunction >> realSelector [
 JinDAMExternalFunction >> relatedSymbolKind [
 
 	^ JinNSKind externalFunction
+]
+
+{ #category : #accessing }
+JinDAMExternalFunction >> typeReference [
+	^ typeReference
 ]
 
 { #category : #accessing }

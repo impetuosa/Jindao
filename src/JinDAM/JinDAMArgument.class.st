@@ -8,6 +8,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMArgument >> accept: aVisitor [  
+	^ aVisitor visitArgument: self.
+
+]
+
 { #category : #adding }
 JinDAMArgument >> addAccess: aJinDAMAccessRead [
 

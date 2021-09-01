@@ -7,6 +7,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMAccessModule >> accept: aVisitor [  
+	^ aVisitor visitAccessModule: self.
+
+]
+
 { #category : #adding }
 JinDAMAccessModule >> addDependency: aJinDAMLibrary [
 
@@ -39,6 +45,17 @@ JinDAMAccessModule >> find: aJinNSKind named: aString [
 			  detect: [ :t | t name asLowercase = lc ]
 			  ifNone: [ self vbaLang find: aJinNSKind named: aString ] ].
 	^ self error: '??'
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMAccessModule >> isAccessModule [
+
+	^ true
+]
+
+{ #category : #testing }
+JinDAMAccessModule >> isVariable [
+	^ true 
 ]
 
 { #category : #accessing }

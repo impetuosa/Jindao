@@ -9,6 +9,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMModule >> accept: aVisitor [  
+	^ aVisitor visitModule: self.
+
+]
+
 { #category : #accessing }
 JinDAMModule >> addInvocable: anInvocable [ 
 	 invocables add: anInvocable 
@@ -17,6 +23,11 @@ JinDAMModule >> addInvocable: anInvocable [
 { #category : #accessing }
 JinDAMModule >> addType: aJinDAMPrimitiveType [
 	self types add: aJinDAMPrimitiveType
+]
+
+{ #category : #accessing }
+JinDAMModule >> astCannotLoad [
+	^ astCannotLoad
 ]
 
 { #category : #'as yet unclassified' }
@@ -58,6 +69,11 @@ JinDAMModule >> initialize [
 	super initialize.
 
 	invocables := OrderedCollection new
+]
+
+{ #category : #accessing }
+JinDAMModule >> invocables [
+	^ invocables
 ]
 
 { #category : #accessing }

@@ -4,6 +4,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMSubProcedure >> accept: aVisitor [  
+	^ aVisitor visitSubProcedure: self.
+
+]
+
 { #category : #accessing }
 JinDAMSubProcedure >> printOn: aStream [
 

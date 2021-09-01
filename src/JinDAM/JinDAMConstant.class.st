@@ -7,6 +7,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMConstant >> accept: aVisitor [  
+	^ aVisitor visitConstant: self.
+
+]
+
 { #category : #adding }
 JinDAMConstant >> addAccess: aJinDAMAccessRead [
 
@@ -18,4 +24,9 @@ JinDAMConstant >> addAccess: aJinDAMAccessRead [
 			         add: value;
 			         yourself ].
 	value add: aJinDAMAccessRead 
+]
+
+{ #category : #adding }
+JinDAMConstant >> value [ 
+	 ^ value 
 ]

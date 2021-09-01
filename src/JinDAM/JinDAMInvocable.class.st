@@ -9,6 +9,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMInvocable >> accept: aVisitor [  
+	^ aVisitor visitInvocable: self.
+
+]
+
 { #category : #adding }
 JinDAMInvocable >> addParameter: aJinDAMParameter [
 
@@ -19,6 +25,11 @@ JinDAMInvocable >> addParameter: aJinDAMParameter [
 JinDAMInvocable >> initialize [
 	 super initialize.
 	parameters := OrderedCollection new . 
+]
+
+{ #category : #accessing }
+JinDAMInvocable >> isInvocable [ 
+	^ true 
 ]
 
 { #category : #accessing }
@@ -52,4 +63,22 @@ JinDAMInvocable >> selector [
 { #category : #accessing }
 JinDAMInvocable >> selector: aString [ 
 	selector := aString
+]
+
+{ #category : #accessing }
+JinDAMInvocable >> signature [
+
+	^ String streamContents: [ :str | 
+		  str
+			  nextPutAll: selector;
+			  nextPut: $(;
+			  nextPutAll: (',' join: (parameters collect: [ :p | 
+								    (p isOptional
+									     ifTrue: [ 'OPTIONAL ' ]
+									     ifFalse: [ '' ])
+								    ,
+									    (p typeReference
+										     ifNil: [ 'Unknown' ]
+										     ifNotNil: [ :t | t name ]) ]));
+			  nextPut: $) ]
 ]

@@ -8,6 +8,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMMultipleTypeReference >> accept: aVisitor [  
+	^ aVisitor visitMultipleTypeReference: self.
+
+]
+
 { #category : #testing }
 JinDAMMultipleTypeReference >> candidate [
 	^ candidate 
@@ -38,6 +44,12 @@ JinDAMMultipleTypeReference >> candidateAnchors: aCollection [
 { #category : #testing }
 JinDAMMultipleTypeReference >> isArray [ 
 	 ^ self dimensions > 0 
+]
+
+{ #category : #testing }
+JinDAMMultipleTypeReference >> isMultipleReference [
+	
+	^ true
 ]
 
 { #category : #testing }

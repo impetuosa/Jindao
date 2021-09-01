@@ -7,6 +7,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #visiting }
+JinDAMModel >> accept: anAlceJinDAMLoader [
+
+	^ anAlceJinDAMLoader visitModel: self
+]
+
 { #category : #accessing }
 JinDAMModel >> entities [
 	^ entities
@@ -26,6 +32,11 @@ JinDAMModel >> instantiate: aClass [
 	obj := aClass new.
 	entities add: obj.
 	^ obj
+]
+
+{ #category : #testing }
+JinDAMModel >> isTypeReference [
+	^ false
 ]
 
 { #category : #accessing }

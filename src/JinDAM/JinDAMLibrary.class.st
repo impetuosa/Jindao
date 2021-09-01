@@ -8,6 +8,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMLibrary >> accept: aVisitor [  
+	^ aVisitor visitLibrary: self.
+
+]
+
 { #category : #adding }
 JinDAMLibrary >> addInvocable: aJinDAMFunction [
 
@@ -38,6 +44,11 @@ JinDAMLibrary >> invocables [
 JinDAMLibrary >> isBuiltIn: aBoolean [
 
 	isBuiltIn := aBoolean
+]
+
+{ #category : #testing }
+JinDAMLibrary >> isVariable [
+	 ^ true
 ]
 
 { #category : #testing }

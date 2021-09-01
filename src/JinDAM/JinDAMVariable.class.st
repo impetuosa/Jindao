@@ -13,6 +13,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMVariable >> accept: aVisitor [  
+	^ aVisitor visitVariable: self.
+
+]
+
 { #category : #initialization }
 JinDAMVariable >> initialize [
 
@@ -31,6 +37,11 @@ JinDAMVariable >> instantiatesObjectOnDefinition: aBoolean [
 JinDAMVariable >> isConstant: aBoolean [
 
 	isConstant := aBoolean
+]
+
+{ #category : #testing }
+JinDAMVariable >> isVariable [
+	 ^ true 
 ]
 
 { #category : #accessing }

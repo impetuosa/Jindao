@@ -8,6 +8,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMTableField >> accept: aVisitor [  
+	^ aVisitor visitTableField: self.
+
+]
+
 { #category : #accessing }
 JinDAMTableField >> size: anInteger [ 
 	size := anInteger

@@ -7,6 +7,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMEnum >> accept: aVisitor [  
+	^ aVisitor visitEnum: self.
+
+]
+
 { #category : #adding }
 JinDAMEnum >> addEnumValue: aJinDAMEnumValue [
 

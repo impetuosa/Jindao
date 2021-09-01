@@ -18,6 +18,22 @@ JinDAMEntity >> anchor: jinAnchor [
 	anchor := jinAnchor
 ]
 
+{ #category : #accessing }
+JinDAMEntity >> isAccessModule [
+
+	^ false
+]
+
+{ #category : #testing }
+JinDAMEntity >> isAttributeGetter [
+	 ^ false 
+]
+
+{ #category : #testing }
+JinDAMEntity >> isInvocable [
+	 ^ false 
+]
+
 { #category : #testing }
 JinDAMEntity >> isReadAccess [
 	^ false 
@@ -30,6 +46,16 @@ JinDAMEntity >> isReference [
 
 { #category : #testing }
 JinDAMEntity >> isType [
+	^ false 
+]
+
+{ #category : #testing }
+JinDAMEntity >> isTypeReference [
+	^ false
+]
+
+{ #category : #testing }
+JinDAMEntity >> isVariable [
 	^ false 
 ]
 

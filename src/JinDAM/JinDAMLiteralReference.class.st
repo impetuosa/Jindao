@@ -9,6 +9,17 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JinDAMLiteralReference >> accept: aVisitor [  
+	^ aVisitor visitLiteralReference: self.
+
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMLiteralReference >> isLiteralReference [
+	^ true 
+]
+
+{ #category : #'as yet unclassified' }
 JinDAMLiteralReference >> literalKind [
 	^ literalKind 
 ]

@@ -8,10 +8,32 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMAttributeAccessor >> accept: aVisitor [  
+	^ aVisitor visitAttributeAccessor: self.
+
+]
+
+{ #category : #accessing }
+JinDAMAttributeAccessor >> attribute [
+	^ attribute
+]
+
 { #category : #accessing }
 JinDAMAttributeAccessor >> attribute: aJinDAMAttribute [
 
 	attribute := aJinDAMAttribute
+]
+
+{ #category : #accessing }
+JinDAMAttributeAccessor >> isAttributeGetter [
+	 ^ self isGet 
+]
+
+{ #category : #testing }
+JinDAMAttributeAccessor >> isGet [
+
+	^ kind asLowercase = #get
 ]
 
 { #category : #accessing }
@@ -45,4 +67,10 @@ JinDAMAttributeAccessor >> printOn: aStream [
 { #category : #accessing }
 JinDAMAttributeAccessor >> relatedSymbolKind [
 	^( #is, kind ) asSymbol 
+]
+
+{ #category : #accessing }
+JinDAMAttributeAccessor >> signature [
+
+	^ kind, ' ' , super signature
 ]

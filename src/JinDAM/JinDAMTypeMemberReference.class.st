@@ -4,6 +4,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMTypeMemberReference >> accept: aVisitor [
+
+	^ aVisitor visitTypeMemberReference: self
+]
+
 { #category : #adding }
 JinDAMTypeMemberReference >> addArgument: anArgument [ 
 	self assert: name isNil. 

@@ -4,6 +4,12 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMEvent >> accept: aVisitor [  
+	^ aVisitor visitEvent: self.
+
+]
+
 { #category : #accessing }
 JinDAMEvent >> printOn: aStream [
 
