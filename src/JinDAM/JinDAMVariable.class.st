@@ -27,10 +27,20 @@ JinDAMVariable >> initialize [
 	writes := OrderedCollection new
 ]
 
+{ #category : #'\\' }
+JinDAMVariable >> instantiatesObjectOnDefinition [
+	^ instantiatesObjectOnDefinition
+]
+
 { #category : #'as yet unclassified' }
 JinDAMVariable >> instantiatesObjectOnDefinition: aBoolean [
 
 	instantiatesObjectOnDefinition := aBoolean
+]
+
+{ #category : #accessing }
+JinDAMVariable >> isConstant [
+	^ isConstant
 ]
 
 { #category : #testing }

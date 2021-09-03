@@ -15,6 +15,11 @@ JinDAMExternalSubProcedure >> accept: aVisitor [
 
 ]
 
+{ #category : #accessing }
+JinDAMExternalSubProcedure >> alias [
+	 ^ alias 
+]
+
 { #category : #generated }
 JinDAMExternalSubProcedure >> alias: aString [
 

@@ -8,9 +8,9 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinDAMExpressionReference >> accept: aVisitor [  
-	^ aVisitor visitExpressionReference: self.
+JinDAMExpressionReference >> accept: aVisitor [
 
+	^ aVisitor visitExpressionReference: self
 ]
 
 { #category : #adding }

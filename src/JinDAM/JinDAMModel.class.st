@@ -13,6 +13,12 @@ JinDAMModel >> accept: anAlceJinDAMLoader [
 	^ anAlceJinDAMLoader visitModel: self
 ]
 
+{ #category : #'as yet unclassified' }
+JinDAMModel >> allButReferences [
+
+	^ entities reject: [ :e | e isKindOf: JinDAMReference ]
+]
+
 { #category : #accessing }
 JinDAMModel >> entities [
 	^ entities

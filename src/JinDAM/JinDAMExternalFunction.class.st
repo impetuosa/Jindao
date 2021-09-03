@@ -16,6 +16,11 @@ JinDAMExternalFunction >> accept: aVisitor [
 ]
 
 { #category : #generated }
+JinDAMExternalFunction >> alias [
+	^ realSelector ifNil: [ nil ] ifNotNil: [ selector  ]
+]
+
+{ #category : #generated }
 JinDAMExternalFunction >> alias: aString [ 
 	realSelector := selector.
 	selector := aString
@@ -57,6 +62,12 @@ JinDAMExternalFunction >> realSelector [
 JinDAMExternalFunction >> relatedSymbolKind [
 
 	^ JinNSKind externalFunction
+]
+
+{ #category : #accessing }
+JinDAMExternalFunction >> selector [
+
+	^ realSelector ifNil: [ selector ] ifNotNil: [ realSelector ]
 ]
 
 { #category : #accessing }

@@ -32,10 +32,20 @@ JinDAMAccessWrite >> hasReads [
 	^ readReference isEmptyOrNil not
 ]
 
+{ #category : #accessing }
+JinDAMAccessWrite >> isNewObject [
+	^ isNewObject
+]
+
 { #category : #testing }
 JinDAMAccessWrite >> isNewObject: aBoolean [
 
 	isNewObject := aBoolean
+]
+
+{ #category : #accessing }
+JinDAMAccessWrite >> isReturn [
+	^ isReturn
 ]
 
 { #category : #testing }

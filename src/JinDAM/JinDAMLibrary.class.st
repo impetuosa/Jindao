@@ -40,6 +40,11 @@ JinDAMLibrary >> invocables [
 	^ invocables ifNil: [ invocables := OrderedCollection new  ]
 ]
 
+{ #category : #accessing }
+JinDAMLibrary >> isBuiltIn [
+	^ isBuiltIn
+]
+
 { #category : #testing }
 JinDAMLibrary >> isBuiltIn: aBoolean [
 

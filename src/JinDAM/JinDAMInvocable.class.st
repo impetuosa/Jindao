@@ -82,3 +82,8 @@ JinDAMInvocable >> signature [
 										     ifNotNil: [ :t | t name ]) ]));
 			  nextPut: $) ]
 ]
+
+{ #category : #accessing }
+JinDAMInvocable >> visibility [
+	^ visibility 
+]

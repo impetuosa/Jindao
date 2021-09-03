@@ -15,6 +15,11 @@ JinDAMTableField >> accept: aVisitor [
 ]
 
 { #category : #accessing }
+JinDAMTableField >> size [
+ 	^ size 
+]
+
+{ #category : #accessing }
 JinDAMTableField >> size: anInteger [ 
 	size := anInteger
 ]

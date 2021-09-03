@@ -16,8 +16,8 @@ JinDAMMultipleTypeReference >> accept: aVisitor [
 
 { #category : #testing }
 JinDAMMultipleTypeReference >> candidate [
+
 	^ candidate 
-	 "self error: 'Use (s)'"
 ]
 
 { #category : #testing }
@@ -39,6 +39,12 @@ JinDAMMultipleTypeReference >> candidateAnchor: aCandidateAnchor [
 JinDAMMultipleTypeReference >> candidateAnchors: aCollection [
 
 	candidateAnchor := aCollection
+]
+
+{ #category : #testing }
+JinDAMMultipleTypeReference >> candidates [
+
+	^ candidate ifNil: [ "self error: 'Use (s)'" {  } ]
 ]
 
 { #category : #testing }
