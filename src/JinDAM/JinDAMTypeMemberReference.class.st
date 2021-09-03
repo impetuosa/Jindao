@@ -17,6 +17,11 @@ JinDAMTypeMemberReference >> addArgument: anArgument [
 ]
 
 { #category : #adding }
+JinDAMTypeMemberReference >> argument [
+	 ^ name 
+]
+
+{ #category : #adding }
 JinDAMTypeMemberReference >> context: aContext [
 
 	aContext candidate isNotNil

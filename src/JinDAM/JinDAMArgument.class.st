@@ -14,6 +14,11 @@ JinDAMArgument >> accept: aVisitor [
 
 ]
 
+{ #category : #accessing }
+JinDAMArgument >> accesses [
+	 ^ reads 
+]
+
 { #category : #adding }
 JinDAMArgument >> addAccess: aJinDAMAccessRead [
 

@@ -63,6 +63,12 @@ JinDAMMultipleTypeReference >> isTypeReference [
 	^ true
 ]
 
+{ #category : #'as yet unclassified' }
+JinDAMMultipleTypeReference >> isUnknownReference [
+
+	^ candidate isEmptyOrNil
+]
+
 { #category : #testing }
 JinDAMMultipleTypeReference >> name [
 	 ^ typeName 

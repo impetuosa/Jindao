@@ -30,6 +30,12 @@ JinDAMTypeReference >> isArray [
 	 ^ self dimensions > 0 
 ]
 
+{ #category : #testing }
+JinDAMTypeReference >> isNull [
+
+	^ typeName isNotNil and: [ typeName asLowercase = #null ]
+]
+
 { #category : #accessing }
 JinDAMTypeReference >> isTypeReference [
 	^ true
