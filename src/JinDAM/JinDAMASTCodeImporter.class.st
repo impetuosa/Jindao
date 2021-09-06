@@ -350,24 +350,10 @@ JinDAMASTCodeImporter >> visitEvent: anEvent [
 { #category : #assignments }
 JinDAMASTCodeImporter >> visitExplicitAssignement: anExplicitAssignement [
 
-	| access tempNames |
+	| access  |
 	access := self instantiate: JinDAMAccessWrite.
 
 	access anchor: (self codeAnchor: #write for: anExplicitAssignement).
-	"
-	tempNames := anExplicitAssignement left acceptVisitor:
-		             self referenceTaggedNameConverter.
-	anExplicitAssignement isReturn
-		ifFalse: [ 
-			write := self
-				         instantiateReferenceForNames: tempNames
-				         context: access
-				         preferring: { #isAttribute . #isSet . #isLet} ]
-		ifTrue: [ 
-			write := self
-				         instantiateReferenceForNames: tempNames
-				         context: access
-				         preferring: { #isInvocable } ]."
 
 	self state push: access.
 	access processingWrite.

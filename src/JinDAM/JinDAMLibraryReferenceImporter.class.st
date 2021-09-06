@@ -54,8 +54,7 @@ JinDAMLibraryReferenceImporter >> instantiateGetterAccessorMethod: aJinLibraryMe
 	selector := ('_' split: aJinLibraryMethod selector) last.
 	acc := self instantiate: JinDAMAttributeAccessor.
 	acc kind: #Get.
-
-
+	
 	acc selector: selector.
 	acc typeReference: (self heuristicaltypeName: aJinLibraryMethod context:acc ).
 
@@ -73,7 +72,6 @@ JinDAMLibraryReferenceImporter >> instantiateSetterAccessorMethod: aJinLibraryMe
 	selector := ('_' split: aJinLibraryMethod selector) last.
 	acc := self instantiate: JinDAMAttributeAccessor.
 	acc kind: #Set.
-
 
 	acc selector: selector.
 	acc typeReference: (self heuristicaltypeName: aJinLibraryMethod context: acc ).
