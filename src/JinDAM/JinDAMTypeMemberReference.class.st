@@ -28,7 +28,7 @@ JinDAMTypeMemberReference >> context: aContext [
 		ifTrue: [ self assert: aContext candidate isFormOrReport ]
 		ifFalse: [ 
 			self assert:
-				({ 'Report_'. 'Form_'. 'Databases' } anySatisfy: [ :s | 
+				({ 'Report_'. 'Form_'. 'Databases' . 'Workspaces'} anySatisfy: [ :s | 
 					 aContext typeName beginsWith: s ]) ].
 	super context: aContext
 ]
