@@ -565,16 +565,18 @@ JinDAMASTCodeImporter >> visitLiteral: aLiteral [
 JinDAMASTCodeImporter >> visitMemberAccess: aMemberAccess [
 
 	| names tip read |
-	names :=  aMemberAccess acceptVisitor: self referenceTaggedNameConverter.
+	names := aMemberAccess acceptVisitor:
+		         self referenceTaggedNameConverter.
 
 	read := self instantiate: JinDAMAccessRead.
 	tip := self
 		       instantiateReferenceForNames: names
 		       context: read
-		       preferring: { #isInvocable. #isAttribute. #isType }.
+		       preferring:
+		       { #isInvocable. #isAttribute. #isType. #isAssembly }.
 
 	read readReference: tip.
-	read anchor: (self codeAnchor: 'memberRead' for: aMemberAccess ).
+	read anchor: (self codeAnchor: 'memberRead' for: aMemberAccess).
 	self state top addAccess: read.
 	^ read
 ]
@@ -824,6 +826,12 @@ JinDAMASTCodeImporter >> visitSimpleIdentifier: aSimpleIdentifier [
 			ifFalse: [ self error: 'What is the symbol? ' ] ].
 
 	^ read
+]
+
+{ #category : #'member access' }
+JinDAMASTCodeImporter >> visitSquareBracketIdentifier: anIdentifier [
+
+	^ self visitSimpleIdentifier: anIdentifier
 ]
 
 { #category : #'functions - subs - events' }

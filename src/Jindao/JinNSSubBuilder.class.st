@@ -54,7 +54,6 @@ JinNSSubBuilder >> subbuildFor: project builder: aMainBuilder reference: aRefere
 { #category : #'as yet unclassified' }
 JinNSSubBuilder >> visitReference: aJinReference [
 
-
 	(self visitedReferences includes:
 		 aJinReference path fullName asLowercase) ifFalse: [ 
 		self visitedReferences add: aJinReference path fullName asLowercase.
@@ -77,8 +76,10 @@ JinNSSubBuilder >> visitReference: aJinReference [
 				aJinReference library acceptVisitor: self.
 				self popAssemblyFor: aJinReference ] ].
 
-	self currentAssemblyNamespace addFriend:
-		(self assemblyNamespaces detect: [ :a | a name = aJinReference name ])
+
+	self assemblyNamespaces
+		detect: [ :a | a name = aJinReference name ]
+		ifFound: [ :a | self currentAssemblyNamespace addFriend: a ]
 ]
 
 { #category : #'as yet unclassified' }
