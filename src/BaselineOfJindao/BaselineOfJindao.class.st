@@ -6,6 +6,7 @@ Class {
 
 { #category : #baselines }
 BaselineOfJindao >> baseline: spec [
+
 	<baseline>
 	spec
 		baseline: 'PharoWin32'
@@ -15,5 +16,6 @@ BaselineOfJindao >> baseline: spec [
 		with: [ spec repository: 'github://impetuosa/VBParser' ].
 	spec
 		package: 'Jindao'
-		with: [ spec requires: #(PharoWin32 VBParser) ]
+		with: [ spec requires: #( PharoWin32 VBParser ) ].
+	spec package: 'JinDAM' with: [ spec requires: 'Jindao' ]
 ]
