@@ -17,7 +17,7 @@ BaselineOfJindao >> baseline: spec [
 	spec
 		package: #Jindao
 		with: [ spec requires: #( PharoWin32 VBParser ) ].
-		
+
 	spec baseline: #PostgreSQLParser with: [ 
 		spec
 			repository: 'github://impetuosa/PostgreSQLParser/src';
