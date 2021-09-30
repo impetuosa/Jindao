@@ -213,10 +213,12 @@ JinNSAbstractBuilder >> visitReference: aJinReference [
 					owner: (self typeOwnerFor: aJinReference library).
 				aJinReference library acceptVisitor: self.
 				self popAssemblyFor: aJinReference ] ].
-		
-		
-	self currentAssemblyNamespace addFriend:
-		(self assemblyNamespaces detect: [ :a | a name = aJinReference name ])
+
+
+
+	self assemblyNamespaces
+		detect: [ :a | a name = aJinReference name ]
+		ifFound: [ :a | self currentAssemblyNamespace addFriend: a ]
 ]
 
 { #category : #visiting }
