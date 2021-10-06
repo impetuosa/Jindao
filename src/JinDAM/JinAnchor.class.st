@@ -163,7 +163,7 @@ JinAnchor >> projectSelector [
 JinAnchor >> readEntityFrom: aProject andCollect: aFullBlockClosure [
 
 	| val entity |
-	path size = 3 ifFalse: [ ^ nil ].
+	path size >= 3 ifFalse: [ ^ nil ].
 
 	entity := (aProject perform: self elementKind asSymbol) detect: [ :m | 
 		          m name = self elementName ].
