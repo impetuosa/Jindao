@@ -1,6 +1,6 @@
 Class {
 	#name : #JinDAMReport,
-	#superclass : #JinDAMClass,
+	#superclass : #JinDAMUIClass,
 	#category : #'JinDAM-Model'
 }
 
@@ -8,12 +8,6 @@ Class {
 JinDAMReport >> accept: aVisitor [  
 	^ aVisitor visitReport: self.
 
-]
-
-{ #category : #'as yet unclassified' }
-JinDAMReport >> isFormOrReport [
-
-	^ true
 ]
 
 { #category : #'as yet unclassified' }

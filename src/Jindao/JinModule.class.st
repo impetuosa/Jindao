@@ -72,6 +72,12 @@ JinModule >> save [
 	project save: self .
 ]
 
+{ #category : #'as yet unclassified' }
+JinModule >> sourceCode [
+
+	^ self code contents
+]
+
 { #category : #accessing }
 JinModule >> src [
 

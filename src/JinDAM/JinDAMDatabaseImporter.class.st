@@ -47,6 +47,11 @@ JinDAMDatabaseImporter >> visitQuery: aJinQuery [
 	tab name: aJinQuery name.
 	tab anchor: self state top anchor / #tables / aJinQuery name.
 	self state top addType: tab.
+	
+	
+	
+	self halt. 
+	tab src: aJinQuery sql.
 
 	aJinQuery fields do: [ :f | 
 		field := self instantiate: JinDAMTableField.

@@ -2,7 +2,8 @@ Class {
 	#name : #JinDAMQuery,
 	#superclass : #JinDAMDataSource,
 	#instVars : [
-		'tables'
+		'tables',
+		'isUnnamed'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -11,6 +12,11 @@ Class {
 JinDAMQuery >> accept: aVisitor [  
 	^ aVisitor visitQuery: self.
 
+]
+
+{ #category : #accessing }
+JinDAMQuery >> isUnnamed: aBool [
+	isUnnamed := aBool 
 ]
 
 { #category : #accessing }

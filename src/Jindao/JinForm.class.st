@@ -415,6 +415,14 @@ JinForm >> recordSourceFull [
 ]
 
 { #category : #'as yet unclassified' }
+JinForm >> sourceCode [
+
+	^ self hasModule
+		  ifFalse: [ '' ]
+		  ifTrue: [ self code contents ]
+]
+
+{ #category : #'as yet unclassified' }
 JinForm >> src [
 
 	^ src ifNil: [ 

@@ -1,6 +1,6 @@
 Class {
 	#name : #JinDAMForm,
-	#superclass : #JinDAMClass,
+	#superclass : #JinDAMUIClass,
 	#category : #'JinDAM-Model'
 }
 
@@ -8,12 +8,6 @@ Class {
 JinDAMForm >> accept: aVisitor [  
 	^ aVisitor visitForm: self.
 
-]
-
-{ #category : #accessing }
-JinDAMForm >> isFormOrReport [
-
-	^ true
 ]
 
 { #category : #accessing }

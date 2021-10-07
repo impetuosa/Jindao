@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'invocables',
 		'types',
-		'astCannotLoad'
+		'astCannotLoad',
+		'src'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -80,6 +81,12 @@ JinDAMModule >> invocables [
 JinDAMModule >> relatedSymbolKind [
 
 	^ JinNSKind module
+]
+
+{ #category : #testing }
+JinDAMModule >> src: aString [
+
+	src := aString
 ]
 
 { #category : #accessing }
