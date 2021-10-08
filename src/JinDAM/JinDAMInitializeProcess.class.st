@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #accessing }
+JinDAMInitializeProcess >> accept: aVisitor [  
+	^ aVisitor visiInitializeProcess: self.
+
+]
+
+{ #category : #accessing }
 JinDAMInitializeProcess >> initialize [
 	super initialize.
 	selector := '__INITIALIZE_WIDGET_FROM_UI_CONFIGURATION'

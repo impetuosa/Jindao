@@ -67,6 +67,7 @@ JinDAMImporter >> initialize [
 JinDAMImporter >> link: aJinDAMModel [
 
 	| references |
+	problematicRefs := nil. 
 	references := aJinDAMModel references.
 	artefacts := aJinDAMModel entities select: [ :e | 
 		             e isKindOf: JinDAMArtefact ].
@@ -131,7 +132,7 @@ JinDAMImporter >> linkReference: r in: aJinDAMModel [
 
 { #category : #'as yet unclassified' }
 JinDAMImporter >> problematicRefs [
-	self halt. 
+
 ^	problematicRefs ifNil: [ problematicRefs  := OrderedCollection new  ]
 ]
 

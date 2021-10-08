@@ -81,7 +81,8 @@ JinDAMAccessWrite >> processingWrite [
 { #category : #'as yet unclassified' }
 JinDAMAccessWrite >> readReferences [
 
-	^ readReference ifNil: [ readReference := OrderedCollection new ]
+	^ (readReference ifNil: [ readReference := OrderedCollection new ])
+		  asCollection
 ]
 
 { #category : #testing }

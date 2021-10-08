@@ -20,11 +20,6 @@ JinDAMTypeConversions >> nodeToTypeReferenceName: aVBNode context: aContext [
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMTypeConversions >> nodeToVariableReferenceName: aVBSimpleIdentifierNode context: aJinDAMAccessRead anchoringSymbol: aJinNSNameEntry [ 
-	self shouldBeImplemented.
-]
-
-{ #category : #'as yet unclassified' }
 JinDAMTypeConversions >> referenceNameConverter [
 
 	^ referenceNameConverter ifNil: [ 

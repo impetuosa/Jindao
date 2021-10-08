@@ -83,6 +83,11 @@ JinDAMModule >> relatedSymbolKind [
 	^ JinNSKind module
 ]
 
+{ #category : #accessing }
+JinDAMModule >> src [
+	^ src
+]
+
 { #category : #testing }
 JinDAMModule >> src: aString [
 
