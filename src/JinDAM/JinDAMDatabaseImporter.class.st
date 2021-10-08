@@ -50,7 +50,7 @@ JinDAMDatabaseImporter >> visitQuery: aJinQuery [
 	
 	
 	
-	self halt. 
+
 	tab src: aJinQuery sql.
 
 	aJinQuery fields do: [ :f | 

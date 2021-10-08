@@ -20,10 +20,10 @@ JinAnchor class >> on: aString [
 
 { #category : #arithmetic }
 JinAnchor >> / aString [
-	| new |
+	| new fragment |
 	new := self class new.
-	
-	new privateSetPath: path / aString adaptToAlceAnchorPathFragment  . 
+	fragment := self scapeSlash: (aString adaptToAlceAnchorPathFragment) .
+	new privateSetPath: path / fragment. 
 	^ new 
 ]
 
@@ -49,7 +49,7 @@ JinAnchor >> containsSource [
 JinAnchor >> elementKind [
 
 	self ensureWellformed.
-	^ path at: 2
+	^ self fragmentAt: 2
 ]
 
 { #category : #enumerating }
@@ -63,21 +63,17 @@ JinAnchor >> elementNSKind [
 JinAnchor >> elementName [
 
 	self ensureWellformed.
-	^ path at: 3
+	^ self fragmentAt: 3
 ]
 
 { #category : #enumerating }
 JinAnchor >> elementProject [
 
 	| pieces |
-	pieces := '.' split: (path at: 1).
+	pieces := '.' split: (self fragmentAt: 1).
 	^ pieces size > 1
 		  ifTrue: [ pieces first ]
-		  ifFalse: [ path at: 1 ]
-]
-
-{ #category : #enumerating }
-JinAnchor >> elements [
+		  ifFalse: [ self fragmentAt: 1 ]
 ]
 
 { #category : #enumerating }
@@ -86,15 +82,14 @@ JinAnchor >> elementsNameKindNamePairs [
 	| limit |
 	limit := path segments indexOf: '@src'.
 	limit := limit = 0
-		         ifTrue: [ path size ]
+		         ifTrue: [ self size ]
 		         ifFalse: [ limit - 1 ].
 
 
 	^ (2 to: limit by: 2) collect: [ :a | 
-		{ 
-			(path at: a + 1).
-			(path at: a) asSymbol  } ].
-		
+		  { 
+			  (self fragmentAt: a + 1).
+			  (self fragmentAt: a) asSymbol } ]
 ]
 
 { #category : #enumerating }
@@ -103,24 +98,31 @@ JinAnchor >> elementsNameKindPairs [
 	| limit |
 	limit := path segments indexOf: '@src'.
 	limit := limit = 0
-		         ifTrue: [ path size ]
+		         ifTrue: [ self size ]
 		         ifFalse: [ limit - 1 ].
 
 
 	^ (2 to: limit by: 2) collect: [ :a | 
-		{ 
-			(path at: a + 1).
-			JinNSKind perform: (path at: a) asSymbol  } ].
-		
+		  { 
+			  (self fragmentAt: a + 1).
+			  (JinNSKind perform: (self fragmentAt: a) asSymbol) } ]
 ]
 
 { #category : #enumerating }
 JinAnchor >> ensureWellformed [
 
-	path size > 1 ifTrue: [ 
+	self size > 1 ifTrue: [ 
 		self assert:
-			({ 'modules'. 'forms'. 'reports'. 'table'. 'query'. 'references'. 'primitiveType'.  'enum'. 'function' . 'classAlias' .  'module' .'form'. 'report'. 'tables' .
-			 'classModule'. 'globalVariable' } includes: (path at: 2)) ] 
+			({ 'modules'. 'forms'. 'reports'. 'table'. 'query'. 'references'.
+			 'primitiveType'. 'enum'. 'function'. 'classAlias'. 'module'.
+			 'form'. 'report'. 'tables'. 'classModule'. 'globalVariable' } 
+				 includes: (self fragmentAt: 2)) ]
+]
+
+{ #category : #enumerating }
+JinAnchor >> fragmentAt: aNumber [
+
+	^ self unscapeSlash: (path at: aNumber)
 ]
 
 { #category : #arithmetic }
@@ -156,14 +158,14 @@ JinAnchor >> privateSetPath: aPath [
 { #category : #'as yet unclassified' }
 JinAnchor >> projectSelector [
 
-	^ path at: 1
+	^ self fragmentAt: 1
 ]
 
 { #category : #enumerating }
 JinAnchor >> readEntityFrom: aProject andCollect: aFullBlockClosure [
 
 	| val entity |
-	path size >= 3 ifFalse: [ ^ nil ].
+	self size >= 3 ifFalse: [ ^ nil ].
 
 	entity := (aProject perform: self elementKind asSymbol) detect: [ :m | 
 		          m name = self elementName ].
@@ -172,15 +174,16 @@ JinAnchor >> readEntityFrom: aProject andCollect: aFullBlockClosure [
 	^ val
 ]
 
-{ #category : #resolving }
-JinAnchor >> resolve: aProject [
-	self shouldBeImplemented
+{ #category : #arithmetic }
+JinAnchor >> scapeSlash: fragment [
+
+	^ fragment copyReplaceAll: '/' with: '^'
 ]
 
 { #category : #'as yet unclassified' }
 JinAnchor >> secondElementKind [
 
-	^ path at: 4
+	^ self fragmentAt: 4
 ]
 
 { #category : #'as yet unclassified' }
@@ -193,7 +196,12 @@ JinAnchor >> secondElementNSKind [
 JinAnchor >> secondElementName [
 
 	self ensureWellformed.
-	^ path at: 5
+	^ self fragmentAt: 5
+]
+
+{ #category : #enumerating }
+JinAnchor >> size [ 
+	 ^ path size 
 ]
 
 { #category : #'as yet unclassified' }
@@ -209,5 +217,12 @@ JinAnchor >> srcFrom [
 { #category : #'as yet unclassified' }
 JinAnchor >> srcTo [
 
-	^ (path segments reverse at: (path segments reverse  indexOf: #to) - 1) asNumber
+	^ (path segments reverse at: (path segments reverse indexOf: #to) - 1)
+		  asNumber
+]
+
+{ #category : #arithmetic }
+JinAnchor >> unscapeSlash: fragment [
+
+	^ fragment copyReplaceAll: '^' with: '/'
 ]

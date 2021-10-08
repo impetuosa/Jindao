@@ -50,6 +50,15 @@ JinControl >> controlName [
 	^ handle propertyNamed: #ControlName
 ]
 
+{ #category : #'property - generated' }
+JinControl >> controlSource [
+
+	^ handle getDispatchType properties
+		  detect: [ :e | e name = #ControlSource ]
+		  ifFound: [ handle propertyNamed: #ControlSource ]
+		  ifNone: [ nil ]
+]
+
 { #category : #'as yet unclassified' }
 JinControl >> controlTypeNumber [
 	^ handle propertyNamed: #ControlType

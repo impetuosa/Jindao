@@ -27,6 +27,11 @@ JinDAMInvocable >> initialize [
 	parameters := OrderedCollection new . 
 ]
 
+{ #category : #testing }
+JinDAMInvocable >> isInitializer [
+	^ false 
+]
+
 { #category : #accessing }
 JinDAMInvocable >> isInvocable [ 
 	^ true 

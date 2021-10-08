@@ -131,6 +131,7 @@ JinDAMImporter >> linkReference: r in: aJinDAMModel [
 
 { #category : #'as yet unclassified' }
 JinDAMImporter >> problematicRefs [
+	self halt. 
 ^	problematicRefs ifNil: [ problematicRefs  := OrderedCollection new  ]
 ]
 

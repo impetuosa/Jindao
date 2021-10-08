@@ -28,7 +28,6 @@ JinDAMCodeImporter >> avoidingEntities [
 { #category : #'visit-first-objects' }
 JinDAMCodeImporter >> visitFormModule: anObject [
 
-	
 	super visitModule: anObject
 ]
 
@@ -41,14 +40,14 @@ JinDAMCodeImporter >> visitMacro: aMacro [
 JinDAMCodeImporter >> visitModule: anObject [
 
 	| obj |
+	
+
 	obj := anObject isClassModule
 		       ifTrue: [ self instantiate: JinDAMClass ]
 		       ifFalse: [ self instantiate: JinDAMModule ].
 	self state top addType: obj.
 	obj name: anObject name.
 	obj anchor: self state top anchor / #modules / anObject name.
-
-
 
 	self state push: obj.
 

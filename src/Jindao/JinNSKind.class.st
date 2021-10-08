@@ -397,7 +397,7 @@ JinNSKind >> isPrimitiveType [
 
 { #category : #testing }
 JinNSKind >> isQuery [
-	^ kind = #query
+	^ kind = #query or: [ self isTable ]
 ]
 
 { #category : #testing }
