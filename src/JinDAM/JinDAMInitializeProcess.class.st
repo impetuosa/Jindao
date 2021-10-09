@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 JinDAMInitializeProcess >> accept: aVisitor [  
-	^ aVisitor visiInitializeProcess: self.
+	^ aVisitor visitInitializeProcess: self.
 
 ]
 

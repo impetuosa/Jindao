@@ -273,16 +273,26 @@ content := 'Attribute VB_Name = "{1}"
 { #category : #'as yet unclassified' }
 JinAccessProject >> ensureIsOpen [
 
-	programHandle isNull ifTrue: [ 
-		forms := nil.
-		modules := nil.
-		macros := nil.
-		reports := nil.
-		relations := nil.
-		queries := nil.
-		tables := nil.
-		dataHandle := nil.
-		self reopen ]
+	(programHandle isNil or: [ programHandle isNull ])
+		ifTrue: [ 
+			forms := nil.
+			modules := nil.
+			macros := nil.
+			reports := nil.
+			relations := nil.
+			queries := nil.
+			tables := nil.
+			dataHandle := nil.
+			self reopen ]
+		ifFalse: [ 
+			[ programHandle propertyNamed: #ProjectType ]
+				on: Win32Error
+				do: [ :e | 
+					e isError0x80020009
+						ifTrue: [ 
+							programHandle := nil.
+							self ensureIsOpen ]
+						ifFalse: [ e signal ] ] ]
 ]
 
 { #category : #'as yet unclassified' }

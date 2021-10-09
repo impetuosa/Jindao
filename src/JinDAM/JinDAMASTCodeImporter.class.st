@@ -636,21 +636,16 @@ JinDAMASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 		/ aModulePropertyGet stopPosition asString.
 
 
-
-
-
 	"Obtain property name from the body of the accessor "
 	acc kind = #Get
 		ifTrue: [ 
 			aModulePropertyGet type ifNotNil: [ 
-				acc typeReference: (self typeName: aModulePropertyGet type context: acc).
+				acc typeReference:
+					(self typeName: aModulePropertyGet type context: acc).
 				acc typeAnchor: self state top anchor / #accessors
-					/ acc typeReference adaptToAlceAnchorPathFragment  / #'@src'
+					/ acc typeReference adaptToAlceAnchorPathFragment / #'@src'
 					/ aModulePropertyGet type startPosition asString / #to
 					/ aModulePropertyGet type stopPosition asString ].
-
-
-
 			statement := (aModulePropertyGet block statements select: [ :s | 
 				              { 
 					              VBExplicitAssignementNode.
@@ -680,6 +675,7 @@ JinDAMASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 				 ifNone: [ nil ] ]).
 	self state push: acc.
 	aModulePropertyGet parameters acceptVisitor: self.
+	aModulePropertyGet block acceptVisitor: self.
 	self state pop
 ]
 
