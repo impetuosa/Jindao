@@ -52,5 +52,10 @@ JinQuery >> privateLoadBodyObject [
 
 { #category : #'as yet unclassified' }
 JinQuery >> sql [
-	^ self body sql 
+
+	^ [ self body sql ]
+		  on: Win32Error
+		  do: [ :e | 
+
+			  ^ '' ]
 ]

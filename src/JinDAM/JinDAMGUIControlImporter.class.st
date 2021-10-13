@@ -57,7 +57,7 @@ JinDAMGUIControlImporter >> createInitializerForControl: aJinDAMAttribute with: 
 																 value.
 																 #member } }
 													 context: initializer
-													 preferring: { #isAttribute }).
+													 preferring: { #isAttribute . #isQuery }).
 
 
 											initializer addAccess: access ] ] ] ] ] ] ]
@@ -74,14 +74,9 @@ JinDAMGUIControlImporter >> visitFormControl: anObject [
 	| attribute |
 	attribute := self instantiate: JinDAMAttribute.
 
-	self createInitializerForControl: attribute with: anObject.
-
-	anObject controlSource ifNotNil: [  ].
-	"	frm dataSource: (self
-			 typeReferenceName: source name
-			 typeSymbol: (self currentNamespace findSymbol: source name)
-			 context: frm).
-"
+	[ self createInitializerForControl: attribute with: anObject ]
+		on: Error
+		do: [ :e | e passIfNotError0x80020009 ].
 
 	attribute visibility: #Public.
 	attribute name: anObject name.
