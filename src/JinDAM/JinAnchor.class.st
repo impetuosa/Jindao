@@ -140,6 +140,15 @@ JinAnchor >> hash [
 	^ path hash
 ]
 
+{ #category : #generated }
+JinAnchor >> names [
+
+	self containsSource ifTrue: [ 
+		^ (1 to: (path segments indexOf: '@src') by: 2) collect: [ :i | 
+			  path at: i ] ].
+	^ (1 to: path segments size by: 2) collect: [ :i | path at: i ]
+]
+
 { #category : #accessing }
 JinAnchor >> path [
 	^ path
