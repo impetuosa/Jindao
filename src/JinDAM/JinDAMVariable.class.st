@@ -8,7 +8,8 @@ Class {
 		'writes',
 		'isConstant',
 		'instantiatesObjectOnDefinition',
-		'redimText'
+		'redimText',
+		'initializer'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -25,6 +26,17 @@ JinDAMVariable >> initialize [
 	super initialize.
 	reads := OrderedCollection new.
 	writes := OrderedCollection new
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMVariable >> initializer [
+
+	^ initializer
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMVariable >> initializer: aStatement [
+	 initializer := aStatement 
 ]
 
 { #category : #'\\' }

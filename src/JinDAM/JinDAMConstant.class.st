@@ -1,9 +1,6 @@
 Class {
 	#name : #JinDAMConstant,
 	#superclass : #JinDAMVariable,
-	#instVars : [
-		'value'
-	],
 	#category : #'JinDAM-Model'
 }
 
@@ -16,17 +13,17 @@ JinDAMConstant >> accept: aVisitor [
 { #category : #adding }
 JinDAMConstant >> addAccess: aJinDAMAccessRead [
 
-	value ifNil: [ 
-		value := aJinDAMAccessRead.
+	initializer ifNil: [ 
+		initializer := aJinDAMAccessRead.
 		^ self ].
-	value isCollection ifFalse: [ 
-		value := OrderedCollection new
-			         add: value;
-			         yourself ].
-	value add: aJinDAMAccessRead 
+	initializer isCollection ifFalse: [ 
+		initializer := OrderedCollection new
+			               add: initializer;
+			               yourself ].
+	initializer add: aJinDAMAccessRead
 ]
 
 { #category : #adding }
 JinDAMConstant >> value [ 
-	 ^ value 
+	 ^ initializer 
 ]

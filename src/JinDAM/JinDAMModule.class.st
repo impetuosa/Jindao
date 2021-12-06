@@ -5,7 +5,10 @@ Class {
 		'invocables',
 		'types',
 		'astCannotLoad',
-		'src'
+		'src',
+		'optionExplicit',
+		'compareDatabase',
+		'accesses'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -14,6 +17,18 @@ Class {
 JinDAMModule >> accept: aVisitor [  
 	^ aVisitor visitModule: self.
 
+]
+
+{ #category : #accessing }
+JinDAMModule >> accesses [
+
+	^ accesses ifNil: [ accesses := OrderedCollection new ]
+]
+
+{ #category : #adding }
+JinDAMModule >> addAccess: aJinDAMAccessRead [
+
+	self accesses add: aJinDAMAccessRead
 ]
 
 { #category : #accessing }
@@ -35,6 +50,12 @@ JinDAMModule >> astCannotLoad [
 JinDAMModule >> astCannotLoad: aBoolean [
 
 	astCannotLoad := aBoolean
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMModule >> compareDatabase: aBoolean [
+
+	compareDatabase := aBoolean
 ]
 
 { #category : #testing }
@@ -75,6 +96,12 @@ JinDAMModule >> initialize [
 { #category : #accessing }
 JinDAMModule >> invocables [
 	^ invocables
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMModule >> optionExplicit: aBoolean [
+
+	optionExplicit := aBoolean
 ]
 
 { #category : #accessing }

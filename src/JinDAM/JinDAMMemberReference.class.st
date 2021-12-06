@@ -3,7 +3,8 @@ Class {
 	#superclass : #JinDAMReference,
 	#instVars : [
 		'name',
-		'arguments'
+		'arguments',
+		'realArguments'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -90,6 +91,12 @@ JinDAMMemberReference >> printOn: aStream [
 	aStream
 		nextPutAll: (',' join: (arguments collect: [ :a | a printString ]));
 		nextPut: $)
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMMemberReference >> realArguments: aCollection [
+
+	realArguments := aCollection
 ]
 
 { #category : #accessing }

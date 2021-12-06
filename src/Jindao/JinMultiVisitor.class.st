@@ -67,7 +67,7 @@ JinMultiVisitor >> visitAccessProperty: anAccessProperty [
 { #category : #'visit-first-objects' }
 JinMultiVisitor >> visitCollection: aCollection [
 
-	aCollection do: [ :element | element acceptVisitor: self ]
+	^ aCollection collect: [ :element | element acceptVisitor: self ]
 ]
 
 { #category : #'delegate to subvisitor' }

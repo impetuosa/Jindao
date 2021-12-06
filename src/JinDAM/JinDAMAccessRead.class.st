@@ -52,6 +52,12 @@ JinDAMAccessRead >> readReference: aJinDAMVariableReference [
 	readReference := aJinDAMVariableReference.
 ]
 
+{ #category : #'as yet unclassified' }
+JinDAMAccessRead >> realArguments: aCollection [
+
+	readReference realArguments: aCollection
+]
+
 { #category : #accessing }
 JinDAMAccessRead >> references [
 	^ readReference references 

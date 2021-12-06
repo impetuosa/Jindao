@@ -3,7 +3,8 @@ Class {
 	#superclass : #JinDAMInvocable,
 	#instVars : [
 		'localVariables',
-		'accesses'
+		'accesses',
+		'block'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -29,6 +30,11 @@ JinDAMBehavioural >> addAccess: aJinDAMAccessRead [
 JinDAMBehavioural >> addLocalVariable: aJinDAMLocalVariable [
 
 	self localVariables add: aJinDAMLocalVariable
+]
+
+{ #category : #generated }
+JinDAMBehavioural >> block: aJinDAMBlock [ 
+	block := aJinDAMBlock 
 ]
 
 { #category : #testing }

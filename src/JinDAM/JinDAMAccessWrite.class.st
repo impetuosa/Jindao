@@ -5,7 +5,9 @@ Class {
 		'writeReference',
 		'isReturn',
 		'isNewObject',
-		'processing'
+		'processing',
+		'assignedTo',
+		'valueToAssign'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -24,6 +26,11 @@ JinDAMAccessWrite >> addAccess: aJinDAMAccessRead [
 	processing = #read ifTrue: [ 
 		^ self readReferences add: aJinDAMAccessRead ].
 	self error: ' asd '
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMAccessWrite >> assignedTo: aJinDAMAccessRead [ 
+	assignedTo := aJinDAMAccessRead 
 ]
 
 { #category : #testing }
@@ -89,6 +96,12 @@ JinDAMAccessWrite >> readReferences [
 JinDAMAccessWrite >> references [
 
 	^ readReference flatCollect: [ :r | r references ]
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMAccessWrite >> valueToAssign: aJinDAMAccessRead [
+
+	valueToAssign := aJinDAMAccessRead
 ]
 
 { #category : #accessing }

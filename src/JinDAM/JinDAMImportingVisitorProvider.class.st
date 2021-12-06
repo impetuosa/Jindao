@@ -64,6 +64,11 @@ JinDAMImportingVisitorProvider >> importAccessReferences [
 ]
 
 { #category : #configuration }
+JinDAMImportingVisitorProvider >> importAllSyntacticElements [
+	syntaxVisitor := JinDAMFullASTCodeImporter
+]
+
+{ #category : #configuration }
 JinDAMImportingVisitorProvider >> importCodeElements [
 	codeVisitor := JinDAMCodeImporter
 ]

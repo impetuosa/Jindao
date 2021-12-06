@@ -687,17 +687,17 @@ JinDAMASTCodeImporter >> visitNull: aLiteral [
 
 { #category : #'avoiding visit' }
 JinDAMASTCodeImporter >> visitOnErrorGoTo: aStatement [
-	
+
 ]
 
 { #category : #'avoiding visit' }
 JinDAMASTCodeImporter >> visitOnErrorResumeNext: aStatement [
-	
+
 ]
 
 { #category : #'avoiding visit' }
 JinDAMASTCodeImporter >> visitOnExpressionGo: aStatement [
-	
+
 ]
 
 { #category : #'functions - subs - events' }
@@ -783,17 +783,17 @@ JinDAMASTCodeImporter >> visitReDimVariable: aReDimVariable [
 
 { #category : #'avoiding visit' }
 JinDAMASTCodeImporter >> visitResumeEmpty: aStatement [
-	
+
 ]
 
 { #category : #'avoiding visit' }
 JinDAMASTCodeImporter >> visitResumeLabel: aResomeNext [ 	
-	
+
 ]
 
 { #category : #'avoiding visit' }
 JinDAMASTCodeImporter >> visitResumeNext: aResomeNext [ 	
-	
+
 ]
 
 { #category : #'member access' }
