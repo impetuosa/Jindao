@@ -28,6 +28,11 @@ JinDAMAccessWrite >> addAccess: aJinDAMAccessRead [
 	self error: ' asd '
 ]
 
+{ #category : #accessing }
+JinDAMAccessWrite >> assignedTo [
+	^ assignedTo
+]
+
 { #category : #'as yet unclassified' }
 JinDAMAccessWrite >> assignedTo: aJinDAMAccessRead [ 
 	assignedTo := aJinDAMAccessRead 
@@ -96,6 +101,11 @@ JinDAMAccessWrite >> readReferences [
 JinDAMAccessWrite >> references [
 
 	^ readReference flatCollect: [ :r | r references ]
+]
+
+{ #category : #accessing }
+JinDAMAccessWrite >> valueToAssign [
+	^ valueToAssign
 ]
 
 { #category : #'as yet unclassified' }

@@ -130,6 +130,11 @@ JinDAMImporter >> linkReference: r in: aJinDAMModel [
 					e } ]
 ]
 
+{ #category : #accessing }
+JinDAMImporter >> model [
+	^ importer model 
+]
+
 { #category : #'as yet unclassified' }
 JinDAMImporter >> problematicRefs [
 

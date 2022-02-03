@@ -32,6 +32,16 @@ JinDAMBehavioural >> addLocalVariable: aJinDAMLocalVariable [
 	self localVariables add: aJinDAMLocalVariable
 ]
 
+{ #category : #accessing }
+JinDAMBehavioural >> ast [
+	self shouldBeImplemented.
+]
+
+{ #category : #accessing }
+JinDAMBehavioural >> block [
+	^ block
+]
+
 { #category : #generated }
 JinDAMBehavioural >> block: aJinDAMBlock [ 
 	block := aJinDAMBlock 

@@ -7,6 +7,11 @@ Class {
 	#category : #'JinDAM-Model'
 }
 
+{ #category : #visiting }
+JinDAMEntity >> acceptVisitor: aMOAlceModelReader [ 
+	^ self accept:aMOAlceModelReader
+]
+
 { #category : #accessing }
 JinDAMEntity >> anchor [
 	^ anchor
@@ -57,6 +62,11 @@ JinDAMEntity >> isTypeReference [
 { #category : #testing }
 JinDAMEntity >> isVariable [
 	^ false 
+]
+
+{ #category : #accessing }
+JinDAMEntity >> language [
+	^ MOLanguage microsoftAccessForAlceModel: nil
 ]
 
 { #category : #'as yet unclassified' }
