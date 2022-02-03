@@ -2,10 +2,26 @@ Class {
 	#name : #JinDAMModel,
 	#superclass : #Object,
 	#instVars : [
-		'entities'
+		'entities',
+		'anchor',
+		'language'
+	],
+	#classInstVars : [
+		'northwind'
 	],
 	#category : #'JinDAM-Model'
 }
+
+{ #category : #accessing }
+JinDAMModel class >> northwind [
+	^ northwind
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMModel class >> northwind: aJinDAMModel [
+
+	northwind := aJinDAMModel
+]
 
 { #category : #visiting }
 JinDAMModel >> accept: anAlceJinDAMLoader [
@@ -20,8 +36,28 @@ JinDAMModel >> allButReferences [
 ]
 
 { #category : #accessing }
+JinDAMModel >> anchor [
+
+	^ anchor ifNil: [ anchor := JinAnchor on: #/ ]
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMModel >> derivative [
+
+	^ MOModelDerivative new
+		  model: self;
+		  yourself
+]
+
+{ #category : #accessing }
 JinDAMModel >> entities [
 	^ entities
+]
+
+{ #category : #testing }
+JinDAMModel >> includes: anEntity [
+
+	^ entities includes: anEntity
 ]
 
 { #category : #'instance creation' }
@@ -43,6 +79,19 @@ JinDAMModel >> instantiate: aClass [
 { #category : #testing }
 JinDAMModel >> isTypeReference [
 	^ false
+]
+
+{ #category : #accessing }
+JinDAMModel >> language [
+
+	^ language ifNil: [ 
+		  language := MOLanguage microsoftAccessForAlceModel: self ]
+]
+
+{ #category : #accessing }
+JinDAMModel >> name [
+
+	^ #jindam
 ]
 
 { #category : #accessing }

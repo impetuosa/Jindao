@@ -154,6 +154,12 @@ JinAnchor >> path [
 	^ path
 ]
 
+{ #category : #'as yet unclassified' }
+JinAnchor >> pathIsNotSet [
+
+	^ false
+]
+
 { #category : #arithmetic }
 JinAnchor >> privateGetPath [
 	^ path
