@@ -14,6 +14,11 @@ JinDAMOnError >> accept: anAlceJinDAMPhase1Loader [
 ]
 
 { #category : #accessing }
+JinDAMOnError >> do [
+	^ do
+]
+
+{ #category : #accessing }
 JinDAMOnError >> do: aJinDAMGoTo [ 
 	do := aJinDAMGoTo
 ]

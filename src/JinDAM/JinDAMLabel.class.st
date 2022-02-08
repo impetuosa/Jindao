@@ -10,9 +10,12 @@ Class {
 { #category : #visiting }
 JinDAMLabel >> accept: anAlceJinDAMPhase1Loader [
 
-	" nothing to do "
+	^ anAlceJinDAMPhase1Loader visitLabel: self
+]
 
-	
+{ #category : #accessing }
+JinDAMLabel >> labelName [
+	^ labelName
 ]
 
 { #category : #accessing }
