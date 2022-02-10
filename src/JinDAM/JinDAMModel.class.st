@@ -4,8 +4,22 @@ Class {
 	#instVars : [
 		'entities'
 	],
+	#classInstVars : [
+		'northwind'
+	],
 	#category : #'JinDAM-Model'
 }
+
+{ #category : #accessing }
+JinDAMModel class >> northwind [
+	^ northwind
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMModel class >> northwind: aJinDAMModel [
+
+	northwind := aJinDAMModel
+]
 
 { #category : #visiting }
 JinDAMModel >> accept: anAlceJinDAMLoader [
