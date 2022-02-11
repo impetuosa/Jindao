@@ -95,7 +95,7 @@ JinDAMFullASTCodeImporter >> registerSpecialVariable: aName type: aType [
 { #category : #generated }
 JinDAMFullASTCodeImporter >> visitArgument: anArgument [
 
-	| arg |
+	| arg expression |
 	"	EL ARGUMENTO SE ESTA TRATANDO DE AGREGAR A OTRO ARGUMENTO POR UQE NO ESTOY MANEJANDO BIEN EL TYPEOF (TYPEOF ES VISITADO COMO NODO A PARTE,PERO DEBIERA PRODUCIR UNA LLAMADA A FUNCION)"
 	self assert: (self state top isReference or: [ 
 			 self state top isKindOf: JinDAMAccessRead ]).
@@ -106,8 +106,11 @@ JinDAMFullASTCodeImporter >> visitArgument: anArgument [
 	arg anchor: (self codeAnchor: #argument for: anArgument).
 	self state top addArgument: arg.
 	self state push: arg.
-	anArgument value acceptVisitor: self.
+	expression := anArgument value acceptVisitor: self.
 	self state pop.
+	arg reads size = 1 ifFalse: [ 
+		(expression isKindOf: JinDAMBinaryOperation) ifFalse: [ self halt ] ].
+	arg expression: expression.
 	^ arg
 ]
 
@@ -621,15 +624,17 @@ JinDAMFullASTCodeImporter >> visitImplements: anImplements [
 JinDAMFullASTCodeImporter >> visitImplicitParenthesesLessCall: anImplicitParenthesesLessCall [
 
 	| element args |
+
 	element := anImplicitParenthesesLessCall selector acceptVisitor: self.
 
 	" Element should be either an access or an invocation. both cases it may have arguments (either for invocation or array access). "
 
 	" Can we visit the arguments? we may need to add them as arguments int o the element."
 	self state push: element.
+	args := anImplicitParenthesesLessCall arguments acceptVisitor: self.
+	self assert: args = element readReference arguments.
 
-	element realArguments:
-		(anImplicitParenthesesLessCall arguments acceptVisitor: self).
+
 	self state pop.
 	^ element
 ]

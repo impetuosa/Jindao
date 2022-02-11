@@ -93,12 +93,6 @@ JinDAMMemberReference >> printOn: aStream [
 		nextPut: $)
 ]
 
-{ #category : #'as yet unclassified' }
-JinDAMMemberReference >> realArguments: aCollection [
-
-	realArguments := aCollection
-]
-
 { #category : #accessing }
 JinDAMMemberReference >> selector [ 
 	 ^ name 
