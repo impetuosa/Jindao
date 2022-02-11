@@ -25,6 +25,12 @@ JinDAMArgument >> addAccess: aJinDAMAccessRead [
 	self reads add: aJinDAMAccessRead
 ]
 
+{ #category : #generated }
+JinDAMArgument >> expression: aJinDAMBinaryOperation [
+
+	expression := aJinDAMBinaryOperation
+]
+
 { #category : #adding }
 JinDAMArgument >> printOn: aStream [
 
