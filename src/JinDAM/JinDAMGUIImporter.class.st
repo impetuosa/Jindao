@@ -49,8 +49,6 @@ JinDAMGUIImporter >> visitForm: anObject [
 
 	self createInitializerForFormOrReport: frm with: anObject.
 
-
-
 	self state top addType: frm.
 	self state push: frm.
 	super visitForm: anObject.

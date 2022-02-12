@@ -2,9 +2,7 @@ Class {
 	#name : #JinDAMModel,
 	#superclass : #Object,
 	#instVars : [
-		'entities',
-		'anchor',
-		'language'
+		'entities'
 	],
 	#classInstVars : [
 		'northwind'

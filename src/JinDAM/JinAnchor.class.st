@@ -140,6 +140,12 @@ JinAnchor >> hash [
 	^ path hash
 ]
 
+{ #category : #'as yet unclassified' }
+JinAnchor >> isLibraryAnchor [
+
+	^ (path at: 2) beginsWith: #reference
+]
+
 { #category : #arithmetic }
 JinAnchor >> isMOObject [
 
