@@ -140,6 +140,12 @@ JinAnchor >> hash [
 	^ path hash
 ]
 
+{ #category : #arithmetic }
+JinAnchor >> isMOObject [
+
+	^ true
+]
+
 { #category : #generated }
 JinAnchor >> names [
 

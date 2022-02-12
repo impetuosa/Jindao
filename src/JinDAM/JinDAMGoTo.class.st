@@ -14,6 +14,11 @@ JinDAMGoTo >> accept: anAlceJinDAMPhase1Loader [
 ]
 
 { #category : #accessing }
+JinDAMGoTo >> labels [
+	^ labels
+]
+
+{ #category : #accessing }
 JinDAMGoTo >> labels: aCollection [ 
 	labels := aCollection
 ]
