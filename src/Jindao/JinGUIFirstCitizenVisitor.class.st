@@ -31,8 +31,9 @@ JinGUIFirstCitizenVisitor >> visitCommandButton: aJinControlCommandButton [
 
 { #category : #'entry-point' }
 JinGUIFirstCitizenVisitor >> visitForm: aJinForm [
-	aJinForm hasModule
-		ifTrue: [ aJinForm module acceptVisitor: self ].
+
+	aJinForm hasModule ifTrue: [ aJinForm module acceptVisitor: self ].
+	self visitCollection: aJinForm properties.
 	self visitCollection: aJinForm controls
 ]
 
@@ -68,8 +69,9 @@ JinGUIFirstCitizenVisitor >> visitRectangle: aJinControlRectangle [
 
 { #category : #'entry-point' }
 JinGUIFirstCitizenVisitor >> visitReport: aJinReport [
-	aJinReport hasModule
-		ifTrue: [ aJinReport module acceptVisitor: self ].
+
+	aJinReport hasModule ifTrue: [ aJinReport module acceptVisitor: self ].
+
 	self visitCollection: aJinReport controls
 ]
 

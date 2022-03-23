@@ -2,7 +2,8 @@ Class {
 	#name : #JinDAMUIClass,
 	#superclass : #JinDAMClass,
 	#instVars : [
-		'dataSource'
+		'dataSource',
+		'defaultInstance'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -16,6 +17,12 @@ JinDAMUIClass >> dataSource [
 JinDAMUIClass >> dataSource: aSource [
 
 	dataSource := aSource
+]
+
+{ #category : #accessing }
+JinDAMUIClass >> defaultInstance [
+
+	^ defaultInstance ifNil: [ defaultInstance := JinDAMObject new ]
 ]
 
 { #category : #'as yet unclassified' }

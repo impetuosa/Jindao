@@ -35,6 +35,12 @@ JinDAMGUIImporter >> createInitializerForFormOrReport: frm with: anObject [
 		frm addInvocable: initializer ]
 ]
 
+{ #category : #initialization }
+JinDAMGUIImporter >> setUpObject: aJinDAMObject with: aCollection [
+
+	aCollection do: [ :a | aJinDAMObject propertyEntryFor: a ]
+]
+
 { #category : #'entry-point' }
 JinDAMGUIImporter >> visitForm: anObject [
 
@@ -47,10 +53,14 @@ JinDAMGUIImporter >> visitForm: anObject [
 	frm name: 'Form_' , anObject name.
 	frm anchor: self state top anchor / #forms / anObject name.
 
-	self createInitializerForFormOrReport: frm with: anObject.
-
 	self state top addType: frm.
 	self state push: frm.
+	frm defaultInstance type: frm.
+	self
+		setUpObject: frm defaultInstance
+		with: anObject documentedProperties.
+
+
 	super visitForm: anObject.
 	anObject ensureUnload.
 	self state pop
@@ -61,9 +71,6 @@ JinDAMGUIImporter >> visitReport: anObject [
 
 	| rpt |
 	rpt := self instantiate: JinDAMReport.
-
-
-
 	rpt superClassReference: (self
 			 typeReferenceName: 'Report'
 			 typeSymbol: (self currentNamespace findSymbol: #Report)
@@ -72,12 +79,14 @@ JinDAMGUIImporter >> visitReport: anObject [
 	rpt name: 'Report_' , anObject name.
 	rpt anchor: self state top anchor / #reports / anObject name.
 
-	self createInitializerForFormOrReport: rpt with: anObject.
-
-
 	self state top addType: rpt.
 	self state push: rpt.
+	rpt defaultInstance type: rpt.
+	self
+		setUpObject: rpt defaultInstance
+		with: anObject documentedProperties  .
 	super visitReport: anObject.
+
 	anObject ensureUnload.
 	self state pop
 ]

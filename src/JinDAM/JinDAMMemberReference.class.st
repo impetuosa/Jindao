@@ -3,8 +3,7 @@ Class {
 	#superclass : #JinDAMReference,
 	#instVars : [
 		'name',
-		'arguments',
-		'realArguments'
+		'arguments'
 	],
 	#category : #'JinDAM-Model'
 }
