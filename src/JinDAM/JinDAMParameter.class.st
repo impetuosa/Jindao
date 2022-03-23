@@ -23,3 +23,8 @@ JinDAMParameter >> isOptional: aBoolean [
 
 	isOptional := aBoolean
 ]
+
+{ #category : #accessing }
+JinDAMParameter >> redimText [
+	^ redimText 
+]

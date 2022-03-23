@@ -14,6 +14,11 @@ JinDAMNewExpression >> accept: anAlceJinDAMPhase1Loader [
 ]
 
 { #category : #accessing }
+JinDAMNewExpression >> typeReference [
+	^ typeReference
+]
+
+{ #category : #accessing }
 JinDAMNewExpression >> typeReference: aJinDAMAccessRead [ 
 	typeReference := aJinDAMAccessRead
 ]

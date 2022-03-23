@@ -29,6 +29,11 @@ JinDAMEntity >> isAccessModule [
 	^ false
 ]
 
+{ #category : #accessing }
+JinDAMEntity >> isArtefact [ 
+ 	 ^ false 
+]
+
 { #category : #testing }
 JinDAMEntity >> isAttributeGetter [
 	 ^ false 

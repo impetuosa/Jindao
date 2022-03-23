@@ -16,13 +16,28 @@ JinDAMUnaryOperation >> accept: anAlceJinDAMPhase1Loader [
 ]
 
 { #category : #accessing }
+JinDAMUnaryOperation >> operand [
+	^ operand
+]
+
+{ #category : #accessing }
 JinDAMUnaryOperation >> operand: aCollection [ 
 	operand := aCollection
 ]
 
 { #category : #accessing }
+JinDAMUnaryOperation >> operator [
+	^ operator
+]
+
+{ #category : #accessing }
 JinDAMUnaryOperation >> operator: aString [ 
 	operator := aString
+]
+
+{ #category : #accessing }
+JinDAMUnaryOperation >> order [
+	^ order
 ]
 
 { #category : #initialization }

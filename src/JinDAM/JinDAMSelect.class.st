@@ -15,8 +15,18 @@ JinDAMSelect >> accept: anAlceJinDAMPhase1Loader [
 ]
 
 { #category : #accessing }
+JinDAMSelect >> cases [
+	^ cases
+]
+
+{ #category : #accessing }
 JinDAMSelect >> cases: aCollection [ 
 	cases := aCollection
+]
+
+{ #category : #accessing }
+JinDAMSelect >> expression [
+	^ expression
 ]
 
 { #category : #accessing }

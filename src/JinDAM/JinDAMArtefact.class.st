@@ -39,6 +39,11 @@ JinDAMArtefact >> initialize [
 ]
 
 { #category : #accessing }
+JinDAMArtefact >> isArtefact [ 
+ 	 ^ true 
+]
+
+{ #category : #accessing }
 JinDAMArtefact >> name [
 	^ name
 ]

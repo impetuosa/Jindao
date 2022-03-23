@@ -15,8 +15,23 @@ JinDAMCase >> accept: anAlceJinDAMPhase1Loader [
 ]
 
 { #category : #accessing }
+JinDAMCase >> block [
+	^ block
+]
+
+{ #category : #accessing }
 JinDAMCase >> block: aJinDAMBlock [ 
 	block := aJinDAMBlock
+]
+
+{ #category : #generated }
+JinDAMCase >> expression [
+	self shouldBeImplemented.
+]
+
+{ #category : #accessing }
+JinDAMCase >> expressions [
+	^ expressions
 ]
 
 { #category : #generated }

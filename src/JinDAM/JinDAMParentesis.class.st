@@ -14,6 +14,11 @@ JinDAMParentesis >> accept: anAlceJinDAMPhase1Loader [
 ]
 
 { #category : #accessing }
+JinDAMParentesis >> expression [
+	^ expression
+]
+
+{ #category : #accessing }
 JinDAMParentesis >> expression: aJinDAMBinaryOperation [ 
 	expression := aJinDAMBinaryOperation
 ]

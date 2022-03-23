@@ -15,8 +15,18 @@ JinDAMWith >> accept: anAlceJinDAMPhase1Loader [
 ]
 
 { #category : #accessing }
+JinDAMWith >> block [
+	^ block
+]
+
+{ #category : #accessing }
 JinDAMWith >> block: aJinDAMBlock [ 
 	block := aJinDAMBlock
+]
+
+{ #category : #accessing }
+JinDAMWith >> with [
+	^ with
 ]
 
 { #category : #accessing }

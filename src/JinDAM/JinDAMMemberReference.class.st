@@ -72,6 +72,11 @@ JinDAMMemberReference >> isVariableReference [
 ]
 
 { #category : #accessing }
+JinDAMMemberReference >> kindAccess [
+	^ kindAccess 
+]
+
+{ #category : #accessing }
 JinDAMMemberReference >> name [ 
 	 ^ name 
 ]

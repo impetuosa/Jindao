@@ -2,7 +2,9 @@ Class {
 	#name : #JinDAMModel,
 	#superclass : #Object,
 	#instVars : [
-		'entities'
+		'entities',
+		'language',
+		'anchor'
 	],
 	#classInstVars : [
 		'northwind'
@@ -15,16 +17,22 @@ JinDAMModel class >> northwind [
 	^ northwind
 ]
 
-{ #category : #'as yet unclassified' }
-JinDAMModel class >> northwind: aJinDAMModel [
-
-	northwind := aJinDAMModel
-]
-
 { #category : #visiting }
 JinDAMModel >> accept: anAlceJinDAMLoader [
 
 	^ anAlceJinDAMLoader visitModel: self
+]
+
+{ #category : #visiting }
+JinDAMModel >> acceptVisitor: aMOJinDAMModelReader [
+
+	^ aMOJinDAMModelReader visitModel: self
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMModel >> accessModulesAndLibraries [
+
+	^ entities select: [ :a | a isArtefact ]
 ]
 
 { #category : #'as yet unclassified' }

@@ -9,8 +9,18 @@ Class {
 }
 
 { #category : #accessing }
+JinDAMLoop >> block [
+	^ block
+]
+
+{ #category : #accessing }
 JinDAMLoop >> block: aJinDAMBlock [ 
 	block := aJinDAMBlock
+]
+
+{ #category : #accessing }
+JinDAMLoop >> condition [
+	^ condition
 ]
 
 { #category : #accessing }
