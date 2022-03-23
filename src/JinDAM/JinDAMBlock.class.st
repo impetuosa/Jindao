@@ -20,6 +20,11 @@ JinDAMBlock >> initialize [
 ]
 
 { #category : #accessing }
+JinDAMBlock >> statements [
+	^ statements
+]
+
+{ #category : #accessing }
 JinDAMBlock >> statements: aCollection [ 
 	statements := aCollection
 ]

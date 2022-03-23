@@ -16,13 +16,28 @@ JinDAMIf >> accept: anAlceJinDAMPhase1Loader [
 ]
 
 { #category : #accessing }
+JinDAMIf >> condition [
+	^ condition
+]
+
+{ #category : #accessing }
 JinDAMIf >> condition: aJinDAMUnaryOperation [ 
 	condition := aJinDAMUnaryOperation
 ]
 
 { #category : #accessing }
+JinDAMIf >> ifFalse [
+	^ ifFalse
+]
+
+{ #category : #accessing }
 JinDAMIf >> ifFalse: aJinDAMBlock [ 
 	ifFalse := aJinDAMBlock
+]
+
+{ #category : #accessing }
+JinDAMIf >> ifTrue [
+	^ ifTrue
 ]
 
 { #category : #accessing }

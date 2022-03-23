@@ -34,8 +34,28 @@ JinDAMModel >> allButReferences [
 ]
 
 { #category : #accessing }
+JinDAMModel >> anchor [
+
+	^ anchor ifNil: [ anchor := JinAnchor on: #/ ]
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMModel >> derivative [
+
+	^ MOModelDerivative new
+		  model: self;
+		  yourself
+]
+
+{ #category : #accessing }
 JinDAMModel >> entities [
 	^ entities
+]
+
+{ #category : #testing }
+JinDAMModel >> includes: anEntity [
+
+	^ entities includes: anEntity
 ]
 
 { #category : #'instance creation' }
@@ -57,6 +77,19 @@ JinDAMModel >> instantiate: aClass [
 { #category : #testing }
 JinDAMModel >> isTypeReference [
 	^ false
+]
+
+{ #category : #accessing }
+JinDAMModel >> language [
+
+	^ language ifNil: [ 
+		  language := MOLanguage microsoftAccessForAlceModel: self ]
+]
+
+{ #category : #accessing }
+JinDAMModel >> name [
+
+	^ #jindam
 ]
 
 { #category : #accessing }

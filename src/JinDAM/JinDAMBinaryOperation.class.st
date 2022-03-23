@@ -16,14 +16,29 @@ JinDAMBinaryOperation >> accept: anAlceJinDAMPhase1Loader [
 ]
 
 { #category : #accessing }
+JinDAMBinaryOperation >> left [
+	^ left
+]
+
+{ #category : #accessing }
 JinDAMBinaryOperation >> left: aJinDAMAccessRead [ 
 	left := aJinDAMAccessRead
+]
+
+{ #category : #accessing }
+JinDAMBinaryOperation >> operator [
+	^ operator
 ]
 
 { #category : #generated }
 JinDAMBinaryOperation >> operator: aString [
 
 	operator := aString asSymbol
+]
+
+{ #category : #accessing }
+JinDAMBinaryOperation >> right [
+	^ right
 ]
 
 { #category : #accessing }

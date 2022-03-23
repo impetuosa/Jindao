@@ -98,6 +98,11 @@ JinDAMVariable >> redim: aString [
 	redimText := aString 
 ]
 
+{ #category : #'as yet unclassified' }
+JinDAMVariable >> redimText [
+	^ redimText
+]
+
 { #category : #generated }
 JinDAMVariable >> type [
 	 ^ typeReference candidate 
