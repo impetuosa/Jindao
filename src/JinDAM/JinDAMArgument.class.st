@@ -3,7 +3,8 @@ Class {
 	#superclass : #JinDAMEntity,
 	#instVars : [
 		'reads',
-		'text'
+		'text',
+		'expression'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -27,7 +28,6 @@ JinDAMArgument >> addAccess: aJinDAMAccessRead [
 
 { #category : #generated }
 JinDAMArgument >> expression: aJinDAMBinaryOperation [
-
 	expression := aJinDAMBinaryOperation
 ]
 

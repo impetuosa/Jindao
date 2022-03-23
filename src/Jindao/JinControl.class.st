@@ -36,7 +36,9 @@ JinControl >> close [
 
 { #category : #'as yet unclassified' }
 JinControl >> componentKnownProperties [
+
 	^ self class componentKnownProperties
+	  , { 'LayoutID'. 'Section'. 'LayoutName' }
 ]
 
 { #category : #'as yet unclassified' }

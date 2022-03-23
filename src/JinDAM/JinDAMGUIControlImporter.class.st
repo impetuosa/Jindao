@@ -68,10 +68,21 @@ JinDAMGUIControlImporter >> nodeToTypeReferenceName: aVBNode context: aContext [
 	^ self referenceNameConverter toTypeReferenceName: aVBNode context: aContext 
 ]
 
+{ #category : #initialization }
+JinDAMGUIControlImporter >> setUpObject: aJinDAMObject with: aCollection [
+
+	aCollection do: [ :a | aJinDAMObject propertyEntryFor: a ]
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMGUIControlImporter >> visitAccessProperty: anAccessProperty [
+	^self halt. 
+]
+
 { #category : #'entry-point' }
 JinDAMGUIControlImporter >> visitFormControl: anObject [
 
-	| attribute |
+	| attribute instance |
 	attribute := self instantiate: JinDAMAttribute.
 
 	[ self createInitializerForControl: attribute with: anObject ]
@@ -87,5 +98,8 @@ JinDAMGUIControlImporter >> visitFormControl: anObject [
 					 #member } }
 			 context: attribute
 			 preferring: { #isType }).
-	self state top addAttribute: attribute
+	self state top addAttribute: attribute.
+
+	instance := self state top defaultInstance objectEntryFor: attribute.
+	self setUpObject: instance with: anObject documentedProperties
 ]

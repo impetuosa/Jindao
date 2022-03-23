@@ -5,7 +5,8 @@ Class {
 	#name : #JinForm,
 	#superclass : #JinVBObject,
 	#instVars : [
-		'src'
+		'src',
+		'documentedProperties'
 	],
 	#category : #'Jindao-Core'
 }
@@ -311,6 +312,18 @@ JinForm >> createControl: aName type: aTypeNumber section: aSection parent: aPar
 { #category : #'as yet unclassified' }
 JinForm >> description [
 	^ description
+]
+
+{ #category : #'as yet unclassified' }
+JinForm >> documentedProperties [
+
+	^ documentedProperties ifNil: [ 
+		  documentedProperties := self componentKnownProperties collect: [ 
+			                          :p | 
+			                          JinAccessFormFastProperty new
+				                          accessObject: self body ;
+				                          name: p;
+				                          yourself ] ]
 ]
 
 { #category : #'as yet unclassified' }
