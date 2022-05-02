@@ -17,6 +17,11 @@ JinDAMModel class >> northwind [
 	^ northwind
 ]
 
+{ #category : #accessing }
+JinDAMModel class >> northwind: aJinDAMModel [ 
+	northwind := aJinDAMModel
+]
+
 { #category : #visiting }
 JinDAMModel >> accept: anAlceJinDAMLoader [
 
@@ -103,4 +108,10 @@ JinDAMModel >> name [
 { #category : #accessing }
 JinDAMModel >> references [
 	^ entities select: [ :e | e isKindOf: JinDAMReference  ]
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMModel >> tableRelations [
+
+	^ entities select: [ :a | a isKindOf: JinDAMTableRelation ]
 ]

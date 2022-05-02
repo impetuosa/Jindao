@@ -1,6 +1,9 @@
 Class {
 	#name : #JinDAMTable,
 	#superclass : #JinDAMDataSource,
+	#instVars : [
+		'indexes'
+	],
 	#category : #'JinDAM-Model'
 }
 
@@ -8,6 +11,16 @@ Class {
 JinDAMTable >> accept: aVisitor [  
 	^ aVisitor visitTable: self.
 
+]
+
+{ #category : #accessing }
+JinDAMTable >> indexes [
+	^ indexes
+]
+
+{ #category : #accessing }
+JinDAMTable >> indexes: aCollection [ 
+	indexes := aCollection
 ]
 
 { #category : #accessing }

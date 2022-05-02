@@ -71,6 +71,7 @@ JinDAMDatabaseImporter >> visitQuery: aJinQuery [
 JinDAMDatabaseImporter >> visitTable: aJinTable [
 
 	| tab field |
+
 	tab := self instantiate: JinDAMTable.
 	tab superClassReference: (self
 			 typeReferenceName: 'TableDefs'
@@ -91,6 +92,11 @@ JinDAMDatabaseImporter >> visitTable: aJinTable [
 				 typeSymbol: (self currentNamespace findSymbol: f typeName)
 				 context: field).
 		tab addAttribute: field ].
+
+	tab indexes: (aJinTable indexes collect: [ :a | 
+			 a name -> (a fields collect: [ :f | 
+				  tab attributes detect: [ :tf | tf name = f name ] ]) ]).
+
 	aJinTable ensureUnload
 ]
 
@@ -98,6 +104,7 @@ JinDAMDatabaseImporter >> visitTable: aJinTable [
 JinDAMDatabaseImporter >> visitTableRelation: aJinTableRelation [
 
 	| relation |
+
 	relation := self instantiate: JinDAMTableRelation.
 	relation sourceTable: aJinTableRelation tableName.
 	relation foreignTable: aJinTableRelation foreignTableName.
