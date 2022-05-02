@@ -84,6 +84,11 @@ JinDAMAccessModule >> relatedSymbolKind [
 ]
 
 { #category : #'as yet unclassified' }
+JinDAMAccessModule >> tableRelations [
+	self shouldBeImplemented.
+]
+
+{ #category : #'as yet unclassified' }
 JinDAMAccessModule >> vbaLang [
 	 ^ self dependencies detect: [  :d |  d name = 'VBALang' ]
 ]

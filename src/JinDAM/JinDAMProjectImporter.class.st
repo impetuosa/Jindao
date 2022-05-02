@@ -96,7 +96,12 @@ JinDAMProjectImporter >> visitProject: aJinAccessProject [
 		ifAbsentPut: [ self state top ].
 
 
-
+		self visitCollection: [aJinAccessProject tables] from: aJinAccessProject.
+	self phaseFinished.
+	self visitCollection: [aJinAccessProject queries] from: aJinAccessProject.
+	self phaseFinished.
+	self visitCollection: [aJinAccessProject relations] from: aJinAccessProject.
+	self phaseFinished.
 self visitCollection: [aJinAccessProject modules] from: aJinAccessProject.
 self phaseFinished.
 	self visitCollection: [aJinAccessProject reports] from: aJinAccessProject.
@@ -109,12 +114,7 @@ self phaseFinished.
 	
 
 	
-	self visitCollection: [aJinAccessProject tables] from: aJinAccessProject.
-	self phaseFinished.
-	self visitCollection: [aJinAccessProject queries] from: aJinAccessProject.
-	self phaseFinished.
-	self visitCollection: [aJinAccessProject relations] from: aJinAccessProject.
-	self phaseFinished.
+
 	"self visitCollection: [aJinAccessProject macros] from: aJinAccessProject.
 self phaseFinished."
 

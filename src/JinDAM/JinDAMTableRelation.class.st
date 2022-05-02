@@ -24,6 +24,11 @@ JinDAMTableRelation >> addMatch: aString to: aString2 [
 ]
 
 { #category : #accessing }
+JinDAMTableRelation >> foreignTable [
+	^ foreignTable
+]
+
+{ #category : #accessing }
 JinDAMTableRelation >> foreignTable: aString [ 
 	foreignTable := aString
 ]
@@ -35,6 +40,11 @@ JinDAMTableRelation >> initialize [
 	matches := OrderedCollection new
 ]
 
+{ #category : #accessing }
+JinDAMTableRelation >> matches [
+	^ matches
+]
+
 { #category : #initialization }
 JinDAMTableRelation >> printOn: aStream [
 
@@ -44,6 +54,11 @@ JinDAMTableRelation >> printOn: aStream [
 		nextPutAll: '=>';
 		nextPutAll: foreignTable;
 		nextPut: $)
+]
+
+{ #category : #accessing }
+JinDAMTableRelation >> sourceTable [
+	^ sourceTable
 ]
 
 { #category : #accessing }
