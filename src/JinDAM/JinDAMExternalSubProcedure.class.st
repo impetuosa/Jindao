@@ -57,9 +57,20 @@ JinDAMExternalSubProcedure >> printOn: aStream [
 ]
 
 { #category : #accessing }
+JinDAMExternalSubProcedure >> realSelector [
+	^ selector 
+]
+
+{ #category : #accessing }
 JinDAMExternalSubProcedure >> relatedSymbolKind [
 
 	^ JinNSKind externalSub
+]
+
+{ #category : #accessing }
+JinDAMExternalSubProcedure >> selector [
+
+	^ alias ifNil: [ selector ] ifNotNil: [ alias ]
 ]
 
 { #category : #accessing }
