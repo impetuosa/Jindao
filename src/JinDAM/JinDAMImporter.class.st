@@ -26,6 +26,23 @@ JinDAMImporter class >> egrc: aJinDAMModel [
 ]
 
 { #category : #accessing }
+JinDAMImporter class >> importerForAlcix [
+
+	| importer |
+	importer := JinDAMImporter new.
+	importer provider
+		importAccessReferences;
+		importDatabase;
+		importProjectElements;
+		importGUIElements;
+		importGUIControlElementsNoObjectProperties;
+		importCodeElements;
+		importSyntacticElements;
+		importLibraryReferences.
+	^ importer
+]
+
+{ #category : #accessing }
 JinDAMImporter class >> importerForMoxing [
 
 	| importer |
