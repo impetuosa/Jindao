@@ -26,6 +26,23 @@ JinDAMImporter class >> egrc: aJinDAMModel [
 ]
 
 { #category : #accessing }
+JinDAMImporter class >> importerForMoxing [
+
+	| importer |
+	importer := JinDAMImporter new.
+	importer provider
+		importAccessReferences;
+		importDatabase;
+		importProjectElements;
+		importGUIElements;
+		importGUIControlElements;
+		importCodeElements;
+		importAllSyntacticElements;
+		importLibraryReferences.
+	^ importer
+]
+
+{ #category : #accessing }
 JinDAMImporter >> createDefaultVisitor [
 	^ importer := provider build
 ]
