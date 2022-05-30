@@ -137,7 +137,10 @@ JinAccessApplication >> close: aName type: aTypeNumber save: aBool [
 
 { #category : #initialization }
 JinAccessApplication >> closeProject: aProject [
-	self handle dispatch: 'CloseCurrentDatabase' withArguments: {}
+
+	[ self handle dispatch: 'CloseCurrentDatabase' withArguments: {  } ]
+		on: Error
+		do: [ :e | Warning signal: e messageText ]
 ]
 
 { #category : #convenience }
@@ -548,8 +551,12 @@ JinAccessApplication >> openedTableHandles [
 
 { #category : #'as yet unclassified' }
 JinAccessApplication >> quit [
+
+	[ 
 	[ handle dispatch: #Quit ]
-		ensure: [ handle := nil ]
+		on: Error
+		do: [ :e | Warning signal: e messageText ] ] ensure: [ 
+		handle := nil ]
 ]
 
 { #category : #accessing }

@@ -168,8 +168,8 @@ JinNSAbstractBuilder >> visitModule: aJinModule [
 
 { #category : #visiting }
 JinNSAbstractBuilder >> visitProject: aJinAccessProject [
-
-self visitCollection: [aJinAccessProject references] from: aJinAccessProject.
+ 
+   self visitCollection: [aJinAccessProject references] from: aJinAccessProject.
 	self visitCollection: [aJinAccessProject modules] from: aJinAccessProject.
 	
 	

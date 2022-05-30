@@ -51,15 +51,18 @@ JinNSBuilder >> assemblyNamespaces [
 
 { #category : #initialization }
 JinNSBuilder >> buildFor: anAccessProject [
-	stack push: (self newExternalNamespaceFor: anAccessProject).
-	stack push: (self
-			 newAssemblyNamespace: anAccessProject
-			 owner: (self typeOwnerFor: anAccessProject)).
-	visitedReferences add: anAccessProject path fullName asLowercase.
-	anAccessProject acceptVisitor: self.
 
-	self joinFutures.
-	self checkTasksSanity.
+	(self visitedReferences includes:
+		 anAccessProject path fullName asLowercase) ifFalse: [ 
+		stack push: (self newExternalNamespaceFor: anAccessProject).
+		stack push: (self
+				 newAssemblyNamespace: anAccessProject
+				 owner: (self typeOwnerFor: anAccessProject)).
+		visitedReferences add: anAccessProject path fullName asLowercase.
+		anAccessProject acceptVisitor: self.
+
+		self joinFutures.
+		self checkTasksSanity ].
 	^ JinNSSymbolTable new
 		  external: externalNamespaces;
 		  assembly: assemblyNamespaces;

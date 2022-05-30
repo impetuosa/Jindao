@@ -8,8 +8,22 @@ Class {
 		'problematicRefs',
 		'artefacts'
 	],
+	#classInstVars : [
+		'egrc'
+	],
 	#category : #'JinDAM-Importers'
 }
+
+{ #category : #accessing }
+JinDAMImporter class >> egrc [
+	^ egrc
+]
+
+{ #category : #accessing }
+JinDAMImporter class >> egrc: aJinDAMModel [
+
+	egrc := aJinDAMModel
+]
 
 { #category : #accessing }
 JinDAMImporter >> createDefaultVisitor [

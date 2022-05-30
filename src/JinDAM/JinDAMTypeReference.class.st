@@ -9,9 +9,9 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-JinDAMTypeReference >> accept: aVisitor [  
-	^ aVisitor visitTypeReference: self.
+JinDAMTypeReference >> accept: aVisitor [
 
+	^ aVisitor visitTypeReference: self
 ]
 
 { #category : #testing }

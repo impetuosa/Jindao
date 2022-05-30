@@ -16,13 +16,28 @@ JinDAMForNext >> accept: anAlceJinDAMPhase1Loader [
 ]
 
 { #category : #accessing }
+JinDAMForNext >> counter [
+	^ counter
+]
+
+{ #category : #accessing }
 JinDAMForNext >> counter: aJinDAMAccessRead [ 
 	counter := aJinDAMAccessRead
 ]
 
 { #category : #accessing }
+JinDAMForNext >> initialValue [
+	^ initialValue
+]
+
+{ #category : #accessing }
 JinDAMForNext >> initialValue: aJinDAMAccessRead [ 
 	initialValue := aJinDAMAccessRead
+]
+
+{ #category : #accessing }
+JinDAMForNext >> limit [
+	^ limit
 ]
 
 { #category : #accessing }

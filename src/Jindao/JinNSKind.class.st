@@ -471,3 +471,12 @@ JinNSKind >> printOn: aStream [
 		nextPutAll: 'NSKind:';
 		nextPutAll: kind
 ]
+
+{ #category : #visiting }
+JinNSKind >> visitControls: aJinCachedEntityCollection for: aJinNSEntryOwner [
+
+	self currentNamespace
+		registerAll: aJinCachedEntityCollection allNames 
+		kind: JinNSKind typeProperty
+		owner: aJinNSEntryOwner
+]

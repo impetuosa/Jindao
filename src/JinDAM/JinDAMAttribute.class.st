@@ -3,7 +3,8 @@ Class {
 	#superclass : #JinDAMVariable,
 	#instVars : [
 		'visibility',
-		'accessors'
+		'accessors',
+		'isStatic'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -28,6 +29,12 @@ JinDAMAttribute >> addAttributeAccessor: aJinDAMAttributeAccessor [
 JinDAMAttribute >> attributeAccessors [
 
 	^ accessors
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMAttribute >> isStatic: aBool [
+
+	isStatic := aBool
 ]
 
 { #category : #accessing }
