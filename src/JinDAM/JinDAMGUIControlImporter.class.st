@@ -74,11 +74,6 @@ JinDAMGUIControlImporter >> setUpObject: aJinDAMObject with: aCollection [
 	aCollection do: [ :a | aJinDAMObject propertyEntryFor: a ]
 ]
 
-{ #category : #'as yet unclassified' }
-JinDAMGUIControlImporter >> visitAccessProperty: anAccessProperty [
-	^self halt. 
-]
-
 { #category : #'entry-point' }
 JinDAMGUIControlImporter >> visitFormControl: anObject [
 
