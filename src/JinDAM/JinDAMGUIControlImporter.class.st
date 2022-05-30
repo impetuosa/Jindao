@@ -3,9 +3,6 @@ Class {
 	#superclass : #JinGUIControlVisitor,
 	#traits : 'JinDAMTypeConversions',
 	#classTraits : 'JinDAMTypeConversions classTrait',
-	#instVars : [
-		'loadObjectProperties'
-	],
 	#category : #'JinDAM-Importers'
 }
 
@@ -66,26 +63,6 @@ JinDAMGUIControlImporter >> createInitializerForControl: aJinDAMAttribute with: 
 											initializer addAccess: access ] ] ] ] ] ] ]
 ]
 
-{ #category : #initialization }
-JinDAMGUIControlImporter >> doLoadObjectProperties [
-
-	loadObjectProperties := true
-]
-
-{ #category : #initialization }
-JinDAMGUIControlImporter >> doNotLoadObjectProperties [
-
-	loadObjectProperties := false
-]
-
-{ #category : #initialization }
-JinDAMGUIControlImporter >> initialize [
-
-	super initialize.
-	loadObjectProperties := true.
-	
-]
-
 { #category : #'as yet unclassified' }
 JinDAMGUIControlImporter >> nodeToTypeReferenceName: aVBNode context: aContext [ 
 	^ self referenceNameConverter toTypeReferenceName: aVBNode context: aContext 
@@ -95,11 +72,6 @@ JinDAMGUIControlImporter >> nodeToTypeReferenceName: aVBNode context: aContext [
 JinDAMGUIControlImporter >> setUpObject: aJinDAMObject with: aCollection [
 
 	aCollection do: [ :a | aJinDAMObject propertyEntryFor: a ]
-]
-
-{ #category : #'as yet unclassified' }
-JinDAMGUIControlImporter >> visitAccessProperty: anAccessProperty [
-	^self halt. 
 ]
 
 { #category : #'entry-point' }

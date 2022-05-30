@@ -81,7 +81,14 @@ JinDAMImportingVisitorProvider >> importDatabase [
 
 { #category : #configuration }
 JinDAMImportingVisitorProvider >> importGUIControlElements [
-	controlVisitor := JinDAMGUIControlImporter
+
+	 controlVisitor := JinDAMGUIControlImporter
+]
+
+{ #category : #configuration }
+JinDAMImportingVisitorProvider >> importGUIControlElementsNoObjectProperties [ 
+
+	 controlVisitor := JinDAMGUIControlImporterNoObjectProperties 
 ]
 
 { #category : #configuration }
