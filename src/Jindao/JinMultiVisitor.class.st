@@ -5,6 +5,15 @@ Class {
 }
 
 { #category : #'part visitor' }
+JinMultiVisitor >> choose: symbols accordingToOrderedRules: rules [
+
+	rules do: [ :r | 
+		(symbols select: [ :s | s kind perform: r ]) ifNotEmpty: [ :col | 
+			^ col ] ].
+	self halt
+]
+
+{ #category : #'part visitor' }
 JinMultiVisitor >> code [
 	^ self subclassResponsibility
 ]

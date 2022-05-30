@@ -10,6 +10,21 @@ Class {
 	#category : #'JinDAM-Importers'
 }
 
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> acceptVisitor: aMOJinDAMImporter [
+
+	^ aMOJinDAMImporter visitJinDAMFullASTCodeImporter: self
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMFullASTCodeImporter >> choose: symbols accordingToOrderedRules: rules [
+
+	rules do: [ :r | 
+		(symbols select: [ :s | s kind perform: r ]) ifNotEmpty: [ :col | 
+			^ col ] ].
+	self halt
+]
+
 { #category : #anchor }
 JinDAMFullASTCodeImporter >> codeAnchor: aString for: aVBModulePropertyNode [
 
@@ -109,7 +124,10 @@ JinDAMFullASTCodeImporter >> visitArgument: anArgument [
 	expression := anArgument value acceptVisitor: self.
 	self state pop.
 	arg reads size = 1 ifFalse: [ 
-		(expression isKindOf: JinDAMBinaryOperation) ifFalse: [ self halt ] ].
+		((expression isKindOf: JinDAMBinaryOperation) or: [ 
+			 (expression isKindOf: JinDAMParentesis) or: [ 
+				 expression isKindOf: JinDAMUnaryOperation ] ]) ifFalse: [ 
+			self halt ] ].
 	arg expression: expression.
 	^ arg
 ]
@@ -354,6 +372,41 @@ JinDAMFullASTCodeImporter >> visitDimVariable: aDimVariable [
 ]
 
 { #category : #visiting }
+JinDAMFullASTCodeImporter >> visitDoEvents: aVBDoEventsNode [
+
+	| read tip |
+	self assert: (self state top isKindOf: JinDAMInvocable).
+	read := self instantiate: JinDAMAccessRead.
+	tip := self
+		       instantiateReferenceForNames: { { 
+				       aVBDoEventsNode doEventsToken value.
+				       #member } }
+		       context: read
+		       preferring: { #isAttribute. #isInvocable. #isType }.
+	read readReference: tip.
+	read anchor:
+		(self codeAnchor: 'memberRead' for: aVBDoEventsNode doEventsToken).
+	self state top addAccess: read.
+
+
+	^ read
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitDoUntilTrue: aVBDoUntilTrueNode [
+
+	^ self visitUntilTrue: aVBDoUntilTrueNode
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitDoWhileTrue: aVBDoWhileTrueNode [
+
+	^ (self instantiate: JinDAMDoWhile)
+		  condition: (aVBDoWhileTrueNode condition acceptVisitor: self);
+		  block: (aVBDoWhileTrueNode body acceptVisitor: self)
+]
+
+{ #category : #visiting }
 JinDAMFullASTCodeImporter >> visitElseIfBlock: aVBElseIfBlockNode [
 
 	self assert: aVBElseIfBlockNode elseToken isNotNil.
@@ -518,10 +571,28 @@ JinDAMFullASTCodeImporter >> visitExternalSub: aDefinition [
 	^ fn
 ]
 
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitFileDescriptorLiteral: aVBFileDescriptorLiteralNode [
+
+	^ self visitLiteral: aVBFileDescriptorLiteralNode
+]
+
 { #category : #'functions - subs - events' }
 JinDAMFullASTCodeImporter >> visitFloatLiteral: aLiteral [
 
 	^ self visitLiteral: aLiteral
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitForEach: aVBForEachNode [
+
+	self assert: aVBForEachNode elements asSet size = 1.
+
+	^ (self instantiate: JinDAMForEach)
+		  each: (aVBForEachNode elements first acceptVisitor: self);
+		  collection: (aVBForEachNode group acceptVisitor: self);
+		  block: (aVBForEachNode body acceptVisitor: self);
+		  yourself
 ]
 
 { #category : #visiting }
@@ -532,6 +603,19 @@ JinDAMFullASTCodeImporter >> visitForNext: aVBForNextNode [
 		  initialValue: (aVBForNextNode initialValue acceptVisitor: self);
 		  limit: (aVBForNextNode limit acceptVisitor: self);
 		  block: (aVBForNextNode body acceptVisitor: self);
+		  yourself
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitForStepNext: aVBForStepNextNode [
+
+	^ (self instantiate: JinDAMForStepNext)
+		  counter: (aVBForStepNextNode counter acceptVisitor: self);
+		  initialValue:
+			  (aVBForStepNextNode initialValue acceptVisitor: self);
+		  limit: (aVBForStepNextNode limit acceptVisitor: self);
+		  step: (aVBForStepNextNode step acceptVisitor: self);
+		  block: (aVBForStepNextNode body acceptVisitor: self);
 		  yourself
 ]
 
@@ -573,7 +657,11 @@ JinDAMFullASTCodeImporter >> visitFunctionDefinition: aDefinition [
 
 { #category : #'avoiding visit' }
 JinDAMFullASTCodeImporter >> visitGoSub: aSubLabel [
-			self halt 
+
+	| goTo |
+	goTo := self instantiate: JinDAMGoSub.
+	goTo label: (aSubLabel destination acceptVisitor: self).
+	^ goTo
 ]
 
 { #category : #'avoiding visit' }
@@ -594,6 +682,12 @@ JinDAMFullASTCodeImporter >> visitGoToStatement: aStatement [
 JinDAMFullASTCodeImporter >> visitGuidLiteral: aLiteral [
 
 	^ self visitLiteral: aLiteral
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitHashIdentifier: aVBHashIdentifierNode [
+
+	^ self visitSimpleIdentifier: aVBHashIdentifierNode
 ]
 
 { #category : #generated }
@@ -617,7 +711,14 @@ JinDAMFullASTCodeImporter >> visitIfThenElse: aVBIfThenElseNode [
 
 { #category : #'member access' }
 JinDAMFullASTCodeImporter >> visitImplements: anImplements [
-		self halt 
+
+	self assert: self state top species = JinDAMClass.
+	^ self state top superClassReference: (self
+			   typeReferenceName: anImplements interface token value
+			   typeSymbol:
+			   (self currentNamespace findSymbol:
+				    anImplements interface token value)
+			   context: self state top)
 ]
 
 { #category : #invocations }
@@ -655,6 +756,16 @@ JinDAMFullASTCodeImporter >> visitLabel: aLabel [
 { #category : #'avoiding visit' }
 JinDAMFullASTCodeImporter >> visitLabelTag: aLabel [ 	
 			self halt 
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitLineInputClause: aVBLineInputClauseNode [
+
+	^ (self instantiate: JinDAMFileLineInput)
+		  fileDescriptorReference:
+			  (aVBLineInputClauseNode fileNumber acceptVisitor: self);
+		  inputReference: (aVBLineInputClauseNode value acceptVisitor: self);
+		  yourself
 ]
 
 { #category : #'functions - subs - events' }
@@ -721,6 +832,24 @@ JinDAMFullASTCodeImporter >> visitModuleAttribute: aModuleAttribute [
 JinDAMFullASTCodeImporter >> visitModuleConstant: aModuleConstant [
 	^ self visitProgram: aModuleConstant.
 
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitModuleMultipleConstants: aVBModuleMultipleConstantsNode [
+
+	^ aVBModuleMultipleConstantsNode constants acceptVisitor: self
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitModuleMultipleProperties: aVBModuleMultiplePropertiesNode [
+
+	| vars visibility |
+	vars := aVBModuleMultiplePropertiesNode variables acceptVisitor: self.
+
+	aVBModuleMultiplePropertiesNode visibility ifNotNil: [ :vis | 
+		visibility := vis value.
+		vars do: [ :v | v visibility: visibility ] ].
+	^ vars
 ]
 
 { #category : #'properties - variables' }
@@ -860,6 +989,18 @@ JinDAMFullASTCodeImporter >> visitOnExpressionGo: aStatement [
 			self halt 
 ]
 
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitOpenClause: aVBOpenClauseNode [
+
+	^ (self instantiate: JinDAMFileOpenClause)
+		  filePathReference:
+			  (aVBOpenClauseNode filepath acceptVisitor: self);
+		  kind: aVBOpenClauseNode mode value;
+		  fileDescriptorReference:
+			  (aVBOpenClauseNode fileDescriptor acceptVisitor: self);
+		  yourself
+]
+
 { #category : #'functions - subs - events' }
 JinDAMFullASTCodeImporter >> visitOptionBase: anOptionBase [
 		self halt 
@@ -900,6 +1041,17 @@ JinDAMFullASTCodeImporter >> visitParentheseesExpression: aVBParentheseesExpress
 	^ (self instantiate: JinDAMParentesis)
 		  expression:
 			  (aVBParentheseesExpressionNode expression acceptVisitor: self);
+		  yourself
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitPrintIntoFileClause: aVBPrintIntoFileClauseNode [
+
+	^ (self instantiate: JinDAMFilePrintIntoClause)
+		  fileDescriptorReference:
+			  (aVBPrintIntoFileClauseNode fileNumber acceptVisitor: self);
+		  printingReferences:
+			  (aVBPrintIntoFileClauseNode values acceptVisitor: self);
 		  yourself
 ]
 
@@ -973,6 +1125,15 @@ JinDAMFullASTCodeImporter >> visitReDimVariable: aReDimVariable [
 		ifNone: [  ]
 ]
 
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitRename: aVBRenameNode [
+
+	^ (self instantiate: JinDAMRenameFile)
+		  oldNameReference: (aVBRenameNode oldName acceptVisitor: self);
+		  newNameReference: (aVBRenameNode newName acceptVisitor: self);
+		  yourself
+]
+
 { #category : #'avoiding visit' }
 JinDAMFullASTCodeImporter >> visitResumeEmpty: aStatement [
 
@@ -988,8 +1149,14 @@ JinDAMFullASTCodeImporter >> visitResumeLabel: aResomeNext [
 ]
 
 { #category : #'avoiding visit' }
-JinDAMFullASTCodeImporter >> visitResumeNext: aResomeNext [ 	
-		self halt 
+JinDAMFullASTCodeImporter >> visitResumeNext: aResomeNext [
+
+	^ self instantiate: JinDAMResumeNext
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitReturn: aVBReturnNode [ 
+	^ self instantiate: JinDAMReturnEmpty
 ]
 
 { #category : #enumerating }
@@ -1005,16 +1172,18 @@ JinDAMFullASTCodeImporter >> visitSimpleIdentifier: aSimpleIdentifier [
 
 	| read tip |
 	({ 
+		 JinDAMModule.
 		 JinDAMAccessWrite.
 		 JinDAMInvocable.
 		 JinDAMArgument } anySatisfy: [ :a | self state top isKindOf: a ]) 
 		ifTrue: [ 
 			read := self instantiate: JinDAMAccessRead.
 			tip := self
-				       instantiateReferenceForNames:
-				       { {aSimpleIdentifier token value . #member }}
+				       instantiateReferenceForNames: { { 
+						       aSimpleIdentifier token value.
+						       #member } }
 				       context: read
-				       preferring: { #isAttribute. #isInvocable }.
+				       preferring: { #isAttribute. #isInvocable. #isType }.
 			read readReference: tip.
 			read anchor: (self codeAnchor: 'memberRead' for: aSimpleIdentifier).
 			self state top addAccess: read ].
@@ -1061,6 +1230,15 @@ JinDAMFullASTCodeImporter >> visitSmaccToken: aSmaCCCaseInsensitiveToken [
 JinDAMFullASTCodeImporter >> visitSquareBracketIdentifier: anIdentifier [
 
 	^ self visitSimpleIdentifier: anIdentifier
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitStaticVariable: aVBStaticVariableNode [
+
+	| var |
+	var := aVBStaticVariableNode variable acceptVisitor: self.
+	var isStatic: true.
+	^ var
 ]
 
 { #category : #'functions - subs - events' }
@@ -1112,6 +1290,14 @@ JinDAMFullASTCodeImporter >> visitTypeOf: aTypeOf [
 	^ element
 ]
 
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitUntilTrue: aVBUntilTrueNode [
+
+	^ (self instantiate: JinDAMDoUntil)
+		  condition: (aVBUntilTrueNode condition acceptVisitor: self);
+		  block: (aVBUntilTrueNode body acceptVisitor: self)
+]
+
 { #category : #generated }
 JinDAMFullASTCodeImporter >> visitVariable: aVariable [
 
@@ -1132,6 +1318,14 @@ JinDAMFullASTCodeImporter >> visitVariable: aVariable [
 JinDAMFullASTCodeImporter >> visitVariableList: aVariableList [
 	^ self visitProgram: aVariableList.
 
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitWhileTrue: aVBWhileTrueNode [
+
+	^ (self instantiate: JinDAMWhile)
+		  condition: (aVBWhileTrueNode condition acceptVisitor: self);
+		  block: (aVBWhileTrueNode body acceptVisitor: self)
 ]
 
 { #category : #visiting }

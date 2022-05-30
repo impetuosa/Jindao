@@ -30,15 +30,19 @@ JinMultiVisitor >> currentNamespace [
 JinMultiVisitor >> instantiateReferenceForNames: aCollection context: aContext preferring: rules [
 
 	| select symbols tip names kinds |
-	
-	
-	names := aCollection collect: [ :c | c isArray ifTrue: [ c first ] ifFalse: [c] ].
-	kinds := (aCollection collect: [ :c |  c isArray ifTrue: [ c second ] ifFalse: [ #member ]]) readStream.
+	names := aCollection collect: [ :c | 
+		         c isArray
+			         ifTrue: [ c first ]
+			         ifFalse: [ c ] ].
+	kinds := (aCollection collect: [ :c | 
+		          c isArray
+			          ifTrue: [ c second ]
+			          ifFalse: [ #member ] ]) readStream.
 	symbols := self currentNamespace findSymbol: names first.
 
 	symbols size > 1 ifTrue: [ 
-		select := symbols select: [ :s | 
-			          rules anySatisfy: [ :r | s kind perform: r ] ].
+		select := self choose: symbols accordingToOrderedRules: rules.
+
 		self assert: select isNotEmpty.
 		symbols := select ].
 
@@ -55,8 +59,7 @@ JinMultiVisitor >> instantiateReferenceForNames: aCollection context: aContext p
 		into: [ :acc :name | 
 			symbols := acc ifNil: [ {  } ] ifNotNil: [ acc findSymbol: name ].
 			symbols size > 1 ifTrue: [ 
-				select := symbols select: [ :s | 
-					          rules anySatisfy: [ :r | s kind perform: r ] ].
+				select := self choose: symbols accordingToOrderedRules: rules.
 				self assert: select isNotEmpty.
 				symbols := select ].
 			tip := self
