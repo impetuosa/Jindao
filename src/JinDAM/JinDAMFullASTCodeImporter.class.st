@@ -928,7 +928,7 @@ JinDAMFullASTCodeImporter >> visitModulePropertyGet: aModulePropertyGet [
 				 ifNone: [ nil ] ]).
 	self state push: acc.
 	aModulePropertyGet parameters acceptVisitor: self.
-	aModulePropertyGet block acceptVisitor: self.
+	acc block: (aModulePropertyGet block acceptVisitor: self).
 	self state pop.
 	^ acc
 ]
@@ -1260,7 +1260,7 @@ JinDAMFullASTCodeImporter >> visitSubDefinition: aDefinition [
 	self state top addInvocable: fn.
 	self state push: fn.
 	aDefinition parameters acceptVisitor: self.
-	aDefinition block acceptVisitor: self.
+	fn block: (aDefinition block acceptVisitor: self).
 	self state pop.
 	^ fn
 ]
