@@ -66,7 +66,7 @@ JinDAMProjectImporter >> visitCollection: aCollection from: project [
 		win32Error ifTrue: [ 
 			win32Error := false.
 			self state size = stackSize ifFalse: [ 
-				self halt: 'Umathching stacks!!'.
+				"self halt: 'Umathching stacks!!'."
 				self state pop ].
 
 			project reopen.
