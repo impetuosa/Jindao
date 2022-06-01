@@ -13,6 +13,11 @@ Class {
 }
 
 { #category : #accessing }
+JinDAMModel class >> egrc: aJinDAMModel [ 
+	self shouldBeImplemented.
+]
+
+{ #category : #accessing }
 JinDAMModel class >> northwind [
 	^ northwind
 ]

@@ -1003,7 +1003,7 @@ JinDAMFullASTCodeImporter >> visitOpenClause: aVBOpenClauseNode [
 
 { #category : #'functions - subs - events' }
 JinDAMFullASTCodeImporter >> visitOptionBase: anOptionBase [
-		self halt 
+
 ]
 
 { #category : #visiting }
