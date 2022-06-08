@@ -35,6 +35,17 @@ JinDAMLibrary >> find: aJinNSKind named: aString [
 	^ self error: '??'
 ]
 
+{ #category : #testing }
+JinDAMLibrary >> findAttributeInvocable: aString amountArguments: anInteger [
+
+	| lcName |
+	invocables ifNotNil: [ 
+		lcName := aString asLowercase.
+		(invocables anySatisfy: [ :a | a name asLowercase = lcName ]) 
+			ifTrue: [ self halt ] ].
+	^ super findAttributeInvocable: aString amountArguments: anInteger
+]
+
 { #category : #accessing }
 JinDAMLibrary >> invocables [
 	^ invocables ifNil: [ invocables := OrderedCollection new  ]
@@ -75,4 +86,10 @@ JinDAMLibrary >> printOn: aStream [
 JinDAMLibrary >> relatedSymbolKind [
 
 	^ #isAssembly
+]
+
+{ #category : #testing }
+JinDAMLibrary >> type [
+
+	^ self
 ]

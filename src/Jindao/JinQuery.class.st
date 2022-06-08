@@ -46,6 +46,11 @@ JinQuery >> fields [
 ]
 
 { #category : #accessing }
+JinQuery >> isQuery [ 
+	 ^ true
+]
+
+{ #category : #accessing }
 JinQuery >> privateLoadBodyObject [
 	^ (project openQuery: self)
 ]

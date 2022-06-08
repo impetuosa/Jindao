@@ -71,8 +71,18 @@ JinModelObject >> isAccessForm [
 ]
 
 { #category : #'as yet unclassified' }
+JinModelObject >> isAccessProject [
+	 ^ false 
+]
+
+{ #category : #'as yet unclassified' }
 JinModelObject >> isControl [
 
+	^ false
+]
+
+{ #category : #'as yet unclassified' }
+JinModelObject >> isLibrary [
 	^ false
 ]
 
@@ -87,8 +97,24 @@ JinModelObject >> isModule [
 	^ false
 ]
 
+{ #category : #'as yet unclassified' }
+JinModelObject >> isQuery [ 
+	^ false
+]
+
+{ #category : #'as yet unclassified' }
+JinModelObject >> isRelation [ 
+	^ false 
+]
+
 { #category : #accessing }
 JinModelObject >> isRootElement [
+
+	^ false
+]
+
+{ #category : #'as yet unclassified' }
+JinModelObject >> isTable [
 
 	^ false
 ]

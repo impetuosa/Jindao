@@ -6,7 +6,8 @@ Class {
 		'symbolTable',
 		'importer',
 		'problematicRefs',
-		'artefacts'
+		'artefacts',
+		'traversed'
 	],
 	#classInstVars : [
 		'egrc'
@@ -115,11 +116,12 @@ JinDAMImporter >> initialize [
 JinDAMImporter >> link: aJinDAMModel [
 
 	| references |
-	problematicRefs := nil. 
+	problematicRefs := nil.
 	references := aJinDAMModel references.
 	artefacts := aJinDAMModel entities select: [ :e | 
 		             e isKindOf: JinDAMArtefact ].
 
+	traversed := Set new.
 	references
 		select: [ :r | r isKindOf: JinDAMTypeReference ]
 		thenDo: [ :r | self linkReference: r in: aJinDAMModel ].
@@ -131,51 +133,100 @@ JinDAMImporter >> link: aJinDAMModel [
 { #category : #accessing }
 JinDAMImporter >> linkReference: r in: aJinDAMModel [
 
-	| candidates |
+	(traversed includes: r) ifTrue: [ ^ self ].
+	traversed add: r.
 	[ 
 	r candidate ifNil: [ 
-		r candidateAnchor ifNil: [ 
-			({ 'NULL'. 'ERROR'. 'CARRAY'. 'SAFEARRAY'. 'ParamArray'.
-			 'HRESULT'. 'COMUnknownInstance'. 'COMDispatchInstance'.
-			 'USERDEFINED*' } includes: r name) ifTrue: [ ^ self ].
-			r context isReadAccess ifTrue: [ ^ self ].
-
-			self assert: r context isReference.
-			r context candidate ifNil: [ 
-				self linkReference: r context in: aJinDAMModel ].
-			candidates := r context candidateType
-				              findAttributeInvocable: r name
-				              amountArguments: r arguments size.
-
-			candidates
-				ifEmpty: [ self assert: r isDictionaryAccess ]
-				ifNotEmpty: [ 
-					self assert: (candidates size = 1 or: [ 
-							 (candidates collect: [ :c | c typeReference name ]) asSet size
-							 = 1 and: [ 
-								 (candidates collect: [ :c | c parametersSize ]) asSet size
-								 = 1 ] ]).
-					candidates size = 1
-						ifTrue: [ 
-							r candidateAnchor: candidates first anchor.
-							r candidate: candidates first ]
-						ifFalse: [ r candidate: candidates ] ].
-			^ self ].
-
-
-		r candidateAnchor ifNotNil: [ 
-			| artefact |
-			artefact := artefacts detect: [ :e | 
-				            e name asLowercase
-				            = r candidateAnchor elementProject asLowercase ].
-			r candidate: (r candidateAnchor elementsNameKindPairs
-					 inject: artefact
-					 into: [ :nav :each | nav find: each second named: each first ]) ] ] ]
+		r context isReference ifTrue: [ 
+			self linkReference: r context in: aJinDAMModel ].
+		r candidateAnchor
+			ifNil: [ self manageNameLookUpReference: r in: aJinDAMModel ]
+			ifNotNil: [ self manageAnchorLookInReference: r in: aJinDAMModel ] ] ]
 		on: Error
 		do: [ :e | 
 			self problematicRefs add: { 
 					r.
 					e } ]
+]
+
+{ #category : #accessing }
+JinDAMImporter >> manageAnchorLookInReference: r in: aJinDAMModel [
+
+	| artefact |
+	r context isReference ifTrue: [ 
+		^ self manageNameLookUpReference: r in: aJinDAMModel ].
+
+	(r context isReadAccess and: [ 
+		 r context readReference ~= r and: [ 
+			 r context readReference context ~= r ] ]) ifTrue: [ 
+		^ self manageNameLookUpWithnReadAccessReference: r in: aJinDAMModel ].
+	artefact := artefacts detect: [ :e | 
+		            e name asLowercase
+		            = r candidateAnchor elementProject asLowercase ].
+	r candidate: (r candidateAnchor elementsNameKindPairs
+			 inject: artefact
+			 into: [ :nav :each | nav find: each second named: each first ])
+]
+
+{ #category : #accessing }
+JinDAMImporter >> manageNameLookUpReference: r in: aJinDAMModel [
+
+	| candidates |
+	({ 'NULL'. 'ERROR'. 'CARRAY'. 'SAFEARRAY'. 'ParamArray'. 'HRESULT'.
+	 'COMUnknownInstance'. 'COMDispatchInstance'. 'USERDEFINED*' } 
+		 includes: r name) ifTrue: [ ^ self ].
+	r context isReadAccess ifTrue: [ ^ self ].
+	self assert: r context isReference.
+	r context candidate ifNil: [ 
+		self linkReference: r context in: aJinDAMModel ].
+
+	candidates := r context candidateType
+		              findAttributeInvocable: r name
+		              amountArguments: r arguments size.
+	candidates
+		select: [ :a | a isAlias ]
+		thenDo: [ :a | self linkReference: a typeReference in: aJinDAMModel ].
+		
+	candidates
+		ifEmpty: [ self assert: r isDictionaryAccess ]
+		ifNotEmpty: [ 
+			self assert: (candidates size = 1 or: [ 
+					 (candidates collect: [ :c | c typeReference name ]) asSet size
+					 = 1 and: [ 
+						 (candidates collect: [ :c | c parametersSize ]) asSet size = 1 ] ]).
+			candidates size = 1
+				ifTrue: [ 
+					r candidateAnchor: candidates first anchor.
+					r candidate: candidates first ]
+				ifFalse: [ r candidate: candidates ] ]
+]
+
+{ #category : #accessing }
+JinDAMImporter >> manageNameLookUpWithnReadAccessReference: r in: aJinDAMModel [
+
+	| candidates ref |
+	({ 'NULL'. 'ERROR'. 'CARRAY'. 'SAFEARRAY'. 'ParamArray'. 'HRESULT'.
+	 'COMUnknownInstance'. 'COMDispatchInstance'. 'USERDEFINED*' } 
+		 includes: r name) ifTrue: [ ^ self ].
+	self assert: r context isReadAccess.
+	ref := r context readReference.
+	ref candidate ifNil: [ self linkReference: ref in: aJinDAMModel ].
+	candidates := ref candidateType
+		              findAttributeInvocable: r name
+		              amountArguments: r arguments size.
+
+	candidates
+		ifEmpty: [ self assert: r isDictionaryAccess ]
+		ifNotEmpty: [ 
+			self assert: (candidates size = 1 or: [ 
+					 (candidates collect: [ :c | c typeReference name ]) asSet size
+					 = 1 and: [ 
+						 (candidates collect: [ :c | c parametersSize ]) asSet size = 1 ] ]).
+			candidates size = 1
+				ifTrue: [ 
+					r candidateAnchor: candidates first anchor.
+					r candidate: candidates first ]
+				ifFalse: [ r candidate: candidates ] ]
 ]
 
 { #category : #accessing }

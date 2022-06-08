@@ -131,6 +131,11 @@ JinTable >> isSystemTable [
 	^ (self attributes & -2147483646) > 0
 ]
 
+{ #category : #'as yet unclassified' }
+JinTable >> isTable [ 
+	 ^ true 
+]
+
 { #category : #accessing }
 JinTable >> privateLoadBodyObject [
 	^ (project openTable: self)

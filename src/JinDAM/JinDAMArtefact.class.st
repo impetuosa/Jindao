@@ -27,6 +27,18 @@ JinDAMArtefact >> addType: aJinDAMPrimitiveType [
 ]
 
 { #category : #accessing }
+JinDAMArtefact >> findAttributeInvocable: aString amountArguments: anInteger [
+
+	| privateName lcName |
+	self assert: anInteger = 0.
+	lcName := aString asLowercase.
+	privateName := '_' , lcName.
+
+	^ (types select: [ :t | t name asLowercase = lcName ]) ifEmpty: [ 
+		  types select: [ :t | t name asLowercase = privateName ] ]
+]
+
+{ #category : #accessing }
 JinDAMArtefact >> globals [
 	^ globals ifNil: [  globals := OrderedCollection new  ]
 ]

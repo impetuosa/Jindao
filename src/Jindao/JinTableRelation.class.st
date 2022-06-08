@@ -63,6 +63,11 @@ JinTableRelation >> isReflexiveRelation [
 ]
 
 { #category : #'as yet unclassified' }
+JinTableRelation >> isRelation [ 
+	^ true
+]
+
+{ #category : #'as yet unclassified' }
 JinTableRelation >> printOn: aStream [
 	aStream
 		nextPutAll: self tableName;

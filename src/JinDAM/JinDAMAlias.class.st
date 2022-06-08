@@ -26,6 +26,12 @@ JinDAMAlias >> findAttributeInvocable: aString amountArguments: amount [
 ]
 
 { #category : #accessing }
+JinDAMAlias >> isAlias [
+
+	^ true
+]
+
+{ #category : #accessing }
 JinDAMAlias >> printOn: aStream [
 
 	aStream
