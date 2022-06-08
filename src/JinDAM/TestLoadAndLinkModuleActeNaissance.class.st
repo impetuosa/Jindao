@@ -30,53 +30,42 @@ TestLoadAndLinkModuleActeNaissance >> setUp [
 { #category : #initialization }
 TestLoadAndLinkModuleActeNaissance >> testEnregistreEnteteActeNaissanceMustUseFormControls [
 
-	| acte iif formControls1 formControls2 enregistreEnteteActeNaissance setNew |
+	| acte iif formCandidate1 formCandidate2 enregistreEnteteActeNaissance setNew |
 	acte := model userTypes detect: [ :a | a name = #mActeNaissance ].
 	enregistreEnteteActeNaissance := acte invocables detect: [ :a | 
 		                                 a selector
 		                                 = #pgEnregistreEnteteActeNaissance ].
-	self halt.	
+
 	setNew := enregistreEnteteActeNaissance block statements at: 5.
-	
+	self
+		assert: setNew assignedTo readReference candidate species
+		equals: JinDAMLocalVariable.
+	self
+		assert:
+			setNew assignedTo readReference candidate typeReference candidate
+				species
+		equals: JinDAMAlias.
+	self
+		assert:
+			setNew assignedTo readReference candidate typeReference candidate
+				typeReference candidate name
+		equals: '_Recordset'.
+	self
+		assert: setNew valueToAssign readReference typeReference candidate
+		equals:
+		setNew assignedTo readReference candidate typeReference candidate.
+
 	iif := (enregistreEnteteActeNaissance block statements at: 8)
 		       valueToAssign readReference.
-	
-	self assert: iif selector equals: #IIf.
-	self assert: iif arguments size equals: 3.
-	formControls1 := iif arguments first expression readReference
-		                 arguments first expression readReference.
-	formControls2 := iif arguments third expression readReference.
-	self assert: formControls1 name equals: #Controls.
-	self assert: formControls2 name equals: #Controls.
-	self assert: formControls1 arguments size equals: 1.
-	self assert: formControls2 arguments size equals: 1.
-	self
-		assert:
-		formControls1 arguments first expression readReference candidate
-		equals: '"IdEnteteActe"'.
-	self
-		assert:
-		formControls2 arguments first expression readReference candidate
-		equals: '"IdEnteteActe"'.
-	self assert: formControls1 context readReference name equals: #Forms.
-	self assert: formControls2 context readReference name equals: #Forms.
-	self
-		assert: formControls1 context readReference arguments size
-		equals: 1.
-	self
-		assert: formControls2 context readReference arguments size
-		equals: 1.
+	self assert: iif candidate isInvocable.
+	self assert: iif selector equals: iif candidate selector.
 
-	self
-		assert:
-			formControls1 context readReference arguments first expression
-				readReference candidate
-		equals: '"Fact"'.
-	self
-		assert:
-			formControls2 context readReference arguments first expression
-				readReference candidate
-		equals: '"Fact"'
+	formCandidate1 := iif arguments first expression readReference
+		                  arguments first expression readReference context
+		                  candidate.
+	formCandidate2 := iif arguments third expression readReference
+		                  context candidate.
+	self assert: formCandidate1 equals: formCandidate2
 ]
 
 { #category : #initialization }

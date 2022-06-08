@@ -134,6 +134,7 @@ JinDAMImporter >> link: aJinDAMModel [
 JinDAMImporter >> linkReference: r in: aJinDAMModel [
 
 	(traversed includes: r) ifTrue: [ ^ self ].
+
 	traversed add: r.
 	[ 
 	r candidate ifNil: [ 
@@ -152,7 +153,9 @@ JinDAMImporter >> linkReference: r in: aJinDAMModel [
 { #category : #accessing }
 JinDAMImporter >> manageAnchorLookInReference: r in: aJinDAMModel [
 
-	| artefact |
+	| artefact candidate candidates |
+	"	aJinDAMModel entities select: [ :a | 
+		(a isInvocable ) and: [ a name = r name ] ]."
 	r context isReference ifTrue: [ 
 		^ self manageNameLookUpReference: r in: aJinDAMModel ].
 
@@ -163,9 +166,29 @@ JinDAMImporter >> manageAnchorLookInReference: r in: aJinDAMModel [
 	artefact := artefacts detect: [ :e | 
 		            e name asLowercase
 		            = r candidateAnchor elementProject asLowercase ].
-	r candidate: (r candidateAnchor elementsNameKindPairs
-			 inject: artefact
-			 into: [ :nav :each | nav find: each second named: each first ])
+	candidate := r candidateAnchor elementsNameKindPairs
+		             inject: artefact
+		             into: [ :nav :each | 
+		             nav find: each second named: each first ].
+	(r respondsTo: #arguments) ifTrue: [ 
+		candidate isInvocable
+			ifFalse: [ r candidate: candidate ]
+			ifTrue: [ 
+				self assert: (candidate respondsTo: #parameters).
+				(r arguments size
+					 between:
+					 (candidate parameters reject: [ :p | p isOptional ]) size
+					 and: candidate parameters size)
+					ifTrue: [ r candidate: candidate ]
+					ifFalse: [ 
+						(r arguments isEmpty and: [ candidate species = JinDAMFunction ])
+							ifTrue: [ r candidate: candidate ]
+							ifFalse: [ 
+								candidates := aJinDAMModel entities select: [ :a | 
+									              a isInvocable and: [ a name = r name ] ].
+								candidates size = 1
+									ifTrue: [ r candidate: candidate ]
+									ifFalse: [ self halt ] ] ] ] ]
 ]
 
 { #category : #accessing }
@@ -208,9 +231,11 @@ JinDAMImporter >> manageNameLookUpWithnReadAccessReference: r in: aJinDAMModel [
 	({ 'NULL'. 'ERROR'. 'CARRAY'. 'SAFEARRAY'. 'ParamArray'. 'HRESULT'.
 	 'COMUnknownInstance'. 'COMDispatchInstance'. 'USERDEFINED*' } 
 		 includes: r name) ifTrue: [ ^ self ].
+
 	self assert: r context isReadAccess.
 	ref := r context readReference.
 	ref candidate ifNil: [ self linkReference: ref in: aJinDAMModel ].
+
 	candidates := ref candidateType
 		              findAttributeInvocable: r name
 		              amountArguments: r arguments size.
