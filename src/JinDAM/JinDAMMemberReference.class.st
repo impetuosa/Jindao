@@ -98,11 +98,6 @@ JinDAMMemberReference >> printOn: aStream [
 ]
 
 { #category : #accessing }
-JinDAMMemberReference >> realArguments [
-	^ realArguments
-]
-
-{ #category : #accessing }
 JinDAMMemberReference >> selector [ 
 	 ^ name 
 ]

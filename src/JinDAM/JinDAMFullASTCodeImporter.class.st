@@ -123,11 +123,11 @@ JinDAMFullASTCodeImporter >> visitArgument: anArgument [
 	self state push: arg.
 	expression := anArgument value acceptVisitor: self.
 	self state pop.
-	arg reads size = 1 ifFalse: [ 
+	"arg reads size = 1 ifFalse: [ 
 		((expression isKindOf: JinDAMBinaryOperation) or: [ 
 			 (expression isKindOf: JinDAMParentesis) or: [ 
 				 expression isKindOf: JinDAMUnaryOperation ] ]) ifFalse: [ 
-			self halt ] ].
+			self halt ] ]."
 	arg expression: expression.
 	^ arg
 ]
@@ -186,6 +186,11 @@ JinDAMFullASTCodeImporter >> visitComparisonOperation: aComparisonOperation [
 	comp left: (aComparisonOperation left acceptVisitor: self).
 	comp right: (aComparisonOperation right acceptVisitor: self).
 	^ comp
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitComplexType: aVBComplexTypeNode [ 
+	self shouldBeImplemented.
 ]
 
 { #category : #visiting }
@@ -797,14 +802,21 @@ JinDAMFullASTCodeImporter >> visitLiteral: aLiteral [
 { #category : #'member access' }
 JinDAMFullASTCodeImporter >> visitMemberAccess: aMemberAccess [
 
-	| names tip read |
-	names := aMemberAccess acceptVisitor:
+	| names tip read receiver |
+	receiver := aMemberAccess receiver ifNil: [ 
+		            aMemberAccess enclosingWith with ].
+	self assert: receiver isNotNil.
+	receiver := receiver acceptVisitor: self.
+
+	names := aMemberAccess member acceptVisitor:
 		         self referenceTaggedNameConverter.
+	self assert: names size = 1.
 
 	read := self instantiate: JinDAMAccessRead.
+
 	tip := self
 		       instantiateReferenceForNames: names
-		       context: read
+		       context: receiver
 		       preferring:
 		       { #isInvocable. #isAttribute. #isType. #isAssembly }.
 
@@ -948,9 +960,18 @@ JinDAMFullASTCodeImporter >> visitNegatedOperation: aVBNegatedOperationNode [
 { #category : #visiting }
 JinDAMFullASTCodeImporter >> visitNewClause: aVBNewClauseNode [
 
-	^ (self instantiate: JinDAMNewExpression)
-		  typeReference: (aVBNewClauseNode typeName acceptVisitor: self);
-		  yourself
+	| new readNew |
+	readNew := self instantiate: JinDAMAccessRead.
+	new := self instantiate: JinDAMNewExpression.
+	new typeReference:
+		(self typeName: aVBNewClauseNode typeName context: new).
+
+	readNew readReference: new.
+	readNew anchor: (self codeAnchor: 'New' for: aVBNewClauseNode).
+
+	self state top addAccess: readNew.
+
+	^ readNew
 ]
 
 { #category : #visiting }

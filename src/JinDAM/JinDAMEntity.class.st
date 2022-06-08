@@ -45,6 +45,12 @@ JinDAMEntity >> isInvocable [
 ]
 
 { #category : #testing }
+JinDAMEntity >> isLibrary [
+
+	^ false
+]
+
+{ #category : #testing }
 JinDAMEntity >> isReadAccess [
 	^ false 
 ]
@@ -62,6 +68,11 @@ JinDAMEntity >> isType [
 { #category : #testing }
 JinDAMEntity >> isTypeReference [
 	^ false
+]
+
+{ #category : #testing }
+JinDAMEntity >> isUserDefinedType [ 
+	^ false 
 ]
 
 { #category : #testing }

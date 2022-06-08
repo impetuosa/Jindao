@@ -52,6 +52,12 @@ JinDAMLibrary >> isBuiltIn: aBoolean [
 ]
 
 { #category : #testing }
+JinDAMLibrary >> isLibrary [
+
+	^ true
+]
+
+{ #category : #testing }
 JinDAMLibrary >> isVariable [
 	 ^ true
 ]

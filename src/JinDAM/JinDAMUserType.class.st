@@ -60,6 +60,11 @@ JinDAMUserType >> isFormOrReport [
 ]
 
 { #category : #adding }
+JinDAMUserType >> isUserDefinedType [ 
+	^ true
+]
+
+{ #category : #adding }
 JinDAMUserType >> printOn: aStream [
 
 	aStream

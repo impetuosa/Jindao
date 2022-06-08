@@ -40,6 +40,18 @@ JinDAMModel >> acceptVisitor: aMOJinDAMModelReader [
 ]
 
 { #category : #'as yet unclassified' }
+JinDAMModel >> accessLibraries [
+
+	^ entities select: [ :a | a isLibrary ]
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMModel >> accessModules [
+
+	^ entities select: [ :a | a isAccessModule ]
+]
+
+{ #category : #'as yet unclassified' }
 JinDAMModel >> accessModulesAndLibraries [
 
 	^ entities select: [ :a | a isArtefact ]
@@ -119,4 +131,10 @@ JinDAMModel >> references [
 JinDAMModel >> tableRelations [
 
 	^ entities select: [ :a | a isKindOf: JinDAMTableRelation ]
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMModel >> userTypes [
+
+	^ entities select: [ :e | e isUserDefinedType ]
 ]

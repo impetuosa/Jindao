@@ -47,6 +47,12 @@ JinAccessObject >> isCustomControl [
 	^ false
 ]
 
+{ #category : #testing }
+JinAccessObject >> isModule [
+
+	^ false
+]
+
 { #category : #'as yet unclassified' }
 JinAccessObject >> mooseName [
 	^ self  name 

@@ -64,6 +64,12 @@ JinModelObject >> exportToFolder: aFolder [
 	^ project export: self toFolder: aFolder
 ]
 
+{ #category : #testing }
+JinModelObject >> isAccessForm [
+
+	^ false
+]
+
 { #category : #'as yet unclassified' }
 JinModelObject >> isControl [
 
@@ -73,6 +79,12 @@ JinModelObject >> isControl [
 { #category : #accessing }
 JinModelObject >> isLoaded [
 	^ body isNotNil and: [ description isLoaded ]
+]
+
+{ #category : #accessing }
+JinModelObject >> isModule [
+
+	^ false
 ]
 
 { #category : #accessing }

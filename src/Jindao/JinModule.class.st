@@ -62,6 +62,12 @@ JinModule >> isClassModule [
 		anySatisfy: [ :p | p name = 'Instancing' ]
 ]
 
+{ #category : #'as yet unclassified' }
+JinModule >> isModule [
+
+	^ true
+]
+
 { #category : #accessing }
 JinModule >> privateLoadBodyObject [
 	^ (project openModule: self) 
