@@ -68,6 +68,14 @@ JinModule >> isModule [
 	^ true
 ]
 
+{ #category : #'as yet unclassified' }
+JinModule >> isReferredBySymbol: aJinNSNameEntry [
+
+	^ (aJinNSNameEntry kind isClassModule or: [ 
+		   aJinNSNameEntry kind isModule ]) and: [ 
+		  aJinNSNameEntry referersTo: self name ]
+]
+
 { #category : #accessing }
 JinModule >> privateLoadBodyObject [
 	^ (project openModule: self) 

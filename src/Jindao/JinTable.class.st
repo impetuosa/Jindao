@@ -119,6 +119,13 @@ JinTable >> isLocal [
 	^ self isRemote not 
 ]
 
+{ #category : #testing }
+JinTable >> isReferredBySymbol: aJinNSNameEntry [
+
+	^ aJinNSNameEntry kind isTable and: [ 
+		  aJinNSNameEntry referersTo: self name ]
+]
+
 { #category : #'as yet unclassified' }
 JinTable >> isRemote [
 	^ self isAttachedODBC or: [ self isAttachedNonODBC ]

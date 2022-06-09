@@ -50,6 +50,13 @@ JinQuery >> isQuery [
 	 ^ true
 ]
 
+{ #category : #'as yet unclassified' }
+JinQuery >> isReferredBySymbol: aJinNSNameEntry [
+
+	^ aJinNSNameEntry kind isQuery and: [ 
+		  aJinNSNameEntry referersTo: self name ]
+]
+
 { #category : #accessing }
 JinQuery >> privateLoadBodyObject [
 	^ (project openQuery: self)

@@ -75,6 +75,11 @@ JinAccessObject >> isQuery [
 ]
 
 { #category : #'as yet unclassified' }
+JinAccessObject >> isReferredBySymbol:  aSymbol [
+ 	self halt. 
+]
+
+{ #category : #'as yet unclassified' }
 JinAccessObject >> isRelation [ 
 	^ false 
 ]

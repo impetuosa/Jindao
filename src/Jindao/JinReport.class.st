@@ -193,6 +193,13 @@ JinReport >> installHeaderFooter [
 ]
 
 { #category : #'as yet unclassified' }
+JinReport >> isReferredBySymbol: aJinNSNameEntry [
+
+	^ aJinNSNameEntry kind isReport and: [ 
+		  aJinNSNameEntry referersTo: self name ]
+]
+
+{ #category : #'as yet unclassified' }
 JinReport >> name: aString [ 
 	description name: aString 
 ]

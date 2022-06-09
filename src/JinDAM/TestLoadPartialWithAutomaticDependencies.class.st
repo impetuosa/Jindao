@@ -61,7 +61,7 @@ TestLoadPartialWithAutomaticDependencies >> setUp [
 TestLoadPartialWithAutomaticDependencies >> shouldLoadDependency: anArtefact [
 
 	| names |
-	 anArtefact isAccessModule ifTrue: [ self halt ].
+
 	names := (self usedSymbols
 		          reject: #isNil
 		          thenCollect: [ :a | a assembly ])

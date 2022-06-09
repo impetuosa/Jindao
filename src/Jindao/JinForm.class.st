@@ -387,6 +387,13 @@ JinForm >> isAccessForm [
 ]
 
 { #category : #'as yet unclassified' }
+JinForm >> isReferredBySymbol: aJinNSNameEntry [
+
+	^ aJinNSNameEntry kind isForm and: [ 
+		  aJinNSNameEntry referersTo: self name ]
+]
+
+{ #category : #'as yet unclassified' }
 JinForm >> isSingleForm [
 	^ self body isSingleForm
 ]

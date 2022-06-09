@@ -23,6 +23,12 @@ JinMacro >> color [
 ]
 
 { #category : #accessing }
+JinMacro >> isReferredBySymbol: aJinNSNameEntry [
+
+	^ false
+]
+
+{ #category : #accessing }
 JinMacro >> privateLoadBodyObject [
 	^ (project openMacro: self) 
 ]
