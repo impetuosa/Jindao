@@ -10,6 +10,11 @@ Class {
 }
 
 { #category : #accessing }
+JinNSEntryOwner >> assembly [
+	self shouldBeImplemented.
+]
+
+{ #category : #accessing }
 JinNSEntryOwner >> contentHash: aString [ 
 	contentHash := aString
 ]

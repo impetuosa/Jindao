@@ -18,6 +18,12 @@ JinLibraryType >> definitions [
 	^ self subclassResponsibility 
 ]
 
+{ #category : #testing }
+JinLibraryType >> isReferredBySymbol: aSymbol [
+
+	^ aSymbol kind isType and: [ aSymbol referersTo: self name ]
+]
+
 { #category : #accessing }
 JinLibraryType >> name [
 

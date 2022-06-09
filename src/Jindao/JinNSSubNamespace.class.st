@@ -22,6 +22,19 @@ JinNSSubNamespace >> anchor [
 		   ifFalse: [ parent anchor / self kind / name ]) 
 ]
 
+{ #category : #accessing }
+JinNSSubNamespace >> assembly [
+	^ tag isAssembly ifTrue: [ self ] ifFalse: [ parent assembly ]
+]
+
+{ #category : #'as yet unclassified' }
+JinNSSubNamespace >> containingSymbols [
+
+	^ self kind isAssembly
+		  ifFalse: [ { self } , parent containingSymbols ]
+		  ifTrue: [ {  } ]
+]
+
 { #category : #description }
 JinNSSubNamespace >> kind [
  	^ tag
@@ -71,5 +84,8 @@ JinNSSubNamespace >> printOn: aStream [
 { #category : #'as yet unclassified' }
 JinNSSubNamespace >> referersTo: aString [
 
-	^ name asLowercase = aString asLowercase
+	| lca lcb |
+	lca := (name copyReplaceAll: '_' with: '') asLowercase.
+	lcb := (aString copyReplaceAll: '_' with: '') asLowercase.
+	^ lca = lcb
 ]

@@ -271,6 +271,18 @@ JinDAMImporter >> provider [
 ]
 
 { #category : #accessing }
+JinDAMImporter >> state [
+
+	^ importer state
+]
+
+{ #category : #accessing }
+JinDAMImporter >> usedSymbols [
+
+	^ importer usedSymbols
+]
+
+{ #category : #accessing }
 JinDAMImporter >> visitorFor: aModel [
 
 	^ self createDefaultVisitor

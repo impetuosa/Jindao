@@ -102,6 +102,15 @@ JinDAMImportingVisitorProvider >> importLibraryReferences [
 ]
 
 { #category : #configuration }
+JinDAMImportingVisitorProvider >> importLibraryReferencesThat: aBlock [
+
+	referenceLibraryVisitor := JinDAMSelectiveLibraryReferenceImporter
+		                           new
+		                           block: aBlock;
+		                           yourself
+]
+
+{ #category : #configuration }
 JinDAMImportingVisitorProvider >> importProjectElements [
 	projectVisitor := JinDAMProjectImporter
 ]

@@ -43,6 +43,18 @@ JinNSNamespace >> anchor [
 ]
 
 { #category : #accessing }
+JinNSNamespace >> assembly [
+
+	^ nil
+]
+
+{ #category : #'as yet unclassified' }
+JinNSNamespace >> containingSymbols [
+
+	^ {  }
+]
+
+{ #category : #accessing }
 JinNSNamespace >> count [
 
 	^ (JinNSVisitorCounter new count: self) count

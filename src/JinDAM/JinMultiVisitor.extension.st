@@ -76,7 +76,7 @@ JinMultiVisitor >> instantiateReferenceForNames: aCollection context: aContext p
 JinMultiVisitor >> instantiateReferenceForSymbol: symbol name: aName context: context [
 
 	| inter |
-
+	self usedSymbols add: symbol.
 	symbol
 		ifNil: [ 
 			inter := self instantiate: JinDAMMemberReference.
@@ -97,13 +97,10 @@ JinMultiVisitor >> instantiateReferenceForSymbol: symbol name: aName context: co
 			symbol anchor ifNil: [ self halt ].
 			inter candidateAnchor: symbol anchor ].
 	inter context: context.
-	
+
 	" Should deal with this differently do i? "
 	aName asLowercase = #me ifTrue: [ 
-		
-		
 		inter candidate: self enclosingClass.
-		inter candidateAnchor: inter candidate anchor.
-		 ].
+		inter candidateAnchor: inter candidate anchor ].
 	^ inter
 ]

@@ -22,6 +22,18 @@ JinNSNameEntry >> anchor [
 	^ parent anchor / self kind / name
 ]
 
+{ #category : #accessing }
+JinNSNameEntry >> assembly [
+
+	^ parent assembly
+]
+
+{ #category : #'as yet unclassified' }
+JinNSNameEntry >> containingSymbols [
+
+	^ { self } , parent containingSymbols
+]
+
 { #category : #'as yet unclassified' }
 JinNSNameEntry >> findSymbol: aString [
 	^ (name compare: aString caseSensitive: false) = 2
@@ -81,6 +93,10 @@ JinNSNameEntry >> printOn: aStream [
 ]
 
 { #category : #'as yet unclassified' }
-JinNSNameEntry >> referersTo: aString [ 
-	^ name asLowercase = aString asLowercase 
+JinNSNameEntry >> referersTo: aString [
+
+	| lca lcb |
+	lca := (name copyReplaceAll: '_' with: '') asLowercase.
+	lcb := (aString copyReplaceAll: '_' with: '') asLowercase.
+	^ lca = lcb
 ]

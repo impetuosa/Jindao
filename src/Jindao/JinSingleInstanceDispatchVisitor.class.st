@@ -12,7 +12,8 @@ Class {
 		'project',
 		'reference',
 		'referenceLibrary',
-		'referenceAccess'
+		'referenceAccess',
+		'usedSymbols'
 	],
 	#category : #'Jindao-Subvisitor'
 }
@@ -123,4 +124,10 @@ JinSingleInstanceDispatchVisitor >> syntax [
 JinSingleInstanceDispatchVisitor >> syntax: aVisitor [
 	syntax := aVisitor.
 	aVisitor ifNotNil: [ :v | v parent: self ]
+]
+
+{ #category : #'as yet unclassified' }
+JinSingleInstanceDispatchVisitor >> usedSymbols [
+
+	^ usedSymbols ifNil: [ usedSymbols := Set new ]
 ]
