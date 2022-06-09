@@ -91,6 +91,12 @@ JinModelObject >> isLoaded [
 	^ body isNotNil and: [ description isLoaded ]
 ]
 
+{ #category : #'as yet unclassified' }
+JinModelObject >> isModelObject [
+
+	^ true
+]
+
 { #category : #accessing }
 JinModelObject >> isModule [
 

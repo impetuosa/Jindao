@@ -57,6 +57,12 @@ JinAccessObject >> isLibrary [
 	^ false
 ]
 
+{ #category : #'as yet unclassified' }
+JinAccessObject >> isModelObject [
+
+	^ false 
+]
+
 { #category : #testing }
 JinAccessObject >> isModule [
 

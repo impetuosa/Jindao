@@ -83,3 +83,8 @@ JinSubvisitor >> symbolTable [
 JinSubvisitor >> syntax [
 	^ parent syntax
 ]
+
+{ #category : #accessing }
+JinSubvisitor >> usedSymbols [ 
+	^ parent usedSymbols 
+]

@@ -282,10 +282,11 @@ JinNSKind >> isAnyOf: arrayOfSelectors [
 
 { #category : #testing }
 JinNSKind >> isAssembly [
-	^ kind = ##assembly
+ 
+	^ kind = #assembly
 ]
 
-{ #category : #testing }
+{ #category : #'general testing' }
 JinNSKind >> isAttribute [
 
 	^ self isAnyOf: #( isVariable isLocalVariable isGlobalVariable isField isTypeProperty isConstant isParameter isEnumEntry)
@@ -362,7 +363,7 @@ JinNSKind >> isGlobalVariable [
 	 ^ kind = #globalVariable 
 ]
 
-{ #category : #testing }
+{ #category : #'general testing' }
 JinNSKind >> isInvocable [
 
 	^ self isAnyOf:
@@ -430,7 +431,7 @@ JinNSKind >> isTable [
 	^ kind = #table
 ]
 
-{ #category : #testing }
+{ #category : #'general testing' }
 JinNSKind >> isType [
 
 	^ self isAnyOf:

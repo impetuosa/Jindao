@@ -19,6 +19,13 @@ JinLibraryAttribute >> isConstant [
 	^ false 
 ]
 
+{ #category : #testing }
+JinLibraryAttribute >> isReferredBySymbol: aJinNSNameEntry [
+
+	^ aJinNSNameEntry kind isAttribute and: [ 
+		  aJinNSNameEntry referersTo: self name ]
+]
+
 { #category : #accessing }
 JinLibraryAttribute >> name [
 

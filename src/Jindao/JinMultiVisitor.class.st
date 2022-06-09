@@ -68,6 +68,11 @@ JinMultiVisitor >> syntax [
 	^ self subclassResponsibility 
 ]
 
+{ #category : #'as yet unclassified' }
+JinMultiVisitor >> usedSymbols [ 
+	^ self subclassResponsibility
+]
+
 { #category : #'visit-first-objects' }
 JinMultiVisitor >> visitAccessProperty: anAccessProperty [
 	^ self visitHandleObject: anAccessProperty
