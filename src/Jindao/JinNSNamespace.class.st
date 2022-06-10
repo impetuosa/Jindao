@@ -226,6 +226,11 @@ JinNSNamespace >> parent: aJinNSNamespace [
 	parent := aJinNSNamespace
 ]
 
+{ #category : #'as yet unclassified' }
+JinNSNamespace >> parentChain [
+	self shouldBeImplemented.
+]
+
 { #category : #accessing }
 JinNSNamespace >> printOn: aStream [
 

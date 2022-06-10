@@ -28,6 +28,25 @@ JinNSNameEntry >> assembly [
 	^ parent assembly
 ]
 
+{ #category : #testing }
+JinNSNameEntry >> canBeFoundedInJinDAM: aJinDAMModel [
+
+	| artefact anchor candidate |
+	anchor := self anchor.
+	artefact := aJinDAMModel accessModulesAndLibraries
+		            detect: [ :e | 
+		            e name asLowercase = anchor elementProject asLowercase ]
+		            ifNone: [ ^ false ].
+
+	candidate := anchor elementsNameKindPairs
+		             inject: artefact
+		             into: [ :nav :each | 
+			             [ nav find: each second named: each first ]
+				             on: NotFound
+				             do: [ ^ false ] ].
+	^ true
+]
+
 { #category : #'as yet unclassified' }
 JinNSNameEntry >> containingSymbols [
 
@@ -79,6 +98,12 @@ JinNSNameEntry >> parent [
 { #category : #accessing }
 JinNSNameEntry >> parent: aParent [ 
 	 parent := aParent 
+]
+
+{ #category : #'as yet unclassified' }
+JinNSNameEntry >> parentChain [
+
+	^ { self } , parent parentChain
 ]
 
 { #category : #accessing }

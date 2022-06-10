@@ -2,7 +2,8 @@ Class {
 	#name : #JinDAMSelectiveProjectImporter,
 	#superclass : #JinDAMProjectImporter,
 	#instVars : [
-		'block'
+		'block',
+		'internalDependenciesBlock'
 	],
 	#category : #'JinDAM-Importers'
 }
@@ -14,9 +15,54 @@ JinDAMSelectiveProjectImporter >> block: aBlock [
 ]
 
 { #category : #accessing }
+JinDAMSelectiveProjectImporter >> internalDependenciesBlock: aBlock [
+
+	internalDependenciesBlock := aBlock
+]
+
+{ #category : #accessing }
+JinDAMSelectiveProjectImporter >> loadInternalDependencies: aJinAccessProject [
+	internalDependenciesBlock ifNil: [ ^ self ].
+	self use: internalDependenciesBlock during: [ 
+		self
+			visitCollection: [ aJinAccessProject tables ]
+			from: aJinAccessProject.
+		self phaseFinished.
+		self
+			visitCollection: [ aJinAccessProject queries ]
+			from: aJinAccessProject.
+		self phaseFinished.
+		self
+			visitCollection: [ aJinAccessProject relations ]
+			from: aJinAccessProject.
+		self phaseFinished.
+		self
+			visitCollection: [ aJinAccessProject modules ]
+			from: aJinAccessProject.
+		self phaseFinished.
+		self
+			visitCollection: [ aJinAccessProject reports ]
+			from: aJinAccessProject.
+		self phaseFinished.
+		self
+			visitCollection: [ aJinAccessProject forms ]
+			from: aJinAccessProject.
+		self phaseFinished ]
+]
+
+{ #category : #accessing }
 JinDAMSelectiveProjectImporter >> new [
 
 	^ self
+]
+
+{ #category : #accessing }
+JinDAMSelectiveProjectImporter >> use: aPredicate during: aBlock [
+
+	| prev |
+	prev := block.
+	block := aPredicate.
+	^ aBlock ensure: [ block := prev ]
 ]
 
 { #category : #accessing }
@@ -48,4 +94,53 @@ JinDAMSelectiveProjectImporter >> visitCollection: aCollection from: project [
 
 			project reopen.
 			(aCollection value at: i) acceptVisitor: self ] ]
+]
+
+{ #category : #accessing }
+JinDAMSelectiveProjectImporter >> visitProject: aJinAccessProject [
+
+	| ret |
+	projects push: aJinAccessProject.
+
+	phase := 0.
+
+	self state ifEmpty: [ 
+		self state push: (self instantiate: JinDAMAccessModule) ].
+	ret := self state top.
+
+
+	self state top name: aJinAccessProject name.
+	self state top anchor: (JinAnchor on: #/) / aJinAccessProject name.
+	self state top addDependency: (self sdkLibrary).
+	self state top path: aJinAccessProject projectPath fullName.
+
+	processedReferences
+		at: aJinAccessProject projectPath fullName asLowercase
+		ifAbsentPut: [ self state top ].
+
+
+		self visitCollection: [aJinAccessProject tables] from: aJinAccessProject.
+	self phaseFinished.
+	self visitCollection: [aJinAccessProject queries] from: aJinAccessProject.
+	self phaseFinished.
+	self visitCollection: [aJinAccessProject relations] from: aJinAccessProject.
+	self phaseFinished.
+self visitCollection: [aJinAccessProject modules] from: aJinAccessProject.
+self phaseFinished.
+	self visitCollection: [aJinAccessProject reports] from: aJinAccessProject.
+	self phaseFinished.
+		self visitCollection: [aJinAccessProject forms] from: aJinAccessProject.
+	self phaseFinished.
+	
+	projects size = 1 ifTrue: [ self loadInternalDependencies: aJinAccessProject  ].
+	
+	self visitCollection: [aJinAccessProject references] from: aJinAccessProject.
+	self phaseFinished.
+
+	projects pop.
+	self assertIf: ret = self state top.
+
+
+
+	^ ret
 ]

@@ -61,6 +61,12 @@ JinDAMImporter class >> importerForMoxing [
 ]
 
 { #category : #accessing }
+JinDAMImporter >> artefacts [
+
+	^ artefacts
+]
+
+{ #category : #accessing }
 JinDAMImporter >> createDefaultVisitor [
 	^ importer := provider build
 ]
@@ -104,6 +110,11 @@ JinDAMImporter >> import: aProjectPath symbolTableAt: aString [
 			symbolTable saveAs: aString asFileReference.
 			project closeAndQuit ].
 	^ self import: aProjectPath
+]
+
+{ #category : #accessing }
+JinDAMImporter >> importer [
+	^ importer
 ]
 
 { #category : #accessing }

@@ -27,6 +27,25 @@ JinNSSubNamespace >> assembly [
 	^ tag isAssembly ifTrue: [ self ] ifFalse: [ parent assembly ]
 ]
 
+{ #category : #testing }
+JinNSSubNamespace >> canBeFoundedInJinDAM: aJinDAMModel [
+
+	| artefact anchor candidate |
+	anchor := self anchor.
+	artefact := aJinDAMModel accessModulesAndLibraries
+		            detect: [ :e | 
+		            e name asLowercase = anchor elementProject asLowercase ]
+		            ifNone: [ ^ false ].
+
+	candidate := anchor elementsNameKindPairs
+		             inject: artefact
+		             into: [ :nav :each | 
+			             [ nav find: each second named: each first ]
+				             on: NotFound
+				             do: [ ^ false ] ].
+	^ true
+]
+
 { #category : #'as yet unclassified' }
 JinNSSubNamespace >> containingSymbols [
 
@@ -53,6 +72,14 @@ JinNSSubNamespace >> owner [
 { #category : #accessing }
 JinNSSubNamespace >> owner: aJinNSEntryOwner [ 
 	owner := aJinNSEntryOwner.
+]
+
+{ #category : #'as yet unclassified' }
+JinNSSubNamespace >> parentChain [
+
+	^ { self } ,( self kind isAssembly
+		  ifTrue: [ {  } ]
+		  ifFalse: [ parent parentChain ])
 ]
 
 { #category : #accessing }

@@ -124,6 +124,15 @@ JinDAMImportingVisitorProvider >> importProjectElementsThat: aBlock [
 ]
 
 { #category : #configuration }
+JinDAMImportingVisitorProvider >> importProjectElementsThat: aBlock loadingInternalDependenciesThat: anOtherBlock [
+
+	projectVisitor := JinDAMSelectiveProjectImporter new
+		                  block: aBlock;
+		                  internalDependenciesBlock: anOtherBlock;
+		                  yourself
+]
+
+{ #category : #configuration }
 JinDAMImportingVisitorProvider >> importSyntacticElements [
 	Warning signal: 'You are about to load only basic syntactical elements. Are you sure? this will lead to dummy functions / procedures without body. watn to use importAllSyntacticElements instead? '.
 	syntaxVisitor := JinDAMASTCodeImporter

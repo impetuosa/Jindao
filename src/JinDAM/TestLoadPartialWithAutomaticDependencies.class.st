@@ -4,10 +4,28 @@ Class {
 	#instVars : [
 		'usedSymbols',
 		'requiredSymbols',
-		'isLoadingReferences'
+		'isLoadingReferences',
+		'internallyRequiredSymbols'
 	],
 	#category : #'JinDAM-Tests'
 }
+
+{ #category : #'as yet unclassified' }
+TestLoadPartialWithAutomaticDependencies >> internallyRequiredSymbols [
+
+	^ internallyRequiredSymbols ifNil: [ 
+		  internallyRequiredSymbols := ((importer usedSymbols reject: #isNil) 
+			                                select: [ :a | 
+				                                a assembly isNotNil and: [ 
+					                                a assembly name asLowercase
+					                                = #magact ] ]) flatCollect:
+			                               #containingSymbols.
+
+		  internallyRequiredSymbols := internallyRequiredSymbols reject: [ 
+			                               :symbol | 
+			                               symbol canBeFoundedInJinDAM:
+				                               importer importer model ] ]
+]
 
 { #category : #initialization }
 TestLoadPartialWithAutomaticDependencies >> isLoadingReferences [
@@ -22,6 +40,13 @@ TestLoadPartialWithAutomaticDependencies >> isLoadingReferences [
 TestLoadPartialWithAutomaticDependencies >> isRequired: aLibraryElement [
 
 	^ self requiredSymbols anySatisfy: [ :symbol | 
+		  aLibraryElement isReferredBySymbol: symbol ]
+]
+
+{ #category : #initialization }
+TestLoadPartialWithAutomaticDependencies >> isRequiredInternally: aLibraryElement [
+
+	^ self internallyRequiredSymbols anySatisfy: [ :symbol | 
 		  aLibraryElement isReferredBySymbol: symbol ]
 ]
 
@@ -48,11 +73,12 @@ TestLoadPartialWithAutomaticDependencies >> setUp [
 		importProjectElementsThat: [ :a | 
 			a isModelObject
 				ifTrue: [ 
-					(a name includesSubstring: 'ActeNaissance' caseSensitive: false) 
-						or: [ self isLoadingReferences and: [ self isRequired: a ] ] ]
+					(a name includesSubstring: 'Naissance' caseSensitive: false) or: [ 
+							self isLoadingReferences and: [ self isRequired: a ] ] ]
 				ifFalse: [ 
 					(a isAccessProject or: [ a isLibrary ]) and: [ 
-							self shouldLoadDependency: a ] ] ].
+							self shouldLoadDependency: a ] ] ]
+		loadingInternalDependenciesThat:[ : d | self isRequiredInternally: d ].
 	self import.
 	self link
 ]
@@ -73,18 +99,23 @@ TestLoadPartialWithAutomaticDependencies >> shouldLoadDependency: anArtefact [
 { #category : #initialization }
 TestLoadPartialWithAutomaticDependencies >> testModelShouldOnlyContainAModuleALibraryAndAUserType [
 
-	self assert: model accessModules size equals: 1.
-	self assert: model accessModules first name equals: #magact.
+	self assert: model accessModules size equals: 5.
+	self
+		assert: (model accessModules collect: #name) asSet
+		equals: #( 'magact' 'MAGDEM' 'MAGGPEB' 'CACCUEIL' 'CUTL' ) asSet.
 
-	self assert: model accessLibraries size equals: 1.
-	self assert: model accessLibraries first name equals: #VBALang.
+	self assert: model accessLibraries size equals: 7.
+	self
+		assert: (model accessLibraries collect: #name) asSet
+		equals:
+			#( 'MSForms' 'WMEBoutons020000' 'ADODB' 'DAO' 'VBA' 'Access'
+			   #VBALang ) asSet.
 
-	self assert: model userTypes size equals: 3.
-	self assert:
-		(model userTypes anySatisfy: [ :a | a name = #Form_Fact ]).
-	self assert:
-		(model userTypes anySatisfy: [ :a | a name = #mActeNaissance ]).
-	self assert: (model userTypes anySatisfy: [ :a | a name = #Debug ])
+	self assert: (model accessModules first types allSatisfy: [ :t | 
+			 t name includesSubstring: #ActeNaissance caseSensitive: false ]).
+
+	self assert: model userTypes size equals: 83.
+
 ]
 
 { #category : #accessing }
