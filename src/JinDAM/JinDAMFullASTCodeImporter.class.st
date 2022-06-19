@@ -79,7 +79,6 @@ JinDAMFullASTCodeImporter >> nodeToTypeReferenceName: aVBNode context: aContext 
 	t := self referenceNameConverter
 		     toTypeReferenceName: aVBNode
 		     context: aContext.
-"	self assert: (t isKindOf: JinDAMTypeReference)."
 	^ t
 ]
 
@@ -291,7 +290,8 @@ JinDAMFullASTCodeImporter >> visitDefineType: aDefineType [
 	aDefineType fields doWithIndex: [ :d :i | 
 		| name attr |
 		name := self nodeToString: d name.
-		d type sizes ifNotEmpty: [ 
+		self assert: d _size isNil. 
+		d _size ifNotNil: [ 
 			name := name
 			        ,
 			        ('-' join:
@@ -730,18 +730,20 @@ JinDAMFullASTCodeImporter >> visitImplements: anImplements [
 JinDAMFullASTCodeImporter >> visitImplicitParenthesesLessCall: anImplicitParenthesesLessCall [
 
 	| element args |
-
 	element := anImplicitParenthesesLessCall selector acceptVisitor: self.
 
 	" Element should be either an access or an invocation. both cases it may have arguments (either for invocation or array access). "
 
 	" Can we visit the arguments? we may need to add them as arguments int o the element."
-	self state push: element.
-	args := anImplicitParenthesesLessCall arguments acceptVisitor: self.
-	self assert: args = element readReference arguments.
+
+	anImplicitParenthesesLessCall arguments ifNotNil: [ 
+		self state push: element.
+
+		args := anImplicitParenthesesLessCall arguments acceptVisitor: self.
+		self assert: args = element readReference arguments.
 
 
-	self state pop.
+		self state pop ].
 	^ element
 ]
 
@@ -1080,24 +1082,11 @@ JinDAMFullASTCodeImporter >> visitPrintIntoFileClause: aVBPrintIntoFileClauseNod
 JinDAMFullASTCodeImporter >> visitProcedureCallOrArrayAccess: aProcedureCallOrArrayAccess [
 
 	| element ref |
-	self assert: (aProcedureCallOrArrayAccess selector isNil xor:
-			 aProcedureCallOrArrayAccess receiver isNil).
+	self assert: aProcedureCallOrArrayAccess selector isNotNil.
 
-	aProcedureCallOrArrayAccess selector
-		ifNotNil: [ 
-			element := aProcedureCallOrArrayAccess selector acceptVisitor: self ]
-		ifNil: [ 
-			element := self instantiate: JinDAMAccessRead.
-			ref := aProcedureCallOrArrayAccess receiver acceptVisitor: self.
-			ref := (self instantiate: JinDAMExpressionReference)
-				       anchor: (self
-						        codeAnchor: 'expression'
-						        for: aProcedureCallOrArrayAccess receiver);
-				       candidate: ref;
-				       candidateAnchor: ref anchor;
-				       context: element;
-				       yourself.
-			element readReference: ref ].
+
+	element := aProcedureCallOrArrayAccess selector acceptVisitor: self.
+
 	element anchor:
 		(self codeAnchor: 'memberRead' for: aProcedureCallOrArrayAccess).
 	element readReference isTypeReference ifTrue: [ 

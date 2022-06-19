@@ -218,11 +218,12 @@ JinDAMASTCodeImporter >> visitDefineType: aDefineType [
 	aDefineType fields doWithIndex: [ :d :i | 
 		| name attr |
 		name := self nodeToString: d name.
-		d type sizes ifNotEmpty: [ 
+		self assert: d _size isNil.
+	"	d _size ifNotEmpty: [ 
 			name := name
 			        ,
 			        ('-' join:
-				         (d type sizes collect: [ :d2 | self nodeToString: d2 ])) ].
+				         (d type sizes collect: [ :d2 | self nodeToString: d2 ])) ]."
 		self assert: d type class = VBTypedThingNode.
 		attr := self instantiate: JinDAMAttribute.
 		attr
@@ -513,12 +514,11 @@ JinDAMASTCodeImporter >> visitImplicitParenthesesLessCall: anImplicitParentheses
 	element := anImplicitParenthesesLessCall selector acceptVisitor: self.
 
 	" Element should be either an access or an invocation. both cases it may have arguments (either for invocation or array access). "
+	anImplicitParenthesesLessCall arguments ifNotNil: [ " Can we visit the arguments? we may need to add them as arguments int o the element."
+		self state push: element.
 
-	" Can we visit the arguments? we may need to add them as arguments int o the element."
-	self state push: element.
-
-	anImplicitParenthesesLessCall arguments acceptVisitor: self.
-	self state pop
+		anImplicitParenthesesLessCall arguments acceptVisitor: self.
+		self state pop ]
 ]
 
 { #category : #'functions - subs - events' }
@@ -721,24 +721,9 @@ JinDAMASTCodeImporter >> visitParameter: aParameter [
 JinDAMASTCodeImporter >> visitProcedureCallOrArrayAccess: aProcedureCallOrArrayAccess [
 
 	| element ref |
-	self assert: (aProcedureCallOrArrayAccess selector isNil xor:
-			 aProcedureCallOrArrayAccess receiver isNil).
+	self assert: aProcedureCallOrArrayAccess selector isNotNil.
 
-	aProcedureCallOrArrayAccess selector
-		ifNotNil: [ 
-			element := aProcedureCallOrArrayAccess selector acceptVisitor: self ]
-		ifNil: [ 
-			element := self instantiate: JinDAMAccessRead.
-			ref := aProcedureCallOrArrayAccess receiver acceptVisitor: self.
-			ref := (self instantiate: JinDAMExpressionReference)
-				       anchor: (self
-						        codeAnchor: 'expression'
-						        for: aProcedureCallOrArrayAccess receiver);
-				       candidate: ref;
-				       candidateAnchor: ref anchor;
-				       context: element;
-				       yourself.
-			element readReference: ref ].
+	element := aProcedureCallOrArrayAccess selector acceptVisitor: self.
 	element anchor:
 		(self codeAnchor: 'memberRead' for: aProcedureCallOrArrayAccess).
 	element readReference isTypeReference ifTrue: [ 

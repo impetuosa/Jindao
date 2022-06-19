@@ -47,12 +47,13 @@ JinDAMVBVisitorToReferenceName >> toTypeReferenceName: aNode context: context [
 		Recordset2 context is DAO keyword context.
 		Now the type of the attribute A is Recordset2. 
 	"
-
-
-	^ importer
-		  instantiateReferenceForNames: refChain
-		  context: context
-		  preferring: { #isType. #isAssembly }
+	^ refChain
+		  ifEmpty: [ self undefinedTypeReferenceContext: context ]
+		  ifNotEmpty: [ 
+			  importer
+				  instantiateReferenceForNames: refChain
+				  context: context
+				  preferring: { #isType. #isAssembly } ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -194,6 +195,12 @@ JinDAMVBVisitorToReferenceName >> visitSimpleIdentifier: aVBSimpleIdentifierNode
 	^ {aVBSimpleIdentifierNode token value}
 ]
 
+{ #category : #visiting }
+JinDAMVBVisitorToReferenceName >> visitSimpleType: aVBSimpleTypeNode [
+
+	^ aVBSimpleTypeNode typeName acceptVisitor: self
+]
+
 { #category : #'as yet unclassified' }
 JinDAMVBVisitorToReferenceName >> visitSmaccToken: aSmaCCCaseInsensitiveToken [
 	^ {aSmaCCCaseInsensitiveToken value asSymbol}
@@ -231,6 +238,7 @@ JinDAMVBVisitorToReferenceName >> visitTypeSize: aVBTypeSizeNode [
 { #category : #'as yet unclassified' }
 JinDAMVBVisitorToReferenceName >> visitTypedThing: aVBTypedThingNode [
 
+	aVBTypedThingNode type ifNil: [ ^ {  } ].
 	^ ((aVBTypedThingNode type acceptVisitor: self) ifNil: [ {  } ]) 
 		  collect: [ :a | 
 			  a isArray
