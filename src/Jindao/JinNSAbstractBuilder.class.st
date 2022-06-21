@@ -168,19 +168,33 @@ JinNSAbstractBuilder >> visitModule: aJinModule [
 
 { #category : #visiting }
 JinNSAbstractBuilder >> visitProject: aJinAccessProject [
- 
-   self visitCollection: [aJinAccessProject references] from: aJinAccessProject.
-	self visitCollection: [aJinAccessProject modules] from: aJinAccessProject.
-	
-	
-	self visitCollection: [aJinAccessProject forms] from: aJinAccessProject.
-	self visitCollection: [aJinAccessProject reports] from: aJinAccessProject.
-	
-	
-	self visitCollection: [aJinAccessProject tables] from: aJinAccessProject.
-	self visitCollection: [aJinAccessProject queries] from: aJinAccessProject.
-	self visitCollection: [aJinAccessProject relations] from: aJinAccessProject.
-	self visitCollection: [aJinAccessProject macros] from: aJinAccessProject
+
+	self visitReferenceCollectionFrom: aJinAccessProject.
+	self
+		visitCollection: [ aJinAccessProject modules ]
+		from: aJinAccessProject.
+
+
+	self
+		visitCollection: [ aJinAccessProject forms ]
+		from: aJinAccessProject.
+	self
+		visitCollection: [ aJinAccessProject reports ]
+		from: aJinAccessProject.
+
+
+	self
+		visitCollection: [ aJinAccessProject tables ]
+		from: aJinAccessProject.
+	self
+		visitCollection: [ aJinAccessProject queries ]
+		from: aJinAccessProject.
+	self
+		visitCollection: [ aJinAccessProject relations ]
+		from: aJinAccessProject.
+	self
+		visitCollection: [ aJinAccessProject macros ]
+		from: aJinAccessProject
 ]
 
 { #category : #visiting }
@@ -191,6 +205,7 @@ JinNSAbstractBuilder >> visitQuery: aJinQuery [
 
 { #category : #visiting }
 JinNSAbstractBuilder >> visitReference: aJinReference [
+
 
 	(self visitedReferences includes:
 		 aJinReference path fullName asLowercase) ifFalse: [ 
@@ -219,6 +234,26 @@ JinNSAbstractBuilder >> visitReference: aJinReference [
 	self assemblyNamespaces
 		detect: [ :a | a name = aJinReference name ]
 		ifFound: [ :a | self currentAssemblyNamespace addFriend: a ]
+]
+
+{ #category : #visiting }
+JinNSAbstractBuilder >> visitReferenceCollectionFrom: aJinAccessProject [
+
+	| stackSize win32Error isError0x80020009 |
+	stackSize := stack size.
+	win32Error := false.
+	1 to: aJinAccessProject references value size do: [ :i | " Try to visit. If it fails it restarts the project and it does continue. If it fails twice it let the exception to go "
+		[ (aJinAccessProject references value at: i) acceptVisitor: self ]
+			on: Win32Error
+			do: [ :e | 
+				isError0x80020009 := e isError0x80020009.
+				win32Error := true ].
+		win32Error ifTrue: [ 
+			win32Error := false.
+			stack size = stackSize ifFalse: [ self halt: 'Umathching stacks!!' ].
+			isError0x80020009 ifFalse: [ 
+				aJinAccessProject reopen.
+				(aJinAccessProject references at: i) acceptVisitor: self ] ] ]
 ]
 
 { #category : #visiting }
