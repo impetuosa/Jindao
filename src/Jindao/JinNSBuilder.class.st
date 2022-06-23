@@ -52,6 +52,7 @@ JinNSBuilder >> assemblyNamespaces [
 { #category : #initialization }
 JinNSBuilder >> buildFor: anAccessProject [
 
+
 	(self visitedReferences includes:
 		 anAccessProject path fullName asLowercase) ifFalse: [ 
 		stack push: (self newExternalNamespaceFor: anAccessProject).

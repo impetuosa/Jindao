@@ -28,9 +28,10 @@ JinNSSubBuilder >> assemblyNamespaces [
 { #category : #visiting }
 JinNSSubBuilder >> buildFor: anAccessProject [
 
+
 	stack push: self externalNamespaces first.
 	stack push: (self
-			 newAssemblyNamespace: reference 
+			 newAssemblyNamespace: reference
 			 owner: (self typeOwnerFor: anAccessProject)).
 	parent visitedReferences add:
 		anAccessProject path fullName asLowercase.
@@ -53,6 +54,7 @@ JinNSSubBuilder >> subbuildFor: project builder: aMainBuilder reference: aRefere
 
 { #category : #'as yet unclassified' }
 JinNSSubBuilder >> visitReference: aJinReference [
+
 
 	(self visitedReferences includes:
 		 aJinReference path fullName asLowercase) ifFalse: [ 
