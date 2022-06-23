@@ -752,6 +752,19 @@ JinDAMFullASTCodeImporter >> visitIntegerLiteral: aLiteral [
 	^ self visitLiteral: aLiteral 
 ]
 
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitInterval: aVBIntervalNode [
+
+	| comp |
+	comp := self instantiate: JinDAMInterval.
+
+
+	comp left: (aVBIntervalNode from acceptVisitor: self).
+	comp operator: #to.
+	comp right: (aVBIntervalNode to acceptVisitor: self).
+	^ comp
+]
+
 { #category : #'avoiding visit' }
 JinDAMFullASTCodeImporter >> visitLabel: aLabel [
 
@@ -1131,7 +1144,7 @@ JinDAMFullASTCodeImporter >> visitReDimVariable: aReDimVariable [
 	self state top localVariables
 		detect: [ :a | a name = aReDimVariable variable name token value ]
 		ifFound: [ :e | 
-		e redim: (self nodeToString: aReDimVariable variable type) ]
+		e redim: (self nodeToString: aReDimVariable variable _size) ]
 		ifNone: [  ]
 ]
 
@@ -1193,7 +1206,8 @@ JinDAMFullASTCodeImporter >> visitSimpleIdentifier: aSimpleIdentifier [
 						       aSimpleIdentifier token value.
 						       #member } }
 				       context: read
-				       preferring: { #isAttribute. #isInvocable. #isType }.
+				       preferring:
+				       { #isAttribute. #isInvocable. #isType. #isAssembly }.
 			read readReference: tip.
 			read anchor: (self codeAnchor: 'memberRead' for: aSimpleIdentifier).
 			self state top addAccess: read ].

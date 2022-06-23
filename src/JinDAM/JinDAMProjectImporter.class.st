@@ -12,7 +12,7 @@ Class {
 
 { #category : #'visit-first-objects' }
 JinDAMProjectImporter >> assertIf: abool [ 
-	self assert: abool
+"	self assert: abool"
 ]
 
 { #category : #'visit-first-objects' }
@@ -94,13 +94,13 @@ JinDAMProjectImporter >> visitProject: aJinAccessProject [
 		at: aJinAccessProject projectPath fullName asLowercase
 		ifAbsentPut: [ self state top ].
 
-
+"
 		self visitCollection: [aJinAccessProject tables] from: aJinAccessProject.
 	self phaseFinished.
 	self visitCollection: [aJinAccessProject queries] from: aJinAccessProject.
 	self phaseFinished.
 	self visitCollection: [aJinAccessProject relations] from: aJinAccessProject.
-	self phaseFinished.
+	self phaseFinished."
 self visitCollection: [aJinAccessProject modules] from: aJinAccessProject.
 self phaseFinished.
 	self visitCollection: [aJinAccessProject reports] from: aJinAccessProject.

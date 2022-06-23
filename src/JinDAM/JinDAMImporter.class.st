@@ -196,10 +196,16 @@ JinDAMImporter >> manageAnchorLookInReference: r in: aJinDAMModel [
 							ifTrue: [ r candidate: candidate ]
 							ifFalse: [ 
 								candidates := aJinDAMModel entities select: [ :a | 
-									              a isInvocable and: [ a name = r name ] ].
+									              a isInvocable and: [ 
+										              a name = r name and: [ 
+											              r arguments size
+												              between:
+												              (a parameters reject: [ :p | p isOptional ])
+													              size
+												              and: a parameters size ] ] ].
 								candidates size = 1
-									ifTrue: [ r candidate: candidate ]
-									ifFalse: [ self halt ] ] ] ] ]
+									ifTrue: [ r candidate: candidates first ]
+									ifFalse: [ r candidate: candidate ] ] ] ] ]
 ]
 
 { #category : #accessing }
