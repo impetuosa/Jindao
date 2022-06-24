@@ -5,6 +5,12 @@ Class {
 }
 
 { #category : #visiting }
+JinDAMReturnEmpty >> accept: anAlceJinDAMPhase1Loader [
+
+	^  anAlceJinDAMPhase1Loader visitReturnEmpty: self
+]
+
+{ #category : #visiting }
 JinDAMReturnEmpty >> acceptVisitor: aVisitor [
 
 	^ aVisitor visitReturnEmpty: self
