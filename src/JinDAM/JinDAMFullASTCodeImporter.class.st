@@ -747,6 +747,13 @@ JinDAMFullASTCodeImporter >> visitImplicitParenthesesLessCall: anImplicitParenth
 	^ element
 ]
 
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitInfinityLoop: aVBInfinityLoopNode [
+
+	^ (self instantiate: JinDAMInfinityLoop) block:
+		  (aVBInfinityLoopNode body acceptVisitor: self)
+]
+
 { #category : #'functions - subs - events' }
 JinDAMFullASTCodeImporter >> visitIntegerLiteral: aLiteral [ 
 	^ self visitLiteral: aLiteral 
