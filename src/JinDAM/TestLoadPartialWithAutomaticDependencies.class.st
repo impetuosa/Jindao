@@ -99,10 +99,11 @@ TestLoadPartialWithAutomaticDependencies >> shouldLoadDependency: anArtefact [
 { #category : #initialization }
 TestLoadPartialWithAutomaticDependencies >> testModelShouldOnlyContainAModuleALibraryAndAUserType [
 
-	self assert: model accessModules size equals: 5.
+	self assert: model accessModules size equals: 6.
 	self
 		assert: (model accessModules collect: #name) asSet
-		equals: #( 'magact' 'MAGDEM' 'MAGGPEB' 'CACCUEIL' 'CUTL' ) asSet.
+		equals:
+		#( 'magact' 'MAGDEM' 'MAGGPEB' 'CACCUEIL' 'CUTL' 'chabil' ) asSet.
 
 	self assert: model accessLibraries size equals: 7.
 	self
@@ -114,8 +115,8 @@ TestLoadPartialWithAutomaticDependencies >> testModelShouldOnlyContainAModuleALi
 	self assert: (model accessModules first types allSatisfy: [ :t | 
 			 t name includesSubstring: #ActeNaissance caseSensitive: false ]).
 
-	self assert: model userTypes size equals: 83.
-
+	self assert: model userTypes size equals: 191.
+	JinDAMImporter egrc: model
 ]
 
 { #category : #accessing }
