@@ -87,40 +87,43 @@ JinDAMProjectImporter >> visitProject: aJinAccessProject [
 
 	self state top name: aJinAccessProject name.
 	self state top anchor: (JinAnchor on: #/) / aJinAccessProject name.
-	self state top addDependency: (self sdkLibrary).
+	self state top addDependency: self sdkLibrary.
 	self state top path: aJinAccessProject projectPath fullName.
 
 	processedReferences
 		at: aJinAccessProject projectPath fullName asLowercase
 		ifAbsentPut: [ self state top ].
-
-"
+	[ "
 		self visitCollection: [aJinAccessProject tables] from: aJinAccessProject.
 	self phaseFinished.
 	self visitCollection: [aJinAccessProject queries] from: aJinAccessProject.
 	self phaseFinished.
 	self visitCollection: [aJinAccessProject relations] from: aJinAccessProject.
 	self phaseFinished."
-self visitCollection: [aJinAccessProject modules] from: aJinAccessProject.
-self phaseFinished.
-	self visitCollection: [aJinAccessProject reports] from: aJinAccessProject.
+	self
+		visitCollection: [ aJinAccessProject modules ]
+		from: aJinAccessProject.
 	self phaseFinished.
-		self visitCollection: [aJinAccessProject forms] from: aJinAccessProject.
+	self
+		visitCollection: [ aJinAccessProject reports ]
+		from: aJinAccessProject.
+	self phaseFinished.
+	self
+		visitCollection: [ aJinAccessProject forms ]
+		from: aJinAccessProject.
 	self phaseFinished.
 
-	self visitCollection: [aJinAccessProject references] from: aJinAccessProject.
-	self phaseFinished.
-	
+	self
+		visitCollection: [ aJinAccessProject references ]
+		from: aJinAccessProject.
+	self phaseFinished
 
-	
+
+
 
 	"self visitCollection: [aJinAccessProject macros] from: aJinAccessProject.
-self phaseFinished."
-
-
-
-
-	projects pop.
+self phaseFinished." ] 
+		ensure: [ projects pop ].
 	self assertIf: ret = self state top.
 
 
