@@ -66,6 +66,7 @@ TestLoadPartialWithAutomaticDependencies >> setUp [
 	"Loads the mActeNaissance module The Fact Form and all the inside elements."
 	importer provider
 		importGUIElements;
+		importDatabase;
 		importGUIControlElementsNoObjectProperties;
 		importAccessReferences;
 		importLibraryReferencesThat: [ :libraryElement | 
@@ -78,7 +79,8 @@ TestLoadPartialWithAutomaticDependencies >> setUp [
 				ifFalse: [ 
 					(a isAccessProject or: [ a isLibrary ]) and: [ 
 							self shouldLoadDependency: a ] ] ]
-		loadingInternalDependenciesThat:[ : d | self isRequiredInternally: d ].
+		loadingInternalDependenciesThat: [ :d | 
+			self isRequiredInternally: d ].
 	self import.
 	self link
 ]

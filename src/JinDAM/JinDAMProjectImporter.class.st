@@ -93,13 +93,13 @@ JinDAMProjectImporter >> visitProject: aJinAccessProject [
 	processedReferences
 		at: aJinAccessProject projectPath fullName asLowercase
 		ifAbsentPut: [ self state top ].
-	[ "
+	[ 
 		self visitCollection: [aJinAccessProject tables] from: aJinAccessProject.
 	self phaseFinished.
 	self visitCollection: [aJinAccessProject queries] from: aJinAccessProject.
 	self phaseFinished.
 	self visitCollection: [aJinAccessProject relations] from: aJinAccessProject.
-	self phaseFinished."
+	self phaseFinished.
 	self
 		visitCollection: [ aJinAccessProject modules ]
 		from: aJinAccessProject.
