@@ -26,6 +26,11 @@ JinDAMTypeReference >> dimensions [
 ]
 
 { #category : #accessing }
+JinDAMTypeReference >> dimensions: aCollection [ 
+	dimensions := aCollection
+]
+
+{ #category : #accessing }
 JinDAMTypeReference >> isArray [ 
 	 ^ self dimensions > 0 
 ]
