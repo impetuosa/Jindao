@@ -290,12 +290,7 @@ JinDAMFullASTCodeImporter >> visitDefineType: aDefineType [
 	aDefineType fields doWithIndex: [ :d :i | 
 		| name attr |
 		name := self nodeToString: d name.
-		self assert: d _size isNil. 
-		d _size ifNotNil: [ 
-			name := name
-			        ,
-			        ('-' join:
-				         (d type sizes collect: [ :d2 | self nodeToString: d2 ])) ].
+
 		self assert: d type class = VBTypedThingNode.
 		attr := self instantiate: JinDAMAttribute.
 		attr
@@ -303,7 +298,9 @@ JinDAMFullASTCodeImporter >> visitDefineType: aDefineType [
 			name: name;
 			visibility: #Public.
 		attr typeReference: (self typeName: d type context: attr).
-
+		d sizes ifNotEmpty: [ 
+			attr typeReference dimensions:
+				((self visitCollection: d sizes) flatCollect: #yourself) ].
 
 
 		en addAttribute: attr ]
@@ -1319,6 +1316,11 @@ JinDAMFullASTCodeImporter >> visitTypeOf: aTypeOf [
 	aTypeOf type acceptVisitor: self.
 	self state pop.
 	^ element
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitTypeSize: aVBTypeSizeNode [ 
+	^ self visitCollection: aVBTypeSizeNode sizes 
 ]
 
 { #category : #visiting }
