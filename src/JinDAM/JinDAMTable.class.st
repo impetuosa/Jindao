@@ -15,7 +15,8 @@ JinDAMTable >> accept: aVisitor [
 
 { #category : #accessing }
 JinDAMTable >> indexes [
-	^ indexes
+
+	^ indexes ifNil: [ {  } ]
 ]
 
 { #category : #accessing }

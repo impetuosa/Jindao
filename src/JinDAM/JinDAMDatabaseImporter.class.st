@@ -14,20 +14,42 @@ JinDAMDatabaseImporter >> dbTypeReferenceName: aString typeSymbol: aCollection c
 
 	| enums type ref |
 	enums := aCollection select: [ :e | e kind isEnumEntry ].
-	self assert: enums size = 1.
+	enums isEmpty
+		ifFalse: [ 
+			self assert: enums size = 1.
 
-	type := self dbtypes at: enums first name , aString ifAbsentPut: [ 
-		        type := self instantiate: JinDAMDBType.
-		        type name: aString.
-		        type typeEnumReference: (self
-				         instantiateReferenceForNames: { {aString . #member} }
-				         context: aJinDAMAttribute
-				         preferring: { #isEnumEntry }) ].
-	ref := self instantiate: JinDAMTypeReference.
-	ref candidate: type.
-	ref candidateAnchor: type typeEnumReference candidateAnchor .
-	ref context: aJinDAMAttribute. 
-	^ ref
+			type := self dbtypes
+				        at: enums first name , aString
+				        ifAbsentPut: [ 
+					        type := self instantiate: JinDAMDBType.
+					        type name: aString.
+					        type typeEnumReference: (self
+							         instantiateReferenceForNames: { { 
+									         aString.
+									         #member } }
+							         context: aJinDAMAttribute
+							         preferring: { #isEnumEntry }) ].
+			ref := self instantiate: JinDAMTypeReference.
+			ref candidate: type.
+			ref candidateAnchor: type typeEnumReference candidateAnchor.
+			ref context: aJinDAMAttribute.
+			^ ref ]
+		ifTrue: [ 
+			self assert: aString = 'UnknownCode 0'.
+			type := self dbtypes at: 'UnknownCode 0' ifAbsentPut: [ 
+				        type := self instantiate: JinDAMDBType.
+				        type name: aString.
+				        type typeEnumReference: (self
+						         instantiateReferenceForNames:
+						         { { 'QueryUnknownExpressionType'.
+						         #member } }
+						         context: aJinDAMAttribute
+						         preferring: { #isEnumEntry }) ].
+			ref := self instantiate: JinDAMTypeReference.
+			ref candidate: type.
+			ref candidateAnchor: type typeEnumReference candidateAnchor.
+			ref context: aJinDAMAttribute.
+			^ ref ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -71,7 +93,6 @@ JinDAMDatabaseImporter >> visitQuery: aJinQuery [
 JinDAMDatabaseImporter >> visitTable: aJinTable [
 
 	| tab field |
-
 	tab := self instantiate: JinDAMTable.
 	tab superClassReference: (self
 			 typeReferenceName: 'TableDefs'
@@ -93,9 +114,12 @@ JinDAMDatabaseImporter >> visitTable: aJinTable [
 				 context: field).
 		tab addAttribute: field ].
 
+	[ 
 	tab indexes: (aJinTable indexes collect: [ :a | 
 			 a name -> (a fields collect: [ :f | 
-				  tab attributes detect: [ :tf | tf name = f name ] ]) ]).
+				  tab attributes detect: [ :tf | tf name = f name ] ]) ]) ]
+		on: Error
+		do: [  ].
 
 	aJinTable ensureUnload
 ]
