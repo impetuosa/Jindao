@@ -6,7 +6,6 @@ Class {
 
 { #category : #'delegate to subvisitor' }
 JinFullASTCodeVisitor >> modifiedSourceCode [
-	self halt. 
 	^ ('percy' asFileReference / self state top name
 	   , self state top className , 'bas') exists
 		  ifTrue: [ 

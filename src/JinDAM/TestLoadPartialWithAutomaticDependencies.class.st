@@ -67,7 +67,7 @@ TestLoadPartialWithAutomaticDependencies >> setUp [
 	importer provider
 		importGUIElements;
 		importDatabase;
-		importGUIControlElementsNoObjectProperties;
+		importGUIControlElements;
 		importAccessReferences;
 		importLibraryReferencesThat: [ :libraryElement | 
 			self isRequired: libraryElement ];
