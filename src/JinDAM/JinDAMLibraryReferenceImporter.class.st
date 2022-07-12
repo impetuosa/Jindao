@@ -242,20 +242,24 @@ JinDAMLibraryReferenceImporter >> visitLibraryInterface: aJinLibraryInterface [
 ]
 
 { #category : #visiting }
-JinDAMLibraryReferenceImporter >> visitLibraryMethod: aJinLibraryMethod [ 
-	| fn  selector |
-	 
+JinDAMLibraryReferenceImporter >> visitLibraryMethod: aJinLibraryMethod [
+
+	| fn selector |
 	fn := self instantiate: JinDAMFunction.
-	selector :=( '_' split: aJinLibraryMethod selector) last.  
+	selector := ('_' split: aJinLibraryMethod selector) last.
 	fn selector: selector.
 	fn anchor: self state top anchor / #functions / fn selector.
-	
-	
-	fn typeReference: (self heuristicaltypeName: aJinLibraryMethod context:fn ) .
-	
+
+
+	fn typeReference:
+		(self heuristicaltypeName: aJinLibraryMethod context: fn).
+
 	self state top addInvocable: fn.
 	self state push: fn.
-	super visitLibraryMethod: aJinLibraryMethod.
+
+	aJinLibraryMethod parameters collect: [ :element | 
+		element acceptVisitor: self ].
+
 	self state pop
 ]
 
