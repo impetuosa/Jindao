@@ -38,25 +38,40 @@ TestLoadPartialWithAutomaticDependencies >> isLoadingReferences [
 
 { #category : #initialization }
 TestLoadPartialWithAutomaticDependencies >> isRequired: aLibraryElement [
-
-	^ self requiredSymbols anySatisfy: [ :symbol | 
-		  aLibraryElement isReferredBySymbol: symbol ]
+ 
+	^ (self requiredSymbols anySatisfy: [ :symbol | 
+		   aLibraryElement isReferredBySymbol: symbol ])
+		  ifTrue: [ 
+			  self resetRequiredSymbols.
+			  true ]
+		  ifFalse: [ false ]
 ]
 
 { #category : #initialization }
 TestLoadPartialWithAutomaticDependencies >> isRequiredInternally: aLibraryElement [
 
-	^ self internallyRequiredSymbols anySatisfy: [ :symbol | 
-		  aLibraryElement isReferredBySymbol: symbol ]
+	| t |
+	t := self internallyRequiredSymbols anySatisfy: [ :symbol | 
+		     aLibraryElement isReferredBySymbol: symbol ].
+	t ifTrue: [ 
+		internallyRequiredSymbols := nil.
+		^ true ].
+	^ false
 ]
 
 { #category : #'as yet unclassified' }
 TestLoadPartialWithAutomaticDependencies >> requiredSymbols [
 
 		^ requiredSymbols ifNil: [ 
-		  self assert: usedSymbols isNotNil.
-		  requiredSymbols := (usedSymbols reject: #isNil) flatCollect:
+		  requiredSymbols := (self usedSymbols reject: #isNil) flatCollect:
 			                     #containingSymbols ]
+]
+
+{ #category : #initialization }
+TestLoadPartialWithAutomaticDependencies >> resetRequiredSymbols [
+
+	requiredSymbols := nil.
+	usedSymbols := nil
 ]
 
 { #category : #initialization }
@@ -74,7 +89,7 @@ TestLoadPartialWithAutomaticDependencies >> setUp [
 		importProjectElementsThat: [ :a | 
 			a isModelObject
 				ifTrue: [ 
-					(a name includesSubstring: 'Naissance' caseSensitive: false) or: [ 
+					(a name includesSubstring: 'Naissance' caseSensitive: true) or: [ 
 							self isLoadingReferences and: [ self isRequired: a ] ] ]
 				ifFalse: [ 
 					(a isAccessProject or: [ a isLibrary ]) and: [ 
@@ -89,13 +104,12 @@ TestLoadPartialWithAutomaticDependencies >> setUp [
 TestLoadPartialWithAutomaticDependencies >> shouldLoadDependency: anArtefact [
 
 	| names |
-
 	names := (self usedSymbols
 		          reject: #isNil
 		          thenCollect: [ :a | a assembly ])
 		         reject: #isNil
 		         thenCollect: #name.
-	^ (names includes: anArtefact name)
+	^ (names collect: #asLowercase) includes: anArtefact name asLowercase
 ]
 
 { #category : #initialization }

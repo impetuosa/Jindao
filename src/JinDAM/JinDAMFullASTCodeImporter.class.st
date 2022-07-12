@@ -1047,6 +1047,11 @@ JinDAMFullASTCodeImporter >> visitOptionBase: anOptionBase [
 ]
 
 { #category : #visiting }
+JinDAMFullASTCodeImporter >> visitOptionCompare: aVBOptionCompareNode [ 
+	self state top compareDatabase: false 
+]
+
+{ #category : #visiting }
 JinDAMFullASTCodeImporter >> visitOptionCompareDatabase: aVBOptionCompareDatabaseNode [ 
 	self state top compareDatabase: true 
 ]

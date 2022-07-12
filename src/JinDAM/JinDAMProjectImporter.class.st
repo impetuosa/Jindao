@@ -135,7 +135,7 @@ self phaseFinished." ]
 JinDAMProjectImporter >> visitReference: aJinReference [
 
 	| ref |
-	( aJinReference path fullName asLowercase includesSubstring: 'wmagnus') ifTrue: [ self halt ].
+
 	processedReferences
 		at: aJinReference path fullName asLowercase
 		ifPresent: [ :a | 

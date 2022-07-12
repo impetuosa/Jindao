@@ -31,7 +31,11 @@ JinFullASTCodeVisitor >> visitSourceCode: aCode [
 			self modifiedSourceCode
 				ifNotNil: [ :src | 
 					self state top src: src.
-					ast := VBParser parse: src ]
+					[ ast := VBParser parse: src ]
+						on: Error
+						do: [ 
+							self state top astCannotLoad: true.
+							^ self ] ]
 				ifNil: [ 
 					self state top astCannotLoad: true.
 					^ self ] ].
