@@ -144,6 +144,12 @@ JinNSKind class >> let [
 ]
 
 { #category : #convenience }
+JinNSKind class >> method [
+
+	^ self entry: #method
+]
+
+{ #category : #convenience }
 JinNSKind class >> module [
 
 	^ self entry: #module
@@ -367,7 +373,7 @@ JinNSKind >> isGlobalVariable [
 JinNSKind >> isInvocable [
 
 	^ self isAnyOf:
-		  #( isEvent isFunction isSub isExternalFunction isExternalSub isLet isGet isSet)
+		  #( isEvent isFunction isMethod isSub isExternalFunction isExternalSub isLet isGet isSet)
 ]
 
 { #category : #testing }
@@ -378,6 +384,12 @@ JinNSKind >> isLet [
 { #category : #testing }
 JinNSKind >> isLocalVariable [ 
 	 ^ kind = #localVariable 
+]
+
+{ #category : #testing }
+JinNSKind >> isMethod [
+
+	^ kind = #method
 ]
 
 { #category : #testing }

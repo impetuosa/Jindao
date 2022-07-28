@@ -310,8 +310,8 @@ JinNSASTSymbolImporter >> visitParameter: aVBParameterNode [
 ]
 
 { #category : #visiting }
-JinNSASTSymbolImporter >> visitSubDefinition: aVBSubDefinitionNode [ 
-	
+JinNSASTSymbolImporter >> visitSubDefinition: aVBSubDefinitionNode [
+
 	self
 		registerSubNamespace:
 		aVBSubDefinitionNode selector token value asSymbol

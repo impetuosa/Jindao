@@ -110,7 +110,7 @@ JinDAMFullASTCodeImporter >> registerSpecialVariable: aName type: aType [
 JinDAMFullASTCodeImporter >> visitArgument: anArgument [
 
 	| arg expression |
-	"	EL ARGUMENTO SE ESTA TRATANDO DE AGREGAR A OTRO ARGUMENTO POR UQE NO ESTOY MANEJANDO BIEN EL TYPEOF (TYPEOF ES VISITADO COMO NODO A PARTE,PERO DEBIERA PRODUCIR UNA LLAMADA A FUNCION)"
+
 	self assert: (self state top isReference or: [ 
 			 self state top isKindOf: JinDAMAccessRead ]).
 
@@ -122,11 +122,7 @@ JinDAMFullASTCodeImporter >> visitArgument: anArgument [
 	self state push: arg.
 	expression := anArgument value acceptVisitor: self.
 	self state pop.
-	"arg reads size = 1 ifFalse: [ 
-		((expression isKindOf: JinDAMBinaryOperation) or: [ 
-			 (expression isKindOf: JinDAMParentesis) or: [ 
-				 expression isKindOf: JinDAMUnaryOperation ] ]) ifFalse: [ 
-			self halt ] ]."
+
 	arg expression: expression.
 	^ arg
 ]
