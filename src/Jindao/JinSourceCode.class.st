@@ -28,6 +28,8 @@ JinSourceCode >> amountOfLines [
 JinSourceCode >> ast [
 
 	| semaphore result process |
+	^ (self class environment at: #VBParser) parse: self contents "
+	
 	semaphore := Semaphore new.
 	process := [ 
 	           [ 
@@ -45,7 +47,7 @@ JinSourceCode >> ast [
 			  result ]
 		  onTimeout: [ 
 			  process terminate.
-			  TimedOut new signal: 'TO' ]
+			  TimedOut new signal: 'TO' ]"
 ]
 
 { #category : #'as yet unclassified' }

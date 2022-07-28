@@ -31,9 +31,9 @@ JinMultiVisitor >> instantiateReferenceForNames: aCollection context: aContext p
 
 	| select symbols tip names kinds |
 	names := aCollection collect: [ :c | 
-		         c isArray
-			         ifTrue: [ c first ]
-			         ifFalse: [ c ] ].
+		         (c isArray
+			          ifTrue: [ c first ]
+			          ifFalse: [ c ]) copyReplaceAll: '$' with: '' ].
 	kinds := (aCollection collect: [ :c | 
 		          c isArray
 			          ifTrue: [ c second ]
@@ -42,7 +42,6 @@ JinMultiVisitor >> instantiateReferenceForNames: aCollection context: aContext p
 
 	symbols size > 1 ifTrue: [ 
 		select := self choose: symbols accordingToOrderedRules: rules.
-
 		self assert: select isNotEmpty.
 		symbols := select ].
 

@@ -40,7 +40,7 @@ JinDAMLibrary >> findAttributeInvocable: aString amountArguments: anInteger [
 
 	| lcName |
 	invocables ifNotNil: [ 
-		lcName := aString asLowercase.
+		lcName := aString asLowercase copyReplaceAll: '$' with: ''.
 		(invocables anySatisfy: [ :a | a name asLowercase = lcName ]) 
 			ifTrue: [ self halt ] ].
 	^ super findAttributeInvocable: aString amountArguments: anInteger

@@ -12,7 +12,13 @@ Class {
 
 { #category : #'visit-first-objects' }
 JinDAMProjectImporter >> assertIf: abool [ 
-"	self assert: abool"
+	self assert: abool
+]
+
+{ #category : #'visit-first-objects' }
+JinDAMProjectImporter >> assertStackSize: stackSize [
+
+	self assert: self state size = stackSize
 ]
 
 { #category : #'visit-first-objects' }
@@ -65,9 +71,8 @@ JinDAMProjectImporter >> visitCollection: aCollection from: project [
 			do: [ :e | win32Error := true ].
 		win32Error ifTrue: [ 
 			win32Error := false.
-			self state size = stackSize ifFalse: [ "self halt: 'Umathching stacks!!'." 
-				self state pop ].
-
+			self state size = stackSize ifFalse: [ self state pop ].
+			self assertStackSize: stackSize.
 			project reopen.
 			(aCollection value at: i) acceptVisitor: self ] ]
 ]

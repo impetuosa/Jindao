@@ -35,12 +35,13 @@ JinDAMUserType >> find: aJinNSKind named: aString [
 { #category : #'as yet unclassified' }
 JinDAMUserType >> findAttributeInvocable: aString amountArguments: amount [
 
-	| fst snd |
+	| fst snd noDollar |
+	noDollar := aString copyReplaceAll: '$' with: ''.
 	fst := (attributes ifNil: [ OrderedCollection new ]) select: [ :a | 
-		       (a name compare: aString caseSensitive: false) = 2 ].
+		       (a name compare: noDollar caseSensitive: false) = 2 ].
 	fst size > 2 ifTrue: [ 
 		snd := attributes select: [ :a | 
-			       (a name compare: aString caseSensitive: false) = 2 and: [ 
+			       (a name compare: noDollar caseSensitive: false) = 2 and: [ 
 				       a parametersSize = amount ] ].
 		fst := (snd isNotEmpty and: [ snd size < fst size ])
 			       ifTrue: [ snd ]
@@ -49,7 +50,7 @@ JinDAMUserType >> findAttributeInvocable: aString amountArguments: amount [
 		  ifEmpty: [ 
 			  (attributes ifNil: [ OrderedCollection new ]) select: [ :a | 
 				  (a name
-					   compare: (aString copyReplaceAll: '_' with: ' ')
+					   compare: (noDollar copyReplaceAll: '_' with: ' ')
 					   caseSensitive: false) = 2 ] ]
 		  ifNotEmpty: [ fst ]
 ]

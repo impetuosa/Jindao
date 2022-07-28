@@ -50,6 +50,12 @@ JinSharedCollection >> do: aBlock [
 	self copyCollection do: [ :a | aBlock value: a ]
 ]
 
+{ #category : #enumerating }
+JinSharedCollection >> flatCollect: aFullBlockClosure [
+
+	^ collection flatCollect: aFullBlockClosure
+]
+
 { #category : #adding }
 JinSharedCollection >> initialize [
 

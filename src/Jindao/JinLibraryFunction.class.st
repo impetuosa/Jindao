@@ -15,9 +15,16 @@ JinLibraryFunction >> acceptVisitor: aVisitor [
 
 { #category : #testing }
 JinLibraryFunction >> isReferredBySymbol: aJinNSNameEntry [
-
+ 
 	^ aJinNSNameEntry kind isInvocable and: [ 
-		  aJinNSNameEntry referersTo: self selector ]
+		  (aJinNSNameEntry referersTo: self selector) or: [ 
+			  aJinNSNameEntry referersTo: self loadableSelector ] ]
+]
+
+{ #category : #testing }
+JinLibraryFunction >> loadableSelector [
+
+	^ ('_' split: self selector) last
 ]
 
 { #category : #accessing }

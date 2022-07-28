@@ -70,6 +70,13 @@ JinDAMModel >> anchor [
 ]
 
 { #category : #'as yet unclassified' }
+JinDAMModel >> candidateAnchors [
+
+	^ (self references collect: #candidateAnchor thenReject: #isNil)
+		  asSet
+]
+
+{ #category : #'as yet unclassified' }
 JinDAMModel >> derivative [
 
 	^ MOModelDerivative new
@@ -102,6 +109,11 @@ JinDAMModel >> instantiate: aClass [
 	obj := aClass new.
 	entities add: obj.
 	^ obj
+]
+
+{ #category : #accessing }
+JinDAMModel >> invocations [
+	self shouldBeImplemented.
 ]
 
 { #category : #testing }

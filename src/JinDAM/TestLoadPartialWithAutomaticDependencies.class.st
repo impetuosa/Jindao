@@ -19,12 +19,7 @@ TestLoadPartialWithAutomaticDependencies >> internallyRequiredSymbols [
 				                                a assembly isNotNil and: [ 
 					                                a assembly name asLowercase
 					                                = #magact ] ]) flatCollect:
-			                               #containingSymbols.
-
-		  internallyRequiredSymbols := internallyRequiredSymbols reject: [ 
-			                               :symbol | 
-			                               symbol canBeFoundedInJinDAM:
-				                               importer importer model ] ]
+			                               #containingSymbols ]
 ]
 
 { #category : #initialization }
@@ -38,13 +33,8 @@ TestLoadPartialWithAutomaticDependencies >> isLoadingReferences [
 
 { #category : #initialization }
 TestLoadPartialWithAutomaticDependencies >> isRequired: aLibraryElement [
- 
-	^ (self requiredSymbols anySatisfy: [ :symbol | 
-		   aLibraryElement isReferredBySymbol: symbol ])
-		  ifTrue: [ 
-			  self resetRequiredSymbols.
-			  true ]
-		  ifFalse: [ false ]
+	^ self requiredSymbols anySatisfy: [ :symbol | 
+		  aLibraryElement isReferredBySymbol: symbol ]
 ]
 
 { #category : #initialization }
@@ -62,9 +52,15 @@ TestLoadPartialWithAutomaticDependencies >> isRequiredInternally: aLibraryElemen
 { #category : #'as yet unclassified' }
 TestLoadPartialWithAutomaticDependencies >> requiredSymbols [
 
-		^ requiredSymbols ifNil: [ 
+	| usedAnchors symbols |
+	^ requiredSymbols ifNil: [ 
+		  usedAnchors := importer candidateAnchors.
 		  requiredSymbols := (self usedSymbols reject: #isNil) flatCollect:
-			                     #containingSymbols ]
+			                     #containingSymbols.
+		 " symbols := (symbolTable allSymbols select: [ :a | 
+			              usedAnchors includes: a anchor ]) asSet.
+		  requiredSymbols addAll: symbols."
+		  requiredSymbols ]
 ]
 
 { #category : #initialization }
@@ -109,7 +105,12 @@ TestLoadPartialWithAutomaticDependencies >> shouldLoadDependency: anArtefact [
 		          thenCollect: [ :a | a assembly ])
 		         reject: #isNil
 		         thenCollect: #name.
-	^ (names collect: #asLowercase) includes: anArtefact name asLowercase
+	^ ((names collect: #asLowercase) includes:
+		   anArtefact name asLowercase)
+		  ifTrue: [ 
+			  self resetRequiredSymbols.
+			  true ]
+		  ifFalse: [ false ]
 ]
 
 { #category : #initialization }

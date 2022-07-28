@@ -17,6 +17,12 @@ JinNSNameEntry >> acceptVisitor: aJinNSVisitorCounter [
 ]
 
 { #category : #accessing }
+JinNSNameEntry >> allSymbols [
+
+	^ { self }
+]
+
+{ #category : #accessing }
 JinNSNameEntry >> anchor [
 
 	^ parent anchor / self kind / name
@@ -55,7 +61,10 @@ JinNSNameEntry >> containingSymbols [
 
 { #category : #'as yet unclassified' }
 JinNSNameEntry >> findSymbol: aString [
-	^ (name compare: aString caseSensitive: false) = 2
+
+	| noDollar |
+	noDollar := aString copyReplaceAll: '$' with: ''.
+	^ (name compare: noDollar caseSensitive: false) = 2
 		  ifTrue: [ { self } ]
 		  ifFalse: [ {  } ]
 ]
@@ -121,7 +130,12 @@ JinNSNameEntry >> printOn: aStream [
 JinNSNameEntry >> referersTo: aString [
 
 	| lca lcb |
-	lca := (name copyReplaceAll: '_' with: '') asLowercase.
-	lcb := (aString copyReplaceAll: '_' with: '') asLowercase.
+	lca := ((name copyReplaceAll: '_' with: '')
+		        copyReplaceAll: '$'
+		        with: '') asLowercase.
+
+	lcb := ((aString copyReplaceAll: '_' with: '')
+		        copyReplaceAll: '$'
+		        with: '') asLowercase.
 	^ lca = lcb
 ]

@@ -31,7 +31,7 @@ JinDAMArtefact >> findAttributeInvocable: aString amountArguments: anInteger [
 
 	| privateName lcName |
 	self assert: anInteger = 0.
-	lcName := aString asLowercase.
+	lcName := aString asLowercase copyReplaceAll: '$' with: ''.
 	privateName := '_' , lcName.
 
 	^ (types select: [ :t | t name asLowercase = lcName ]) ifEmpty: [ 

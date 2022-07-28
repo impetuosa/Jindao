@@ -49,9 +49,7 @@ JinNSSubNamespace >> canBeFoundedInJinDAM: aJinDAMModel [
 { #category : #'as yet unclassified' }
 JinNSSubNamespace >> containingSymbols [
 
-	^ self kind isAssembly
-		  ifFalse: [ { self } , parent containingSymbols ]
-		  ifTrue: [ {  } ]
+	^ { self } , parent containingSymbols
 ]
 
 { #category : #description }
@@ -112,7 +110,12 @@ JinNSSubNamespace >> printOn: aStream [
 JinNSSubNamespace >> referersTo: aString [
 
 	| lca lcb |
-	lca := (name copyReplaceAll: '_' with: '') asLowercase.
-	lcb := (aString copyReplaceAll: '_' with: '') asLowercase.
+	lca := ((name copyReplaceAll: '_' with: '')
+		        copyReplaceAll: '$'
+		        with: '') asLowercase.
+
+	lcb := ((aString copyReplaceAll: '_' with: '')
+		        copyReplaceAll: '$'
+		        with: '') asLowercase.
 	^ lca = lcb
 ]

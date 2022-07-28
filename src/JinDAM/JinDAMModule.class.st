@@ -73,14 +73,15 @@ JinDAMModule >> find: aJinNSKind named: aString [
 { #category : #accessing }
 JinDAMModule >> findAttributeInvocable: aString amountArguments: amount [
 
-	| sup this |
+	| sup this noDollar |
+	noDollar := aString copyReplaceAll: '$' with: ''.
 	sup := super findAttributeInvocable: aString amountArguments: amount.
 	this := invocables select: [ :a | 
-		        (a name compare: aString caseSensitive: false) = 2 and: [ 
+		        (a name compare: noDollar caseSensitive: false) = 2 and: [ 
 			        amount = a parametersSize ] ].
 	this ifEmpty: [
 	this := invocables select: [ :a | 
-		        (a name compare: aString caseSensitive: false) = 2 and: [ 
+		        (a name compare: noDollar caseSensitive: false) = 2 and: [ 
 			        amount <= a parametersSize ] ]].
 ^ sup , this
 ]

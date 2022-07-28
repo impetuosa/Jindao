@@ -12,6 +12,12 @@ Class {
 	#category : #'JinDAM-Importers'
 }
 
+{ #category : #'as yet unclassified' }
+JinDAMDispatchingImporter >> candidateAnchors [
+
+	^ model candidateAnchors
+]
+
 { #category : #'instance creation' }
 JinDAMDispatchingImporter >> filter: aBlock [
 	filter := aBlock

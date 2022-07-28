@@ -469,7 +469,23 @@ JinAccessProject >> queries [
 
 { #category : #accessing }
 JinAccessProject >> references [
-	^ application references
+
+	| all |
+	all := application references collect: #yourself.
+
+	^ (all reject: #isLibrary) , (all select: #isLibrary)
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> referencesAccess [
+
+	^ (application references collect: #yourself) reject: #isLibrary
+]
+
+{ #category : #'as yet unclassified' }
+JinAccessProject >> referencesLib [
+
+	^ (application references collect: #yourself) select: #isLibrary
 ]
 
 { #category : #'as yet unclassified' }

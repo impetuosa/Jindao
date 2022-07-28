@@ -18,7 +18,8 @@ Class {
 		'name',
 		'entries',
 		'entriesMutex',
-		'friends'
+		'friends',
+		'allSymbols'
 	],
 	#category : #'Jindao-NamespaceIndex'
 }
@@ -32,6 +33,15 @@ JinNSNamespace >> acceptVisitor: aJinNSVisitorCounter [
 { #category : #accessing }
 JinNSNamespace >> addFriend: anOtherNS [
 	 friends add: anOtherNS
+]
+
+{ #category : #accessing }
+JinNSNamespace >> allSymbols [
+
+	^ allSymbols ifNil: [ 
+		  allSymbols := entries values flatCollect: [ :a | 
+			                a flatCollect: [ :s | 
+				                s allSymbols ] ] ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -92,21 +102,23 @@ JinNSNamespace >> entriesHoldersFor: aStringOrderedCollection [
 { #category : #'as yet unclassified' }
 JinNSNamespace >> findSymbol: aString [
 
-	| ns kw word |
+	| ns noDollar |
+	noDollar := aString copyReplaceAll: '$' with: ''.
 	" Do i have it ? ""	aString asLowercase = 'currentdb' ifTrue:[ self halt ]."
 	ns := OrderedCollection new.
 	entries
-		at: aString asLowercase
+		at: noDollar asLowercase
 		ifPresent: [ :e | ns := e unsafeCopyCollection ].
 
 
 	" Does a friend has it? "
-	ns := ns , (friends flatCollect: [ :f | f friendFindSymbol: aString ])
-		      asOrderedCollection.
+	ns := ns
+	      , (friends flatCollect: [ :f | f friendFindSymbol: noDollar ])
+			      asOrderedCollection.
 
 	"Does my parent has it? "
 	parent ifNil: [ ^ ns removeDuplicates ].
-	ns := (ns , (parent findSymbol: aString)) removeDuplicates.
+	ns := (ns , (parent findSymbol: noDollar)) removeDuplicates.
 	^ ns
 ]
 

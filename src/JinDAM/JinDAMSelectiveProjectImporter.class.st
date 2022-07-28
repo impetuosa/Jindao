@@ -3,10 +3,23 @@ Class {
 	#superclass : #JinDAMProjectImporter,
 	#instVars : [
 		'block',
-		'internalDependenciesBlock'
+		'internalDependenciesBlock',
+		'libReferences'
 	],
 	#category : #'JinDAM-Importers'
 }
+
+{ #category : #accessing }
+JinDAMSelectiveProjectImporter >> accessReferences: aJinAccessProject [
+
+	| parentsRefs |
+
+	parentsRefs := projects allButFirst flatCollect: [ :r | 
+		               r referencesAccess collect: #path ].
+
+	^ aJinAccessProject referencesAccess reject: [ :ref | 
+		  parentsRefs includes: ref path ]
+]
 
 { #category : #accessing }
 JinDAMSelectiveProjectImporter >> block: aBlock [
@@ -15,9 +28,28 @@ JinDAMSelectiveProjectImporter >> block: aBlock [
 ]
 
 { #category : #accessing }
+JinDAMSelectiveProjectImporter >> initialize [
+
+	super initialize.
+	libReferences := OrderedCollection new
+]
+
+{ #category : #accessing }
 JinDAMSelectiveProjectImporter >> internalDependenciesBlock: aBlock [
 
 	internalDependenciesBlock := aBlock
+]
+
+{ #category : #accessing }
+JinDAMSelectiveProjectImporter >> libReferences: aJinAccessProject [
+
+	| parentsRefs |
+
+	parentsRefs := projects allButFirst flatCollect: [ :r | 
+		               r referencesLib collect: #path ].
+
+	^ aJinAccessProject referencesLib reject: [ :ref | 
+		  parentsRefs includes: ref path ]
 ]
 
 { #category : #accessing }
@@ -79,6 +111,7 @@ JinDAMSelectiveProjectImporter >> visitCollection: aCollectionBlock [
 JinDAMSelectiveProjectImporter >> visitCollection: aCollection from: project [
 
 	| stackSize win32Error |
+	
 	stackSize := self state size.
 	win32Error := false.
 	1 to: aCollection value size do: [ :i | " Try to visit. If it fails it restarts the project and it does continue. If it fails twice it let the exception to go "
@@ -132,9 +165,13 @@ self phaseFinished.
 		self visitCollection: [aJinAccessProject forms] from: aJinAccessProject.
 	self phaseFinished.
 	
-	projects size = 1 ifTrue: [ self loadInternalDependencies: aJinAccessProject  ].
+	projects size = 1 ifTrue: [ 
+		self loadInternalDependencies: aJinAccessProject.
+		  ].
+	self visitCollection: [ self accessReferences: aJinAccessProject ] from: aJinAccessProject.
+	self visitCollection: [ self libReferences: aJinAccessProject  ] from: aJinAccessProject.
+
 	
-	self visitCollection: [aJinAccessProject references] from: aJinAccessProject.
 	self phaseFinished.
 
 	projects pop.

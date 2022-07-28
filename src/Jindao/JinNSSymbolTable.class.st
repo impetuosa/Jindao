@@ -3,7 +3,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'external',
-		'assembly'
+		'assembly',
+		'allSymbols'
 	],
 	#category : #'Jindao-NamespaceIndex'
 }
@@ -16,6 +17,14 @@ JinNSSymbolTable class >> loadFrom: aString [
 	self assert: (instance isKindOf: self).
 
 	^ instance
+]
+
+{ #category : #accessing }
+JinNSSymbolTable >> allSymbols [
+
+	^ allSymbols ifNil: [ 
+		  allSymbols := (external flatCollect: #allSymbols) , assembly 
+			                flatCollect: #allSymbols ]
 ]
 
 { #category : #accessing }

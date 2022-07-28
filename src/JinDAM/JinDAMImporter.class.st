@@ -66,6 +66,11 @@ JinDAMImporter >> artefacts [
 	^ artefacts
 ]
 
+{ #category : #'as yet unclassified' }
+JinDAMImporter >> candidateAnchors [
+	^ importer candidateAnchors.
+]
+
 { #category : #accessing }
 JinDAMImporter >> createDefaultVisitor [
 	^ importer := provider build
