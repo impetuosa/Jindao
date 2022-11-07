@@ -1058,6 +1058,11 @@ JinDAMFullASTCodeImporter >> visitOptionExplicit: aVBOptionExplicitNode [
 	self state top optionExplicit: true
 ]
 
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitOptionPrivateModule: aVBOptionPrivateModuleNode [ 
+
+]
+
 { #category : #'functions - subs - events' }
 JinDAMFullASTCodeImporter >> visitParameter: aParameter [
 

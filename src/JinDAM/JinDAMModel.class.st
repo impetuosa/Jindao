@@ -7,7 +7,8 @@ Class {
 		'anchor'
 	],
 	#classInstVars : [
-		'northwind'
+		'northwind',
+		'paperSourceModel'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -25,6 +26,12 @@ JinDAMModel class >> northwind [
 { #category : #accessing }
 JinDAMModel class >> northwind: aJinDAMModel [ 
 	northwind := aJinDAMModel
+]
+
+{ #category : #accessing }
+JinDAMModel class >> paperSourceModel [
+
+	^ paperSourceModel := northwind
 ]
 
 { #category : #visiting }
@@ -119,13 +126,6 @@ JinDAMModel >> invocations [
 { #category : #testing }
 JinDAMModel >> isTypeReference [
 	^ false
-]
-
-{ #category : #accessing }
-JinDAMModel >> language [
-
-	^ language ifNil: [ 
-		  language := MOLanguage microsoftAccessForAlceModel: self ]
 ]
 
 { #category : #accessing }
