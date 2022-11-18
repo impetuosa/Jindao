@@ -18,7 +18,7 @@ JinDAMProjectImporter >> assertIf: abool [
 { #category : #'visit-first-objects' }
 JinDAMProjectImporter >> assertStackSize: stackSize [
 
-	self assert: self state size = stackSize
+	self haltIf: (self state size = stackSize) not
 ]
 
 { #category : #'visit-first-objects' }
