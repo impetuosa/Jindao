@@ -301,6 +301,11 @@ JinNSASTSymbolImporter >> visitOptionExplicit: aVBOptionExplicitNode [
 ]
 
 { #category : #visiting }
+JinNSASTSymbolImporter >> visitOptionPrivateModule: aVBOptionPrivateModuleNode [ 
+
+]
+
+{ #category : #visiting }
 JinNSASTSymbolImporter >> visitParameter: aVBParameterNode [
 
 	self currentNamespace

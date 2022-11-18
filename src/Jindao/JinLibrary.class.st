@@ -108,9 +108,19 @@ JinLibrary >> name [
 { #category : #accessing }
 JinLibrary >> path [
 
+	| path |
 	^ reference path exists
 		  ifTrue: [ reference path ]
-		  ifFalse: [ self libraryHandle win32Path ]
+		  ifFalse: [ 
+			  | handle |
+			  handle := self libraryHandle.
+			  handle win32Path exists
+				  ifTrue: [ handle win32Path ]
+				  ifFalse: [ 
+					  path := handle win32Path.
+					  [ path exists ] whileFalse: [ path := path parent ].
+					  self assert: path extension = #dll.
+					  path ] ]
 ]
 
 { #category : #accessing }

@@ -86,11 +86,6 @@ JinDAMEntity >> isVariable [
 	^ false 
 ]
 
-{ #category : #accessing }
-JinDAMEntity >> language [
-	^ MOLanguage microsoftAccessForAlceModel: nil
-]
-
 { #category : #'as yet unclassified' }
 JinDAMEntity >> relatedSymbolKind [
 
