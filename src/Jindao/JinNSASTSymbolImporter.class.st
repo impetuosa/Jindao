@@ -115,6 +115,16 @@ JinNSASTSymbolImporter >> visitCollection: aCollection [
 ]
 
 { #category : #visiting }
+JinNSASTSymbolImporter >> visitConstant: aVBConstantNode [
+
+	self
+		register: aVBConstantNode constant token value
+		kind: JinNSKind constant
+		owner: owner
+		visibility: aVBConstantNode parent parent visibility value
+]
+
+{ #category : #visiting }
 JinNSASTSymbolImporter >> visitDefineEnum: aVBDefineEnumNode [
 
 	| enumNs |
@@ -244,6 +254,11 @@ JinNSASTSymbolImporter >> visitModuleConstant: aVBModuleConstantNode [
 ]
 
 { #category : #'as yet unclassified' }
+JinNSASTSymbolImporter >> visitModuleMultipleConstants: props [
+	self visitCollection: props constants constants
+]
+
+{ #category : #'as yet unclassified' }
 JinNSASTSymbolImporter >> visitModuleMultipleProperties: props [
 	self visitCollection: 	 props variables variables
 ]
@@ -288,6 +303,12 @@ JinNSASTSymbolImporter >> visitModulePropertyGet: aVBModulePropertyGetNode [
 { #category : #visiting }
 JinNSASTSymbolImporter >> visitOptionBase: aVBOptionCompareDatabaseNode [ 
 
+]
+
+{ #category : #visiting }
+JinNSASTSymbolImporter >> visitOptionCompare: aVBOptionCompareNode [
+
+	
 ]
 
 { #category : #visiting }
