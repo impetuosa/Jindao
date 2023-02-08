@@ -140,7 +140,7 @@ JinAccessApplication >> closeProject: aProject [
 
 	[ self handle dispatch: 'CloseCurrentDatabase' withArguments: {  } ]
 		on: Error
-		do: [ :e | Warning signal: e messageText ]
+		do: [ :e |  ]
 ]
 
 { #category : #convenience }
@@ -555,8 +555,7 @@ JinAccessApplication >> quit [
 	[ 
 	[ handle dispatch: #Quit ]
 		on: Error
-		do: [ :e | Warning signal: e messageText ] ] ensure: [ 
-		handle := nil ]
+		do: [ :e |  ] ] ensure: [ handle := nil ]
 ]
 
 { #category : #accessing }

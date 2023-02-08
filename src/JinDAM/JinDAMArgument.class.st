@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'reads',
 		'text',
-		'expression'
+		'expression',
+		'usesAddressOf'
 	],
 	#category : #'JinDAM-Model'
 }
@@ -60,4 +61,9 @@ JinDAMArgument >> text [
 JinDAMArgument >> text: aString [
 
 	text := aString
+]
+
+{ #category : #accessing }
+JinDAMArgument >> usesAddressOf: aBoolean [ 
+	usesAddressOf := aBoolean
 ]

@@ -22,7 +22,8 @@ JinDAMFullASTCodeImporter >> choose: symbols accordingToOrderedRules: rules [
 	rules do: [ :r | 
 		(symbols select: [ :s | s kind perform: r ]) ifNotEmpty: [ :col | 
 			^ col ] ].
-	self halt
+	
+	^ symbols
 ]
 
 { #category : #anchor }
@@ -104,6 +105,15 @@ JinDAMFullASTCodeImporter >> registerSpecialVariable: aName type: aType [
 	var typeReference: (self typeReferenceName: aType name type: aType context: var).
 	var anchor: self state top anchor / #variables / var name.
 	^ var
+]
+
+{ #category : #visiting }
+JinDAMFullASTCodeImporter >> visitAddressOfClause: aVBAddressOfClauseNode [
+
+	| arg |
+	arg := aVBAddressOfClauseNode name acceptVisitor: self.
+	self state top usesAddressOf: true.
+	^ arg
 ]
 
 { #category : #generated }
@@ -710,13 +720,21 @@ JinDAMFullASTCodeImporter >> visitIfThenElse: aVBIfThenElseNode [
 { #category : #'member access' }
 JinDAMFullASTCodeImporter >> visitImplements: anImplements [
 
+	| superClass |
 	self assert: self state top species = JinDAMClass.
-	^ self state top superClassReference: (self
-			   typeReferenceName: anImplements interface token value
-			   typeSymbol:
-			   (self currentNamespace findSymbol:
-				    anImplements interface token value)
-			   context: self state top)
+	superClass := (anImplements interface isKindOf: VBMemberAccessNode)
+		              ifTrue: [ anImplements interface acceptVisitor: self ]
+		              ifFalse: [ 
+			              self
+				              typeReferenceName:
+				              anImplements interface token value
+				              typeSymbol:
+				              (self currentNamespace findSymbol:
+					               anImplements interface token value)
+				              context: self state top ].
+	^ self state top
+		  superClassReference: superClass;
+		  yourself
 ]
 
 { #category : #invocations }
