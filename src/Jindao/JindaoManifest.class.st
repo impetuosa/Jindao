@@ -50,3 +50,61 @@ Class {
 	#superclass : #PackageManifest,
 	#category : #'Jindao-Manifest'
 }
+
+{ #category : #'as yet unclassified' }
+JindaoManifest class >> exampleCountControls [
+
+	<example>
+	
+	| project controls |
+	
+	" Opens an access project "
+	project := JinAccessApplication default open: self projectPath.
+
+	
+	" Flat collect the amount of controls per form. As Microsoft Access has a limit of forms opened at the same time, we close them as soon as we finished with it. "
+	controls := project forms flatCollect: [ :f |
+		            | size |
+		            size := f controls size.
+		            f close.
+		            size ] sum.
+
+	" Opens the transcript to see the next message "
+	Transcript open.
+	
+	" Traces the amount of forms and forms and controls "
+	self traceCr:
+		('The project has {1} forms and defines a total of {2} controls '
+			 format: {
+					 project forms size asString.
+					 controls asString }).
+
+	" Closes the project and quits the Microsoft Access application "
+	project closeAndQuit
+]
+
+{ #category : #'as yet unclassified' }
+JindaoManifest class >> exampleOpenAndQuitProject [
+
+	<example>
+	| project |
+	" Opens an access project "
+	project := JinAccessApplication default open: self projectPath.
+
+	" waits for the user to press ok "
+	UIManager default alert:
+		'Please press OK to continue and close the Access project '.
+
+
+	" Closes the project and quits the Microsoft Access application "
+	project closeAndQuit
+]
+
+{ #category : #'as yet unclassified' }
+JindaoManifest class >> projectPath [
+
+	^ (UIManager default
+		   chooseFullFileNameMatching: #( accdb )
+		   label: 'Please find a accdb file to open') ifNil: [
+		  self error: 'Must choose a project' ]
+]
