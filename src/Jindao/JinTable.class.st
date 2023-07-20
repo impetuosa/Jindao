@@ -25,7 +25,9 @@ JinTable >> acceptVisitor: aVisitor [
 
 { #category : #'as yet unclassified' }
 JinTable >> attributes [
-	^ self body attributes 
+
+	<doc: 'Returns the attributes of the table '>
+	^ self body attributes
 ]
 
 { #category : #'as yet unclassified' }
@@ -36,7 +38,9 @@ JinTable >> children [
 
 { #category : #'as yet unclassified' }
 JinTable >> connect [
-	^ self body connect 
+
+	<doc: 'Connects to the table. Required to open a recordset.'>
+	^ self body connect
 ]
 
 { #category : #'as yet unclassified' }
@@ -53,6 +57,8 @@ JinTable >> contents [
 
 { #category : #'as yet unclassified' }
 JinTable >> createIndex: aString [
+	
+	<doc: 'Creates an index over this table named as given by the parameter. '>
 	^ self body createIndex: aString
 ]
 
@@ -63,60 +69,62 @@ JinTable >> exportToFolder: aFolder [
 
 { #category : #'as yet unclassified' }
 JinTable >> fields [
-	^ self body fields 
+
+	<doc: 'Returns the fields of the table '>
+	^ self body fields
 ]
 
 { #category : #'as yet unclassified' }
 JinTable >> indexes [
-	^ self body indexes 
+
+	<doc: 'Returns all the indexes defined in the table'>
+	^ self body indexes
 ]
 
 { #category : #'as yet unclassified' }
 JinTable >> isAttachedAndSavesPassword [
-	" dbAttachSavePWD	131072	Saves user ID and password for linked remote table."
 
-	^ (self attributes & 131072) = 131072
-	
-
+	<doc:
+	'Returns if the table is or not dbAttachSavePWD	131072	Saves user ID and password for linked remote table.'>
+	^ self attributes & 131072 = 131072
 ]
 
 { #category : #'as yet unclassified' }
 JinTable >> isAttachedExclusively [
-	" dbAttachExclusive	65536	Opens a linked Microsoft Access database engine table for exclusive use."
 
-	^ (self attributes & 65536) = 65536
-	
-
+	<doc:
+	'Returns if the table is or not dbAttachExclusive	65536	Opens a linked Microsoft Access database engine table for exclusive use.'>
+	^ self attributes & 65536 = 65536
 ]
 
 { #category : #'as yet unclassified' }
 JinTable >> isAttachedNonODBC [
-	" dbAttachedTable	1073741824	Linked non-ODBC database table."
-
+<doc:
+	'Returns if the table is or not dbAttachedTable	1073741824	Linked non-ODBC database table'>
 	^ (self attributes & 1073741824) = 1073741824
 	
 ]
 
 { #category : #'as yet unclassified' }
 JinTable >> isAttachedODBC [
-	" dbAttachedODBC	536870912	Linked ODBC database table."
-
-	^ (self attributes & 536870912) = 536870912
+	<doc:
+	'Returns if the table is or not dbAttachedODBC	536870912	 Linked ODBC database table. '>
+	^ self attributes & 536870912 = 536870912
 ]
 
 { #category : #'as yet unclassified' }
-JinTable >> isHidden [ 
-	" dbHiddenObject	1	Hidden table (for temporary use)."
+JinTable >> isHidden [
 
-	^ (self attributes & 1) = 1
-	
-
-
+	<doc: 'Returns if the table is or not visible '>
+	^ self attributes & 1 = 1
 ]
 
 { #category : #'as yet unclassified' }
 JinTable >> isLocal [
-	^ self isRemote not 
+
+	<doc:
+	'Returns if the table stored in the database where we got the object from'>
+	^ self isRemote not
 ]
 
 { #category : #testing }
@@ -128,6 +136,8 @@ JinTable >> isReferredBySymbol: aJinNSNameEntry [
 
 { #category : #'as yet unclassified' }
 JinTable >> isRemote [
+
+	<doc: 'Returns if the table stored in a remote database '>
 	^ self isAttachedODBC or: [ self isAttachedNonODBC ]
 ]
 
@@ -150,10 +160,13 @@ JinTable >> privateLoadBodyObject [
 
 { #category : #'as yet unclassified' }
 JinTable >> recordset [
+
+	<doc:
+	'Returns a Recordset accessing all the data of this table. Must connect before usign. '>
 	self assert: self isLocal.
 	^ self body recordset
-		table: self;
-		yourself
+		  table: self;
+		  yourself
 ]
 
 { #category : #'as yet unclassified' }
@@ -164,6 +177,8 @@ JinTable >> registerIndex: aJinIndexBody [
 
 { #category : #'as yet unclassified' }
 JinTable >> relations [
+
+	<doc: 'Returns all the relations (FK) with other tables '>
 	^ self body relations
 ]
 

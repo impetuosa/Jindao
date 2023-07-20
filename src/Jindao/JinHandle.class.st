@@ -1,7 +1,11 @@
 "
+Remote handle. For interacting with remote Access entities COM provides re- mote memory addresses. We call these addresses handles.
+
 JinHandle gets together the access to access by proxifying COMDispatch and allowign some leverage. 
 
 JinHandle is mean to be polymorphic with COMDispatch .
+
+
 "
 Class {
 	#name : #JinHandle,

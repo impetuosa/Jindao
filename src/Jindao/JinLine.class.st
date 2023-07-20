@@ -108,6 +108,8 @@ JinLine class >> mappedTypeName [
 
 { #category : #generated }
 JinLine >> acceptVisitor: aVisitor [
+
+	<doc: 'Accepts visitor'>
 	^ aVisitor visitLine: self
 ]
 

@@ -256,6 +256,8 @@ JinCheckbox class >> mappedTypeName [
 
 { #category : #generated }
 JinCheckbox >> acceptVisitor: aVisitor [
+
+	<doc: 'Accepts visitor'>
 	^ aVisitor visitCheckbox: self
 ]
 

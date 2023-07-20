@@ -236,6 +236,8 @@ JinLabel class >> mappedTypeName [
 
 { #category : #generated }
 JinLabel >> acceptVisitor: aVisitor [
+
+	<doc: 'Accepts visitor'>
 	^ aVisitor visitLabel: self
 ]
 

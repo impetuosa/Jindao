@@ -211,6 +211,8 @@ JinImage class >> mappedTypeName [
 
 { #category : #generated }
 JinImage >> acceptVisitor: aVisitor [
+
+	<doc: 'Accepts visitor'>
 	^ aVisitor visitImage: self
 ]
 

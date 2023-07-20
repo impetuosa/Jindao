@@ -1,30 +1,9 @@
 "
 This is the basic access handle manager. 
 
-	access := COMDispatchInstance createInstanceByName: 'Access.Application'.
-	access propertyNamed: 'Visible' put: true. 
-	access dispatch: 'OpenCurrentDatabase' withArguments: { 'C:\Users\santiago\Documents\Northwind.accdb' }.
-	
-	self halt. 
-	
-	""a COMDispatchInstance(@ 16r00D791E8)""
-access propertyNamed: 'CurrentProject'.
+Application. First instance to access through COM. This application object is bound to a running instance of Access. It exposes an explorable API, and it allows access to the project components, directly or indirectly.
 
-(access propertyNamed: 'DoCmd') dispatch: 'OpenForm' withArguments: { 'Purchase Order Details' . 1 }.
-access propertyNamed: 'Modules'.
 
-(access propertyNamed: 'Modules') propertyNamed: 'Count'.
-
-oneModule := (access propertyNamed: 'Modules')  propertyNamed: 'Item' withArguments: { 0 }.
-oneModule propertyNamed: 'Lines' withArguments: { 1 . 100 }.
-
-(access propertyNamed: 'DoCmd') dispatch: 'OpenModule' withArguments: { 'Inventory' }.
-
-(access propertyNamed: 'Modules') propertyNamed: 'Item' withArguments: { 0 }.
-	
-	
-	access dispatch: 'Quit'.
-	access finalize. 
 "
 Class {
 	#name : #JinAccessApplication,
@@ -46,57 +25,76 @@ JinAccessApplication >> acceptVisitor: aVisitor [
 	aVisitor visitApplication: self 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessApplication >> activeEntity [
+
+	<doc:
+	'Obtains the entity that is been seen by the user. Either a report or a form. It fails if none of those is active. '>
 	^ [ self activeForm ]
-		on: Win32Error
-		do: [ :e | 
-			e passIfNotError0x80020009.
-			self activeReport ]
+		  on: Win32Error
+		  do: [ :e |
+			  e passIfNotError0x80020009.
+			  self activeReport ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessApplication >> activeForm [
+
+	<doc:
+	'Obtains the form that is been seen by the user. It fails if there is no form been seen'>
 	| screen |
 	screen := handle propertyNamed: #Screen.
 	^ screen propertyNamed: #ActiveForm
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #accessing }
 JinAccessApplication >> activeReport [
+
+	<doc:
+	'Obtains the report that is been seen by the user. It fails if there is no report been seen'>
 	| screen |
 	screen := handle propertyNamed: #Screen.
 	^ screen propertyNamed: #ActiveReport
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'application-api' }
 JinAccessApplication >> addReference: aName builtIn: isBuiltIn path: aFileReference guid: aGuid major: aMajor minor: aMinor [
+
+	<doc:
+	'Adds a reference to the module that has been used to open the application. A reference may be an other Microsoft Access module or a DLL'>
 	| addedRef |
 	self references
-		detect:
-			[ :r | r guid = aGuid and: [ r major = aMajor and: [ r minor = aMinor ] ] ]
+		detect: [ :r |
+			r guid = aGuid and: [ r major = aMajor and: [ r minor = aMinor ] ] ]
 		ifFound: [ :r | ^ r ]
-		ifNone: [ [ (handle propertyNamed: #References)
+		ifNone: [
+			[
+			(handle propertyNamed: #References)
 				dispatch: #AddFromFile
-				withArguments: {aFileReference fullName} ]
+				withArguments: { aFileReference fullName } ]
 				on: Error
-				do: [ :e | 
+				do: [ :e |
 					(handle propertyNamed: #References)
 						dispatch: #AddFromGuid
-						withArguments:
-							{aGuid.
-							aMajor.
-							aMinor} ].
+						withArguments: {
+								aGuid.
+								aMajor.
+								aMinor } ].
 			^ self references detect: [ :r | r name = aName ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'convenience-fst-class-citizen' }
 JinAccessApplication >> close: aJinModelObject [
+
+	<doc:
+	'Closes a given first class citizen (Form, Class, etc) without saving, therfore losing all modification'>
 	self close: aJinModelObject save: false
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'convenience-fst-class-citizen' }
 JinAccessApplication >> close: aJinModelObject save: aBool [
+	<doc:
+	'Closes a given first class citizen (Form, Class, etc). It saves or not accordign to the :save: parameter.'>
 	"	
 		Third parameter is about saving or not: 
 		
@@ -104,7 +102,7 @@ JinAccessApplication >> close: aJinModelObject save: aBool [
 		acSavePrompt == 0
 		acSaveYes == 1
 		"
-
+	
 	self
 		command: #Close
 		withArguments:
@@ -115,7 +113,7 @@ JinAccessApplication >> close: aJinModelObject save: aBool [
 				ifFalse: [ 2 ])}
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'convenience-fst-class-citizen' }
 JinAccessApplication >> close: aName type: aTypeNumber save: aBool [
 	"	
 		Third parameter is about saving or not: 
@@ -137,7 +135,7 @@ JinAccessApplication >> close: aName type: aTypeNumber save: aBool [
 
 { #category : #initialization }
 JinAccessApplication >> closeProject: aProject [
-
+	<doc: 'Closes the currently opened project.'>
 	[ self handle dispatch: 'CloseCurrentDatabase' withArguments: {  } ]
 		on: Error
 		do: [ :e |  ]
@@ -145,22 +143,27 @@ JinAccessApplication >> closeProject: aProject [
 
 { #category : #convenience }
 JinAccessApplication >> command [
+
 	^ handle propertyNamed: #DoCmd
 ]
 
 { #category : #convenience }
-JinAccessApplication >> command: aString withArguments: aCollection [ 
-	^ self command dispatch: aString withArguments: aCollection 
+JinAccessApplication >> command: aString withArguments: aCollection [
+
+	<doc:
+	'DoCmd. (Do Command) is an object that reifies most of the available operations to apply on the application. It must be used for opening a project, databases and others. Most of the objects below have this object as a dependency.'>
+	^ self command dispatch: aString withArguments: aCollection
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #commands }
 JinAccessApplication >> compileAll [
-	"acCmdCompileAllModules 	125"
 
-	self command: #RunCommand withArguments: {125}
+	<doc:
+	'Runs command acCmdCompileAllModules 	125. This is equivalent to click on the Microsoft Access "Compile All" menu.  It forces the compilation of all the modules'>
+	self command: #RunCommand withArguments: { 125 }
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'form-api' }
 JinAccessApplication >> createControl: aName inForm: aJinForm type: aTypeNumber section: aSection [
 	| control |
 	control := handle
@@ -172,7 +175,7 @@ JinAccessApplication >> createControl: aName inForm: aJinForm type: aTypeNumber 
 	control propertyNamed: #Name put: aName
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'form-api' }
 JinAccessApplication >> createControl: aName inForm: aJinForm type: aTypeNumber section: aSection parent: aParentName [
 	| control |
 	control := handle
@@ -185,7 +188,7 @@ JinAccessApplication >> createControl: aName inForm: aJinForm type: aTypeNumber 
 	control propertyNamed: #Name put: aName
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'report-api' }
 JinAccessApplication >> createControl: aName inReport: aJinReport type: aTypeNumber section: aSection [
 	| control |
 	control := handle
@@ -196,9 +199,15 @@ JinAccessApplication >> createControl: aName inReport: aJinReport type: aTypeNum
 	control propertyNamed: #Name put: aName
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'form-api' }
 JinAccessApplication >> createForm [
+	<doc: '[https://learn.microsoft.com/en-us/office/vba/api/access.application.createform](https://learn.microsoft.com/en-us/office/vba/api/access.application.createform) 
+	
+	Use the CreateForm method when designing a wizard that creates a new NAMELESS form.
+	The CreateForm method opens a new, minimized form in form Design view.
+	If the name that you use for the FormTemplate argument isn''t valid, Visual Basic uses the form template specified by the Form Template setting on the Forms/Reports tab of the Options dialog box.'>
 	| form defaultName |
+	
 	self ensureNonOtherFormtIsOpen.
 	form := handle dispatch: #CreateForm.
 	defaultName := form propertyNamed: #Name.
@@ -210,8 +219,13 @@ JinAccessApplication >> createForm [
 	^ form
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'form-api' }
 JinAccessApplication >> createFormNamed: aString [
+	<doc: '[https://learn.microsoft.com/en-us/office/vba/api/access.application.createform](https://learn.microsoft.com/en-us/office/vba/api/access.application.createform) 
+	
+	Use the CreateForm method when designing a wizard that creates a new form.
+	The CreateForm method opens a new, minimized form in form Design view.
+	If the name that you use for the FormTemplate argument isn''t valid, Visual Basic uses the form template specified by the Form Template setting on the Forms/Reports tab of the Options dialog box.'>
 	| form defaultName |
 	form := handle dispatch: #CreateForm.
 	defaultName := form propertyNamed: #Name.
@@ -229,7 +243,7 @@ JinAccessApplication >> createFormNamed: aString [
 			defaultName}
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'report-api' }
 JinAccessApplication >> createGroupLevel: aJinReport expression: anExpression header: aBoolean footer: anOtherBoolean [
 	^ handle
 		dispatch: #CreateGroupLevel
@@ -244,30 +258,25 @@ JinAccessApplication >> createGroupLevel: aJinReport expression: anExpression he
 				ifFalse: [ 0 ])}
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'module-api' }
 JinAccessApplication >> createModule: aKind named: aName properties: aCollection into: aProject [
+
 	| f |
 	f := self
-		ensureFileModuleKind: aKind
-		name: aName
-		properties: aCollection.
-		
-		
-'Application.VBE.ActiveVBProject.VBComponents.Import mcstrImportExportModule
-   
-    Application.DoCmd.Save acModule, mcstrModuleName
-   
-    Application.RefreshDatabaseWindow '
-	handle
-		dispatch: #LoadFromText
-		withArguments:
-			{JinModule typeNumber.
+		     ensureFileModuleKind: aKind
+		     name: aName
+		     properties: aCollection.
+
+
+
+	handle dispatch: #LoadFromText withArguments: {
+			JinModule typeNumber.
 			aName.
-			f fullName}.
+			f fullName }.
 	f delete
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'project-api' }
 JinAccessApplication >> createNewProject: aFileReference [
 	self handle
 		dispatch: 'NewCurrentDatabase'
@@ -280,7 +289,7 @@ JinAccessApplication >> createNewProject: aFileReference [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'report-api' }
 JinAccessApplication >> createReport [
 	| report defaultName |
 	self ensureNonOtherReportIsOpen.
@@ -296,7 +305,7 @@ JinAccessApplication >> createReport [
 	^ report
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'report-api' }
 JinAccessApplication >> createReportNamed: aString [
 	| report defaultName |
 	report := handle dispatch: #CreateReport.
@@ -324,7 +333,7 @@ JinAccessApplication >> database [
 	^ (self workspace propertyNamed: #Databases) propertyNamed:#Item withArguments:{0}
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'module-api' }
 JinAccessApplication >> ensureFileModuleKind: aKind name: aName properties: aCollection [
 	| f content |
 	f := (aName , '.bas') asFileReference.
@@ -355,9 +364,12 @@ content := 'Attribute VB_Name = "{1}"
 	^ f
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'form-api' }
 JinAccessApplication >> ensureNonOtherFormtIsOpen [
-	[ self
+
+	<doc: 'Closes any active form'>
+	[
+	self
 		close: (self activeForm propertyNamed: #Name)
 		type: JinForm typeNumber
 		save: false ]
@@ -365,7 +377,7 @@ JinAccessApplication >> ensureNonOtherFormtIsOpen [
 		do: [ :e |  ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'report-api' }
 JinAccessApplication >> ensureNonOtherReportIsOpen [
 	[ self
 		close: (self activeReport propertyNamed: #Name)
@@ -375,22 +387,28 @@ JinAccessApplication >> ensureNonOtherReportIsOpen [
 		do: [ :e |  ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'convenience-fst-class-citizen' }
 JinAccessApplication >> export: aJinModelObject toFolder: aFileReference [
+
+	<doc:
+	'Saves a given first class citizen as text. This is a nondocumented feature. We encourage not using it. This command does not work with tables or queries.'>
 	| destination |
 	destination := aFileReference / aJinModelObject name
-		, (aJinModelObject class name copyReplaceAll: 'Jin' with: '').
-	handle
-		dispatch: #SaveAsText
-		withArguments:
-			{aJinModelObject typeNumber.
+	               ,
+	               (aJinModelObject class name
+		                copyReplaceAll: 'Jin'
+		                with: '').
+	handle dispatch: #SaveAsText withArguments: {
+			aJinModelObject typeNumber.
 			aJinModelObject name.
-			destination fullName}
+			destination fullName }
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'convenience-fst-class-citizen' }
 JinAccessApplication >> exportXml: aJinModelObject toFolder: aFileReference [
 	| destination xsd |
+	<doc:
+	'Saves a given first class citizen as XML. It works only with queries and tables'>
 	destination := aFileReference / aJinModelObject name
 		,
 			((aJinModelObject class name copyReplaceAll: 'Jin' with: '')
@@ -429,32 +447,39 @@ JinAccessApplication >> name [
 
 { #category : #initialization }
 JinAccessApplication >> open: aFileReference [
+
+	<doc:
+	'Opens a given project with Microsoft Access, creates a new project object'>
 	self handle
 		dispatch: 'OpenCurrentDatabase'
-		withArguments: {aFileReference fullName}.
+		withArguments: { aFileReference fullName }.
 	^ JinAccessProject new
-		handle: (handle propertyNamed: 'CurrentProject')
-			dataHandle: (handle propertyNamed: #CurrentData)
-			application: self;
-		projectPath: aFileReference;
-		yourself
+		  handle: (handle propertyNamed: 'CurrentProject')
+		  dataHandle: (handle propertyNamed: #CurrentData)
+		  application: self;
+		  projectPath: aFileReference;
+		  yourself
 ]
 
 { #category : #initialization }
 JinAccessApplication >> open: aFileReference into: aProject [
+
+	<doc: 'Opens a given project with Microsoft Access, using a given project object'>
 	self handle
 		dispatch: 'OpenCurrentDatabase'
-		withArguments: {aFileReference fullName}.
+		withArguments: { aFileReference fullName }.
 	^ aProject
-		handle: (handle propertyNamed: 'CurrentProject')
-			dataHandle: (handle propertyNamed: #CurrentData)
-			application: self;
-		projectPath: aFileReference;
-		yourself
+		  handle: (handle propertyNamed: 'CurrentProject')
+		  dataHandle: (handle propertyNamed: #CurrentData)
+		  application: self;
+		  projectPath: aFileReference;
+		  yourself
 ]
 
 { #category : #'form-api' }
 JinAccessApplication >> openForm: aJinForm [
+	<doc: '[https://learn.microsoft.com/en-us/office/vba/api/access.docmd.openform](https://learn.microsoft.com/en-us/office/vba/api/access.docmd.openform)
+	Open a given form in edition mode'>
 	self
 		command: #OpenForm
 		withArguments:
@@ -549,10 +574,11 @@ JinAccessApplication >> openedTableHandles [
 				yourself)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'application-api' }
 JinAccessApplication >> quit [
 
-	[ 
+	<doc: 'Quits the instance of Microsoft Access'>
+	[
 	[ handle dispatch: #Quit ]
 		on: Error
 		do: [ :e |  ] ] ensure: [ handle := nil ]
@@ -568,12 +594,15 @@ JinAccessApplication >> references [
 				yourself)
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #convenience }
 JinAccessApplication >> refreshDatabaseWindow [
+
+	<doc:
+	'[https://learn.microsoft.com/en-us/office/vba/api/access.application.refreshdatabasewindow](https://learn.microsoft.com/en-us/office/vba/api/access.application.refreshdatabasewindow) The RefreshDatabaseWindow method updates the Database window after a database object has been created, deleted, or renamed.'>
 	handle dispatch: #RefreshDatabaseWindow
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'convenience-fst-class-citizen' }
 JinAccessApplication >> rename: aName typeNumber: aNumber with: aNewName [
 	self
 		command: #Rename
@@ -583,8 +612,10 @@ JinAccessApplication >> rename: aName typeNumber: aNumber with: aNewName [
 			aName}
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'convenience-fst-class-citizen' }
 JinAccessApplication >> rename: anObject with: aName [
+
+	<doc: 'Renames a given first class citizen with a given name'>
 	self
 		rename: anObject name
 		typeNumber: anObject typeNumber
@@ -593,6 +624,9 @@ JinAccessApplication >> rename: anObject with: aName [
 
 { #category : #initialization }
 JinAccessApplication >> reopen: aFileReference into: aProject [
+
+	<doc:
+	'Tries to close the opened project and application, to open it again. '>
 	[ aProject close ]
 		on: Error
 		do: [ :e |  ].
@@ -602,18 +636,16 @@ JinAccessApplication >> reopen: aFileReference into: aProject [
 	self open: aFileReference into: aProject
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'application-api' }
 JinAccessApplication >> save: aJinModelObject [
 
-
-	self
-		command: #Save
-		withArguments:
-			{aJinModelObject typeNumber.
-			aJinModelObject name}
+	<doc: 'Saves a given object. Form, Report, Module, etc'>
+	self command: #Save withArguments: {
+			aJinModelObject typeNumber.
+			aJinModelObject name }
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'module-api' }
 JinAccessApplication >> saveModuleNamed: aString [
 	self
 		command: #Save
@@ -622,32 +654,35 @@ JinAccessApplication >> saveModuleNamed: aString [
 			aString}
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'convenience-fst-class-citizen' }
 JinAccessApplication >> vbeComponentFor: aJinModule in: aJinAccessProject [
 	^ (self vbeProjectFor: aJinAccessProject) components
 		detect: [ :c | c name = aJinModule vbeComponentName ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'project-api' }
 JinAccessApplication >> vbeProjectFor: aJinAccessProject [
 
+	<doc:
+	'Obtains the VB Project related to a given Access Module(project)'>
 	^ self vbeProjects
 		  detect: [ :p | p sanitizedName = aJinAccessProject sanitizedName ]
-		  ifNone: [ 
+		  ifNone: [
 			  self vbeProjects size = 1
 				  ifTrue: [ self vbeProjects first ]
-				  ifFalse: [ 
+				  ifFalse: [
 					  self vbeProjects
-						  detect: [ :p | 
+						  detect: [ :p |
 						  p sanitizedName beginsWith: aJinAccessProject sanitizedName ]
-						  ifNone: [ 
+						  ifNone: [
 							  self vbeProjects size = 1
 								  ifTrue: [ self vbeProjects first ]
-								  ifFalse: [ self halt ] ] ] ]
+								  ifFalse: [ self error: 'Cannot find VB related project ' ] ] ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'application-api' }
 JinAccessApplication >> vbeProjects [
+	<doc:'Use the VBProjects collection to access the collection of projects (Access modules) of the related VBEnvironment. The VBE property of the Application object represents the Microsoft Visual Basic for Applications editor. '>
 	^ JinCollection newDefaultForMethod
 		handle: ((handle propertyNamed: #VBE) propertyNamed: #VBProjects)
 		factory:
@@ -663,6 +698,8 @@ JinAccessApplication >> visible [
 
 { #category : #initialization }
 JinAccessApplication >> visible: aBoolean [
+
+	<doc: 'Turns visible or invisible the instance of Microsoft Access'>
 	visible := aBoolean.
 	handle ifNotNil: [ handle propertyNamed: #Visible put: aBoolean ]
 ]

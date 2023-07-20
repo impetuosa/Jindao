@@ -19,8 +19,11 @@ JinNorwindBasedTests >> runCaseManaged [
 
 { #category : #running }
 JinNorwindBasedTests >> setUp [
+
+	<doc:
+	'This testcase expects the existance of the Northwind database in c:\Northwind.accdb'>
 	super setUp.
-	project := JinAccessApplication default open: self class norwind 
+	project := JinAccessApplication default open: self class norwind
 ]
 
 { #category : #running }

@@ -198,6 +198,8 @@ JinSubForm class >> mappedTypeName [
 
 { #category : #generated }
 JinSubForm >> acceptVisitor: aVisitor [
+
+	<doc: 'Accepts visitor'>
 	^ aVisitor visitSubForm: self
 ]
 

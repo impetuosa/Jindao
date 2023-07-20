@@ -343,6 +343,8 @@ JinCommandButton class >> mappedTypeName [
 
 { #category : #generated }
 JinCommandButton >> acceptVisitor: aVisitor [
+
+	<doc: 'Accepts visitor'>
 	^ aVisitor visitCommandButton: self
 ]
 

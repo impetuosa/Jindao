@@ -374,6 +374,8 @@ JinTextbox class >> mappedTypeName [
 
 { #category : #generated }
 JinTextbox >> acceptVisitor: aVisitor [
+
+	<doc: 'Accepts visitor'>
 	^ aVisitor visitTextbox: self
 ]
 

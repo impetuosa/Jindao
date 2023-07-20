@@ -138,6 +138,8 @@ JinRectangle class >> mappedTypeName [
 
 { #category : #generated }
 JinRectangle >> acceptVisitor: aVisitor [
+
+	<doc: 'Accepts visitor'>
 	^ aVisitor visitRectangle: self
 ]
 

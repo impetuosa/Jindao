@@ -219,44 +219,50 @@ JinForm class >> typeNumber [
 	^ 2
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> acceptVisitor: aVisitor [
 	aVisitor visitForm: self.
 	
 ]
 
-{ #category : #'as yet unclassified' }
-JinForm >> addControl: aJinLabel [ 
-	self shouldBeImplemented.
-]
-
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> allowAdditions [
+
+	<doc:
+	' Responds if the form allows to add information into a bound table'>
 	^ self body allowAdditions
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> allowDeletions [
+	<doc:' Responds if the form allows to delete information from a bound table'>
 	^ self body allowDeletions
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> allowEdits [
+
+	<doc:
+	' Responds if the form allows to modify information from a bound table'>
 	^ self body allowEdits
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> allowFilters [
+
+	<doc:
+	' Responds if the form allows to filter information from a bound table'>
 	^ self body allowFilters
 ]
 
 { #category : #ast }
 JinForm >> ast [
 
+	<doc: 'Returns a VBParser AST of the module, if it has one.'>
 	^ self hasModule ifTrue: [ self code ast ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> children [
 
 	| controls |
@@ -265,17 +271,18 @@ JinForm >> children [
 	^ controls
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> code [
+	<doc: 'Returns source of the module, if it has one.'>
 	^ self body code
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> componentKnownProperties [
 	^ self class componentKnownProperties
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> contentHash [
 
 	| code |
@@ -285,22 +292,29 @@ JinForm >> contentHash [
 		  hex
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> controls [
-	^ self body controls 
+
+	<doc: 'Returns all the controls defined in the form'>
+	^ self body controls
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> createControl: aName type: aTypeNumber section: aSection [
+
+	<doc:
+	'[https://learn.microsoft.com/en-us/office/vba/api/access.application.createcontrol](https://learn.microsoft.com/en-us/office/vba/api/access.application.createcontrol) Creates a control inside the form. '>
 	^ project
-		createControl: aName
-		inForm: self 
-		type: aTypeNumber
-		section: aSection
+		  createControl: aName
+		  inForm: self
+		  type: aTypeNumber
+		  section: aSection
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> createControl: aName type: aTypeNumber section: aSection parent: aParentName [
+	<doc:
+	'[https://learn.microsoft.com/en-us/office/vba/api/access.application.createcontrol](https://learn.microsoft.com/en-us/office/vba/api/access.application.createcontrol) Creates a control inside the form with a specific parent. '>
 	^ project
 		createControl: aName
 		inForm: self
@@ -309,12 +323,12 @@ JinForm >> createControl: aName type: aTypeNumber section: aSection parent: aPar
 		parent: aParentName
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> description [
 	^ description
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> documentedProperties [
 
 	^ documentedProperties ifNil: [ 
@@ -326,79 +340,86 @@ JinForm >> documentedProperties [
 				                          yourself ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> ensureItHasNonPageHeaderFooter [
 	^ project ensureItHasNonPageHeaderFooter: self 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> formType [
-	^ self body formType 
+
+	<doc:
+	'Returns the type #(SingleForm ContinuousForm Datasheet PivotTable PivotChart SplitForm) '>
+	^ self body formType
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> handle [
 	self shouldBeImplemented.
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> hasHeaderFooter [
 	^ self body hasHeaderFooter
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> hasModule [
 	^ self body hasModule
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> hasModule: aValue [
 	^ self body hasModule: aValue
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> hasPageHeaderFooter [
 	^ self body hasPageHeaderFooter
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> height [
 	^ self body height 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> height: anInteger [
 	self body height: anInteger
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> installHeaderFooter [
+
+	<doc: 'Installs a header and footer on this form'>
 	^ project installHeaderFooterOn: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> installPageHeaderFooter [
-	^ project ensurePageHeaderFooter: self 
+
+	<doc: 'Installs a PAGE header and footer on this form'>
+	^ project ensurePageHeaderFooter: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> isAccessForm [
 	^ true
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> isReferredBySymbol: aJinNSNameEntry [
 
 	^ aJinNSNameEntry kind isForm and: [ 
 		  aJinNSNameEntry referersTo: self name ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> isSingleForm [
 	^ self body isSingleForm
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> module [
 	^ self body module
 ]
@@ -408,7 +429,7 @@ JinForm >> privateLoadBodyObject [
 	^ project openForm: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> recordSource [
 	| source |
 	source := self body recordSource trimBoth.
@@ -420,7 +441,7 @@ JinForm >> recordSource [
 				ifNone: [ project queries detect: [ :q | q name = source ] ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> recordSourceFull [
 	| source |
 	source := self body recordSource trimBoth.
@@ -434,7 +455,7 @@ JinForm >> recordSourceFull [
 						ifNone: [ nil ] ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> sourceCode [
 
 	^ self hasModule
@@ -442,7 +463,7 @@ JinForm >> sourceCode [
 		  ifTrue: [ self code contents ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> src [
 
 	^ src ifNil: [ 
@@ -456,12 +477,16 @@ JinForm >> vbeComponentName [
 	^ 'Form_' , self name
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> width [
+
+	<doc: 'Gets the width of the widget. '>
 	^ self body width
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #visiting }
 JinForm >> width: anInteger [
+
+	<doc: 'Sets the width of the widget. '>
 	self body width: anInteger
 ]

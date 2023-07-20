@@ -504,6 +504,8 @@ JinCombobox class >> mappedTypeName [
 
 { #category : #generated }
 JinCombobox >> acceptVisitor: aVisitor [
+
+	<doc: 'Accepts visitor'>
 	^ aVisitor visitCombobox: self
 ]
 

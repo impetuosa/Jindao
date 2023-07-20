@@ -32,12 +32,15 @@ JinModelObject >> body: aCOMDispatchInstance [
 
 { #category : #'as yet unclassified' }
 JinModelObject >> close [
+	<doc: 'Closes this first class citizen'>
 	project close: self.
 	body := nil
 ]
 
 { #category : #'as yet unclassified' }
 JinModelObject >> closeAndSave [
+
+	<doc: 'Closes and save this first class citizen'>
 	project close: self save: true.
 	body := nil
 ]
@@ -61,6 +64,8 @@ JinModelObject >> ensureUnload [
 
 { #category : #'as yet unclassified' }
 JinModelObject >> exportToFolder: aFolder [
+
+	<doc: 'export as text into a given folder '>
 	^ project export: self toFolder: aFolder
 ]
 
@@ -127,8 +132,10 @@ JinModelObject >> isTable [
 
 { #category : #accessing }
 JinModelObject >> load [
-	self isLoaded
-		ifFalse: [ body := self privateLoadBodyObject ]
+
+	<doc:
+	'Opens the first class citizen object in edition mode in the context of the Microsoft Access environment. '>
+	self isLoaded ifFalse: [ body := self privateLoadBodyObject ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -166,6 +173,8 @@ JinModelObject >> rename: aName [
 
 { #category : #accessing }
 JinModelObject >> save [
+
+	<doc: 'Saves any modification of a firstclass citizen '>
 	project save: self
 ]
 

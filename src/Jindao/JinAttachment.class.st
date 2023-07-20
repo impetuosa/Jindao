@@ -355,6 +355,8 @@ JinAttachment class >> mappedTypeName [
 
 { #category : #generated }
 JinAttachment >> acceptVisitor: aVisitor [
+
+	<doc: 'Accepts visitor'>
 	^ aVisitor visitAttachment: self
 ]
 

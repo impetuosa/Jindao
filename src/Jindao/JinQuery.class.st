@@ -35,6 +35,8 @@ JinQuery >> contentHash [
 
 { #category : #accessing }
 JinQuery >> exportToFolder: aFolder [
+
+	<doc: 'export as text into a given folder '>
 	(aFolder / self name , 'QUERY') writeStream
 		nextPutAll: self sql;
 		close
@@ -42,7 +44,11 @@ JinQuery >> exportToFolder: aFolder [
 
 { #category : #'as yet unclassified' }
 JinQuery >> fields [
-	 [ ^ self body fields ] on: Error do: [ :e | ^ {  } ]
+
+	<doc: 'Returns the fields of the Query'>
+	[ ^ self body fields ]
+		on: Error
+		do: [ :e | ^ {  } ]
 ]
 
 { #category : #accessing }
@@ -65,9 +71,8 @@ JinQuery >> privateLoadBodyObject [
 { #category : #'as yet unclassified' }
 JinQuery >> sql [
 
+	<doc: 'Returns the SQL used to build the Query'>
 	^ [ self body sql ]
 		  on: Win32Error
-		  do: [ :e | 
-
-			  ^ '' ]
+		  do: [ :e | ^ '' ]
 ]

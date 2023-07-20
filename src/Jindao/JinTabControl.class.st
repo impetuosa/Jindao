@@ -265,6 +265,8 @@ JinTabControl class >> mappedTypeName [
 
 { #category : #generated }
 JinTabControl >> acceptVisitor: aVisitor [
+
+	<doc: 'Accepts visitor'>
 	^ aVisitor visitTabControl: self
 ]
 

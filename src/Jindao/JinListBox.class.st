@@ -364,6 +364,8 @@ JinListBox class >> mappedTypeName [
 
 { #category : #generated }
 JinListBox >> acceptVisitor: aVisitor [
+
+	<doc: 'Accepts visitor'>
 	^ aVisitor visitListBox: self
 ]
 

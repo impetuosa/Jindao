@@ -139,6 +139,8 @@ JinPage class >> mappedTypeName [
 
 { #category : #generated }
 JinPage >> acceptVisitor: aVisitor [
+
+	<doc: 'Accepts visitor'>
 	^ aVisitor visitPage: self
 ]
 

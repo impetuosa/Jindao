@@ -17,6 +17,11 @@ JinVBObject >> close [
 ]
 
 { #category : #'as yet unclassified' }
+JinVBObject >> hasModule [
+	 self subclassResponsibility 
+]
+
+{ #category : #'as yet unclassified' }
 JinVBObject >> properties [
 	^ self hasModule
 		ifTrue: [ self vbeComponent properties ]
