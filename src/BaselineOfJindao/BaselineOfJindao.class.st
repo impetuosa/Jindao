@@ -22,7 +22,8 @@ BaselineOfJindao >> baseline: spec [
 		spec
 			repository: 'github://impetuosa/PostgreSQLParser/src';
 			loads: #dev ].
+	spec package: #JinNamespaces with: [ spec requires: #( Jindao ) ].
 	spec
 		package: #JinDAM
-		with: [ spec requires: #( Jindao PostgreSQLParser ) ]
+		with: [ spec requires: #( Jindao JinNamespaces PostgreSQLParser ) ]
 ]
