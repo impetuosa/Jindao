@@ -1,6 +1,6 @@
 # Jindao
 JinDao (進道) is a project faor Microsoft Access usage. JinDao does not mean anything, but puts together Jin (get into) and Dao (way).
-# Jindao - Generated Doc
+
 ## Manifest
 Jindao is a library which provides online access to Microsoft Access projects through the usage of Microsoft COM. 
 Jindao follows generally the implementation proposed by [https://inria.hal.science/hal-02966146v1](https://inria.hal.science/hal-02966146v1).
@@ -33,6 +33,46 @@ For mapping the binary-model-entities to model-entity types, we propose to use f
 
 
 
+
+## Project Examples
+```smalltalk
+exampleCountControls
+	
+	| project controls |
+	
+	" Opens an access project "
+	project := JinAccessApplication default open: self projectPath.
+	
+	" Flat collect the amount of controls per form. As Microsoft Access has a limit of forms opened at the same time, we close them as soon as we finished with it. "
+	controls := project forms flatCollect: [ :f |
+		            | size |
+		            size := f controls size.
+		            f close.
+		            size ] sum.
+	" Opens the transcript to see the next message "
+	Transcript open.
+	
+	" Traces the amount of forms and forms and controls "
+	self traceCr:
+		('The project has {1} forms and defines a total of {2} controls '
+			 format: {
+					 project forms size asString.
+					 controls asString }).
+	" Closes the project and quits the Microsoft Access application "
+	project closeAndQuit
+```
+```smalltalk
+exampleOpenAndQuitProject
+	| project |
+	" Opens an access project "
+	project := JinAccessApplication default open: self projectPath.
+	" waits for the user to press ok "
+	UIManager default alert:
+		'Please press OK to continue and close the Access project '.
+
+	" Closes the project and quits the Microsoft Access application "
+	project closeAndQuit
+```
 
 
 
