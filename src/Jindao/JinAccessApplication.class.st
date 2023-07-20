@@ -203,9 +203,9 @@ JinAccessApplication >> createControl: aName inReport: aJinReport type: aTypeNum
 JinAccessApplication >> createForm [
 	<doc: '[https://learn.microsoft.com/en-us/office/vba/api/access.application.createform](https://learn.microsoft.com/en-us/office/vba/api/access.application.createform) 
 	
-	Use the CreateForm method when designing a wizard that creates a new NAMELESS form.
-	The CreateForm method opens a new, minimized form in form Design view.
-	If the name that you use for the FormTemplate argument isn''t valid, Visual Basic uses the form template specified by the Form Template setting on the Forms/Reports tab of the Options dialog box.'>
+Use the CreateForm method when designing a wizard that creates a new NAMELESS form.
+The CreateForm method opens a new, minimized form in form Design view.
+If the name that you use for the FormTemplate argument isn''t valid, Visual Basic uses the form template specified by the Form Template setting on the Forms/Reports tab of the Options dialog box.'>
 	| form defaultName |
 	
 	self ensureNonOtherFormtIsOpen.
@@ -221,11 +221,10 @@ JinAccessApplication >> createForm [
 
 { #category : #'form-api' }
 JinAccessApplication >> createFormNamed: aString [
-	<doc: '[https://learn.microsoft.com/en-us/office/vba/api/access.application.createform](https://learn.microsoft.com/en-us/office/vba/api/access.application.createform) 
-	
-	Use the CreateForm method when designing a wizard that creates a new form.
-	The CreateForm method opens a new, minimized form in form Design view.
-	If the name that you use for the FormTemplate argument isn''t valid, Visual Basic uses the form template specified by the Form Template setting on the Forms/Reports tab of the Options dialog box.'>
+	<doc: '[https://learn.microsoft.com/en-us/office/vba/api/access.application.createform](https://learn.microsoft.com/en-us/office/vba/api/access.application.createform) 	
+Use the CreateForm method when designing a wizard that creates a new form.
+The CreateForm method opens a new, minimized form in form Design view.
+If the name that you use for the FormTemplate argument isn''t valid, Visual Basic uses the form template specified by the Form Template setting on the Forms/Reports tab of the Options dialog box.'>
 	| form defaultName |
 	form := handle dispatch: #CreateForm.
 	defaultName := form propertyNamed: #Name.

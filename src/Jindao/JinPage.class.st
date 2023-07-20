@@ -41,62 +41,6 @@ A **Page** object is also a type of **Control** object. The **ControlType** prop
 Each **Page** object can also contain one or more controls. Controls on a **Page** object belong to that **Page** object's **Controls** collection. To work with a control on a **Page** object, you must refer to that control within the **Page** object's **Controls** collection.
 
 
-## Events
-
-- [Click](Access.Page.Click.md)
-- [DblClick](Access.Page.DblClick.md)
-- [MouseDown](Access.Page.MouseDown.md)
-- [MouseMove](Access.Page.MouseMove.md)
-- [MouseUp](Access.Page.MouseUp.md)
-
-## Methods
-
-- [Move](Access.Page.Move.md)
-- [Requery](Access.Page.Requery.md)
-- [SetFocus](Access.Page.SetFocus.md)
-- [SetTabOrder](Access.Page.SetTabOrder.md)
-- [SizeToFit](Access.Page.SizeToFit.md)
-
-## Properties
-
-- [Application](Access.Page.Application.md)
-- [Caption](Access.Page.Caption.md)
-- [Controls](Access.Page.Controls.md)
-- [ControlTipText](Access.Page.ControlTipText.md)
-- [ControlType](Access.Page.ControlType.md)
-- [Enabled](Access.Page.Enabled.md)
-- [EventProcPrefix](Access.Page.EventProcPrefix.md)
-- [Height](Access.Page.Height.md)
-- [HelpContextId](Access.Page.HelpContextId.md)
-- [InSelection](Access.Page.InSelection.md)
-- [IsVisible](Access.Page.IsVisible.md)
-- [Left](Access.Page.Left.md)
-- [Name](Access.Page.Name.md)
-- [OnClick](Access.Page.OnClick.md)
-- [OnDblClick](Access.Page.OnDblClick.md)
-- [OnMouseDown](Access.Page.OnMouseDown.md)
-- [OnMouseMove](Access.Page.OnMouseMove.md)
-- [OnMouseUp](Access.Page.OnMouseUp.md)
-- [PageIndex](Access.Page.PageIndex.md)
-- [Parent](Access.Page.Parent.md)
-- [Picture](Access.Page.Picture.md)
-- [PictureData](Access.Page.PictureData.md)
-- [PictureType](Access.Page.PictureType.md)
-- [Properties](Access.Page.Properties.md)
-- [Section](Access.Page.Section.md)
-- [ShortcutMenuBar](Access.Page.ShortcutMenuBar.md)
-- [StatusBarText](Access.Page.StatusBarText.md)
-- [Tag](Access.Page.Tag.md)
-- [Top](Access.Page.Top.md)
-- [Visible](Access.Page.Visible.md)
-- [Width](Access.Page.Width.md)
-
-## See also
-
-- [Access Object Model Reference](overview/Access/object-model.md)
-
-
-[!include[Support and feedback](~/includes/feedback-boilerplate.md)]
 "
 Class {
 	#name : #JinPage,
