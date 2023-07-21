@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'code'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Code'
 }
 
 { #category : #'as yet unclassified' }

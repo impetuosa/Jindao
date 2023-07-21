@@ -40,7 +40,7 @@ Class {
 		'factory',
 		'base'
 	],
-	#category : #'Jindao-RemoteCollections'
+	#category : #'Jindao-Core-RemoteCollections'
 }
 
 { #category : #'instance creation' }
@@ -82,33 +82,49 @@ JinCollection >> anySatisfy: aBlock [
 
 { #category : #'as yet unclassified' }
 JinCollection >> at: anIndex [
+		<doc:
+	'Accesses the Microsoft Access instance and obtain a handle in a given anIndex. With this handle, it delegates to the factory to create an instance which wrapps the handle.'>
 	^ factory elementFor: (handle propertyNamed: 'Item' withArguments: {(anIndex  - base )})
 ]
 
 { #category : #'as yet unclassified' }
 JinCollection >> base: aBase [
+	<doc:
+	'Defines the accessing base of the collection. Often 0 or 1.'>
 	base := aBase
 ]
 
 { #category : #'as yet unclassified' }
-JinCollection >> collect: aBlock [ 
-	"Evaluate aBlock with each of the receiver's elements as the argument.  
-	Collect the resulting values into a collection like the receiver. Answer  
-	the new collection."
+JinCollection >> collect: aBlock [
 
+	<doc:
+	'Evaluate aBlock with each of the receiver''s elements as the argument.  
+Collect the resulting values into a collection like the receiver. Answer  
+the new collection.'>
 	| newCollection |
 	newCollection := OrderedCollection new.
-	self do: [:each | newCollection add: (aBlock value: each)].
+	self do: [ :each | newCollection add: (aBlock value: each) ].
 	^ newCollection
 ]
 
 { #category : #'as yet unclassified' }
-JinCollection >> detect: aBlock [ 
-	^ self detect: aBlock ifNone: [self errorNotFound: aBlock]
+JinCollection >> detect: aBlock [
+
+	<doc:
+	'Evaluate aBlock with each of the receiver''s elements as the argument.
+Answer the first element for which aBlock evaluates to true.'>
+	^ self detect: aBlock ifNone: [ self errorNotFound: aBlock ]
 ]
 
 { #category : #'as yet unclassified' }
 JinCollection >> detect: aBlock ifFound: foundBlock [
+
+	<doc:
+	'Evaluate aBlock with each of the receiver''s elements as the argument.
+If some element evaluates aBlock to true, then cull this element into
+foundBlock.
+If no element matches the criteria then do nothing.
+Always returns self to avoid misuse and a potential isNil check on the sender.'>
 	self
 		detect: aBlock
 		ifFound: foundBlock
@@ -117,21 +133,37 @@ JinCollection >> detect: aBlock ifFound: foundBlock [
 
 { #category : #'as yet unclassified' }
 JinCollection >> detect: aBlock ifFound: foundBlock ifNone: exceptionBlock [
-	self
-		do: [ :each | 
-			(aBlock value: each)
-				ifTrue: [ ^ foundBlock cull: each ] ].
-	^ exceptionBlock value	
+
+	<doc:
+	'Evaluate aBlock with each of the receiver''s elements as the argument.
+If some element evaluates aBlock to true, then cull this element into
+foundBlock and answer the result of this evaluation.
+If none evaluate to true, then evaluate exceptionBlock'>
+	self do: [ :each |
+		(aBlock value: each) ifTrue: [ ^ foundBlock cull: each ] ].
+	^ exceptionBlock value
 ]
 
 { #category : #'as yet unclassified' }
 JinCollection >> detect: aBlock ifNone: exceptionBlock [
 
-	^ self detect: aBlock ifFound: [ :element | element ] ifNone: exceptionBlock
+	<doc:
+	'Evaluate aBlock with each of the receiver''s elements as the argument.
+Answer the first element for which aBlock evaluates to true. If none
+evaluate to true, then evaluate the argument, exceptionBlock.'>
+	^ self
+		  detect: aBlock
+		  ifFound: [ :element | element ]
+		  ifNone: exceptionBlock
 ]
 
 { #category : #'as yet unclassified' }
 JinCollection >> do: aBlock [
+
+	<doc:
+'Evaluate aBlock with each of the receiver''s elements as the argument.
+
+This is the general foreach method, but for most standard needs there is often a more specific and simpler method.'>
 	1 to: self size do: [ :index | aBlock value: (self at: index) ]
 ]
 
@@ -142,11 +174,17 @@ JinCollection >> factory: anInstanceFactory [
 
 { #category : #'as yet unclassified' }
 JinCollection >> first [
+	<doc:'Answer the first element of the receiver'>
 	^ self at: 1 
 ]
 
 { #category : #'as yet unclassified' }
 JinCollection >> flatCollect: aBlock [
+
+	<doc:
+	'Evaluate aBlock for each of the receiver''s elements and answer the
+list of all resulting values flatten one level. Assumes that aBlock returns some kind
+of collection for each element. Equivalent to the lisp''s mapcan'>
 	| col |
 	col := OrderedCollection new: self size.
 	self do: [ :each | col addAll: (aBlock value: each) ].
@@ -155,17 +193,19 @@ JinCollection >> flatCollect: aBlock [
 
 { #category : #'as yet unclassified' }
 JinCollection >> groupedBy: aBlock [
-	"Answer a dictionary whose keys are the result of evaluating aBlock for all my elements, and the value for each key is the selection of my elements that evaluated to that key. Uses species."
-	
+
+	<doc:
+	'Answer a dictionary whose keys are the result of evaluating aBlock for all my elements, and the value for each key is the selection of my elements that evaluated to that key. Uses species.'>
 	| groups |
 	groups := OrderedDictionary new.
 	self do: [ :each |
-		(groups at: (aBlock value: each) ifAbsentPut: [ OrderedCollection new ]) add: each ].
+		(groups
+			 at: (aBlock value: each)
+			 ifAbsentPut: [ OrderedCollection new ]) add: each ].
 	self species ~~ OrderedCollection ifTrue: [
 		groups associationsDo: [ :association |
-			association value: (OrderedCollection withAll: association value) ]].
+			association value: (OrderedCollection withAll: association value) ] ].
 	^ groups
-
 ]
 
 { #category : #'as yet unclassified' }
@@ -211,8 +251,8 @@ JinCollection >> isNotEmpty [
 
 { #category : #'as yet unclassified' }
 JinCollection >> reject: rejectBlock thenDo: aBlock [
-	"Refer to the comment in Collection>>#reject:thenDo:"
-	
+	<doc:'	Utility method to improve readability.
+Do not create the intermediate collection.'>
 	|  each |
 	
 	1 to: self size do: [ :index |
@@ -222,27 +262,28 @@ JinCollection >> reject: rejectBlock thenDo: aBlock [
 
 { #category : #'as yet unclassified' }
 JinCollection >> second [
-	^ self at:2 
+
+	<doc: 'Answer the second element of the receiver'>
+	^ self at: 2
 ]
 
 { #category : #'as yet unclassified' }
 JinCollection >> select: aBlock [
-	"Evaluate aBlock with each of the receiver's elements as the argument. Collect into a new collection like the receiver, only those elements for which aBlock evaluates to true. Answer the new collection."
-
 	"(#(1 2 3 4 5) select: #even) >>> #(2 4)"
 
+	<doc:
+	'Evaluate aBlock with each of the receiver''s elements as the argument. Collect into a new collection like the receiver, only those elements for which aBlock evaluates to true. Answer the new collection.'>
 	| newCollection |
 	newCollection := OrderedCollection new.
-	self
-		do: [ :each | 
-			(aBlock value: each)
-				ifTrue: [ newCollection add: each ] ].
+	self do: [ :each |
+		(aBlock value: each) ifTrue: [ newCollection add: each ] ].
 	^ newCollection
 ]
 
 { #category : #'as yet unclassified' }
 JinCollection >> select: selectBock thenDo: aBlock [
-	
+	<doc:'	Utility method to improve readability.
+Do not create the intermediate collection.'>
 	| each |
 	1 to: self size do: [ :index |
 		(selectBock value: (each := self at: index))
@@ -251,6 +292,8 @@ JinCollection >> select: selectBock thenDo: aBlock [
 
 { #category : #'as yet unclassified' }
 JinCollection >> size [
+
+	<doc: 'Answer how many elements the receiver contains.'>
 	^ handle propertyNamed: #Count
 ]
 

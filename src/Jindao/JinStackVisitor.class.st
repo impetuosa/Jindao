@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'stack'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-Visitors'
 }
 
 { #category : #initialization }

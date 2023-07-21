@@ -10,7 +10,7 @@ dbSystemObject	-2147483646	System table.
 Class {
 	#name : #JinTable,
 	#superclass : #JinModelObject,
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Database'
 }
 
 { #category : #accessing }

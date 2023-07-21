@@ -4,7 +4,7 @@ a report is kind of a form with some extrea features
 Class {
 	#name : #JinReport,
 	#superclass : #JinForm,
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Widgets'
 }
 
 { #category : #accessing }

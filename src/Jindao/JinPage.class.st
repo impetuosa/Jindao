@@ -45,7 +45,7 @@ Each **Page** object can also contain one or more controls. Controls on a **Page
 Class {
 	#name : #JinPage,
 	#superclass : #JinControlAbstractPage,
-	#category : #'Jindao-FormControls-Builtin'
+	#category : #'Jindao-MSAccess-Widgets-Builtin-Controls'
 }
 
 { #category : #accessing }

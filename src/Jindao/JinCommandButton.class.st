@@ -35,7 +35,7 @@ You can display text on a command button by setting its **Caption** property, or
 Class {
 	#name : #JinCommandButton,
 	#superclass : #JinControlAbstractCommandButton,
-	#category : #'Jindao-FormControls-Builtin'
+	#category : #'Jindao-MSAccess-Widgets-Builtin-Controls'
 }
 
 { #category : #accessing }

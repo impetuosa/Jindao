@@ -15,7 +15,7 @@ Class {
 		'referenceAccess',
 		'usedSymbols'
 	],
-	#category : #'Jindao-Subvisitor'
+	#category : #'Jindao-Visitors'
 }
 
 { #category : #'visit-first-objects' }

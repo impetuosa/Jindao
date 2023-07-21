@@ -34,7 +34,7 @@ You can use the image control or an [Unbound object frame](overview/Access.md) f
 Class {
 	#name : #JinImage,
 	#superclass : #JinControlAbstractImage,
-	#category : #'Jindao-FormControls-Builtin'
+	#category : #'Jindao-MSAccess-Widgets-Builtin-Controls'
 }
 
 { #category : #accessing }

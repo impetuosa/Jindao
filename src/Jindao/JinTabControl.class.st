@@ -27,7 +27,7 @@ With the tab control, you can construct a single form or dialog box that contain
 Class {
 	#name : #JinTabControl,
 	#superclass : #JinControlAbstractTabControl,
-	#category : #'Jindao-FormControls-Builtin'
+	#category : #'Jindao-MSAccess-Widgets-Builtin-Controls'
 }
 
 { #category : #accessing }

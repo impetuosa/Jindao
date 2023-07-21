@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'project'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Database'
 }
 
 { #category : #'as yet unclassified' }

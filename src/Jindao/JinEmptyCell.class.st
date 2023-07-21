@@ -4,7 +4,7 @@ Enitty produced by access with the only reason of layout adjustment.
 Class {
 	#name : #JinEmptyCell,
 	#superclass : #JinControlGeneric,
-	#category : #'Jindao-FormControls-Builtin'
+	#category : #'Jindao-MSAccess-Widgets-Builtin-Controls'
 }
 
 { #category : #'as yet unclassified' }

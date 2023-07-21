@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'src'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Code'
 }
 
 { #category : #accessing }

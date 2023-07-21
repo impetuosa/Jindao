@@ -27,7 +27,7 @@ You can use the **BorderWidth** property to change the line width. You can use t
 Class {
 	#name : #JinLine,
 	#superclass : #JinControlAbstractLine,
-	#category : #'Jindao-FormControls-Builtin'
+	#category : #'Jindao-MSAccess-Widgets-Builtin-Controls'
 }
 
 { #category : #generated }

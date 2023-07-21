@@ -1,10 +1,14 @@
+"
+I am in charge of loadind of the different elements defined in a library. 
+I am basically a factory. My main entry point is #load:. 
+"
 Class {
 	#name : #JinLibraryTypeLoader,
 	#superclass : #Object,
 	#instVars : [
 		'library'
 	],
-	#category : #'Jindao-LibraryAnalysis'
+	#category : #'Jindao-DLL-Library'
 }
 
 { #category : #loader }

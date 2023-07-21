@@ -5,7 +5,7 @@ Class {
 		'reference',
 		'name'
 	],
-	#category : #'Jindao-COMDoc'
+	#category : #'Jindao-MSAccess-Documentation'
 }
 
 { #category : #'as yet unclassified' }

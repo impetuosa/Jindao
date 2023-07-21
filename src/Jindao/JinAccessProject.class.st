@@ -495,7 +495,7 @@ JinAccessProject >> relations [
 		  relations := JinCollection newDefault
 			               handle:
 			               (application database propertyNamed: #Relations)
-			               factory: (JinRemoteObjectOnlyGenericsFactory new
+			               factory: (JinRemoteObjectSingleClassFactory new
 					                defaultHierarchyClass: JinTableRelation;
 					                scopedBy: self;
 					                yourself) ]

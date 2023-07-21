@@ -32,7 +32,7 @@ You can also use check boxes in an option group to display values to choose from
 Class {
 	#name : #JinCheckbox,
 	#superclass : #JinControlAbstractCheckbox,
-	#category : #'Jindao-FormControls-Builtin'
+	#category : #'Jindao-MSAccess-Widgets-Builtin-Controls'
 }
 
 { #category : #'as yet unclassified' }

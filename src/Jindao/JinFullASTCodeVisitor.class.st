@@ -1,7 +1,7 @@
 Class {
 	#name : #JinFullASTCodeVisitor,
 	#superclass : #JinSubvisitor,
-	#category : #'Jindao-Subvisitor'
+	#category : #'Jindao-Visitors'
 }
 
 { #category : #'delegate to subvisitor' }

@@ -1,7 +1,7 @@
 Class {
 	#name : #JinGUIFirstCitizenVisitor,
 	#superclass : #JinSubvisitor,
-	#category : #'Jindao-Subvisitor'
+	#category : #'Jindao-Visitors'
 }
 
 { #category : #'visit-controls' }

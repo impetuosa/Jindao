@@ -1,10 +1,13 @@
+"
+I represent a ENUM type defined in the library
+"
 Class {
 	#name : #JinLibraryEnum,
 	#superclass : #JinLibraryType,
 	#instVars : [
 		'values'
 	],
-	#category : #'Jindao-LibraryAnalysis'
+	#category : #'Jindao-DLL-Library'
 }
 
 { #category : #'as yet unclassified' }

@@ -20,7 +20,7 @@ JinVBEComponent >> properties [
 	^ JinCollection newDefaultForMethod
 		handle: (handle propertyNamed: #Properties)
 		factory:
-			(JinRemoteObjectOnlyGenericsFactory new
+			(JinRemoteObjectSingleClassFactory new
 				defaultHierarchyClass: JinAccessProperty;
 				yourself)
 ]

@@ -8,7 +8,7 @@ Class {
 		'src',
 		'documentedProperties'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Widgets'
 }
 
 { #category : #accessing }

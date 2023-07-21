@@ -1,3 +1,7 @@
+"
+I represent a Property defined in the library. 
+Note that properties are like in C#/VB.net, etc. A mashup of memory holding plus setting/getting attached functions.
+"
 Class {
 	#name : #JinLibraryProperty,
 	#superclass : #JinLibraryAttribute,
@@ -5,7 +9,7 @@ Class {
 		'setter',
 		'getter'
 	],
-	#category : #'Jindao-LibraryAnalysis'
+	#category : #'Jindao-DLL-Library'
 }
 
 { #category : #'as yet unclassified' }

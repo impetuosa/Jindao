@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'default'
 	],
-	#category : #'Jindao-COMDoc'
+	#category : #'Jindao-MSAccess-Documentation'
 }
 
 { #category : #accessing }

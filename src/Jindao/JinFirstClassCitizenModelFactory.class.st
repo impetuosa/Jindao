@@ -8,7 +8,7 @@ Class {
 		'useClass',
 		'project'
 	],
-	#category : #'Jindao-Factories'
+	#category : #'Jindao-Core-Factories'
 }
 
 { #category : #'as yet unclassified' }
@@ -18,7 +18,7 @@ JinFirstClassCitizenModelFactory class >> defaultFor: aClass [
 		yourself
 ]
 
-{ #category : #accessing }
+{ #category : #'as yet unclassified' }
 JinFirstClassCitizenModelFactory >> elementFor: aHandle [
 	^ useClass new
 		description:

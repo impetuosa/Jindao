@@ -6,7 +6,7 @@ I am only accessible through a form
 Class {
 	#name : #JinSubModuleBody,
 	#superclass : #JinModuleBody,
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Widgets'
 }
 
 { #category : #'as yet unclassified' }

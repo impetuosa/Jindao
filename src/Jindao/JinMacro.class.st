@@ -4,7 +4,7 @@ I represent a macro at the first citizen level.
 Class {
 	#name : #JinMacro,
 	#superclass : #JinModelObject,
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Code'
 }
 
 { #category : #accessing }

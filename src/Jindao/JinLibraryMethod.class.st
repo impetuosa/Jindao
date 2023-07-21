@@ -1,3 +1,6 @@
+"
+I represent a METHOD defined in the library
+"
 Class {
 	#name : #JinLibraryMethod,
 	#superclass : #JinLibraryFunction,
@@ -5,7 +8,7 @@ Class {
 		'parameters',
 		'returnTypeName'
 	],
-	#category : #'Jindao-LibraryAnalysis'
+	#category : #'Jindao-DLL-Library'
 }
 
 { #category : #'as yet unclassified' }

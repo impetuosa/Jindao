@@ -67,7 +67,7 @@ End Sub
 Class {
 	#name : #JinListBox,
 	#superclass : #JinControlAbstractListBox,
-	#category : #'Jindao-FormControls-Builtin'
+	#category : #'Jindao-MSAccess-Widgets-Builtin-Controls'
 }
 
 { #category : #generated }

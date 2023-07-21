@@ -6,7 +6,7 @@ I am able to show my contents
 Class {
 	#name : #JinSourceCode,
 	#superclass : #JinAccessObject,
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Code'
 }
 
 { #category : #'as yet unclassified' }

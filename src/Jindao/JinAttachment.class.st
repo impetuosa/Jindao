@@ -109,7 +109,7 @@ Office Access 2007 blocks the following types of attached files. At this time, y
 Class {
 	#name : #JinAttachment,
 	#superclass : #JinControlAbstractAttachment,
-	#category : #'Jindao-FormControls-Builtin'
+	#category : #'Jindao-MSAccess-Widgets-Builtin-Controls'
 }
 
 { #category : #'as yet unclassified' }

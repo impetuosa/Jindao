@@ -1,7 +1,10 @@
+"
+I represent a Co Class defined in the library
+"
 Class {
 	#name : #JinLibraryCoClass,
 	#superclass : #JinLibraryType,
-	#category : #'Jindao-LibraryAnalysis'
+	#category : #'Jindao-DLL-Library'
 }
 
 { #category : #'as yet unclassified' }

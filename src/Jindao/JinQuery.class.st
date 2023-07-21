@@ -4,7 +4,7 @@ I represent a query
 Class {
 	#name : #JinQuery,
 	#superclass : #JinModelObject,
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Database'
 }
 
 { #category : #accessing }

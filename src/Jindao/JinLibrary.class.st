@@ -1,3 +1,7 @@
+"
+This class allows to inspect libraries. For doing so it leverages DBHelp and COM interfaces. 
+
+"
 Class {
 	#name : #JinLibrary,
 	#superclass : #Object,
@@ -9,7 +13,7 @@ Class {
 		'types',
 		'typeLoader'
 	],
-	#category : #'Jindao-LibraryAnalysis'
+	#category : #'Jindao-DLL-Library'
 }
 
 { #category : #visiting }
@@ -56,10 +60,11 @@ JinLibrary >> dbgHandle [
 { #category : #lazy }
 JinLibrary >> fetchLibraryFunctions [
 
+	<doc: 'Instantiates the functions collection by crawling all the functions defined in the library. It uses DBHelp Library for doing so. '>
 	| ff |
 	ff := OrderedCollection new.
 
-	[ 
+	[
 	DBGHelpLib uniqueInstance
 		enumerateSymbols: self dbgHandle
 		callback: [ :pSymbol :size :usc | " The pSymbol pointer is valid **ONLY** during the callback execution. "
@@ -71,7 +76,7 @@ JinLibrary >> fetchLibraryFunctions [
 			The symbol is from the export table. 
 			"
 			self traceCr: symbol flags hex.
-			symbol flags = 16r200 ifTrue: [ 
+			symbol flags = 16r200 ifTrue: [
 				ff add: (JinLibraryFunction new
 						 owner: self;
 						 selector: symbol name;
@@ -108,15 +113,16 @@ JinLibrary >> name [
 { #category : #accessing }
 JinLibrary >> path [
 
+	<doc: 'Obtains the path from the remote entity. '>
 	| path |
 	^ reference path exists
 		  ifTrue: [ reference path ]
-		  ifFalse: [ 
+		  ifFalse: [
 			  | handle |
 			  handle := self libraryHandle.
 			  handle win32Path exists
 				  ifTrue: [ handle win32Path ]
-				  ifFalse: [ 
+				  ifFalse: [
 					  path := handle win32Path.
 					  [ path exists ] whileFalse: [ path := path parent ].
 					  self assert: path extension = #dll.
@@ -131,7 +137,7 @@ JinLibrary >> reference: aJinReference [
 
 { #category : #accessing }
 JinLibrary >> typeLoader [
-
+	
 	^ typeLoader ifNil: [ 
 		  typeLoader := JinLibraryTypeLoader new
 			                library: self;
@@ -140,7 +146,7 @@ JinLibrary >> typeLoader [
 
 { #category : #accewssing }
 JinLibrary >> types [
-
+	<doc: 'Instantiates the types collection by crawling all the types defined in the library. It uses COM interfaces for doing so. '>
 	^ types ifNil: [ 
 		  types := self libraryHandle typeInfos collect: [ :i | 
 			           self typeLoader load: i ].

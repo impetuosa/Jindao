@@ -12,7 +12,7 @@ JinVBEProject >> components [
 	^ JinCollection newDefaultForMethod
 		handle: (handle propertyNamed: #VBComponents)
 		factory:
-			(JinRemoteObjectOnlyGenericsFactory new
+			(JinRemoteObjectSingleClassFactory new
 				defaultHierarchyClass: JinVBEComponent;
 				yourself)
 ]

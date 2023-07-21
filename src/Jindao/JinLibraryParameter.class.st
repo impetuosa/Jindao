@@ -1,10 +1,13 @@
+"
+I represent a parameter in a function defined in the library
+"
 Class {
 	#name : #JinLibraryParameter,
 	#superclass : #JinLibraryAttribute,
 	#instVars : [
 		'isOptional'
 	],
-	#category : #'Jindao-LibraryAnalysis'
+	#category : #'Jindao-DLL-Library'
 }
 
 { #category : #'as yet unclassified' }

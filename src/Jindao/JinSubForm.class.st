@@ -34,7 +34,7 @@ Instead of creating the main form, and then adding the subform control to it, yo
 Class {
 	#name : #JinSubForm,
 	#superclass : #JinControlAbstractSubForm,
-	#category : #'Jindao-FormControls-Builtin'
+	#category : #'Jindao-MSAccess-Widgets-Builtin-Controls'
 }
 
 { #category : #generated }

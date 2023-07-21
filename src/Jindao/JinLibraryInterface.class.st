@@ -1,7 +1,10 @@
+"
+I represent a Interface defined in the library. I include  variables and functions/methods
+"
 Class {
 	#name : #JinLibraryInterface,
 	#superclass : #JinLibraryModule,
-	#category : #'Jindao-LibraryAnalysis'
+	#category : #'Jindao-DLL-Library'
 }
 
 { #category : #'as yet unclassified' }

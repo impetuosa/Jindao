@@ -9,7 +9,7 @@ Class {
 		'lastReturnedValues',
 		'table'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Database'
 }
 
 { #category : #accessing }
@@ -32,7 +32,7 @@ JinRecordset >> fields [
 	^ JinCollection newDefault
 		handle: (handle propertyNamed: #Fields)
 			factory:
-			(JinRemoteObjectOnlyGenericsFactory new
+			(JinRemoteObjectSingleClassFactory new
 				defaultHierarchyClass: JinAccessTableField;
 				yourself);
 		yourself

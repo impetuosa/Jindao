@@ -1,7 +1,7 @@
 Class {
 	#name : #JinLibraryReferenceVisitor,
 	#superclass : #JinSubvisitor,
-	#category : #'Jindao-Subvisitor'
+	#category : #'Jindao-Visitors'
 }
 
 { #category : #accessing }

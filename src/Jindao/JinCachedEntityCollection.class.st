@@ -4,7 +4,7 @@ I have a cache at the level of local entity. I return the same entity for the sa
 Class {
 	#name : #JinCachedEntityCollection,
 	#superclass : #JinCachedCollection,
-	#category : #'Jindao-RemoteCollections'
+	#category : #'Jindao-Core-RemoteCollections'
 }
 
 { #category : #'as yet unclassified' }

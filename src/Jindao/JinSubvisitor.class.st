@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'parent'
 	],
-	#category : #'Jindao-Subvisitor'
+	#category : #'Jindao-Visitors'
 }
 
 { #category : #'as yet unclassified' }

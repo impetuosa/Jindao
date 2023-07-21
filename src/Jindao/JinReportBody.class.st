@@ -4,7 +4,7 @@ I do represent a Report. A report contains controls and oftenly a related module
 Class {
 	#name : #JinReportBody,
 	#superclass : #JinFormBody,
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Widgets'
 }
 
 { #category : #'as yet unclassified' }

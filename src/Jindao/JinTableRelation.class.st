@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'project'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Database'
 }
 
 { #category : #'as yet unclassified' }
@@ -40,7 +40,7 @@ JinTableRelation >> fields [
 		base: 1;
 		handle: (handle propertyNamed: #Fields)
 			factory:
-			(JinRemoteObjectOnlyGenericsFactory new
+			(JinRemoteObjectSingleClassFactory new
 				defaultHierarchyClass: JinRelationField;
 				yourself);
 		yourself

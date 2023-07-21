@@ -1,10 +1,13 @@
+"
+I represent a Function defined in the library
+"
 Class {
 	#name : #JinLibraryFunction,
 	#superclass : #JinLibraryElement,
 	#instVars : [
 		'selector'
 	],
-	#category : #'Jindao-LibraryAnalysis'
+	#category : #'Jindao-DLL-Library'
 }
 
 { #category : #visiting }

@@ -52,6 +52,36 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+JindaoManifest class >> exampleAccessTableInformation [
+
+	<example>
+	| project table recordset records |
+	" Opens an access project "
+	project := JinAccessApplication default open: self projectPath.
+
+
+	"Choose a random table"
+	table := project tables shuffle first.
+
+	"Get's a recordset form the table"
+	recordset := table recordset.
+	records := OrderedCollection new.
+	
+	"Fills up the records collection with the first two rows"
+	[ recordset atEnd not and: [ records size < 3 ] ] whileTrue: [
+		records add:
+			(recordset fields collect: [ :f | f name , '=' , f value asString ]) ].
+	"Closes the recordset "
+	recordset close. 
+	
+	"Inspects the stored information"
+	records inspect. 
+	
+	" Closes the project and quits the Microsoft Access application "
+	project closeAndQuit
+]
+
+{ #category : #'as yet unclassified' }
 JindaoManifest class >> exampleCountControls [
 
 	<example>
@@ -78,6 +108,25 @@ JindaoManifest class >> exampleCountControls [
 			 format: {
 					 project forms size asString.
 					 controls asString }).
+
+	" Closes the project and quits the Microsoft Access application "
+	project closeAndQuit
+]
+
+{ #category : #'as yet unclassified' }
+JindaoManifest class >> exampleLoadAstModule [
+
+	<example>
+	| project form |
+	" Opens an access project "
+	project := JinAccessApplication default open: self projectPath.
+
+
+	"Choose a random form from all those forms with module (attached code) "
+	form := (project forms select: [ :a | a hasModule ]) shuffle first.
+
+	"Inspect the form's ast"
+	form ast inspect.
 
 	" Closes the project and quits the Microsoft Access application "
 	project closeAndQuit

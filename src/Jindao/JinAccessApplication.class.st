@@ -527,7 +527,7 @@ JinAccessApplication >> openedFormsHandles [
 	^ JinCollection newDefault
 		handle: (handle propertyNamed: #Forms)
 		factory:
-			(JinRemoteObjectOnlyGenericsFactory new
+			(JinRemoteObjectSingleClassFactory new
 				defaultHierarchyClass: JinFormBody ;
 				yourself)
 ]
@@ -537,7 +537,7 @@ JinAccessApplication >> openedModuleHandles [
 ^ JinCollection newDefault
 		handle: (handle propertyNamed: #Modules)
 		factory:
-			(JinRemoteObjectOnlyGenericsFactory new
+			(JinRemoteObjectSingleClassFactory new
 				defaultHierarchyClass: JinModuleBody  ;
 				yourself)
 	
@@ -548,7 +548,7 @@ JinAccessApplication >> openedQueryHandles [
 	^ JinCollection newDefault
 		handle: (self database propertyNamed: #QueryDefs)
 		factory:
-			(JinRemoteObjectOnlyGenericsFactory new
+			(JinRemoteObjectSingleClassFactory new
 				defaultHierarchyClass: JinQueryBody;
 				yourself)
 ]
@@ -558,7 +558,7 @@ JinAccessApplication >> openedReportHandles [
 	^ JinCollection newDefault
 		handle: (handle propertyNamed: #Reports)
 		factory:
-			(JinRemoteObjectOnlyGenericsFactory new
+			(JinRemoteObjectSingleClassFactory new
 				defaultHierarchyClass: JinReportBody ;
 				yourself)
 ]
@@ -568,7 +568,7 @@ JinAccessApplication >> openedTableHandles [
 	^ JinCollection newDefault
 		handle: (self database propertyNamed: #TableDefs)
 		factory:
-			(JinRemoteObjectOnlyGenericsFactory new
+			(JinRemoteObjectSingleClassFactory new
 				defaultHierarchyClass: JinTableBody;
 				yourself)
 ]
@@ -588,7 +588,7 @@ JinAccessApplication >> references [
 	^ JinCollection newDefaultForMethod
 		handle: (handle propertyNamed: #References)
 		factory:
-			(JinRemoteObjectOnlyGenericsFactory new
+			(JinRemoteObjectSingleClassFactory new
 				defaultHierarchyClass: JinReference;
 				yourself)
 ]
@@ -685,7 +685,7 @@ JinAccessApplication >> vbeProjects [
 	^ JinCollection newDefaultForMethod
 		handle: ((handle propertyNamed: #VBE) propertyNamed: #VBProjects)
 		factory:
-			(JinRemoteObjectOnlyGenericsFactory new
+			(JinRemoteObjectSingleClassFactory new
 				defaultHierarchyClass: JinVBEProject;
 				yourself)
 ]

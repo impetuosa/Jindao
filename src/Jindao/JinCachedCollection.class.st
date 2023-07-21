@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'collection'
 	],
-	#category : #'Jindao-RemoteCollections'
+	#category : #'Jindao-Core-RemoteCollections'
 }
 
 { #category : #'as yet unclassified' }

@@ -1,3 +1,6 @@
+"
+I represent a Module defined in the library. I include  variables and functions/methods
+"
 Class {
 	#name : #JinLibraryModule,
 	#superclass : #JinLibraryStructure,
@@ -7,7 +10,7 @@ Class {
 		'properties',
 		'methods'
 	],
-	#category : #'Jindao-LibraryAnalysis'
+	#category : #'Jindao-DLL-Library'
 }
 
 { #category : #'as yet unclassified' }

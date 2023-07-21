@@ -32,7 +32,7 @@ You can move a rectangle and the controls in it as a single unit by dragging the
 Class {
 	#name : #JinRectangle,
 	#superclass : #JinControlAbstractRectangle,
-	#category : #'Jindao-FormControls-Builtin'
+	#category : #'Jindao-MSAccess-Widgets-Builtin-Controls'
 }
 
 { #category : #accessing }

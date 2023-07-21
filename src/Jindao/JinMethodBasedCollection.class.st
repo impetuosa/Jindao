@@ -4,7 +4,7 @@ I differ from the point of view that i do not use a property to access content b
 Class {
 	#name : #JinMethodBasedCollection,
 	#superclass : #JinCollection,
-	#category : #'Jindao-RemoteCollections'
+	#category : #'Jindao-Core-RemoteCollections'
 }
 
 { #category : #'as yet unclassified' }

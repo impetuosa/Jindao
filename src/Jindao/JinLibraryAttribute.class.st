@@ -1,3 +1,6 @@
+"
+I represent an variable defined in a library. 
+"
 Class {
 	#name : #JinLibraryAttribute,
 	#superclass : #JinLibraryElement,
@@ -5,7 +8,7 @@ Class {
 		'typeName',
 		'name'
 	],
-	#category : #'Jindao-LibraryAnalysis'
+	#category : #'Jindao-DLL-Library'
 }
 
 { #category : #'as yet unclassified' }

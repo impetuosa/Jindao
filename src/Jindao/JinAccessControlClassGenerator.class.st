@@ -17,7 +17,7 @@ JinAccessControlClassGenerator >> forceDoubleGenerationOfAllClasses [
 	^ (project forms
 		flatCollect: [ :c | 
 			c controls
-				factory: JinRemoteObjectGeneratorFactory newControlDoubleClassBasedFactory;
+				factory: JinRemoteObjectClassGeneratorFactory newControlDoubleClassBasedFactory;
 				yourself ]) collect: [ :c | c yourself ]
 ]
 
@@ -28,7 +28,7 @@ JinAccessControlClassGenerator >> forceGenerationOfAllAccessPropertiesClasses [
 	(allControls
 		flatCollect: [ :c | 
 			c properties
-				factory: JinRemoteObjectGeneratorFactory newAccessPropertySimpleClassBasedFactory;
+				factory: JinRemoteObjectClassGeneratorFactory newAccessPropertySimpleClassBasedFactory;
 				yourself ]) collect: [ :p | p yourself ]
 ]
 
@@ -37,7 +37,7 @@ JinAccessControlClassGenerator >> forceGenerationOfAllClasses [
 	^ (project forms
 		flatCollect: [ :c | 
 			c controls
-				factory: JinRemoteObjectGeneratorFactory newControlSimpleClassBasedFactory ])
+				factory: JinRemoteObjectClassGeneratorFactory newControlSimpleClassBasedFactory ])
 		collect: [ :c | c yourself ].
 
 ]
@@ -73,7 +73,7 @@ JinAccessControlClassGenerator >> testAllTheExpectedControlsAreCreated [
 { #category : #tests }
 JinAccessControlClassGenerator >> testGeneratedClassesMethodsOrPropertiesShouldNotOverrideAnyNotOverrideMethod [
 	| configuredBuilder |
-	configuredBuilder := JinRemoteObjectGeneratorFactory
+	configuredBuilder := JinRemoteObjectClassGeneratorFactory
 		newControlSimpleClassBasedFactory newBuilderForName: 'Test'.
 	self
 		deny: (configuredBuilder shouldGenerateMethodNamed: 'properties' asSymbol)
@@ -82,7 +82,7 @@ JinAccessControlClassGenerator >> testGeneratedClassesMethodsOrPropertiesShouldN
 { #category : #tests }
 JinAccessControlClassGenerator >> testGeneratedClassesMethodsOrPropertiesShouldNotOverrideAnyNotOverrideMethod2 [
 	| configuredBuilder |
-	configuredBuilder := JinRemoteObjectGeneratorFactory
+	configuredBuilder := JinRemoteObjectClassGeneratorFactory
 		newControlSimpleClassBasedFactory newBuilderForName: 'Test'.
 	self
 		deny: (configuredBuilder shouldGenerateMethodNamed: 'controlName' asSymbol)
@@ -91,7 +91,7 @@ JinAccessControlClassGenerator >> testGeneratedClassesMethodsOrPropertiesShouldN
 { #category : #tests }
 JinAccessControlClassGenerator >> testGeneratedClassesMethodsOrPropertiesShouldOverrideAnyNoNotOverrideMethod [
 	| configuredBuilder |
-	configuredBuilder := JinRemoteObjectGeneratorFactory
+	configuredBuilder := JinRemoteObjectClassGeneratorFactory
 		newControlSimpleClassBasedFactory newBuilderForName: 'Test'.
 	self
 		assert:

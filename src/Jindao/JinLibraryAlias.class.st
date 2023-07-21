@@ -1,10 +1,13 @@
+"
+I represent an Alias of an actual type.
+"
 Class {
 	#name : #JinLibraryAlias,
 	#superclass : #JinLibraryType,
 	#instVars : [
 		'aliaseeTypeName'
 	],
-	#category : #'Jindao-LibraryAnalysis'
+	#category : #'Jindao-DLL-Library'
 }
 
 { #category : #accessing }

@@ -2,42 +2,42 @@
 i am a factory that generates classes on demand. 
 "
 Class {
-	#name : #JinRemoteObjectGeneratorFactory,
-	#superclass : #JinRemoteObjectMappedTypesFactory,
+	#name : #JinRemoteObjectClassGeneratorFactory,
+	#superclass : #JinRemoteObjectMappedClassFactory,
 	#instVars : [
 		'buildingClass',
 		'packageName'
 	],
-	#category : #'Jindao-Factories'
+	#category : #'Jindao-Core-Factories'
 }
 
 { #category : #'instance creation' }
-JinRemoteObjectGeneratorFactory class >> newAccessPropertyDoubleClassBasedFactory [
+JinRemoteObjectClassGeneratorFactory class >> newAccessPropertyDoubleClassBasedFactory [
 	^ self newDefaultAccessPropertyFactory: JinControlDoubleClassBuilder
 ]
 
 { #category : #'instance creation' }
-JinRemoteObjectGeneratorFactory class >> newAccessPropertySimpleClassBasedFactory [
+JinRemoteObjectClassGeneratorFactory class >> newAccessPropertySimpleClassBasedFactory [
 	^ self newDefaultAccessPropertyFactory: JinControlClassBuilder
 ]
 
 { #category : #'instance creation' }
-JinRemoteObjectGeneratorFactory class >> newControlDoubleClassBasedFactory [
+JinRemoteObjectClassGeneratorFactory class >> newControlDoubleClassBasedFactory [
 	^ self newDefaultControlsFactory: JinControlDoubleClassBuilder
 ]
 
 { #category : #'instance creation' }
-JinRemoteObjectGeneratorFactory class >> newControlSimpleClassBasedFactory [
+JinRemoteObjectClassGeneratorFactory class >> newControlSimpleClassBasedFactory [
 	^ self newDefaultControlsFactory: JinControlClassBuilder
 ]
 
 { #category : #'instance creation' }
-JinRemoteObjectGeneratorFactory class >> newDefaultAccessPropertyFactory [
+JinRemoteObjectClassGeneratorFactory class >> newDefaultAccessPropertyFactory [
 	^ self newAccessPropertyDoubleClassBasedFactory
 ]
 
 { #category : #'instance creation' }
-JinRemoteObjectGeneratorFactory class >> newDefaultAccessPropertyFactory: aJinClassBuilder [
+JinRemoteObjectClassGeneratorFactory class >> newDefaultAccessPropertyFactory: aJinClassBuilder [
 	
 	^ self new
 		defaultHierarchyClass: JinAccessPropertyGenerated;
@@ -52,12 +52,12 @@ JinRemoteObjectGeneratorFactory class >> newDefaultAccessPropertyFactory: aJinCl
 ]
 
 { #category : #'instance creation' }
-JinRemoteObjectGeneratorFactory class >> newDefaultControlsFactory [
+JinRemoteObjectClassGeneratorFactory class >> newDefaultControlsFactory [
 	^ self newControlDoubleClassBasedFactory
 ]
 
 { #category : #'instance creation' }
-JinRemoteObjectGeneratorFactory class >> newDefaultControlsFactory: aJinClassBuilder [
+JinRemoteObjectClassGeneratorFactory class >> newDefaultControlsFactory: aJinClassBuilder [
 	^ self new
 		defaultHierarchyClass: JinControlGenerated;
 		" If class not found, a new class will be created under this superclass "
@@ -71,24 +71,26 @@ JinRemoteObjectGeneratorFactory class >> newDefaultControlsFactory: aJinClassBui
 ]
 
 { #category : #accessing }
-JinRemoteObjectGeneratorFactory >> buildingClass [
+JinRemoteObjectClassGeneratorFactory >> buildingClass [
 	^ buildingClass
 ]
 
 { #category : #accessing }
-JinRemoteObjectGeneratorFactory >> buildingClass: aClass [
+JinRemoteObjectClassGeneratorFactory >> buildingClass: aClass [
 	buildingClass := aClass
 ]
 
 { #category : #accessing }
-JinRemoteObjectGeneratorFactory >> classFor: aControl [
+JinRemoteObjectClassGeneratorFactory >> classFor: aControl [
+	<doc:
+	'Returns a class to instantiate to represent a given remote handle. If none is found, it delegates to a builder to create a Pharo Class able to hold the given handle, and to be after visit separately.'>
 	^ self
 		classFor: aControl
 		ifNone: [ self generateClassControlFor: aControl ]
 ]
 
 { #category : #accessing }
-JinRemoteObjectGeneratorFactory >> generateClassControlFor: aRemoteObject [
+JinRemoteObjectClassGeneratorFactory >> generateClassControlFor: aRemoteObject [
 	| builder |
 	builder := self newBuilderForName: (self resolveNameForClassGeneration: aRemoteObject).
 	(self selectPropertiesFor: aRemoteObject)
@@ -100,7 +102,7 @@ JinRemoteObjectGeneratorFactory >> generateClassControlFor: aRemoteObject [
 ]
 
 { #category : #accessing }
-JinRemoteObjectGeneratorFactory >> newBuilder [
+JinRemoteObjectClassGeneratorFactory >> newBuilder [
 	^ self buildingClass new
 		packageName: packageName;
 		superclass: self defaultHierarchyClass;
@@ -108,23 +110,23 @@ JinRemoteObjectGeneratorFactory >> newBuilder [
 ]
 
 { #category : #accessing }
-JinRemoteObjectGeneratorFactory >> newBuilderForName: aName [
+JinRemoteObjectClassGeneratorFactory >> newBuilderForName: aName [
 	^ self newBuilder
 		name: aName;
 		yourself
 ]
 
 { #category : #accessing }
-JinRemoteObjectGeneratorFactory >> packageName: aName [
+JinRemoteObjectClassGeneratorFactory >> packageName: aName [
 	packageName := aName
 ]
 
 { #category : #accessing }
-JinRemoteObjectGeneratorFactory >> selectMethodsFor: aRemoteObject [
+JinRemoteObjectClassGeneratorFactory >> selectMethodsFor: aRemoteObject [
 	^ aRemoteObject getTypeInfo methods
 ]
 
 { #category : #accessing }
-JinRemoteObjectGeneratorFactory >> selectPropertiesFor: aRemoteObject [
+JinRemoteObjectClassGeneratorFactory >> selectPropertiesFor: aRemoteObject [
 	^ aRemoteObject getTypeInfo properties
 ]

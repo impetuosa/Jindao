@@ -3,7 +3,7 @@ Class {
 	#superclass : #JinSubvisitor,
 	#traits : 'TVBProgramNodeVisitor',
 	#classTraits : 'TVBProgramNodeVisitor classTrait',
-	#category : #'Jindao-Subvisitor'
+	#category : #'Jindao-Visitors'
 }
 
 { #category : #'delegate to subvisitor' }

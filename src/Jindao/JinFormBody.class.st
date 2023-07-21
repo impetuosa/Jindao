@@ -9,7 +9,7 @@ Class {
 		'module',
 		'controls'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Widgets'
 }
 
 { #category : #accessing }

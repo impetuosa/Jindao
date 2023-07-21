@@ -8,7 +8,7 @@ Class {
 		'fields',
 		'table'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Database'
 }
 
 { #category : #'as yet unclassified' }
@@ -39,7 +39,7 @@ JinIndexBody >> fields [
 		base: 1;
 		handle: (handle propertyNamed: #Fields)
 			factory:
-			(JinRemoteObjectOnlyGenericsFactory new
+			(JinRemoteObjectSingleClassFactory new
 				defaultHierarchyClass: JinAccessTableField;
 				yourself);
 		yourself

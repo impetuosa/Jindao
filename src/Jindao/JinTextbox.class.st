@@ -44,7 +44,7 @@ End Sub
 Class {
 	#name : #JinTextbox,
 	#superclass : #JinControlAbstractTextbox,
-	#category : #'Jindao-FormControls-Builtin'
+	#category : #'Jindao-MSAccess-Widgets-Builtin-Controls'
 }
 
 { #category : #accessing }

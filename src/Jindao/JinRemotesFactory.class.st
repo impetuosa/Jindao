@@ -13,12 +13,12 @@ Class {
 		'defaultHierarchyClass',
 		'scope'
 	],
-	#category : #'Jindao-Factories'
+	#category : #'Jindao-Core-Factories'
 }
 
 { #category : #'instance creation' }
 JinRemotesFactory class >> defaultFactory [
-	^ JinRemoteObjectMappedTypesFactory
+	^ JinRemoteObjectMappedClassFactory
 ]
 
 { #category : #'instance creation' }
@@ -39,6 +39,9 @@ JinRemotesFactory class >> newDefaultControlsFactory [
 
 { #category : #accessing }
 JinRemotesFactory >> classFor: aControl [
+
+	<doc:
+	'Returns a class to instantiate to represent a given remote handle. If none is found, it returns the defaultHierarchyClass with which this object has been configured.'>
 	^ self classFor: aControl ifNone: [ self defaultHierarchyClass ]
 ]
 
@@ -54,6 +57,9 @@ JinRemotesFactory >> defaultHierarchyClass [
 
 { #category : #accessing }
 JinRemotesFactory >> defaultHierarchyClass: aClass [
+
+	<doc:
+	'Sets the class that has been used to create new instances when required.'>
 	defaultHierarchyClass := aClass
 ]
 

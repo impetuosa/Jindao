@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'project'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Database'
 }
 
 { #category : #'as yet unclassified' }
@@ -111,7 +111,7 @@ JinDatabaseEngine >> relations [
 	^ JinCollection newDefault
 		handle: (handle propertyNamed: #Relations)
 		factory:
-			(JinRemoteObjectOnlyGenericsFactory new
+			(JinRemoteObjectSingleClassFactory new
 				defaultHierarchyClass: JinAccessObject ;
 				yourself)
 ]

@@ -1,7 +1,7 @@
 Class {
 	#name : #JinGUIControlVisitor,
 	#superclass : #JinSubvisitor,
-	#category : #'Jindao-Subvisitor'
+	#category : #'Jindao-Visitors'
 }
 
 { #category : #'visit-control-properties' }

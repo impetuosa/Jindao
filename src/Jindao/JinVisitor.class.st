@@ -4,7 +4,7 @@ I am a massive visitor. I can visit what ever in an access system .
 Class {
 	#name : #JinVisitor,
 	#superclass : #Object,
-	#category : #'Jindao-Core'
+	#category : #'Jindao-Visitors'
 }
 
 { #category : #'visit-first-objects' }

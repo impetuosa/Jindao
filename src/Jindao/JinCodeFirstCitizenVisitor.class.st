@@ -1,7 +1,7 @@
 Class {
 	#name : #JinCodeFirstCitizenVisitor,
 	#superclass : #JinSubvisitor,
-	#category : #'Jindao-Subvisitor'
+	#category : #'Jindao-Visitors'
 }
 
 { #category : #'as yet unclassified' }

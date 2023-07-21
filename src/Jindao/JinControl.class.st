@@ -11,7 +11,7 @@ Class {
 		'scope',
 		'documentedProperties'
 	],
-	#category : #'Jindao-FormControls'
+	#category : #'Jindao-MSAccess-Widgets'
 }
 
 { #category : #'as yet unclassified' }

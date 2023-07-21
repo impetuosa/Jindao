@@ -1,7 +1,7 @@
 Class {
 	#name : #JinProjectVisitor,
 	#superclass : #JinSubvisitor,
-	#category : #'Jindao-Subvisitor'
+	#category : #'Jindao-Visitors'
 }
 
 { #category : #'visit-first-objects' }

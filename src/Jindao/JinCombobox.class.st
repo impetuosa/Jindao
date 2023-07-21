@@ -148,7 +148,7 @@ End Sub
 Class {
 	#name : #JinCombobox,
 	#superclass : #JinControlAbstractCombobox,
-	#category : #'Jindao-FormControls-Builtin'
+	#category : #'Jindao-MSAccess-Widgets-Builtin-Controls'
 }
 
 { #category : #generated }

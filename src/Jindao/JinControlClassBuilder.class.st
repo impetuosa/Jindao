@@ -10,7 +10,7 @@ Class {
 		'mapping',
 		'packageName'
 	],
-	#category : #'Jindao-Factories-Builders'
+	#category : #'Jindao-Core-Factories'
 }
 
 { #category : #'as yet unclassified' }

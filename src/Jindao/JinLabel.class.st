@@ -39,7 +39,7 @@ When you create a label by using the **Label** tool, the label stands on its own
 Class {
 	#name : #JinLabel,
 	#superclass : #JinControlAbstractLabel,
-	#category : #'Jindao-FormControls-Builtin'
+	#category : #'Jindao-MSAccess-Widgets-Builtin-Controls'
 }
 
 { #category : #generated }

@@ -1,10 +1,13 @@
+"
+I represent a Structure (struct like) defined in the library
+"
 Class {
 	#name : #JinLibraryStructure,
 	#superclass : #JinLibraryType,
 	#instVars : [
 		'instanceVariables'
 	],
-	#category : #'Jindao-LibraryAnalysis'
+	#category : #'Jindao-DLL-Library'
 }
 
 { #category : #'as yet unclassified' }

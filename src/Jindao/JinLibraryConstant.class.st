@@ -1,10 +1,13 @@
+"
+I represent a Constant value defined in the library 
+"
 Class {
 	#name : #JinLibraryConstant,
 	#superclass : #JinLibraryAttribute,
 	#instVars : [
 		'value'
 	],
-	#category : #'Jindao-LibraryAnalysis'
+	#category : #'Jindao-DLL-Library'
 }
 
 { #category : #'as yet unclassified' }
