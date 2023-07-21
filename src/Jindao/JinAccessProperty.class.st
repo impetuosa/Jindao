@@ -127,9 +127,9 @@ JinAccessProperty >> type: aParam1 [
 
 { #category : #'remote properties' }
 JinAccessProperty >> value [
-<getter>
-	^ (handle propertyNamed: #'Value' ).
 
+	<getter>
+	^ handle propertyNamed: #Value
 ]
 
 { #category : #'remote properties' }

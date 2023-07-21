@@ -1,5 +1,36 @@
 "
-I am a proxy to an access collection .
+Microsoft Access uses two kind of collections, one where the accessing to specific properties is done through property access, and a second one where is done through method activation. 
+A JinCollection  and JinMethodBasedCollection are a proxy to a remote COM collection.  The first one accesses information as properties the second as method activation. 
+
+Collections are configured with a collection handle and a factory which has the responsibility of creating proxies to the accessed entities within the collection .
+
+The hierarchy of the collection provides slightly different behaviours: 
+
+* JinCollection/JinMethodBasedCollection
+This collection is fully virtual. It does not consume much memory. It guarantees that the accessed elements are allways *fresh* as there are allways obtained through the Microsoft Access running instances. 
+	
+* JinCachedCollection/JinCachedMethodCollection
+This collection lazily caches the remote handles of each of the contained elements. 
+This caching reduces the systematic access to the instances, however it requires to be refreshed time to time in order to ensure that the collection is trully representing the real collection.
+
+* JinCachedEntityCollection/JinCachedEntityMethodCollection
+This collection lazily caches the remote handles of each of the contained elements, and the created element
+This caching reduces the systematic access to the instances and the systematic creation of entity objects. This enables to have a better degree of identity for the user of the collection. 
+However it requires to be refreshed time to time in order to ensure that the collection is trully representing the real collection.
+
+
+
+To create a new instances we encourage to use the class methods:
+
+```
+JinCollection>>newDefault 
+JinCollection>>newDefaultForMethod 
+```
+
+
+Using this helpers eases the modification of the system consistently. 
+
+
 "
 Class {
 	#name : #JinCollection,
@@ -14,11 +45,13 @@ Class {
 
 { #category : #'instance creation' }
 JinCollection class >> newDefault [ 
+	<doc: 'Creates default class instance of collection based on property access'>
 	^ JinCachedEntityCollection new
 ]
 
 { #category : #'instance creation' }
 JinCollection class >> newDefaultForMethod [ 
+	<doc: 'Creates default class instance of collection based on method access '>
 	^ JinMethodBasedCollection new
 ]
 
