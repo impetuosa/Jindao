@@ -5,7 +5,7 @@ JinDao (進道) is a project faor Microsoft Access usage. JinDao does not mean a
 Jindao is a library which provides online access to Microsoft Access projects through the usage of Microsoft COM. 
 Jindao follows generally the implementation proposed by [https://inria.hal.science/hal-02966146v1](https://inria.hal.science/hal-02966146v1).
 Access provides a visual interface to export some entities by point and click. This process is time consuming and prone to error. It is not tractable for full applications and in addition not all the elements can be exported. Leading to what we call a partially observable domain, since, by the usage of given tooling we cannot obtain artefact to analyze.
-![Figure-Blind-Metamodel](https://github.com/impetuosa/Jindao/blob/master/figures/access-metamodel-blind.pdf?raw=true).
+![Figure-Blind-Metamodel](https://github.com/impetuosa/Jindao/blob/master/figures/access-metamodel-blind.jpg?raw=true).
 
 The figure shows a simplified model of \access main elements.
 In grey we show the elements that \textbf{cannot} be exported from the GUI, in white those that can.
@@ -26,7 +26,7 @@ For interacting with Access through COM we must interact with an object model, c
 * TableDef and QueryDef. Depends on Workspace. Each of these objects contains a description. For the TableDefs name and fields. For the QueryDefs name and SQL.
 * Forms, Reports and Modules. Depends on DoCmd. Finally, we have three main collections where we can find the Form, Report and Module objects with their inner composition. This internal definition includes composed controls (textbox, labels, etc.), properties (layout, naming, companion-module, etc) and VBA source code.
 ## Architecture Implementation
-![Figure-Architecture](https://github.com/impetuosa/Jindao/blob/master/figures/uml-arc-jindao.pdf?raw=true).
+![Figure-Architecture](https://github.com/impetuosa/Jindao/blob/master/figures/uml-arc-jindao.jpg?raw=true).
 As general architecture we propose to create a model that uses the COM model as a back-end as shown in the next figure We propose lazy access to the COM model back-end, what will guarantee that we access and load only what is needed. This feature aims to limit the memory usage (constraint stated in Section 2) by construction. The lazy approach will also allow us to map each binary-model-entity to a model-entity one at a time. We also propose to cache the results, for reducing the COM calls and therefore CPU time and inter-process communication.
 Regarding the mapping between the COM model entity-type and our model, we propose to use two kinds of mapping: by type and by attribute value. First- class citizen entities are represented by two COM models, and that is why all of them subclass from a LoadableObject class, which maps two COM models instead of one.
 For mapping the binary-model-entities to model-entity types, we propose to use factories. The mapping factory by type maps one binary-entity-type to one model-entity-type. The mapping factory by attribute value maps one binary- entity to one specific model-entity-type according to one specific binary-entity value.
@@ -35,6 +35,31 @@ For mapping the binary-model-entities to model-entity types, we propose to use f
 
 
 ## Project Examples
+```smalltalk
+exampleAccessTableInformation
+	| project table recordset records |
+	" Opens an access project "
+	project := JinAccessApplication default open: self projectPath.
+
+	"Choose a random table"
+	table := project tables shuffle first.
+	"Get's a recordset form the table"
+	recordset := table recordset.
+	records := OrderedCollection new.
+	
+	"Fills up the records collection with the first two rows"
+	[ recordset atEnd not and: [ records size < 3 ] ] whileTrue: [
+		records add:
+			(recordset fields collect: [ :f | f name , '=' , f value asString ]) ].
+	"Closes the recordset "
+	recordset close. 
+	
+	"Inspects the stored information"
+	records inspect. 
+	
+	" Closes the project and quits the Microsoft Access application "
+	project closeAndQuit
+```
 ```smalltalk
 exampleCountControls
 	
@@ -70,6 +95,19 @@ exampleOpenAndQuitProject
 	UIManager default alert:
 		'Please press OK to continue and close the Access project '.
 
+	" Closes the project and quits the Microsoft Access application "
+	project closeAndQuit
+```
+```smalltalk
+exampleLoadAstModule
+	| project form |
+	" Opens an access project "
+	project := JinAccessApplication default open: self projectPath.
+
+	"Choose a random form from all those forms with module (attached code) "
+	form := (project forms select: [ :a | a hasModule ]) shuffle first.
+	"Inspect the form's ast"
+	form ast inspect.
 	" Closes the project and quits the Microsoft Access application "
 	project closeAndQuit
 ```
@@ -294,6 +332,112 @@ You can also use check boxes in an option group to display values to choose from
 ### Methods
 #### JinCheckbox>>acceptVisitor: aVisitor
 Accepts visitor
+
+
+
+## JinCollection
+Microsoft Access uses two kind of collections, one where the accessing to specific properties is done through property access, and a second one where is done through method activation. 
+A JinCollection  and JinMethodBasedCollection are a proxy to a remote COM collection.  The first one accesses information as properties the second as method activation. 
+Collections are configured with a collection handle and a factory which has the responsibility of creating proxies to the accessed entities within the collection .
+The hierarchy of the collection provides slightly different behaviours: 
+* JinCollection/JinMethodBasedCollection
+This collection is fully virtual. It does not consume much memory. It guarantees that the accessed elements are allways *fresh* as there are allways obtained through the Microsoft Access running instances. 
+	
+* JinCachedCollection/JinCachedMethodCollection
+This collection lazily caches the remote handles of each of the contained elements. 
+This caching reduces the systematic access to the instances, however it requires to be refreshed time to time in order to ensure that the collection is trully representing the real collection.
+* JinCachedEntityCollection/JinCachedEntityMethodCollection
+This collection lazily caches the remote handles of each of the contained elements, and the created element
+This caching reduces the systematic access to the instances and the systematic creation of entity objects. This enables to have a better degree of identity for the user of the collection. 
+However it requires to be refreshed time to time in order to ensure that the collection is trully representing the real collection.
+
+To create a new instances we encourage to use the class methods:
+```
+JinCollection>>newDefault 
+JinCollection>>newDefaultForMethod 
+```
+
+Using this helpers eases the modification of the system consistently. 
+
+
+### Properties
+handle
+factory
+base
+
+### Methods
+#### JinCollection>>detect: aBlock
+Evaluate aBlock with each of the receiver's elements as the argument.
+Answer the first element for which aBlock evaluates to true.
+
+#### JinCollection>>detect: aBlock ifFound: foundBlock ifNone: exceptionBlock
+Evaluate aBlock with each of the receiver's elements as the argument.
+If some element evaluates aBlock to true, then cull this element into
+foundBlock and answer the result of this evaluation.
+If none evaluate to true, then evaluate exceptionBlock
+
+#### JinCollection>>select: aBlock
+Evaluate aBlock with each of the receiver's elements as the argument. Collect into a new collection like the receiver, only those elements for which aBlock evaluates to true. Answer the new collection.
+
+#### JinCollection>>first
+Answer the first element of the receiver
+
+#### JinCollection>>detect: aBlock ifFound: foundBlock
+Evaluate aBlock with each of the receiver's elements as the argument.
+If some element evaluates aBlock to true, then cull this element into
+foundBlock.
+If no element matches the criteria then do nothing.
+Always returns self to avoid misuse and a potential isNil check on the sender.
+
+#### JinCollection>>at: anIndex
+Accesses the Microsoft Access instance and obtain a handle in a given anIndex. With this handle, it delegates to the factory to create an instance which wrapps the handle.
+
+#### JinCollection>>size
+Answer how many elements the receiver contains.
+
+#### JinCollection>>select: selectBock thenDo: aBlock
+	Utility method to improve readability.
+Do not create the intermediate collection.
+
+#### JinCollection>>groupedBy: aBlock
+Answer a dictionary whose keys are the result of evaluating aBlock for all my elements, and the value for each key is the selection of my elements that evaluated to that key. Uses species.
+
+#### JinCollection>>second
+Answer the second element of the receiver
+
+#### JinCollection>>do: aBlock
+Evaluate aBlock with each of the receiver's elements as the argument.
+This is the general foreach method, but for most standard needs there is often a more specific and simpler method.
+
+#### JinCollection>>detect: aBlock ifNone: exceptionBlock
+Evaluate aBlock with each of the receiver's elements as the argument.
+Answer the first element for which aBlock evaluates to true. If none
+evaluate to true, then evaluate the argument, exceptionBlock.
+
+#### JinCollection>>reject: rejectBlock thenDo: aBlock
+	Utility method to improve readability.
+Do not create the intermediate collection.
+
+#### JinCollection>>flatCollect: aBlock
+Evaluate aBlock for each of the receiver's elements and answer the
+list of all resulting values flatten one level. Assumes that aBlock returns some kind
+of collection for each element. Equivalent to the lisp's mapcan
+
+#### JinCollection>>base: aBase
+Defines the accessing base of the collection. Often 0 or 1.
+
+#### JinCollection>>collect: aBlock
+Evaluate aBlock with each of the receiver's elements as the argument.  
+Collect the resulting values into a collection like the receiver. Answer  
+the new collection.
+
+
+### Class Methods
+#### JinCollection class>>newDefault 
+Creates default class instance of collection based on property access
+
+#### JinCollection class>>newDefaultForMethod 
+Creates default class instance of collection based on method access 
 
 
 
@@ -578,6 +722,30 @@ Accepts visitor
 
 
 
+## JinLibrary
+This class allows to inspect libraries. For doing so it leverages DBHelp and COM interfaces. 
+
+
+### Properties
+reference
+functions
+libraryHandle
+dbgHandle
+types
+typeLoader
+
+### Methods
+#### JinLibrary>>path
+Obtains the path from the remote entity. 
+
+#### JinLibrary>>types
+Instantiates the types collection by crawling all the types defined in the library. It uses COM interfaces for doing so. 
+
+#### JinLibrary>>fetchLibraryFunctions
+Instantiates the functions collection by crawling all the functions defined in the library. It uses DBHelp Library for doing so. 
+
+
+
 ## JinLine
 ---
 title: Line object (Access)
@@ -783,6 +951,69 @@ You can move a rectangle and the controls in it as a single unit by dragging the
 ### Methods
 #### JinRectangle>>acceptVisitor: aVisitor
 Accepts visitor
+
+
+
+## JinRemoteObjectClassGeneratorFactory
+i am a factory that generates classes on demand. 
+
+### Properties
+defaultHierarchyClass
+scope
+nameResolver
+buildingClass
+packageName
+
+### Methods
+#### JinRemoteObjectClassGeneratorFactory>>classFor: aControl
+Returns a class to instantiate to represent a given remote handle. If none is found, it delegates to a builder to create a Pharo Class able to hold the given handle, and to be after visit separately.
+
+
+
+## JinRemoteObjectMappedClassFactory
+This factory creates instances of a class that maps with the remote object to represent.
+This factory checks a mappable classes all the subclasses of a given class (defaultHierarchyClass). 
+
+
+### Properties
+defaultHierarchyClass
+scope
+nameResolver
+
+### Methods
+#### JinRemoteObjectMappedClassFactory>>classFor: aRemoteObject ifNone: aBlock
+Check in between all the subclasses of the defaultHierarchyClass if anyone is able to contain aRemoteObject handle.
+
+#### JinRemoteObjectMappedClassFactory>>nameResolver: aBlock
+Sets a block able to extract TYPE name out of a handle. The name is after used to query for possible matching classes by name
+
+
+
+## JinRemoteObjectSingleClassFactory
+I am a factory that returns allways instances of a given class. 
+
+### Methods
+#### JinRemoteObjectSingleClassFactory>>classFor: aControl ifNone: aBlock
+It allways return the defaultHiearchyClass of this object. This factory yields always instances of the *same* class 
+
+
+
+## JinRemotesFactory
+A remote object factory creates instances of our model based on some guidelines. 
+This different factories are configured resolve the class to create based on a naming convention for mapping. 
+
+I am an abstract factory that gives general guidelines on the creation of an object mapping a remote object 
+
+### Properties
+defaultHierarchyClass
+scope
+
+### Methods
+#### JinRemotesFactory>>classFor: aControl
+Returns a class to instantiate to represent a given remote handle. If none is found, it returns the defaultHierarchyClass with which this object has been configured.
+
+#### JinRemotesFactory>>defaultHierarchyClass: aClass
+Sets the class that has been used to create new instances when required.
 
 
 
