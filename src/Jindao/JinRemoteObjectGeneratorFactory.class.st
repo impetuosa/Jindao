@@ -38,6 +38,7 @@ JinRemoteObjectGeneratorFactory class >> newDefaultAccessPropertyFactory [
 
 { #category : #'instance creation' }
 JinRemoteObjectGeneratorFactory class >> newDefaultAccessPropertyFactory: aJinClassBuilder [
+	
 	^ self new
 		defaultHierarchyClass: JinAccessPropertyGenerated;
 		" If class not found, a new class will be created under this superclass "

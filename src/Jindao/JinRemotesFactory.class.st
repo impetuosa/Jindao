@@ -1,4 +1,9 @@
 "
+A remote object factory creates instances of our model based on some guidelines. 
+This different factories are configured resolve the class to create based on a naming convention for mapping. 
+
+
+
 I am an abstract factory that gives general guidelines on the creation of an object mapping a remote object 
 "
 Class {
