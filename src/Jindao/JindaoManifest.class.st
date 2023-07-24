@@ -36,6 +36,15 @@ As general architecture we propose to create a model that uses the COM model as 
 Regarding the mapping between the COM model entity-type and our model, we propose to use two kinds of mapping: by type and by attribute value. First- class citizen entities are represented by two COM models, and that is why all of them subclass from a LoadableObject class, which maps two COM models instead of one.
 For mapping the binary-model-entities to model-entity types, we propose to use factories. The mapping factory by type maps one binary-entity-type to one model-entity-type. The mapping factory by attribute value maps one binary- entity to one specific model-entity-type according to one specific binary-entity value.
 
+## More documentation
+
+* For documentation about the Jindao MSAccess first citizen usage, please address to [API.md](API.md)
+* For documentation about the Jindao connector internals, please address to [InternalAPI.md](InternalAPI.md).
+* For documentation about the Microsoft Access object model, please address [https://learn.microsoft.com/en-us/office/vba/api/overview/access](https://learn.microsoft.com/en-us/office/vba/api/overview/access)
+
+
+
+
 
 
 
@@ -67,22 +76,23 @@ JindaoManifest class >> exampleAccessTableInformation [
 
 
 	"Choose a random table"
-	table := project tables shuffle first.
+	table := project tables first.
 
 	"Get's a recordset form the table"
 	recordset := table recordset.
 	records := OrderedCollection new.
-	
+
 	"Fills up the records collection with the first two rows"
-	[ recordset atEnd not and: [ records size < 3 ] ] whileTrue: [
+	[ recordset atEnd not and: [ records size < 3 ] ] whileTrue: [ 
 		records add:
-			(recordset fields collect: [ :f | f name , '=' , f value asString ]) ].
+			(recordset fields collect: [ :f | f name , '=' , f value asString ]).
+		recordset next ].
 	"Closes the recordset "
-	recordset close. 
-	
+	recordset close.
+
 	"Inspects the stored information"
-	records inspect. 
-	
+	records inspect.
+
 	" Closes the project and quits the Microsoft Access application "
 	project closeAndQuit
 ]
@@ -91,27 +101,25 @@ JindaoManifest class >> exampleAccessTableInformation [
 JindaoManifest class >> exampleCountControls [
 
 	<example>
-	
 	| project controls |
-	
 	" Opens an access project "
 	project := JinAccessApplication default open: self projectPath.
 
-	
+
 	" Flat collect the amount of controls per form. As Microsoft Access has a limit of forms opened at the same time, we close them as soon as we finished with it. "
-	controls := project forms flatCollect: [ :f |
-		            | size |
-		            size := f controls size.
-		            f close.
-		            size ] sum.
+	controls := (project forms collect: [ :f | 
+		             | size |
+		             size := f controls size.
+		             f close.
+		             size ]) sum.
 
 	" Opens the transcript to see the next message "
 	Transcript open.
-	
+
 	" Traces the amount of forms and forms and controls "
 	self traceCr:
-		('The project has {1} forms and defines a total of {2} controls '
-			 format: {
+		('The project has {1} forms and defines a total of {2} controls ' 
+			 format: { 
 					 project forms size asString.
 					 controls asString }).
 
@@ -129,7 +137,11 @@ JindaoManifest class >> exampleLoadAstModule [
 
 
 	"Choose a random form from all those forms with module (attached code) "
-	form := (project forms select: [ :a | a hasModule ]) shuffle first.
+	form := project forms detect: [ :a | 
+		        | f |
+		        f := a hasModule.
+		        a ensureUnload.
+		        f ].
 
 	"Inspect the form's ast"
 	form ast inspect.
@@ -138,7 +150,7 @@ JindaoManifest class >> exampleLoadAstModule [
 	project closeAndQuit
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'1- Starting' }
 JindaoManifest class >> exampleOpenAndQuitProject [
 
 	<example>
@@ -175,10 +187,12 @@ JindaoManifest class >> implementationPackages [
 { #category : #'as yet unclassified' }
 JindaoManifest class >> projectPath [
 
+	^ 'c:\Northwind.accdb' asFileReference
+	"
 	^ (UIManager default
 		   chooseFullFileNameMatching: #( accdb )
 		   label: 'Please find a accdb file to open') ifNil: [
-		  self error: 'Must choose a project' ]
+		  self error: 'Must choose a project' ]"
 ]
 
 { #category : #'as yet unclassified' }
