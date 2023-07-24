@@ -115,9 +115,9 @@ exampleLoadAstModule
 
 ## More documentation
 
-For documentation about the Jindao MSAccess first citizen usage, please address to [API.md](API.md)
-For documentation about the Jindao connector internals, please address to [InternalAPI.md](InternalAPI.md).
-
+* For documentation about the Jindao MSAccess first citizen usage, please address to [API.md](API.md)
+* For documentation about the Jindao connector internals, please address to [InternalAPI.md](InternalAPI.md).
+* For documentation about the Microsoft Access object model, please address [https://learn.microsoft.com/en-us/office/vba/api/overview/access](https://learn.microsoft.com/en-us/office/vba/api/overview/access)
 
 
 
