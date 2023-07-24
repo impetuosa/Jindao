@@ -1,6 +1,7 @@
 # Jindao
-JinDao (進道) is a project faor Microsoft Access usage. JinDao does not mean anything, but puts together Jin (get into) and Dao (way).
+JinDao (進道) is a project for Microsoft Access usage. JinDao does not mean anything, but puts together Jin (get into) and Dao (way).
 ## Manifest
+
 Jindao is a library which provides online access to Microsoft Access projects through the usage of Microsoft COM. 
 Jindao follows generally the implementation proposed by [https://inria.hal.science/hal-02966146v1](https://inria.hal.science/hal-02966146v1).
 Access provides a visual interface to export some entities by point and click. This process is time consuming and prone to error. It is not tractable for full applications and in addition not all the elements can be exported. Leading to what we call a partially observable domain, since, by the usage of given tooling we cannot obtain artefact to analyze.
@@ -32,7 +33,6 @@ For interacting with Access through COM we must interact with an object model, c
 As general architecture we propose to create a model that uses the COM model as a back-end as shown in the next figure We propose lazy access to the COM model back-end, what will guarantee that we access and load only what is needed. This feature aims to limit the memory usage (constraint stated in Section 2) by construction. The lazy approach will also allow us to map each binary-model-entity to a model-entity one at a time. We also propose to cache the results, for reducing the COM calls and therefore CPU time and inter-process communication.
 Regarding the mapping between the COM model entity-type and our model, we propose to use two kinds of mapping: by type and by attribute value. First- class citizen entities are represented by two COM models, and that is why all of them subclass from a LoadableObject class, which maps two COM models instead of one.
 For mapping the binary-model-entities to model-entity types, we propose to use factories. The mapping factory by type maps one binary-entity-type to one model-entity-type. The mapping factory by attribute value maps one binary- entity to one specific model-entity-type according to one specific binary-entity value.
-
 ## More documentation
 * For documentation about the Jindao MSAccess first citizen usage, please address to [API.md](API.md)
 * For documentation about the Jindao connector internals, please address to [InternalAPI.md](InternalAPI.md).
@@ -52,6 +52,36 @@ exampleOpenAndQuitProject
 	UIManager default alert:
 		'Please press OK to continue and close the Access project '.
 
+	" Closes the project and quits the Microsoft Access application "
+	project closeAndQuit
+```
+```smalltalk
+exampleTableInformation
+	| project table |
+	" Opens an access project "
+	project := JinAccessApplication default open: self projectPath.
+
+	"Choose a random table"
+	table := project tables first.
+	" A table is an object. "
+	table name traceCr.
+	" It has fields "
+	table fields do: [ :f | 
+		f name trace.
+		' ' trace.
+		f typeName traceCr ].
+
+	" A table also has indexes "
+	(String streamContents: [ :stream | 
+		 table indexes do: [ :i | 
+			 stream
+				 nextPutAll: 'IndexName: ';
+				 nextPutAll: i name;
+				 nextPutAll: 'Affects Columns (';
+				 nextPutAll: (',' join: (i fields collect: #name));
+				 nextPutAll: ')';
+				 nextPutAll: String lf ] ]) traceCr.
+	table close.
 	" Closes the project and quits the Microsoft Access application "
 	project closeAndQuit
 ```
@@ -118,10 +148,48 @@ exampleAccessTableInformation
 	" Closes the project and quits the Microsoft Access application "
 	project closeAndQuit
 ```
+```smalltalk
+exampleLibrariesAnalysis
+	| project reference stringsModule signatures |
+	" Opens an access project "
+	project := JinAccessApplication default open: self projectPath.
 
+	" 
+	A project has references. A reference can be either a DLL library or an AccessModule. 
+	In this example we find the VBA library, which includes the VBA language builtin types and functions.
+	
+	 "
+	reference := project references detect: [ :r | r name = #VBA ].
 
-
-
+	" 
+	The reference object is a meta-object which includes information such as the version and GUID of the library and which knows how to obtain the Path of the library in this running computer. 
+	 "
+	Transcript open.
+	reference name traceCr.
+	reference version traceCr.
+	reference guid traceCr.
+	" 
+	The reference object can give us access to a library reification, which analyses the library file (ex: DLL) and exposes all the content.
+	
+	This handle allows for example, to find all the defined types in the library. 
+	In our example we get the module where all the string functions are defined. 
+	
+	 "
+	stringsModule := reference library types detect: [ :t | 
+		                 t name = #Strings ].
+	" 
+	
+	As the strings module is an object too, we can get all the mehods or functions defined within. 
+	Which are also objects. 
+	In this part of the example we obtain all the signatures of all the methods defined in the Strings module, shipped with the VBA language. 
+	"
+	signatures := stringsModule methods collect: [ :m | 
+		              m returnTypeName , ' ' , m selector , '('
+		              , m parameters size asString , ')' ].
+	signatures traceCr.
+	signatures inspect.
+	project closeAndQuit
+```
 
 
 
