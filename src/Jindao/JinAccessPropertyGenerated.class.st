@@ -5,5 +5,5 @@ This generated properties are subclass of this class
 Class {
 	#name : #JinAccessPropertyGenerated,
 	#superclass : #JinAccessProperty,
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-ComponentProperties'
 }

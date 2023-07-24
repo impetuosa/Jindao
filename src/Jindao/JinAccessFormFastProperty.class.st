@@ -1,7 +1,7 @@
 Class {
 	#name : #JinAccessFormFastProperty,
 	#superclass : #JinAccessFastProperty,
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-ComponentProperties'
 }
 
 { #category : #accessing }

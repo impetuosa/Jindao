@@ -6,7 +6,7 @@ This properties are an object representation of attributes from some specific ob
 Class {
 	#name : #JinAccessProperty,
 	#superclass : #JinAccessObject,
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-ComponentProperties'
 }
 
 { #category : #visiting }

@@ -4,7 +4,7 @@ I represent a Interface defined in the library. I include  variables and functio
 Class {
 	#name : #JinLibraryInterface,
 	#superclass : #JinLibraryModule,
-	#category : #'Jindao-DLL-Library'
+	#category : #'Jindao-MSAccess-Library'
 }
 
 { #category : #'as yet unclassified' }

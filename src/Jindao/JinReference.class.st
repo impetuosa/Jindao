@@ -9,7 +9,7 @@ Class {
 	#instVars : [
 		'library'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Project'
 }
 
 { #category : #'as yet unclassified' }

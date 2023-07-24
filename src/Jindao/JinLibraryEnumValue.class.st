@@ -4,7 +4,7 @@ I represent a specific ENUM value defined in the library
 Class {
 	#name : #JinLibraryEnumValue,
 	#superclass : #JinLibraryConstant,
-	#category : #'Jindao-DLL-Library'
+	#category : #'Jindao-MSAccess-Library'
 }
 
 { #category : #'as yet unclassified' }

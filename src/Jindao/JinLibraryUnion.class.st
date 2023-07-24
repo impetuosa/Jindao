@@ -1,7 +1,7 @@
 Class {
 	#name : #JinLibraryUnion,
 	#superclass : #JinLibraryStructure,
-	#category : #'Jindao-DLL-Library'
+	#category : #'Jindao-MSAccess-Library'
 }
 
 { #category : #'as yet unclassified' }

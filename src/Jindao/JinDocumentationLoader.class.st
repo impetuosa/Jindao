@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'default'
 	],
-	#category : #'Jindao-MSAccess-Documentation'
+	#category : #'Jindao-Helper-Documentation-Crawler'
 }
 
 { #category : #accessing }

@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'owner'
 	],
-	#category : #'Jindao-DLL-Library'
+	#category : #'Jindao-MSAccess-Library'
 }
 
 { #category : #accessing }

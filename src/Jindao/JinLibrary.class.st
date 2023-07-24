@@ -13,7 +13,7 @@ Class {
 		'types',
 		'typeLoader'
 	],
-	#category : #'Jindao-DLL-Library'
+	#category : #'Jindao-MSAccess-Library'
 }
 
 { #category : #visiting }

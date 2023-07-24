@@ -8,7 +8,7 @@ Class {
 		'parent',
 		'properties'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Database'
 }
 
 { #category : #'as yet unclassified' }

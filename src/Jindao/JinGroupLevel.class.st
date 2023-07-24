@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'level'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Widgets'
 }
 
 { #category : #'as yet unclassified' }

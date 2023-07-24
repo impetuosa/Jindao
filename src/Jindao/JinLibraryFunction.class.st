@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'selector'
 	],
-	#category : #'Jindao-DLL-Library'
+	#category : #'Jindao-MSAccess-Library'
 }
 
 { #category : #visiting }

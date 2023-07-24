@@ -8,7 +8,7 @@ Class {
 	#instVars : [
 		'library'
 	],
-	#category : #'Jindao-DLL-Library'
+	#category : #'Jindao-MSAccess-Library'
 }
 
 { #category : #loader }

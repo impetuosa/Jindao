@@ -4,7 +4,7 @@ I represent a Dispatch interface defined in the library. I include  variables an
 Class {
 	#name : #JinLibraryDispatchInterface,
 	#superclass : #JinLibraryModule,
-	#category : #'Jindao-DLL-Library'
+	#category : #'Jindao-MSAccess-Library'
 }
 
 { #category : #'as yet unclassified' }

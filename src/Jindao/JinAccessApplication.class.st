@@ -12,7 +12,7 @@ Class {
 		'visible',
 		'references'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Project'
 }
 
 { #category : #'as yet unclassified' }

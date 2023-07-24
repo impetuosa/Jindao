@@ -4,7 +4,7 @@ I represent a Co Class defined in the library
 Class {
 	#name : #JinLibraryCoClass,
 	#superclass : #JinLibraryType,
-	#category : #'Jindao-DLL-Library'
+	#category : #'Jindao-MSAccess-Library'
 }
 
 { #category : #'as yet unclassified' }

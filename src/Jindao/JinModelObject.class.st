@@ -80,13 +80,13 @@ JinModelObject >> isAccessProject [
 	 ^ false 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 JinModelObject >> isControl [
 
 	^ false
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 JinModelObject >> isLibrary [
 	^ false
 ]
@@ -96,7 +96,7 @@ JinModelObject >> isLoaded [
 	^ body isNotNil and: [ description isLoaded ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 JinModelObject >> isModelObject [
 
 	^ true
@@ -108,12 +108,12 @@ JinModelObject >> isModule [
 	^ false
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 JinModelObject >> isQuery [ 
 	^ false
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 JinModelObject >> isRelation [ 
 	^ false 
 ]
@@ -124,7 +124,7 @@ JinModelObject >> isRootElement [
 	^ false
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #testing }
 JinModelObject >> isTable [
 
 	^ false

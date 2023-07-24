@@ -18,7 +18,7 @@ Class {
 		'relations',
 		'queries'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-Project'
 }
 
 { #category : #'initialize-release' }
@@ -62,6 +62,7 @@ JinAccessProject >> application [
 
 { #category : #'initialize-release' }
 JinAccessProject >> close [
+	<doc: 'Closes this project.'>
 	application closeProject: self.
 	programHandle := nil.
 	dataHandle := nil
@@ -81,6 +82,7 @@ JinAccessProject >> close: aJinForm save: aBool [
 
 { #category : #'initialize-release' }
 JinAccessProject >> closeAndQuit [
+	<doc: 'Closes this project, then closes the Microsoft Access running instance.'>
 	[ self close ]
 		ensure: [ application quit.
 			application := nil ]
@@ -115,7 +117,7 @@ JinAccessProject >> contentHash [
 	^ (MD5 hashMessage: message) hex 
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private-form-api' }
 JinAccessProject >> createControl: aName inForm: aJinForm type: aTypeNumber section: aSection [
 	application
 		createControl: aName
@@ -125,7 +127,7 @@ JinAccessProject >> createControl: aName inForm: aJinForm type: aTypeNumber sect
 	^ aJinForm controls detect: [ :c | c name = aName ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private-form-api' }
 JinAccessProject >> createControl: aName inForm: aJinForm type: aTypeNumber section: aSection parent: aParentName [
 	application
 		createControl: aName
@@ -136,7 +138,7 @@ JinAccessProject >> createControl: aName inForm: aJinForm type: aTypeNumber sect
 	^ aJinForm controls detect: [ :c | c name = aName ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private-form-api' }
 JinAccessProject >> createControl: aName inReport: aJinReport type: aTypeNumber section: aSection [
 	application
 		createControl: aName
@@ -146,7 +148,7 @@ JinAccessProject >> createControl: aName inReport: aJinReport type: aTypeNumber 
 	^ aJinReport controls detect: [ :c | c name = aName ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'form-api' }
 JinAccessProject >> createForm [
 	| formHandle |
 
@@ -160,7 +162,7 @@ JinAccessProject >> createForm [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'form-api' }
 JinAccessProject >> createFormNamed: aString [
 	application createFormNamed: aString.
 	^ (self forms detect: [ :r | r name = aString ])
@@ -181,7 +183,7 @@ JinAccessProject >> createGroupLevel: aJinReport expression: anExpression header
 	^ aJinReport groupLevelNumber: long
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'module-api' }
 JinAccessProject >> createModule: aKind named: aName properties: aCollection [
 	^ self modules
 		detect: [ :m | m name = aName ]
@@ -198,7 +200,7 @@ JinAccessProject >> createModule: aKind named: aName properties: aCollection [
 			^ module ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'module-api' }
 JinAccessProject >> createModuleNamed: aName fromFile: aFileReference [
 	^ self modules
 		detect: [ :m | m name = aName ]
@@ -208,7 +210,7 @@ JinAccessProject >> createModuleNamed: aName fromFile: aFileReference [
 			^ self modules detect: [ :m | m name = aName ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'report-api' }
 JinAccessProject >> createReport [
 	| createReport |
 	createReport := application createReport.
@@ -218,7 +220,7 @@ JinAccessProject >> createReport [
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'report-api' }
 JinAccessProject >> createReportNamed: aString [
 	application createReportNamed: aString.
 	^ (self reports detect: [ :r | r name = aString ])
@@ -313,12 +315,12 @@ JinAccessProject >> ensurePageHeaderFooter: aJinFormOrModule [
 		ifFalse: [ application command: #RunCommand withArguments: {182} ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private-table-api' }
 JinAccessProject >> export: aJinTable toFolder: aFileReference [
 	^ application export: aJinTable toFolder: aFileReference
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'private-table-api' }
 JinAccessProject >> exportXml: aJinTable toFolder: aFileReference [
 	application exportXml: aJinTable toFolder: aFileReference
 ]

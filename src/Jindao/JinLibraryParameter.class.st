@@ -7,7 +7,7 @@ Class {
 	#instVars : [
 		'isOptional'
 	],
-	#category : #'Jindao-DLL-Library'
+	#category : #'Jindao-MSAccess-Library'
 }
 
 { #category : #'as yet unclassified' }

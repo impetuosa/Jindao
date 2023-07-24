@@ -9,7 +9,7 @@ Class {
 		'name',
 		'value'
 	],
-	#category : #'Jindao-Core'
+	#category : #'Jindao-MSAccess-ComponentProperties'
 }
 
 { #category : #'as yet unclassified' }
