@@ -1,4 +1,7 @@
 "
+# Jindao
+JinDao (進道) is a project faor Microsoft Access usage. JinDao does not mean anything, but puts together Jin (get into) and Dao (way).
+
 Jindao is a library which provides online access to Microsoft Access projects through the usage of Microsoft COM. 
 
 Jindao follows generally the implementation proposed by [https://inria.hal.science/hal-02966146v1](https://inria.hal.science/hal-02966146v1).
