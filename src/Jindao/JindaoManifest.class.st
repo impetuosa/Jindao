@@ -73,7 +73,7 @@ JindaoManifest class >> apiPackages [
 	^ self tags: #( 'MSAccess-Project' 'MSAccess-Database' 'MSAccess-Code' 'MSAccess-Widgets' 'MSAccess-Widgets-Builtin-Controls' 'MSAccess-Library')
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'3- Tables' }
 JindaoManifest class >> exampleAccessTableInformation [
 
 	<example>
@@ -104,7 +104,7 @@ JindaoManifest class >> exampleAccessTableInformation [
 	project closeAndQuit
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'2- Forms' }
 JindaoManifest class >> exampleCountControls [
 
 	<example>
@@ -134,7 +134,60 @@ JindaoManifest class >> exampleCountControls [
 	project closeAndQuit
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'4- Libraries' }
+JindaoManifest class >> exampleLibrariesAnalysis [
+
+	<example>
+	| project reference stringsModule signatures |
+	" Opens an access project "
+	project := JinAccessApplication default open: self projectPath.
+
+
+	" 
+	A project has references. A reference can be either a DLL library or an AccessModule. 
+	In this example we find the VBA library, which includes the VBA language builtin types and functions.
+	
+	 "
+
+	reference := project references detect: [ :r | r name = #VBA ].
+
+
+	" 
+	The reference object is a meta-object which includes information such as the version and GUID of the library and which knows how to obtain the Path of the library in this running computer. 
+	 "
+	Transcript open.
+
+	reference name traceCr.
+	reference version traceCr.
+	reference guid traceCr.
+
+	" 
+	The reference object can give us access to a library reification, which analyses the library file (ex: DLL) and exposes all the content.
+	
+	This handle allows for example, to find all the defined types in the library. 
+	In our example we get the module where all the string functions are defined. 
+	
+	 "
+	stringsModule := reference library types detect: [ :t | 
+		                 t name = #Strings ].
+
+	" 
+	
+	As the strings module is an object too, we can get all the mehods or functions defined within. 
+	Which are also objects. 
+	In this part of the example we obtain all the signatures of all the methods defined in the Strings module, shipped with the VBA language. 
+	"
+	signatures := stringsModule methods collect: [ :m | 
+		              m returnTypeName , ' ' , m selector , '('
+		              , m parameters size asString , ')' ].
+
+	signatures traceCr.
+	signatures inspect.
+
+	project closeAndQuit
+]
+
+{ #category : #'2- Forms' }
 JindaoManifest class >> exampleLoadAstModule [
 
 	<example>
@@ -174,6 +227,44 @@ JindaoManifest class >> exampleOpenAndQuitProject [
 	project closeAndQuit
 ]
 
+{ #category : #'3- Tables' }
+JindaoManifest class >> exampleTableInformation [
+
+	<example>
+	| project table |
+	" Opens an access project "
+	project := JinAccessApplication default open: self projectPath.
+
+
+	"Choose a random table"
+	table := project tables first.
+
+	" A table is an object. "
+
+	table name traceCr.
+
+	" It has fields "
+	table fields do: [ :f | 
+		f name trace.
+		' ' trace.
+		f typeName traceCr ].
+
+
+	" A table also has indexes "
+	(String streamContents: [ :stream | 
+		 table indexes do: [ :i | 
+			 stream
+				 nextPutAll: 'IndexName: ';
+				 nextPutAll: i name;
+				 nextPutAll: 'Affects Columns (';
+				 nextPutAll: (',' join: (i fields collect: #name));
+				 nextPutAll: ')';
+				 nextPutAll: String lf ] ]) traceCr.
+	table close.
+	" Closes the project and quits the Microsoft Access application "
+	project closeAndQuit
+]
+
 { #category : #'as yet unclassified' }
 JindaoManifest class >> implementationDocumentation [
 
@@ -194,12 +285,10 @@ JindaoManifest class >> implementationPackages [
 { #category : #'as yet unclassified' }
 JindaoManifest class >> projectPath [
 
-	^ 'c:\Northwind.accdb' asFileReference
-	"
 	^ (UIManager default
 		   chooseFullFileNameMatching: #( accdb )
-		   label: 'Please find a accdb file to open') ifNil: [
-		  self error: 'Must choose a project' ]"
+		   label: 'Please find a accdb file to open') ifNil: [ 
+		  self error: 'Must choose a project' ]
 ]
 
 { #category : #'as yet unclassified' }

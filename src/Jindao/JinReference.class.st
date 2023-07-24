@@ -81,3 +81,13 @@ JinReference >> printOn: aStream [
 				ifTrue: [ 'BROKEN]' ]
 				ifFalse: [ ']' ])
 ]
+
+{ #category : #'as yet unclassified' }
+JinReference >> version [
+
+	^ String streamContents: [ :str | 
+		  str
+			  nextPutAll: self major asString;
+			  nextPut: $.;
+			  nextPutAll: self minor asString ]
+]
