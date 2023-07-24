@@ -5,7 +5,7 @@ Class {
 		'mutex',
 		'collection'
 	],
-	#category : #JinNamespaces
+	#category : #'JinNamespaces-Collection'
 }
 
 { #category : #adding }

@@ -7,7 +7,7 @@ Class {
 		'owner',
 		'static'
 	],
-	#category : #JinNamespaces
+	#category : #'JinNamespaces-Importer'
 }
 
 { #category : #accessing }

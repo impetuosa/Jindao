@@ -4,7 +4,7 @@ Class {
 	#instVars : [
 		'count'
 	],
-	#category : #JinNamespaces
+	#category : #'JinNamespaces-Visitor'
 }
 
 { #category : #accessing }

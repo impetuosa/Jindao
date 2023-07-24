@@ -11,7 +11,7 @@ Class {
 	#classInstVars : [
 		'instances'
 	],
-	#category : #JinNamespaces
+	#category : #'JinNamespaces-EntryPoint'
 }
 
 { #category : #'instance creation' }

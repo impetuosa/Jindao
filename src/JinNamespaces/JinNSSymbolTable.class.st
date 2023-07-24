@@ -6,7 +6,7 @@ Class {
 		'assembly',
 		'allSymbols'
 	],
-	#category : #JinNamespaces
+	#category : #'JinNamespaces-EntryPoint'
 }
 
 { #category : #private }

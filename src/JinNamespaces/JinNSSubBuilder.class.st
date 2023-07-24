@@ -5,7 +5,7 @@ Class {
 		'parent',
 		'reference'
 	],
-	#category : #JinNamespaces
+	#category : #'JinNamespaces-Importer'
 }
 
 { #category : #visiting }

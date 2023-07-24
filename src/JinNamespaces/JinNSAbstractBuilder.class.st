@@ -1,7 +1,7 @@
 Class {
 	#name : #JinNSAbstractBuilder,
 	#superclass : #JinNSAbstractImporter,
-	#category : #JinNamespaces
+	#category : #'JinNamespaces-Importer'
 }
 
 { #category : #visiting }

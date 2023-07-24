@@ -6,7 +6,7 @@ Class {
 		'type',
 		'contentHash'
 	],
-	#category : #JinNamespaces
+	#category : #'JinNamespaces-Model'
 }
 
 { #category : #accessing }

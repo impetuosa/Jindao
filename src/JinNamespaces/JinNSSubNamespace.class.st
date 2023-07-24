@@ -5,7 +5,7 @@ Class {
 		'owner',
 		'path'
 	],
-	#category : #JinNamespaces
+	#category : #'JinNamespaces-Model'
 }
 
 { #category : #accessing }

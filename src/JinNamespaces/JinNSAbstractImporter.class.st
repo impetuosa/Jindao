@@ -7,7 +7,7 @@ Class {
 		'isConcurrent',
 		'futureRegistry'
 	],
-	#category : #JinNamespaces
+	#category : #'JinNamespaces-Importer'
 }
 
 { #category : #'as yet unclassified' }

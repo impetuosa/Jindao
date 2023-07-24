@@ -7,7 +7,7 @@ Class {
 		'owner',
 		'kind'
 	],
-	#category : #JinNamespaces
+	#category : #'JinNamespaces-Model'
 }
 
 { #category : #visiting }

@@ -7,7 +7,7 @@ Class {
 	#classInstVars : [
 		'entries'
 	],
-	#category : #JinNamespaces
+	#category : #'JinNamespaces-Model'
 }
 
 { #category : #'as yet unclassified' }

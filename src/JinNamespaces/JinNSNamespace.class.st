@@ -21,7 +21,7 @@ Class {
 		'friends',
 		'allSymbols'
 	],
-	#category : #JinNamespaces
+	#category : #'JinNamespaces-Model'
 }
 
 { #category : #visiting }

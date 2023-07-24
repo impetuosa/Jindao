@@ -8,7 +8,7 @@ Class {
 		'owner',
 		'buildingModule'
 	],
-	#category : #JinNamespaces
+	#category : #'JinNamespaces-Importer'
 }
 
 { #category : #accessing }
