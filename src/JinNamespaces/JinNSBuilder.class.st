@@ -1,3 +1,6 @@
+"
+This builder is in charge of building a JinNSSymbolTable based on analysing a project and their direct and indirect dependencies. 
+"
 Class {
 	#name : #JinNSBuilder,
 	#superclass : #JinNSAbstractBuilder,

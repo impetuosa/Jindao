@@ -1,3 +1,9 @@
+"
+This builder is in charge of installing names that are not available in the respective language libraries.
+For doing so, it installs mainly Aliases and primitive type names.
+
+The names deifned in this class are the only names that are not extracted from the source code and library analysis. 
+"
 Class {
 	#name : #JinNSSDKLibraryBuilder,
 	#superclass : #Object,
@@ -19,6 +25,8 @@ JinNSSDKLibraryBuilder class >> forModel: aModel [
 { #category : #alias }
 JinNSSDKLibraryBuilder >> aliasTypes [
 
+	<doc:
+	'All aliases defined artificially to properly represent the VBA language'>
 	^ { 
 		  self float.
 		  self int32.
@@ -162,7 +170,7 @@ JinNSSDKLibraryBuilder >> float [
 
 { #category : #globals }
 JinNSSDKLibraryBuilder >> globals [
-
+	<doc:'All globals defined artificially to properly represent the VBA language' >
 	^ { 
 		  self nullObject.
 		  self nothingObject.
@@ -257,23 +265,24 @@ JinNSSDKLibraryBuilder >> primitiveTypeNamed: aName [
 { #category : #'primitive types' }
 JinNSSDKLibraryBuilder >> primitiveTypes [
 
+	<doc:
+	'All primitive types defined artificially to properly represent the VBA language'>
 	^ { 
-		self boolean.
-		self byte.
-		self currency.
-		self date.
-		self decimal.
-		self double.
-		self integer.
-		self long.
-		self longPtr.
-		self longLong.
-		self object. 
-		self single.
-		self string.
-		self variant .
-		self void 
-	}
+		  self boolean.
+		  self byte.
+		  self currency.
+		  self date.
+		  self decimal.
+		  self double.
+		  self integer.
+		  self long.
+		  self longPtr.
+		  self longLong.
+		  self object.
+		  self single.
+		  self string.
+		  self variant.
+		  self void }
 ]
 
 { #category : #'primitive types' }

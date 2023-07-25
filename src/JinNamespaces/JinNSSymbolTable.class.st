@@ -1,3 +1,18 @@
+"
+I am a Symbol Table.
+I am built based on a specific Microsoft Access project. 
+I may contain information of other Microsoft Projects if my original project uses other Microsoft Access projects as dependency. 
+
+I have two main instance variables: 
+**external** holds a namespace which aggregates all the symbols declared within my main project.
+**assembly** holds namespaces per each associated (referenced) artifact: libraries or other Access projects. 
+
+
+The external namespace is named external as it holds not only the subhierarchies of symbols but also **all** publically visible elements (or the external visibility of the project). 
+
+
+
+"
 Class {
 	#name : #JinNSSymbolTable,
 	#superclass : #Object,
@@ -12,6 +27,8 @@ Class {
 { #category : #private }
 JinNSSymbolTable class >> loadFrom: aString [
 
+	<doc:
+	'Imports a symbol table in ston format. Receives a file path as parameter (String | FileReference)'>
 	| instance |
 	instance := STON fromStream: aString asFileReference readStream.
 	self assert: (instance isKindOf: self).
@@ -49,7 +66,7 @@ JinNSSymbolTable >> external: aCollection [
 
 { #category : #'as yet unclassified' }
 JinNSSymbolTable >> namespaceFor: aJinDAMAccessModule kind: aJinNSKind [
-
+	<doc:'Obtains a namespace for a given name'>
 	self assert: external size = 1.
 	^ external first namespaceFor: aJinDAMAccessModule name  kind: aJinNSKind
 ]
@@ -57,6 +74,8 @@ JinNSSymbolTable >> namespaceFor: aJinDAMAccessModule kind: aJinNSKind [
 { #category : #saving }
 JinNSSymbolTable >> saveAs: aString [
 
+	<doc:
+	'Exports a symbol table in ston format. Receives a file path as parameter (String | FileReference)'>
 	| stream |
 	aString asFileReference ensureDelete.
 	stream := aString asFileReference writeStream.
