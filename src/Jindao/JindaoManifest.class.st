@@ -48,11 +48,14 @@ For mapping the binary-model-entities to model-entity types, we propose to use f
 
 ## More documentation
 
-* For documentation about the Jindao MSAccess first citizen usage, please address to [API.md](API.md)
-* For documentation about the Jindao connector internals, please address to [InternalAPI.md](InternalAPI.md).
+* For documentation about the Jindao MSAccess first citizen usage, please address  [API.md](API.md)
+* For documentation about the Jindao connector internals, please address [InternalAPI.md](InternalAPI.md).
 * For documentation about the Microsoft Access object model, please address [https://learn.microsoft.com/en-us/office/vba/api/overview/access](https://learn.microsoft.com/en-us/office/vba/api/overview/access)
 
+## Other modules
 
+* For documentation about the JinNamespaces symbol table, please address [Namespace.md](Namespace.md).
+* For documentation about the JinDAM Data Access Model (unification model for further imports to Moose and Moxing) please, address  [DataAccessModel.md](DataAccessModel.md).
 
 
 
