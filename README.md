@@ -33,10 +33,20 @@ For interacting with Access through COM we must interact with an object model, c
 As general architecture we propose to create a model that uses the COM model as a back-end as shown in the next figure We propose lazy access to the COM model back-end, what will guarantee that we access and load only what is needed. This feature aims to limit the memory usage (constraint stated in Section 2) by construction. The lazy approach will also allow us to map each binary-model-entity to a model-entity one at a time. We also propose to cache the results, for reducing the COM calls and therefore CPU time and inter-process communication.
 Regarding the mapping between the COM model entity-type and our model, we propose to use two kinds of mapping: by type and by attribute value. First- class citizen entities are represented by two COM models, and that is why all of them subclass from a LoadableObject class, which maps two COM models instead of one.
 For mapping the binary-model-entities to model-entity types, we propose to use factories. The mapping factory by type maps one binary-entity-type to one model-entity-type. The mapping factory by attribute value maps one binary- entity to one specific model-entity-type according to one specific binary-entity value.
+
+
 ## More documentation
-* For documentation about the Jindao MSAccess first citizen usage, please address to [API.md](API.md)
-* For documentation about the Jindao connector internals, please address to [InternalAPI.md](InternalAPI.md).
+
+* For documentation about the Jindao MSAccess first citizen usage, please address  [API.md](API.md)
+* For documentation about the Jindao connector internals, please address [InternalAPI.md](InternalAPI.md).
 * For documentation about the Microsoft Access object model, please address [https://learn.microsoft.com/en-us/office/vba/api/overview/access](https://learn.microsoft.com/en-us/office/vba/api/overview/access)
+
+## Other modules
+
+* For documentation about the JinNamespaces symbol table, please address [Namespace.md](Namespace.md).
+* For documentation about the JinDAM Data Access Model (unification model for further imports to Moose and Moxing) please, address  [DataAccessModel.md](DataAccessModel.md).
+
+
 
 
 
