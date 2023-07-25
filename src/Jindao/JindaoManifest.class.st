@@ -269,17 +269,6 @@ JindaoManifest class >> exampleTableInformation [
 ]
 
 { #category : #'as yet unclassified' }
-JindaoManifest class >> implementationDocumentation [
-
-	^ String streamContents: [ :stream |
-		  PRGWriter markup
-			  writeDocumentation: self
-			  sending: #implementationPackages
-			  into: stream
-			  titled: 'Internal API' ]
-]
-
-{ #category : #'as yet unclassified' }
 JindaoManifest class >> implementationPackages [
 
 	^ self tags: #( Core 'Core-RemoteCollections' 'Core-Factories' )
@@ -292,11 +281,4 @@ JindaoManifest class >> projectPath [
 		   chooseFullFileNameMatching: #( accdb )
 		   label: 'Please find a accdb file to open') ifNil: [ 
 		  self error: 'Must choose a project' ]
-]
-
-{ #category : #'as yet unclassified' }
-JindaoManifest class >> tags: aCollection [
-
-	^ aCollection collect: [ :c |
-		  self package classTags detect: [ :a | a name = c ] ]
 ]

@@ -13,16 +13,17 @@ BaselineOfJindao >> baseline: spec [
 		with: [ spec repository: 'github://tesonep/pharo-com' ].
 	spec
 		baseline: #VBParser
-		with: [ spec repository: 'gitlab://gitlab.forge.berger-levrault.com:bl-drit/bl.drit.experiments/software.engineering/microsoft-access-migration/VBParser:master' ].
+		with: [ spec repository: 'github://impetuosa/VBParser' ].
 	spec
 		package: #Jindao
 		with: [ spec requires: #( PharoWin32 VBParser ) ].
 
 	spec baseline: #PostgreSQLParser with: [ 
 		spec
-			repository: 'gitlab://gitlab.forge.berger-levrault.com:bl-drit/bl.drit.experiments/software.engineering/microsoft-access-migration/PostgreSQLParser:master/src';
+			repository: 'github://impetuosa/PostgreSQLParser/src';
 			loads: #dev ].
+	spec package: #JinNamespaces with: [ spec requires: #( Jindao ) ].
 	spec
 		package: #JinDAM
-		with: [ spec requires: #( Jindao PostgreSQLParser ) ]
+		with: [ spec requires: #( Jindao JinNamespaces PostgreSQLParser ) ]
 ]

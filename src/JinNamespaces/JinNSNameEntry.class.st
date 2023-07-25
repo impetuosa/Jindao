@@ -1,3 +1,7 @@
+"
+A name entry is a symbol which has a kind (JinNSKind - what it is) an owner (JinNSEntryOwner where it was defined). 
+
+"
 Class {
 	#name : #JinNSNameEntry,
 	#superclass : #Object,
@@ -56,12 +60,16 @@ JinNSNameEntry >> canBeFoundedInJinDAM: aJinDAMModel [
 { #category : #'as yet unclassified' }
 JinNSNameEntry >> containingSymbols [
 
+	<doc:
+	'Return all the entries where this element has been declared, starting by the inner-most element. Function, Module, Library, Project '>
 	^ { self } , parent containingSymbols
 ]
 
 { #category : #'as yet unclassified' }
 JinNSNameEntry >> findSymbol: aString [
 
+	<doc:
+	'Polimorphic with a namespace. If the given string matches this symbols name, it returns a collection with self within. Empty collection if not.'>
 	| noDollar |
 	noDollar := aString copyReplaceAll: '$' with: ''.
 	^ (name compare: noDollar caseSensitive: false) = 2

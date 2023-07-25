@@ -1,3 +1,8 @@
+"
+A kind denotes a kind of symbol. 
+Symbols are described with this kind of value to denote the nature of the artefacts they declare. 
+Like this, when we find a function declaration, we register the symbol of kind ```JinNSKind function```
+"
 Class {
 	#name : #JinNSKind,
 	#superclass : #Object,
@@ -18,7 +23,9 @@ JinNSKind class >> assembly [
 
 { #category : #accessing }
 JinNSKind class >> attribute [
-	 ^ self entry: #attribute 
+
+	<doc: 'Any symbol with this kind is related with an attribute'>
+	^ self entry: #attribute
 ]
 
 { #category : #accessing }
@@ -28,19 +35,19 @@ JinNSKind class >> attributes [
 
 { #category : #'as yet unclassified' }
 JinNSKind class >> classAlias [
-
+		<doc:'Any symbol with this kind is related with an class alias'>
 	^ self entry: #classAlias
 ]
 
 { #category : #convenience }
 JinNSKind class >> classModule [
-
+		<doc:'Any symbol with this kind is related with an class module'>
 	^ self entry: #classModule
 ]
 
 { #category : #generated }
 JinNSKind class >> constant [
-
+		<doc:'Any symbol with this kind is related with a constant'>
 	^ self entry: #constant
 ]
 
@@ -55,43 +62,44 @@ JinNSKind class >> entry: aName [
 
 { #category : #convenience }
 JinNSKind class >> enum [
-
+		<doc:'Any symbol with this kind is related with an enumeration'>
 	^ self entry: #enum
 ]
 
 { #category : #convenience }
 JinNSKind class >> enumEntry [
-
+		<doc:'Any symbol with this kind is related with an enum value'>
 	^ self entry: #enumEntry
 ]
 
 { #category : #convenience }
 JinNSKind class >> event [ 
-
+		<doc:'Any symbol with this kind is related with an event'>
 	^ self entry: #event
 ]
 
 { #category : #convenience }
 JinNSKind class >> externalFunction [
-
+		<doc:'Any symbol with this kind is related with an external function'>
 	^ self entry: #externalFunction
 ]
 
 { #category : #convenience }
 JinNSKind class >> externalSub [
-
+		<doc:'Any symbol with this kind is related with an external subprocedure'>
 	^ self entry: #externalSub
 ]
 
 { #category : #'as yet unclassified' }
 JinNSKind class >> field [
 
+	<doc: 'Any symbol with this kind is related with a field'>
 	^ self entry: #field
 ]
 
 { #category : #convenience }
 JinNSKind class >> form [
-
+		<doc:'Any symbol with this kind is related with a form'>
 	^ self entry: #form
 ]
 
@@ -102,7 +110,7 @@ JinNSKind class >> forms [
 
 { #category : #convenience }
 JinNSKind class >> function [ 
-
+		<doc:'Any symbol with this kind is related with a function'>
 	^ self entry: #function
 ]
 
@@ -114,12 +122,13 @@ JinNSKind class >> functions [
 
 { #category : #convenience }
 JinNSKind class >> get [
+		<doc:'Any symbol with this kind is related with a property getter'>
 	^ self entry: #get
 ]
 
 { #category : #convenience }
 JinNSKind class >> globalVariable [
-
+		<doc:'Any symbol with this kind is related with a global variable'>
 	^ self entry: #globalVariable
 ]
 
@@ -130,6 +139,7 @@ JinNSKind class >> initialize [
 
 { #category : #generated }
 JinNSKind class >> interface [
+		<doc:'Any symbol with this kind is related with an interface'>
 	 ^ self entry: #interface. 
 ]
 
@@ -140,18 +150,19 @@ JinNSKind class >> interfaces [
 
 { #category : #convenience }
 JinNSKind class >> let [
+	<doc:'Any symbol with this kind is related with a property letter'>
 	^ self entry: #let
 ]
 
 { #category : #convenience }
 JinNSKind class >> method [
-
+		<doc:'Any symbol with this kind is related with a method'>
 	^ self entry: #method
 ]
 
 { #category : #convenience }
 JinNSKind class >> module [
-
+		<doc:'Any symbol with this kind is related with a module'>
 	^ self entry: #module
 ]
 
@@ -163,12 +174,14 @@ JinNSKind class >> modules [
 
 { #category : #accessing }
 JinNSKind class >> parameter [
-	 ^ self entry: #parameter 
+
+	<doc: 'Any symbol with this kind is related with a parameter'>
+	^ self entry: #parameter
 ]
 
 { #category : #convenience }
 JinNSKind class >> primitiveType [
-
+		<doc:'Any symbol with this kind is related with a primitive type '>
 	^ self entry: #primitiveType
 ]
 
@@ -180,13 +193,13 @@ JinNSKind class >> queries [
 
 { #category : #convenience }
 JinNSKind class >> query [
-
+		<doc:'Any symbol with this kind is related with a query'>
 	^ self entry: #query
 ]
 
 { #category : #'as yet unclassified' }
 JinNSKind class >> reference [
-
+		<doc:'Any symbol with this kind is related with a reference'>
 	^ self entry: #reference
 ]
 
@@ -198,7 +211,7 @@ JinNSKind class >> references [
 
 { #category : #convenience }
 JinNSKind class >> report [
-
+		<doc:'Any symbol with this kind is related with a report'>
 	^ self entry: #report
 ]
 
@@ -210,24 +223,25 @@ JinNSKind class >> reports [
 
 { #category : #convenience }
 JinNSKind class >> set [
+		<doc:'Any symbol with this kind is related with a property setter'>
 	^ self entry: #set
 ]
 
 { #category : #'as yet unclassified' }
 JinNSKind class >> struct [
-
+		<doc:'Any symbol with this kind is related with a struct'>
 	^ self entry: #struct
 ]
 
 { #category : #convenience }
 JinNSKind class >> sub [ 
-
+		<doc:'Any symbol with this kind is related with a subprocedure'>
 	^ self entry: #sub
 ]
 
 { #category : #convenience }
 JinNSKind class >> table [
-
+		<doc:'Any symbol with this kind is related with a table'>
 	^ self entry: #table
 ]
 
@@ -239,19 +253,19 @@ JinNSKind class >> tables [
 
 { #category : #convenience }
 JinNSKind class >> typeProperty [
-
+		<doc:'Any symbol with this kind is related with a property'>
 	^ self entry: #typeProperty
 ]
 
 { #category : #convenience }
 JinNSKind class >> userType [
-
+		<doc:'Any symbol with this kind is related with a user type'>
 	^ self entry: #userType
 ]
 
 { #category : #generated }
 JinNSKind class >> variable [
-
+		<doc:'Any symbol with this kind is related with a variable'>
 	^ self entry: #variable
 ]
 

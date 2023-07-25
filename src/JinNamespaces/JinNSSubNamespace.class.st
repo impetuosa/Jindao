@@ -1,3 +1,8 @@
+"
+Subnamespaces are symbols (named entries) which contain other entries within. 
+As a defined a named context (with the name of the class) and contains all the entries within representing other names (attributes, functions, etc).
+
+"
 Class {
 	#name : #JinNSSubNamespace,
 	#superclass : #JinNSNamespace,
@@ -17,9 +22,11 @@ JinNSSubNamespace >> acceptVisitor: aJinNSVisitorCounter [
 { #category : #description }
 JinNSSubNamespace >> anchor [
 
-	^ ((parent isNil or: [ tag isAssembly ])
-		   ifTrue: [ (JinAnchor on: #/)  / name ]
-		   ifFalse: [ parent anchor / self kind / name ]) 
+	<doc:
+	'Returns an Anchor. An anchor is the path to take to find a specific symbol from the root namespace .'>
+	^ (parent isNil or: [ tag isAssembly ])
+		  ifTrue: [ (JinAnchor on: #/) / name ]
+		  ifFalse: [ parent anchor / self kind / name ]
 ]
 
 { #category : #accessing }
@@ -49,6 +56,8 @@ JinNSSubNamespace >> canBeFoundedInJinDAM: aJinDAMModel [
 { #category : #'as yet unclassified' }
 JinNSSubNamespace >> containingSymbols [
 
+	<doc:
+	'Return all the entries where this element has been declared, starting by the inner-most element. Function, Module, Library, Project '>
 	^ { self } , parent containingSymbols
 ]
 

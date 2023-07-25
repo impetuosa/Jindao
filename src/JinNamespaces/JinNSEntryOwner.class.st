@@ -1,3 +1,12 @@
+"
+Entry owner defines, within the context where the entry has been registered, which sub contect is the owner. 
+
+For example, a static public method is visible at any level, however, its owner is the class where it has been defined. 
+
+The owner denotes not only structural information as name, assembly where it belongs, and kind, but also a contentHash. 
+
+This content hash allows to learn if symbol should or not being re-registered. 
+"
 Class {
 	#name : #JinNSEntryOwner,
 	#superclass : #Object,

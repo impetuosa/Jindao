@@ -47,6 +47,8 @@ JinNSNamespace >> allSymbols [
 { #category : #'as yet unclassified' }
 JinNSNamespace >> anchor [
 
+	<doc:
+	'Returns an Anchor. An anchor is the path to take to find a specific symbol from the root namespace .'>
 	^ ((parent isNil or: [ tag isAssembly ])
 		   ifTrue: [ JinAnchor on: #/ ]
 		   ifFalse: [ parent anchor ]) / name
@@ -60,6 +62,9 @@ JinNSNamespace >> assembly [
 
 { #category : #'as yet unclassified' }
 JinNSNamespace >> containingSymbols [
+
+	<doc:
+	'Return all the entries where this element has been declared, starting by the inner-most element. Function, Module, Library, Project '>
 
 	^ {  }
 ]
@@ -101,7 +106,8 @@ JinNSNamespace >> entriesHoldersFor: aStringOrderedCollection [
 
 { #category : #'as yet unclassified' }
 JinNSNamespace >> findSymbol: aString [
-
+		<doc:
+	'Return all symbols visible by in this namespace named as given.'>
 	| ns noDollar |
 	noDollar := aString copyReplaceAll: '$' with: ''.
 	" Do i have it ? ""	aString asLowercase = 'currentdb' ifTrue:[ self halt ]."
@@ -124,7 +130,8 @@ JinNSNamespace >> findSymbol: aString [
 
 { #category : #'as yet unclassified' }
 JinNSNamespace >> friendFindSymbol: aString [
-
+		<doc:
+	'Return all symbols visible by in any friend namespace named as given.'>
 	| ns kw word |
 	" Do i have it ? ""	aString asLowercase = 'currentdb' ifTrue:[ self halt ]."
 	ns := OrderedCollection new.
@@ -145,7 +152,8 @@ JinNSNamespace >> friends [
 
 { #category : #'as yet unclassified' }
 JinNSNamespace >> friendsNamespaceFor: aString kind: aJinNSKind [
-
+	<doc:
+	'Find any entry (sub-namespace included) with the name and kind given within the context of any "friend" (sub)namespace. (for example, in the context of a project, the friend namespaces are those of included libraries)'>
 	| ns |
 	" Do i have it ? "
 	ns := {  }.
@@ -200,6 +208,8 @@ JinNSNamespace >> name: aString [
 { #category : #'as yet unclassified' }
 JinNSNamespace >> namespaceFor: aString kind: aJinNSKind [
 
+	<doc:
+	'Find any entry (sub-namespace included) with the name and kind given within the context of this (sub)namespace. '>
 	| ns |
 	" Do i have it ? "
 	ns := {  }.
