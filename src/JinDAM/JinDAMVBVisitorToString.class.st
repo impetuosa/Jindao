@@ -1,3 +1,8 @@
+"
+I am a visitor able to produce a String represdentation out of any kind of element. 
+
+
+"
 Class {
 	#name : #JinDAMVBVisitorToString,
 	#superclass : #Object,

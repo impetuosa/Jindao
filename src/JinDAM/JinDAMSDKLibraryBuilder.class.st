@@ -1,3 +1,8 @@
+"
+I am a builder which creates all the model elements which are not included in libraries (and therefore cannot be created out of reverse engineering analysis).
+
+
+"
 Class {
 	#name : #JinDAMSDKLibraryBuilder,
 	#superclass : #Object,

@@ -1,3 +1,13 @@
+"
+I create reference name arrays.
+If the element is not a name reference, I return nil. 
+
+For example for an expression such as 
+a.b
+it returns 
+{#a . #b}
+
+"
 Class {
 	#name : #JinDAMVBVisitorToTaggedReferenceName,
 	#superclass : #Object,

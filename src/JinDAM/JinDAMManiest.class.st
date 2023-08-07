@@ -21,3 +21,103 @@ Class {
 	#superclass : #PackageManifest,
 	#category : #'JinDAM-Manifest'
 }
+
+{ #category : #'as yet unclassified' }
+JinDAMManiest class >> exampleImporterForAlce [
+	<example> 
+	| importer symbolTable path dam |
+
+" 
+	This importer is configured to load all the structure of the project. 
+	For the code elements, it only imports the fan-in and fan-out information and arguments types. 
+"
+
+	importer := JinDAMImporter new.
+	importer provider
+		importAccessReferences;
+		importDatabase;
+		importProjectElements;
+		importGUIElements;
+		importGUIControlElementsNoObjectProperties;
+		importCodeElements;
+		importSyntacticElements;
+		importLibraryReferences.
+
+	path := self pathToImportedAccessProject.
+	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
+
+" 
+	The importer requires a symbol table previously calculated. 
+"
+	dam := importer import: path asFileReference symbolTable: symbolTable.
+	
+" 
+	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
+"
+	importer link: dam
+	
+
+
+
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMManiest class >> exampleImporterForMoxing [
+	<example> 
+	| importer symbolTable path dam |
+
+" 
+	
+	This importer is configured to load all the structure of the project. 
+	It also imports all the syntactical elements, representing all the written code. 
+	It also imports all the forms/reports objects, storing all the configuration properties.
+	
+"
+
+	importer := JinDAMImporter new.
+	importer provider
+		importAccessReferences;
+		importDatabase;
+		importProjectElements;
+		importGUIElements;
+		importGUIControlElements;
+		importCodeElements;
+		importAllSyntacticElements;
+		importLibraryReferences.
+
+
+	path := self pathToImportedAccessProject.
+	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
+
+" 
+	The importer requires a symbol table previously calculated. 
+"
+	dam := importer import: path asFileReference symbolTable: symbolTable.
+	
+" 
+	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
+"
+	importer link: dam
+	
+
+
+
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMManiest class >> pathToImportedAccessProject [
+
+	^ (UIManager default
+		   chooseFullFileNameMatching: #( accdb )
+		   label: 'Please find a accdb file to open') ifNil: [ 
+		  self error: 'Must choose a project' ]
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMManiest class >> pathToSymbolTable [
+
+	^ (UIManager default
+		   chooseFullFileNameMatching: #( ston )
+		   label: 'Please find a ston file to open') ifNil: [ 
+		  self error: 'Must choose a symbol table' ]
+]
