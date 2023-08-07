@@ -1,3 +1,6 @@
+"
+I import Code related elements (Macros, modules, forms and reports)  
+"
 Class {
 	#name : #JinDAMCodeImporter,
 	#superclass : #JinCodeFirstCitizenVisitor,

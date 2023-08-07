@@ -1,3 +1,6 @@
+"
+I represent an IF  statement 
+"
 Class {
 	#name : #JinDAMIf,
 	#superclass : #JinDAMEntity,

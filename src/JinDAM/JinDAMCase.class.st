@@ -1,3 +1,7 @@
+"
+I represent a case. I am to be found within a SELECT.
+(this is equivalent, switch case )
+"
 Class {
 	#name : #JinDAMCase,
 	#superclass : #JinDAMEntity,

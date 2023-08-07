@@ -1,3 +1,6 @@
+"
+I import GUI Control elementsm but i do not store object information. 
+"
 Class {
 	#name : #JinDAMGUIControlImporterNoObjectProperties,
 	#superclass : #JinDAMGUIControlImporter,

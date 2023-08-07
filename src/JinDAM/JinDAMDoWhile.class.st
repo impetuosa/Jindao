@@ -1,3 +1,6 @@
+"
+I represent a while statement 
+"
 Class {
 	#name : #JinDAMDoWhile,
 	#superclass : #JinDAMLoop,

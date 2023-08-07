@@ -1,3 +1,6 @@
+"
+I represent a select statement 
+"
 Class {
 	#name : #JinDAMSelect,
 	#superclass : #JinDAMEntity,

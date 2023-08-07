@@ -1,3 +1,6 @@
+"
+I import Database elements 
+"
 Class {
 	#name : #JinDAMDatabaseImporter,
 	#superclass : #JinDatabaseFirstCitizenVisitor,

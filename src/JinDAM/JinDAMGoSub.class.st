@@ -1,3 +1,6 @@
+"
+I represent a gosub statement 
+"
 Class {
 	#name : #JinDAMGoSub,
 	#superclass : #JinDAMEntity,

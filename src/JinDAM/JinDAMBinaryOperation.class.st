@@ -1,3 +1,7 @@
+"
+I represent a binary operation. Comparing, arithmetics etc. 
+
+"
 Class {
 	#name : #JinDAMBinaryOperation,
 	#superclass : #JinDAMEntity,

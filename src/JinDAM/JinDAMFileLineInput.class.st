@@ -1,3 +1,6 @@
+"
+I represent a file input statement 
+"
 Class {
 	#name : #JinDAMFileLineInput,
 	#superclass : #JinDAMEntity,

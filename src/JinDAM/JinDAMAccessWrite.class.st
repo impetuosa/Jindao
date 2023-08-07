@@ -1,3 +1,7 @@
+"
+I represent a writing access, meaning, an assignment. 
+
+"
 Class {
 	#name : #JinDAMAccessWrite,
 	#superclass : #JinDAMAccessRead,

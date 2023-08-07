@@ -1,3 +1,6 @@
+"
+I represent a goto statement 
+"
 Class {
 	#name : #JinDAMGoTo,
 	#superclass : #JinDAMEntity,

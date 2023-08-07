@@ -1,3 +1,6 @@
+"
+I represent a on error statement 
+"
 Class {
 	#name : #JinDAMOnError,
 	#superclass : #JinDAMEntity,

@@ -1,3 +1,6 @@
+"
+I represent a  print into statement 
+"
 Class {
 	#name : #JinDAMFilePrintIntoClause,
 	#superclass : #JinDAMEntity,

@@ -1,3 +1,6 @@
+"
+I go though all the elements of a project, but I only allow processing those that respond to a block given during construction .
+"
 Class {
 	#name : #JinDAMSelectiveProjectImporter,
 	#superclass : #JinDAMProjectImporter,

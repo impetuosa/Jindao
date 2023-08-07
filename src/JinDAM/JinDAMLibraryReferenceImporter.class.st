@@ -1,3 +1,6 @@
+"
+I import Libraries elements 
+"
 Class {
 	#name : #JinDAMLibraryReferenceImporter,
 	#superclass : #JinLibraryReferenceVisitor,

@@ -1,3 +1,6 @@
+"
+I represent the reading of an expression. By reading means that it could be in the context of a return or an assignment, etc. 
+"
 Class {
 	#name : #JinDAMAccessRead,
 	#superclass : #JinDAMAccess,

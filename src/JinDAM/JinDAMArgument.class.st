@@ -1,3 +1,7 @@
+"
+I represent an argument. 
+
+"
 Class {
 	#name : #JinDAMArgument,
 	#superclass : #JinDAMEntity,

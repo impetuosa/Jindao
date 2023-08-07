@@ -1,3 +1,6 @@
+"
+I import GUI ontrols (the building bricks of a form/reports)
+"
 Class {
 	#name : #JinDAMGUIControlImporter,
 	#superclass : #JinGUIControlVisitor,

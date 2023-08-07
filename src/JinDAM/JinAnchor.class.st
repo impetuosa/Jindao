@@ -1,3 +1,8 @@
+"
+I represent an Anchor. 
+Anchors are like path for models. 
+
+"
 Class {
 	#name : #JinAnchor,
 	#superclass : #Object,

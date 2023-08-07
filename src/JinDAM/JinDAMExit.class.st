@@ -1,3 +1,6 @@
+"
+I represent the exit statement. 
+"
 Class {
 	#name : #JinDAMExit,
 	#superclass : #JinDAMEntity,

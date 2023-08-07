@@ -1,3 +1,6 @@
+"
+I represent a for next statement 
+"
 Class {
 	#name : #JinDAMForNext,
 	#superclass : #JinDAMLoop,

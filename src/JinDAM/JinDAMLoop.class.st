@@ -1,3 +1,6 @@
+"
+I represent a loop statement 
+"
 Class {
 	#name : #JinDAMLoop,
 	#superclass : #JinDAMEntity,

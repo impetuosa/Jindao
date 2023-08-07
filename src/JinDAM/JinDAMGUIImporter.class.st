@@ -1,3 +1,6 @@
+"
+I import GUI fst class citizen: forms and reports 
+"
 Class {
 	#name : #JinDAMGUIImporter,
 	#superclass : #JinGUIFirstCitizenVisitor,

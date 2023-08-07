@@ -1,3 +1,6 @@
+"
+I represent an enum entry. 
+"
 Class {
 	#name : #JinDAMEnumValue,
 	#superclass : #JinDAMEntity,

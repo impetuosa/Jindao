@@ -1,3 +1,7 @@
+"
+I am a Library reference. 
+I represent a reference to a library which is used . 
+"
 Class {
 	#name : #JinDAMLibrary,
 	#superclass : #JinDAMArtefact,

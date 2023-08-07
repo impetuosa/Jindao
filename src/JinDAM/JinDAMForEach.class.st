@@ -1,3 +1,6 @@
+"
+I represent a for each statement 
+"
 Class {
 	#name : #JinDAMForEach,
 	#superclass : #JinDAMLoop,

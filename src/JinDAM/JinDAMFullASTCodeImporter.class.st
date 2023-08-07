@@ -1,3 +1,6 @@
+"
+I import all syntactic elements 
+"
 Class {
 	#name : #JinDAMFullASTCodeImporter,
 	#superclass : #JinFullASTCodeVisitor,

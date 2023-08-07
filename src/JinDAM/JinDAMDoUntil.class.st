@@ -1,3 +1,6 @@
+"
+I represent a do until statement 
+"
 Class {
 	#name : #JinDAMDoUntil,
 	#superclass : #JinDAMLoop,

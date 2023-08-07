@@ -1,3 +1,6 @@
+"
+I represent a function declaration 
+"
 Class {
 	#name : #JinDAMFunction,
 	#superclass : #JinDAMBehavioural,

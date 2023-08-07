@@ -1,3 +1,7 @@
+"
+I am an Access Module reference. 
+I represent a reference to a microsoft access project which is used . 
+"
 Class {
 	#name : #JinDAMAccessModule,
 	#superclass : #JinDAMArtefact,

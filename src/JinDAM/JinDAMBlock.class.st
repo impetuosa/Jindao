@@ -1,3 +1,6 @@
+"
+I represent a syntactical block of code. 
+"
 Class {
 	#name : #JinDAMBlock,
 	#superclass : #JinDAMEntity,

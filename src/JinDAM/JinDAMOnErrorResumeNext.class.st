@@ -1,3 +1,6 @@
+"
+I represent a on error resume next  statement 
+"
 Class {
 	#name : #JinDAMOnErrorResumeNext,
 	#superclass : #JinDAMEntity,

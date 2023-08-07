@@ -1,3 +1,6 @@
+"
+I represent an open file statement 
+"
 Class {
 	#name : #JinDAMFileOpenClause,
 	#superclass : #JinDAMEntity,

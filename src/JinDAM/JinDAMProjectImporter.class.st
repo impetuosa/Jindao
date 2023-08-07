@@ -1,3 +1,8 @@
+"
+I import project elements. 
+What means that i do go through all the different elements of a project, and delegate to other side visitors. 
+
+"
 Class {
 	#name : #JinDAMProjectImporter,
 	#superclass : #JinProjectVisitor,
