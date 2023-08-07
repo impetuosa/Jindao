@@ -105,6 +105,117 @@ JinDAMManiest class >> exampleImporterForMoxing [
 ]
 
 { #category : #'as yet unclassified' }
+JinDAMManiest class >> exampleImporterForOnlyDatabaseElements [
+	<example> 
+	| importer symbolTable path dam |
+
+" 
+	
+	This importer can be used to create an Alce model which only focuses on the Database structural elements. 
+	
+	
+"
+
+	importer := JinDAMImporter new.
+	importer provider
+		importAccessReferences;
+		importProjectElements;
+		importDatabase.
+
+
+	path := self pathToImportedAccessProject.
+	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
+
+" 
+	The importer requires a symbol table previously calculated. 
+"
+	dam := importer import: path asFileReference symbolTable: symbolTable.
+	
+" 
+	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
+"
+	importer link: dam
+	
+
+
+
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMManiest class >> exampleImporterForOnlyGUIElements [
+	<example> 
+	| importer symbolTable path dam |
+
+" 
+	
+	This importer can be used to create an Alce model which only focuses on the GUI structural elements. 
+	
+	
+"
+
+	importer := JinDAMImporter new.
+	importer provider
+		importAccessReferences;
+		importProjectElements;
+		importGUIElements;
+		importGUIControlElements.
+
+
+	path := self pathToImportedAccessProject.
+	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
+
+" 
+	The importer requires a symbol table previously calculated. 
+"
+	dam := importer import: path asFileReference symbolTable: symbolTable.
+	
+" 
+	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
+"
+	importer link: dam
+	
+
+
+
+]
+
+{ #category : #'as yet unclassified' }
+JinDAMManiest class >> exampleSelectiveImporterForOnlyGUIElements [
+
+	<example>
+	| importer symbolTable path dam |
+	" 
+	
+	An importer can be configured to import only the elements that respond to a given block condition. 
+	As the importer is configured to be selective, the importer will also try to load all the other things that are used by the selected element. 
+	Basically, the idea of this kind of importer is to import fewer elements, and all those elements directly used by those elements. 
+	
+	
+"
+	importer := JinDAMImporter new.
+	importer provider
+		importGUIElements;
+		importGUIControlElementsNoObjectProperties;
+		importLibraryReferences;
+		importProjectElementsThat: [ :a | 
+			a isAccessForm and: [ a name =  #Name ] ].
+
+
+	path := self pathToImportedAccessProject.
+	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
+
+	" 
+	The importer requires a symbol table previously calculated. 
+"
+	dam := importer import: path asFileReference symbolTable: symbolTable.
+
+	" 
+	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
+"
+	importer link: dam
+]
+
+{ #category : #'as yet unclassified' }
 JinDAMManiest class >> pathToImportedAccessProject [
 
 	^ (UIManager default
