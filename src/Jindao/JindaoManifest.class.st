@@ -305,7 +305,7 @@ JindaoManifest class >> loadMetacello [
 JindaoManifest class >> projectPath [
 
 	^ (UIManager default
-		   chooseFullFileNameMatching: #( accdb )
+		   chooseFullFileNameMatching: #( * )
 		   label: 'Please find a accdb file to open') ifNil: [ 
 		  self error: 'Must choose a project' ]
 ]

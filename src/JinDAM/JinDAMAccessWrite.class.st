@@ -98,7 +98,7 @@ JinDAMAccessWrite >> processingWrite [
 JinDAMAccessWrite >> readReferences [
 
 	^ (readReference ifNil: [ readReference := OrderedCollection new ])
-		  asCollection
+		  asOrderedCollection
 ]
 
 { #category : #testing }

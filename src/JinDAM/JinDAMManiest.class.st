@@ -54,26 +54,26 @@ JinDAMManiest class >> exampleImporterForAlce [
 " 
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
-	importer link: dam
+	importer link: dam.
+
+	dam inspect. 
+
 	
-
-
 
 ]
 
 { #category : #'as yet unclassified' }
 JinDAMManiest class >> exampleImporterForMoxing [
-	<example> 
-	| importer symbolTable path dam |
 
-" 
+	<example>
+	| importer symbolTable path dam |
+	" 
 	
 	This importer is configured to load all the structure of the project. 
 	It also imports all the syntactical elements, representing all the written code. 
 	It also imports all the forms/reports objects, storing all the configuration properties.
 	
 "
-
 	importer := JinDAMImporter new.
 	importer provider
 		importAccessReferences;
@@ -89,19 +89,16 @@ JinDAMManiest class >> exampleImporterForMoxing [
 	path := self pathToImportedAccessProject.
 	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
 
-" 
+	" 
 	The importer requires a symbol table previously calculated. 
 "
 	dam := importer import: path asFileReference symbolTable: symbolTable.
-	
-" 
+
+	" 
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
-	importer link: dam
-	
-
-
-
+	importer link: dam.
+	dam inspect
 ]
 
 { #category : #'as yet unclassified' }
@@ -134,11 +131,9 @@ JinDAMManiest class >> exampleImporterForOnlyDatabaseElements [
 " 
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
-	importer link: dam
-	
+	importer link: dam.
 
-
-
+	dam inspect. 
 ]
 
 { #category : #'as yet unclassified' }
@@ -172,7 +167,8 @@ JinDAMManiest class >> exampleImporterForOnlyGUIElements [
 " 
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
-	importer link: dam
+	importer link: dam.
+	dam inspect. 
 	
 
 
@@ -212,14 +208,16 @@ JinDAMManiest class >> exampleSelectiveImporterForOnlyGUIElements [
 	" 
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
-	importer link: dam
+	importer link: dam.
+	
+	dam inspect. 
 ]
 
 { #category : #'as yet unclassified' }
 JinDAMManiest class >> pathToImportedAccessProject [
 
 	^ (UIManager default
-		   chooseFullFileNameMatching: #( accdb )
+		   chooseFullFileNameMatching: #( * )
 		   label: 'Please find a accdb file to open') ifNil: [ 
 		  self error: 'Must choose a project' ]
 ]
@@ -228,7 +226,7 @@ JinDAMManiest class >> pathToImportedAccessProject [
 JinDAMManiest class >> pathToSymbolTable [
 
 	^ (UIManager default
-		   chooseFullFileNameMatching: #( ston )
+		   chooseFullFileNameMatching: #( * )
 		   label: 'Please find a ston file to open') ifNil: [ 
 		  self error: 'Must choose a symbol table' ]
 ]
