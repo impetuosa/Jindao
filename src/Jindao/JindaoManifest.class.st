@@ -277,6 +277,30 @@ JindaoManifest class >> implementationPackages [
 	^ self tags: #( Core 'Core-RemoteCollections' 'Core-Factories' )
 ]
 
+{ #category : #'3- Tables' }
+JindaoManifest class >> loadAddBaseline [
+
+	<load>
+	| spec |
+	spec
+		baseline: 'Jindao'
+		with: [ 
+		spec repository: 'github://impetuosa/Jindao:v2.x.x/src' ]
+]
+
+{ #category : #'3- Tables' }
+JindaoManifest class >> loadMetacello [
+
+	<load>
+	  Metacello new
+    	githubUser: 'Impetuosa' project: 'Jindao' commitish: 'v1.x.x' path: 'src';
+    	baseline: 'Jindao';
+    	onWarningLog;
+    	load
+	
+
+]
+
 { #category : #'as yet unclassified' }
 JindaoManifest class >> projectPath [
 
