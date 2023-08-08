@@ -55,7 +55,7 @@ loadAddBaseline
 	spec
 		baseline: 'Jindao'
 		with: [ 
-		spec repository: 'github://impetuosa/Jindao:v2.x.x/src' ]
+		spec repository: 'github://impetuosa/Jindao:v1.x.x/src' ]
 ```
 ```smalltalk
 loadMetacello
