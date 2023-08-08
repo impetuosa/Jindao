@@ -55,12 +55,12 @@ loadAddBaseline
 	spec
 		baseline: 'Jindao'
 		with: [ 
-		spec repository: 'github://impetuosa/Jindao:v1.x.x/src' ]
+		spec repository: 'gitlab://gitlab.forge.berger-levrault.com:bl-drit/bl.drit.experiments/software.engineering/microsoft-access-migration/Jindao:v1.x.x/src' ]
 ```
 ```smalltalk
 loadMetacello
 	  Metacello new
-    	githubUser: 'Impetuosa' project: 'Jindao' commitish: 'v1.x.x' path: 'src';
+    	repository: 'gitlab://gitlab.forge.berger-levrault.com:bl-drit/bl.drit.experiments/software.engineering/microsoft-access-migration/Jindao:v1.x.x/src';
     	baseline: 'Jindao';
     	onWarningLog;
     	load
