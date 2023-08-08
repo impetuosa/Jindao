@@ -48,7 +48,24 @@ For mapping the binary-model-entities to model-entity types, we propose to use f
 
 
 
-
+## Load
+```smalltalk
+loadAddBaseline
+	| spec |
+	spec
+		baseline: 'Jindao'
+		with: [ 
+		spec repository: 'github://impetuosa/Jindao:v2.x.x/src' ]
+```
+```smalltalk
+loadMetacello
+	  Metacello new
+    	githubUser: 'Impetuosa' project: 'Jindao' commitish: 'v1.x.x' path: 'src';
+    	baseline: 'Jindao';
+    	onWarningLog;
+    	load
+	
+```
 
 
 
