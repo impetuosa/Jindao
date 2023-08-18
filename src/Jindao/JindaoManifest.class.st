@@ -271,6 +271,11 @@ JindaoManifest class >> exampleTableInformation [
 	project closeAndQuit
 ]
 
+{ #category : #'3- Tables' }
+JindaoManifest class >> icebergRepository [ 
+	 ^ IceRepository registry detect: [ :a | a name = #Jindao ]
+]
+
 { #category : #'as yet unclassified' }
 JindaoManifest class >> implementationPackages [
 
@@ -301,6 +306,11 @@ JindaoManifest class >> loadMetacello [
 
 ]
 
+{ #category : #'3- Tables' }
+JindaoManifest class >> northwind [ 
+	^self resources / 'Northwind.accdb' 
+]
+
 { #category : #'as yet unclassified' }
 JindaoManifest class >> projectPath [
 
@@ -308,4 +318,10 @@ JindaoManifest class >> projectPath [
 		   chooseFullFileNameMatching: #( * )
 		   label: 'Please find a accdb file to open') ifNil: [ 
 		  self error: 'Must choose a project' ]
+]
+
+{ #category : #'3- Tables' }
+JindaoManifest class >> resources [
+
+	^ (self icebergRepository location / #resources) resolve
 ]
