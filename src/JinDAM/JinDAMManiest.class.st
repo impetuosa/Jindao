@@ -98,7 +98,8 @@ JinDAMManiest class >> exampleImporterForMoxing [
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
 	importer link: dam.
-	dam inspect
+	dam inspect.
+	^ dam
 ]
 
 { #category : #'as yet unclassified' }
@@ -222,8 +223,5 @@ JinDAMManiest class >> pathToProject [
 { #category : #'as yet unclassified' }
 JinDAMManiest class >> pathToSymbolTable [
 
-	^ (UIManager default
-		   chooseFullFileNameMatching: #( * )
-		   label: 'Please find a ston file to open') ifNil: [ 
-		  self error: 'Must choose a symbol table' ]
+	^ JindaoManifest northwindSymbolTable
 ]
