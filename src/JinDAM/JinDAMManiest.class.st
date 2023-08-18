@@ -43,7 +43,7 @@ JinDAMManiest class >> exampleImporterForAlce [
 		importSyntacticElements;
 		importLibraryReferences.
 
-	path := self pathToImportedAccessProject.
+	path := self pathToProject.
 	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
 
 " 
@@ -86,7 +86,7 @@ JinDAMManiest class >> exampleImporterForMoxing [
 		importLibraryReferences.
 
 
-	path := self pathToImportedAccessProject.
+	path := self pathToProject.
 	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
 
 	" 
@@ -120,7 +120,7 @@ JinDAMManiest class >> exampleImporterForOnlyDatabaseElements [
 		importDatabase.
 
 
-	path := self pathToImportedAccessProject.
+	path := self pathToProject.
 	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
 
 " 
@@ -156,7 +156,7 @@ JinDAMManiest class >> exampleImporterForOnlyGUIElements [
 		importGUIControlElements.
 
 
-	path := self pathToImportedAccessProject.
+	path := self pathToProject.
 	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
 
 " 
@@ -197,7 +197,7 @@ JinDAMManiest class >> exampleSelectiveImporterForOnlyGUIElements [
 			a isAccessForm and: [ a name =  #Name ] ].
 
 
-	path := self pathToImportedAccessProject.
+	path := self pathToProject.
 	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
 
 	" 
@@ -214,12 +214,9 @@ JinDAMManiest class >> exampleSelectiveImporterForOnlyGUIElements [
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMManiest class >> pathToImportedAccessProject [
+JinDAMManiest class >> pathToProject [
 
-	^ (UIManager default
-		   chooseFullFileNameMatching: #( * )
-		   label: 'Please find a accdb file to open') ifNil: [ 
-		  self error: 'Must choose a project' ]
+	^ JindaoManifest northwind
 ]
 
 { #category : #'as yet unclassified' }

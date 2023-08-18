@@ -311,13 +311,15 @@ JindaoManifest class >> northwind [
 	^self resources / 'Northwind.accdb' 
 ]
 
+{ #category : #'3- Tables' }
+JindaoManifest class >> northwindSymbolTable [
+	^self resources / 'symbol.nwd.ston' 
+]
+
 { #category : #'as yet unclassified' }
 JindaoManifest class >> projectPath [
 
-	^ (UIManager default
-		   chooseFullFileNameMatching: #( * )
-		   label: 'Please find a accdb file to open') ifNil: [ 
-		  self error: 'Must choose a project' ]
+	^ self northwind
 ]
 
 { #category : #'3- Tables' }
