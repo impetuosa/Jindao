@@ -24,13 +24,14 @@ Class {
 
 { #category : #'as yet unclassified' }
 JinDAMManiest class >> exampleImporterForAlce [
-
-	<example>
+	<example> 
 	| importer symbolTable path dam |
-	" 
+
+" 
 	This importer is configured to load all the structure of the project. 
 	For the code elements, it only imports the fan-in and fan-out information and arguments types. 
 "
+
 	importer := JinDAMImporter new.
 	importer provider
 		importAccessReferences;
@@ -42,35 +43,37 @@ JinDAMManiest class >> exampleImporterForAlce [
 		importSyntacticElements;
 		importLibraryReferences.
 
-	path := self pathToImportedAccessProject.
+	path := self pathToProject.
 	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
 
-	" 
+" 
 	The importer requires a symbol table previously calculated. 
 "
 	dam := importer import: path asFileReference symbolTable: symbolTable.
-
-	" 
+	
+" 
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
 	importer link: dam.
 
-	^ dam
+	dam inspect. 
+
+	^ dam. 
+
 ]
 
 { #category : #'as yet unclassified' }
 JinDAMManiest class >> exampleImporterForMoxing [
-	<example> 
-	| importer symbolTable path dam |
 
-" 
+	<example>
+	| importer symbolTable path dam |
+	" 
 	
 	This importer is configured to load all the structure of the project. 
 	It also imports all the syntactical elements, representing all the written code. 
 	It also imports all the forms/reports objects, storing all the configuration properties.
 	
 "
-
 	importer := JinDAMImporter new.
 	importer provider
 		importAccessReferences;
@@ -83,38 +86,33 @@ JinDAMManiest class >> exampleImporterForMoxing [
 		importLibraryReferences.
 
 
-	path := self pathToImportedAccessProject.
+	path := self pathToProject.
 	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
 
-" 
+	" 
 	The importer requires a symbol table previously calculated. 
 "
 	dam := importer import: path asFileReference symbolTable: symbolTable.
-	
-" 
+
+	" 
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
 	importer link: dam.
-	
-	^ dam.
-	
-
-
-
+	dam inspect.
+	^ dam
 ]
 
 { #category : #'as yet unclassified' }
 JinDAMManiest class >> exampleImporterForOnlyDatabaseElements [
-	<example> 
-	| importer symbolTable path dam |
 
-" 
+	<example>
+	| importer symbolTable path dam |
+	" 
 	
 	This importer can be used to create an Alce model which only focuses on the Database structural elements. 
 	
 	
 "
-
 	importer := JinDAMImporter new.
 	importer provider
 		importAccessReferences;
@@ -122,38 +120,34 @@ JinDAMManiest class >> exampleImporterForOnlyDatabaseElements [
 		importDatabase.
 
 
-	path := self pathToImportedAccessProject.
+	path := self pathToProject.
 	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
 
-" 
+	" 
 	The importer requires a symbol table previously calculated. 
 "
 	dam := importer import: path asFileReference symbolTable: symbolTable.
-	
-" 
+
+	" 
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
 	importer link: dam.
-	
-	^ dam.
-	
 
-
-
+	dam inspect.
+	^ dam
 ]
 
 { #category : #'as yet unclassified' }
 JinDAMManiest class >> exampleImporterForOnlyGUIElements [
-	<example> 
-	| importer symbolTable path dam |
 
-" 
+	<example>
+	| importer symbolTable path dam |
+	" 
 	
 	This importer can be used to create an Alce model which only focuses on the GUI structural elements. 
 	
 	
 "
-
 	importer := JinDAMImporter new.
 	importer provider
 		importAccessReferences;
@@ -162,24 +156,21 @@ JinDAMManiest class >> exampleImporterForOnlyGUIElements [
 		importGUIControlElements.
 
 
-	path := self pathToImportedAccessProject.
+	path := self pathToProject.
 	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
 
-" 
+	" 
 	The importer requires a symbol table previously calculated. 
 "
 	dam := importer import: path asFileReference symbolTable: symbolTable.
-	
-" 
+
+	" 
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
 	importer link: dam.
+	dam inspect.
 
-	^ dam.
-	
-
-
-
+	^ dam
 ]
 
 { #category : #'as yet unclassified' }
@@ -204,7 +195,7 @@ JinDAMManiest class >> exampleSelectiveImporterForOnlyGUIElements [
 			a isAccessForm and: [ a name = #Name ] ].
 
 
-	path := self pathToImportedAccessProject.
+	path := self pathToProject.
 	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
 
 	" 
@@ -217,7 +208,8 @@ JinDAMManiest class >> exampleSelectiveImporterForOnlyGUIElements [
 "
 	importer link: dam.
 
-
+	dam inspect.
+	
 	^ dam
 ]
 
