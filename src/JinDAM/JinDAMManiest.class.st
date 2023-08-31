@@ -56,7 +56,6 @@ JinDAMManiest class >> exampleImporterForAlce [
 "
 	importer link: dam.
 
-	dam inspect. 
 
 	^ dam. 
 

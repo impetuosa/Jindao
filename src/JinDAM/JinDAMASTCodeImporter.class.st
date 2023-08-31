@@ -218,7 +218,7 @@ JinDAMASTCodeImporter >> visitDefineType: aDefineType [
 	aDefineType fields doWithIndex: [ :d :i | 
 		| name attr |
 		name := self nodeToString: d name.
-		self assert: d _size isNil.
+		self assert: d sizes isEmpty.
 	"	d _size ifNotEmpty: [ 
 			name := name
 			        ,
