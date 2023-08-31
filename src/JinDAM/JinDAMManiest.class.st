@@ -222,19 +222,13 @@ JinDAMManiest class >> exampleSelectiveImporterForOnlyGUIElements [
 ]
 
 { #category : #'as yet unclassified' }
-JinDAMManiest class >> pathToImportedAccessProject [
+JinDAMManiest class >> pathToProject [
 
-	^ (UIManager default
-		   chooseFullFileNameMatching: #( accdb )
-		   label: 'Please find a accdb file to open') ifNil: [ 
-		  self error: 'Must choose a project' ]
+	^ JindaoManifest northwind
 ]
 
 { #category : #'as yet unclassified' }
 JinDAMManiest class >> pathToSymbolTable [
 
-	^ (UIManager default
-		   chooseFullFileNameMatching: #( ston )
-		   label: 'Please find a ston file to open') ifNil: [ 
-		  self error: 'Must choose a symbol table' ]
+	^ JindaoManifest northwindSymbolTable
 ]
