@@ -24,14 +24,13 @@ Class {
 
 { #category : #'as yet unclassified' }
 JinDAMManiest class >> exampleImporterForAlce [
-	<example> 
-	| importer symbolTable path dam |
 
-" 
+	<example>
+	| importer symbolTable path dam |
+	" 
 	This importer is configured to load all the structure of the project. 
 	For the code elements, it only imports the fan-in and fan-out information and arguments types. 
 "
-
 	importer := JinDAMImporter new.
 	importer provider
 		importAccessReferences;
@@ -46,19 +45,17 @@ JinDAMManiest class >> exampleImporterForAlce [
 	path := self pathToImportedAccessProject.
 	symbolTable := JinNSSymbolTable loadFrom: self pathToSymbolTable.
 
-" 
+	" 
 	The importer requires a symbol table previously calculated. 
 "
 	dam := importer import: path asFileReference symbolTable: symbolTable.
-	
-" 
+
+	" 
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
-	importer link: dam
-	
+	importer link: dam.
 
-
-
+	^ dam
 ]
 
 { #category : #'as yet unclassified' }
@@ -97,7 +94,9 @@ JinDAMManiest class >> exampleImporterForMoxing [
 " 
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
-	importer link: dam
+	importer link: dam.
+	
+	^ dam.
 	
 
 
@@ -134,7 +133,9 @@ JinDAMManiest class >> exampleImporterForOnlyDatabaseElements [
 " 
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
-	importer link: dam
+	importer link: dam.
+	
+	^ dam.
 	
 
 
@@ -172,7 +173,9 @@ JinDAMManiest class >> exampleImporterForOnlyGUIElements [
 " 
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
-	importer link: dam
+	importer link: dam.
+
+	^ dam.
 	
 
 
@@ -198,7 +201,7 @@ JinDAMManiest class >> exampleSelectiveImporterForOnlyGUIElements [
 		importGUIControlElementsNoObjectProperties;
 		importLibraryReferences;
 		importProjectElementsThat: [ :a | 
-			a isAccessForm and: [ a name =  #Name ] ].
+			a isAccessForm and: [ a name = #Name ] ].
 
 
 	path := self pathToImportedAccessProject.
@@ -212,7 +215,10 @@ JinDAMManiest class >> exampleSelectiveImporterForOnlyGUIElements [
 	" 
 	The imported model is not yet linked. i.e. connects all the calls to the methods or functions.
 "
-	importer link: dam
+	importer link: dam.
+
+
+	^ dam
 ]
 
 { #category : #'as yet unclassified' }
