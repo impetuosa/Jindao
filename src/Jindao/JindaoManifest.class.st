@@ -272,6 +272,11 @@ JindaoManifest class >> exampleTableInformation [
 ]
 
 { #category : #'as yet unclassified' }
+JindaoManifest class >> icebergRepository [ 
+	 ^ IceRepository registry detect: [ :a | a name = #Jindao ]
+]
+
+{ #category : #'as yet unclassified' }
 JindaoManifest class >> implementationPackages [
 
 	^ self tags: #( Core 'Core-RemoteCollections' 'Core-Factories' )
@@ -308,4 +313,10 @@ JindaoManifest class >> projectPath [
 		   chooseFullFileNameMatching: #( accdb )
 		   label: 'Please find a accdb file to open') ifNil: [ 
 		  self error: 'Must choose a project' ]
+]
+
+{ #category : #'as yet unclassified' }
+JindaoManifest class >> resources [
+
+	^ (self icebergRepository location / #resources) resolve
 ]
